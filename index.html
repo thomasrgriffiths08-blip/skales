@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tomxsystems — websites & systems for service businesses</title>
+<meta name="description" content="Websites and systems for UK service businesses that capture the enquiry, reply in seconds and book the job. Built by hand, owned by you.">
+<meta property="og:title" content="tomxsystems — websites & systems that answer">
+<meta property="og:description" content="Missed call, 9:47pm. Booked by 9:48. Websites, booking and follow-up systems for service businesses — owned, not rented.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23433bff'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23fbfbfe' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --text:#050315; --bg:#fbfbfe; --primary:#2f27ce; --secondary:#dedcff; --accent:#433bff;
+  --muted:color-mix(in srgb, var(--text) 58%, var(--bg));
+  --hairline:color-mix(in srgb, var(--text) 12%, var(--bg));
+  --surface:color-mix(in srgb, var(--bg) 92%, var(--secondary));
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none !important}
+::selection{background:var(--accent);color:var(--bg)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg); color:var(--text); font-size:1.0625rem; line-height:1.55;
+  overflow-x:hidden;
+}
+a{color:inherit}
+.wrap{max-width:1180px; margin:0 auto; padding:0 clamp(1.1rem,4vw,2.5rem)}
+
+/* reveals — visible by default; motion only when allowed (html.m-on) */
+html.m-on .reveal{opacity:0; transform:translateY(22px); filter:blur(6px);
+  transition:opacity .7s ease-out, transform .7s ease-out, filter .7s ease-out}
+html.m-on .reveal.is-visible{opacity:1; transform:none; filter:none}
+
+/* ---------- header ---------- */
+header{position:sticky; top:0; z-index:50;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px); border-bottom:1px solid var(--hairline)}
+.nav{display:flex; align-items:center; justify-content:space-between; padding:.95rem clamp(1.1rem,4vw,2.5rem)}
+.wordmark{font-weight:800; letter-spacing:-.02em; font-size:1.08rem; text-decoration:none}
+.wordmark em{font-style:normal; color:var(--accent)}
+.nav nav{display:flex; align-items:center; gap:1.5rem; font-size:.9rem}
+.nav nav a{text-decoration:none; color:var(--muted)}
+.nav nav a:hover{color:var(--text)}
+.nav .cta{
+  background:var(--accent); color:var(--bg); font-weight:650;
+  padding:.55rem .95rem; border-radius:10px; text-decoration:none;
+  transition:background .15s}
+.nav .cta:hover{background:var(--primary); color:var(--bg)}
+@media(max-width:640px){ .nav nav a:not(.cta){display:none} }
+
+/* ---------- hero ---------- */
+.hero{position:relative; padding:clamp(3rem,8vw,6.5rem) 0 clamp(3rem,7vw,5.5rem)}
+.hero .wrap{display:grid; grid-template-columns:repeat(12,1fr); gap:1rem; align-items:center}
+.hero-copy{grid-column:1/8}
+.edge{
+  position:absolute; right:clamp(.4rem,1.4vw,1.4rem); top:8.5rem;
+  writing-mode:vertical-rl; font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--muted); user-select:none}
+h1{font-size:clamp(2.6rem,7vw,5.2rem); line-height:.98; letter-spacing:-.035em; font-weight:800}
+h1 .quiet{color:var(--muted)}
+h1 .hit{color:var(--accent)}
+.hero-sub{margin:1.4rem 0 2rem; max-width:46ch; color:var(--muted); font-size:1.1rem}
+.hero-sub strong{color:var(--text); font-weight:650}
+.cta-row{display:flex; flex-wrap:wrap; gap:.8rem; align-items:center}
+.btn{
+  display:inline-block; text-decoration:none; font-weight:650; font-size:1rem;
+  padding:.9rem 1.25rem; border-radius:10px; transition:transform .15s, background .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent); color:var(--bg)}
+.btn-primary:hover{background:var(--primary)}
+.btn-ghost{border:1px solid var(--hairline); color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent); color:var(--accent)}
+.hero-micro{margin-top:1.3rem; font-size:.82rem; color:var(--muted)}
+.hero-micro a{color:var(--primary); font-weight:650; text-decoration:none}
+.hero-micro a:hover{text-decoration:underline}
+
+/* phone demo */
+.hero-demo{grid-column:8/13; justify-self:center; position:relative; margin-top:1.5rem}
+.demo-glow{position:absolute; inset:-22% -42%; z-index:0; pointer-events:none;
+  background:radial-gradient(closest-side,
+    color-mix(in srgb, var(--accent) 38%, transparent) 0%,
+    color-mix(in srgb, var(--secondary) 70%, transparent) 44%,
+    transparent 76%)}
+.phone{
+  position:relative; z-index:1; width:min(305px,80vw);
+  border:1.5px solid color-mix(in srgb, var(--text) 20%, var(--bg));
+  border-radius:38px; background:var(--bg); padding:11px;
+  box-shadow:0 30px 70px -32px color-mix(in srgb, var(--primary) 45%, transparent)}
+.notch{position:absolute; top:20px; left:50%; transform:translateX(-50%);
+  width:88px; height:9px; border-radius:999px; background:color-mix(in srgb, var(--text) 14%, var(--bg)); z-index:3}
+.screen{border-radius:28px; background:var(--surface); height:540px; max-height:72vh;
+  display:flex; flex-direction:column; overflow:hidden}
+.chat-head{display:flex; gap:.6rem; align-items:center; padding:1.7rem .95rem .7rem;
+  border-bottom:1px solid var(--hairline); background:var(--bg)}
+.chat-head .avatar{width:30px; height:30px; border-radius:999px; background:var(--secondary);
+  color:var(--primary); font-weight:800; font-size:.8rem; display:flex; align-items:center; justify-content:center}
+.chat-head .who{line-height:1.15}
+.chat-head .who b{display:block; font-size:.82rem; letter-spacing:-.01em}
+.chat-head .who span{font-size:.68rem; color:var(--muted)}
+.chat{flex:1; padding:.9rem .8rem; display:flex; flex-direction:column; gap:.55rem; overflow:hidden}
+.bubble,.chip{opacity:0; transform:translateY(8px); transition:opacity .35s ease-out, transform .35s ease-out}
+.bubble.on,.chip.on{opacity:1; transform:none}
+.chip{align-self:center; font-size:.68rem; font-weight:650; letter-spacing:.02em;
+  padding:.3rem .7rem; border-radius:999px; background:color-mix(in srgb, var(--text) 7%, var(--bg)); color:var(--muted)}
+.chip.win{background:var(--accent); color:var(--bg)}
+.bubble{max-width:82%; padding:.55rem .75rem; border-radius:14px; font-size:.82rem; line-height:1.4}
+.bubble.out{align-self:flex-end; background:var(--accent); color:var(--bg); border-bottom-right-radius:4px}
+.bubble.in{align-self:flex-start; background:var(--bg); border:1px solid var(--hairline); border-bottom-left-radius:4px}
+.bubble .t{display:block; margin-top:.25rem; font-size:.62rem; opacity:.7}
+.demo-cap{position:relative; z-index:1; margin-top:1rem; text-align:center; font-size:.78rem; color:var(--muted)}
+.demo-cap b{color:var(--text)}
+
+@media(max-width:900px){
+  .hero .wrap{display:block}
+  .hero-demo{margin:2.6rem auto 0; display:block; width:fit-content}
+  .edge{display:none}
+}
+
+/* ---------- systems index ---------- */
+.systems{padding:clamp(2.5rem,7vw,5rem) 0}
+.sec-kick{font-size:.72rem; font-weight:650; letter-spacing:.14em; text-transform:uppercase; color:var(--primary); margin-bottom:1.6rem}
+.row{
+  display:grid; grid-template-columns:auto 1fr auto; gap:clamp(.9rem,3vw,2rem); align-items:baseline;
+  padding:1.5rem 0; border-top:1px solid var(--hairline); text-decoration:none;
+  position:relative; transition:padding-left .25s ease}
+.row:last-of-type{border-bottom:1px solid var(--hairline)}
+.row .num{
+  font-size:clamp(1.6rem,4vw,2.6rem); font-weight:800; letter-spacing:-.02em;
+  color:transparent; -webkit-text-stroke:1.5px color-mix(in srgb, var(--text) 30%, var(--bg))}
+.row h3{font-size:clamp(1.35rem,3.4vw,2rem); letter-spacing:-.025em; font-weight:800; margin-bottom:.25rem}
+.row p{color:var(--muted); font-size:.95rem; max-width:56ch}
+.row .go{font-size:1.4rem; color:var(--muted); transition:color .2s, transform .25s}
+.row::after{content:''; position:absolute; left:0; bottom:-1px; height:1px; width:0;
+  background:var(--accent); transition:width .35s ease}
+.row:hover{padding-left:.6rem}
+.row:hover::after{width:100%}
+.row:hover .go{color:var(--accent); transform:translateX(4px)}
+.row:hover .num{-webkit-text-stroke-color:var(--accent)}
+
+/* ---------- wave + dark band ---------- */
+.wave{display:block; width:100%; height:clamp(90px,16vw,240px)}
+.band{background:var(--text); color:var(--bg); position:relative; overflow:hidden;
+  padding:clamp(2.8rem,7vw,5.5rem) 0 clamp(3rem,7vw,5.5rem)}
+.band .grain{position:absolute; inset:0; opacity:.05; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
+.band .wrap{position:relative; display:grid; grid-template-columns:repeat(12,1fr); gap:2rem}
+.band-copy{grid-column:1/7}
+.band h2{font-size:clamp(2rem,5.5vw,3.6rem); letter-spacing:-.03em; line-height:1.02; font-weight:800; margin-bottom:1.1rem}
+.band h2 em{font-style:normal; color:var(--secondary)}
+.band p{color:color-mix(in srgb, var(--bg) 72%, var(--text)); max-width:48ch; font-size:1rem}
+.band .foot{margin-top:1.6rem; font-size:.8rem; color:color-mix(in srgb, var(--bg) 55%, var(--text))}
+.band .foot .ast{color:var(--accent); font-size:1.1rem; font-weight:800}
+.price{grid-column:7/13; align-self:center}
+.price-line{display:flex; justify-content:space-between; gap:1rem; align-items:baseline;
+  padding:1.05rem 0; border-top:1px solid color-mix(in srgb, var(--bg) 16%, var(--text))}
+.price-line:last-of-type{border-bottom:1px solid color-mix(in srgb, var(--bg) 16%, var(--text))}
+.price-line b{font-size:1.02rem; font-weight:650; letter-spacing:-.01em}
+.price-line span{font-size:.8rem; color:color-mix(in srgb, var(--bg) 55%, var(--text))}
+.price-line .amt{font-weight:800; font-size:1.05rem; color:var(--secondary); white-space:nowrap}
+.price .note{margin-top:.9rem; font-size:.8rem; color:color-mix(in srgb, var(--bg) 55%, var(--text))}
+.price .btn{margin-top:1.4rem; background:var(--bg); color:var(--text)}
+.price .btn:hover{background:var(--secondary)}
+@media(max-width:900px){ .band .wrap{display:block} .price{margin-top:2rem} }
+
+/* ---------- proof ---------- */
+.proof{padding:clamp(2.8rem,7vw,5rem) 0; position:relative}
+.proof .wrap{display:grid; grid-template-columns:repeat(12,1fr); gap:1rem; align-items:center}
+.proof-copy{grid-column:1/9}
+.proof h2{font-size:clamp(1.8rem,4.5vw,2.9rem); letter-spacing:-.03em; font-weight:800; margin-bottom:.7rem}
+.proof p{color:var(--muted); max-width:52ch}
+.ig{grid-column:9/13; justify-self:end; position:relative}
+.ig a{
+  display:inline-block; text-decoration:none; font-weight:650;
+  border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem;
+  transition:border-color .2s, box-shadow .2s}
+.ig a:hover{border-color:var(--accent); box-shadow:0 12px 30px -18px color-mix(in srgb, var(--accent) 60%, transparent)}
+.ig a span{display:block; font-size:.75rem; color:var(--muted); font-weight:400; margin-top:.2rem}
+.stamp{
+  position:absolute; top:-1.6rem; right:-.5rem; transform:rotate(6deg);
+  font-size:.6rem; font-weight:650; letter-spacing:.16em; text-transform:uppercase;
+  border:1.5px solid var(--accent); color:var(--accent); border-radius:6px; padding:.3rem .5rem;
+  user-select:none}
+@media(max-width:900px){ .proof .wrap{display:block} .ig{margin-top:1.6rem; justify-self:start} .stamp{right:auto; left:8rem} }
+
+/* ---------- faq ---------- */
+.faq{padding:0 0 clamp(3rem,7vw,5rem)}
+.faq details{border-top:1px solid var(--hairline); padding:1.1rem 0}
+.faq details:last-of-type{border-bottom:1px solid var(--hairline)}
+.faq summary{cursor:pointer; font-weight:650; font-size:1.02rem; list-style:none; display:flex; justify-content:space-between; gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+'; color:var(--accent); font-weight:800; font-size:1.2rem}
+.faq details[open] summary::after{content:'–'}
+.faq details p{margin-top:.6rem; color:var(--muted); font-size:.95rem; max-width:64ch}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--hairline); padding:clamp(2rem,5vw,3.5rem) 0 2rem; overflow:hidden}
+.f-mark{
+  font-size:clamp(3.2rem,13vw,10.5rem); font-weight:800; letter-spacing:-.05em; line-height:.9;
+  color:transparent; -webkit-text-stroke:1.5px color-mix(in srgb, var(--text) 22%, var(--bg));
+  user-select:none; white-space:nowrap}
+.f-mark em{font-style:normal; color:var(--accent); -webkit-text-stroke:0}
+.f-row{display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; justify-content:space-between; align-items:center;
+  margin-top:1.6rem; font-size:.82rem; color:var(--muted)}
+.f-row nav{display:flex; flex-wrap:wrap; gap:1.3rem}
+.f-row a{text-decoration:none; color:var(--muted)}
+.f-row a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="wordmark" href="./">tom<em>×</em>systems</a>
+    <nav>
+      <a href="#systems">What I build</a>
+      <a href="#pricing">Pricing</a>
+      <a class="cta" href="teardown.html">Free teardown</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="edge">systems for service businesses · UK</p>
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Missed call, <span class="quiet">9:47pm.</span><br>Booked by <span class="hit">9:48.</span></h1>
+      <p class="hero-sub">I build <strong>websites and systems for service businesses</strong> that catch the enquiry, reply in seconds and book the job — while you're on the tools, or on the sofa.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="teardown.html">Get a free teardown →</a>
+        <a class="btn btn-ghost" id="waBtn" href="#" hidden>WhatsApp me</a>
+      </div>
+      <p class="hero-micro">One build a week, in public → <a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">@tomxsystems</a></p>
+    </div>
+
+    <div class="hero-demo">
+      <div class="demo-glow" aria-hidden="true"></div>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="chat-head">
+            <div class="avatar">W</div>
+            <div class="who"><b>Westfield Fencing</b><span>replies in seconds — even at night</span></div>
+          </div>
+          <div class="chat" id="chat"></div>
+        </div>
+      </div>
+      <p class="demo-cap"><b>Live demo.</b> Invented business — the system's real.</p>
+    </div>
+  </div>
+</section>
+
+<section class="systems wrap" id="systems">
+  <p class="sec-kick reveal">What I build</p>
+  <a class="row reveal" href="teardown.html">
+    <span class="num">01</span>
+    <span><h3>Websites that capture</h3><p>Not a brochure. Three fields, one-tap call, loads before they blink — built to turn a visit into a name and a number.</p></span>
+    <span class="go">→</span>
+  </a>
+  <a class="row reveal" href="teardown.html">
+    <span class="num">02</span>
+    <span><h3>Booking &amp; the pipeline</h3><p>Quotes chased, jobs in a diary, nothing living in your texts. You see every enquiry and what happened to it.</p></span>
+    <span class="go">→</span>
+  </a>
+  <a class="row reveal" href="teardown.html">
+    <span class="num">03</span>
+    <span><h3>Follow-up that runs itself</h3><p>Missed-call text-back, review requests the day the job's done, "you're due a service" reminders — automatic.</p></span>
+    <span class="go">→</span>
+  </a>
+</section>
+
+<svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M -57.6 56.0 C -7.6 58.3, 143.3 71.7, 242.3 69.4 C 341.3 67.0, 434.5 34.7, 536.3 41.9 C 638.0 49.2, 744.3 103.1, 852.7 112.8 C 961.1 122.5, 1079.1 105.3, 1186.6 100.1 C 1294.1 94.8, 1445.8 84.2, 1497.6 81.1 L 1440.0 260 L 0 260 Z" fill="#dedcff"/>
+  <path d="M -57.6 133.1 C -6.3 131.1, 150.2 112.7, 250.3 120.7 C 350.4 128.6, 434.5 172.3, 543.1 180.8 C 651.7 189.3, 794.6 180.9, 901.9 172.0 C 1009.1 163.0, 1087.3 129.2, 1186.6 127.1 C 1285.9 124.9, 1445.8 153.5, 1497.6 158.8 L 1440.0 260 L 0 260 Z" fill="#433bff"/>
+  <path d="M -57.6 235.7 C 6.8 237.2, 231.2 246.4, 328.9 245.0 C 426.5 243.7, 435.9 231.6, 528.4 227.7 C 620.9 223.8, 786.0 222.8, 883.8 221.4 C 981.5 220.0, 1012.6 214.8, 1114.9 219.3 C 1217.2 223.8, 1433.8 243.6, 1497.6 248.5 L 1440.0 260 L 0 260 Z" fill="#050315"/>
+</svg>
+
+<section class="band" id="pricing">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="band-copy reveal">
+      <h2>Own it.<br><em>Don't rent it.</em></h2>
+      <p>Some builders charge you monthly, forever, to keep your own website alive. Not here. Domain, code, accounts — everything in your name from day one. Fire me any time and it all keeps working.</p>
+      <p class="foot"><span class="ast">*</span> If a quote ever includes a "monthly platform fee" for your own site — that's rent. Run.</p>
+    </div>
+    <div class="price reveal">
+      <div class="price-line"><span><b>Capture site</b><br><span>Fast, findable, built to convert</span></span><span class="amt">from £950</span></div>
+      <div class="price-line"><span><b>Site + booking &amp; pipeline</b><br><span>Enquiries to booked jobs, tracked</span></span><span class="amt">from £1,500</span></div>
+      <div class="price-line"><span><b>The full system</b><br><span>Capture, booking, follow-up — the lot</span></span><span class="amt">£2,500–£3,000</span></div>
+      <p class="note">Every job quoted flat and agreed before I start. No surprises, no meetings that should've been a message.</p>
+      <a class="btn" href="teardown.html">Start with the free teardown →</a>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <div class="proof-copy reveal">
+      <h2>Watch them get built.</h2>
+      <p>I build one of these systems in public every week — invented demo businesses, real working systems, no client names, no stock, no templates.</p>
+    </div>
+    <div class="ig reveal">
+      <span class="stamp">Built by hand</span>
+      <a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">@tomxsystems on Instagram →<span>the weekly build, start to finish</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="faq wrap">
+  <p class="sec-kick reveal">Straight answers</p>
+  <details class="reveal"><summary>How fast is a build?</summary><p>A capture site: days. A full system: usually one to two weeks. You get a date with the quote, and you'll see it being built.</p></details>
+  <details class="reveal"><summary>Do I actually own it?</summary><p>Yes — domain, code and hosting sit in your accounts from day one. I set it up so you could walk away tomorrow and lose nothing. That's the point.</p></details>
+  <details class="reveal"><summary>What happens after I send the form?</summary><p>I look at your setup, then message you three things: what's leaking, what to fix first, and what it's worth in jobs. Want it fixed? I quote flat. Don't? Keep the list — no hard feelings.</p></details>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-mark">tom<em>×</em>systems</div>
+    <div class="f-row">
+      <span>Websites &amp; systems for service businesses · UK · © 2026</span>
+      <nav>
+        <a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">Instagram</a>
+        <a id="waFoot" href="#" hidden>WhatsApp</a>
+        <a href="teardown.html">Free teardown</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ CONFIG — the only bit to edit ============ */
+const CONFIG = {
+  whatsapp: "",   // digits only, international: UK 07123 456789 -> "447123456789"
+};
+/* ======================================================= */
+if (CONFIG.whatsapp) {
+  const href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent("Hi Tom — saw tomxsystems, got a question.");
+  const b = document.getElementById('waBtn'), f = document.getElementById('waFoot');
+  b.hidden = false; b.href = href; f.hidden = false; f.href = href;
+}
+
+/* reveals: motion only when the visitor allows it — content is never hidden otherwise */
+if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  document.documentElement.classList.add('m-on');
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+  }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+/* ---------- the signature moment: a system, running ---------- */
+const chat = document.getElementById('chat');
+const SCRIPT = [
+  { k:'chip',            t:'Missed call — 9:47pm',                                              d:600  },
+  { k:'bubble out',      t:'Sorry we missed you — on a job. What needs doing, and your postcode?', sub:'sent 42 seconds after the call', d:1500 },
+  { k:'bubble in',       t:'Fence panel’s come down in the wind. WF3.',                     d:3300 },
+  { k:'bubble out',      t:'Can take a look Tuesday 8:30am — want me to book you in?',           d:5100 },
+  { k:'bubble in',       t:'Go on then 👍',                                            d:6700 },
+  { k:'chip win',        t:'Booked — Tue 08:30 · added to the diary',                            d:7600 },
+];
+const LOOP_MS = 11500;
+function runDemo(){
+  chat.innerHTML = '';
+  SCRIPT.forEach(step => {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = step.k;
+      el.textContent = step.t;
+      if (step.sub) {
+        const s = document.createElement('span');
+        s.className = 't'; s.textContent = step.sub; el.appendChild(s);
+      }
+      chat.appendChild(el);
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('on')));
+    }, step.d);
+  });
+  setTimeout(() => { chat.style.opacity = 0;
+    setTimeout(() => { chat.style.transition = 'none'; chat.style.opacity = 1; runDemo();
+      requestAnimationFrame(() => chat.style.transition = 'opacity .4s'); }, 450);
+  }, LOOP_MS);
+}
+chat.style.transition = 'opacity .4s';
+runDemo();
+</script>
+</body>
+</html>
