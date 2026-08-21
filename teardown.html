@@ -77,10 +77,15 @@ h1 .tick{color:var(--accent)}
              0 24px 60px -30px color-mix(in srgb, var(--primary) 25%, transparent);
   padding:clamp(1.3rem,4.5vw,2rem); overflow:hidden;
 }
-.card .glow{
-  position:absolute; inset:auto -30% -55% -30%; height:70%;
-  opacity:.16; pointer-events:none; filter:saturate(.9);
+.card::after{
+  content:''; position:absolute; inset:auto -25% -50% -25%; height:65%;
+  background:radial-gradient(closest-side,
+    color-mix(in srgb, var(--accent) 16%, transparent) 0%,
+    color-mix(in srgb, var(--secondary) 30%, transparent) 48%,
+    transparent 78%);
+  pointer-events:none; z-index:0;
 }
+.card form, .card .done{position:relative; z-index:1}
 .field{margin-bottom:1.05rem; position:relative}
 label{display:block; font-size:.8rem; font-weight:650; letter-spacing:.02em; margin-bottom:.35rem}
 label .opt{color:var(--muted); font-weight:400}
@@ -164,13 +169,6 @@ footer a:hover{color:var(--accent)}
   </ul>
 
   <div class="card">
-    <svg class="glow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" preserveAspectRatio="none" aria-hidden="true">
-      <defs><filter id="blur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="162"/></filter></defs>
-      <rect width="900" height="900" fill="#dedcff"/>
-      <circle cx="420" cy="488" r="435" fill="#433bff" filter="url(#blur)"/>
-      <circle cx="428" cy="455" r="368" fill="#2f27ce" filter="url(#blur)"/>
-    </svg>
-
     <form id="f" novalidate>
       <div class="field">
         <label for="name">Your name</label>
