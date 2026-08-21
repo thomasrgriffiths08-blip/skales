@@ -7,6 +7,7 @@
 <meta name="description" content="Websites and systems for UK service businesses that capture the enquiry, reply in seconds and book the job. Built by hand, owned by you.">
 <meta property="og:title" content="tomxsystems — websites & systems that answer">
 <meta property="og:description" content="Missed call, 9:47pm. Booked by 9:48. Websites, booking and follow-up systems for service businesses — owned, not rented.">
+<meta property="og:image" content="https://thomasrgriffiths08-blip.github.io/tomxsystems-site/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23433bff'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23fbfbfe' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -140,6 +141,9 @@ h1 .hit{color:var(--accent)}
 .row:hover::after{width:100%}
 .row:hover .go{color:var(--accent); transform:translateX(4px)}
 .row:hover .num{-webkit-text-stroke-color:var(--accent)}
+.sys-link{margin-top:1.6rem; font-size:.95rem; color:var(--muted)}
+.sys-link a{color:var(--primary); font-weight:650; text-decoration:none}
+.sys-link a:hover{text-decoration:underline}
 
 /* ---------- wave + dark band ---------- */
 .wave{display:block; width:100%; height:clamp(90px,16vw,240px)}
@@ -184,7 +188,8 @@ h1 .hit{color:var(--accent)}
   font-size:.6rem; font-weight:650; letter-spacing:.16em; text-transform:uppercase;
   border:1.5px solid var(--accent); color:var(--accent); border-radius:6px; padding:.3rem .5rem;
   user-select:none}
-@media(max-width:900px){ .proof .wrap{display:block} .ig{margin-top:1.6rem; justify-self:start} .stamp{right:auto; left:8rem} }
+@media(max-width:900px){ .proof .wrap{display:block} .ig{margin-top:1.6rem; justify-self:start}
+  .stamp{position:static; display:inline-block; margin:0 0 .6rem; transform:rotate(-4deg)} }
 
 /* ---------- faq ---------- */
 .faq{padding:0 0 clamp(3rem,7vw,5rem)}
@@ -217,6 +222,7 @@ footer{border-top:1px solid var(--hairline); padding:clamp(2rem,5vw,3.5rem) 0 2r
     <a class="wordmark" href="./">tom<em>×</em>systems</a>
     <nav>
       <a href="#systems">What I build</a>
+      <a href="systems.html">See them run</a>
       <a href="#pricing">Pricing</a>
       <a class="cta" href="teardown.html">Free teardown</a>
     </nav>
@@ -260,16 +266,17 @@ footer{border-top:1px solid var(--hairline); padding:clamp(2rem,5vw,3.5rem) 0 2r
     <span><h3>Websites that capture</h3><p>Not a brochure. Three fields, one-tap call, loads before they blink — built to turn a visit into a name and a number.</p></span>
     <span class="go">→</span>
   </a>
-  <a class="row reveal" href="teardown.html">
+  <a class="row reveal" href="systems.html#pipeline">
     <span class="num">02</span>
     <span><h3>Booking &amp; the pipeline</h3><p>Quotes chased, jobs in a diary, nothing living in your texts. You see every enquiry and what happened to it.</p></span>
     <span class="go">→</span>
   </a>
-  <a class="row reveal" href="teardown.html">
+  <a class="row reveal" href="systems.html#textback">
     <span class="num">03</span>
     <span><h3>Follow-up that runs itself</h3><p>Missed-call text-back, review requests the day the job's done, "you're due a service" reminders — automatic.</p></span>
     <span class="go">→</span>
   </a>
+  <p class="sys-link reveal">Don't take a list's word for it — <a href="systems.html">watch all three running, live →</a></p>
 </section>
 
 <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
@@ -360,12 +367,23 @@ const SCRIPT = [
   { k:'bubble out',      t:'Can take a look Tuesday 8:30am — want me to book you in?',           d:5100 },
   { k:'bubble in',       t:'Go on then 👍',                                            d:6700 },
   { k:'chip win',        t:'Booked — Tue 08:30 · added to the diary',                            d:7600 },
+  { wipe:true,                                                                                   d:10400 },
+  { k:'chip',            t:'Next day — job done, 11:02am',                                       d:10900 },
+  { k:'bubble out',      t:'Cheers Dave. If we did alright, a review helps massively — one tap here ⭐', sub:'auto-sent, same day', d:11800 },
+  { k:'bubble in',       t:'Least I can do 👍',                                          d:13700 },
+  { k:'chip win',        t:'★★★★★ posted — rating 4.6 → 4.7',                                   d:14700 },
 ];
-const LOOP_MS = 11500;
+const LOOP_MS = 18400;
 function runDemo(){
   chat.innerHTML = '';
   SCRIPT.forEach(step => {
     setTimeout(() => {
+      if (step.wipe) {
+        chat.style.opacity = 0;
+        setTimeout(() => { chat.innerHTML = ''; chat.style.transition = 'none'; chat.style.opacity = 1;
+          requestAnimationFrame(() => chat.style.transition = 'opacity .4s'); }, 380);
+        return;
+      }
       const el = document.createElement('div');
       el.className = step.k;
       el.textContent = step.t;
