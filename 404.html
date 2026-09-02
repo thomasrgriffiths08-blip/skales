@@ -1,32 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lost — tomxsystems</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23433bff'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23fbfbfe' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;800&display=swap" rel="stylesheet">
+<title>Not found — tomxsystems</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0C10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0C10'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23FF5A1F' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-:root{--text:#050315;--bg:#fbfbfe;--accent:#433bff;
-  --muted:color-mix(in srgb, var(--text) 58%, var(--bg))}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,-apple-system,sans-serif;background:var(--bg);color:var(--text);
-  min-height:100svh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
-main{max-width:34rem}
-h1{font-size:clamp(2.4rem,9vw,4rem);letter-spacing:-.04em;font-weight:800;line-height:1;margin-bottom:1rem}
-h1 em{font-style:normal;color:var(--accent)}
-p{color:var(--muted);margin-bottom:1.6rem}
-a.btn{display:inline-block;background:var(--accent);color:var(--bg);font-weight:650;
-  text-decoration:none;padding:.85rem 1.2rem;border-radius:10px}
-a.plain{display:inline-block;margin-left:1rem;color:var(--muted)}
+main{min-height:68vh;display:flex;align-items:center;padding-block:clamp(2.5rem,8vw,6rem)}
+.big{font-family:var(--mono);font-size:clamp(3.5rem,14vw,9rem);line-height:.9;letter-spacing:-.05em;
+  color:transparent;-webkit-text-stroke:1px var(--zinc-2);font-variant-numeric:tabular-nums slashed-zero}
+h1{margin:1.2rem 0 1rem;font-size:clamp(1.9rem,5vw,3.2rem)}
+.links{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.8rem}
 </style>
 </head>
 <body>
-<main>
-  <h1>This page doesn't exist<em>.</em></h1>
-  <p>Ironic, from someone who builds websites for a living. The rest of the site works — promise.</p>
-  <a class="btn" href="/tomxsystems-site/">Back to the site →</a>
-  <a class="plain" href="/tomxsystems-site/teardown.html">or grab the free teardown</a>
+<div class="grain" aria-hidden="true"></div>
+<header class="site-head">
+  <div class="bar">
+    <a class="wordmark" href="./">tom<i>&times;</i>systems</a>
+    <span class="readout"><span class="lamp is-live"></span><b id="clock">--:--:--</b> UK &middot; switched on</span>
+    <nav>
+      <a href="work.html">The rack<sup class="cnt">16</sup></a>
+      <a class="btn btn-live btn-sm" href="teardown.html">Free teardown</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <div>
+    <p class="big">404</p>
+    <h1>That channel isn&rsquo;t wired up.</h1>
+    <p class="lead">The page you were after has moved or never existed. Everything that <em>is</em> switched on is one click away.</p>
+    <div class="links">
+      <a class="btn btn-live" href="work.html">Open the rack</a>
+      <a class="btn btn-ghost" href="./">Back to the start</a>
+    </div>
+  </div>
 </main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="f-row" style="margin-top:0">
+      <span>&copy; <span data-year></span> tomxsystems &middot; UK</span>
+      <nav><a href="./">Home</a><a href="teardown.html">Free teardown</a></nav>
+    </div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
 </body>
 </html>

@@ -1,407 +1,408 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>tomxsystems — websites & systems for service businesses</title>
-<meta name="description" content="Websites and systems for UK service businesses that capture the enquiry, reply in seconds and book the job. Built by hand, owned by you.">
-<meta property="og:title" content="tomxsystems — websites & systems that answer">
-<meta property="og:description" content="Missed call, 9:47pm. Booked by 9:48. Websites, booking and follow-up systems for service businesses — owned, not rented.">
+<title>tomxsystems — websites &amp; systems for service businesses</title>
+<meta name="description" content="Websites and systems for UK service businesses that catch the enquiry, answer it in seconds and book the job. Sixteen working builds you can open and use on this site.">
+<meta property="og:title" content="tomxsystems — everything on this page is switched on">
+<meta property="og:description" content="Missed call at 9:47pm, booked by 9:52. Websites, booking and follow-up systems for service businesses — owned, not rented. Sixteen live builds you can use.">
 <meta property="og:image" content="https://thomasrgriffiths08-blip.github.io/tomxsystems-site/og.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23433bff'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23fbfbfe' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A0C10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0C10'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23FF5A1F' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/rack.css">
 <style>
-:root{
-  --text:#050315; --bg:#fbfbfe; --primary:#2f27ce; --secondary:#dedcff; --accent:#433bff;
-  --muted:color-mix(in srgb, var(--text) 58%, var(--bg));
-  --hairline:color-mix(in srgb, var(--text) 12%, var(--bg));
-  --surface:color-mix(in srgb, var(--bg) 92%, var(--secondary));
+/* ---------- hero: the bench. Copy on the left, the live stage bleeding off the right edge ---------- */
+.hero{grid-template-columns:[full-start] minmax(var(--pad),1fr) [wrap-start] minmax(0,620px) [mid] minmax(0,calc(var(--shell) - 620px)) [wrap-end] minmax(var(--pad),1fr) [full-end];
+  padding-block:clamp(2.2rem,5vw,4rem) 0;align-items:end}
+.hero-copy{grid-column:wrap-start/mid;padding:0 clamp(1.5rem,4vw,3.5rem) clamp(2rem,4vw,3.5rem) 0;min-width:0}
+.hero-copy h1{margin:1.4rem 0 1.3rem;font-size:clamp(3rem,6.6vw,6rem);letter-spacing:-.046em;line-height:.92}
+.hero-copy h1 .on{color:var(--live)}
+.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.7rem}
+.hero-copy .spec{margin-top:1.5rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;text-transform:none;letter-spacing:.06em}
+.hero-stage{grid-column:mid/full-end;min-width:0;display:flex;flex-direction:column}
+.hero-stage .stage{border:1px solid var(--zinc);border-right:0;border-radius:var(--r-cell) 0 0 0;border-bottom:0}
+.hero-stage .viewport{height:min(560px,64vh)}
+.hero-stage .rig-cap{padding:12px 16px}
+.hero-stage .rig-cap h3{font-size:1rem}
+.hero-stage .rig-cap p{font-size:.86rem}
+.hstrip{display:flex;gap:1px;background:var(--zinc);border:1px solid var(--zinc);border-right:0;overflow-x:auto;min-width:0;scrollbar-width:thin}
+.hstrip .ch{flex:none;display:flex;grid-template-columns:none;gap:7px;padding:9px 11px;background:var(--ink);border-left:0;width:auto}
+.hstrip .ch[aria-selected="true"]{background:var(--steel-2)}
+.hstrip .ch .nm{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.mon-note{display:flex;align-items:center;gap:.55rem;padding:0 0 .7rem}
+/* hero parallax: the stage and the copy leave at different speeds (scroll-driven, visitors with motion on) */
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion: no-preference){
+    .hero-stage{animation:stage-drift linear both;animation-timeline:scroll(root);animation-range:0px 90vh}
+    .hero-copy{animation:copy-drift linear both;animation-timeline:scroll(root);animation-range:0px 90vh}
+    @keyframes stage-drift{to{transform:translateY(-56px)}}
+    @keyframes copy-drift{to{transform:translateY(-14px)}}
+  }
 }
-*{margin:0;padding:0;box-sizing:border-box}
-[hidden]{display:none !important}
-::selection{background:var(--accent);color:var(--bg)}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:var(--bg); color:var(--text); font-size:1.0625rem; line-height:1.55;
-  overflow-x:hidden;
-}
-a{color:inherit}
-.wrap{max-width:1180px; margin:0 auto; padding:0 clamp(1.1rem,4vw,2.5rem)}
-
-/* reveals — visible by default; motion only when allowed (html.m-on) */
-html.m-on .reveal{opacity:0; transform:translateY(22px); filter:blur(6px);
-  transition:opacity .7s ease-out, transform .7s ease-out, filter .7s ease-out}
-html.m-on .reveal.is-visible{opacity:1; transform:none; filter:none}
-
-/* ---------- header ---------- */
-header{position:sticky; top:0; z-index:50;
-  background:color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter:blur(10px); border-bottom:1px solid var(--hairline)}
-.nav{display:flex; align-items:center; justify-content:space-between; padding:.95rem clamp(1.1rem,4vw,2.5rem)}
-.wordmark{font-weight:800; letter-spacing:-.02em; font-size:1.08rem; text-decoration:none}
-.wordmark em{font-style:normal; color:var(--accent)}
-.nav nav{display:flex; align-items:center; gap:1.5rem; font-size:.9rem}
-.nav nav a{text-decoration:none; color:var(--muted)}
-.nav nav a:hover{color:var(--text)}
-.nav .cta{
-  background:var(--accent); color:var(--bg); font-weight:650;
-  padding:.55rem .95rem; border-radius:10px; text-decoration:none;
-  transition:background .15s}
-.nav .cta:hover{background:var(--primary); color:var(--bg)}
-@media(max-width:640px){ .nav nav a:not(.cta){display:none} }
-
-/* ---------- hero ---------- */
-.hero{position:relative; padding:clamp(3rem,8vw,6.5rem) 0 clamp(3rem,7vw,5.5rem)}
-.hero .wrap{display:grid; grid-template-columns:repeat(12,1fr); gap:1rem; align-items:center}
-.hero-copy{grid-column:1/8}
-.edge{
-  position:absolute; right:clamp(.4rem,1.4vw,1.4rem); top:8.5rem;
-  writing-mode:vertical-rl; font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--muted); user-select:none}
-h1{font-size:clamp(2.6rem,7vw,5.2rem); line-height:.98; letter-spacing:-.035em; font-weight:800}
-h1 .quiet{color:var(--muted)}
-h1 .hit{color:var(--accent)}
-.hero-sub{margin:1.4rem 0 2rem; max-width:46ch; color:var(--muted); font-size:1.1rem}
-.hero-sub strong{color:var(--text); font-weight:650}
-.cta-row{display:flex; flex-wrap:wrap; gap:.8rem; align-items:center}
-.btn{
-  display:inline-block; text-decoration:none; font-weight:650; font-size:1rem;
-  padding:.9rem 1.25rem; border-radius:10px; transition:transform .15s, background .15s}
-.btn:active{transform:scale(.98)}
-.btn-primary{background:var(--accent); color:var(--bg)}
-.btn-primary:hover{background:var(--primary)}
-.btn-ghost{border:1px solid var(--hairline); color:var(--text)}
-.btn-ghost:hover{border-color:var(--accent); color:var(--accent)}
-.hero-micro{margin-top:1.3rem; font-size:.82rem; color:var(--muted)}
-.hero-micro a{color:var(--primary); font-weight:650; text-decoration:none}
-.hero-micro a:hover{text-decoration:underline}
-
-/* phone demo */
-.hero-demo{grid-column:8/13; justify-self:center; position:relative; margin-top:1.5rem}
-.demo-glow{position:absolute; inset:-22% -42%; z-index:0; pointer-events:none;
-  background:radial-gradient(closest-side,
-    color-mix(in srgb, var(--accent) 38%, transparent) 0%,
-    color-mix(in srgb, var(--secondary) 70%, transparent) 44%,
-    transparent 76%)}
-.phone{
-  position:relative; z-index:1; width:min(305px,80vw);
-  border:1.5px solid color-mix(in srgb, var(--text) 20%, var(--bg));
-  border-radius:38px; background:var(--bg); padding:11px;
-  box-shadow:0 30px 70px -32px color-mix(in srgb, var(--primary) 45%, transparent)}
-.notch{position:absolute; top:20px; left:50%; transform:translateX(-50%);
-  width:88px; height:9px; border-radius:999px; background:color-mix(in srgb, var(--text) 14%, var(--bg)); z-index:3}
-.screen{border-radius:28px; background:var(--surface); height:540px; max-height:72vh;
-  display:flex; flex-direction:column; overflow:hidden}
-.chat-head{display:flex; gap:.6rem; align-items:center; padding:1.7rem .95rem .7rem;
-  border-bottom:1px solid var(--hairline); background:var(--bg)}
-.chat-head .avatar{width:30px; height:30px; border-radius:999px; background:var(--secondary);
-  color:var(--primary); font-weight:800; font-size:.8rem; display:flex; align-items:center; justify-content:center}
-.chat-head .who{line-height:1.15}
-.chat-head .who b{display:block; font-size:.82rem; letter-spacing:-.01em}
-.chat-head .who span{font-size:.68rem; color:var(--muted)}
-.chat{flex:1; padding:.9rem .8rem; display:flex; flex-direction:column; gap:.55rem; overflow:hidden}
-.bubble,.chip{opacity:0; transform:translateY(8px); transition:opacity .35s ease-out, transform .35s ease-out}
-.bubble.on,.chip.on{opacity:1; transform:none}
-.chip{align-self:center; font-size:.68rem; font-weight:650; letter-spacing:.02em;
-  padding:.3rem .7rem; border-radius:999px; background:color-mix(in srgb, var(--text) 7%, var(--bg)); color:var(--muted)}
-.chip.win{background:var(--accent); color:var(--bg)}
-.bubble{max-width:82%; padding:.55rem .75rem; border-radius:14px; font-size:.82rem; line-height:1.4}
-.bubble.out{align-self:flex-end; background:var(--accent); color:var(--bg); border-bottom-right-radius:4px}
-.bubble.in{align-self:flex-start; background:var(--bg); border:1px solid var(--hairline); border-bottom-left-radius:4px}
-.bubble .t{display:block; margin-top:.25rem; font-size:.62rem; opacity:.7}
-.demo-cap{position:relative; z-index:1; margin-top:1rem; text-align:center; font-size:.78rem; color:var(--muted)}
-.demo-cap b{color:var(--text)}
-
-@media(max-width:900px){
-  .hero .wrap{display:block}
-  .hero-demo{margin:2.6rem auto 0; display:block; width:fit-content}
-  .edge{display:none}
+@media(max-width:960px){
+  .hero{grid-template-columns:[full-start] minmax(var(--pad),1fr) [wrap-start] minmax(0,var(--shell)) [wrap-end] minmax(var(--pad),1fr) [full-end]}
+  .hero-copy{grid-column:wrap;padding-right:0}
+  .hero-stage{grid-column:full}
+  .hero-stage .stage{border-radius:0;border-left:0}
+  .hero-stage .viewport{height:min(480px,60vh)}
+  .hstrip{border-left:0}
+  .mon-note{padding-inline:var(--pad)}
 }
 
-/* ---------- systems index ---------- */
-.systems{padding:clamp(2.5rem,7vw,5rem) 0}
-.sec-kick{font-size:.72rem; font-weight:650; letter-spacing:.14em; text-transform:uppercase; color:var(--primary); margin-bottom:1.6rem}
-.row{
-  display:grid; grid-template-columns:auto 1fr auto; gap:clamp(.9rem,3vw,2rem); align-items:baseline;
-  padding:1.5rem 0; border-top:1px solid var(--hairline); text-decoration:none;
-  position:relative; transition:padding-left .25s ease}
-.row:last-of-type{border-bottom:1px solid var(--hairline)}
-.row .num{
-  font-size:clamp(1.6rem,4vw,2.6rem); font-weight:800; letter-spacing:-.02em;
-  color:transparent; -webkit-text-stroke:1.5px color-mix(in srgb, var(--text) 30%, var(--bg))}
-.row h3{font-size:clamp(1.35rem,3.4vw,2rem); letter-spacing:-.025em; font-weight:800; margin-bottom:.25rem}
-.row p{color:var(--muted); font-size:.95rem; max-width:56ch}
-.row .go{font-size:1.4rem; color:var(--muted); transition:color .2s, transform .25s}
-.row::after{content:''; position:absolute; left:0; bottom:-1px; height:1px; width:0;
-  background:var(--accent); transition:width .35s ease}
-.row:hover{padding-left:.6rem}
-.row:hover::after{width:100%}
-.row:hover .go{color:var(--accent); transform:translateX(4px)}
-.row:hover .num{-webkit-text-stroke-color:var(--accent)}
-.sys-link{margin-top:1.6rem; font-size:.95rem; color:var(--muted)}
-.sys-link a{color:var(--primary); font-weight:650; text-decoration:none}
-.sys-link a:hover{text-decoration:underline}
+/* ---------- sheet 02: the night line — one ruled instrument ---------- */
+.night h2{max-width:14ch;margin-bottom:1rem}
+.line{display:grid;grid-template-columns:300px minmax(0,1fr);border:1px solid var(--zinc);border-radius:var(--r-cell);overflow:hidden;
+  margin-top:2rem;align-items:stretch}
+.line>*{min-width:0}
+@media(max-width:820px){ .line{grid-template-columns:minmax(0,1fr)} }
 
-/* ---------- wave + dark band ---------- */
-.wave{display:block; width:100%; height:clamp(90px,16vw,240px)}
-.band{background:var(--text); color:var(--bg); position:relative; overflow:hidden;
-  padding:clamp(2.8rem,7vw,5.5rem) 0 clamp(3rem,7vw,5.5rem)}
-.band .grain{position:absolute; inset:0; opacity:.05; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
-.band .wrap{position:relative; display:grid; grid-template-columns:repeat(12,1fr); gap:2rem}
-.band-copy{grid-column:1/7}
-.band h2{font-size:clamp(2rem,5.5vw,3.6rem); letter-spacing:-.03em; line-height:1.02; font-weight:800; margin-bottom:1.1rem}
-.band h2 em{font-style:normal; color:var(--secondary)}
-.band p{color:color-mix(in srgb, var(--bg) 72%, var(--text)); max-width:48ch; font-size:1rem}
-.band .foot{margin-top:1.6rem; font-size:.8rem; color:color-mix(in srgb, var(--bg) 55%, var(--text))}
-.band .foot .ast{color:var(--accent); font-size:1.1rem; font-weight:800}
-.price{grid-column:7/13; align-self:center}
-.price-line{display:flex; justify-content:space-between; gap:1rem; align-items:baseline;
-  padding:1.05rem 0; border-top:1px solid color-mix(in srgb, var(--bg) 16%, var(--text))}
-.price-line:last-of-type{border-bottom:1px solid color-mix(in srgb, var(--bg) 16%, var(--text))}
-.price-line b{font-size:1.02rem; font-weight:650; letter-spacing:-.01em}
-.price-line span{font-size:.8rem; color:color-mix(in srgb, var(--bg) 55%, var(--text))}
-.price-line .amt{font-weight:800; font-size:1.05rem; color:var(--secondary); white-space:nowrap}
-.price .note{margin-top:.9rem; font-size:.8rem; color:color-mix(in srgb, var(--bg) 55%, var(--text))}
-.price .btn{margin-top:1.4rem; background:var(--bg); color:var(--text)}
-.price .btn:hover{background:var(--secondary)}
-@media(max-width:900px){ .band .wrap{display:block} .price{margin-top:2rem} }
+.phone{border-right:1px solid var(--zinc);display:flex;flex-direction:column;background:var(--ink)}
+.ph-head{display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid var(--zinc);background:var(--steel)}
+.ph-head .av{width:26px;height:26px;border-radius:50%;background:var(--steel-3);color:var(--dyeline-2);display:flex;align-items:center;
+  justify-content:center;font-weight:600;font-size:.74rem;flex:none}
+.ph-head b{display:block;font-size:.84rem;letter-spacing:-.01em}
+.ph-head span{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--dyeline-3)}
+.thread{flex:1;min-height:250px;padding:14px 12px;display:flex;flex-direction:column;gap:7px;justify-content:flex-end}
+.bub{max-width:90%;padding:.5rem .68rem;border-radius:10px;font-size:.82rem;line-height:1.42}
+.bub.out{align-self:flex-end;background:var(--live);color:var(--live-ink);border-bottom-right-radius:2px}
+.bub.in{align-self:flex-start;background:var(--steel-3);color:var(--dyeline);border-bottom-left-radius:2px}
+@media(max-width:820px){ .phone{border-right:0;border-bottom:1px solid var(--zinc)} }
 
-/* ---------- proof ---------- */
-.proof{padding:clamp(2.8rem,7vw,5rem) 0; position:relative}
-.proof .wrap{display:grid; grid-template-columns:repeat(12,1fr); gap:1rem; align-items:center}
-.proof-copy{grid-column:1/9}
-.proof h2{font-size:clamp(1.8rem,4.5vw,2.9rem); letter-spacing:-.03em; font-weight:800; margin-bottom:.7rem}
-.proof p{color:var(--muted); max-width:52ch}
-.ig{grid-column:9/13; justify-self:end; position:relative}
-.ig a{
-  display:inline-block; text-decoration:none; font-weight:650;
-  border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem;
-  transition:border-color .2s, box-shadow .2s}
-.ig a:hover{border-color:var(--accent); box-shadow:0 12px 30px -18px color-mix(in srgb, var(--accent) 60%, transparent)}
-.ig a span{display:block; font-size:.75rem; color:var(--muted); font-weight:400; margin-top:.2rem}
-.stamp{
-  position:absolute; top:-1.6rem; right:-.5rem; transform:rotate(6deg);
-  font-size:.6rem; font-weight:650; letter-spacing:.16em; text-transform:uppercase;
-  border:1.5px solid var(--accent); color:var(--accent); border-radius:6px; padding:.3rem .5rem;
-  user-select:none}
-@media(max-width:900px){ .proof .wrap{display:block} .ig{margin-top:1.6rem; justify-self:start}
-  .stamp{position:static; display:inline-block; margin:0 0 .6rem; transform:rotate(-4deg)} }
+.log-panel{display:flex;flex-direction:column;background:var(--ink)}
+.log-head{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--zinc);background:var(--steel)}
+.log-head .sp{flex:1}
+.log{list-style:none;padding:8px 12px;display:flex;flex-direction:column;flex:1}
+.log li{display:grid;grid-template-columns:68px 84px minmax(0,1fr);gap:12px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--zinc);font-size:.86rem}
+.log li:last-child{border-bottom:0}
+.log li .t{font-family:var(--mono);font-size:.72rem;color:var(--dyeline-3);font-variant-numeric:tabular-nums slashed-zero}
+.log li .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dyeline-3)}
+.log li .m{color:var(--dyeline-2)}
+.log li.missed .m{color:var(--dyeline-3)}
+.log li.missed .m s{text-decoration-color:var(--zinc-2);text-decoration-thickness:1px}
+.log li.sys .k{color:var(--live)}
+.log li.sys .m{color:var(--dyeline)}
+.log li .m b{color:var(--dyeline);font-weight:500}
+.log-foot{padding:14px 12px;border-top:1px solid var(--zinc);background:var(--steel);display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem}
+.log-foot b{font-family:var(--disp);font-size:1.3rem;letter-spacing:-.03em;font-weight:700}
+.log-foot span{color:var(--dyeline-2);font-size:.88rem}
+.log-empty{color:var(--dyeline-3);font-size:.88rem;padding:8px 0}
+@media(max-width:560px){
+  .log li{grid-template-columns:auto minmax(0,1fr);gap:2px 10px;padding:8px 0}
+  .log li .m{grid-column:1/-1}
+}
 
-/* ---------- faq ---------- */
-.faq{padding:0 0 clamp(3rem,7vw,5rem)}
-.faq details{border-top:1px solid var(--hairline); padding:1.1rem 0}
-.faq details:last-of-type{border-bottom:1px solid var(--hairline)}
-.faq summary{cursor:pointer; font-weight:650; font-size:1.02rem; list-style:none; display:flex; justify-content:space-between; gap:1rem}
+/* ---------- sheet 03: what I build — ruled rows, each proven on a channel ---------- */
+.brow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem 2rem;align-items:center;padding:1.5rem 0;border-top:1px solid var(--zinc);
+  text-decoration:none;color:inherit}
+.brow:first-of-type{margin-top:1.8rem}
+.brow:last-of-type{border-bottom:1px solid var(--zinc)}
+.brow h3{margin-bottom:.4rem;transition:color .14s}
+.brow p{color:var(--dyeline-2);font-size:.95rem;max-width:60ch}
+.brow .plate{align-self:center;transition:border-color .14s}
+.brow:hover h3{color:var(--live)}
+.brow:hover .plate{border-color:var(--live);color:var(--dyeline)}
+@media(max-width:640px){ .brow{grid-template-columns:minmax(0,1fr)} }
+
+/* ---------- sheet 04: the strip ---------- */
+.rack-head{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:flex-end;justify-content:space-between}
+.rack-head h2{max-width:14ch}
+
+/* ---------- sheet 05: the operator — a nameplate ---------- */
+.nameplate{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--zinc);border:1px solid var(--zinc);border-radius:var(--r-cell);
+  overflow:hidden;margin-top:2rem}
+.nameplate>div{background:var(--ink);padding:16px 18px;display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.nameplate dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dyeline-3)}
+.nameplate dd{font-size:.98rem;line-height:1.45}
+.nameplate dd b{font-weight:600}
+@media(max-width:640px){ .nameplate{grid-template-columns:1fr} }
+
+/* ---------- daylight: the deal ---------- */
+.day{padding-block:0}
+.day .panel{border-top-color:var(--day-line)}
+.day .lab{border-right-color:var(--day-line)}
+.day .lab .sheet,.day .lab .name{color:var(--day-ink-2)}
+.day .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(1.8rem,5vw,4rem);align-items:start}
+.day .grid>*{min-width:0}
+@media(max-width:880px){ .day .grid{grid-template-columns:minmax(0,1fr)} .day .lab{border-bottom-color:var(--day-line)} }
+.day h2 em{font-style:normal;color:var(--day-ink-2)}
+.day .warn{margin-top:1.4rem;font-size:.88rem;color:var(--day-ink-2);display:flex;gap:.55rem;max-width:46ch}
+.day .warn i{font-style:normal;color:var(--live);font-weight:700;flex:none}
+.pline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.2rem;align-items:baseline;padding:1.05rem 0;border-top:1px solid var(--day-line)}
+.pline:last-of-type{border-bottom:1px solid var(--day-line)}
+.pline b{font-size:1rem;font-weight:600;letter-spacing:-.015em;display:block}
+.pline small{font-size:.84rem;color:var(--day-ink-2)}
+.pline .amt{font-family:var(--mono);font-weight:500;font-size:1rem;white-space:nowrap;font-variant-numeric:tabular-nums slashed-zero}
+.day .note{margin-top:1rem;font-size:.86rem;color:var(--day-ink-2);max-width:50ch}
+.day .btn-live{margin-top:1.4rem}
+
+/* ---------- straight answers ---------- */
+.faq details{border-top:1px solid var(--zinc);padding:1.1rem 0}
+.faq details:first-of-type{margin-top:.4rem}
+.faq details:last-of-type{border-bottom:1px solid var(--zinc)}
+.faq summary{cursor:pointer;font-weight:500;font-size:1.02rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+'; color:var(--accent); font-weight:800; font-size:1.2rem}
-.faq details[open] summary::after{content:'–'}
-.faq details p{margin-top:.6rem; color:var(--muted); font-size:.95rem; max-width:64ch}
-
-/* ---------- footer ---------- */
-footer{border-top:1px solid var(--hairline); padding:clamp(2rem,5vw,3.5rem) 0 2rem; overflow:hidden}
-.f-mark{
-  font-size:clamp(3.2rem,13vw,10.5rem); font-weight:800; letter-spacing:-.05em; line-height:.9;
-  color:transparent; -webkit-text-stroke:1.5px color-mix(in srgb, var(--text) 22%, var(--bg));
-  user-select:none; white-space:nowrap}
-.f-mark em{font-style:normal; color:var(--accent); -webkit-text-stroke:0}
-.f-row{display:flex; flex-wrap:wrap; gap:.6rem 1.6rem; justify-content:space-between; align-items:center;
-  margin-top:1.6rem; font-size:.82rem; color:var(--muted)}
-.f-row nav{display:flex; flex-wrap:wrap; gap:1.3rem}
-.f-row a{text-decoration:none; color:var(--muted)}
-.f-row a:hover{color:var(--accent)}
+.faq summary::after{content:'+';color:var(--live);font-family:var(--mono);font-size:1.05rem}
+.faq details[open] summary::after{content:'\2212'}
+.faq details p{margin-top:.65rem;color:var(--dyeline-2);font-size:.95rem;max-width:66ch}
 </style>
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
 
-<header>
-  <div class="nav">
-    <a class="wordmark" href="./">tom<em>×</em>systems</a>
+<header class="site-head">
+  <div class="bar">
+    <a class="wordmark" href="./">tom<i>&times;</i>systems</a>
+    <span class="readout"><span class="lamp is-live"></span><b id="clock">--:--:--</b> UK &middot; switched on</span>
     <nav>
-      <a href="#systems">What I build</a>
-      <a href="systems.html">See them run</a>
+      <a href="work.html">The rack<sup class="cnt">16</sup></a>
+      <a href="systems.html">The systems<sup class="cnt">3</sup></a>
       <a href="#pricing">Pricing</a>
-      <a class="cta" href="teardown.html">Free teardown</a>
+      <a class="btn btn-live btn-sm" href="teardown.html">Free teardown</a>
     </nav>
   </div>
 </header>
 
-<section class="hero">
-  <p class="edge">systems for service businesses · UK</p>
-  <div class="wrap">
-    <div class="hero-copy">
-      <h1>Missed call, <span class="quiet">9:47pm.</span><br>Booked by <span class="hit">9:48.</span></h1>
-      <p class="hero-sub">I build <strong>websites and systems for service businesses</strong> that catch the enquiry, reply in seconds and book the job — while you're on the tools, or on the sofa.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="teardown.html">Get a free teardown →</a>
-        <a class="btn btn-ghost" id="waBtn" href="#" hidden>WhatsApp me</a>
-      </div>
-      <p class="hero-micro">One build a week, in public → <a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">@tomxsystems</a></p>
+<main>
+<!-- ============ the bench ============ -->
+<section class="hero bench">
+  <div class="hero-copy">
+    <span class="plate"><span>Websites &amp; systems</span><span>Service businesses</span><span>UK</span></span>
+    <h1>Everything on<br>this page is<br><span class="on">switched on.</span></h1>
+    <p class="lead">I build websites and systems for service businesses &mdash; the kind that <strong>catch the enquiry at 9:47pm, answer it in seconds and put the job in the diary</strong> while you&rsquo;re asleep. Sixteen of them are running on this site right now. Go and use one.</p>
+    <div class="cta-row">
+      <a class="btn btn-live" href="teardown.html">Get a free teardown</a>
+      <a class="btn btn-ghost" href="work.html">Open the rack</a>
     </div>
+    <p class="spec">One build a week, in public &middot; <a class="lnk" data-ig href="#" target="_blank" rel="noopener">@tomxsystems</a></p>
+  </div>
 
-    <div class="hero-demo">
-      <div class="demo-glow" aria-hidden="true"></div>
-      <div class="phone">
-        <div class="notch"></div>
-        <div class="screen">
-          <div class="chat-head">
-            <div class="avatar">W</div>
-            <div class="who"><b>Westfield Fencing</b><span>replies in seconds — even at night</span></div>
+  <div class="hero-stage">
+    <p class="mon-note spec"><span class="lamp is-live" id="rigLamp"></span> Live &mdash; a real build, not a picture of one. Use it.</p>
+    <div class="stage">
+      <div class="chrome">
+        <span class="pips" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="url" id="rigUrl"></span>
+        <a class="pop" id="rigPop" href="#" target="_blank" rel="noopener">Open full size</a>
+      </div>
+      <div class="viewport" id="viewport"><div class="boot">Powering up</div></div>
+      <div class="rig-cap" id="rigCap"></div>
+    </div>
+    <div class="hstrip" id="rail" role="tablist" aria-label="Switch channel"></div>
+  </div>
+</section>
+
+<!-- ============ sheet 02: the night line ============ -->
+<section data-sheet="02" class="panel night" id="night">
+  <div class="wrap inner">
+    <div class="lab"><span class="sheet">Sheet 02</span><span class="name">The 9:47pm problem</span></div>
+    <div class="body">
+      <h2>Most jobs aren&rsquo;t lost. They&rsquo;re missed.</h2>
+      <p class="lead">A call you can&rsquo;t take at teatime is a customer ringing the next firm on the list by half past. You don&rsquo;t need to answer faster. You need something that answers for you.</p>
+
+      <div class="line">
+        <div class="phone">
+          <div class="ph-head"><span class="av">R</span><span><b>Redgate Heating</b><span>07700 900461</span></span></div>
+          <div class="thread" id="thread"></div>
+        </div>
+        <div class="log-panel">
+          <div class="log-head">
+            <span class="lamp" id="lineLamp"></span>
+            <span class="spec">Line 1 &middot; residential</span>
+            <span class="sp"></span>
+            <button class="btn btn-live btn-sm" type="button" id="ring">Ring the line</button>
           </div>
-          <div class="chat" id="chat"></div>
+          <ol class="log" id="log"><li style="border:0"><span class="log-empty">Press <b style="color:var(--dyeline)">Ring the line</b> and watch what happens to a call nobody picks up.</span></li></ol>
+          <div class="log-foot" id="lineOut"><span>What happens to that call is the whole business.</span></div>
         </div>
       </div>
-      <p class="demo-cap"><b>Live demo.</b> Invented business — the system's real.</p>
+      <p class="f-note" style="margin-top:1rem">Invented business, invented customer, Ofcom drama number. The sequence is the one I actually build.</p>
     </div>
   </div>
 </section>
 
-<section class="systems wrap" id="systems">
-  <p class="sec-kick reveal">What I build</p>
-  <a class="row reveal" href="teardown.html">
-    <span class="num">01</span>
-    <span><h3>Websites that capture</h3><p>Not a brochure. Three fields, one-tap call, loads before they blink — built to turn a visit into a name and a number.</p></span>
-    <span class="go">→</span>
-  </a>
-  <a class="row reveal" href="systems.html#pipeline">
-    <span class="num">02</span>
-    <span><h3>Booking &amp; the pipeline</h3><p>Quotes chased, jobs in a diary, nothing living in your texts. You see every enquiry and what happened to it.</p></span>
-    <span class="go">→</span>
-  </a>
-  <a class="row reveal" href="systems.html#textback">
-    <span class="num">03</span>
-    <span><h3>Follow-up that runs itself</h3><p>Missed-call text-back, review requests the day the job's done, "you're due a service" reminders — automatic.</p></span>
-    <span class="go">→</span>
-  </a>
-  <p class="sys-link reveal">Don't take a list's word for it — <a href="systems.html">watch all three running, live →</a></p>
-</section>
-
-<svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M -57.6 56.0 C -7.6 58.3, 143.3 71.7, 242.3 69.4 C 341.3 67.0, 434.5 34.7, 536.3 41.9 C 638.0 49.2, 744.3 103.1, 852.7 112.8 C 961.1 122.5, 1079.1 105.3, 1186.6 100.1 C 1294.1 94.8, 1445.8 84.2, 1497.6 81.1 L 1440.0 260 L 0 260 Z" fill="#dedcff"/>
-  <path d="M -57.6 133.1 C -6.3 131.1, 150.2 112.7, 250.3 120.7 C 350.4 128.6, 434.5 172.3, 543.1 180.8 C 651.7 189.3, 794.6 180.9, 901.9 172.0 C 1009.1 163.0, 1087.3 129.2, 1186.6 127.1 C 1285.9 124.9, 1445.8 153.5, 1497.6 158.8 L 1440.0 260 L 0 260 Z" fill="#433bff"/>
-  <path d="M -57.6 235.7 C 6.8 237.2, 231.2 246.4, 328.9 245.0 C 426.5 243.7, 435.9 231.6, 528.4 227.7 C 620.9 223.8, 786.0 222.8, 883.8 221.4 C 981.5 220.0, 1012.6 214.8, 1114.9 219.3 C 1217.2 223.8, 1433.8 243.6, 1497.6 248.5 L 1440.0 260 L 0 260 Z" fill="#050315"/>
-</svg>
-
-<section class="band" id="pricing">
-  <div class="grain" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="band-copy reveal">
-      <h2>Own it.<br><em>Don't rent it.</em></h2>
-      <p>Some builders charge you monthly, forever, to keep your own website alive. Not here. Domain, code, accounts — everything in your name from day one. Fire me any time and it all keeps working.</p>
-      <p class="foot"><span class="ast">*</span> If a quote ever includes a "monthly platform fee" for your own site — that's rent. Run.</p>
-    </div>
-    <div class="price reveal">
-      <div class="price-line"><span><b>Capture site</b><br><span>Fast, findable, built to convert</span></span><span class="amt">from £950</span></div>
-      <div class="price-line"><span><b>Site + booking &amp; pipeline</b><br><span>Enquiries to booked jobs, tracked</span></span><span class="amt">from £1,500</span></div>
-      <div class="price-line"><span><b>The full system</b><br><span>Capture, booking, follow-up — the lot</span></span><span class="amt">£2,500–£3,000</span></div>
-      <p class="note">Every job quoted flat and agreed before I start. No surprises, no meetings that should've been a message.</p>
-      <a class="btn" href="teardown.html">Start with the free teardown →</a>
+<!-- ============ sheet 03: what I build ============ -->
+<section data-sheet="03" class="panel" id="build">
+  <div class="wrap inner">
+    <div class="lab"><span class="sheet">Sheet 03</span><span class="name">What I build</span></div>
+    <div class="body">
+      <h2>Three things. Each one is running on this site.</h2>
+      <a class="brow" href="work.html#ch=13">
+        <span><h3>A website that captures</h3><p>Not a brochure with your logo on it. Three fields, one-tap call, loads before they blink, and built so a visit turns into a name and a number you can ring back.</p></span>
+        <span class="plate"><span>Proven on</span><span class="on">CH 13</span></span>
+      </a>
+      <a class="brow" href="work.html#ch=14">
+        <span><h3>Booking, quotes and the pipeline</h3><p>Slots customers take themselves, deposits that hold them, quotes chased on their own, and every enquiry sat in one place with what happened to it.</p></span>
+        <span class="plate"><span>Proven on</span><span class="on">CH 14</span></span>
+      </a>
+      <a class="brow" href="work.html#ch=12">
+        <span><h3>Follow-up that runs itself</h3><p>Missed-call text-back in under a minute, review requests the day the job&rsquo;s done, &ldquo;you&rsquo;re due a service&rdquo; reminders next year. Set once, runs without you.</p></span>
+        <span class="plate"><span>Proven on</span><span class="on">CH 12</span></span>
+      </a>
+      <p class="f-note" style="margin-top:1.4rem">Rather watch all three end to end? <a class="lnk" href="systems.html">The systems page runs them in sequence</a>.</p>
     </div>
   </div>
 </section>
 
-<section class="proof">
-  <div class="wrap">
-    <div class="proof-copy reveal">
-      <h2>Watch them get built.</h2>
-      <p>I build one of these systems in public every week — invented demo businesses, real working systems, no client names, no stock, no templates.</p>
+<!-- ============ sheet 04: the rack ============ -->
+<section data-sheet="04" class="panel" id="rack">
+  <div class="wrap inner">
+    <div class="lab"><span class="sheet">Sheet 04</span><span class="name">The rack</span></div>
+    <div class="body">
+      <div class="rack-head">
+        <div>
+          <h2>Sixteen builds you can actually open.</h2>
+          <p class="lead" style="margin-top:.9rem">Quote engines, a CRM, a dispatch board, booking and deposits, four full websites. Hover one and it wakes up.</p>
+        </div>
+        <a class="btn btn-ghost" href="work.html">Open all sixteen</a>
+      </div>
     </div>
-    <div class="ig reveal">
-      <span class="stamp">Built by hand</span>
-      <a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">@tomxsystems on Instagram →<span>the weekly build, start to finish</span></a>
+  </div>
+  <div class="strip" id="stripRack"></div>
+  <div class="wrap"><p class="f-note" style="padding:1rem 0 1.6rem">Every business in them is invented &mdash; deliberately, so nothing here exposes a real client.</p></div>
+</section>
+
+<!-- ============ sheet 05: the operator ============ -->
+<section data-sheet="05" class="panel" id="operator">
+  <div class="wrap inner">
+    <div class="lab"><span class="sheet">Sheet 05</span><span class="name">Who&rsquo;s building it</span></div>
+    <div class="body">
+      <h2>One person. The one you message is the one who builds it.</h2>
+      <dl class="nameplate">
+        <div><dt>Operator</dt><dd><b>Tom.</b> No account manager, no handover to a junior. You talk to the person doing the work.</dd></div>
+        <div><dt>Base</dt><dd>UK. Built for the way UK service businesses actually get their work &mdash; the phone, Google, word of mouth.</dd></div>
+        <div><dt>Cadence</dt><dd>One system a week, built in public on Instagram. You can watch the next one being made.</dd></div>
+        <div><dt>Method</dt><dd>By hand. No page-builders, no themes, no platform that charges you monthly to keep your own site alive.</dd></div>
+        <div><dt>Ownership</dt><dd>Domain, code and accounts in your name from day one. Walk away tomorrow and it all keeps working.</dd></div>
+        <div><dt>The demos</dt><dd>Sixteen, all fictional businesses. Real working software &mdash; just nothing that exposes a client.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ daylight: the deal ============ -->
+<section class="day on-day" id="pricing">
+  <div class="panel" data-sheet="06">
+    <div class="wrap inner">
+      <div class="lab"><span class="sheet">Sheet 06</span><span class="name">The deal</span></div>
+      <div class="body">
+        <div class="grid">
+          <div>
+            <h2>Own it.<br><em>Don&rsquo;t rent it.</em></h2>
+            <p class="lead" style="margin-top:1rem">Some builders charge you every month, forever, just to keep your own website alive. Not here. Domain, code, accounts &mdash; all in your name from day one. Sack me tomorrow and everything keeps working.</p>
+            <p class="warn"><i>*</i><span>If a quote includes a &ldquo;monthly platform fee&rdquo; to keep your own site online, that is rent. Walk away.</span></p>
+          </div>
+          <div>
+            <div class="pline"><span><b>Capture site</b><small>Fast, findable, built to convert</small></span><span class="amt">from &pound;950</span></div>
+            <div class="pline"><span><b>Site + booking &amp; pipeline</b><small>Enquiries to booked jobs, tracked</small></span><span class="amt">from &pound;1,500</span></div>
+            <div class="pline"><span><b>The full system</b><small>Capture, booking, follow-up &mdash; the lot</small></span><span class="amt">&pound;2,500&ndash;&pound;3,000</span></div>
+            <p class="note">Every job quoted flat and agreed before I start. No surprises, and no meeting that should have been a message.</p>
+            <a class="btn btn-live" href="teardown.html">Start with the free teardown</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="faq wrap">
-  <p class="sec-kick reveal">Straight answers</p>
-  <details class="reveal"><summary>How fast is a build?</summary><p>A capture site: days. A full system: usually one to two weeks. You get a date with the quote, and you'll see it being built.</p></details>
-  <details class="reveal"><summary>Do I actually own it?</summary><p>Yes — domain, code and hosting sit in your accounts from day one. I set it up so you could walk away tomorrow and lose nothing. That's the point.</p></details>
-  <details class="reveal"><summary>What happens after I send the form?</summary><p>I look at your setup, then message you three things: what's leaking, what to fix first, and what it's worth in jobs. Want it fixed? I quote flat. Don't? Keep the list — no hard feelings.</p></details>
+<section data-sheet="07" class="panel faq">
+  <div class="wrap inner">
+    <div class="lab"><span class="sheet">Sheet 07</span><span class="name">Straight answers</span></div>
+    <div class="body">
+      <details><summary>How fast is a build?</summary><p>A capture site: days. A full system: usually one to two weeks. You get a date with the quote, and you can watch it being built.</p></details>
+      <details><summary>Do I actually own it?</summary><p>Yes. Domain, code and hosting sit in your accounts from day one. It is set up so you could walk away tomorrow and lose nothing. That is the whole point.</p></details>
+      <details><summary>Are those sixteen builds real clients?</summary><p>No, and deliberately so. Every business, person, review and phone number in them is invented, so nothing on this site exposes anyone I work with. They are real working software &mdash; just for businesses that do not exist.</p></details>
+      <details><summary>What happens after I send the form?</summary><p>I look at your setup, then message you three things: what is leaking, what to fix first, and what it is worth in jobs. Want it fixed? I quote flat. Don&rsquo;t? Keep the list, no hard feelings.</p></details>
+    </div>
+  </div>
 </section>
 
-<footer>
+<footer class="site-foot">
   <div class="wrap">
-    <div class="f-mark">tom<em>×</em>systems</div>
+    <div class="f-mark">tom<i>&times;</i>systems</div>
     <div class="f-row">
-      <span>Websites &amp; systems for service businesses · UK · © 2026</span>
+      <span>Websites &amp; systems for service businesses &middot; UK &middot; &copy; <span data-year></span></span>
       <nav>
-        <a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">Instagram</a>
-        <a id="waFoot" href="#" hidden>WhatsApp</a>
+        <a href="work.html">The rack</a>
+        <a href="systems.html">The systems</a>
         <a href="teardown.html">Free teardown</a>
+        <a data-ig href="#" target="_blank" rel="noopener">Instagram</a>
+        <a data-wa="Hi Tom — found you through your site." href="#" hidden>WhatsApp</a>
       </nav>
     </div>
   </div>
 </footer>
 
+<script src="assets/site.js"></script>
+<script src="assets/builds.js"></script>
+<script src="assets/rack.js"></script>
 <script>
-/* ============ CONFIG — the only bit to edit ============ */
-const CONFIG = {
-  whatsapp: "",   // digits only, international: UK 07123 456789 -> "447123456789"
-};
-/* ======================================================= */
-if (CONFIG.whatsapp) {
-  const href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent("Hi Tom — saw tomxsystems, got a question.");
-  const b = document.getElementById('waBtn'), f = document.getElementById('waFoot');
-  b.hidden = false; b.href = href; f.hidden = false; f.href = href;
-}
+renderRack('#stripRack', [1,2,3,14,12,11,8,10,7].map(function(n){
+  return BUILDS.filter(function(b){ return b.n === n; })[0];
+}));
 
-/* reveals: motion only when the visitor allows it — content is never hidden otherwise */
-if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-  document.documentElement.classList.add('m-on');
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
-  }), { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-}
-
-/* ---------- the signature moment: a system, running ---------- */
-const chat = document.getElementById('chat');
-const SCRIPT = [
-  { k:'chip',            t:'Missed call — 9:47pm',                                              d:600  },
-  { k:'bubble out',      t:'Sorry we missed you — on a job. What needs doing, and your postcode?', sub:'sent 42 seconds after the call', d:1500 },
-  { k:'bubble in',       t:'Fence panel’s come down in the wind. WF3.',                     d:3300 },
-  { k:'bubble out',      t:'Can take a look Tuesday 8:30am — want me to book you in?',           d:5100 },
-  { k:'bubble in',       t:'Go on then 👍',                                            d:6700 },
-  { k:'chip win',        t:'Booked — Tue 08:30 · added to the diary',                            d:7600 },
-  { wipe:true,                                                                                   d:10400 },
-  { k:'chip',            t:'Next day — job done, 11:02am',                                       d:10900 },
-  { k:'bubble out',      t:'Cheers Dave. If we did alright, a review helps massively — one tap here ⭐', sub:'auto-sent, same day', d:11800 },
-  { k:'bubble in',       t:'Least I can do 👍',                                          d:13700 },
-  { k:'chip win',        t:'★★★★★ posted — rating 4.6 → 4.7',                                   d:14700 },
-];
-const LOOP_MS = 18400;
-function runDemo(){
-  chat.innerHTML = '';
-  SCRIPT.forEach(step => {
-    setTimeout(() => {
-      if (step.wipe) {
-        chat.style.opacity = 0;
-        setTimeout(() => { chat.innerHTML = ''; chat.style.transition = 'none'; chat.style.opacity = 1;
-          requestAnimationFrame(() => chat.style.transition = 'opacity .4s'); }, 380);
-        return;
-      }
-      const el = document.createElement('div');
-      el.className = step.k;
-      el.textContent = step.t;
-      if (step.sub) {
-        const s = document.createElement('span');
-        s.className = 't'; s.textContent = step.sub; el.appendChild(s);
-      }
-      chat.appendChild(el);
-      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('on')));
-    }, step.d);
+(function(){
+  function go(){ initRig(14, { compact:true }); }
+  if (document.readyState === 'complete') setTimeout(go, 60);
+  else window.addEventListener('load', function(){
+    (window.requestIdleCallback || function(fn){ setTimeout(fn, 200); })(go, { timeout:1200 });
   });
-  setTimeout(() => { chat.style.opacity = 0;
-    setTimeout(() => { chat.style.transition = 'none'; chat.style.opacity = 1; runDemo();
-      requestAnimationFrame(() => chat.style.transition = 'opacity .4s'); }, 450);
-  }, LOOP_MS);
-}
-chat.style.transition = 'opacity .4s';
-runDemo();
+})();
+
+/* ---- the night line ---- */
+(function(){
+  var log = document.getElementById('log'), thread = document.getElementById('thread'),
+      out = document.getElementById('lineOut'), btn = document.getElementById('ring'),
+      lamp = document.getElementById('lineLamp');
+  var BEATS = [
+    { d:0,    t:'21:47:04', k:'Incoming', c:'missed', m:'<s>07700 900461</s> &mdash; six rings, no answer. Dan&rsquo;s at his daughter&rsquo;s birthday tea.' },
+    { d:1000, t:'21:47:15', k:'System',   c:'sys', m:'Missed-call text-back sent &mdash; <b>11 seconds</b> after the miss.',
+      bub:{ s:'out', x:'Sorry we missed you — Redgate Heating here. What&rsquo;s up? Reply to this and we&rsquo;ll get you sorted.' } },
+    { d:1500, t:'21:49:32', k:'Customer', c:'', m:'Replied. The lead is now a conversation, not a voicemail.',
+      bub:{ s:'in', x:'No hot water and it&rsquo;s banging when it fires up' } },
+    { d:1300, t:'21:49:34', k:'System',   c:'sys', m:'Job created &middot; triage sent &middot; slot offered from the live diary.',
+      bub:{ s:'out', x:'Sounds like the diverter valve. Earliest we can be there is 8am tomorrow — want it holding?' } },
+    { d:1500, t:'21:52:10', k:'Customer', c:'', m:'Took the slot herself. No phone call, no back and forth.',
+      bub:{ s:'in', x:'Yes please, 8am works' } },
+    { d:1100, t:'21:52:11', k:'System',   c:'sys', m:'<b>&pound;45 deposit taken</b> &middot; slot locked &middot; added to Dan&rsquo;s route for the morning.' },
+    { d:1300, t:'07:58:02', k:'Engineer', c:'sys', m:'On the way &mdash; automatic &ldquo;we&rsquo;re 10 minutes out&rdquo; text sent.' }
+  ];
+  var timers = [], running = false, played = false;
+  function play(){
+    if (running) return;
+    running = true; played = true;
+    timers.forEach(clearTimeout); timers = [];
+    log.innerHTML = ''; thread.innerHTML = ''; out.innerHTML = '';
+    btn.textContent = 'Ringing'; btn.disabled = true;
+    lamp.classList.remove('is-live');
+    var at = 0;
+    BEATS.forEach(function(b, i){
+      at += b.d;
+      timers.push(setTimeout(function(){
+        var li = document.createElement('li');
+        if (b.c) li.className = b.c;
+        li.innerHTML = '<span class="t">'+b.t+'</span><span class="k">'+b.k+'</span><span class="m">'+b.m+'</span>';
+        log.appendChild(li);
+        if (b.bub){ var el = document.createElement('div'); el.className = 'bub '+b.bub.s; el.innerHTML = b.bub.x; thread.appendChild(el); }
+        if (i === 1) lamp.classList.add('is-live');
+        if (i === BEATS.length - 1){
+          out.innerHTML = '<b>One missed call. A &pound;340 job in the diary.</b><span>Time you spent on it: none. You were at a birthday tea, then asleep.</span>';
+          btn.textContent = 'Run it again'; btn.disabled = false; running = false;
+        }
+      }, at));
+    });
+  }
+  btn.addEventListener('click', play);
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(en){ if (en[0].isIntersecting && !played){ play(); io.disconnect(); } }, { threshold:.3 });
+    io.observe(document.getElementById('night'));
+  }
+})();
 </script>
 </body>
 </html>
