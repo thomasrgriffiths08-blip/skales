@@ -1,188 +1,106 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-power="off">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free teardown — tomxsystems</title>
-<meta name="description" content="Ten minutes on your website, Google listing and what happens when a customer tries to reach you. Three things back: what's leaking, what to fix first, what it's worth in jobs.">
-<meta property="og:title" content="Free teardown — tomxsystems">
-<meta property="og:description" content="What's leaking, what to fix first, and what it's worth in jobs. One reply from a real person.">
-<meta property="og:image" content="https://thomasrgriffiths08-blip.github.io/tomxsystems-site/og.png">
+<title>Free teardown — three findings by message | Skales</title>
+<meta name="description" content="Send three details. Tom Griffiths checks your website, Google listing and missed calls, then messages back what is leaking and what to fix first.">
+<link rel="canonical" href="https://skales.com/teardown.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0A0C10">
+<meta name="author" content="Tom Griffiths">
+<meta property="og:site_name" content="Skales">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skales.com/teardown.html">
+<meta property="og:title" content="Free teardown — three findings by message | Skales">
+<meta property="og:description" content="Send three details. Tom Griffiths checks your website, Google listing and missed calls, then messages back what is leaking and what to fix first.">
+<meta property="og:image" content="https://skales.com/og/teardown.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Free teardown — three findings by message | Skales">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free teardown — three findings by message | Skales">
+<meta name="twitter:description" content="Send three details. Tom Griffiths checks your website, Google listing and missed calls, then messages back what is leaking and what to fix first.">
+<meta name="twitter:image" content="https://skales.com/og/teardown.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0C10'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23FF5A1F' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="og/icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
-<style>
-main{padding-block:clamp(2.4rem,6vw,4.5rem) clamp(3rem,7vw,5rem)}
-.td{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:clamp(1.8rem,5vw,4rem);align-items:start}
-.td>*{min-width:0}
-@media(max-width:900px){ .td{grid-template-columns:minmax(0,1fr)} }
-h1{margin:1.3rem 0 1.2rem;font-size:clamp(2.4rem,5.6vw,4.6rem)}
-h1 .on{color:var(--live)}
-.gets{list-style:none;margin-top:2rem;border:1px solid var(--zinc);border-radius:var(--r-cell)}
-.gets li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1rem;align-items:baseline;
-  padding:1rem 1.1rem;border-bottom:1px solid var(--zinc)}
-.gets li:last-child{border-bottom:0}
-.gets .n{font-family:var(--mono);font-size:.76rem;color:var(--dyeline-3);font-variant-numeric:tabular-nums slashed-zero}
-.gets b{font-weight:600;display:block;letter-spacing:-.01em}
-.gets span.d{color:var(--dyeline-2);font-size:.92rem}
 
-.card{border:1px solid var(--zinc);border-radius:var(--r-cell);background:var(--ink);overflow:hidden}
-.card-hd{padding:10px 14px;border-bottom:1px solid var(--zinc);background:var(--steel);
-  font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dyeline-3);
-  display:flex;align-items:center;gap:9px}
-form{padding:20px 16px 16px;display:flex;flex-direction:column;gap:16px}
-.field label{display:block;font-size:.86rem;font-weight:500;margin-bottom:6px}
-.field label .opt{color:var(--dyeline-3);font-weight:400}
-.field input,.field textarea{
-  width:100%;font:inherit;font-size:1rem;color:var(--dyeline);
-  background:var(--steel);border:1px solid var(--zinc-2);border-radius:var(--r-cell);padding:.7rem .8rem;
-  transition:border-color .15s}
-.field textarea{min-height:88px;resize:vertical}
-.field input::placeholder,.field textarea::placeholder{color:var(--dyeline-3)}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--live)}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.send{width:100%;justify-content:center}
-.done{padding:28px 20px 24px;text-align:center;display:none}
-.done.show{display:block}
-.done .badge{width:40px;height:40px;border-radius:50%;background:var(--live);color:#170800;
-  display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:600;margin:0 auto 14px}
-.done h2{font-size:1.5rem}
-.done p{color:var(--dyeline-2);margin-top:.5rem;font-size:.94rem}
-.done .ps{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--zinc);
-  font-size:.86rem;color:var(--dyeline-3);text-align:left}
-.alt{margin-top:1rem;font-size:.88rem;color:var(--dyeline-3)}
-.alt a{color:var(--live);text-decoration:none}
-.alt a:hover{text-decoration:underline}
-.reassure{margin-top:.6rem;font-size:.82rem;color:var(--dyeline-3)}
-</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://skales.com/#organization","name":"Skales","legalName":"Skales","url":"https://skales.com/","description":"Websites & systems for service businesses — Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).","founder":{"@id":"https://skales.com/#founder"},"foundingDate":"2026","areaServed":{"@type":"Country","name":"United Kingdom"},"knowsAbout":["Web design for service businesses","Online booking systems","Missed-call text-back automation","Customer follow-up automation","Trades websites","Review request automation"],"sameAs":["https://www.instagram.com/tomxsystems/"],"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"thomasrgriffiths08@gmail.com","availableLanguage":"en-GB","areaServed":"GB"},"logo":{"@type":"ImageObject","url":"https://skales.com/og/home.png"}},{"@type":"Person","@id":"https://skales.com/#founder","name":"Tom Griffiths","alternateName":"Thomas Griffiths","jobTitle":"Founder & builder","worksFor":{"@id":"https://skales.com/#organization"},"url":"https://skales.com/why/","sameAs":["https://www.instagram.com/tomxsystems/"],"nationality":"GB"},{"@type":"WebSite","@id":"https://skales.com/#website","url":"https://skales.com/","name":"Skales","description":"Websites & systems for service businesses","publisher":{"@id":"https://skales.com/#organization"},"inLanguage":"en-GB"},{"@type":"ContactPage","@id":"https://skales.com/teardown.html#webpage","url":"https://skales.com/teardown.html","name":"Free teardown — three findings by message | Skales","description":"Send three details. Tom Griffiths checks your website, Google listing and missed calls, then messages back what is leaking and what to fix first.","isPartOf":{"@id":"https://skales.com/#website"},"about":{"@id":"https://skales.com/#organization"},"inLanguage":"en-GB","dateModified":"2026-09-03"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://skales.com/"},{"@type":"ListItem","position":2,"name":"Free teardown","item":"https://skales.com/teardown.html"}]}]}</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="bar">
-    <a class="wordmark" href="./">tom<i>&times;</i>systems</a>
-    <span class="readout"><span class="lamp is-live"></span><b id="clock">--:--:--</b> UK &middot; switched on</span>
-    <nav>
-      <a href="work.html">The rack<sup class="cnt">16</sup></a>
-      <a href="systems.html">The systems<sup class="cnt">3</sup></a>
-      <a href="index.html#pricing">Pricing</a>
-    </nav>
+    <a class="wordmark" href="./">s<i>k</i>ales</a>
+    <span class="readout"><span class="lamp" id="powerLamp"></span><b id="clock">--:--:--</b> UK &middot; <span id="powerWord">standby</span></span>
+    <nav class="nav" aria-label="Primary"><a href="work/">Work<sup class="cnt">16</sup></a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a><a class="btn btn-live btn-sm" href="book/">Book a call</a></nav>
+    <button class="mtoggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Primary (mobile)" hidden>
+    <a href="work/">Work<sup class="cnt">16</sup></a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a>
+    <a href="book/" class="mcta">Book a call</a>
+    <a href="teardown.html">Free teardown</a>
+  </nav>
 </header>
-
-<main class="wrap">
+<main id="main" class="wrap td-main">
   <div class="td">
     <div>
       <span class="plate"><span>Free teardown</span><span>10 minutes</span><span>No pitch attached</span></span>
       <h1>Ten minutes on your setup.<br>Three things back<span class="on">.</span></h1>
-      <p class="lead">I go through your <strong style="color:var(--dyeline);font-weight:600">website, your Google listing, and what actually happens when someone tries to reach you</strong> &mdash; the way a customer experiences it, not the way an agency audits it.</p>
-
+      <p class="lead">Tom Griffiths goes through your <strong>website, your Google listing, and what actually happens when someone tries to reach you</strong> &mdash; the way a customer experiences it, not the way an agency audits it.</p>
       <ul class="gets">
         <li><span class="n">01</span><span><b>What&rsquo;s leaking</b><span class="d">Where enquiries are going cold right now, with the specific step they die at.</span></span></li>
         <li><span class="n">02</span><span><b>What to fix first</b><span class="d">One thing. Not a forty-page report you&rsquo;ll never open.</span></span></li>
         <li><span class="n">03</span><span><b>What it&rsquo;s worth</b><span class="d">In jobs per month, so you can decide for yourself whether it matters.</span></span></li>
       </ul>
-
-      <p class="f-note" style="margin-top:1.6rem">Want to see the sort of thing I build first? <a class="lnk" href="work.html">Sixteen of them are running on the rack</a></p>
+      <p class="f-note" style="margin-top:1.6rem">Rather talk it through? <a class="lnk" href="book/">Book a call instead</a>. Want to see the work first? <a class="lnk" href="work/">Sixteen builds are running on the rack</a>.</p>
     </div>
-
     <div>
       <div class="card">
         <div class="card-hd"><span class="lamp is-live"></span> Line 2 &middot; this form is switched on</div>
         <form id="f" novalidate>
-          <div class="field">
-            <label for="name">Your name</label>
-            <input id="name" name="name" autocomplete="name" required placeholder="e.g. Dave">
-          </div>
-          <div class="field">
-            <label for="phone">WhatsApp or mobile</label>
-            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="07…">
-          </div>
-          <div class="field">
-            <label for="biz">Your business &mdash; and what&rsquo;s bugging you <span class="opt">(one line is plenty)</span></label>
-            <textarea id="biz" name="biz" placeholder="e.g. Roofing, Wakefield. Website gets visits, phone doesn't ring."></textarea>
-          </div>
+          <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required placeholder="e.g. Dave"></div>
+          <div class="field"><label for="phone">WhatsApp or mobile</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="07…"></div>
+          <div class="field"><label for="biz">Your business &mdash; and what&rsquo;s bugging you <span class="opt">(one line is plenty)</span></label><textarea id="biz" name="biz" placeholder="e.g. Roofing, Wakefield. Website gets visits, phone doesn't ring."></textarea></div>
           <div class="hp" aria-hidden="true"><label>Leave this empty<input name="company" tabindex="-1" autocomplete="off"></label></div>
           <button class="btn btn-live send" type="submit">Send it over</button>
         </form>
-
         <div class="done" id="done">
           <div class="badge">&#10003;</div>
           <h2 id="doneTitle">Got it.</h2>
-          <p id="doneBody">You&rsquo;ll hear from me personally, fast.</p>
-          <p class="ps">PS &mdash; this instant confirmation? Your business could answer missed calls the same way, at 9:47pm, without you touching the phone. That is the kind of thing I build.</p>
+          <p id="doneBody">You&rsquo;ll hear back personally, fast.</p>
+          <p class="ps">PS &mdash; this instant confirmation? Your business could answer missed calls the same way, at 9:47pm, without you touching the phone. That is the kind of thing that gets built here.</p>
         </div>
       </div>
-
-      <p class="alt" id="waAlt" hidden>Prefer to skip the form? <a id="waDirect" href="#">Message me straight on WhatsApp</a></p>
+      
       <p class="reassure">No spam, no list, no obligation. One reply from a real person.</p>
     </div>
   </div>
 </main>
-
 <footer class="site-foot">
   <div class="wrap">
-    <div class="f-row" style="margin-top:0">
-      <span>&copy; <span data-year></span> tomxsystems &middot; UK</span>
-      <nav>
-        <a href="./">Home</a>
-        <a href="work.html">The rack</a>
-        <a data-ig href="#" target="_blank" rel="noopener">Instagram</a>
-      </nav>
+    <div class="f-mark" aria-hidden="true">s<i>k</i>ales</div>
+    <div class="f-cols">
+      <div><h2 class="spec">Pages</h2><a href="">Home</a><a href="work/">Work</a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a><a href="book/">Book a call</a><a href="teardown.html">Free teardown</a></div><div><h2 class="spec">Tools</h2><a href="work/northgate-quote-engine/">Northgate Quote Engine</a><a href="work/redgate-job-system/">Redgate Job &amp; Lead System</a><a href="work/halcyon-dispatch/">Halcyon Dispatch</a><a href="work/ledgerline/">Ledgerline</a><a href="work/mortgage-lab/">Mortgage Lab</a><a href="work/payslip-lab/">Payslip Lab</a><a href="work/kerbside-scorecard/">Kerbside Scorecard</a><a href="work/stopcock/">Stopcock</a><a href="work/turnover/">Turnover</a><a href="work/fenwick-booking/">Fenwick Booking</a><a href="work/jobsheet/">Jobsheet</a><a href="work/shiftbook/">Shiftbook</a></div><div><h2 class="spec">Websites</h2><a href="work/atelier-voss/">Atelier Voss</a><a href="work/cadence/">Cadence</a><a href="work/maree/">MARÉE — Sel Obscur</a><a href="work/signal/">SIGNAL 2027</a></div><div><h2 class="spec">Contact</h2><a href="mailto:thomasrgriffiths08@gmail.com">thomasrgriffiths08@gmail.com</a><a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">@tomxsystems on Instagram</a></div>
     </div>
+    <div class="f-row">
+      <span>Websites &amp; systems for service businesses &middot; United Kingdom &middot; &copy; <span data-year></span> Skales</span>
+      <span class="spec">Updated September 2026</span>
+    </div>
+    <p class="f-note">Every business, person, review and phone number in the demonstration builds on this site is invented. No client is named or shown anywhere.</p>
   </div>
 </footer>
-
+<script>window.SITE={"base":"","name":"Skales","origin":"https://skales.com","whatsapp":"","email":"thomasrgriffiths08@gmail.com","instagram":"https://www.instagram.com/tomxsystems/","calendly":""};</script>
 <script src="assets/site.js"></script>
-<script>
-(function(){
-  var wa = CONFIG.whatsapp && String(CONFIG.whatsapp).replace(/\D/g,'');
-  if (wa){
-    var alt = document.getElementById('waAlt');
-    alt.hidden = false;
-    document.getElementById('waDirect').href =
-      'https://wa.me/' + wa + '?text=' + encodeURIComponent("Hi Tom — saw your page, fancy the free teardown.");
-  }
-
-  document.getElementById('f').addEventListener('submit', function(e){
-    e.preventDefault();
-    var name  = document.getElementById('name').value.trim();
-    var phone = document.getElementById('phone').value.trim();
-    var biz   = document.getElementById('biz').value.trim();
-    if (this.company.value) return;                     // bot trap
-    if (!name || !phone){
-      (!name ? document.getElementById('name') : document.getElementById('phone')).focus();
-      return;
-    }
-
-    var msg = "Free teardown request\n"
-            + "Name: " + name + "\n"
-            + "Number: " + phone + "\n"
-            + (biz ? "Business / problem: " + biz : "");
-
-    this.style.display = 'none';
-    var t = new Date();
-    var hh = String(t.getHours()).padStart(2,'0'), mm = String(t.getMinutes()).padStart(2,'0');
-    document.getElementById('doneTitle').textContent = "Got it, " + name.split(' ')[0] + ".";
-    document.getElementById('doneBody').innerHTML =
-      "Sent at <strong style=\"color:var(--dyeline)\">" + hh + ":" + mm + "</strong>. You'll hear from me personally, fast.";
-    document.getElementById('done').classList.add('show');
-
-    setTimeout(function(){
-      if (wa){
-        location.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(msg);
-      } else {
-        location.href = 'mailto:' + CONFIG.email
-          + '?subject=' + encodeURIComponent('Free teardown — ' + name)
-          + '&body=' + encodeURIComponent(msg);
-      }
-    }, 900);
-  });
-})();
-</script>
+<script src="assets/teardown.js"></script>
 </body>
 </html>

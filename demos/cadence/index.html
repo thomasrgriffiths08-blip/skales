@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head><script>(function(){try{var h=["localhost","127.0.0.1","thomasrgriffiths08-blip.github.io","skales.com","www.skales.com"],r=document.referrer||"",o=r?new URL(r).hostname:"";if(o&&h.indexOf(o)>-1)return;}catch(e){}window.stop();document.documentElement.innerHTML="<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex,nofollow\"><title>Cadence · runs inside Skales</title><style>html,body{height:100%;margin:0;background:#0A0C10;color:#EDF1F5;font:16px/1.5 -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif}main{min-height:100%;display:grid;place-items:center;padding:24px}div{max-width:44ch;border:1px solid #252D38;padding:28px 28px 24px;border-radius:2px}p{margin:0 0 14px;color:#A3ADB8}b{color:#EDF1F5}a{display:inline-block;margin-top:6px;color:#0A0C10;background:#FF5A1F;text-decoration:none;font-weight:600;padding:12px 16px;border-radius:3px}small{display:block;margin-top:18px;font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6E7885}</style></head><body><main><div><p><b>Cadence</b> is one of Skales’s working builds. It runs inside the site, not on its own.</p><a href=\"https://skales.com/work/cadence/\">Open it on the site</a><small>CH 08 · Field-ops software</small></div></main></body>";})();</script><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cadence — the board that never stops running</title>
+<meta name="description" content="Cadence is the operations layer for field-heavy businesses: live dispatch, exception routing and margin visibility on every job.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Schibsted+Grotesk:wght@400..900&display=swap" rel="stylesheet">
+<style>[hidden]{display:none!important}:root{--bg:#16140f;--bg-warm:#1b1813;--panel:#201c15;--panel-2:#262119;--ink:#efe8da;--ink-2:rgba(239,232,218,.78);--ink-3:rgba(239,232,218,.60);--ink-4:rgba(239,232,218,.54);--acc:#ffb300;--acc-dim:rgba(255,179,0,.16);--stop:#c4483a;--clear:#5e9b6f;--line:rgba(239,232,218,.09);--line-2:rgba(239,232,218,.16);--maxw:1320px;--gut:24px;--ease:cubic-bezier(.16,1,.3,1);--t-ui:620ms;--t-rev:620ms;--f-ui:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;--f-disp:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;--f-mono:"Fragment Mono",ui-monospace,SFMono-Regular,Menlo,monospace}*,::after,::before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:16px;line-height:1.62;font-weight:400;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}img,svg{max-width:100%}blockquote,figure,h1,h2,h3,h4,ol,p,table,ul{margin:0}ol,ul{padding:0;list-style:none}a{color:inherit;text-decoration:none}s{text-decoration:none}button,input,select{font:inherit;color:inherit}::selection{background:var(--acc);color:#17140d}html{scrollbar-color:rgba(239,232,218,.18) var(--bg);scrollbar-width:thin}::-webkit-scrollbar{width:11px;height:11px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:rgba(239,232,218,.16);border:3px solid var(--bg);border-radius:0}::-webkit-scrollbar-thumb:hover{background:rgba(255,179,0,.5)}:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:1px}.skip{position:fixed;left:14px;top:-60px;z-index:200;background:var(--acc);color:#17140d;padding:10px 16px;font-weight:600;font-size:13px;transition:top var(--t-ui) var(--ease)}.skip:focus{top:14px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);position:relative}.wrap--wide{max-width:1560px}.edge{display:none}@media (min-width:1081px){.wrap--rail{padding-left:calc(var(--gut) + 48px)}.edge{display:block;left:var(--gut)}}.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut)}.sec{position:relative;padding:132px 0}.sec--tight{padding:92px 0}section[id]{scroll-margin-top:92px}.rule{height:1px;background:var(--line);width:100%}.measure{max-width:64ch}.lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:500;display:inline-flex;align-items:center;gap:10px}.lbl::before{content:"";width:22px;height:1px;background:var(--line-2);flex:none}.lbl--plain::before{display:none}.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums slashed-zero;letter-spacing:.01em}.edge{position:absolute;left:0;top:0;writing-mode:vertical-rl;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(239,232,218,.28);pointer-events:none;user-select:none}.edge b{font-weight:400;color:var(--acc);opacity:.7}.coord{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(239,232,218,.3)}.disp{font-family:var(--f-disp);font-weight:700;line-height:.94;letter-spacing:-.034em;text-wrap:balance}.close h2 em,.disp em,.hero-h1 em,.lane h3 em,.pull em{font-style:normal;color:var(--acc)}.h-sec{font-family:var(--f-disp);font-weight:600;font-size:clamp(25px,2.9vw,38px);line-height:1.06;letter-spacing:-.022em}.body{color:var(--ink-2);font-size:17px;line-height:1.62;max-width:64ch}.body--sm{font-size:15.5px;line-height:1.6;color:var(--ink-3);max-width:56ch}.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.55 0.55 0.55 0 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");background-size:260px 260px;contain:strict}.nav{position:fixed;top:0;left:0;right:0;z-index:100}.nav__in{display:flex;align-items:center;gap:28px;height:74px;border-bottom:1px solid transparent;transition:height var(--t-ui) var(--ease),background-color var(--t-ui) var(--ease),border-color var(--t-ui) var(--ease)}.nav.is-stuck .nav__in{height:58px;background:rgba(22,20,15,.96);border-bottom-color:var(--line)}.nav__mark{display:flex;align-items:center;gap:11px;flex:none}.nav__mark svg{display:block}.nav__word{font-family:var(--f-ui);font-weight:700;font-size:16px;letter-spacing:-.022em}.nav__links{display:flex;gap:26px;margin-left:16px}.nav__links a{font-size:13.5px;color:var(--ink-3);position:relative;padding:4px 0;transition:color var(--t-ui) var(--ease)}.nav__links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:100% 50%;transition:transform 420ms var(--ease)}.nav__links a:hover{color:var(--ink)}.nav__links a:hover::after{transform:scaleX(1);transform-origin:0 50%}.nav__right{margin-left:auto;display:flex;align-items:center;gap:8px}.nav__clock{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--ink-4);padding-right:6px;display:inline-flex;align-items:center;gap:8px}.nav__prog{position:absolute;left:0;bottom:-1px;height:1px;background:var(--acc);width:0;transform-origin:0 50%}.nav__toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;flex:none;padding:0;border:1px solid var(--line-2);background:0 0;border-radius:2px;cursor:pointer}.nav__toggle i{display:block;width:16px;height:1px;background:var(--ink);position:relative;transition:background-color 220ms var(--ease)}.nav__toggle i::after,.nav__toggle i::before{content:"";position:absolute;left:0;width:16px;height:1px;background:var(--ink);transition:transform 380ms var(--ease)}.nav__toggle i::before{top:-5px}.nav__toggle i::after{top:5px}.nav__toggle[aria-expanded=true] i{background:0 0}.nav__toggle[aria-expanded=true] i::before{transform:translateY(5px) rotate(45deg)}.nav__toggle[aria-expanded=true] i::after{transform:translateY(-5px) rotate(-45deg)}.nav__panel,.nav__scrim{display:none}html.is-navopen,html.is-navopen body{overflow:hidden}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:46px;padding:0 22px;font-size:14px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;border:1px solid var(--line-2);background:0 0;color:var(--ink);cursor:pointer;position:relative;overflow:hidden;border-radius:2px;transition:border-color var(--t-ui) var(--ease),color var(--t-ui) var(--ease),background-color var(--t-ui) var(--ease)}.btn span{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px}.btn:hover{border-color:var(--ink-4);background:rgba(239,232,218,.04)}.btn--pri{background:var(--acc);color:#17140d;border-color:var(--acc)}.btn--pri::after{content:"";position:absolute;inset:0;background:#ffca4d;transform:translateX(-101%);transition:transform 480ms var(--ease)}.btn--pri:hover{background:var(--acc);color:#17140d;border-color:var(--acc)}.btn--pri:hover::after{transform:translateX(0)}.btn--sm{height:36px;padding:0 15px;font-size:13px}.btn--ghost{border-color:transparent;color:var(--ink-2)}.btn--ghost:hover{color:var(--ink);border-color:var(--line)}.btn:disabled{opacity:.4;cursor:not-allowed}.dot{width:6px;height:6px;border-radius:50%;background:var(--acc);flex:none;box-shadow:0 0 0 0 rgba(255,179,0,.55)}.dot--pulse{animation:pulse 2.6s var(--ease) infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,179,0,.5)}70%{box-shadow:0 0 0 9px rgba(255,179,0,0)}100%{box-shadow:0 0 0 0 rgba(255,179,0,0)}}.stage{position:relative;height:440vh}.stage__pin{position:sticky;top:0;height:100svh;min-height:640px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:82px 0 26px}.stage__frame{position:relative}.stage__grid{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55}.stage__grid .g12,.stage__grid .wrap{height:100%}.stage__grid i{border-left:1px solid rgba(239,232,218,.05);height:100%;display:block}.stage__grid i:last-child{border-right:1px solid rgba(239,232,218,.05)}.stage__in{position:relative;z-index:2;width:100%}.stage__top{display:flex;align-items:baseline;justify-content:flex-end;gap:26px;padding-bottom:14px;flex-wrap:wrap}.stage__beat{display:flex;align-items:baseline;gap:14px;min-width:0}.stage__beat .bn{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;color:var(--acc)}.stage__beat .bt{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3)}.stage__say{font-size:14.5px;color:var(--ink-2);max-width:74ch;min-height:44px;line-height:1.5;padding-top:10px;border-top:1px solid var(--line)}.stage__say b{color:var(--ink);font-weight:500}.stage__meter{display:flex;align-items:center;gap:12px;flex:none}.stage__meter .tr{width:180px;height:1px;background:var(--line-2);position:relative}.stage__meter .tr b{position:absolute;left:0;top:0;height:1px;width:0;background:var(--acc);display:block}.stage__hint{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4)}.stage__hint kbd{font:inherit;border:1px solid var(--line-2);border-radius:2px;padding:1px 5px;color:var(--ink-3)}.pinned{position:absolute;z-index:6;left:0;top:-22px;width:min(654px,56%);background:linear-gradient(180deg,rgba(38,33,25,.97),rgba(27,24,19,.97));border:1px solid var(--line-2);border-radius:4px;padding:26px 30px 24px;box-shadow:0 50px 90px -40px rgba(0,0,0,.95);transform:rotate(-.5deg);transform-origin:0 0;will-change:transform,opacity}.pinned::before{content:"";position:absolute;left:26px;top:-5px;width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px rgba(255,179,0,.14)}.pinned__meta{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-4);margin-bottom:18px;display:flex;gap:10px;flex-wrap:wrap}.hero-h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(38px,5.4vw,74px);line-height:.98;letter-spacing:-.036em;margin:0 0 16px}.pinned__sub{font-size:16px;line-height:1.55;color:var(--ink-2);max-width:44ch}.pinned__sub b{color:var(--ink);font-weight:600}.pinned__row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px}.pinned__note{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4)}.app{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,#201c15,#1b1813);border-radius:4px;overflow:hidden;box-shadow:0 60px 120px -60px rgba(0,0,0,.9)}.app::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;background:repeating-linear-gradient(180deg,rgba(255,179,0,.45) 0 1px,transparent 1px 3px)}.app__bar{display:flex;align-items:center;gap:14px;padding:0 14px;height:42px;border-bottom:1px solid var(--line);background:rgba(239,232,218,.02)}.app__dots{display:flex;gap:7px;flex:none}.app__dots i{width:9px;height:9px;border-radius:50%;background:rgba(239,232,218,.16);display:block}.app__crumb{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-4);letter-spacing:.04em;display:flex;gap:8px;align-items:center;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.app__crumb b{color:var(--ink-2);font-weight:500}.app__kbd{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:rgba(239,232,218,.3);flex:none}.app__clock{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);flex:none;letter-spacing:.04em}.app__body{display:grid;grid-template-columns:186px minmax(0,1fr)}.app__side{border-right:1px solid var(--line);padding:14px 11px;display:flex;flex-direction:column;gap:3px}.app__org{display:flex;align-items:center;gap:9px;padding:6px 8px 14px}.app__org b{font-size:13px;font-weight:600}.app__org span{font-family:var(--f-mono);font-size:10px;color:var(--ink-4);display:block;letter-spacing:.08em}.navitem{display:flex;align-items:center;gap:10px;padding:7px 9px;border-radius:2px;font-size:13px;color:var(--ink-3);transition:background-color .3s var(--ease),color .3s var(--ease);cursor:default}.navitem svg{flex:none;color:var(--ink-4)}.navitem.is-on{background:rgba(239,232,218,.055);color:var(--ink)}.navitem.is-on svg{color:var(--acc)}.navitem.is-alert{color:var(--stop)}.navitem.is-alert svg{color:var(--stop)}.navitem .cnt{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;color:var(--ink-4)}.app__sidefoot{margin-top:auto;border-top:1px solid var(--line);padding:11px 9px 2px;font-family:var(--f-mono);font-size:10.5px;color:var(--ink-4);line-height:1.6}.app__main{display:flex;flex-direction:column;min-width:0}.app__tools{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}.app__tools h4{font-size:13.5px;font-weight:600;margin-right:6px}.chip{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border:1px solid var(--line);border-radius:2px;font-size:11.5px;color:var(--ink-3);background:0 0;transition:border-color 340ms var(--ease),color 340ms var(--ease),background-color 340ms var(--ease)}.chip.is-on{border-color:rgba(255,179,0,.42);color:var(--acc);background:rgba(255,179,0,.08)}.chip .x{font-family:var(--f-mono);font-size:10px;opacity:.7}.app__search{margin-left:auto;display:flex;align-items:center;gap:8px;height:28px;padding:0 10px;border:1px solid var(--line);border-radius:2px;font-family:var(--f-mono);font-size:11px;color:var(--ink-4);min-width:0}.app__split{display:grid;grid-template-columns:minmax(0,1.44fr) minmax(0,1fr);min-height:0;flex:1}.app__rows{border-right:1px solid var(--line);padding:5px 0;position:relative}.rowwait{position:absolute;left:0;right:0;top:36px;bottom:0;display:grid;place-items:end center;text-align:center;padding:0 20px 22px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(239,232,218,.3);transition:opacity 420ms var(--ease)}.rowwait.is-off{opacity:0}.row,.rowhead{display:grid;grid-template-columns:26px 74px minmax(0,1fr) 92px 66px;gap:12px;align-items:center;padding:0 16px;height:44px;font-size:13px}.rowhead{height:30px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);border-bottom:1px solid var(--line)}.row{border-bottom:1px solid rgba(239,232,218,.045);perspective:520px;transition:opacity 420ms var(--ease),background-color 420ms var(--ease),transform 420ms var(--ease)}.row--tail{opacity:.55;max-height:120px;overflow:hidden;transition:opacity 420ms var(--ease),max-height 420ms var(--ease),border-width 420ms var(--ease)}.row--tail.is-off{max-height:0;border-bottom-width:0;transform:none}.row--tail .rn{color:rgba(239,232,218,.24)}.row--tail .who i{color:rgba(239,232,218,.42)}.row.is-off{opacity:0;transform:translateY(-9px);pointer-events:none}.row.is-fade{opacity:.2}.row.is-hot{background:rgba(196,72,58,.09);box-shadow:inset 2px 0 0 var(--stop)}.row.is-act{background:rgba(255,179,0,.07);box-shadow:inset 2px 0 0 var(--acc)}.row.is-done{background:rgba(94,155,111,.06);box-shadow:inset 2px 0 0 var(--clear)}.row .rn{font-family:var(--f-mono);font-size:10.5px;color:rgba(239,232,218,.3)}.row .job{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-4)}.row .who{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.row .who b{font-weight:500}.row .who i{display:block;font-style:normal;font-size:11px;color:var(--ink-4);line-height:1.3;transition:color 420ms var(--ease)}.row.is-done .who i{color:var(--clear)}.row .eta{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);text-align:right;font-variant-numeric:tabular-nums slashed-zero;transform-origin:50% 50%;backface-visibility:hidden}@keyframes flap{0%{transform:rotateX(0)}46%{transform:rotateX(-86deg)}54%{transform:rotateX(86deg)}100%{transform:rotateX(0)}}.row .eta.is-flap{animation:flap 520ms cubic-bezier(.4,0,.2,1) 1;color:var(--acc)}.stat{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:2px;border:1px solid var(--line);color:var(--ink-3);transition:color 480ms var(--ease),border-color 480ms var(--ease),background-color 480ms var(--ease);white-space:nowrap}.stat i{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}.stat--stop{color:var(--stop);border-color:rgba(196,72,58,.34);background:rgba(196,72,58,.1)}.stat--cau{color:var(--acc);border-color:rgba(255,179,0,.34);background:rgba(255,179,0,.09)}.stat--clear{color:var(--clear);border-color:rgba(94,155,111,.32);background:rgba(94,155,111,.09)}.stat--grey{color:var(--ink-4)}.app__panel{padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}.pcard{border:1px solid var(--line);border-radius:4px;padding:12px 13px;background:rgba(239,232,218,.014)}.pcard h5{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);font-weight:500;margin-bottom:9px}.pcard .big{font-family:var(--f-mono);font-size:26px;letter-spacing:-.01em;font-variant-numeric:tabular-nums slashed-zero;line-height:1}.pcard .delta{font-family:var(--f-mono);font-size:11px;color:var(--clear);margin-left:8px}.pcard .fine{font-size:11.5px;color:var(--ink-4);margin-top:7px;line-height:1.45}.chartwrap svg{display:block;width:100%;height:96px;overflow:visible}.chart-line{fill:none;stroke:var(--acc);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.chart-base{fill:none;stroke:rgba(239,232,218,.1);stroke-width:1;stroke-dasharray:2 4}.pcard .rt{font-size:12.5px;color:var(--ink-2);line-height:1.5}.toast{position:absolute;right:14px;bottom:14px;z-index:5;display:flex;gap:11px;align-items:flex-start;max-width:min(330px,calc(100% - 28px));padding:12px 14px;border:1px solid rgba(255,179,0,.28);background:rgba(36,28,10,.96);border-radius:4px;box-shadow:0 24px 50px -24px rgba(0,0,0,.9);opacity:0;transform:translateY(10px);transition:opacity 460ms var(--ease),transform 460ms var(--ease);pointer-events:none}.toast.is-in{opacity:1;transform:translateY(0)}.toast b{display:block;font-size:13px;font-weight:600;margin-bottom:2px}.toast p{font-size:12px;color:var(--ink-3);line-height:1.45}.toast .tk{flex:none;width:22px;height:22px;border-radius:50%;background:rgba(255,179,0,.13);display:grid;place-items:center;color:var(--acc)}.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-warm);padding:26px 0;overflow:hidden;position:relative}.strip__head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:22px}.marquee{position:relative;width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}.marquee__track{display:flex;align-items:center;gap:70px;width:max-content;will-change:transform}.wordmark{flex:none;color:var(--ink-3);transition:color 520ms var(--ease),opacity 520ms var(--ease);opacity:.72}.wordmark:hover{color:var(--ink);opacity:1}.wordmark svg{display:block;height:28px;width:auto}.filters{border-top:1px solid var(--line-2)}.fitem{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);border-bottom:1px solid var(--line);padding:40px 0;align-items:start;position:relative;transition:background-color 520ms var(--ease)}.fitem:hover{background:rgba(239,232,218,.014)}.fitem__n{grid-column:1/span 2;font-family:var(--f-mono);font-size:13px;letter-spacing:.2em;line-height:1;color:var(--ink-4);padding-top:14px;position:relative;transition:color 520ms var(--ease)}.fitem__n::after{content:"";position:absolute;left:0;top:0;width:24px;height:2px;background:var(--acc);opacity:.45;transition:opacity 520ms var(--ease),width 520ms var(--ease)}.fitem:hover .fitem__n{color:var(--acc)}.fitem:hover .fitem__n::after{opacity:1;width:46px}.fitem__t{grid-column:3/span 5}.fitem__t h3{font-family:var(--f-disp);font-weight:600;font-size:clamp(25px,2.9vw,38px);line-height:1.06;letter-spacing:-.024em;margin-bottom:14px;text-wrap:balance}.fitem__tok{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);border:1px solid rgba(255,179,0,.28);background:rgba(255,179,0,.05);border-radius:2px;padding:3px 9px}.fitem__b{grid-column:8/span 5}.fitem__b p{color:var(--ink-2);font-size:16px;line-height:1.6;max-width:56ch}.fitem__b .fitem__meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}.fitem__b .fitem__meta b{color:var(--ink-3);font-weight:400}.lanes{background:#1c1913;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:104px 0 112px;position:relative;overflow:hidden}.rail{position:relative;height:64px;margin:34px 0 8px;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line)}.rail__ticks{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr)}.rail__ticks i{border-left:1px solid var(--line);display:block;position:relative}.rail__ticks i:first-child{border-left:0}.rail__ticks i::after{content:attr(data-t);position:absolute;top:8px;font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;color:var(--ink-4);padding-left:12px}.rail__job{position:absolute;top:50%;left:0;transform:translate(0,-50%);will-change:transform;display:inline-flex;align-items:center;gap:9px;height:30px;padding:0 12px;border-radius:2px;border:1px solid rgba(255,179,0,.45);background:rgba(36,28,10,.94);color:var(--acc);font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;white-space:nowrap}.rail__job::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--acc);flex:none}.rail__trail{position:absolute;top:50%;left:0;height:1px;width:0;background:linear-gradient(90deg,rgba(255,179,0,0),rgba(255,179,0,.6));transform:translateY(-50%);will-change:width}.laneset{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);margin-top:26px}.lane{border-top:1px solid var(--line-2);padding-top:20px}.lane--1{grid-column:1/span 4}.lane--2{grid-column:5/span 5;margin-top:34px}.lane--3{grid-column:10/span 3;margin-top:68px}.lane__no{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.2em;color:var(--acc);display:block;margin-bottom:12px}.lane h3{font-family:var(--f-disp);font-weight:600;font-size:clamp(24px,2.6vw,34px);line-height:1.08;letter-spacing:-.022em;margin-bottom:12px;text-wrap:balance}.lane p{color:var(--ink-3);font-size:15.5px;line-height:1.6}.lane__tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}.tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4);border:1px solid var(--line);padding:4px 8px;border-radius:2px}.figure{position:relative;padding:120px 0 104px;overflow:hidden}.figure__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);align-items:end}.figure__n{grid-column:1/span 7;font-family:var(--f-mono);font-weight:400;font-size:clamp(96px,20vw,280px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums slashed-zero;display:block;margin-left:-.02em}.figure__n s{text-decoration:none}.figure__n em{font-style:normal;color:var(--acc)}.figure__say{grid-column:9/span 4;padding-bottom:12px}.figure__say p{font-size:17px;line-height:1.58;color:var(--ink-2);max-width:38ch}.figure__say .src{margin-top:16px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4)}.figure__sats{display:flex;flex-wrap:wrap;gap:0;margin-top:64px;border-top:1px solid var(--line)}.sat{flex:1 1 220px;border-left:1px solid var(--line);padding:22px 24px 4px}.sat:first-child{border-left:0;padding-left:0}.sat .v{font-family:var(--f-mono);font-size:22px;letter-spacing:-.01em;font-variant-numeric:tabular-nums slashed-zero}.sat .k{margin-top:8px;font-size:13.5px;color:var(--ink-4);line-height:1.5;max-width:30ch}.pullsec{padding:120px 0 118px;position:relative}.pull{font-family:var(--f-disp);font-weight:600;font-size:clamp(32px,5.2vw,72px);line-height:1.08;letter-spacing:-.03em;max-width:19ch;margin:24px 0 0}.pull__by{display:flex;align-items:center;gap:13px;margin-top:34px;padding-top:18px;border-top:1px solid var(--line);max-width:34ch}.pull__by .av{width:36px;height:36px;flex:none;border:1px solid var(--line-2);overflow:hidden}.pull__by b{display:block;font-size:13.5px;font-weight:600}.pull__by span{font-size:12.5px;color:var(--ink-4)}.note{margin-top:64px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut)}.note__card{grid-column:6/span 7;border:1px solid var(--line);border-left:2px solid var(--acc);border-radius:0 4px 4px 0;background:rgba(239,232,218,.014);padding:20px 22px}.note__card .note__hd{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.note__card p{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:60ch}.note__by{margin-top:14px;font-size:12.5px;color:var(--ink-4)}.note__by b{color:var(--ink-3);font-weight:500}.inv{border:1px solid var(--line);border-radius:4px;background:linear-gradient(180deg,#201c15,#1b1813);overflow:hidden;box-shadow:0 50px 100px -60px rgba(0,0,0,.9);position:relative}.inv::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;background:repeating-linear-gradient(180deg,rgba(255,179,0,.45) 0 1px,transparent 1px 3px)}.inv__bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(239,232,218,.02)}.inv__bar .t{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}.inv__bar .r{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}.toggle{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:2px;padding:3px;background:rgba(239,232,218,.02)}.toggle button{height:30px;padding:0 14px;border:0;background:0 0;font-size:12.5px;font-weight:500;color:var(--ink-3);cursor:pointer;border-radius:2px;transition:background-color 380ms var(--ease),color 380ms var(--ease)}.toggle button[aria-pressed=true]{background:var(--ink);color:#17140d;font-weight:600}.savenote{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}.inv table{width:100%;border-collapse:collapse}.inv td,.inv th{text-align:left;padding:0 20px;height:52px;font-size:14px;vertical-align:middle}.inv thead th{height:32px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);font-weight:500;border-bottom:1px solid var(--line)}.inv tbody tr{border-bottom:1px solid rgba(239,232,218,.045);transition:background-color 420ms var(--ease)}.inv tbody tr:hover{background:rgba(239,232,218,.02)}.inv .c-n{width:52px;font-family:var(--f-mono);font-size:11px;color:rgba(239,232,218,.3)}.inv .c-d b{font-weight:500;display:block}.inv .c-d i{font-style:normal;font-size:12px;color:var(--ink-4);display:block;line-height:1.35}.inv .c-a,.inv .c-q,.inv .c-u{font-family:var(--f-mono);font-variant-numeric:tabular-nums slashed-zero;text-align:right;white-space:nowrap}.inv .c-q{width:120px;color:var(--ink-3);font-size:12.5px}.inv .c-u{width:104px;color:var(--ink-4);font-size:12.5px}.inv .c-a{width:124px;color:var(--ink);font-size:14px}.inv .incl{color:var(--clear)}.inv__sum{border-top:1px solid var(--line-2);padding:18px 20px 22px;display:flex;justify-content:flex-end}.sums{width:min(420px,100%)}.sums div{display:flex;justify-content:space-between;gap:20px;padding:7px 0;font-size:13.5px;color:var(--ink-3)}.sums div span:last-child{font-family:var(--f-mono);font-variant-numeric:tabular-nums slashed-zero;color:var(--ink-2)}.sums .tot{border-top:1px solid var(--line);margin-top:10px;padding-top:16px;align-items:baseline}.sums .tot span:first-child{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}.sums .tot span:last-child{font-family:var(--f-mono);font-size:34px;letter-spacing:-.035em;color:var(--acc)}.inv__foot{border-top:1px solid var(--line);padding:16px 20px;display:flex;gap:22px;flex-wrap:wrap;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}.pricefoot{margin-top:24px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut)}.pricefoot p{grid-column:1/span 6;font-size:15px;line-height:1.6;color:var(--ink-3);max-width:58ch}.pricefoot .cta{grid-column:8/span 5;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}.faq{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut)}.faq__hd{grid-column:1/span 4}.faq__list{grid-column:6/span 7;border-top:1px solid var(--line-2)}.qa{border-bottom:1px solid var(--line)}.qa__q{width:100%;display:flex;align-items:flex-start;gap:18px;background:0 0;border:0;text-align:left;cursor:pointer;padding:22px 0;font-size:17px;font-weight:500;letter-spacing:-.012em;color:var(--ink);line-height:1.36}.qa__q .ix{font-family:var(--f-mono);font-size:11px;color:var(--ink-4);padding-top:6px;flex:none}.qa__q .pm{margin-left:auto;flex:none;width:15px;height:15px;position:relative;margin-top:5px}.qa__q .pm::after,.qa__q .pm::before{content:"";position:absolute;background:var(--ink-3);transition:transform 460ms var(--ease),background-color 460ms var(--ease)}.qa__q .pm::before{left:0;top:7px;width:15px;height:1px}.qa__q .pm::after{left:7px;top:0;width:1px;height:15px}.qa.is-open .pm::after{transform:scaleY(0)}.qa.is-open .pm::before{background:var(--acc)}.qa__a{overflow:hidden;height:0;transition:height 520ms var(--ease)}.qa__a>div{padding:0 0 24px 33px;color:var(--ink-3);font-size:15.5px;line-height:1.62;max-width:68ch}.close{position:relative;border-top:1px solid var(--line);padding:120px 0 118px}.close__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);align-items:end}.close h2{grid-column:1/span 7;font-family:var(--f-disp);font-weight:700;font-size:clamp(38px,6.2vw,92px);line-height:.94;letter-spacing:-.036em}.close__side{grid-column:9/span 4;padding-bottom:10px}.close__side p{color:var(--ink-2);font-size:16px;line-height:1.6;max-width:42ch}.slot{margin-top:56px;border:1px solid var(--line-2);border-radius:4px;background:rgba(239,232,218,.016);display:grid;grid-template-columns:26px 96px minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 22px}.slot .rn{font-family:var(--f-mono);font-size:10.5px;color:rgba(239,232,218,.3)}.slot .jb{font-family:var(--f-mono);font-size:11.5px;color:var(--acc)}.slot .ds b{font-weight:500;font-size:15px;display:block}.slot .ds i{font-style:normal;font-size:12.5px;color:var(--ink-4)}.slot .ac{display:flex;gap:10px;flex-wrap:wrap}.close__fine{margin-top:22px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4)}.foot{border-top:1px solid var(--line);padding:60px 0 0;position:relative;overflow:hidden}.foot__cols{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);padding-bottom:44px}.foot__brand{grid-column:1/span 3}.foot__brand p{font-size:13.5px;color:var(--ink-4);line-height:1.6;max-width:32ch;margin-top:14px}.foot__status{display:inline-flex;align-items:center;gap:9px;margin-top:18px;border:1px solid var(--line);padding:5px 12px 5px 10px;border-radius:2px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}.foot__col{grid-column:span 2}.foot__col:nth-of-type(2){grid-column:5/span 2}.foot h4{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(239,232,218,.34);font-weight:500;margin-bottom:14px}.foot ul{display:flex;flex-direction:column;gap:9px}.foot ul a{font-size:12.5px;color:var(--ink-3);transition:color 340ms var(--ease)}.foot ul a:hover{color:var(--acc)}.foot__poster{border-top:1px solid var(--line);padding:30px 0 0;overflow:hidden;position:relative}.foot__poster svg{display:block;width:100%;height:auto;color:rgba(239,232,218,.09)}.foot__legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:20px 0 30px;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}.foot__legal a:hover{color:var(--ink-2)}.anim .rv{opacity:0;transform:translateY(14px);filter:blur(4px)}.anim .rv.is-in{opacity:1;transform:none;filter:none;transition:opacity var(--t-rev) var(--ease),transform var(--t-rev) var(--ease),filter var(--t-rev) var(--ease)}.anim .rv-d1.is-in{transition-delay:80ms}.anim .rv-d2.is-in{transition-delay:160ms}.anim .rv-d3.is-in{transition-delay:240ms}@media (max-width:1180px){.pinned{width:min(500px,58%)}.app__split{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}@media (max-width:1080px){.sec{padding:104px 0}.stage{height:420vh}.pinned{width:min(470px,72%);top:6px;padding:22px 24px 22px}.app__body{grid-template-columns:152px minmax(0,1fr)}.app__split{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr)}.pcard .fine{display:none}.fitem__n{grid-column:1/span 2}.fitem__t{grid-column:3/span 9}.fitem__b{grid-column:3/span 9;margin-top:14px}.lane--1{grid-column:1/span 6}.lane--2{grid-column:7/span 6;margin-top:34px}.lane--3{grid-column:1/span 8;margin-top:44px}.figure__n{grid-column:1/span 12}.figure__say{grid-column:1/span 8;margin-top:26px;padding-bottom:0}.note__card{grid-column:1/span 12}.faq__hd{grid-column:1/span 12}.faq__list{grid-column:1/span 12;margin-top:26px}.close h2{grid-column:1/span 12}.close__side{grid-column:1/span 12;margin-top:24px;padding-bottom:0}.pricefoot p{grid-column:1/span 12}.pricefoot .cta{grid-column:1/span 12;margin-top:18px}.foot__brand{grid-column:1/span 12}.foot__col,.foot__col:nth-of-type(2){grid-column:span 3}}@media (max-width:820px){.nav__links{display:none}.app__body{grid-template-columns:142px minmax(0,1fr)}.app__split{grid-template-columns:1fr}.app__rows{border-right:0;border-bottom:1px solid var(--line);height:236px;overflow:hidden}.row{max-height:120px;overflow:hidden;transition:opacity 380ms var(--ease),max-height 380ms var(--ease),padding 380ms var(--ease),background-color 380ms var(--ease)}.row.is-off{max-height:0;padding-top:0;padding-bottom:0;border-bottom-width:0}.app__panel{flex-direction:row;padding:10px 12px;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}.app__panel::-webkit-scrollbar{display:none}.pcard{flex:0 0 200px;scroll-snap-align:start}.pcard .big{font-size:23px}.chartwrap svg{height:48px}.gsec{grid-template-columns:1fr;gap:26px}.gsec>*{grid-column:auto!important;grid-column-start:auto!important}.slot{grid-template-columns:1fr;gap:14px;align-items:start}.figure__sats{flex-direction:column}.sat{border-left:0;border-top:1px solid var(--line);padding:18px 0 4px}.sat:first-child{border-top:0}.wrap{padding-left:max(var(--gut),env(safe-area-inset-left));padding-right:max(var(--gut),env(safe-area-inset-right))}.nav>.wrap{z-index:101}.nav__in{gap:12px;height:64px}.nav.is-stuck .nav__in{height:56px}.nav__clock{display:none}.nav__right{gap:8px}.nav__right .btn--ghost{display:none}.nav__toggle{display:inline-flex}.nav__panel{display:block;position:fixed;left:0;right:0;top:0;z-index:99;background:rgba(22,20,15,.985);border-bottom:1px solid var(--line);padding:92px var(--gut) calc(26px + env(safe-area-inset-bottom));max-height:100svh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(-101%);visibility:hidden;transition:transform 460ms var(--ease),visibility 460ms var(--ease)}.nav__panel.is-open{transform:none;visibility:visible}.nav__panel nav{display:flex;flex-direction:column;border-top:1px solid var(--line)}.nav__panel nav a{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;padding:6px 0;font-size:19px;letter-spacing:-.015em;color:var(--ink);border-bottom:1px solid var(--line)}.nav__panel nav a span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-4)}.nav__panelfoot{display:flex;gap:10px;margin-top:22px}.nav__panelfoot .btn{flex:1 1 0;min-width:0}.nav__panelnote{margin-top:18px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);display:flex;align-items:center;gap:8px}.nav__scrim{display:block;position:fixed;inset:0;z-index:98;background:rgba(10,9,6,.6);opacity:0;visibility:hidden;transition:opacity 420ms var(--ease),visibility 420ms var(--ease)}.nav__scrim.is-open{opacity:1;visibility:visible}.foot{padding-bottom:env(safe-area-inset-bottom)}}@media (pointer:coarse){.btn{height:48px}.btn--sm{height:42px;padding:0 14px}.toggle button{height:40px;padding:0 16px}.qa__q{padding:22px 0}.foot ul{gap:4px}.foot ul a{display:inline-block;padding:7px 0}.foot__legal a{display:inline-block;padding:4px 0}}@media (max-width:640px){:root{--gut:16px}.sec{padding:78px 0}.sec--tight{padding:60px 0}section[id]{scroll-margin-top:72px}/* -- 5. type scale: body copy back to phone size, tracking off the labels -- */ .body{font-size:16px;line-height:1.6}.body--sm{font-size:16px;line-height:1.58;max-width:none}.lbl{letter-spacing:.06em;gap:8px}.lbl::before{width:16px}.close__fine,.coord,.fitem__meta,.fitem__tok,.foot h4,.foot__legal,.foot__status,.inv__foot,.lane__no,.note__hd,.savenote,.stage__hint,.tag{letter-spacing:.07em}.h-sec{font-size:clamp(24px,6.6vw,38px)}.stage{height:440vh}.stage__pin{height:100svh;min-height:0;justify-content:flex-start;padding:68px 0 18px}.stage__grid .g12{grid-template-columns:repeat(4,minmax(0,1fr))}.stage__grid i:nth-child(n+5){display:none}.pinned{left:calc(var(--gut) * -1);right:calc(var(--gut) * -1);top:74px;bottom:auto;width:auto;overflow:visible;transform:none;transform-origin:50% 0;border-radius:0;border-left:0;border-right:0;border-bottom:1px solid var(--line-2);box-shadow:0 26px 46px -28px rgba(0,0,0,.92);padding:18px var(--gut) 20px;background:linear-gradient(180deg,rgba(22,20,15,.965) 0,rgba(22,20,15,.94) 66%,rgba(22,20,15,.74) 100%);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}.pinned::before{left:var(--gut);top:-5px}.pinned__note{display:none}.pinned__row{margin-top:16px}.app__panel{padding-bottom:12px}.hero-h1{font-size:clamp(34px,10.6vw,62px);letter-spacing:-.032em;margin-bottom:14px;hyphens:auto;-webkit-hyphens:auto}.pinned__meta{margin-bottom:12px;letter-spacing:.1em;font-size:10px}.pinned__sub{font-size:16px;max-width:none}.pinned__row{margin-top:18px;gap:12px}.pinned__row .btn{flex:1 1 auto;justify-content:center}.stage__top{flex-direction:row;align-items:baseline;justify-content:space-between;gap:10px;padding-bottom:10px}.stage__meter .tr{width:120px}.stage__say{font-size:14px;min-height:56px;max-width:none}.stage__hint{display:none}.app{margin-left:calc(var(--gut) * -1);margin-right:calc(var(--gut) * -1);border-radius:0;border-left:0;border-right:0;box-shadow:none}.app__bar{height:38px;padding:0 12px;gap:10px}.app__clock,.app__crumb{font-size:10.5px}.app__crumb .crumb-x{display:none}.app__kbd{display:none}.app__body{grid-template-columns:1fr}.app__side{flex-direction:row;align-items:center;gap:4px;overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid var(--line);padding:8px 12px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 86%,rgba(0,0,0,.15));mask-image:linear-gradient(90deg,#000 86%,rgba(0,0,0,.15))}.app__side::-webkit-scrollbar{display:none}.app__org,.app__sidefoot{display:none}.navitem{flex:none;scroll-snap-align:start;white-space:nowrap;font-size:12.5px;padding:6px 10px}.navitem .cnt{margin-left:6px}.app__tools{padding:9px 12px;gap:6px}.app__tools h4{width:100%;font-size:13px;margin-right:0}.app__search{display:none}.app__rows{height:214px}.row,.rowhead{grid-template-columns:minmax(0,1fr) 84px 46px;gap:8px;padding:0 12px;height:auto}.rowhead{padding-top:0}.row .job,.row .rn,.rowhead span:first-child,.rowhead span:nth-child(2){display:none}.row{padding:9px 12px;font-size:13px}.row .who i{font-size:10.5px}.row .eta{font-size:11px}.stat{font-size:9.5px;padding:3px 6px}.app__panel{padding:10px 12px}.pcard{flex:0 0 196px}.pcard .big{font-size:22px}.chartwrap svg{height:46px}.toast{left:12px;right:12px;bottom:12px;max-width:none}.strip{padding:22px 0}.strip__head{margin-bottom:18px}.marquee__track{gap:42px}.wordmark svg{height:22px}.fitem{grid-template-columns:1fr;gap:0;padding:30px 0}.fitem__b,.fitem__n,.fitem__t{grid-column:1/-1}.fitem__n{font-size:12px;padding-top:12px;margin-bottom:16px}.fitem__t h3{font-size:clamp(23px,6.4vw,38px)}.fitem__b{margin-top:12px}.fitem__b p{font-size:16px;max-width:none}.fitem__meta{gap:12px;margin-top:12px}.lanes{padding:70px 0 76px}.rail{height:68px;margin:26px 0 4px}.rail__ticks i::after{padding-left:8px;top:3px;font-size:9px;letter-spacing:.1em}.rail__job{height:26px;padding:0 9px;font-size:10px;top:64%}.rj-x{display:none}.laneset{grid-template-columns:1fr;gap:26px;margin-top:22px}.lane--1,.lane--2,.lane--3{grid-column:1/-1;margin-top:0}.lane h3{font-size:clamp(22px,6.2vw,34px)}.lane p{font-size:16px}.figure{padding:76px 0 70px}.figure__n{font-size:clamp(88px,30vw,180px);letter-spacing:-.055em}.figure__say{grid-column:1/-1;margin-top:20px}.figure__say p{font-size:16px;max-width:none}.figure__sats{margin-top:40px}.sat .v{font-size:20px}.sat .k{font-size:13px;max-width:none}.pullsec{padding:76px 0 74px}.pull{font-size:clamp(27px,7.6vw,72px);line-height:1.12;max-width:none}.note{margin-top:44px}.note__card{padding:18px}.note__card p{font-size:16px;max-width:none}.inv{margin-left:calc(var(--gut) * -1);margin-right:calc(var(--gut) * -1);border-radius:0;border-left:0;border-right:0;box-shadow:none}.inv__bar{padding:12px var(--gut);gap:10px}.inv__bar .r{margin-left:0;width:100%;justify-content:space-between}.inv thead{display:none}.inv tbody tr{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:14px var(--gut)}.inv td{padding:0;height:auto}.inv .c-n{display:none}.inv .c-d{grid-column:1;grid-row:1/span 2}.inv .c-q{grid-column:1;grid-row:3;text-align:left;width:auto;margin-top:6px}.inv .c-u{display:none}.inv .c-a{grid-column:2;grid-row:1;width:auto;font-size:15px}.inv__sum{padding:16px var(--gut) 20px}.sums .tot span:last-child{font-size:28px}.inv__foot{padding:14px var(--gut);gap:8px;flex-direction:column}.pricefoot p{font-size:15.5px;max-width:none}.pricefoot .cta .btn{flex:1 1 auto;justify-content:center}.qa__q{font-size:16px;gap:12px;padding:20px 0;line-height:1.4}.qa__q .ix{padding-top:4px}.qa__q .pm{margin-top:4px}.qa__a>div{padding:0 0 22px 28px;font-size:15.5px}.close{padding:76px 0 72px}.close h2{font-size:clamp(31px,9vw,92px)}.close__side p{font-size:16px;max-width:none}.slot{margin-top:34px;padding:16px 18px}.slot .ac{width:100%}.slot .ac .btn{flex:1 1 auto;justify-content:center}.foot{padding-top:52px}.foot__cols{gap:26px 20px;padding-bottom:36px}.foot__col,.foot__col:nth-of-type(2){grid-column:span 6}.foot__poster{padding-top:22px}.foot__legal{flex-direction:column;gap:10px;padding-bottom:28px}}@media (max-width:380px){.hero-h1{font-size:33px}.nav__word{display:none}.row,.rowhead{grid-template-columns:minmax(0,1fr) 78px 42px}}@media (prefers-reduced-motion:reduce){*{animation-duration:NaNs!important;animation-iteration-count:1!important}.anim .rv{opacity:1;transform:none;filter:none}.chip,.qa__a,.row,.stat,.toast{transition-duration:NaNs!important}html{scroll-behavior:auto}}</style>
+</head>
+<body>
+<a class="skip" href="#shift">Skip to the live board</a>
+<div class="grain" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="wrap wrap--wide">
+    <div class="nav__in">
+      <a class="nav__mark" href="#top" aria-label="Cadence — home">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <rect x="0.5" y="0.5" width="21" height="21" stroke="currentColor" stroke-opacity=".28"/>
+          <path d="M4 14.5C6.2 14.5 6.2 7.5 8.4 7.5S10.6 14.5 12.8 14.5 15 7.5 17.2 7.5" stroke="#ffb300" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="nav__word">Cadence</span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#shift">The board</a>
+        <a href="#watch">What it watches</a>
+        <a href="#stages">Deployment</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav__right">
+        <span class="nav__clock num" aria-hidden="true"><i class="dot dot--pulse"></i><span id="navClock">07:40:12</span></span>
+        <a class="btn btn--sm btn--ghost" href="#faq">Sign in</a>
+        <a class="btn btn--sm btn--pri" href="#cta"><span>Book a walkthrough</span></a>
+        <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false"
+                aria-controls="navPanel" aria-label="Open menu"><i aria-hidden="true"></i></button>
+      </div>
+      <div class="nav__prog" id="navprog" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="nav__panel" id="navPanel">
+    <nav aria-label="Primary">
+      <a href="#shift">The board <span>01</span></a>
+      <a href="#watch">What it watches <span>02</span></a>
+      <a href="#stages">Deployment <span>03</span></a>
+      <a href="#pricing">Pricing <span>04</span></a>
+      <a href="#faq">FAQ <span>05</span></a>
+    </nav>
+    <div class="nav__panelfoot">
+      <a class="btn" href="#faq">Sign in</a>
+      <a class="btn btn--pri" href="#cta"><span>Book a walkthrough</span></a>
+    </div>
+    <p class="nav__panelnote"><i class="dot dot--pulse"></i> Taking September pilots · 4 slots left</p>
+  </div>
+</header>
+<div class="nav__scrim" id="navScrim" aria-hidden="true"></div>
+<main id="top">
+<section class="stage" id="shift" aria-labelledby="shift-h">
+  <h2 class="sr" id="shift-h">A Tuesday morning on the Cadence board</h2>
+  <p class="sr">
+    Scrolling advances a recorded shift on the board below, in seven beats: the
+    07:40 sync lands and builds the Tuesday programme; job NM-4431 at Pennine Chill
+    crosses the slip threshold and turns red; the board filters to the three blocked
+    jobs and prices £8,400 of penalty exposure; Cadence proposes moving the job from
+    Crew 7 to Crew 3; the swap is taken and the ETA flips from 10:20 to 09:52,
+    clearing £5,800 of exposure; the board returns to watching all seven jobs.
+  </p>
+  <div class="stage__pin">
+    <div class="stage__grid" aria-hidden="true">
+      <div class="wrap wrap--wide"><div class="g12">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div></div>
+    </div>
+    <div class="wrap wrap--wide stage__in">
+      <div class="stage__top">
+        <p class="stage__beat"><span class="bn num" id="beatNo">00 / 06</span><span class="bt" id="beatName">Standby</span></p>
+        <div class="stage__meter">
+          <span class="stage__hint" aria-hidden="true"><kbd>↓</kbd> runs the shift</span>
+          <span class="tr" aria-hidden="true"><b id="beatFill"></b></span>
+          <span class="coord num" id="beatPct">00%</span>
+        </div>
+      </div>
+      <div class="stage__frame">
+        <div class="pinned" id="pinned">
+          <p class="pinned__meta"><span class="num">TUE 25 AUG</span> · <span class="num">07:40</span> · NORTH REGION · <span class="num">142</span> JOBS</p>
+          <h1 class="hero-h1">Every job runs on a rhythm. <em>Hold</em> it.</h1>
+          <p class="pinned__sub">Cadence sits between your dispatch board, your field app and your finance system and watches every job for the moment it slips. <b>Median exception caught 41 minutes before the customer notices.</b></p>
+          <div class="pinned__row">
+            <a class="btn btn--pri" href="#cta"><span>Book a walkthrough</span></a>
+            <span class="pinned__note">Scroll to run the shift ↓</span>
+          </div>
+        </div>
+        <div class="app" id="app">
+          <div class="app__bar">
+            <div class="app__dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <p class="app__crumb">cadence.app / <b>northmoor-logistics</b><span class="crumb-x"> / board / <b>Tue 25 Aug</b></span></p>
+            <p class="app__kbd" aria-hidden="true">⌘K JUMP · ⌥R REPLAY</p>
+            <p class="app__clock num" id="appClock">07:40:12</p>
+          </div>
+          <div class="app__body">
+            <aside class="app__side">
+              <div class="app__org">
+                <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="21" stroke="currentColor" stroke-opacity=".28"/><path d="M4 14.5C6.2 14.5 6.2 7.5 8.4 7.5S10.6 14.5 12.8 14.5 15 7.5 17.2 7.5" stroke="#ffb300" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <div><b>Northmoor</b><span>NORTH REGION</span></div>
+              </div>
+              <div class="navitem is-on"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="5" height="5" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="1" width="5" height="5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="5" height="5" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="8" width="5" height="5" stroke="currentColor" stroke-width="1.3"/></svg> Board <span class="cnt num" id="sideCount">0</span></div>
+              <div class="navitem" id="sideExcItem"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 11.5 7 2l5 9.5H2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg> Exceptions <span class="cnt num" id="sideExc">0</span></div>
+              <div class="navitem"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><path d="M7 4v3.3L9 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Schedule</div>
+              <div class="navitem"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 12V6M6 12V2M10 12V8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Margin</div>
+              <div class="navitem"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="2.5" width="11" height="9" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 5.5h11" stroke="currentColor" stroke-width="1.3"/></svg> Invoicing</div>
+              <div class="navitem"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="5" r="2.4" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 12c.6-2.4 2.3-3.6 4.5-3.6S11 9.6 11.5 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Crews</div>
+              <div class="app__sidefoot">SYNC · <span id="syncWord">idle</span><br>Vantage FSM · Sage 200</div>
+            </aside>
+            <div class="app__main">
+              <div class="app__tools">
+                <h4>Tuesday programme</h4>
+                <span class="chip is-on" id="chipAll">All regions</span>
+                <span class="chip" id="chipFilter">Blocked only <span class="x">×</span></span>
+                <span class="app__search"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="3.6" stroke="currentColor" stroke-width="1.3"/><path d="m8 8 3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> search jobs</span>
+              </div>
+              <div class="app__split">
+                <div class="app__rows">
+                  <div class="rowhead"><span>#</span><span>Job</span><span>Site / crew</span><span>Status</span><span>ETA</span></div>
+                  <p class="rowwait" id="rowWait">Waiting for the 07:40 sync · 142 records queued in Vantage FSM</p>
+                  <div id="tailHost">
+                    <div class="row row--tail"><span class="rn">N1</span><span class="job">NM-4396</span><span class="who"><b>Skipton depot, bay 1</b><i>Crew 11 · night shift</i></span><span><span class="stat stat--clear"><i></i>Signed off</span></span><span class="eta">07:20</span></div>
+                    <div class="row row--tail"><span class="rn">N2</span><span class="job">NM-4390</span><span class="who"><b>Wharfedale cold store</b><i>Crew 11 · night shift</i></span><span><span class="stat stat--grey"><i></i>Closing</span></span><span class="eta">07:55</span></div>
+                  </div>
+                  <div id="rowHost">
+                    <div class="row"><span class="rn">01</span><span class="job">NM-4412</span><span class="who"><b>Beckwith Cold Store</b><i>Crew 2 · Ilkley</i></span><span><span class="stat stat--grey"><i></i>On plan</span></span><span class="eta">08:15</span></div>
+                    <div class="row"><span class="rn">02</span><span class="job">NM-4418</span><span class="who"><b>Ridgeway Distribution Park</b><i>Crew 5 · Wetherby</i></span><span><span class="stat stat--stop"><i></i>Blocked</span></span><span class="eta">08:40</span></div>
+                    <div class="row"><span class="rn">03</span><span class="job">NM-4423</span><span class="who"><b>Harlow Street depot</b><i>Crew 1 · Leeds</i></span><span><span class="stat stat--grey"><i></i>On plan</span></span><span class="eta">09:05</span></div>
+                    <div class="row" id="rowFlip"><span class="rn">04</span><span class="job">NM-4431</span><span class="who"><b>Pennine Chill — bay 3</b><i id="flipCrew">Crew 7 · Keighley</i></span><span><span class="stat stat--grey" id="flipStat"><i></i>On plan</span></span><span class="eta" id="flipEta">10:20</span></div>
+                    <div class="row"><span class="rn">05</span><span class="job">NM-4437</span><span class="who"><b>Calder Foods, unit 14</b><i>Crew 3 · Brighouse</i></span><span><span class="stat stat--grey"><i></i>On plan</span></span><span class="eta">11:00</span></div>
+                    <div class="row"><span class="rn">06</span><span class="job">NM-4440</span><span class="who"><b>Aire Valley transfer hub</b><i>Crew 5 · Shipley</i></span><span><span class="stat stat--stop"><i></i>Blocked</span></span><span class="eta">11:45</span></div>
+                    <div class="row"><span class="rn">07</span><span class="job">NM-4446</span><span class="who"><b>Selby packhouse, line 2</b><i>Crew 9 · Selby</i></span><span><span class="stat stat--grey"><i></i>On plan</span></span><span class="eta">13:30</span></div>
+                  </div>
+                </div>
+                <div class="app__panel">
+                  <div class="pcard">
+                    <h5>Exposure this shift</h5>
+                    <p class="big num"><span id="expo">£0</span><span class="delta" id="expoDelta">&nbsp;</span></p>
+                    <p class="fine">Contract penalties at risk if the blocked jobs miss their window.</p>
+                  </div>
+                  <div class="pcard chartwrap">
+                    <h5>On-time completion · 6 weeks</h5>
+                    <svg viewBox="0 0 260 96" preserveAspectRatio="none" aria-hidden="true">
+                      <path class="chart-base" d="M0 78H260M0 50H260M0 22H260"/>
+                      <path class="chart-line" id="chartLine" d="M6 72 L48 64 L90 68 L132 48 L174 35 L216 24 L254 13"/>
+                    </svg>
+                    <div style="display:flex;justify-content:space-between;margin-top:7px">
+                      <span class="coord num">14 JUL</span><span class="coord num">25 AUG</span>
+                    </div>
+                  </div>
+                  <div class="pcard">
+                    <h5>Router</h5>
+                    <p class="rt" id="routerTxt">Waiting for the 07:40 sync.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="toast" id="toast">
+            <span class="tk" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6.4 4.7 9 10 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><b>Route rebalanced — Crew 3</b><p>Pennine Chill moved ahead of Aire Valley. 14 minutes recovered, penalty window cleared.</p></span>
+          </div>
+        </div>
+      </div>
+      <p class="stage__say" id="beatSay">The night shift is still signing off two jobs. The 07:40 sync hasn't landed, <b>142 job records</b> are sitting in Vantage FSM, and the coordinator is looking at six tabs.</p>
+    </div>
+  </div>
+</section>
+<section class="strip" aria-labelledby="strip-h">
+  <div class="wrap wrap--wide">
+    <div class="strip__head">
+      <h2 class="lbl" id="strip-h">Boards running right now</h2>
+      <p class="coord num">53.7997° N · 1.5492° W · 27 DEPLOYMENTS</p>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee__track" id="mqtrack">
+      <div class="wordmark" title="Northmoor Logistics">
+        <svg viewBox="0 0 208 30" height="30" role="img" aria-label="Northmoor Logistics"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 22V8l13 14V8"/><circle cx="27" cy="15" r="6.6"/></g><text x="42" y="20" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="600" letter-spacing="0.16em" fill="currentColor">NORTHMOOR</text></svg>
+      </div>
+      <div class="wordmark" title="Vantage Rail">
+        <svg viewBox="0 0 186 30" height="30" role="img" aria-label="Vantage Rail"><g fill="currentColor"><path d="M3 7h5l5.5 13L19 7h5l-8 17h-5L3 7Z"/></g><g stroke="currentColor" stroke-width="1.5" fill="none"><path d="M30 24 38 6M36 24 44 6M28 13h18M26 19h18"/></g><text x="54" y="20" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" font-weight="500" letter-spacing="0.24em" fill="currentColor">VANTAGE RAIL</text></svg>
+      </div>
+      <div class="wordmark" title="Hollowell &amp; Pike">
+        <svg viewBox="0 0 214 30" height="30" role="img" aria-label="Hollowell and Pike"><g stroke="currentColor" stroke-width="1.4" fill="none"><rect x="3" y="6" width="18" height="18"/><path d="M3 15h18M12 6v18"/></g><text x="30" y="15" font-family="Georgia, 'Times New Roman', serif" font-size="17" fill="currentColor">Hollowell</text><text x="30" y="27" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="9.5" letter-spacing="0.36em" fill="currentColor">&amp; PIKE 1978</text></svg>
+      </div>
+      <div class="wordmark" title="Auger Robotics">
+        <svg viewBox="0 0 200 30" height="30" role="img" aria-label="Auger Robotics"><g stroke="currentColor" stroke-width="1.5" fill="none"><path d="M12 4v22M5 9c7 2 7 4 14 6M5 15c7 2 7 4 14 6M5 21c7 2 7 3 14 5"/></g><text x="28" y="20" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15.5" font-weight="700" letter-spacing="-0.02em" fill="currentColor">auger</text><text x="86" y="20" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0.2em" fill="currentColor">ROBOTICS</text></svg>
+      </div>
+      <div class="wordmark" title="Kestrel Freight Group">
+        <svg viewBox="0 0 222 30" height="30" role="img" aria-label="Kestrel Freight Group"><g stroke="currentColor" stroke-width="1.5" fill="none"><path d="M4 24 16 4l4 10 6-4-2 14H4Z"/></g><text x="36" y="14" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="0.1em" fill="currentColor">KESTREL</text><text x="36" y="26" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="9" font-weight="400" letter-spacing="0.3em" fill="currentColor">FREIGHT GROUP</text></svg>
+      </div>
+      <div class="wordmark" title="Marchetti Foods">
+        <svg viewBox="0 0 206 30" height="30" role="img" aria-label="Marchetti Foods"><g stroke="currentColor" stroke-width="1.5" fill="none"><circle cx="14" cy="15" r="10"/><path d="M14 5v20M4 15h20"/></g><text x="32" y="21" font-family="Georgia, 'Times New Roman', serif" font-size="21" letter-spacing="-0.01em" fill="currentColor">Marchetti</text><text x="150" y="21" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="9.5" letter-spacing="0.28em" fill="currentColor">FOODS</text></svg>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec" id="watch" aria-labelledby="watch-h">
+  <div class="wrap wrap--wide wrap--rail">
+    <p class="edge" aria-hidden="true">02 <b>/</b> FILTER STATES</p>
+    <div class="g12 gsec" style="margin-bottom:46px">
+      <div class="rv" style="grid-column:1 / span 6">
+        <p class="lbl">The rescore loop</p>
+        <h2 class="h-sec" id="watch-h" style="margin-top:16px">Five checks, run in this order,<br>every ninety seconds.</h2>
+      </div>
+      <div class="rv rv-d1" style="grid-column:8 / span 5;align-self:end">
+        <p class="body--sm">No modules to buy, no per-seat maths. Every account gets all five from day one — the difference between plans is volume, and how deep we go into your finance stack.</p>
+      </div>
+    </div>
+    <div class="filters">
+      <article class="fitem rv">
+        <p class="fitem__n num" aria-hidden="true">01</p>
+        <div class="fitem__t">
+          <h3>The job tells you it's slipping. Not the customer.</h3>
+          <span class="fitem__tok num">status:slipping</span>
+        </div>
+        <div class="fitem__b">
+          <p>Cadence reads engineer check-ins, parts movements, van telematics and the customer's own access windows, then scores every live job for slip risk every 90 seconds. When a score crosses your threshold it doesn't email someone — it proposes the swap, prices the penalty either way, and waits for one tap.</p>
+          <p class="fitem__meta"><span>Rescore <b>90s</b></span><span>Inputs <b>4 sources</b></span><span>Exception routing</span></p>
+        </div>
+      </article>
+      <article class="fitem rv">
+        <p class="fitem__n num" aria-hidden="true">02</p>
+        <div class="fitem__t">
+          <h3>Live cost, not month-end.</h3>
+          <span class="fitem__tok num">margin:live</span>
+        </div>
+        <div class="fitem__b">
+          <p>Labour, travel, parts and subcontract land against the job as they happen, priced off your own rate cards. You know which jobs are underwater on the day you can still fix them, not on the twelfth of next month when the ledger closes.</p>
+          <p class="fitem__meta"><span>Lag <b>&lt; 4 min</b></span><span>Rate cards <b>yours</b></span><span>Margin per job</span></p>
+        </div>
+      </article>
+      <article class="fitem rv">
+        <p class="fitem__n num" aria-hidden="true">03</p>
+        <div class="fitem__t">
+          <h3>Two taps, offline, gloves on.</h3>
+          <span class="fitem__tok num">signal:none</span>
+        </div>
+        <div class="fitem__b">
+          <p>Engineers get the next job, the asset history and a photo-first sign-off. Four screens, no training deck. It queues and syncs when the signal comes back, which on this customer base means plant rooms, chill stores and the bottom of a lift shaft.</p>
+          <p class="fitem__meta"><span>Screens <b>4</b></span><span>Offline queue <b>unlimited</b></span><span>Field app</span></p>
+        </div>
+      </article>
+      <article class="fitem rv">
+        <p class="fitem__n num" aria-hidden="true">04</p>
+        <div class="fitem__t">
+          <h3>Invoice raised before the van is home.</h3>
+          <span class="fitem__tok num">ledger:write</span>
+        </div>
+        <div class="fitem__b">
+          <p>Signed-off jobs push straight into Sage, Xero or NetSuite with the evidence pack attached — photos, timestamps, parts used, the customer's signature. Average time from sign-off to invoice at our customers fell from nine days to thirty-one hours.</p>
+          <p class="fitem__meta"><span>Sage · Xero · NetSuite</span><span>Was <b>9 days</b></span><span>Now <b>31 hrs</b></span></p>
+        </div>
+      </article>
+      <article class="fitem rv">
+        <p class="fitem__n num" aria-hidden="true">05</p>
+        <div class="fitem__t">
+          <h3>Argue with the recording, not each other.</h3>
+          <span class="fitem__tok num">replay:*</span>
+        </div>
+        <div class="fitem__b">
+          <p>Every board state is kept. Replay any day, see who moved what and when the slip actually started. Three weeks of "whose fault was it" collapses into four minutes of scrubbing a timeline in front of the client.</p>
+          <p class="fitem__meta"><span>Retention <b>unlimited</b></span><span>Export <b>audit CSV</b></span><span>Programme replay</span></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="lanes" id="stages" aria-labelledby="stages-h">
+  <div class="wrap wrap--wide">
+    <div class="g12 gsec" style="align-items:end">
+      <div class="rv" style="grid-column:1 / span 6">
+        <p class="lbl">Deployment</p>
+        <h2 class="h-sec" id="stages-h" style="margin-top:16px">Three weeks, not three quarters.<br>Watch one job make the trip.</h2>
+      </div>
+      <div class="rv rv-d1" style="grid-column:8 / span 5">
+        <p class="body--sm">We have never asked a customer to switch off their field service system. Cadence reads it, sits above it, and gives the coordinator one board instead of six tabs.</p>
+      </div>
+    </div>
+    <div class="rail" id="rail" aria-hidden="true">
+      <div class="rail__ticks">
+        <i data-t="INTAKE"></i><i data-t="THRESHOLDS"></i><i data-t="LIVE"></i>
+      </div>
+      <span class="rail__trail" id="railTrail"></span>
+      <span class="rail__job" id="railJob">NM-4431<span class="rj-x"> · Pennine Chill</span></span>
+    </div>
+    <div class="laneset">
+      <article class="lane lane--1 rv">
+        <span class="lane__no num">01 / DAY 1–4</span>
+        <h3>We plug into what you <em>already</em> run.</h3>
+        <p>Read-only connectors into your FSM, telematics, parts stock and accounting ledger. Nothing is migrated and nothing is switched off, so the failure mode of a bad week is that you carry on exactly as you did before.</p>
+        <div class="lane__tags"><span class="tag">Read-only</span><span class="tag">No downtime</span></div>
+      </article>
+      <article class="lane lane--2 rv rv-d1">
+        <span class="lane__no num">02 / WEEK 2</span>
+        <h3>Your rules become <em>thresholds</em>.</h3>
+        <p>Two workshops with your coordinators. What counts as blocked, which contracts carry penalties, how late is late for each customer, who is allowed to move a crew. Those answers become the scoring model — not a generic template with your logo dropped on it.</p>
+        <div class="lane__tags"><span class="tag">2 workshops</span><span class="tag">Your thresholds</span><span class="tag">No template</span></div>
+      </article>
+      <article class="lane lane--3 rv rv-d2">
+        <span class="lane__no num">03 / WEEK 3</span>
+        <h3>One region <em>live</em>, then the rest.</h3>
+        <p>One region runs on the Cadence board while the others stay as they are, so you get a clean comparison in the same fortnight.</p>
+        <div class="lane__tags"><span class="tag">One region</span><span class="tag">Measured against control</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="figure" id="proof" aria-labelledby="proof-h">
+  <div class="wrap wrap--wide wrap--rail">
+    <p class="edge" aria-hidden="true">04 <b>/</b> MEASURED</p>
+    <p class="lbl rv" id="proof-h">Across 27 deployments, rolling 12 months to July 2026</p>
+    <div class="figure__grid" style="margin-top:30px">
+      <p class="figure__n rv"><s data-count="41" data-suffix="">41</s><em>%</em></p>
+      <div class="figure__say rv rv-d1">
+        <p>fewer jobs finishing outside their contracted window — median, first ninety days, measured against a region the customer deliberately held back as a control.</p>
+        <p class="src">Source: customer control-region comparison, n=27</p>
+      </div>
+    </div>
+    <div class="figure__sats rv rv-d2">
+      <div class="sat"><p class="v"><s data-count="6.2" data-dec="1" data-suffix="h">6.2h</s></p><p class="k">given back to each coordinator every week · self-reported, n=214</p></div>
+      <div class="sat"><p class="v"><s data-count="31" data-suffix="hrs">31hrs</s></p><p class="k">sign-off to invoice raised, down from nine days · finance connector data</p></div>
+      <div class="sat"><p class="v"><s data-count="99.98" data-dec="2" data-suffix="%">99.98%</s></p><p class="k">board uptime, including the two regional failovers in March · public status page</p></div>
+    </div>
+  </div>
+</section>
+<section class="pullsec" aria-labelledby="pull-h">
+  <div class="wrap wrap--wide wrap--rail">
+    <p class="edge" aria-hidden="true">05 <b>/</b> ON THE GROUND</p>
+    <p class="lbl rv" id="pull-h">What changed</p>
+    <figure class="rv rv-d1">
+      <blockquote class="pull disp">“We didn't have a scheduling problem. We had a <em>knowing</em> problem.”</blockquote>
+      <figcaption class="pull__by">
+        <span class="av" aria-hidden="true">
+          <svg viewBox="0 0 36 36" width="36" height="36"><rect width="36" height="36" fill="#262119"/><circle cx="18" cy="14" r="6" fill="none" stroke="rgba(239,232,218,.4)" stroke-width="1.3"/><path d="M6 34c2.4-7 6.8-10.4 12-10.4S27.6 27 30 34" fill="none" stroke="rgba(239,232,218,.4)" stroke-width="1.3"/><path d="M0 28h36" stroke="rgba(255,179,0,.5)" stroke-width="1"/></svg>
+        </span>
+        <span><b>Priya Raghunathan</b><span>Operations Director, Northmoor Logistics</span></span>
+      </figcaption>
+    </figure>
+    <div class="note rv rv-d2">
+      <figure class="note__card">
+        <p class="note__hd"><span>NOTE</span><span class="num">NM-4431</span><span class="num">09:58</span><span>ATTACHED BY C. FERREIRA-BOYD</span></p>
+        <blockquote><p>“The number I care about is engineers idle on site waiting for access. It was eleven percent of paid hours. It is now under four. That paid for Cadence in the first quarter and then some.”</p></blockquote>
+        <figcaption class="note__by"><b>Callum Ferreira-Boyd</b> · Head of Field Delivery, Kestrel Freight Group</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<section class="sec" id="pricing" aria-labelledby="pricing-h">
+  <div class="wrap wrap--wide">
+    <div class="g12 gsec" style="margin-bottom:40px;align-items:end">
+      <div class="rv" style="grid-column:1 / span 6">
+        <p class="lbl">Pricing</p>
+        <h2 class="h-sec" id="pricing-h" style="margin-top:16px">Priced on jobs, not on seats.<br>Here is a real invoice.</h2>
+      </div>
+      <div class="rv rv-d1" style="grid-column:8 / span 5">
+        <p class="body--sm">This is the August statement for a four-region cold-chain operator running roughly 2,300 jobs a week. Put the whole office on it — charging you per coordinator would only make you use it less, which is a strange thing to sell.</p>
+      </div>
+    </div>
+    <div class="inv rv rv-d1">
+      <div class="inv__bar">
+        <span class="t">Statement · Aug 2026 · Northmoor Logistics</span>
+        <span class="r">
+          <span class="savenote" id="saveNote" aria-live="polite">Annual saves 20%</span>
+          <span class="toggle" role="group" aria-label="Billing period">
+            <button type="button" id="billMonthly" aria-pressed="true">Monthly</button>
+            <button type="button" id="billAnnual" aria-pressed="false">Annual</button>
+          </span>
+        </span>
+      </div>
+      <table>
+        <caption class="sr">Cadence monthly line items, quantities, unit prices and amounts</caption>
+        <thead>
+          <tr><th scope="col">#</th><th scope="col">Line item</th><th scope="col" class="c-q">Qty</th><th scope="col" class="c-u">Unit</th><th scope="col" class="c-a">Amount</th></tr>
+        </thead>
+        <tbody id="invBody">
+          <tr>
+            <td class="c-n">01</td>
+            <td class="c-d"><b>Board licence · north region</b><i>The live board, exception routing, replay</i></td>
+            <td class="c-q">1 region</td><td class="c-u num">£480</td><td class="c-a num" data-line="480">£480</td>
+          </tr>
+          <tr>
+            <td class="c-n">02</td>
+            <td class="c-d"><b>Additional regions</b><i>Midlands, south-west, Scotland</i></td>
+            <td class="c-q">3 regions</td><td class="c-u num">£260</td><td class="c-a num" data-line="780">£780</td>
+          </tr>
+          <tr>
+            <td class="c-n">03</td>
+            <td class="c-d"><b>Jobs above the 400/week floor</b><i>Metered weekly, never estimated</i></td>
+            <td class="c-q">1,900 jobs</td><td class="c-u num">£0.04</td><td class="c-a num" data-line="76">£76</td>
+          </tr>
+          <tr>
+            <td class="c-n">04</td>
+            <td class="c-d"><b>Finance handshake · Sage 200</b><i>Write-back with the evidence pack attached</i></td>
+            <td class="c-q">1 ledger</td><td class="c-u num">£120</td><td class="c-a num" data-line="120">£120</td>
+          </tr>
+          <tr>
+            <td class="c-n">05</td>
+            <td class="c-d"><b>Read-only connectors</b><i>Vantage FSM, telematics, parts stock</i></td>
+            <td class="c-q">3 connectors</td><td class="c-u num">£0</td><td class="c-a num incl" data-line="0">Included</td>
+          </tr>
+          <tr>
+            <td class="c-n">06</td>
+            <td class="c-d"><b>Coordinators, engineers, replay history</b><i>Unmetered, on every plan, forever</i></td>
+            <td class="c-q">318 people</td><td class="c-u num">£0</td><td class="c-a num incl" data-line="0">Included</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="inv__sum">
+        <div class="sums">
+          <div><span>Subtotal</span><span class="num" id="sumSub">£1,456</span></div>
+          <div><span id="sumDiscLabel">Annual commitment discount</span><span class="num" id="sumDisc">—</span></div>
+          <div><span>VAT at 20% · recoverable</span><span class="num" id="sumVat">£291.20</span></div>
+          <div class="tot"><span>Total per month, inc VAT</span><span class="num" id="sumTot">£1,747.20</span></div>
+        </div>
+      </div>
+      <p class="inv__foot">
+        <span>Line items metered weekly</span><span>Cancel any time</span><span>No per-seat charge, ever</span><span class="num">Ref CAD-2026-08-NM</span>
+      </p>
+    </div>
+    <div class="pricefoot rv rv-d2">
+      <p>Regional (£480), Operate (£1,240) and Programme (£3,600) are the same board — the line items just get longer. The 30-day pilot is one month at your plan price on your real data, with one region held back as a control. If the pilot region doesn't beat the control on late completions, you owe nothing for the month.</p>
+      <p class="cta">
+        <a class="btn btn--pri" href="#cta"><span>Book a walkthrough</span></a>
+        <a class="btn" href="#faq"><span>Read the small print</span></a>
+      </p>
+    </div>
+  </div>
+</section>
+<section class="sec" id="faq" aria-labelledby="faq-h">
+  <div class="wrap wrap--wide wrap--rail">
+    <p class="edge" aria-hidden="true">07 <b>/</b> QUESTIONS</p>
+    <div class="faq">
+      <div class="faq__hd rv">
+        <p class="lbl">Questions</p>
+        <h2 class="h-sec" id="faq-h" style="margin-top:16px">Five questions, in the order<br>ops directors ask them.</h2>
+        <p class="body--sm" style="margin-top:20px">If yours isn't here, put it to us on a walkthrough — we would rather lose the deal early than in month four.</p>
+      </div>
+      <div class="faq__list rv rv-d1" id="faqList">
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false" aria-controls="a1"><span class="ix num">01</span><span>Do we have to replace our field service system?</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="qa__a" id="a1" role="region"><div>No, and we would talk you out of it. Cadence reads from your FSM over its API and writes back only status changes you approve. Twenty-three of our twenty-seven deployments still run the FSM they had before us. The one thing we do replace is the spreadsheet the coordinator keeps alongside it.</div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false" aria-controls="a2"><span class="ix num">02</span><span>What happens if the risk model is wrong?</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="qa__a" id="a2" role="region"><div>It proposes, you decide — Cadence never moves a crew on its own unless you explicitly turn that on for a named contract. Every proposal shows the inputs that produced it and the cost of both choices, and every decision is kept in replay. Coordinators overrule us roughly 12% of the time in month one and 4% by month three, which is the number we watch.</div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false" aria-controls="a3"><span class="ix num">03</span><span>Our engineers hate new apps. Honestly.</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="qa__a" id="a3" role="region"><div>Fair. The field app has four screens and works with no signal; if an engineer never opens it, Cadence still works from the data your FSM already collects — it just sees less. We measure adoption weekly during the pilot and if it is under 60% by week three, we come on site and find out why rather than emailing you a training deck.</div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false" aria-controls="a4"><span class="ix num">04</span><span>Where does our data live, and who can see it?</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="qa__a" id="a4" role="region"><div>UK South by default, with a Frankfurt region for EU groups. Encrypted at rest and in transit, single-tenant database per customer, SSO on every plan. Our engineers cannot read customer data without a time-boxed break-glass grant that appears in your audit log. ISO 27001 certified since February 2025; the SOC 2 Type II report is available under NDA.</div></div>
+        </div>
+        <div class="qa">
+          <button class="qa__q" type="button" aria-expanded="false" aria-controls="a5"><span class="ix num">05</span><span>What does the pilot actually cost, and what if it fails?</span><span class="pm" aria-hidden="true"></span></button>
+          <div class="qa__a" id="a5" role="region"><div>The 30-day pilot is one month at your plan price, and we hold one region back as a control so the comparison is real. If the pilot region does not beat the control on late completions, you owe nothing for the month and we will tell you which of the two we think is at fault. Two of twenty-nine pilots ended that way; both are now customers on the second attempt, eighteen months later.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="close" id="cta" aria-labelledby="cta-h">
+  <div class="wrap wrap--wide">
+    <div class="close__grid">
+      <h2 class="rv" id="cta-h">Find out where your Tuesday <em>breaks</em>.</h2>
+      <div class="close__side rv rv-d1">
+        <p>Forty-five minutes, your board on the screen, our head of deployment asking uncomfortable questions. You leave with a written estimate of what your slipped jobs cost last quarter, whether or not you buy anything.</p>
+      </div>
+    </div>
+    <div class="slot rv rv-d1">
+      <span class="rn num">08</span>
+      <span class="jb num">CAD-SEP-04</span>
+      <span class="ds"><b>Walkthrough · September pilot slot</b><i>4 of 12 remaining · 45 minutes · your data, not a sandbox</i></span>
+      <span class="ac">
+        <a class="btn btn--pri" href="#pricing"><span>Book a walkthrough</span></a>
+        <a class="btn" href="#shift"><span>Replay the shift</span></a>
+      </span>
+    </div>
+    <p class="close__fine">No slide deck · No procurement call · Bring your worst week</p>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <div class="wrap wrap--wide">
+    <div class="foot__cols">
+      <div class="foot__brand">
+        <a class="nav__mark" href="#top" aria-label="Cadence — back to top">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="21" stroke="currentColor" stroke-opacity=".28"/><path d="M4 14.5C6.2 14.5 6.2 7.5 8.4 7.5S10.6 14.5 12.8 14.5 15 7.5 17.2 7.5" stroke="#ffb300" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="nav__word">Cadence</span>
+        </a>
+        <p>Operations infrastructure for businesses whose work happens somewhere else. Built in Leeds and Lisbon.</p>
+        <span class="foot__status"><i class="dot dot--pulse"></i> All systems operational · <span class="num" id="footUp">99.98%</span></span>
+      </div>
+      <div class="foot__col"><h4>Product</h4><ul>
+        <li><a href="#shift">The live board</a></li><li><a href="#watch">Exception routing</a></li>
+        <li><a href="#watch">Margin per job</a></li><li><a href="#watch">Field app</a></li><li><a href="#watch">Programme replay</a></li>
+      </ul></div>
+      <div class="foot__col"><h4>Company</h4><ul>
+        <li><a href="#stages">How we deploy</a></li><li><a href="#pricing">Pricing</a></li>
+        <li><a href="#cta">Careers — 6 open</a></li><li><a href="#faq">Security</a></li><li><a href="#top">Press kit</a></li>
+      </ul></div>
+      <div class="foot__col"><h4>Sectors</h4><ul>
+        <li><a href="#watch">Cold chain &amp; logistics</a></li><li><a href="#watch">Mechanical &amp; electrical</a></li>
+        <li><a href="#watch">Rail maintenance</a></li><li><a href="#watch">Facilities</a></li><li><a href="#watch">Utilities</a></li>
+      </ul></div>
+      <div class="foot__col"><h4>Resources</h4><ul>
+        <li><a href="#faq">Documentation</a></li><li><a href="#faq">Connector list</a></li>
+        <li><a href="#proof">Benchmark report 2026</a></li><li><a href="#faq">Status page</a></li><li><a href="#cta">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="foot__poster" aria-hidden="true">
+      <svg viewBox="0 0 1000 296" preserveAspectRatio="xMidYMid meet"><text x="0" y="252" font-family="Schibsted Grotesk, Helvetica, Arial, sans-serif" font-weight="700" font-size="330" letter-spacing="-0.055em" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="currentColor">Cadence</text></svg>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 Cadence Operations Ltd · Company 14 902 771 · Fictional company, built as a design exercise</span>
+      <span><a href="#faq">Privacy</a> · <a href="#faq">Terms</a> · <a href="#faq">DPA</a> · <a href="#faq">Sub-processors</a></span>
+    </div>
+  </div>
+</footer>
+<script>!function(){"use strict";var t=document.documentElement,e=!1;try{e=window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(t){e=!1}var n="function"==typeof window.IntersectionObserver;function i(t,e){return(e||document).querySelector(t)}function o(t,e){return Array.prototype.slice.call((e||document).querySelectorAll(t))}function a(t,e,n){return t<e?e:t>n?n:t}function s(t){return 1-Math.pow(1-t,3)}function r(t,e,n){return a((t-e)/(n-e),0,1)}e||t.classList.add("anim");var c,l,d=function(){var t=[],e=!1;function n(){e=!1;for(var n=0;n<t.length;n++)try{t[n]()}catch(t){}}function i(){e||(e=!0,window.requestAnimationFrame(n))}return window.addEventListener("scroll",i,{passive:!0}),window.addEventListener("resize",i,{passive:!0}),window.addEventListener("orientationchange",i,{passive:!0}),{add:function(e){t.push(e),i()},kick:i}}();c=i("#nav"),l=i("#navprog"),c&&d.add(function(){var e=window.pageYOffset||t.scrollTop||0;if(c.classList.toggle("is-stuck",e>46),l){var n=Math.max(1,document.body.scrollHeight-window.innerHeight);l.style.width=(100*a(e/n,0,1)).toFixed(2)+"%"}}),function(){var e=i("#navToggle"),n=i("#navPanel"),a=i("#navScrim");if(e&&n){var s=!1;e.addEventListener("click",function(){if(c(!s),s){var t=r();t.length&&t[0].focus()}}),n.addEventListener("click",function(t){var e=t.target;e&&e.closest&&e.closest("a")&&c(!1)}),a&&a.addEventListener("click",function(){c(!1),e.focus()}),document.addEventListener("keydown",function(t){if(s){var n=t.key||"";if("Escape"===n||"Esc"===n||27===t.keyCode)return t.preventDefault(),c(!1),void e.focus();if("Tab"===n||9===t.keyCode){var i=r();if(!i.length)return;i.push(e);var o=i[0],a=i[i.length-1];t.shiftKey&&document.activeElement===o?(t.preventDefault(),a.focus()):t.shiftKey||document.activeElement!==a||(t.preventDefault(),o.focus())}}}),window.addEventListener("resize",function(){s&&window.innerWidth>820&&c(!1)},{passive:!0}),c(!1)}function r(){return o("a[href],button:not([disabled])",n).filter(function(t){return t.offsetWidth>0||t.offsetHeight>0})}function c(i){s=!!i,e.setAttribute("aria-expanded",s?"true":"false"),e.setAttribute("aria-label",s?"Close menu":"Open menu"),n.classList.toggle("is-open",s),a&&a.classList.toggle("is-open",s),t.classList.toggle("is-navopen",s)}}(),function(){var t=o(".rv");function i(){for(var e=0;e<t.length;e++)t[e].classList.add("is-in")}if(n&&!e){for(var a=new IntersectionObserver(function(t,e){for(var n=0;n<t.length;n++)t[n].isIntersecting&&(t[n].target.classList.add("is-in"),e.unobserve(t[n].target))},{rootMargin:"0px 0px -7% 0px",threshold:.06}),s=0;s<t.length;s++)a.observe(t[s]);window.setTimeout(i,4e3)}else i()}(),function(){var t=i("#shift"),e=i(".stage__pin",t||document),n=i("#app");if(t&&n){var s=o("#rowHost .row"),c=[1,3,5],l=i("#pinned"),f=i("#chipAll"),u=i("#chipFilter"),h=i("#flipStat"),g=i("#flipEta"),v=i("#flipCrew"),p=i("#rowFlip"),m=i("#chartLine"),w=i("#toast"),b=i("#expo"),y=i("#expoDelta"),x=i("#sideCount"),L=i("#sideExc"),C=i("#sideExcItem"),E=i("#routerTxt"),A=i("#syncWord"),F=i("#rowWait"),k=o("#tailHost .row");g&&g.addEventListener("animationend",function(){g.classList.remove("is-flap")});var M=i("#appClock"),T=i("#navClock"),q=i("#beatNo"),S=i("#beatName"),H=i("#beatSay"),_=i("#beatFill"),N=i("#beatPct"),D=[{p:0,n:"00 / 06",name:"Standby",say:"The night shift is still signing off two jobs. The 07:40 sync has not landed, <b>142 job records</b> are sitting in Vantage FSM, and the coordinator is looking at six tabs.",rt:"Night shift closing out. Waiting for the 07:40 sync."},{p:.11,n:"01 / 06",name:"Sync",say:"<b>142 records pulled.</b> The Tuesday programme builds itself — seven jobs, four crews, one region, no one typing.",rt:"Pulling 142 job records from Vantage FSM."},{p:.32,n:"02 / 06",name:"Exception",say:"<b>NM-4431 crosses the slip threshold.</b> Site access at Pennine Chill bay 3 has gone, and the 10:20 window is a penalty line, not a preference.",rt:"NM-4431 scored 0.81 against your 0.60 threshold. Access window lost."},{p:.46,n:"03 / 06",name:"Triage",say:"The board filters itself to blocked. Three jobs, <b>£8,400 of penalty exposure</b>, all of it still recoverable at 07:44.",rt:"3 jobs blocked on site access. Pricing the penalty on each."},{p:.62,n:"04 / 06",name:"Reassign",say:"Cadence prices both choices and proposes the swap: <b>Crew 7 out, Crew 3 in</b>, Pennine Chill ahead of Aire Valley. One tap, on the coordinator.",rt:"Proposed — Crew 7 → Crew 3. £5,800 avoided, 14 minutes recovered."},{p:.76,n:"05 / 06",name:"Cleared",say:"<b>09:52 instead of 10:20.</b> £5,800 of exposure gone, fourteen minutes recovered, and nobody has phoned anybody.",rt:"Swap accepted 07:44. Sage 200 notified, replay entry written."},{p:.9,n:"06 / 06",name:"Steady",say:"Filter off, all seven jobs back on the board. It goes back to watching — the next rescore is in ninety seconds.",rt:"Programme steady. Next rescore in 90s."}],I={},W=320;try{m&&m.getTotalLength&&(W=m.getTotalLength()||320)}catch(t){}W&&!isNaN(W)||(W=320),m&&(m.style.strokeDasharray=W+" "+W,m.style.strokeDashoffset=W),d.add(j),window.addEventListener("load",function(){d.kick()}),j()}function O(t){return-1!==c.indexOf(t)}function B(t,e,n){I[t]!==e&&(I[t]=e,n(e))}function P(t){return(t<10?"0":"")+t}function j(){var n=t.getBoundingClientRect(),i=Math.max(1,t.offsetHeight-(e?e.offsetHeight:window.innerHeight));!function(t){var e,n=0;for(e=0;e<D.length;e++)t>=D[e].p&&(n=e);var i=D[n];if(B("bi",n,function(){q&&(q.textContent=i.n),S&&(S.textContent=i.name),H&&(H.innerHTML=i.say),E&&(E.textContent=i.rt)}),B("pct",Math.round(100*t),function(t){N&&(N.textContent=P(t)+"%"),_&&(_.style.width=t+"%")}),B("clk",27612+Math.round(720*t),function(t){var e=P(Math.floor(t/3600)%24)+":"+P(Math.floor(t/60)%60)+":"+P(t%60);M&&(M.textContent=e),T&&(T.textContent=e)}),l){var o=r(t,.02,.13);l.style.opacity=(1-o).toFixed(3),l.style.transform=(window.innerWidth>640?"rotate(-.5deg) ":"")+"translateY("+(46*-o).toFixed(1)+"px)",B("pinoff",o>.9,function(t){l.style.pointerEvents=t?"none":"",l.setAttribute("aria-hidden",t?"true":"false")})}var a=Math.round(r(t,.11,.3)*s.length),c=t>=.44&&t<.88,d=t>=.5&&t<.86;B("rowstate",a+"|"+(c?1:0)+"|"+(d?1:0),function(){for(var t=0;t<s.length;t++){var e=t>=a||d&&!O(t);s[t].classList.toggle("is-off",e),s[t].classList.toggle("is-fade",!e&&c&&!O(t))}}),B("side",a,function(t){x&&(x.textContent=String(t))}),B("wait",0===a,function(t){F&&F.classList.toggle("is-off",!t)}),B("tail",t<.14,function(t){for(var e=0;e<k.length;e++)k[e].classList.toggle("is-off",!t)}),B("phase",t>=.76?3:t>=.62?2:t>=.32?1:0,function(t){if(p&&(p.classList.toggle("is-hot",1===t),p.classList.toggle("is-act",2===t),p.classList.toggle("is-done",3===t)),h&&(h.className="stat "+(0===t?"stat--grey":1===t?"stat--stop":2===t?"stat--cau":"stat--clear"),h.innerHTML="<i></i>"+(0===t?"On plan":1===t?"Blocked":2===t?"Reassigning":"Resolved")),v&&(v.textContent=3===t?"Crew 3 · Bradford":2===t?"Crew 7 → Crew 3 · proposed":"Crew 7 · Keighley"),g){var e=3===t?"09:52":"10:20";g.textContent!==e&&(g.textContent=e,g.classList.remove("is-flap"),g.offsetWidth,g.classList.add("is-flap"))}}),B("exc",t<.3?0:t>=.76?2:3,function(t){L&&(L.textContent=String(t)),C&&C.classList.toggle("is-alert",3===t)}),B("sync",t<.11?"idle":t<.28?"pulling 07:40":"clean",function(t){A&&(A.textContent=t)}),B("filter",c,function(t){u&&u.classList.toggle("is-on",t),f&&f.classList.toggle("is-on",!t)});var I=Math.round(8400*r(t,.12,.3));t>=.76&&(I=Math.round(8400-5800*r(t,.76,.84))),B("expo",I,function(t){b&&(b.textContent=function(t){return"£"+Math.round(t).toLocaleString("en-GB")}(t))}),B("delta",t>=.8,function(t){y&&(y.innerHTML=t?"−£5,800":"&nbsp;")});var j=r(t,.36,.58);B("chart",Math.round(100*j),function(t){m&&(m.style.strokeDashoffset=(W*(1-t/100)).toFixed(1))}),B("toast",t>=.63&&t<.87,function(t){w&&w.classList.toggle("is-in",t)})}(a(-n.top/i,0,1))}}(),function(){var t=i("#rail"),e=i("#railJob"),n=i("#railTrail");if(t&&e){var o=-1;d.add(function(){var i=t.getBoundingClientRect(),s=window.innerHeight||800,r=a((.88*s-i.top)/(.6*s),0,1),c=Math.round(400*r);if(c!==o){o=c;var l=Math.max(0,t.clientWidth-e.offsetWidth-8);e.style.transform="translate("+(r*l).toFixed(1)+"px,-50%)",n&&(n.style.width=(r*l+.5*e.offsetWidth).toFixed(1)+"px")}})}}(),function(){var t=i("#mqtrack");if(t){var o=0,a=0,s=0,r=!1;t.innerHTML=t.innerHTML+t.innerHTML,c(),window.addEventListener("resize",function(){window.clearTimeout(t.__rt),t.__rt=window.setTimeout(c,180)},{passive:!0}),n?new IntersectionObserver(function(t){t[0].isIntersecting?d():f()},{threshold:.01}).observe(t):d(),document.addEventListener("visibilitychange",function(){document.hidden?f():d()})}function c(){o=t.scrollWidth/2||0}function l(){r&&(a-=.32,o>0&&a<=-o&&(a+=o),t.style.transform="translate3d("+a.toFixed(2)+"px,0,0)",s=window.requestAnimationFrame(l))}function d(){r||e||(r=!0,s=window.requestAnimationFrame(l))}function f(){r=!1,s&&window.cancelAnimationFrame(s),s=0}}(),function(){var t=o("[data-count]");if(t.length)if(n){var i=new IntersectionObserver(function(t,e){t.forEach(function(t){t.isIntersecting&&(r(t.target),e.unobserve(t.target))})},{threshold:.4});t.forEach(function(t){i.observe(t)})}else t.forEach(r);function r(t){var n=parseFloat(t.getAttribute("data-count")),i=parseInt(t.getAttribute("data-dec")||"0",10),o=t.getAttribute("data-suffix")||"";if(!isNaN(n))if(e)t.textContent=n.toFixed(i)+o;else{var r=0;window.requestAnimationFrame(function e(c){r||(r=c);var l=a((c-r)/1400,0,1);t.textContent=(n*s(l)).toFixed(i)+o,l<1&&window.requestAnimationFrame(e)})}}}(),function(){var t=i("#billMonthly"),n=i("#billAnnual"),r=i("#saveNote"),c=i("#sumSub"),l=i("#sumDisc"),d=i("#sumDiscLabel"),f=i("#sumVat"),u=i("#sumTot"),h=o("#invBody [data-line]");if(t&&n&&u){var g=!1,v=0,p=0;h.forEach(function(t){p+=parseFloat(t.getAttribute("data-line"))||0}),t.addEventListener("click",function(){g&&(g=!1,w())}),n.addEventListener("click",function(){g||(g=!0,w())}),w()}function m(t){return"£"+t.toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2})}function w(){t.setAttribute("aria-pressed",g?"false":"true"),n.setAttribute("aria-pressed",g?"true":"false");var i=g?.2*p:0,o=p-i,h=.2*o,w=o+h,b=parseFloat((u.textContent||"").replace(/[^0-9.]/g,""))||0;c&&(c.textContent=function(t){return"£"+Math.round(t).toLocaleString("en-GB")}(p)),d&&(d.textContent=g?"Annual commitment · 20% off":"Annual commitment discount"),l&&(l.textContent=g?"−"+m(i):"—"),f&&(f.textContent=m(h)),r&&(r.textContent=g?"Two months on us":"Annual saves 20%"),function(t,n){if(v&&window.cancelAnimationFrame(v),e||t===n)u.textContent=m(n);else{var i=0;v=window.requestAnimationFrame(function e(o){i||(i=o);var r=a((o-i)/520,0,1);u.textContent=m(t+(n-t)*s(r)),v=r<1?window.requestAnimationFrame(e):0})}}(b,w)}}(),function(){var t=i("#faqList");if(t){var e=o(".qa",t);e.forEach(function(t){var n=i(".qa__q",t),o=i(".qa__a",t);n&&o&&(o.style.height="0px",n.addEventListener("click",function(){var a=t.classList.contains("is-open");if(e.forEach(function(e){if(e!==t){var n=i(".qa__q",e),o=i(".qa__a",e);e.classList.remove("is-open"),n&&n.setAttribute("aria-expanded","false"),o&&(o.style.height="0px")}}),a)t.classList.remove("is-open"),n.setAttribute("aria-expanded","false"),o.style.height="0px";else{t.classList.add("is-open"),n.setAttribute("aria-expanded","true");var s=o.firstElementChild;o.style.height=(s?s.offsetHeight:120)+"px"}}))}),window.addEventListener("resize",function(){e.forEach(function(t){if(t.classList.contains("is-open")){var e=i(".qa__a",t),n=e?e.firstElementChild:null;e&&n&&(e.style.height=n.offsetHeight+"px")}})},{passive:!0})}}(),function(){var t=i("#footUp");if(t){var e=["99.98%","99.99%","99.98%","100.00%"],n=0;window.setInterval(function(){document.hidden||(n=(n+1)%e.length,t.textContent=e[n])},7e3)}}()}();</script>
+</body>
+</html>

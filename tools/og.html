@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@700&family=Geist:wght@400;500&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1200px;height:630px;background:#0A0C10;color:#EDF1F5;overflow:hidden;position:relative;font-family:"Geist",-apple-system,sans-serif}
+.grain{position:absolute;inset:0;opacity:.05;background-size:260px 260px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.6 0.6 0.6 0 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E")}
+.pad{position:relative;padding:60px 70px;height:100%;display:flex;flex-direction:column;justify-content:space-between}
+.top{display:flex;align-items:center;justify-content:space-between}
+.wm{font-family:"Familjen Grotesk",sans-serif;font-weight:700;font-size:26px;letter-spacing:-.03em}.wm i{font-style:normal;color:#FF5A1F}
+.kick{font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#A3ADB8;display:inline-grid;grid-auto-flow:column;border:1px solid #3A4451;border-radius:3px}
+.kick span{padding:9px 12px;border-right:1px solid #3A4451}.kick span:last-child{border-right:0}
+h1{font-family:"Familjen Grotesk",sans-serif;font-weight:700;font-size:82px;line-height:.96;letter-spacing:-.045em;max-width:1000px;overflow-wrap:anywhere}
+h1 span{color:#FF5A1F}
+.bot{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.sub{color:#A3ADB8;font-size:22px;max-width:46ch;line-height:1.4}
+.chip{width:120px;height:44px;border-radius:3px;flex:none;border:1px solid #3A4451}
+.lamp{display:inline-block;width:9px;height:9px;border-radius:50%;background:#FF5A1F;box-shadow:0 0 14px rgba(255,90,31,.7);margin-right:8px;vertical-align:middle}
+</style></head><body><div class="grain"></div>
+<div class="pad">
+  <div class="top"><span class="wm" id="wm"></span><span class="kick" id="kick"></span></div>
+  <h1 id="t"></h1>
+  <div class="bot"><p class="sub" id="s"></p><span class="chip" id="chip"></span></div>
+</div>
+<script>
+var q=new URLSearchParams(location.search), wm=q.get('wm')||'s|k|ales';
+document.getElementById('wm').innerHTML=wm.indexOf('|')>-1?wm.split('|').map(function(x,i){return i===1?'<i>'+x+'</i>':x}).join(''):wm.replace('×','<i>×</i>');
+document.getElementById('kick').innerHTML=(q.get('k')||'').split('·').map(function(s){return '<span>'+s.trim()+'</span>';}).join('');
+var t=q.get('t')||''; document.getElementById('t').innerHTML=t.replace(/switched on\.|running\.|Don’t rent it\./,function(m){return '<span>'+m+'</span>';});
+document.getElementById('s').textContent=q.get('s')||'';
+var c=q.get('c'); var chip=document.getElementById('chip'); if(c){chip.style.background=c;} else {chip.innerHTML='<span class="lamp"></span>'; chip.style.cssText='width:auto;border:0;font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#A3ADB8;padding-top:14px'; chip.append('switched on');}
+if(t.length>44) document.getElementById('t').style.fontSize='64px';
+if(t.length>70) document.getElementById('t').style.fontSize='52px';
+</script></body></html>

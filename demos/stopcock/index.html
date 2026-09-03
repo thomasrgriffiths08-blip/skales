@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en-GB">
+<head><script>(function(){try{var h=["localhost","127.0.0.1","thomasrgriffiths08-blip.github.io","skales.com","www.skales.com"],r=document.referrer||"",o=r?new URL(r).hostname:"";if(o&&h.indexOf(o)>-1)return;}catch(e){}window.stop();document.documentElement.innerHTML="<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex,nofollow\"><title>Stopcock · runs inside Skales</title><style>html,body{height:100%;margin:0;background:#0A0C10;color:#EDF1F5;font:16px/1.5 -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif}main{min-height:100%;display:grid;place-items:center;padding:24px}div{max-width:44ch;border:1px solid #252D38;padding:28px 28px 24px;border-radius:2px}p{margin:0 0 14px;color:#A3ADB8}b{color:#EDF1F5}a{display:inline-block;margin-top:6px;color:#0A0C10;background:#FF5A1F;text-decoration:none;font-weight:600;padding:12px 16px;border-radius:3px}small{display:block;margin-top:18px;font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6E7885}</style></head><body><main><div><p><b>Stopcock</b> is one of Skales’s working builds. It runs inside the site, not on its own.</p><a href=\"https://skales.com/work/stopcock/\">Open it on the site</a><small>CH 12 · Missed-call leak meter</small></div></main></body>";})();</script><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stopcock — the missed-call leak calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>[hidden]{display:none!important}:root{--paper:#FAFBFB;--card:#FFFFFF;--sunken:#F2F4F4;--line:#E5E8E8;--line-2:#D3D8D8;--ink:#16181A;--ink-2:#5A6265;--ink-3:#8A9295;--water:#14606E;--water-soft:#E4EEF0;--mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;--e:cubic-bezier(.2,0,0,1)}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--paper);color:var(--ink);font:400 14px/1.6 Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-variant-numeric:tabular-nums slashed-zero}:focus-visible{outline:2px solid var(--water);outline-offset:2px;border-radius:3px}::selection{background:rgba(20,96,110,.16)}.num{font-family:var(--mono);font-variant-numeric:tabular-nums slashed-zero}.top{position:sticky;top:0;z-index:40;background:rgba(250,251,251,.97);border-bottom:1px solid var(--line)}.top-in{max-width:1060px;margin:0 auto;padding:0 20px;height:52px;display:flex;align-items:center;gap:12px}.wordmark{font-weight:590;font-size:14px;letter-spacing:-.01em}.wordmark i{font-style:normal;color:var(--water)}.top .sub{color:var(--ink-3);font-size:12px;border-left:1px solid var(--line);padding-left:12px}.top .sp{flex:1}.btn{appearance:none;font:inherit;font-size:13px;font-weight:500;color:var(--ink);background:var(--card);border:1px solid var(--line-2);border-radius:6px;padding:7px 12px;cursor:pointer;transition:background .14s var(--e)}.btn:hover{background:var(--sunken)}.wrap{max-width:1060px;margin:0 auto;padding:0 20px}.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:24px;align-items:start;padding:24px 0 72px}.meter{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}.hero{padding:28px 28px 22px;border-bottom:1px solid var(--line)}.hero .k{font-size:11px;font-weight:590;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}.hero .big{margin-top:6px;font-family:var(--mono);font-weight:500;letter-spacing:-.02em;color:var(--water);font-size:clamp(44px,6vw,72px);line-height:1.02}.hero .sub{margin-top:8px;font-size:14px;color:var(--ink-2);max-width:56ch}.hero .sub b{color:var(--ink);font-weight:590}.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line)}.scell{padding:14px 16px;border-right:1px solid var(--line)}.scell:last-child{border-right:0}.scell .k{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:500}.scell .v{margin-top:3px;font-family:var(--mono);font-size:19px;font-weight:500}.scell .d{font-size:11px;color:var(--ink-3)}.sect{padding:18px 28px 22px;border-bottom:1px solid var(--line)}.sect:last-child{border-bottom:0}.sect h2{margin:0 0 4px;font-size:11px;font-weight:590;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}.sect .note{font-size:12px;color:var(--ink-3);margin:0 0 14px}.frow2{display:grid;grid-template-columns:150px minmax(0,1fr) 110px;gap:12px;align-items:center;min-height:34px}.frow2 .lab{font-size:13px;color:var(--ink-2)}.frow2 .val{font-family:var(--mono);font-size:13px;text-align:right}.bar{height:14px;background:var(--sunken);border-radius:2px;overflow:hidden;display:flex}.bar i{display:block;height:100%}.bar .keep{background:var(--ink-2)}.bar .lose{background:var(--water)}.legend{display:flex;gap:18px;margin-top:12px;font-size:12px;color:var(--ink-2)}.legend .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}.recover .line{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;padding:10px 0;border-top:1px solid var(--line)}.recover .line:first-of-type{border-top:0}.recover .who{flex:1;min-width:200px;font-size:13.5px}.recover .who small{display:block;color:var(--ink-3);font-size:12px}.recover .amt{font-family:var(--mono);font-size:22px;font-weight:500}.recover .amt.keep{color:var(--water)}.recover .bar{width:100%;height:8px;margin-top:4px}.payback{margin-top:14px;padding:12px 14px;background:var(--water-soft);border:1px solid var(--line);border-radius:6px;font-size:13px;color:var(--ink-2)}.payback b{color:var(--ink);font-weight:590}.payback .num{color:var(--water);font-weight:500}.panel{background:var(--card);border:1px solid var(--line);border-radius:12px}.panel-hd{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:baseline}.panel-hd h2{margin:0;font-size:11px;font-weight:590;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}.panel-hd .hint{margin-left:auto;font-size:11px;color:var(--ink-3)}.fields{padding:6px 16px 16px}.fld{padding:12px 0 4px;border-bottom:1px solid var(--line)}.fld:last-child{border-bottom:0}.fld .lr{display:flex;align-items:baseline;gap:10px}.fld label{flex:1;font-size:13px;color:var(--ink-2)}.fld output{font-family:var(--mono);font-size:14px;font-weight:500}.fld input[type=range]{width:100%;margin:8px 0 6px;accent-color:var(--water)}.fld .sub{font-size:11px;color:var(--ink-3)}.assume{padding:12px 16px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-3)}.assume b{color:var(--ink-2);font-weight:500}.statusbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(250,251,251,.97);border-top:1px solid var(--line);font-size:12px;color:var(--ink-3)}.statusbar .in{max-width:1060px;margin:0 auto;padding:7px 20px calc(7px + env(safe-area-inset-bottom));display:flex;gap:16px;flex-wrap:wrap}body{padding-bottom:44px}.otabs{border-bottom:1px solid var(--line);background:var(--card)}.otabs-in{max-width:1060px;margin:0 auto;padding:0 20px;display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch}.otab{appearance:none;font:inherit;font-size:13px;font-weight:500;color:var(--ink-2);background:0 0;border:none;border-bottom:2px solid transparent;padding:14px 12px 12px;white-space:nowrap;cursor:pointer}.otab:hover{color:var(--ink)}.otab.on{color:var(--ink);border-bottom-color:var(--water)}.strip.n2{grid-template-columns:repeat(2,minmax(0,1fr))}.compare{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:6px;overflow:hidden}.compare div{padding:14px 16px;border-right:1px solid var(--line)}.compare div:last-child{border-right:0}.compare .k{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:500}.compare .v{margin-top:6px;font-size:19px;font-weight:500}.compare .v.accent{font-family:var(--mono);color:var(--water)}.compare .d{margin-top:3px;font-size:12px;color:var(--ink-3)}.bench{display:grid}.brow{display:grid;grid-template-columns:150px 1fr 1fr;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}.brow:first-child{border-top:0}.brow .lab{font-size:13px;color:var(--ink-2)}.brow .yours{font-family:var(--mono);font-size:15px;font-weight:500}.brow .typical{font-size:12.5px;color:var(--ink-3)}.brow .typical b{color:var(--ink-2);font-weight:500;font-family:var(--mono)}.brow .flag{display:inline-block;margin-left:8px;font-size:10.5px;font-weight:500;padding:1px 7px;border-radius:2px;background:var(--water-soft);color:var(--water);vertical-align:1px}@media (max-width:860px){.cols{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:16px}.meter{order:1}.panel{order:2}.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.scell:nth-child(2){border-right:0}.scell{border-bottom:1px solid var(--line)}.scell:nth-child(n+3){border-bottom:0}.hero,.sect{padding-left:16px;padding-right:16px}.frow2{grid-template-columns:minmax(0,1fr) 90px}.frow2 .bar{grid-column:1/-1}body{font-size:16px}.fld label{font-size:15px}.fld input[type=range]{min-height:40px}.otab{min-height:40px}.compare{grid-template-columns:1fr}.compare div{border-right:0;border-bottom:1px solid var(--line)}.compare div:last-child{border-bottom:0}.brow{grid-template-columns:1fr;gap:2px}}@media (prefers-reduced-motion:reduce){*{transition-duration:NaNs!important}}</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <span class="wordmark">Stopcock<i>.</i></span>
+  <span class="sub">what missed calls actually cost</span>
+  <span class="sp"></span>
+  <button class="btn" id="resetBtn" type="button">Reset</button>
+</div></header>
+<nav class="otabs"><div class="otabs-in">
+  <button type="button" class="otab" data-v="calc">Calculator</button>
+  <button type="button" class="otab" data-v="years">Three years</button>
+  <button type="button" class="otab" data-v="fix">The fix</button>
+  <button type="button" class="otab" data-v="benchmark">Benchmark</button>
+</div></nav>
+<main class="wrap cols" id="view-calc">
+  <section class="meter" aria-label="Results">
+    <div class="hero">
+      <div class="k">Leaking from missed calls</div>
+      <div class="big num" id="heroLeak" aria-live="polite">£0</div>
+      <p class="sub">a year, at your numbers — <b id="heroJobs">0 jobs</b> that rang you first and gave up. It never shows on a report, because a call that wasn't answered was never recorded anywhere.</p>
+    </div>
+    <div class="strip" aria-label="Key figures">
+      <div class="scell"><div class="k">Missed / month</div><div class="v num" id="sMissed">0</div><div class="d">calls unanswered</div></div>
+      <div class="scell"><div class="k">Lost for good</div><div class="v num" id="sEnq">0</div><div class="d">real, and won't ring back</div></div>
+      <div class="scell"><div class="k">Jobs lost / month</div><div class="v num" id="sJobs">0</div><div class="d">at your close rate</div></div>
+      <div class="scell"><div class="k">Lost / month</div><div class="v num" id="sMonth">£0</div><div class="d">before repeat work</div></div>
+    </div>
+    <div class="sect">
+      <h2>Where the calls go</h2>
+      <p class="note">Each month, at your volumes. The dark segment stays; the blue segment is the leak.</p>
+      <div class="frow2"><span class="lab">Calls that ring</span><span class="bar"><i class="keep" id="b1k" style="width:100%"></i></span><span class="val num" id="v1">0</span></div>
+      <div class="frow2"><span class="lab">Answered in time</span><span class="bar"><i class="keep" id="b2k"></i><i class="lose" id="b2l"></i></span><span class="val num" id="v2">0</span></div>
+      <div class="frow2"><span class="lab">Become jobs</span><span class="bar"><i class="keep" id="b3k"></i><i class="lose" id="b3l"></i></span><span class="val num" id="v3">0</span></div>
+      <div class="legend"><span><span class="sw" style="background:var(--ink-2)"></span>kept</span><span><span class="sw" style="background:var(--water)"></span>leaked — jobs your competitor booked</span></div>
+    </div>
+    <div class="sect recover">
+      <h2>Turn the stopcock</h2>
+      <p class="note">A missed-call text-back replies by SMS inside 60 seconds — before they've dialled the next number. Industry estimates suggest roughly two in five missed enquiries can be caught this way; the split at your numbers:</p>
+      <div class="line">
+        <span class="who">Still leaked <small>calls that were never real, or gone for good</small></span>
+        <span class="amt num" id="rLost">£0</span>
+      </div>
+      <div class="line">
+        <span class="who">Recovered by a 60-second text-back <small>booked before they ring the next firm</small></span>
+        <span class="amt keep num" id="rSaved">£0</span>
+      </div>
+      <div class="bar" style="margin-top:10px"><i class="lose" id="rBarL"></i><i class="keep" id="rBarK" style="background:var(--water);opacity:.35"></i></div>
+      <div class="payback" id="payback"></div>
+    </div>
+  </section>
+  <aside class="panel" aria-label="Your numbers">
+    <div class="panel-hd"><h2>Your numbers</h2><span class="hint">drag — the meter reads live</span></div>
+    <div class="fields" id="fields"></div>
+    <div class="assume"><b>Assumptions on show:</b> figures are illustrative estimates, not measurements — the model and every rate in it are visible in this page's source and adjustable above. Verify against real call logs before quoting to a client.</div>
+  </aside>
+</main>
+<main class="wrap" id="view-years" hidden>
+  <section class="meter" aria-label="Three-year projection">
+    <div class="hero">
+      <div class="k">Cumulative loss if nothing changes</div>
+      <div class="big num" id="yrsBig">£0</div>
+      <p class="sub">over three years, holding today's numbers flat — no assumption that the business grows or shrinks.</p>
+    </div>
+    <div class="sect">
+      <h2>Year by year</h2>
+      <p class="note">Same split as the calculator: each year leaks at the same rate, so the loss (and what a text-back would recover) simply adds up.</p>
+      <div class="frow2"><span class="lab">Year 1</span><span class="bar"><i class="lose" id="y1l"></i><i class="keep" id="y1k" style="background:var(--water);opacity:.35"></i></span><span class="val num" id="y1v">£0</span></div>
+      <div class="frow2"><span class="lab">Year 2</span><span class="bar"><i class="lose" id="y2l"></i><i class="keep" id="y2k" style="background:var(--water);opacity:.35"></i></span><span class="val num" id="y2v">£0</span></div>
+      <div class="frow2"><span class="lab">Year 3</span><span class="bar"><i class="lose" id="y3l"></i><i class="keep" id="y3k" style="background:var(--water);opacity:.35"></i></span><span class="val num" id="y3v">£0</span></div>
+      <div class="legend"><span><span class="sw" style="background:var(--water);opacity:.35"></span>recovered by a text-back</span><span><span class="sw" style="background:var(--water)"></span>still leaked</span></div>
+    </div>
+    <div class="sect">
+      <h2>What recovering it would fund</h2>
+      <p class="note" id="fundLine">—</p>
+      <div class="assume"><b>Assumption:</b> this is a straight line, not a forecast — it assumes the same call volume and missed-call rate every year. A real business grows, shrinks, or fixes the leak partway through; treat the three-year figure as a floor.</div>
+    </div>
+  </section>
+</main>
+<main class="wrap cols" id="view-fix" hidden>
+  <section class="meter" aria-label="What the fix changes">
+    <div class="hero">
+      <div class="k">Recovered a year, at these assumptions</div>
+      <div class="big num" id="fixBig">£0</div>
+      <p class="sub">using your numbers from the calculator tab and the two assumptions on the right.</p>
+    </div>
+    <div class="sect">
+      <h2>Before / after</h2>
+      <p class="note">The only thing that changes is how fast someone hears back.</p>
+      <div class="compare">
+        <div><div class="k">Response time now</div><div class="v">Whenever someone's free</div><div class="d">often hours later, sometimes not at all</div></div>
+        <div><div class="k">With a text-back</div><div class="v accent num">60 seconds</div><div class="d">automatic, every missed call, every time</div></div>
+      </div>
+    </div>
+    <div class="sect">
+      <h2>Payback</h2>
+      <p class="note" id="fixPayback">—</p>
+    </div>
+  </section>
+  <aside class="panel" aria-label="Assumptions for the fix">
+    <div class="panel-hd"><h2>Assumptions for this tab</h2><span class="hint">edit on a call</span></div>
+    <div class="fields" id="fixFields"></div>
+    <div class="assume"><b>Both editable on purpose:</b> recovery rate is an industry-style estimate for missed-call text-back, not a measurement of this business — move it if you have better data. Monthly cost is whatever's being quoted.</div>
+  </aside>
+</main>
+<main class="wrap" id="view-benchmark" hidden>
+  <section class="meter" aria-label="Benchmark against typical figures">
+    <div class="hero">
+      <div class="k">Inside the typical range</div>
+      <div class="big num" id="benchLead">0 / 0</div>
+      <p class="sub">of the four figures below — using your live inputs from the calculator tab.</p>
+    </div>
+    <div class="sect">
+      <h2>Your numbers vs typical</h2>
+      <p class="note">Typical ranges are illustrative estimates for context, not measured data for this trade or this business — a sense check, not a target to hit.</p>
+      <div class="bench" id="benchRows"></div>
+    </div>
+  </section>
+</main>
+<div class="statusbar"><div class="in">
+  <span>Model: missed × real-enquiry × gone-for-good × close rate × job value × repeat</span>
+  <span id="saveState">Saved locally</span>
+  <span style="margin-left:auto">Stopcock · demo</span>
+</div></div>
+<script>!function(){"use strict";var e=149,t=[{k:"callsWeek",label:"Calls that ring per week",min:5,max:200,step:5,def:25,unit:"",sub:"everything inbound — mobile and office"},{k:"missPct",label:"Share that go unanswered",min:5,max:70,step:5,def:20,unit:"%",sub:"on a ladder, on a job, after 5pm"},{k:"jobValue",label:"Average job value",min:80,max:8e3,step:20,def:850,unit:"£",sub:"what a typical booked job is worth"},{k:"closeRate",label:"Enquiries you win when you speak",min:10,max:90,step:5,def:40,unit:"%",sub:"your normal conversion on answered calls"},{k:"repeat",label:"Repeat & referral multiplier",min:10,max:25,step:1,def:13,unit:"×10",sub:"1.0 = one-off work · 1.5 = strong repeat trade"}],n="stopcock.v1",a={view:"calc",recoverPct:40,monthlyCost:149},o=function(){try{var e=localStorage.getItem(n);if(e){var t=JSON.parse(e);if(t&&"object"==typeof t)return r(t)}}catch(e){}return r({})}();function r(e){var n={};for(var o in t.forEach(function(t){n[t.k]=void 0!==e[t.k]?e[t.k]:t.def}),a)n[o]=e&&void 0!==e[o]?e[o]:a[o];return n}function s(){try{localStorage.setItem(n,JSON.stringify(o))}catch(e){}}var i=function(e){return document.querySelector(e)};function l(e){return"£"+Math.round(e).toLocaleString("en-GB")}function u(e,t){return"£"===e.unit?"£"+t.toLocaleString("en-GB"):"%"===e.unit?t+"%":"×10"===e.unit?(t/10).toFixed(1)+"×":String(t)}var c,d,v=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches,h=null,f=0;function b(){var e=52*o.callsWeek/12,t=e*o.missPct/100,n=.8*t*.55,a=n*o.closeRate/100,r=o.repeat/10,s=a*o.jobValue,i=12*s*r;return{callsMonth:e,missed:t,enq:n,jobs:a,monthBase:s,yearFull:i,saved:.4*i}}function m(){var t=b();!function(e){if(v)return f=e,void(i("#heroLeak").textContent=l(e));h&&cancelAnimationFrame(h);var t=f,n=performance.now();!function a(o){var r=Math.min(1,(o-n)/420);r=1-Math.pow(1-r,3),f=t+(e-t)*r,i("#heroLeak").textContent=l(f),h=r<1?requestAnimationFrame(a):null}(n)}(t.yearFull),i("#heroJobs").textContent=Math.round(12*t.jobs)+" jobs",i("#sMissed").textContent=Math.round(t.missed),i("#sEnq").textContent=Math.round(t.enq),i("#sJobs").textContent=(Math.round(10*t.jobs)/10).toFixed(1),i("#sMonth").textContent=l(t.monthBase);var n=function(e){return Math.max(0,Math.min(100,e/t.callsMonth*100))};i("#v1").textContent=Math.round(t.callsMonth);var a=t.callsMonth-t.missed;i("#b2k").style.width=n(a)+"%",i("#b2l").style.width=n(t.missed)+"%",i("#v2").textContent=Math.round(a);var r=.8*a*o.closeRate/100;i("#b3k").style.width=n(r)+"%",i("#b3l").style.width=n(t.jobs)+"%",i("#v3").textContent=(Math.round(10*r)/10).toFixed(1),i("#rLost").textContent=l(t.yearFull-t.saved),i("#rSaved").textContent=l(t.saved);var s=t.yearFull>0?t.saved/t.yearFull*100:0;i("#rBarL").style.width=100-s+"%",i("#rBarK").style.width=s+"%";var u=t.saved>0?1788/t.saved:0;i("#payback").innerHTML=t.saved>1788?"At "+l(e)+"/month, the system costs <b>"+l(1788)+"</b> a year and recovers <span class='num'>"+l(t.saved)+"</span> — it pays for itself with <b>"+(u<1?"the first job":"about "+Math.ceil(12/(t.saved/1788))+" months' recoveries")+"</b>.":"At these volumes the recovery (<span class='num'>"+l(t.saved)+"</span>/yr) sits under the system cost (<b>"+l(1788)+"</b>/yr) — the honest answer is: fix answering first, automate second."}c=i("#fields"),d="",t.forEach(function(e){d+='<div class="fld"><div class="lr"><label for="in-'+e.k+'">'+e.label+'</label><output id="out-'+e.k+'" for="in-'+e.k+'"></output></div><input id="in-'+e.k+'" data-k="'+e.k+'" type="range" min="'+e.min+'" max="'+e.max+'" step="'+e.step+'" aria-describedby="sub-'+e.k+'"><div class="sub" id="sub-'+e.k+'">'+e.sub+"</div></div>"}),c.innerHTML=d,t.forEach(function(e){var t=i("#in-"+e.k);t.value=o[e.k],i("#out-"+e.k).textContent=u(e,o[e.k]),t.addEventListener("input",function(){o[e.k]=Number(t.value),i("#out-"+e.k).textContent=u(e,o[e.k]),s(),m()})});var y=[{k:"recoverPct",label:"Recovery rate assumption",min:20,max:60,step:5,def:40,unit:"%",sub:"share of missed enquiries a 60-second text-back catches — an estimate, not measured for this business"},{k:"monthlyCost",label:"Monthly cost of the system",min:49,max:399,step:10,def:149,unit:"£",sub:"whatever's being quoted on this call"}],k=[{k:"callsWeek",label:"Calls per week",lo:15,hi:45,range:"15–45 / week",val:function(e){return e+" / week"}},{k:"missPct",label:"Missed rate",lo:10,hi:30,range:"10–30%",val:function(e){return e+"%"}},{k:"jobValue",label:"Average job value",lo:120,hi:450,range:"£120–£450",val:function(e){return l(e)}},{k:"closeRate",label:"Close rate on answered calls",lo:30,hi:60,range:"30–60%",val:function(e){return e+"%"}}];function p(){var e,t=b(),n=o.recoverPct/100,a=t.yearFull*n,r=12*o.monthlyCost;if(i("#fixBig").textContent=l(a),a>r){var s=r/a*12,u=Math.max(1,Math.round(s));e=s<.5?"At "+l(o.monthlyCost)+"/month, the system pays for itself inside the first recovered job.":"At "+l(o.monthlyCost)+"/month ("+l(r)+"/year), it recovers "+l(a)+"/year — paying for itself in about <b>"+u+" month"+(1===u?"":"s")+"</b>."}else e="At "+l(o.monthlyCost)+"/month ("+l(r)+"/year), the recovery ("+l(a)+"/yr) sits under the system cost — the honest answer is: fix answering first, automate second.";i("#fixPayback").innerHTML=e}function x(e){o.view=e,s(),["calc","years","fix","benchmark"].forEach(function(t){var n=document.getElementById("view-"+t);n&&(n.hidden=t!==e)}),document.querySelectorAll(".otab").forEach(function(t){t.className="otab"+(t.getAttribute("data-v")===e?" on":"")}),"years"===e&&function(){var e=b();i("#yrsBig").textContent=l(3*e.yearFull);var t=e.yearFull>0?.4*e.yearFull/e.yearFull*100:0;[1,2,3].forEach(function(n){i("#y"+n+"l").style.width=100-t+"%",i("#y"+n+"k").style.width=t+"%",i("#y"+n+"v").textContent=l(e.yearFull*n)});var n=3*e.yearFull*.4,a=o.jobValue>0?Math.round(n/o.jobValue):0;i("#fundLine").innerHTML=a>0?"Recovering this over three years is roughly <b>"+a+" more jobs</b> at your average job value of "+l(o.jobValue)+" — stated plainly, not as a sales figure.":"At these volumes there's not enough leaking to fund anything meaningful — turn up the sliders on the calculator tab to see it move."}(),"fix"===e&&p(),"benchmark"===e&&function(){var e=0,t=k.map(function(t){var n=o[t.k],a=n<t.lo?"below typical":n>t.hi?"above typical":"";return a||e++,'<div class="brow"><span class="lab">'+t.label+'</span><span class="yours">'+t.val(n)+(a?'<span class="flag">'+a+"</span>":"")+'</span><span class="typical">Typical: <b>'+t.range+"</b> <i>(illustrative)</i></span></div>"}).join("");i("#benchRows").innerHTML=t,i("#benchLead").textContent=e+" / "+k.length}()}document.querySelectorAll(".otab").forEach(function(e){e.addEventListener("click",function(){x(e.getAttribute("data-v"))})}),function(){var e=i("#fixFields"),t="";y.forEach(function(e){t+='<div class="fld"><div class="lr"><label for="in-'+e.k+'">'+e.label+'</label><output id="out-'+e.k+'" for="in-'+e.k+'"></output></div><input id="in-'+e.k+'" data-k="'+e.k+'" type="range" min="'+e.min+'" max="'+e.max+'" step="'+e.step+'" aria-describedby="sub-'+e.k+'"><div class="sub" id="sub-'+e.k+'">'+e.sub+"</div></div>"}),e.innerHTML=t,y.forEach(function(e){var t=i("#in-"+e.k);t.value=o[e.k],i("#out-"+e.k).textContent=u(e,o[e.k]),t.addEventListener("input",function(){o[e.k]=Number(t.value),i("#out-"+e.k).textContent=u(e,o[e.k]),s(),p()})})}(),i("#resetBtn").addEventListener("click",function(){o=r({}),s(),t.forEach(function(e){i("#in-"+e.k).value=o[e.k],i("#out-"+e.k).textContent=u(e,o[e.k])}),y.forEach(function(e){i("#in-"+e.k).value=o[e.k],i("#out-"+e.k).textContent=u(e,o[e.k])}),m(),x(o.view||"calc");var e=i("#saveState"),n=e.textContent;e.textContent="Reset",setTimeout(function(){e.textContent=n},1500)}),m(),x(o.view||"calc")}();</script>
+</body>
+</html>

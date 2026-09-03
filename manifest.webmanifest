@@ -1,0 +1,16 @@
+{
+  "name": "Skales",
+  "short_name": "Skales",
+  "description": "Websites & systems for service businesses",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0A0C10",
+  "theme_color": "#0A0C10",
+  "icons": [
+    {
+      "src": "og/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

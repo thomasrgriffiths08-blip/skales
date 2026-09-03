@@ -1,0 +1,68 @@
+# Skales — everything public is crawlable, including by AI search engines.
+User-agent: *
+Allow: /
+Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /demos/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /demos/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /demos/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /demos/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /demos/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /demos/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /demos/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /demos/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /demos/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /demos/
+
+User-agent: CCBot
+Allow: /
+Disallow: /demos/
+
+User-agent: Applebot
+Allow: /
+Disallow: /demos/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /demos/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /demos/
+
+User-agent: YouBot
+Allow: /
+Disallow: /demos/
+
+Sitemap: https://skales.com/sitemap.xml

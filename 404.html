@@ -1,55 +1,76 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-power="off">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Not found — tomxsystems</title>
-<meta name="robots" content="noindex">
+<title>Not found | Skales</title>
+<meta name="description" content="That page has moved or never existed. Every working build and page on the site is one click away.">
+<link rel="canonical" href="https://skales.com/404.html">
+<meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0A0C10">
+<meta name="author" content="Tom Griffiths">
+<meta property="og:site_name" content="Skales">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skales.com/404.html">
+<meta property="og:title" content="Not found | Skales">
+<meta property="og:description" content="That page has moved or never existed. Every working build and page on the site is one click away.">
+<meta property="og:image" content="https://skales.com/og/home.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Not found | Skales">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Not found | Skales">
+<meta name="twitter:description" content="That page has moved or never existed. Every working build and page on the site is one click away.">
+<meta name="twitter:image" content="https://skales.com/og/home.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0C10'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23FF5A1F' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="og/icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
-<style>
-main{min-height:68vh;display:flex;align-items:center;padding-block:clamp(2.5rem,8vw,6rem)}
-.big{font-family:var(--mono);font-size:clamp(3.5rem,14vw,9rem);line-height:.9;letter-spacing:-.05em;
-  color:transparent;-webkit-text-stroke:1px var(--zinc-2);font-variant-numeric:tabular-nums slashed-zero}
-h1{margin:1.2rem 0 1rem;font-size:clamp(1.9rem,5vw,3.2rem)}
-.links{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.8rem}
-</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://skales.com/#organization","name":"Skales","legalName":"Skales","url":"https://skales.com/","description":"Websites & systems for service businesses — Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).","founder":{"@id":"https://skales.com/#founder"},"foundingDate":"2026","areaServed":{"@type":"Country","name":"United Kingdom"},"knowsAbout":["Web design for service businesses","Online booking systems","Missed-call text-back automation","Customer follow-up automation","Trades websites","Review request automation"],"sameAs":["https://www.instagram.com/tomxsystems/"],"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"thomasrgriffiths08@gmail.com","availableLanguage":"en-GB","areaServed":"GB"},"logo":{"@type":"ImageObject","url":"https://skales.com/og/home.png"}},{"@type":"Person","@id":"https://skales.com/#founder","name":"Tom Griffiths","alternateName":"Thomas Griffiths","jobTitle":"Founder & builder","worksFor":{"@id":"https://skales.com/#organization"},"url":"https://skales.com/why/","sameAs":["https://www.instagram.com/tomxsystems/"],"nationality":"GB"},{"@type":"WebSite","@id":"https://skales.com/#website","url":"https://skales.com/","name":"Skales","description":"Websites & systems for service businesses","publisher":{"@id":"https://skales.com/#organization"},"inLanguage":"en-GB"}]}</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="bar">
-    <a class="wordmark" href="./">tom<i>&times;</i>systems</a>
-    <span class="readout"><span class="lamp is-live"></span><b id="clock">--:--:--</b> UK &middot; switched on</span>
-    <nav>
-      <a href="work.html">The rack<sup class="cnt">16</sup></a>
-      <a class="btn btn-live btn-sm" href="teardown.html">Free teardown</a>
-    </nav>
+    <a class="wordmark" href="./">s<i>k</i>ales</a>
+    <span class="readout"><span class="lamp" id="powerLamp"></span><b id="clock">--:--:--</b> UK &middot; <span id="powerWord">standby</span></span>
+    <nav class="nav" aria-label="Primary"><a href="work/">Work<sup class="cnt">16</sup></a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a><a class="btn btn-live btn-sm" href="book/">Book a call</a></nav>
+    <button class="mtoggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Primary (mobile)" hidden>
+    <a href="work/">Work<sup class="cnt">16</sup></a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a>
+    <a href="book/" class="mcta">Book a call</a>
+    <a href="teardown.html">Free teardown</a>
+  </nav>
 </header>
-<main class="wrap">
-  <div>
-    <p class="big">404</p>
-    <h1>That channel isn&rsquo;t wired up.</h1>
-    <p class="lead">The page you were after has moved or never existed. Everything that <em>is</em> switched on is one click away.</p>
-    <div class="links">
-      <a class="btn btn-live" href="work.html">Open the rack</a>
-      <a class="btn btn-ghost" href="./">Back to the start</a>
-    </div>
-  </div>
+<main id="main" class="wrap nf">
+  <p class="big">404</p>
+  <h1>That channel isn&rsquo;t wired up.</h1>
+  <p class="lead">The page you were after has moved or never existed. Everything that is switched on is one click away.</p>
+  <div class="cta-row"><a class="btn btn-live" href="work/">Open the rack</a><a class="btn btn-ghost" href="">Back to the start</a></div>
 </main>
 <footer class="site-foot">
   <div class="wrap">
-    <div class="f-row" style="margin-top:0">
-      <span>&copy; <span data-year></span> tomxsystems &middot; UK</span>
-      <nav><a href="./">Home</a><a href="teardown.html">Free teardown</a></nav>
+    <div class="f-mark" aria-hidden="true">s<i>k</i>ales</div>
+    <div class="f-cols">
+      <div><h2 class="spec">Pages</h2><a href="">Home</a><a href="work/">Work</a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a><a href="book/">Book a call</a><a href="teardown.html">Free teardown</a></div><div><h2 class="spec">Tools</h2><a href="work/northgate-quote-engine/">Northgate Quote Engine</a><a href="work/redgate-job-system/">Redgate Job &amp; Lead System</a><a href="work/halcyon-dispatch/">Halcyon Dispatch</a><a href="work/ledgerline/">Ledgerline</a><a href="work/mortgage-lab/">Mortgage Lab</a><a href="work/payslip-lab/">Payslip Lab</a><a href="work/kerbside-scorecard/">Kerbside Scorecard</a><a href="work/stopcock/">Stopcock</a><a href="work/turnover/">Turnover</a><a href="work/fenwick-booking/">Fenwick Booking</a><a href="work/jobsheet/">Jobsheet</a><a href="work/shiftbook/">Shiftbook</a></div><div><h2 class="spec">Websites</h2><a href="work/atelier-voss/">Atelier Voss</a><a href="work/cadence/">Cadence</a><a href="work/maree/">MARÉE — Sel Obscur</a><a href="work/signal/">SIGNAL 2027</a></div><div><h2 class="spec">Contact</h2><a href="mailto:thomasrgriffiths08@gmail.com">thomasrgriffiths08@gmail.com</a><a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">@tomxsystems on Instagram</a></div>
     </div>
+    <div class="f-row">
+      <span>Websites &amp; systems for service businesses &middot; United Kingdom &middot; &copy; <span data-year></span> Skales</span>
+      <span class="spec">Updated September 2026</span>
+    </div>
+    <p class="f-note">Every business, person, review and phone number in the demonstration builds on this site is invented. No client is named or shown anywhere.</p>
   </div>
 </footer>
+<script>window.SITE={"base":"","name":"Skales","origin":"https://skales.com","whatsapp":"","email":"thomasrgriffiths08@gmail.com","instagram":"https://www.instagram.com/tomxsystems/","calendly":""};</script>
 <script src="assets/site.js"></script>
 </body>
 </html>

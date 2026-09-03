@@ -1,0 +1,50 @@
+# Skales
+
+> Websites & systems for service businesses. Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators). Run by Tom Griffiths, one person, in the United Kingdom.
+
+Key facts:
+- Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).
+- One person: the person you message is the person who builds it.
+- Sixteen working demonstration builds run live on the site; every business in them is fictional.
+- One system a week is built in public on Instagram.
+- Clients own their domain, code and accounts from day one; nothing is rented back to them monthly.
+- Every build is hand-coded with no page-builder, no theme and no third-party runtime dependencies.
+- Contact: thomasrgriffiths08@gmail.com · Instagram @tomxsystems (https://www.instagram.com/tomxsystems/)
+- Book a call: https://skales.com/book/
+
+## Pages
+- [Home](https://skales.com/): what Skales builds, with a live demonstration build on the page.
+- [Work — sixteen builds](https://skales.com/work/): every demonstration build, each running live and each with its own page.
+- [What I do](https://skales.com/what-i-do/): the three services — capture websites, online booking with a pipeline, missed-call and review automation — with the systems running, and the four-step process.
+- [Why](https://skales.com/why/): ownership (clients own domain, code and accounts), one person, built in public, and the FAQ.
+- [Book a call](https://skales.com/book/): four qualifying questions, then a slot straight into the diary.
+- [Free teardown](https://skales.com/teardown.html): three details in, three findings back by message.
+- [Notes](https://skales.com/notes/): short pieces — what a missed call actually costs a service business; why i don’t rent you your own website; sixteen builds for businesses that don’t exist, on purpose.
+
+## The sixteen builds
+- [Northgate Quote Engine](https://skales.com/work/northgate-quote-engine/): business tool for an invented kitchen fitter — A quote that assembles itself while the customer answers.
+- [Redgate Job & Lead System](https://skales.com/work/redgate-job-system/): business tool for an invented heating & plumbing — Every enquiry, where it came from, and what happened to it.
+- [Halcyon Dispatch](https://skales.com/work/halcyon-dispatch/): business tool for an invented heating dispatch team — Drag a job to another engineer and the week re-plans itself.
+- [Ledgerline](https://skales.com/work/ledgerline/): business tool for an invented invoice & proposal studio — A live A4 page that reflows as you type.
+- [Mortgage Lab](https://skales.com/work/mortgage-lab/): business tool for an invented broker lead magnet — What an overpayment really saves, month by month.
+- [Payslip Lab](https://skales.com/work/payslip-lab/): business tool for an invented accountant lead magnet — Gross to net, and the 60% trap nobody explains.
+- [Kerbside Scorecard](https://skales.com/work/kerbside-scorecard/): business tool for an invented google profile report card — Marks a Google Business Profile like an exam.
+- [Stopcock](https://skales.com/work/stopcock/): business tool for an invented missed-call leak meter — What unanswered calls cost you a year.
+- [Turnover](https://skales.com/work/turnover/): business tool for an invented roofing firm rebuild — Drag the tape line across a 2011 site and its rebuild.
+- [Fenwick Booking](https://skales.com/work/fenwick-booking/): business tool for an invented heating engineer — Service, slot, deposit, confirmed — no phone tag.
+- [Jobsheet](https://skales.com/work/jobsheet/): business tool for an invented van-side job report — Fill it in from the van, the customer report writes itself.
+- [Shiftbook](https://skales.com/work/shiftbook/): business tool for an invented salon staff rota — Click a cell to place a shift. Clashes flag as you go.
+- [Atelier Voss](https://skales.com/work/atelier-voss/): website for an invented architecture practice — A studio site with no photographs at all.
+- [Cadence](https://skales.com/work/cadence/): website for an invented field-ops software — The page is an operations board that never stops running.
+- [MARÉE — Sel Obscur](https://skales.com/work/maree/): website for an invented fragrance house — Ink through water, and a page that darkens as you descend.
+- [SIGNAL 2027](https://skales.com/work/signal/): website for an invented music & light festival — Type that reacts to how hard you scroll.
+
+## Frequently asked
+- **Do I actually own the website?** Yes. With Skales the domain, the code and the hosting sit in your own accounts from day one. It is set up so you could walk away tomorrow and lose nothing; that is the whole point.
+- **Is there a monthly fee to keep my site online?** No. Skales does not charge a monthly platform fee to keep your own website alive. You pay for hosting and your domain directly, in your own name, at cost. If any quote you get includes a monthly fee to keep your own site online, that is rent.
+- **How long does a build take?** A capture website takes days. A full system with booking and follow-up usually takes one to two weeks. You get a date with the quote, and you can watch it being built in public.
+- **Are the sixteen builds on this site real clients?** No, and deliberately so. Every business, person, review and phone number in the demonstration builds is invented, so nothing on this site exposes anyone Skales works with. They are real working software, just for businesses that do not exist.
+- **Who actually does the work?** Tom Griffiths. Skales is one person: there is no account manager and no handover to a junior. The person you message is the person who builds it.
+- **What kind of businesses is this for?** UK service businesses whose work comes in by phone: plumbers, heating engineers, electricians, roofers, kitchen fitters, landscapers, cleaners, salons and similar trades and local operators.
+- **What happens after I book a call or send the form?** Tom Griffiths looks at your website, your Google listing and what happens when someone tries to reach you, then messages you three things: what is leaking, what to fix first, and what it is worth in jobs. If you want it fixed, you get a flat quote. If not, you keep the list.
+- **Do you use page-builders or templates?** No. Every build is hand-coded with no page-builder, no theme and no third-party runtime dependencies. Every visual is drawn in code rather than bought from a stock library.

@@ -1,209 +1,99 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-power="off">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>tomxsystems — websites &amp; systems for service businesses</title>
-<meta name="description" content="Websites and systems for UK service businesses that catch the enquiry, answer it in seconds and book the job. Sixteen working builds you can open and use on this site.">
-<meta property="og:title" content="tomxsystems — everything on this page is switched on">
-<meta property="og:description" content="Missed call at 9:47pm, booked by 9:52. Websites, booking and follow-up systems for service businesses — owned, not rented. Sixteen live builds you can use.">
-<meta property="og:image" content="https://thomasrgriffiths08-blip.github.io/tomxsystems-site/og.png">
+<title>Websites &amp; booking systems for UK trades | Skales</title>
+<meta name="description" content="Websites, online booking and missed-call text-back for UK trades, built by one person and owned by you. Sixteen working builds run live on this site.">
+<link rel="canonical" href="https://skales.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0A0C10">
+<meta name="author" content="Tom Griffiths">
+<meta property="og:site_name" content="Skales">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skales.com/">
+<meta property="og:title" content="Websites &amp; booking systems for UK trades | Skales">
+<meta property="og:description" content="Websites, online booking and missed-call text-back for UK trades, built by one person and owned by you. Sixteen working builds run live on this site.">
+<meta property="og:image" content="https://skales.com/og/home.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Websites &amp; booking systems for UK trades | Skales">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Websites &amp; booking systems for UK trades | Skales">
+<meta name="twitter:description" content="Websites, online booking and missed-call text-back for UK trades, built by one person and owned by you. Sixteen working builds run live on this site.">
+<meta name="twitter:image" content="https://skales.com/og/home.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0C10'/%3E%3Cpath d='M20 20 L44 44 M44 20 L20 44' stroke='%23FF5A1F' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="og/icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/rack.css">
-<style>
-/* ---------- hero: the bench. Copy on the left, the live stage bleeding off the right edge ---------- */
-.hero{grid-template-columns:[full-start] minmax(var(--pad),1fr) [wrap-start] minmax(0,620px) [mid] minmax(0,calc(var(--shell) - 620px)) [wrap-end] minmax(var(--pad),1fr) [full-end];
-  padding-block:clamp(2.2rem,5vw,4rem) 0;align-items:end}
-.hero-copy{grid-column:wrap-start/mid;padding:0 clamp(1.5rem,4vw,3.5rem) clamp(2rem,4vw,3.5rem) 0;min-width:0}
-.hero-copy h1{margin:1.4rem 0 1.3rem;font-size:clamp(3rem,6.6vw,6rem);letter-spacing:-.046em;line-height:.92}
-.hero-copy h1 .on{color:var(--live)}
-.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.7rem}
-.hero-copy .spec{margin-top:1.5rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;text-transform:none;letter-spacing:.06em}
-.hero-stage{grid-column:mid/full-end;min-width:0;display:flex;flex-direction:column}
-.hero-stage .stage{border:1px solid var(--zinc);border-right:0;border-radius:var(--r-cell) 0 0 0;border-bottom:0}
-.hero-stage .viewport{height:min(560px,64vh)}
-.hero-stage .rig-cap{padding:12px 16px}
-.hero-stage .rig-cap h3{font-size:1rem}
-.hero-stage .rig-cap p{font-size:.86rem}
-.hstrip{display:flex;gap:1px;background:var(--zinc);border:1px solid var(--zinc);border-right:0;overflow-x:auto;min-width:0;scrollbar-width:thin}
-.hstrip .ch{flex:none;display:flex;grid-template-columns:none;gap:7px;padding:9px 11px;background:var(--ink);border-left:0;width:auto}
-.hstrip .ch[aria-selected="true"]{background:var(--steel-2)}
-.hstrip .ch .nm{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.mon-note{display:flex;align-items:center;gap:.55rem;padding:0 0 .7rem}
-/* hero parallax: the stage and the copy leave at different speeds (scroll-driven, visitors with motion on) */
-@supports (animation-timeline: scroll()){
-  @media (prefers-reduced-motion: no-preference){
-    .hero-stage{animation:stage-drift linear both;animation-timeline:scroll(root);animation-range:0px 90vh}
-    .hero-copy{animation:copy-drift linear both;animation-timeline:scroll(root);animation-range:0px 90vh}
-    @keyframes stage-drift{to{transform:translateY(-56px)}}
-    @keyframes copy-drift{to{transform:translateY(-14px)}}
-  }
-}
-@media(max-width:960px){
-  .hero{grid-template-columns:[full-start] minmax(var(--pad),1fr) [wrap-start] minmax(0,var(--shell)) [wrap-end] minmax(var(--pad),1fr) [full-end]}
-  .hero-copy{grid-column:wrap;padding-right:0}
-  .hero-stage{grid-column:full}
-  .hero-stage .stage{border-radius:0;border-left:0}
-  .hero-stage .viewport{height:min(480px,60vh)}
-  .hstrip{border-left:0}
-  .mon-note{padding-inline:var(--pad)}
-}
-
-/* ---------- sheet 02: the night line — one ruled instrument ---------- */
-.night h2{max-width:14ch;margin-bottom:1rem}
-.line{display:grid;grid-template-columns:300px minmax(0,1fr);border:1px solid var(--zinc);border-radius:var(--r-cell);overflow:hidden;
-  margin-top:2rem;align-items:stretch}
-.line>*{min-width:0}
-@media(max-width:820px){ .line{grid-template-columns:minmax(0,1fr)} }
-
-.phone{border-right:1px solid var(--zinc);display:flex;flex-direction:column;background:var(--ink)}
-.ph-head{display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid var(--zinc);background:var(--steel)}
-.ph-head .av{width:26px;height:26px;border-radius:50%;background:var(--steel-3);color:var(--dyeline-2);display:flex;align-items:center;
-  justify-content:center;font-weight:600;font-size:.74rem;flex:none}
-.ph-head b{display:block;font-size:.84rem;letter-spacing:-.01em}
-.ph-head span{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--dyeline-3)}
-.thread{flex:1;min-height:250px;padding:14px 12px;display:flex;flex-direction:column;gap:7px;justify-content:flex-end}
-.bub{max-width:90%;padding:.5rem .68rem;border-radius:10px;font-size:.82rem;line-height:1.42}
-.bub.out{align-self:flex-end;background:var(--live);color:var(--live-ink);border-bottom-right-radius:2px}
-.bub.in{align-self:flex-start;background:var(--steel-3);color:var(--dyeline);border-bottom-left-radius:2px}
-@media(max-width:820px){ .phone{border-right:0;border-bottom:1px solid var(--zinc)} }
-
-.log-panel{display:flex;flex-direction:column;background:var(--ink)}
-.log-head{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--zinc);background:var(--steel)}
-.log-head .sp{flex:1}
-.log{list-style:none;padding:8px 12px;display:flex;flex-direction:column;flex:1}
-.log li{display:grid;grid-template-columns:68px 84px minmax(0,1fr);gap:12px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--zinc);font-size:.86rem}
-.log li:last-child{border-bottom:0}
-.log li .t{font-family:var(--mono);font-size:.72rem;color:var(--dyeline-3);font-variant-numeric:tabular-nums slashed-zero}
-.log li .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dyeline-3)}
-.log li .m{color:var(--dyeline-2)}
-.log li.missed .m{color:var(--dyeline-3)}
-.log li.missed .m s{text-decoration-color:var(--zinc-2);text-decoration-thickness:1px}
-.log li.sys .k{color:var(--live)}
-.log li.sys .m{color:var(--dyeline)}
-.log li .m b{color:var(--dyeline);font-weight:500}
-.log-foot{padding:14px 12px;border-top:1px solid var(--zinc);background:var(--steel);display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem}
-.log-foot b{font-family:var(--disp);font-size:1.3rem;letter-spacing:-.03em;font-weight:700}
-.log-foot span{color:var(--dyeline-2);font-size:.88rem}
-.log-empty{color:var(--dyeline-3);font-size:.88rem;padding:8px 0}
-@media(max-width:560px){
-  .log li{grid-template-columns:auto minmax(0,1fr);gap:2px 10px;padding:8px 0}
-  .log li .m{grid-column:1/-1}
-}
-
-/* ---------- sheet 03: what I build — ruled rows, each proven on a channel ---------- */
-.brow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem 2rem;align-items:center;padding:1.5rem 0;border-top:1px solid var(--zinc);
-  text-decoration:none;color:inherit}
-.brow:first-of-type{margin-top:1.8rem}
-.brow:last-of-type{border-bottom:1px solid var(--zinc)}
-.brow h3{margin-bottom:.4rem;transition:color .14s}
-.brow p{color:var(--dyeline-2);font-size:.95rem;max-width:60ch}
-.brow .plate{align-self:center;transition:border-color .14s}
-.brow:hover h3{color:var(--live)}
-.brow:hover .plate{border-color:var(--live);color:var(--dyeline)}
-@media(max-width:640px){ .brow{grid-template-columns:minmax(0,1fr)} }
-
-/* ---------- sheet 04: the strip ---------- */
-.rack-head{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:flex-end;justify-content:space-between}
-.rack-head h2{max-width:14ch}
-
-/* ---------- sheet 05: the operator — a nameplate ---------- */
-.nameplate{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--zinc);border:1px solid var(--zinc);border-radius:var(--r-cell);
-  overflow:hidden;margin-top:2rem}
-.nameplate>div{background:var(--ink);padding:16px 18px;display:flex;flex-direction:column;gap:.35rem;min-width:0}
-.nameplate dt{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dyeline-3)}
-.nameplate dd{font-size:.98rem;line-height:1.45}
-.nameplate dd b{font-weight:600}
-@media(max-width:640px){ .nameplate{grid-template-columns:1fr} }
-
-/* ---------- daylight: the deal ---------- */
-.day{padding-block:0}
-.day .panel{border-top-color:var(--day-line)}
-.day .lab{border-right-color:var(--day-line)}
-.day .lab .sheet,.day .lab .name{color:var(--day-ink-2)}
-.day .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(1.8rem,5vw,4rem);align-items:start}
-.day .grid>*{min-width:0}
-@media(max-width:880px){ .day .grid{grid-template-columns:minmax(0,1fr)} .day .lab{border-bottom-color:var(--day-line)} }
-.day h2 em{font-style:normal;color:var(--day-ink-2)}
-.day .warn{margin-top:1.4rem;font-size:.88rem;color:var(--day-ink-2);display:flex;gap:.55rem;max-width:46ch}
-.day .warn i{font-style:normal;color:var(--live);font-weight:700;flex:none}
-.pline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.2rem;align-items:baseline;padding:1.05rem 0;border-top:1px solid var(--day-line)}
-.pline:last-of-type{border-bottom:1px solid var(--day-line)}
-.pline b{font-size:1rem;font-weight:600;letter-spacing:-.015em;display:block}
-.pline small{font-size:.84rem;color:var(--day-ink-2)}
-.pline .amt{font-family:var(--mono);font-weight:500;font-size:1rem;white-space:nowrap;font-variant-numeric:tabular-nums slashed-zero}
-.day .note{margin-top:1rem;font-size:.86rem;color:var(--day-ink-2);max-width:50ch}
-.day .btn-live{margin-top:1.4rem}
-
-/* ---------- straight answers ---------- */
-.faq details{border-top:1px solid var(--zinc);padding:1.1rem 0}
-.faq details:first-of-type{margin-top:.4rem}
-.faq details:last-of-type{border-bottom:1px solid var(--zinc)}
-.faq summary{cursor:pointer;font-weight:500;font-size:1.02rem;list-style:none;display:flex;justify-content:space-between;gap:1rem}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';color:var(--live);font-family:var(--mono);font-size:1.05rem}
-.faq details[open] summary::after{content:'\2212'}
-.faq details p{margin-top:.65rem;color:var(--dyeline-2);font-size:.95rem;max-width:66ch}
-</style>
+<link rel="stylesheet" href="assets/hero.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://skales.com/#organization","name":"Skales","legalName":"Skales","url":"https://skales.com/","description":"Websites & systems for service businesses — Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).","founder":{"@id":"https://skales.com/#founder"},"foundingDate":"2026","areaServed":{"@type":"Country","name":"United Kingdom"},"knowsAbout":["Web design for service businesses","Online booking systems","Missed-call text-back automation","Customer follow-up automation","Trades websites","Review request automation"],"sameAs":["https://www.instagram.com/tomxsystems/"],"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"thomasrgriffiths08@gmail.com","availableLanguage":"en-GB","areaServed":"GB"},"logo":{"@type":"ImageObject","url":"https://skales.com/og/home.png"}},{"@type":"Person","@id":"https://skales.com/#founder","name":"Tom Griffiths","alternateName":"Thomas Griffiths","jobTitle":"Founder & builder","worksFor":{"@id":"https://skales.com/#organization"},"url":"https://skales.com/why/","sameAs":["https://www.instagram.com/tomxsystems/"],"nationality":"GB"},{"@type":"WebSite","@id":"https://skales.com/#website","url":"https://skales.com/","name":"Skales","description":"Websites & systems for service businesses","publisher":{"@id":"https://skales.com/#organization"},"inLanguage":"en-GB"},{"@type":"WebPage","@id":"https://skales.com/#webpage","url":"https://skales.com/","name":"Websites & booking systems for UK trades | Skales","description":"Websites, online booking and missed-call text-back for UK trades, built by one person and owned by you. Sixteen working builds run live on this site.","isPartOf":{"@id":"https://skales.com/#website"},"about":{"@id":"https://skales.com/#organization"},"inLanguage":"en-GB","dateModified":"2026-09-03","primaryImageOfPage":{"@type":"ImageObject","url":"https://skales.com/og/home.png"}}]}</script>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 
+<a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="bar">
-    <a class="wordmark" href="./">tom<i>&times;</i>systems</a>
-    <span class="readout"><span class="lamp is-live"></span><b id="clock">--:--:--</b> UK &middot; switched on</span>
-    <nav>
-      <a href="work.html">The rack<sup class="cnt">16</sup></a>
-      <a href="systems.html">The systems<sup class="cnt">3</sup></a>
-      <a href="#pricing">Pricing</a>
-      <a class="btn btn-live btn-sm" href="teardown.html">Free teardown</a>
-    </nav>
+    <a class="wordmark" href="./">s<i>k</i>ales</a>
+    <span class="readout"><span class="lamp" id="powerLamp"></span><b id="clock">--:--:--</b> UK &middot; <span id="powerWord">standby</span></span>
+    <nav class="nav" aria-label="Primary"><a href="work/">Work<sup class="cnt">16</sup></a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a><a class="btn btn-live btn-sm" href="book/">Book a call</a></nav>
+    <button class="mtoggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Primary (mobile)" hidden>
+    <a href="work/">Work<sup class="cnt">16</sup></a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a>
+    <a href="book/" class="mcta">Book a call</a>
+    <a href="teardown.html">Free teardown</a>
+  </nav>
 </header>
-
-<main>
-<!-- ============ the bench ============ -->
-<section class="hero bench">
+<main id="main">
+<section class="hero bench" id="top" aria-label="Introduction">
+  <div class="worklight" aria-hidden="true"></div>
   <div class="hero-copy">
-    <span class="plate"><span>Websites &amp; systems</span><span>Service businesses</span><span>UK</span></span>
-    <h1>Everything on<br>this page is<br><span class="on">switched on.</span></h1>
-    <p class="lead">I build websites and systems for service businesses &mdash; the kind that <strong>catch the enquiry at 9:47pm, answer it in seconds and put the job in the diary</strong> while you&rsquo;re asleep. Sixteen of them are running on this site right now. Go and use one.</p>
-    <div class="cta-row">
-      <a class="btn btn-live" href="teardown.html">Get a free teardown</a>
-      <a class="btn btn-ghost" href="work.html">Open the rack</a>
+    <div class="power-row">
+      <button class="power" id="power" type="button" aria-pressed="false" aria-label="Power switch: turn the page on or off">
+        <span class="pw-house" aria-hidden="true"><span class="pw-knob"><span class="pw-lamp"></span></span></span>
+        <span class="pw-lab" aria-hidden="true"><b>Off</b><b>On</b></span>
+      </button>
+      <span class="plate"><span>Websites &amp; systems</span><span>Service businesses</span><span>UK</span></span>
     </div>
-    <p class="spec">One build a week, in public &middot; <a class="lnk" data-ig href="#" target="_blank" rel="noopener">@tomxsystems</a></p>
+    <h1>Everything on<br>this page is<br><span class="on">switched on.</span></h1>
+    <p class="lead">Skales builds websites and systems for UK service businesses &mdash; the kind that <strong>catch the enquiry at 9:47pm, answer it in seconds and put the job in the diary</strong> while you&rsquo;re asleep. Sixteen of them are running on this site right now. Go and use one.</p>
+    <div class="cta-row">
+      <a class="btn btn-live" href="book/">Book a call</a>
+      <a class="btn btn-ghost" href="work/">Open the rack</a>
+    </div>
+    <ul class="proof" aria-label="Why this is the right option">
+      <li><b>16</b><span>working builds, live on this site</span></li><li><b>Every one</b><span>you can open and use</span></li><li><b>One person</b><span>the one you message builds it</span></li><li><b>Weekly</b><span>a new system built in public</span></li><li><b>Yours</b><span>domain, code and accounts from day one</span></li>
+    </ul>
   </div>
-
   <div class="hero-stage">
-    <p class="mon-note spec"><span class="lamp is-live" id="rigLamp"></span> Live &mdash; a real build, not a picture of one. Use it.</p>
+    <p class="mon-note spec"><span class="lamp" id="rigLamp"></span><span><b id="monWord">Standby</b> &mdash; a real build, not a picture of one. Use it.</span></p>
     <div class="stage">
       <div class="chrome">
         <span class="pips" aria-hidden="true"><i></i><i></i><i></i></span>
         <span class="url" id="rigUrl"></span>
-        <a class="pop" id="rigPop" href="#" target="_blank" rel="noopener">Open full size</a>
+        <a class="pop" id="rigPop" href="work/" target="_blank" rel="noopener">Open full size</a>
       </div>
-      <div class="viewport" id="viewport"><div class="boot">Powering up</div></div>
+      <div class="viewport" id="viewport"><div class="boot" id="boot"><span class="lamp"></span> Standby &mdash; flip the switch</div></div>
       <div class="rig-cap" id="rigCap"></div>
     </div>
     <div class="hstrip" id="rail" role="tablist" aria-label="Switch channel"></div>
   </div>
 </section>
 
-<!-- ============ sheet 02: the night line ============ -->
-<section data-sheet="02" class="panel night" id="night">
+<section class="panel night" id="night">
   <div class="wrap inner">
-    <div class="lab"><span class="sheet">Sheet 02</span><span class="name">The 9:47pm problem</span></div>
+    <div class="lab"><span class="sheet">The problem</span><span class="name">Most jobs aren&rsquo;t lost. They&rsquo;re missed.</span></div>
     <div class="body">
-      <h2>Most jobs aren&rsquo;t lost. They&rsquo;re missed.</h2>
-      <p class="lead">A call you can&rsquo;t take at teatime is a customer ringing the next firm on the list by half past. You don&rsquo;t need to answer faster. You need something that answers for you.</p>
-
+      <h2>What happens to a call you can&rsquo;t take at teatime?</h2>
+      <p class="lead">A call you can&rsquo;t take at teatime is a customer ringing the next firm on the list by half past. You don&rsquo;t need to answer faster. You need something that answers for you. This is the sequence Skales installs, played out on an invented heating firm.</p>
       <div class="line">
         <div class="phone">
           <div class="ph-head"><span class="av">R</span><span><b>Redgate Heating</b><span>07700 900461</span></span></div>
@@ -220,189 +110,101 @@
           <div class="log-foot" id="lineOut"><span>What happens to that call is the whole business.</span></div>
         </div>
       </div>
-      <p class="f-note" style="margin-top:1rem">Invented business, invented customer, Ofcom drama number. The sequence is the one I actually build.</p>
+      <p class="f-note" style="margin-top:1rem">Invented business, invented customer, Ofcom drama number. The sequence is the one that actually gets built.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ sheet 03: what I build ============ -->
-<section data-sheet="03" class="panel" id="build">
+<section class="panel" id="build">
   <div class="wrap inner">
-    <div class="lab"><span class="sheet">Sheet 03</span><span class="name">What I build</span></div>
+    <div class="lab"><span class="sheet">What I build</span><span class="name">Three things, each running on this site</span></div>
     <div class="body">
-      <h2>Three things. Each one is running on this site.</h2>
-      <a class="brow" href="work.html#ch=13">
-        <span><h3>A website that captures</h3><p>Not a brochure with your logo on it. Three fields, one-tap call, loads before they blink, and built so a visit turns into a name and a number you can ring back.</p></span>
-        <span class="plate"><span>Proven on</span><span class="on">CH 13</span></span>
+      <h2>What does Skales build?</h2>
+      <p class="lead">Three things, and each one is proven by a working build you can open: a website that captures the enquiry, booking and a pipeline that chase themselves, and follow-up that runs without you.</p>
+      
+      <a class="brow" href="work/turnover/">
+        <span><h3>Websites that capture the enquiry</h3><p>A hand-built website for a service business: three fields, one-tap call, loads before they blink, and every page written to answer the question the customer typed into Google. Built so a visit becomes a name and a number you can ring back.</p></span>
+        <span class="plate"><span>Proven on</span><span class="on">CH 13</span><span><i class="sw" style="background:#C77D2B"></i>Turnover</span></span>
       </a>
-      <a class="brow" href="work.html#ch=14">
-        <span><h3>Booking, quotes and the pipeline</h3><p>Slots customers take themselves, deposits that hold them, quotes chased on their own, and every enquiry sat in one place with what happened to it.</p></span>
-        <span class="plate"><span>Proven on</span><span class="on">CH 14</span></span>
+      <a class="brow" href="work/fenwick-booking/">
+        <span><h3>Booking, quotes and the pipeline</h3><p>Online booking with slots generated from a real calendar, deposits that hold them, quotes that chase themselves, and a pipeline where every enquiry sits with what happened to it. Nothing lives in your texts any more.</p></span>
+        <span class="plate"><span>Proven on</span><span class="on">CH 14</span><span><i class="sw" style="background:#B4451F"></i>Fenwick Booking</span></span>
       </a>
-      <a class="brow" href="work.html#ch=12">
-        <span><h3>Follow-up that runs itself</h3><p>Missed-call text-back in under a minute, review requests the day the job&rsquo;s done, &ldquo;you&rsquo;re due a service&rdquo; reminders next year. Set once, runs without you.</p></span>
-        <span class="plate"><span>Proven on</span><span class="on">CH 12</span></span>
+      <a class="brow" href="work/stopcock/">
+        <span><h3>Follow-up that runs itself</h3><p>A missed call gets a text back in under a minute. A finished job gets a review request the same day. Next year the customer gets a &quot;you are due a service&quot; reminder. Set up once, runs without you touching the phone.</p></span>
+        <span class="plate"><span>Proven on</span><span class="on">CH 12</span><span><i class="sw" style="background:#14606E"></i>Stopcock</span></span>
       </a>
-      <p class="f-note" style="margin-top:1.4rem">Rather watch all three end to end? <a class="lnk" href="systems.html">The systems page runs them in sequence</a>.</p>
+      <p class="f-note" style="margin-top:1.4rem">Every one of these has a full page: <a class="lnk" href="what-i-do/">what I do, with the systems running</a>.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ sheet 04: the rack ============ -->
-<section data-sheet="04" class="panel" id="rack">
+<section class="panel" id="rack">
   <div class="wrap inner">
-    <div class="lab"><span class="sheet">Sheet 04</span><span class="name">The rack</span></div>
+    <div class="lab"><span class="sheet">The rack</span><span class="name">Sixteen builds you can actually open</span></div>
     <div class="body">
       <div class="rack-head">
         <div>
-          <h2>Sixteen builds you can actually open.</h2>
-          <p class="lead" style="margin-top:.9rem">Quote engines, a CRM, a dispatch board, booking and deposits, four full websites. Hover one and it wakes up.</p>
+          <h2>Which builds can you try on this site?</h2>
+          <p class="lead" style="margin-top:.9rem">Quote engines, a CRM, a dispatch board, booking and deposits, four full websites. Hover one and it wakes up; open one and it has its own page.</p>
         </div>
-        <a class="btn btn-ghost" href="work.html">Open all sixteen</a>
+        <a class="btn btn-ghost" href="work/">Open all sixteen</a>
       </div>
     </div>
   </div>
-  <div class="strip" id="stripRack"></div>
+  <div class="strip" id="stripRack" data-strip="14,2,1,3,12,11,8,10,7"></div>
   <div class="wrap"><p class="f-note" style="padding:1rem 0 1.6rem">Every business in them is invented &mdash; deliberately, so nothing here exposes a real client.</p></div>
 </section>
 
-<!-- ============ sheet 05: the operator ============ -->
-<section data-sheet="05" class="panel" id="operator">
+<section class="panel" id="operator">
   <div class="wrap inner">
-    <div class="lab"><span class="sheet">Sheet 05</span><span class="name">Who&rsquo;s building it</span></div>
+    <div class="lab"><span class="sheet">Who</span><span class="name">One person. The one you message builds it.</span></div>
     <div class="body">
-      <h2>One person. The one you message is the one who builds it.</h2>
+      <h2>Who is behind Skales?</h2>
       <dl class="nameplate">
-        <div><dt>Operator</dt><dd><b>Tom.</b> No account manager, no handover to a junior. You talk to the person doing the work.</dd></div>
-        <div><dt>Base</dt><dd>UK. Built for the way UK service businesses actually get their work &mdash; the phone, Google, word of mouth.</dd></div>
+        <div><dt>Operator</dt><dd><b>Tom Griffiths.</b> No account manager, no handover to a junior. You talk to the person doing the work.</dd></div>
+        <div><dt>Base</dt><dd>United Kingdom. Built for the way UK service businesses actually get their work &mdash; the phone, Google, word of mouth.</dd></div>
         <div><dt>Cadence</dt><dd>One system a week, built in public on Instagram. You can watch the next one being made.</dd></div>
         <div><dt>Method</dt><dd>By hand. No page-builders, no themes, no platform that charges you monthly to keep your own site alive.</dd></div>
         <div><dt>Ownership</dt><dd>Domain, code and accounts in your name from day one. Walk away tomorrow and it all keeps working.</dd></div>
         <div><dt>The demos</dt><dd>Sixteen, all fictional businesses. Real working software &mdash; just nothing that exposes a client.</dd></div>
       </dl>
+      <p class="f-note" style="margin-top:1.2rem"><a class="lnk" href="why/">Why it works this way</a></p>
     </div>
   </div>
 </section>
 </main>
 
-<!-- ============ daylight: the deal ============ -->
-<section class="day on-day" id="pricing">
-  <div class="panel" data-sheet="06">
-    <div class="wrap inner">
-      <div class="lab"><span class="sheet">Sheet 06</span><span class="name">The deal</span></div>
-      <div class="body">
-        <div class="grid">
-          <div>
-            <h2>Own it.<br><em>Don&rsquo;t rent it.</em></h2>
-            <p class="lead" style="margin-top:1rem">Some builders charge you every month, forever, just to keep your own website alive. Not here. Domain, code, accounts &mdash; all in your name from day one. Sack me tomorrow and everything keeps working.</p>
-            <p class="warn"><i>*</i><span>If a quote includes a &ldquo;monthly platform fee&rdquo; to keep your own site online, that is rent. Walk away.</span></p>
-          </div>
-          <div>
-            <div class="pline"><span><b>Capture site</b><small>Fast, findable, built to convert</small></span><span class="amt">from &pound;950</span></div>
-            <div class="pline"><span><b>Site + booking &amp; pipeline</b><small>Enquiries to booked jobs, tracked</small></span><span class="amt">from &pound;1,500</span></div>
-            <div class="pline"><span><b>The full system</b><small>Capture, booking, follow-up &mdash; the lot</small></span><span class="amt">&pound;2,500&ndash;&pound;3,000</span></div>
-            <p class="note">Every job quoted flat and agreed before I start. No surprises, and no meeting that should have been a message.</p>
-            <a class="btn btn-live" href="teardown.html">Start with the free teardown</a>
-          </div>
-        </div>
-      </div>
+<section class="day on-day cta-band">
+  <div class="wrap grid">
+    <div>
+      <h2>Ready when you are.</h2>
+      <p class="lead" style="margin-top:.8rem">A short call to find out what is leaking and what to fix first. No pitch, no proposal deck. If Skales is the wrong fit, you will hear that on the call too.</p>
+    </div>
+    <div class="cta-col">
+      <a class="btn btn-live" href="book/">Book a call</a>
+      <a class="btn btn-ghost" href="teardown.html">Or get a free teardown by message</a>
     </div>
   </div>
 </section>
-
-<section data-sheet="07" class="panel faq">
-  <div class="wrap inner">
-    <div class="lab"><span class="sheet">Sheet 07</span><span class="name">Straight answers</span></div>
-    <div class="body">
-      <details><summary>How fast is a build?</summary><p>A capture site: days. A full system: usually one to two weeks. You get a date with the quote, and you can watch it being built.</p></details>
-      <details><summary>Do I actually own it?</summary><p>Yes. Domain, code and hosting sit in your accounts from day one. It is set up so you could walk away tomorrow and lose nothing. That is the whole point.</p></details>
-      <details><summary>Are those sixteen builds real clients?</summary><p>No, and deliberately so. Every business, person, review and phone number in them is invented, so nothing on this site exposes anyone I work with. They are real working software &mdash; just for businesses that do not exist.</p></details>
-      <details><summary>What happens after I send the form?</summary><p>I look at your setup, then message you three things: what is leaking, what to fix first, and what it is worth in jobs. Want it fixed? I quote flat. Don&rsquo;t? Keep the list, no hard feelings.</p></details>
-    </div>
-  </div>
-</section>
-
 <footer class="site-foot">
   <div class="wrap">
-    <div class="f-mark">tom<i>&times;</i>systems</div>
-    <div class="f-row">
-      <span>Websites &amp; systems for service businesses &middot; UK &middot; &copy; <span data-year></span></span>
-      <nav>
-        <a href="work.html">The rack</a>
-        <a href="systems.html">The systems</a>
-        <a href="teardown.html">Free teardown</a>
-        <a data-ig href="#" target="_blank" rel="noopener">Instagram</a>
-        <a data-wa="Hi Tom — found you through your site." href="#" hidden>WhatsApp</a>
-      </nav>
+    <div class="f-mark" aria-hidden="true">s<i>k</i>ales</div>
+    <div class="f-cols">
+      <div><h2 class="spec">Pages</h2><a href="">Home</a><a href="work/">Work</a><a href="what-i-do/">What I do</a><a href="why/">Why</a><a href="notes/">Notes</a><a href="book/">Book a call</a><a href="teardown.html">Free teardown</a></div><div><h2 class="spec">Tools</h2><a href="work/northgate-quote-engine/">Northgate Quote Engine</a><a href="work/redgate-job-system/">Redgate Job &amp; Lead System</a><a href="work/halcyon-dispatch/">Halcyon Dispatch</a><a href="work/ledgerline/">Ledgerline</a><a href="work/mortgage-lab/">Mortgage Lab</a><a href="work/payslip-lab/">Payslip Lab</a><a href="work/kerbside-scorecard/">Kerbside Scorecard</a><a href="work/stopcock/">Stopcock</a><a href="work/turnover/">Turnover</a><a href="work/fenwick-booking/">Fenwick Booking</a><a href="work/jobsheet/">Jobsheet</a><a href="work/shiftbook/">Shiftbook</a></div><div><h2 class="spec">Websites</h2><a href="work/atelier-voss/">Atelier Voss</a><a href="work/cadence/">Cadence</a><a href="work/maree/">MARÉE — Sel Obscur</a><a href="work/signal/">SIGNAL 2027</a></div><div><h2 class="spec">Contact</h2><a href="mailto:thomasrgriffiths08@gmail.com">thomasrgriffiths08@gmail.com</a><a href="https://www.instagram.com/tomxsystems/" target="_blank" rel="noopener">@tomxsystems on Instagram</a></div>
     </div>
+    <div class="f-row">
+      <span>Websites &amp; systems for service businesses &middot; United Kingdom &middot; &copy; <span data-year></span> Skales</span>
+      <span class="spec">Updated September 2026</span>
+    </div>
+    <p class="f-note">Every business, person, review and phone number in the demonstration builds on this site is invented. No client is named or shown anywhere.</p>
   </div>
 </footer>
-
+<script>window.SITE={"base":"","name":"Skales","origin":"https://skales.com","whatsapp":"","email":"thomasrgriffiths08@gmail.com","instagram":"https://www.instagram.com/tomxsystems/","calendly":""};</script>
 <script src="assets/site.js"></script>
 <script src="assets/builds.js"></script>
 <script src="assets/rack.js"></script>
-<script>
-renderRack('#stripRack', [1,2,3,14,12,11,8,10,7].map(function(n){
-  return BUILDS.filter(function(b){ return b.n === n; })[0];
-}));
-
-(function(){
-  function go(){ initRig(14, { compact:true }); }
-  if (document.readyState === 'complete') setTimeout(go, 60);
-  else window.addEventListener('load', function(){
-    (window.requestIdleCallback || function(fn){ setTimeout(fn, 200); })(go, { timeout:1200 });
-  });
-})();
-
-/* ---- the night line ---- */
-(function(){
-  var log = document.getElementById('log'), thread = document.getElementById('thread'),
-      out = document.getElementById('lineOut'), btn = document.getElementById('ring'),
-      lamp = document.getElementById('lineLamp');
-  var BEATS = [
-    { d:0,    t:'21:47:04', k:'Incoming', c:'missed', m:'<s>07700 900461</s> &mdash; six rings, no answer. Dan&rsquo;s at his daughter&rsquo;s birthday tea.' },
-    { d:1000, t:'21:47:15', k:'System',   c:'sys', m:'Missed-call text-back sent &mdash; <b>11 seconds</b> after the miss.',
-      bub:{ s:'out', x:'Sorry we missed you — Redgate Heating here. What&rsquo;s up? Reply to this and we&rsquo;ll get you sorted.' } },
-    { d:1500, t:'21:49:32', k:'Customer', c:'', m:'Replied. The lead is now a conversation, not a voicemail.',
-      bub:{ s:'in', x:'No hot water and it&rsquo;s banging when it fires up' } },
-    { d:1300, t:'21:49:34', k:'System',   c:'sys', m:'Job created &middot; triage sent &middot; slot offered from the live diary.',
-      bub:{ s:'out', x:'Sounds like the diverter valve. Earliest we can be there is 8am tomorrow — want it holding?' } },
-    { d:1500, t:'21:52:10', k:'Customer', c:'', m:'Took the slot herself. No phone call, no back and forth.',
-      bub:{ s:'in', x:'Yes please, 8am works' } },
-    { d:1100, t:'21:52:11', k:'System',   c:'sys', m:'<b>&pound;45 deposit taken</b> &middot; slot locked &middot; added to Dan&rsquo;s route for the morning.' },
-    { d:1300, t:'07:58:02', k:'Engineer', c:'sys', m:'On the way &mdash; automatic &ldquo;we&rsquo;re 10 minutes out&rdquo; text sent.' }
-  ];
-  var timers = [], running = false, played = false;
-  function play(){
-    if (running) return;
-    running = true; played = true;
-    timers.forEach(clearTimeout); timers = [];
-    log.innerHTML = ''; thread.innerHTML = ''; out.innerHTML = '';
-    btn.textContent = 'Ringing'; btn.disabled = true;
-    lamp.classList.remove('is-live');
-    var at = 0;
-    BEATS.forEach(function(b, i){
-      at += b.d;
-      timers.push(setTimeout(function(){
-        var li = document.createElement('li');
-        if (b.c) li.className = b.c;
-        li.innerHTML = '<span class="t">'+b.t+'</span><span class="k">'+b.k+'</span><span class="m">'+b.m+'</span>';
-        log.appendChild(li);
-        if (b.bub){ var el = document.createElement('div'); el.className = 'bub '+b.bub.s; el.innerHTML = b.bub.x; thread.appendChild(el); }
-        if (i === 1) lamp.classList.add('is-live');
-        if (i === BEATS.length - 1){
-          out.innerHTML = '<b>One missed call. A &pound;340 job in the diary.</b><span>Time you spent on it: none. You were at a birthday tea, then asleep.</span>';
-          btn.textContent = 'Run it again'; btn.disabled = false; running = false;
-        }
-      }, at));
-    });
-  }
-  btn.addEventListener('click', play);
-  if ('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(en){ if (en[0].isIntersecting && !played){ play(); io.disconnect(); } }, { threshold:.3 });
-    io.observe(document.getElementById('night'));
-  }
-})();
-</script>
+<script src="assets/hero.js"></script>
+<script src="assets/nightline.js"></script>
 </body>
 </html>

@@ -1,39 +1,25 @@
-/* ============================================================
-   Shell behaviour. One place for the contact config.
-   ============================================================ */
-window.CONFIG = {
-  /* Tom's WhatsApp number, international format, digits only — e.g. '447700900123'.
-     While empty, every WhatsApp control hides itself and the form falls back to email. */
-  whatsapp: '',
-  email: 'thomasrgriffiths08@gmail.com',
-  instagram: 'https://www.instagram.com/tomxsystems/'
-};
-
+/* Shell behaviour on every page. Config comes from window.SITE (written by the build). */
 (function(){
-  var d = document;
+  var d = document, S = window.SITE || {};
   try{ if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) d.documentElement.classList.add('m-on'); }catch(e){}
   d.addEventListener('DOMContentLoaded', function(){
-    var wa = CONFIG.whatsapp && String(CONFIG.whatsapp).replace(/\D/g,'');
+    var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, '');
     d.querySelectorAll('[data-wa]').forEach(function(el){
       if (!wa){ el.hidden = true; return; }
-      el.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(el.getAttribute('data-wa') || 'Hi Tom — saw your site.');
-      el.hidden = false;
+      el.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(el.getAttribute('data-wa') || 'Hi Tom — saw your site.'); el.hidden = false;
     });
-    d.querySelectorAll('[data-email]').forEach(function(el){ el.href = 'mailto:' + CONFIG.email; });
-    d.querySelectorAll('[data-ig]').forEach(function(el){ el.href = CONFIG.instagram; });
     d.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
-
-    /* the readout: UK time, ticking. Content, not decoration — runs regardless of reduced motion. */
+    /* mobile menu */
+    var t = d.querySelector('.mtoggle'), m = d.getElementById('mnav');
+    if (t && m) t.addEventListener('click', function(){ var open = t.getAttribute('aria-expanded') === 'true'; t.setAttribute('aria-expanded', String(!open)); m.hidden = open; });
+    /* the readout: UK time, ticking. Content, not decoration. */
     var clock = d.getElementById('clock');
     if (clock){
-      var fmt;
-      try{ fmt = new Intl.DateTimeFormat('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false, timeZone:'Europe/London' }); }
-      catch(e){ fmt = null; }
-      var tick = function(){
-        var t = new Date();
-        clock.textContent = fmt ? fmt.format(t) : t.toTimeString().slice(0,8);
-      };
+      var fmt = null; try{ fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Europe/London' }); }catch(e){}
+      var tick = function(){ var t = new Date(); clock.textContent = fmt ? fmt.format(t) : t.toTimeString().slice(0, 8); };
       tick(); setInterval(tick, 1000);
     }
+    /* pages without the switch are simply on */
+    if (!d.getElementById('power')){ d.documentElement.setAttribute('data-power', 'on'); var pl = d.getElementById('powerLamp'); if (pl) pl.classList.add('is-live'); var pw = d.getElementById('powerWord'); if (pw) pw.textContent = 'switched on'; }
   });
 })();

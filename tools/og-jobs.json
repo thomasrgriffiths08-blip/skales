@@ -1,0 +1,174 @@
+[
+  {
+    "key": "home",
+    "title": "Skales — websites & systems for service businesses",
+    "kicker": "Websites & systems · UK",
+    "sub": "Sixteen working builds you can use. Booking, missed-call text-back, quotes, CRMs — hand-built, owned by you."
+  },
+  {
+    "key": "work",
+    "title": "Sixteen builds. All of them running.",
+    "kicker": "The rack · 16 channels",
+    "sub": "Quote engines, a CRM, a dispatch board, booking, four full websites — running live, open to use."
+  },
+  {
+    "key": "work-northgate-quote-engine",
+    "title": "Northgate Quote Engine",
+    "kicker": "CH 01 · Kitchen fitter · Business tool",
+    "sub": "A quote that assembles itself while the customer answers.",
+    "colour": "#245247"
+  },
+  {
+    "key": "work-redgate-job-system",
+    "title": "Redgate Job & Lead System",
+    "kicker": "CH 02 · Heating & plumbing · Business tool",
+    "sub": "Every enquiry, where it came from, and what happened to it.",
+    "colour": "#3730a3"
+  },
+  {
+    "key": "work-halcyon-dispatch",
+    "title": "Halcyon Dispatch",
+    "kicker": "CH 03 · Heating dispatch team · Business tool",
+    "sub": "Drag a job to another engineer and the week re-plans itself.",
+    "colour": "#2f5cdb"
+  },
+  {
+    "key": "work-ledgerline",
+    "title": "Ledgerline",
+    "kicker": "CH 04 · Invoice & proposal studio · Business tool",
+    "sub": "A live A4 page that reflows as you type.",
+    "colour": "#1f4fd8"
+  },
+  {
+    "key": "work-mortgage-lab",
+    "title": "Mortgage Lab",
+    "kicker": "CH 05 · Broker lead magnet · Business tool",
+    "sub": "What an overpayment really saves, month by month.",
+    "colour": "#0b6e4f"
+  },
+  {
+    "key": "work-payslip-lab",
+    "title": "Payslip Lab",
+    "kicker": "CH 06 · Accountant lead magnet · Business tool",
+    "sub": "Gross to net, and the 60% trap nobody explains.",
+    "colour": "#2952cc"
+  },
+  {
+    "key": "work-kerbside-scorecard",
+    "title": "Kerbside Scorecard",
+    "kicker": "CH 11 · Google profile report card · Business tool",
+    "sub": "Marks a Google Business Profile like an exam.",
+    "colour": "#B42318"
+  },
+  {
+    "key": "work-stopcock",
+    "title": "Stopcock",
+    "kicker": "CH 12 · Missed-call leak meter · Business tool",
+    "sub": "What unanswered calls cost you a year.",
+    "colour": "#14606E"
+  },
+  {
+    "key": "work-turnover",
+    "title": "Turnover",
+    "kicker": "CH 13 · Roofing firm rebuild · Business tool",
+    "sub": "Drag the tape line across a 2011 site and its rebuild.",
+    "colour": "#C77D2B"
+  },
+  {
+    "key": "work-fenwick-booking",
+    "title": "Fenwick Booking",
+    "kicker": "CH 14 · Heating engineer · Business tool",
+    "sub": "Service, slot, deposit, confirmed — no phone tag.",
+    "colour": "#B4451F"
+  },
+  {
+    "key": "work-jobsheet",
+    "title": "Jobsheet",
+    "kicker": "CH 15 · Van-side job report · Business tool",
+    "sub": "Fill it in from the van, the customer report writes itself.",
+    "colour": "#275C3F"
+  },
+  {
+    "key": "work-shiftbook",
+    "title": "Shiftbook",
+    "kicker": "CH 16 · Salon staff rota · Business tool",
+    "sub": "Click a cell to place a shift. Clashes flag as you go.",
+    "colour": "#6D3B52"
+  },
+  {
+    "key": "work-atelier-voss",
+    "title": "Atelier Voss",
+    "kicker": "CH 07 · Architecture practice · Website",
+    "sub": "A studio site with no photographs at all.",
+    "colour": "#14508c"
+  },
+  {
+    "key": "work-cadence",
+    "title": "Cadence",
+    "kicker": "CH 08 · Field-ops software · Website",
+    "sub": "The page is an operations board that never stops running.",
+    "colour": "#FFB300"
+  },
+  {
+    "key": "work-maree",
+    "title": "MARÉE — Sel Obscur",
+    "kicker": "CH 09 · Fragrance house · Website",
+    "sub": "Ink through water, and a page that darkens as you descend.",
+    "colour": "#A9CBBD"
+  },
+  {
+    "key": "work-signal",
+    "title": "SIGNAL 2027",
+    "kicker": "CH 10 · Music & light festival · Website",
+    "sub": "Type that reacts to how hard you scroll.",
+    "colour": "#3B18E0"
+  },
+  {
+    "key": "what-i-do",
+    "title": "What I build for service businesses",
+    "kicker": "Websites · booking · follow-up",
+    "sub": "Three systems, each one running on the page. Hand-built, owned by you."
+  },
+  {
+    "key": "why",
+    "title": "Own it. Don’t rent it.",
+    "kicker": "Why · one person · built in public",
+    "sub": "Why the domain, the code and the accounts sit in your name from day one."
+  },
+  {
+    "key": "book",
+    "title": "Book a call",
+    "kicker": "A few questions first · then a slot",
+    "sub": "Tell me what is leaking. Pick a time. No pitch, no proposal deck."
+  },
+  {
+    "key": "notes",
+    "title": "Notes",
+    "kicker": "Short, straight, added to",
+    "sub": "What a missed call costs, why you should own your site, and why every demo is fictional."
+  },
+  {
+    "key": "notes-what-a-missed-call-costs",
+    "title": "What a missed call actually costs a service business",
+    "kicker": "Notes · 3 September 2026",
+    "sub": "The sum behind the missed-call text-back, with every assumption on the table — and why the number survives a sceptic."
+  },
+  {
+    "key": "notes-why-i-dont-rent-you-your-own-website",
+    "title": "Why I don’t rent you your own website",
+    "kicker": "Notes · 3 September 2026",
+    "sub": "Some builders charge every month, forever, to keep your own site alive. Here is what \"you own it\" actually means in practice."
+  },
+  {
+    "key": "notes-sixteen-builds-all-fictional",
+    "title": "Sixteen builds for businesses that don’t exist, on purpose",
+    "kicker": "Notes · 3 September 2026",
+    "sub": "Why every demo on this site is for an invented company, and why that is better proof than a client logo wall."
+  },
+  {
+    "key": "teardown",
+    "title": "Ten minutes on your setup. Three things back.",
+    "kicker": "Free teardown · by message",
+    "sub": "What is leaking, what to fix first, what it is worth in jobs."
+  }
+]
