@@ -1,0 +1,29 @@
+{
+  "n": 26,
+  "slug": "starboard",
+  "file": "26-starboard.html",
+  "kind": "tool",
+  "lane": "broad",
+  "trade": "Any local business",
+  "mobile": true,
+  "name": "Starboard",
+  "biz": "Shown running for Aldercroft Tree Care",
+  "c": "#B45309",
+  "pg": "#F8F8F7",
+  "short": "Asks for the review at the right moment, then helps you reply to it.",
+  "long": "Every job finished this week with a status against it — not asked, asked, opened, reviewed — and a timeline showing exactly when each message went. Press \"Ask now\" and you see the text that leaves; a few seconds later the customer opens it and the review turns up at the top of the reviews screen, quietly highlighted.",
+  "proves": "You can answer every review you have got in about a minute, and stop forgetting to ask the happy ones.",
+  "tags": [
+    "Ask-now timeline",
+    "Reply desk",
+    "Star distribution",
+    "Twelve-week trend"
+  ],
+  "features": [
+    "Twelve completed jobs seeded against the real clock, each with an ask timeline and a follow-up you can push three days",
+    "Ask now shows the actual message, the customer opens it, and a new review lands at the top with a subtle highlight",
+    "Reply box with three starters the owner edits — nothing is written for them and passed off as theirs",
+    "Rating over twelve weeks as a line, new reviews per week as bars, both on solid hairline grids with direct labels"
+  ],
+  "story": "Review tools mostly nag the owner and write the replies for them. Asking well and replying in your own voice is the whole job, so the tool does the timing and leaves the words alone."
+}

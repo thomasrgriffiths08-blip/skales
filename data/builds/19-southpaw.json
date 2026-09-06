@@ -1,0 +1,29 @@
+{
+  "n": 19,
+  "slug": "southpaw",
+  "file": "19-southpaw.html",
+  "kind": "site",
+  "lane": "loud",
+  "trade": "Boxing club",
+  "mobile": true,
+  "name": "Southpaw",
+  "biz": "Boxing club, Leeds",
+  "c": "#C8281E",
+  "pg": "#EFE9DC",
+  "short": "A boxing club site built as a fight card, run by a round timer.",
+  "long": "The hero is a working three-minute round timer — start, pause, reset, twelve rounds with a minute's rest — and every ten seconds it lands another line of the headline like a jab. Classes are laid out as bouts on a fight poster, the timetable is a real weekly grid, and a \"what's on tonight\" row is worked out from the visitor's own clock.",
+  "proves": "Somebody who has never boxed can pick a level, pick a night this week and be booked in about twenty seconds.",
+  "tags": [
+    "Working round timer",
+    "Fight-card classes",
+    "Live timetable",
+    "Free-session flow"
+  ],
+  "features": [
+    "Three-minute round timer with rest rounds and a bell that flashes the page and twangs the ropes",
+    "Headline lines slam in on the ten-second beat — all four are in the DOM from the first frame, nothing waits on motion",
+    "Classes as bout pairings on a poster, with a real weekly grid and tonight's session computed from the clock",
+    "First-session flow: level, then a day this week, then two fields — with a sticky book bar and one-tap call on phones"
+  ],
+  "story": "Gyms sell on atmosphere and then hide the timetable three clicks deep. This one puts the noise and the booking in the same place, so the page feels like the gym and still books the session."
+}

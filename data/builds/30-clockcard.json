@@ -1,0 +1,30 @@
+{
+  "n": 30,
+  "slug": "clockcard",
+  "file": "30-clockcard.html",
+  "kind": "tool",
+  "lane": "broad",
+  "trade": "Any service business",
+  "mobile": true,
+  "name": "Clockcard",
+  "biz": "Redgate Works",
+  "c": "#2B4C7E",
+  "pg": "#FAFAFB",
+  "short": "Staff clock in from the van; the office watches the week fill up.",
+  "long": "Two views of one clock. On a phone the fitter picks the job, taps clock in and gets a running timer, a break button and a note for the office. On the desk it is a week grid of people against days with overtime shaded, every job's hours set against the estimate, and a week that can be approved and exported.",
+  "proves": "You find out a job is running over while it is still running, not when the invoice goes out.",
+  "tags": [
+    "time tracking",
+    "two personas",
+    "timesheets"
+  ],
+  "features": [
+    "Clock in, switch job, take a break, clock out — the timer runs against the real clock",
+    "Owner's week grid: people against days, overtime shaded, click a cell to correct an entry",
+    "Hours booked against the estimate for every job, over and under said in plain words",
+    "Approve or send a week back per person, then copy the payroll CSV out of a textarea",
+    "House rules — standard day, overtime thresholds, unpaid break, rounding — recalculate everything above",
+    "Clocking in on the phone shows up in the owner's grid and the job bars immediately"
+  ],
+  "story": "Most small firms find out a job ran over when they add up the invoice. This puts the clock in the fitter's pocket and the running total on the owner's screen at the same moment."
+}

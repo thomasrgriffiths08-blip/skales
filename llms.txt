@@ -5,45 +5,67 @@
 Key facts:
 - Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).
 - One person: the person you message is the person who builds it.
-- Sixteen working demonstration builds run live on the site; every business in them is fictional.
+- Thirty-six working demonstration builds run live on the site; every business in them is fictional.
 - One system a week is built in public on Instagram.
 - Clients own their domain, code and accounts from day one; nothing is rented back to them monthly.
 - Every build is hand-coded with no page-builder, no theme and no third-party runtime dependencies.
 - Contact: thomasrgriffiths08@gmail.com · Instagram @tomxsystems (https://www.instagram.com/tomxsystems/)
-- Book a call: https://skales.com/book/
+- Book a call: https://thomasrgriffiths08-blip.github.io/tomxsystems-site/book/
 
 ## Pages
-- [Home](https://skales.com/): what Skales builds, with a live demonstration build on the page.
-- [Work — sixteen builds](https://skales.com/work/): every demonstration build, each running live and each with its own page.
-- [What I do](https://skales.com/what-i-do/): the three services — capture websites, online booking with a pipeline, missed-call and review automation — with the systems running, and the four-step process.
-- [Why](https://skales.com/why/): ownership (clients own domain, code and accounts), one person, built in public, and the FAQ.
-- [Book a call](https://skales.com/book/): four qualifying questions, then a slot straight into the diary.
-- [Free teardown](https://skales.com/teardown.html): three details in, three findings back by message.
-- [Notes](https://skales.com/notes/): short pieces — what a missed call actually costs a service business; why i don’t rent you your own website; sixteen builds for businesses that don’t exist, on purpose.
+- [Home](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/): what Skales builds, with a live demonstration build on the page.
+- [Work — thirty-six builds](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/): every demonstration build, each running live and each with its own page.
+- [Websites](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/websites/): the four kinds of website (loud, motion, quiet, direct) with every example.
+- [Tools](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/tools/): the broad tools for any service business and the ones built for a single trade.
+- [What I do](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/what-i-do/): the three services — capture websites, online booking with a pipeline, missed-call and review automation — with the systems running, and the four-step process.
+- [Why](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/why/): ownership (clients own domain, code and accounts), one person, built in public, and the FAQ.
+- [Book a call](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/book/): four qualifying questions, then a slot straight into the diary.
+- [Free teardown](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/teardown.html): three details in, three findings back by message.
+- [Notes](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/notes/): short pieces — what a missed call actually costs a service business; why i don’t rent you your own website; sixteen builds for businesses that don’t exist, on purpose.
 
-## The sixteen builds
-- [Northgate Quote Engine](https://skales.com/work/northgate-quote-engine/): business tool for an invented kitchen fitter — A quote that assembles itself while the customer answers.
-- [Redgate Job & Lead System](https://skales.com/work/redgate-job-system/): business tool for an invented heating & plumbing — Every enquiry, where it came from, and what happened to it.
-- [Halcyon Dispatch](https://skales.com/work/halcyon-dispatch/): business tool for an invented heating dispatch team — Drag a job to another engineer and the week re-plans itself.
-- [Ledgerline](https://skales.com/work/ledgerline/): business tool for an invented invoice & proposal studio — A live A4 page that reflows as you type.
-- [Mortgage Lab](https://skales.com/work/mortgage-lab/): business tool for an invented broker lead magnet — What an overpayment really saves, month by month.
-- [Payslip Lab](https://skales.com/work/payslip-lab/): business tool for an invented accountant lead magnet — Gross to net, and the 60% trap nobody explains.
-- [Kerbside Scorecard](https://skales.com/work/kerbside-scorecard/): business tool for an invented google profile report card — Marks a Google Business Profile like an exam.
-- [Stopcock](https://skales.com/work/stopcock/): business tool for an invented missed-call leak meter — What unanswered calls cost you a year.
-- [Turnover](https://skales.com/work/turnover/): business tool for an invented roofing firm rebuild — Drag the tape line across a 2011 site and its rebuild.
-- [Fenwick Booking](https://skales.com/work/fenwick-booking/): business tool for an invented heating engineer — Service, slot, deposit, confirmed — no phone tag.
-- [Jobsheet](https://skales.com/work/jobsheet/): business tool for an invented van-side job report — Fill it in from the van, the customer report writes itself.
-- [Shiftbook](https://skales.com/work/shiftbook/): business tool for an invented salon staff rota — Click a cell to place a shift. Clashes flag as you go.
-- [Atelier Voss](https://skales.com/work/atelier-voss/): website for an invented architecture practice — A studio site with no photographs at all.
-- [Cadence](https://skales.com/work/cadence/): website for an invented field-ops software — The page is an operations board that never stops running.
-- [MARÉE — Sel Obscur](https://skales.com/work/maree/): website for an invented fragrance house — Ink through water, and a page that darkens as you descend.
-- [SIGNAL 2027](https://skales.com/work/signal/): website for an invented music & light festival — Type that reacts to how hard you scroll.
+## The thirty-six builds
+- [Northgate Quote Engine](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/northgate-quote-engine/): business tool for an invented kitchen fitter — A quote that assembles itself while the customer answers.
+- [Redgate Job & Lead System](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/redgate-job-system/): business tool for an invented heating & plumbing — Every enquiry, where it came from, and what happened to it.
+- [Halcyon Dispatch](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/halcyon-dispatch/): business tool for an invented heating dispatch team — Drag a job to another engineer and the week re-plans itself.
+- [Ledgerline](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/ledgerline/): business tool for an invented invoice & proposal studio — A live A4 page that reflows as you type.
+- [Mortgage Lab](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/mortgage-lab/): business tool for an invented broker lead magnet — What an overpayment really saves, month by month.
+- [Payslip Lab](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/payslip-lab/): business tool for an invented accountant lead magnet — Gross to net, and the 60% trap nobody explains.
+- [Atelier Voss](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/atelier-voss/): website for an invented architecture practice — A studio site with no photographs at all.
+- [Cadence](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/cadence/): website for an invented field-ops software — The page is an operations board that never stops running.
+- [MARÉE — Sel Obscur](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/maree/): website for an invented fragrance house — Ink through water, and a page that darkens as you descend.
+- [SIGNAL 2027](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/signal/): website for an invented music & light festival — Type that reacts to how hard you scroll.
+- [Kerbside Scorecard](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/kerbside-scorecard/): business tool for an invented google profile report card — Marks a Google Business Profile like an exam.
+- [Stopcock](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/stopcock/): business tool for an invented missed-call leak meter — What unanswered calls cost you a year.
+- [Turnover](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/turnover/): business tool for an invented roofing firm rebuild — Drag the tape line across a 2011 site and its rebuild.
+- [Fenwick Booking](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/fenwick-booking/): business tool for an invented heating engineer — Service, slot, deposit, confirmed — no phone tag.
+- [Jobsheet](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/jobsheet/): business tool for an invented van-side job report — Fill it in from the van, the customer report writes itself.
+- [Shiftbook](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/shiftbook/): business tool for an invented salon staff rota — Click a cell to place a shift. Clashes flag as you go.
+- [Long Exposure](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/long-exposure/): website for an invented long exposure — A film company's site that plays like a film you can scrub.
+- [Overhead](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/overhead/): website for an invented overhead — Scroll to climb — the valley draws itself in contours as you rise.
+- [Southpaw](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/southpaw/): website for an invented boxing club, leeds — A boxing club site built as a fight card, run by a round timer.
+- [Marrow & Pin](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/marrow-and-pin/): website for an invented tattoo studio, bristol — A flash wall that inks itself as you scroll past each sheet.
+- [Hale & Partners](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/hale-and-partners/): website for an invented chartered accountants, harrogate — A year-end that settles, and the deadlines counted from today.
+- [Fern Physio](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/fern-physio/): website for an invented fern physio — A drawn body with ten tappable points, and a booking flow behind it.
+- [Kestrel Electrical](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/kestrel-electrical/): website for an invented two-van electrical firm — An electrician's page built as a fuse board — every job is a breaker.
+- [Kerb & Camber](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/kerb-and-camber/): website for an invented kerb & camber mot centre — A UK number plate you type into, and the MOT date that comes back.
+- [Ringsback](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/ringsback/): business tool for an invented heating firm, leeds — Missed-call text-back console: the text goes out, the reply lands here.
+- [Starboard](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/starboard/): business tool for an invented shown running for aldercroft tree care — Asks for the review at the right moment, then helps you reply to it.
+- [Slate](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/slate/): business tool for an invented ashgrove building & maintenance — Your own price book, and the estimate it builds in a minute.
+- [Triage](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/triage/): business tool for an invented latchford locks & security — Every enquiry, every channel, sorted by who has waited longest.
+- [Doorstep](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/doorstep/): business tool for an invented heating firm’s customer — The page the customer opens on their phone after they have booked.
+- [Clockcard](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/clockcard/): business tool for an invented redgate works — Staff clock in from the van; the office watches the week fill up.
+- [Boiler Book](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/boiler-book/): business tool for an invented ashgate heating — Thirty boilers sorted by what's due, with the chasing done for you.
+- [MOT Minder](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/mot-minder/): business tool for an invented kilnbrook motors — Every car the garage has seen, and the texts that bring them back.
+- [Chairside](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/chairside/): business tool for an invented four-chair salon — Rebooks the client at the counter and refills the slots that fall out.
+- [Turntable](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/turntable/): business tool for an invented corncrake — The floor, the queue at the door and the deposit rule, on one screen.
+- [Roofline](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/roofline/): business tool for an invented ackroyd roofing — A postcode and seven taps draw the roof, then price it.
+- [Roundsheet](https://thomasrgriffiths08-blip.github.io/tomxsystems-site/work/roundsheet/): business tool for an invented nash window cleaning — The round in door order, with a DONE big enough for one thumb.
 
 ## Frequently asked
 - **Do I actually own the website?** Yes. With Skales the domain, the code and the hosting sit in your own accounts from day one. It is set up so you could walk away tomorrow and lose nothing; that is the whole point.
 - **Is there a monthly fee to keep my site online?** No. Skales does not charge a monthly platform fee to keep your own website alive. You pay for hosting and your domain directly, in your own name, at cost. If any quote you get includes a monthly fee to keep your own site online, that is rent.
 - **How long does a build take?** A capture website takes days. A full system with booking and follow-up usually takes one to two weeks. You get a date with the quote, and you can watch it being built in public.
-- **Are the sixteen builds on this site real clients?** No, and deliberately so. Every business, person, review and phone number in the demonstration builds is invented, so nothing on this site exposes anyone Skales works with. They are real working software, just for businesses that do not exist.
+- **Are the thirty-six builds on this site real clients?** No, and deliberately so. Every business, person, review and phone number in the demonstration builds is invented, so nothing on this site exposes anyone Skales works with. They are real working software, just for businesses that do not exist.
 - **Who actually does the work?** Tom Griffiths. Skales is one person: there is no account manager and no handover to a junior. The person you message is the person who builds it.
 - **What kind of businesses is this for?** UK service businesses whose work comes in by phone: plumbers, heating engineers, electricians, roofers, kitchen fitters, landscapers, cleaners, salons and similar trades and local operators.
 - **What happens after I book a call or send the form?** Tom Griffiths looks at your website, your Google listing and what happens when someone tries to reach you, then messages you three things: what is leaking, what to fix first, and what it is worth in jobs. If you want it fixed, you get a flat quote. If not, you keep the list.

@@ -1,0 +1,30 @@
+{
+  "n": 34,
+  "slug": "turntable",
+  "file": "34-turntable.html",
+  "kind": "tool",
+  "lane": "specific",
+  "trade": "Restaurant",
+  "mobile": true,
+  "name": "Turntable",
+  "biz": "Corncrake",
+  "c": "#A9600F",
+  "pg": "#FAF9F7",
+  "short": "The floor, the queue at the door and the deposit rule, on one screen.",
+  "long": "A drawn plan of eighteen tables across the room and the yard, each one showing who is on it, which course they are on and how long they have been sat. Clear a table and the top party on the waitlist that fits it is texted, walks in and is seated, all on the plan in front of you. The book runs alongside it with the deposit rule that catches sixes and Friday nights, and the numbers behind the service — covers, turn times and no-shows by month.",
+  "proves": "The table that has just gone gets refilled before anyone has walked past the desk.",
+  "tags": [
+    "specific",
+    "live board",
+    "waitlist"
+  ],
+  "features": [
+    "SVG floor plan of the room and the yard that scales to a phone and reads off the real clock",
+    "Clear a table, the waitlist is texted, the party arrives and sits down — all on the plan",
+    "Waits quoted off the actual floor: which tables fit, and how long they have been sat",
+    "Course, bill and clear-down on every table, with a red timer once it is over its turn",
+    "The deposit rule for sixes and for Friday and Saturday, the guest's confirmation text, and the deposit kept on a no-show",
+    "Covers by hour, turn times against target, no-shows by month; state survives a reload"
+  ],
+  "story": "Front of house already runs on a paper list and a sense of the room. This puts the two together, so the wait quoted at the door comes from the tables actually sat down rather than from a guess."
+}

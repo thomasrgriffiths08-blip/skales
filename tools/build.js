@@ -24,7 +24,7 @@ for (const p of pages){
 }
 
 /* client-side data: only what the rack needs (no long copy) */
-write('assets/builds.js', `/* generated from data/builds.js — do not edit by hand */\nwindow.BUILDS=${JSON.stringify(builds.map(x => ({ n: x.n, slug: x.slug, kind: x.kind, group: x.group, name: x.name, biz: x.biz, short: x.short, long: x.long, proves: x.proves, tags: x.tags, c: x.c })))};\n`);
+write('assets/builds.js', `/* generated from data/builds.js — do not edit by hand */\nwindow.LANES=${JSON.stringify(Object.fromEntries(Object.entries(L.LANES).map(([k, v]) => [k, { name: v.name, kindWord: v.kindWord, kind: v.kind }])))};\nwindow.BUILDS=${JSON.stringify(builds.map(x => ({ n: x.n, slug: x.slug, kind: x.kind, lane: x.lane, trade: x.trade, mobile: !!x.mobile, group: x.group, name: x.name, biz: x.biz, c: x.c, sheet: x.sheet, cInk: x.cInk, cText: x.cText, short: x.short, long: x.long, proves: x.proves, tags: x.tags })))};`);
 
 /* sitemap + robots (AI crawlers explicitly allowed) */
 const today = L.iso(L.UPDATED);
@@ -53,14 +53,14 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 
 ## Pages
 - [Home](${L.abs('/')}): what ${site.name} builds, with a live demonstration build on the page.
-- [Work — sixteen builds](${L.abs('/work/')}): every demonstration build, each running live and each with its own page.
+- [Work — ${L.words(builds.length)} builds](${L.abs('/work/')}): every demonstration build, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [Tools](${L.abs('/work/tools/')}): the broad tools for any service business and the ones built for a single trade.
 - [What I do](${L.abs('/what-i-do/')}): the three services — capture websites, online booking with a pipeline, missed-call and review automation — with the systems running, and the four-step process.
 - [Why](${L.abs('/why/')}): ownership (clients own domain, code and accounts), one person, built in public, and the FAQ.
 - [Book a call](${L.abs('/book/')}): four qualifying questions, then a slot straight into the diary.
 - [Free teardown](${L.abs('/teardown.html')}): three details in, three findings back by message.
 - [Notes](${L.abs('/notes/')}): short pieces — ${notes.map(n => n.title.toLowerCase()).join('; ')}.
 
-## The sixteen builds
+## The ${L.words(builds.length)} builds
 ${builds.map(x => `- [${x.name}](${L.abs('/work/' + x.slug + '/')}): ${x.kind === 'site' ? 'website' : 'business tool'} for an invented ${x.biz.toLowerCase()} — ${x.short}`).join('\n')}
 
 ## Frequently asked
@@ -70,7 +70,7 @@ write('llms.txt', short);
 const strip = h => h.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim();
 write('llms-full.txt', short + `\n\n---\n\n## Full page text\n\n` + pages.filter(p => p.sitemap !== false && !p.noindex).map(p => `### ${p.meta ? p.meta.title : p.url} — ${L.abs(p.url)}\n\n${strip(p.render(baseFor(p.url)))}\n`).join('\n'));
 
-write('manifest.webmanifest', JSON.stringify({ name: site.name, short_name: site.name, description: site.tagline, start_url: site.origin.replace(/^https?:\/\/[^/]+/, '') + '/', display: 'browser', background_color: '#0A0C10', theme_color: '#0A0C10', icons: [{ src: 'og/icon.png', sizes: '512x512', type: 'image/png' }] }, null, 2));
+write('manifest.webmanifest', JSON.stringify({ name: site.name, short_name: site.name, description: site.tagline, start_url: site.origin.replace(/^https?:\/\/[^/]+/, '') + '/', display: 'browser', background_color: L.defaultBuild().sheet, theme_color: L.defaultBuild().sheet, icons: [{ src: 'og/icon.png', sizes: '512x512', type: 'image/png' }] }, null, 2));
 write('tools/og-jobs.json', JSON.stringify(ogJobs, null, 2));
 write('humans.txt', `/* TEAM */\n${site.founder.name} — ${site.founder.jobTitle}\n${site.instagram}\n\n/* SITE */\nLast update: ${today}\nStandards: HTML5, CSS, vanilla JS. No frameworks, no page-builders, no runtime dependencies.\n`);
 console.log(`built ${pages.length} pages · sitemap ${sitemap.length} urls · ${ogJobs.length} OG jobs`);

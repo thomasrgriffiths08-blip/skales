@@ -4,7 +4,7 @@ const FAQ = [
   ['Do I actually own the website?', `Yes. With ${site.name} the domain, the code and the hosting sit in your own accounts from day one. It is set up so you could walk away tomorrow and lose nothing; that is the whole point.`],
   ['Is there a monthly fee to keep my site online?', `No. ${site.name} does not charge a monthly platform fee to keep your own website alive. You pay for hosting and your domain directly, in your own name, at cost. If any quote you get includes a monthly fee to keep your own site online, that is rent.`],
   ['How long does a build take?', `A capture website takes days. A full system with booking and follow-up usually takes one to two weeks. You get a date with the quote, and you can watch it being built in public.`],
-  ['Are the sixteen builds on this site real clients?', `No, and deliberately so. Every business, person, review and phone number in the demonstration builds is invented, so nothing on this site exposes anyone ${site.name} works with. They are real working software, just for businesses that do not exist.`],
+  [`Are the ${L.words(L.builds.length)} builds on this site real clients?`, `No, and deliberately so. Every business, person, review and phone number in the demonstration builds is invented, so nothing on this site exposes anyone ${site.name} works with. They are real working software, just for businesses that do not exist.`],
   ['Who actually does the work?', `${site.founder.name}. ${site.name} is one person: there is no account manager and no handover to a junior. The person you message is the person who builds it.`],
   ['What kind of businesses is this for?', `UK service businesses whose work comes in by phone: plumbers, heating engineers, electricians, roofers, kitchen fitters, landscapers, cleaners, salons and similar trades and local operators.`],
   ['What happens after I book a call or send the form?', `${site.founder.name} looks at your website, your Google listing and what happens when someone tries to reach you, then messages you three things: what is leaking, what to fix first, and what it is worth in jobs. If you want it fixed, you get a flat quote. If not, you keep the list.`],
@@ -53,7 +53,7 @@ ${L.header(b, 'why')}
         <div><dt>Base</dt><dd>${esc(site.areaServed)}. Built for how UK service businesses get work: the phone, Google, word of mouth.</dd></div>
         <div><dt>Cadence</dt><dd>One system a week, built in public on <a class="lnk" href="${site.instagram}" target="_blank" rel="noopener">Instagram (${esc(site.instagramHandle)})</a>.</dd></div>
         <div><dt>Method</dt><dd>Hand-coded. No page-builders, no themes, no stock imagery, no third-party runtime.</dd></div>
-        <div><dt>Proof</dt><dd>Sixteen working builds on <a class="lnk" href="${b}work/">the Work page</a>, every one open to use.</dd></div>
+        <div><dt>Proof</dt><dd>${L.Words(L.builds.length)} working builds on <a class="lnk" href="${b}work/">the Work page</a>, every one open to use.</dd></div>
         <div><dt>Contact</dt><dd><a class="lnk" href="mailto:${esc(site.email)}">${esc(site.email)}</a> &middot; <a class="lnk" href="${b}book/">book a call</a></dd></div>
       </dl>
     </div>
@@ -81,7 +81,7 @@ ${L.header(b, 'why')}
   </div>
 </section>
 </main>
-<section class="day on-day cta-band">
+<section class="flood cta-band">
   <div class="wrap grid">
     <div><h2>Ready when you are.</h2><p class="lead" style="margin-top:.8rem">A short call, no pitch. If ${esc(site.name)} is the wrong fit you will hear that on the call too.</p></div>
     <div class="cta-col"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a></div>

@@ -20,6 +20,5 @@
       tick(); setInterval(tick, 1000);
     }
     /* pages without the switch are simply on */
-    if (!d.getElementById('power')){ d.documentElement.setAttribute('data-power', 'on'); var pl = d.getElementById('powerLamp'); if (pl) pl.classList.add('is-live'); var pw = d.getElementById('powerWord'); if (pw) pw.textContent = 'switched on'; }
   });
 })();

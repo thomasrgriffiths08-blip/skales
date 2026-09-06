@@ -1,0 +1,30 @@
+{
+  "n": 35,
+  "slug": "roofline",
+  "file": "35-roofline.html",
+  "kind": "tool",
+  "lane": "specific",
+  "trade": "Roofer",
+  "mobile": true,
+  "name": "Roofline",
+  "biz": "Ackroyd Roofing",
+  "c": "#A33B22",
+  "pg": "#FAFAFA",
+  "short": "A postcode and seven taps draw the roof, then price it.",
+  "long": "A homeowner gives an outward code, a house type, a roof shape and a covering, and the page draws their roof from above with its dimensions, lists the tiles, battens, membrane and ridge it would take, and puts an estimate range at the top. The roofer's side of the same page holds every enquiry with the workings behind it, and a rates screen where changing the price of a tile re-prices the whole book as he types.",
+  "proves": "Somebody can find out what a re-roof costs at eleven at night without giving a stranger their address.",
+  "tags": [
+    "calculator",
+    "drawn SVG",
+    "lead capture"
+  ],
+  "features": [
+    "A roof plan in SVG that redraws itself from the inputs — gable, hip, flat, back outrigger, chimney stacks",
+    "Deterministic measurements: pitch, area, ridge, hips, valleys and eaves, all shown as a legend under the drawing",
+    "Materials with real quantities — tiles per m², battens by the metre, membrane by the roll — and an estimate range over the top",
+    "Every enquiry lands in the roofer's list with the inputs, the geometry and the price breakdown that produced it",
+    "An editable price book: change a labour rate or the cost of a tile and all ten leads re-price live",
+    "The result sits above the questions on a phone, and the plan drops its callouts to stay readable at 390px"
+  ],
+  "story": "Roofers spend half their week driving to houses to say a number they could have said on the phone. This gives the number away and keeps the workings, so the visit is a confirmation rather than a first conversation."
+}

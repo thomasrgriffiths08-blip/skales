@@ -1,0 +1,29 @@
+{
+  "n": 20,
+  "slug": "marrow-and-pin",
+  "file": "20-marrow-and-pin.html",
+  "kind": "site",
+  "lane": "loud",
+  "trade": "Tattoo studio",
+  "mobile": true,
+  "name": "Marrow & Pin",
+  "biz": "Tattoo studio, Bristol",
+  "c": "#5B2A86",
+  "pg": "#F5F2EC",
+  "short": "A flash wall that inks itself as you scroll past each sheet.",
+  "long": "Nine hand-drawn flash designs pinned up as paper sheets, each one drawn twice — a thin purple stencil and the finished black ink — with the ink filling in as the sheet crosses the middle of the screen. Filter the wall by artist, open a sheet for sizes, and the design carries through to a consultation form laid out like the studio's own paperwork, placement picked on a body outline instead of typed into a box.",
+  "proves": "Your own drawings can be the website, and they can still take the booking.",
+  "tags": [
+    "hand-drawn SVG",
+    "scroll-driven",
+    "booking form"
+  ],
+  "features": [
+    "Every design drawn twice and inked on scroll — stencil purple to black",
+    "Flash wall filtered by artist, with a sheet view and size options",
+    "Consultation form with a placement picker on a body outline",
+    "Guest-spot dates and the next free chair computed from today's date",
+    "Fresh-versus-healed toggle showing what a fine line does in a year"
+  ],
+  "story": "Built for the trades that sell by showing the work: the drawings are the design, so the page had to be made of them rather than of photographs of them."
+}

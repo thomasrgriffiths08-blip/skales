@@ -1,0 +1,31 @@
+{
+  "n": 31,
+  "slug": "boiler-book",
+  "file": "31-boiler-book.html",
+  "kind": "tool",
+  "lane": "specific",
+  "trade": "Heating engineer",
+  "mobile": true,
+  "name": "Boiler Book",
+  "biz": "Ashgate Heating",
+  "c": "#B4500C",
+  "pg": "#FAFAF9",
+  "short": "Thirty boilers sorted by what's due, with the chasing done for you.",
+  "long": "A heating engineer's book of every boiler they look after: what is fitted where, when it was last serviced, when it falls due, and the letter, text and call that go out on their own. The service record is filled in on the doorstep with one hand, and completing it moves that row from overdue to fine and sets next year's reminders while the engineer is still on the drive.",
+  "proves": "The boiler you serviced last October chases itself this October, whether you remember it or not.",
+  "tags": [
+    "reminders",
+    "service records",
+    "heating"
+  ],
+  "features": [
+    "Thirty boilers bucketed into overdue, this month, next month and fine against the real date",
+    "Tick the ones with a reminder waiting and send the whole batch in one go",
+    "Customer page with the full history, the reminder timeline and a slot grid to book the visit",
+    "Doorstep service record: tick list, readings, parts and a signature drawn on the screen",
+    "Completing it sets the last service to today, the next to twelve months on, and reschedules the sequence",
+    "Sequence editor: change a timing or the wording and preview it as the text, letter or call task",
+    "A record card for the customer's file, marked as a demo layout with no scheme names or numbers"
+  ],
+  "story": "Annual services are the steadiest work a heating engineer has, and they are lost by forgetting. This is the book that remembers, and the doorstep form that closes the loop before the van moves off."
+}

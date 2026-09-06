@@ -1,0 +1,31 @@
+{
+  "n": 27,
+  "slug": "slate",
+  "file": "27-slate.html",
+  "kind": "tool",
+  "lane": "broad",
+  "trade": "Any service business",
+  "mobile": true,
+  "name": "Slate",
+  "biz": "Ashgrove Building & Maintenance",
+  "c": "#3A5A72",
+  "pg": "#F7F8F9",
+  "short": "Your own price book, and the estimate it builds in a minute.",
+  "long": "Every rate the business charges lives in one book — labour, materials, plant, extras — with cost, markup and sell price side by side and editable in place. Building an estimate is typing a few words and picking lines out of that book; the total, the VAT and the deposit move as you go. The customer gets a real A4 document they can sign with a finger and pay the deposit on.",
+  "proves": "The price you agreed on the doorstep and the price on the paperwork are the same price.",
+  "tags": [
+    "price book",
+    "estimates",
+    "signature"
+  ],
+  "features": [
+    "47-item price book in four categories, edited in place, sell price computed from cost and markup",
+    "Estimate lines pulled from the book by typing, with optional sections the customer chooses later",
+    "Live total panel: VAT on or off, deposit at 0/10/25/50%, and what that deposit actually is",
+    "A true A4 preview on letterhead that prints as an A4 estimate and nothing else",
+    "Send, then the customer's own view: tick the optional extras, sign the box, pay the deposit",
+    "Rates are snapshotted onto an estimate when the line is added, so re-pricing the book never rewrites a sent quote",
+    "Everything survives a reload; Reset demo puts the book and the seven estimates back"
+  ],
+  "story": "Most small firms price a job twice — once in their head on the doorstep and again at the kitchen table at ten at night. This keeps the rates in one place and turns them into a document the customer can accept before they change their mind."
+}

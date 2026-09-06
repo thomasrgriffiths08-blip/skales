@@ -1,0 +1,29 @@
+{
+  "n": 24,
+  "slug": "kerb-and-camber",
+  "file": "24-kerb-and-camber.html",
+  "kind": "site",
+  "lane": "direct",
+  "trade": "Garage",
+  "mobile": true,
+  "name": "Kerb & Camber",
+  "biz": "Kerb & Camber MOT Centre",
+  "c": "#1F4E9C",
+  "pg": "#ECEEEF",
+  "short": "A UK number plate you type into, and the MOT date that comes back.",
+  "long": "An independent MOT and service centre where the hero is a real number plate you can type in. Press Check and a job card slides in with the vehicle, the last advisory, how many days until the MOT runs out, and the next three slots on the ramp. The price board, the tyre-size helper and the opening hours are all on the same page, and the phone number never leaves the screen on a mobile.",
+  "proves": "Somebody who does not know when their MOT is due can find out and book it before they close the tab.",
+  "tags": [
+    "direct",
+    "reg lookup",
+    "booking"
+  ],
+  "features": [
+    "Number-plate input with a fictional lookup that is deterministic and labelled as a demo",
+    "MOT due or overdue counted against the real clock, with the age identifier read off the plate",
+    "Slot booking on a diary built from today, Sundays closed, ending in a booking reference",
+    "Tyre-size helper: width, profile and rim in, stock and fitted prices out",
+    "Sticky call and book bar on phones; opening hours that say open now or opens at"
+  ],
+  "story": "Half the calls a garage takes are somebody asking when their MOT is due. Answering it on the page turns that call into a booking."
+}

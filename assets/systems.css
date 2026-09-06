@@ -10,7 +10,7 @@
 .call-row .who b{display:block;font-size:.86rem}
 .call-row .who span{font-family:var(--mono);font-size:.68rem;color:var(--dyeline-3)}
 .call-row .st{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dyeline-3)}
-.call-row.caught{border-color:rgba(255,90,31,.45)}
+.call-row.caught{border-color:var(--live)}
 .call-row.caught .st{color:var(--live)}
 .tb-btn{margin-top:auto;width:100%}
 .tb-right{padding:14px 12px;display:flex;flex-direction:column;gap:7px;background:var(--steel);justify-content:flex-end}

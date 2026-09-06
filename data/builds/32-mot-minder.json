@@ -1,0 +1,30 @@
+{
+  "n": 32,
+  "slug": "mot-minder",
+  "file": "32-mot-minder.html",
+  "kind": "tool",
+  "lane": "specific",
+  "trade": "Garage",
+  "mobile": true,
+  "name": "MOT Minder",
+  "biz": "Kilnbrook Motors",
+  "c": "#1B4E7D",
+  "pg": "#FAFAFA",
+  "short": "Every car the garage has seen, and the texts that bring them back.",
+  "long": "Forty vehicles with their MOT and service dates, last visit and outstanding advisories, sorted by what runs out first. The reminder sequence goes out at six weeks, two weeks and three days with a rebook link in it; when the customer taps that link the slot fills itself and the row flips to booked while you watch. Every advisory the last test threw up can be ticked into a quote and texted from the same screen.",
+  "proves": "The car books itself back in while you are under a different one.",
+  "tags": [
+    "specific",
+    "reminders",
+    "rebooking"
+  ],
+  "features": [
+    "Forty vehicles with plate chips, MOT and service dates counted from today, sorted, filtered and searchable",
+    "Send the rebook link and watch the customer take a slot — the booking lands in the grid and the row flips",
+    "Advisories from the last MOT tick into a quote with VAT and go out by text",
+    "The six-week, two-week and three-day wording, with merge fields and the text as the customer reads it",
+    "Reminded versus rebooked by month, and which advisories actually turned into work",
+    "Everything survives a reload; Reset demo puts the forty cars back"
+  ],
+  "story": "Garages already know which cars are due — the list is sat in the diary. What they lose is the twenty minutes a day it takes to chase them, so the car goes to whoever texted first."
+}

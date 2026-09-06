@@ -5,8 +5,9 @@ module.exports = {
   wordmark: { a: 's', x: 'k', b: 'ales' },   // the twisted letter is the accent
   legalName: 'Skales',
   tagline: 'Websites & systems for service businesses',
-  // ORIGIN — skales.com. Everything (canonicals, sitemap, schema, OG, the demo lock) derives from it.
-  origin: 'https://skales.com',
+  // ORIGIN — the live address. Everything (canonicals, sitemap, schema, OG, the demo lock) derives from it.
+  // Do NOT point this at a domain that is not registered and pointing here: every link becomes a parking page.
+  origin: 'https://thomasrgriffiths08-blip.github.io/tomxsystems-site',   // skales.com is not bought yet — switch this line the day it is, then rebuild
   // extra hosts the locked demos may run under (dev + any future domain)
   allowedHosts: ['localhost', '127.0.0.1', 'thomasrgriffiths08-blip.github.io', 'skales.com', 'www.skales.com'],
   locale: 'en-GB',
@@ -23,7 +24,7 @@ module.exports = {
   facts: [
     'Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).',
     'One person: the person you message is the person who builds it.',
-    'Sixteen working demonstration builds run live on the site; every business in them is fictional.',
+    '{{N}} working demonstration builds run live on the site; every business in them is fictional.',
     'One system a week is built in public on Instagram.',
     'Clients own their domain, code and accounts from day one; nothing is rented back to them monthly.',
     'Every build is hand-coded with no page-builder, no theme and no third-party runtime dependencies.',

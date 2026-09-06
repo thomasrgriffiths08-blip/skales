@@ -3,125 +3,313 @@
     "key": "home",
     "title": "Skales — websites & systems for service businesses",
     "kicker": "Websites & systems · UK",
-    "sub": "Sixteen working builds you can use. Booking, missed-call text-back, quotes, CRMs — hand-built, owned by you."
+    "sub": "Thirty-six working builds you can use. Booking, missed-call text-back, quotes, CRMs — hand-built, owned by you."
   },
   {
     "key": "work",
-    "title": "Sixteen builds. All of them running.",
-    "kicker": "The rack · 16 channels",
-    "sub": "Quote engines, a CRM, a dispatch board, booking, four full websites — running live, open to use."
+    "title": "Thirty-six builds. All of them running.",
+    "kicker": "The rack · 36 channels",
+    "sub": "12 websites in four lanes, 24 tools broad and specific — every one live, open to use."
+  },
+  {
+    "key": "websites",
+    "title": "Four kinds of website.",
+    "kicker": "Websites · 12 live examples",
+    "sub": "Loud, motion, quiet, direct. Pick the lane that matches how your customers decide."
+  },
+  {
+    "key": "tools",
+    "title": "The tools that run a service business.",
+    "kicker": "Tools · 24 live examples",
+    "sub": "Booking, quotes, the pipeline, follow-up — and the ones built for one trade’s day."
   },
   {
     "key": "work-northgate-quote-engine",
     "title": "Northgate Quote Engine",
-    "kicker": "CH 01 · Kitchen fitter · Business tool",
+    "kicker": "CH 01 · Kitchen fitter · Tool · Broad",
     "sub": "A quote that assembles itself while the customer answers.",
-    "colour": "#245247"
+    "colour": "#245247",
+    "sheet": "#E0E7E5"
   },
   {
     "key": "work-redgate-job-system",
     "title": "Redgate Job & Lead System",
-    "kicker": "CH 02 · Heating & plumbing · Business tool",
+    "kicker": "CH 02 · Heating & plumbing · Tool · Broad",
     "sub": "Every enquiry, where it came from, and what happened to it.",
-    "colour": "#3730a3"
+    "colour": "#3730a3",
+    "sheet": "#E3E2F2"
   },
   {
     "key": "work-halcyon-dispatch",
     "title": "Halcyon Dispatch",
-    "kicker": "CH 03 · Heating dispatch team · Business tool",
+    "kicker": "CH 03 · Heating dispatch team · Tool · Broad",
     "sub": "Drag a job to another engineer and the week re-plans itself.",
-    "colour": "#2f5cdb"
+    "colour": "#2f5cdb",
+    "sheet": "#E2E8FA"
   },
   {
     "key": "work-ledgerline",
     "title": "Ledgerline",
-    "kicker": "CH 04 · Invoice & proposal studio · Business tool",
+    "kicker": "CH 04 · Invoice & proposal studio · Tool · Broad",
     "sub": "A live A4 page that reflows as you type.",
-    "colour": "#1f4fd8"
+    "colour": "#1f4fd8",
+    "sheet": "#E0E6FA"
   },
   {
     "key": "work-mortgage-lab",
     "title": "Mortgage Lab",
-    "kicker": "CH 05 · Broker lead magnet · Business tool",
+    "kicker": "CH 05 · Broker lead magnet · Tool · Specific",
     "sub": "What an overpayment really saves, month by month.",
-    "colour": "#0b6e4f"
+    "colour": "#0b6e4f",
+    "sheet": "#DDEBE6"
   },
   {
     "key": "work-payslip-lab",
     "title": "Payslip Lab",
-    "kicker": "CH 06 · Accountant lead magnet · Business tool",
+    "kicker": "CH 06 · Accountant lead magnet · Tool · Specific",
     "sub": "Gross to net, and the 60% trap nobody explains.",
-    "colour": "#2952cc"
-  },
-  {
-    "key": "work-kerbside-scorecard",
-    "title": "Kerbside Scorecard",
-    "kicker": "CH 11 · Google profile report card · Business tool",
-    "sub": "Marks a Google Business Profile like an exam.",
-    "colour": "#B42318"
-  },
-  {
-    "key": "work-stopcock",
-    "title": "Stopcock",
-    "kicker": "CH 12 · Missed-call leak meter · Business tool",
-    "sub": "What unanswered calls cost you a year.",
-    "colour": "#14606E"
-  },
-  {
-    "key": "work-turnover",
-    "title": "Turnover",
-    "kicker": "CH 13 · Roofing firm rebuild · Business tool",
-    "sub": "Drag the tape line across a 2011 site and its rebuild.",
-    "colour": "#C77D2B"
-  },
-  {
-    "key": "work-fenwick-booking",
-    "title": "Fenwick Booking",
-    "kicker": "CH 14 · Heating engineer · Business tool",
-    "sub": "Service, slot, deposit, confirmed — no phone tag.",
-    "colour": "#B4451F"
-  },
-  {
-    "key": "work-jobsheet",
-    "title": "Jobsheet",
-    "kicker": "CH 15 · Van-side job report · Business tool",
-    "sub": "Fill it in from the van, the customer report writes itself.",
-    "colour": "#275C3F"
-  },
-  {
-    "key": "work-shiftbook",
-    "title": "Shiftbook",
-    "kicker": "CH 16 · Salon staff rota · Business tool",
-    "sub": "Click a cell to place a shift. Clashes flag as you go.",
-    "colour": "#6D3B52"
+    "colour": "#2952cc",
+    "sheet": "#E1E7F8"
   },
   {
     "key": "work-atelier-voss",
     "title": "Atelier Voss",
-    "kicker": "CH 07 · Architecture practice · Website",
+    "kicker": "CH 07 · Architecture practice · Website · Quiet",
     "sub": "A studio site with no photographs at all.",
-    "colour": "#14508c"
+    "colour": "#14508c",
+    "sheet": "#DEE7EF"
   },
   {
     "key": "work-cadence",
     "title": "Cadence",
-    "kicker": "CH 08 · Field-ops software · Website",
+    "kicker": "CH 08 · Field-ops software · Website · Direct",
     "sub": "The page is an operations board that never stops running.",
-    "colour": "#FFB300"
+    "colour": "#FFB300",
+    "sheet": "#FFF4DB"
   },
   {
     "key": "work-maree",
     "title": "MARÉE — Sel Obscur",
-    "kicker": "CH 09 · Fragrance house · Website",
+    "kicker": "CH 09 · Fragrance house · Website · Motion",
     "sub": "Ink through water, and a page that darkens as you descend.",
-    "colour": "#A9CBBD"
+    "colour": "#A9CBBD",
+    "sheet": "#F3F8F6"
   },
   {
     "key": "work-signal",
     "title": "SIGNAL 2027",
-    "kicker": "CH 10 · Music & light festival · Website",
+    "kicker": "CH 10 · Music & light festival · Website · Loud",
     "sub": "Type that reacts to how hard you scroll.",
-    "colour": "#3B18E0"
+    "colour": "#3B18E0",
+    "sheet": "#E4DFFB"
+  },
+  {
+    "key": "work-kerbside-scorecard",
+    "title": "Kerbside Scorecard",
+    "kicker": "CH 11 · Google profile report card · Tool · Broad",
+    "sub": "Marks a Google Business Profile like an exam.",
+    "colour": "#B42318",
+    "sheet": "#F5E0DF"
+  },
+  {
+    "key": "work-stopcock",
+    "title": "Stopcock",
+    "kicker": "CH 12 · Missed-call leak meter · Tool · Broad",
+    "sub": "What unanswered calls cost you a year.",
+    "colour": "#14606E",
+    "sheet": "#DEE9EB"
+  },
+  {
+    "key": "work-turnover",
+    "title": "Turnover",
+    "kicker": "CH 13 · Roofing firm rebuild · Tool · Specific",
+    "sub": "Drag the tape line across a 2011 site and its rebuild.",
+    "colour": "#C77D2B",
+    "sheet": "#F7EDE1"
+  },
+  {
+    "key": "work-fenwick-booking",
+    "title": "Fenwick Booking",
+    "kicker": "CH 14 · Heating engineer · Tool · Broad",
+    "sub": "Service, slot, deposit, confirmed — no phone tag.",
+    "colour": "#B4451F",
+    "sheet": "#F5E5E0"
+  },
+  {
+    "key": "work-jobsheet",
+    "title": "Jobsheet",
+    "kicker": "CH 15 · Van-side job report · Tool · Specific",
+    "sub": "Fill it in from the van, the customer report writes itself.",
+    "colour": "#275C3F",
+    "sheet": "#E1E8E4"
+  },
+  {
+    "key": "work-shiftbook",
+    "title": "Shiftbook",
+    "kicker": "CH 16 · Salon staff rota · Tool · Specific",
+    "sub": "Click a cell to place a shift. Clashes flag as you go.",
+    "colour": "#6D3B52",
+    "sheet": "#EBE4E7"
+  },
+  {
+    "key": "work-long-exposure",
+    "title": "Long Exposure",
+    "kicker": "CH 17 · Long Exposure · Website · Motion",
+    "sub": "A film company's site that plays like a film you can scrub.",
+    "colour": "#E8A84B",
+    "sheet": "#FCF3E6"
+  },
+  {
+    "key": "work-overhead",
+    "title": "Overhead",
+    "kicker": "CH 18 · Overhead · Website · Motion",
+    "sub": "Scroll to climb — the valley draws itself in contours as you rise.",
+    "colour": "#B7791F",
+    "sheet": "#F5ECE0"
+  },
+  {
+    "key": "work-southpaw",
+    "title": "Southpaw",
+    "kicker": "CH 19 · Boxing club, Leeds · Website · Loud",
+    "sub": "A boxing club site built as a fight card, run by a round timer.",
+    "colour": "#C8281E",
+    "sheet": "#F7E1E0"
+  },
+  {
+    "key": "work-marrow-and-pin",
+    "title": "Marrow & Pin",
+    "kicker": "CH 20 · Tattoo studio, Bristol · Website · Loud",
+    "sub": "A flash wall that inks itself as you scroll past each sheet.",
+    "colour": "#5B2A86",
+    "sheet": "#E8E1EE"
+  },
+  {
+    "key": "work-hale-and-partners",
+    "title": "Hale & Partners",
+    "kicker": "CH 21 · Chartered accountants, Harrogate · Website · Quiet",
+    "sub": "A year-end that settles, and the deadlines counted from today.",
+    "colour": "#A61E1E",
+    "sheet": "#F3E0E0"
+  },
+  {
+    "key": "work-fern-physio",
+    "title": "Fern Physio",
+    "kicker": "CH 22 · Fern Physio · Website · Quiet",
+    "sub": "A drawn body with ten tappable points, and a booking flow behind it.",
+    "colour": "#6F8F79",
+    "sheet": "#EBEFEC"
+  },
+  {
+    "key": "work-kestrel-electrical",
+    "title": "Kestrel Electrical",
+    "kicker": "CH 23 · Two-van electrical firm · Website · Direct",
+    "sub": "An electrician's page built as a fuse board — every job is a breaker.",
+    "colour": "#6B3A1E",
+    "sheet": "#EAE3E0"
+  },
+  {
+    "key": "work-kerb-and-camber",
+    "title": "Kerb & Camber",
+    "kicker": "CH 24 · Kerb & Camber MOT Centre · Website · Direct",
+    "sub": "A UK number plate you type into, and the MOT date that comes back.",
+    "colour": "#1F4E9C",
+    "sheet": "#E0E6F1"
+  },
+  {
+    "key": "work-ringsback",
+    "title": "Ringsback",
+    "kicker": "CH 25 · Heating firm, Leeds · Tool · Broad",
+    "sub": "Missed-call text-back console: the text goes out, the reply lands here.",
+    "colour": "#17784A",
+    "sheet": "#DFECE6"
+  },
+  {
+    "key": "work-starboard",
+    "title": "Starboard",
+    "kicker": "CH 26 · Shown running for Aldercroft Tree Care · Tool · Broad",
+    "sub": "Asks for the review at the right moment, then helps you reply to it.",
+    "colour": "#B45309",
+    "sheet": "#F5E7DD"
+  },
+  {
+    "key": "work-slate",
+    "title": "Slate",
+    "kicker": "CH 27 · Ashgrove Building & Maintenance · Tool · Broad",
+    "sub": "Your own price book, and the estimate it builds in a minute.",
+    "colour": "#3A5A72",
+    "sheet": "#E3E8EB"
+  },
+  {
+    "key": "work-triage",
+    "title": "Triage",
+    "kicker": "CH 28 · Latchford Locks & Security · Tool · Broad",
+    "sub": "Every enquiry, every channel, sorted by who has waited longest.",
+    "colour": "#2F5D50",
+    "sheet": "#E2E8E7"
+  },
+  {
+    "key": "work-doorstep",
+    "title": "Doorstep",
+    "kicker": "CH 29 · Heating firm’s customer · Tool · Broad",
+    "sub": "The page the customer opens on their phone after they have booked.",
+    "colour": "#2B4FA2",
+    "sheet": "#E1E6F2"
+  },
+  {
+    "key": "work-clockcard",
+    "title": "Clockcard",
+    "kicker": "CH 30 · Redgate Works · Tool · Broad",
+    "sub": "Staff clock in from the van; the office watches the week fill up.",
+    "colour": "#2B4C7E",
+    "sheet": "#E1E6ED"
+  },
+  {
+    "key": "work-boiler-book",
+    "title": "Boiler Book",
+    "kicker": "CH 31 · Ashgate Heating · Tool · Specific",
+    "sub": "Thirty boilers sorted by what's due, with the chasing done for you.",
+    "colour": "#B4500C",
+    "sheet": "#F5E7DD"
+  },
+  {
+    "key": "work-mot-minder",
+    "title": "MOT Minder",
+    "kicker": "CH 32 · Kilnbrook Motors · Tool · Specific",
+    "sub": "Every car the garage has seen, and the texts that bring them back.",
+    "colour": "#1B4E7D",
+    "sheet": "#DFE6ED"
+  },
+  {
+    "key": "work-chairside",
+    "title": "Chairside",
+    "kicker": "CH 33 · Four-chair salon · Tool · Specific",
+    "sub": "Rebooks the client at the counter and refills the slots that fall out.",
+    "colour": "#7A4A2E",
+    "sheet": "#ECE6E2"
+  },
+  {
+    "key": "work-turntable",
+    "title": "Turntable",
+    "kicker": "CH 34 · Corncrake · Tool · Specific",
+    "sub": "The floor, the queue at the door and the deposit rule, on one screen.",
+    "colour": "#A9600F",
+    "sheet": "#F3E9DD"
+  },
+  {
+    "key": "work-roofline",
+    "title": "Roofline",
+    "kicker": "CH 35 · Ackroyd Roofing · Tool · Specific",
+    "sub": "A postcode and seven taps draw the roof, then price it.",
+    "colour": "#A33B22",
+    "sheet": "#F2E4E0"
+  },
+  {
+    "key": "work-roundsheet",
+    "title": "Roundsheet",
+    "kicker": "CH 36 · Nash Window Cleaning · Tool · Specific",
+    "sub": "The round in door order, with a DONE big enough for one thumb.",
+    "colour": "#0F6B93",
+    "sheet": "#DDEAF0"
   },
   {
     "key": "what-i-do",

@@ -1,0 +1,30 @@
+{
+  "n": 36,
+  "slug": "roundsheet",
+  "file": "36-roundsheet.html",
+  "kind": "tool",
+  "lane": "specific",
+  "trade": "Window cleaner",
+  "mobile": true,
+  "name": "Roundsheet",
+  "biz": "Nash Window Cleaning",
+  "c": "#0F6B93",
+  "pg": "#F8F9FA",
+  "short": "The round in door order, with a DONE big enough for one thumb.",
+  "long": "Four rounds, 122 customers and a today list of 28 doors in the order he walks them. Marking a house done moves the running total, fills its dot on the route and lands in the money view the same second; a cash house stays on the list until he says whether he was paid. If it comes in wet, one button moves the rest of the sheet to the next working day and shifts everything behind it.",
+  "proves": "The whole round fits on the phone in his hand while he is stood at the gate.",
+  "tags": [
+    "round manager",
+    "one-handed",
+    "drawn route"
+  ],
+  "features": [
+    "Today's round in door order, with the settled doors folded away so the next one to knock on is at the top",
+    "A 56px DONE and 17px text on a phone — written by width, so it holds at 390px",
+    "Cash doors stay live until the money question is answered, and the running total splits cleaned from collected",
+    "Wet day moves the rest of the sheet to the next working day and pushes the week along",
+    "Each round drawn as the route he walks, a dot per door, filling in as the day goes",
+    "Money: cleaned against collected over five weeks, the direct-debit and cash split, and everyone more than two cleans behind"
+  ],
+  "story": "Round work lives in a notebook that gets wet and a head that forgets who paid. Putting it on the phone only helps if it can be worked with one thumb, in the rain, at a gate."
+}

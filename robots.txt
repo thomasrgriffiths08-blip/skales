@@ -65,4 +65,4 @@ User-agent: YouBot
 Allow: /
 Disallow: /demos/
 
-Sitemap: https://skales.com/sitemap.xml
+Sitemap: https://thomasrgriffiths08-blip.github.io/tomxsystems-site/sitemap.xml

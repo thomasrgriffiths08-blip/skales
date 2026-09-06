@@ -1,0 +1,31 @@
+{
+  "n": 28,
+  "slug": "triage",
+  "file": "28-triage.html",
+  "kind": "tool",
+  "lane": "broad",
+  "trade": "Any service business",
+  "mobile": true,
+  "name": "Triage",
+  "biz": "Latchford Locks & Security",
+  "c": "#2F5D50",
+  "pg": "#F7F8F7",
+  "short": "Every enquiry, every channel, sorted by who has waited longest.",
+  "long": "Website form, missed call, WhatsApp, email, Facebook message and the note somebody took on the office phone all land in one list, and the list is ordered by how long the person has been waiting rather than when they arrived. The clock on each one counts up in front of you, turns amber at half an hour and red at an hour, and stops the moment you reply. New enquiries land while you watch, so you can see what an unattended inbox actually costs.",
+  "proves": "The enquiry you never got back to is the one at the top of the list, not the one you forgot.",
+  "tags": [
+    "inbox",
+    "response time",
+    "board"
+  ],
+  "features": [
+    "Six channels drawn as SVG glyphs, never emoji, with the first line of what they actually said",
+    "A live wait on every unanswered enquiry — amber past 30 minutes, red past an hour",
+    "j and k to move, r to reply, b to book, l to mark lost, without touching the mouse",
+    "Reply with one of four templates, send a quote, or book a slot off the real calendar",
+    "The same enquiries as a five-lane board, dragged between lanes with pointer events so it works under a thumb",
+    "Numbers: unanswered right now as the hero figure, median first reply, enquiries per channel, booked against lost",
+    "A new enquiry lands about every 40 seconds while the tab is in front, and the median moves as you clear them"
+  ],
+  "story": "Small firms do not lose work on price nearly as often as they lose it on silence. This puts every channel in one queue and makes the waiting visible, because a number that keeps counting is harder to ignore than a notification."
+}

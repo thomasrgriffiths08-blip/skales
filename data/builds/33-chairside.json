@@ -1,0 +1,29 @@
+{
+  "n": 33,
+  "slug": "chairside",
+  "file": "33-chairside.html",
+  "kind": "tool",
+  "lane": "specific",
+  "trade": "Hair salon",
+  "mobile": true,
+  "name": "Chairside",
+  "biz": "Four-chair salon",
+  "c": "#7A4A2E",
+  "pg": "#FBFAF8",
+  "short": "Rebooks the client at the counter and refills the slots that fall out.",
+  "long": "A real diary for today across four stylists, with checkout on whoever is at the desk. The counter tablet asks \"same again in six weeks?\" with three slots that actually fit, an add-on, a tip and a demo card. Cancel an appointment and the waitlist gets texted; a few seconds later somebody says yes and the slot fills itself back in.",
+  "proves": "The gap somebody cancelled at nine is booked again by half past, without anyone picking up the phone.",
+  "tags": [
+    "Four-stylist diary",
+    "Counter rebooking",
+    "Deposit shield",
+    "Waitlist refill"
+  ],
+  "features": [
+    "Today's diary across four stylists on a real time grid, seeded for the whole week and read against the clock",
+    "Checkout as the client sees it on the counter tablet: three suggested slots, add-on, tip and a demo card, then a rebooked badge in the diary",
+    "No-show shield — the clients with history, the card-holding rule, and a 48h/24h reminder sequence with reply-C-to-cancel",
+    "Cancel an appointment and the waitlist is texted, the first yes takes the slot, and the diary refills in front of you"
+  ],
+  "story": "Salons lose more money to empty chairs than to bad haircuts. The two moments that fix it are the thirty seconds at the counter and the ten minutes after a cancellation, so the tool is built around exactly those two."
+}

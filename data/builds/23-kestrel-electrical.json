@@ -1,0 +1,29 @@
+{
+  "n": 23,
+  "slug": "kestrel-electrical",
+  "file": "23-kestrel-electrical.html",
+  "kind": "site",
+  "lane": "direct",
+  "trade": "Electrician",
+  "mobile": true,
+  "name": "Kestrel Electrical",
+  "biz": "Two-van electrical firm",
+  "c": "#6B3A1E",
+  "pg": "#E4E6E8",
+  "short": "An electrician's page built as a fuse board — every job is a breaker.",
+  "long": "Three lines say what they do, where they go and when they answer; under them sit three fields and the phone number at poster size. The services are a row of breakers on a board — flip one and it turns on to show what's included, what it costs and a button to ring about it. The only thing that moves on the page is a switch.",
+  "proves": "Someone standing in a dark kitchen can ring the right number in one tap, at any hour, without reading a word of marketing.",
+  "tags": [
+    "Breaker board",
+    "Three-field callback",
+    "Postcode area check",
+    "Open-now line switching"
+  ],
+  "features": [
+    "Seven breakers on a consumer unit — fault finding, fuse board, EV charger, rewire, EICR, sockets, emergency — each flipping on to its own panel",
+    "The main switch is the phone number, and it swaps between the office line and the emergency mobile from the real clock",
+    "Callback form that validates and confirms by name, number and the hour the office will ring",
+    "Postcode outward-code check across NG1–NG17, and a sticky CALL / BOOK bar on phones"
+  ],
+  "story": "Most trade sites bury the number under a hero image and a form nobody fills in. Borrowing the layout of the thing an electrician opens every day made the page label itself: everything is a switch, and the biggest one rings the phone."
+}

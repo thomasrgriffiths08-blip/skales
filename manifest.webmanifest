@@ -2,10 +2,10 @@
   "name": "Skales",
   "short_name": "Skales",
   "description": "Websites & systems for service businesses",
-  "start_url": "/",
+  "start_url": "/tomxsystems-site/",
   "display": "browser",
-  "background_color": "#0A0C10",
-  "theme_color": "#0A0C10",
+  "background_color": "#FCF3E6",
+  "theme_color": "#FCF3E6",
   "icons": [
     {
       "src": "og/icon.png",

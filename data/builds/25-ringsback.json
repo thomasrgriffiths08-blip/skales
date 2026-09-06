@@ -1,0 +1,29 @@
+{
+  "n": 25,
+  "slug": "ringsback",
+  "file": "25-ringsback.html",
+  "kind": "tool",
+  "lane": "broad",
+  "trade": "Any service business",
+  "mobile": true,
+  "name": "Ringsback",
+  "biz": "Heating firm, Leeds",
+  "c": "#17784A",
+  "pg": "#F7F7F6",
+  "short": "Missed-call text-back console: the text goes out, the reply lands here.",
+  "long": "A live feed of today's calls — answered, missed, missed then texted then replied then booked — with the exact message that went out and how many seconds after the call it left. Press \"Simulate a missed call\" and you watch the whole thing happen: the phone rings out, a countdown runs, the text sends, and a minute later the customer replies.",
+  "proves": "The customer gets a text before they've finished leaving a voicemail.",
+  "tags": [
+    "Live call feed",
+    "Simulated missed call",
+    "Editable templates",
+    "Recovered report"
+  ],
+  "features": [
+    "Live feed of nineteen calls today seeded against the real clock, each missed one showing its auto-text and the seconds it took",
+    "Simulate a missed call: rings out, counts down in the row, sends, then the customer replies on their own",
+    "Conversation threads with quick replies and a booking link that marks the thread booked when it is opened",
+    "Hours, three message templates and per-line settings that save; a weekly recovered report with a hairline bar chart"
+  ],
+  "story": "Every trade loses work to a phone that rang while they were under a floor. This is the smallest tool that fixes it — and the only way to show it is to let someone press the button and watch the text go."
+}

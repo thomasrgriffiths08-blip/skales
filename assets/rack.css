@@ -6,10 +6,11 @@
    ============================================================ */
 
 /* ---------- the rack: a ruled grid of cells ---------- */
-.rack{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--zinc);
+/* each cell draws its own hairline, so an incomplete last row leaves paper, not a grey block */
+.rack{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:transparent;
   border:1px solid var(--zinc);border-radius:var(--r-cell);overflow:hidden}
-.cell{background:var(--ink);display:flex;flex-direction:column;min-width:0;position:relative}
-.cell .frame{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0d1116;border-bottom:1px solid var(--zinc)}
+.cell{background:var(--ink);display:flex;flex-direction:column;min-width:0;position:relative;box-shadow:0 0 0 1px var(--zinc)}
+.cell .frame{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--steel-3);border-bottom:1px solid var(--zinc)}
 .cell .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;transition:opacity .3s;
   z-index:1}
 .cell .frame iframe{position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform-origin:0 0;
@@ -18,7 +19,7 @@
 /* the worklight: when one cell is lit, the rest of the rack falls back into the dark */
 .cell{transition:opacity .35s ease}
 .rack:has(.cell.is-awake) .cell:not(.is-awake),.strip:has(.cell.is-awake) .cell:not(.is-awake){opacity:.42}
-.cell.is-awake .frame{box-shadow:inset 0 0 0 1px rgba(255,90,31,.6)}
+.cell.is-awake .frame{box-shadow:inset 0 0 0 1px var(--live)}
 /* the live build rolls open like a shutter, left to right (compositor-only: clip-path) */
 html.m-on .cell .frame iframe{animation:shutter .55s cubic-bezier(.2,.7,.2,1) both}
 @keyframes shutter{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
@@ -27,17 +28,17 @@ html.m-on .cell .frame iframe{animation:shutter .55s cubic-bezier(.2,.7,.2,1) bo
   border-right:1px solid var(--zinc);border-bottom:1px solid var(--zinc);border-radius:0 0 var(--r-cell) 0;
   display:flex;align-items:center;gap:.45rem}
 .cell .wake .lamp{width:6px;height:6px}
-.cell.is-awake .wake{color:var(--live)}
+.cell.is-awake .wake{color:var(--live-text)}
 .cell .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
 .cell .plate{margin-bottom:2px}
 .cell h3{font-size:1.06rem}
 .cell h3 a{text-decoration:none}
-.cell h3 a:hover{color:var(--live)}
+.cell h3 a:hover{color:var(--live-text)}
 .cell p{font-size:.88rem;color:var(--dyeline-2);line-height:1.45}
 .cell .foot{margin-top:auto;padding-top:10px;display:flex;justify-content:space-between;align-items:center;
   font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dyeline-3)}
 .cell .foot a{text-decoration:none;color:var(--dyeline-2);border-bottom:1px solid var(--zinc-2);padding-bottom:2px;transition:color .14s,border-color .14s}
-.cell .foot a:hover{color:var(--live);border-color:var(--live)}
+.cell .foot a:hover{color:var(--live-text);border-color:var(--live-text)}
 .cell:hover .frame,.cell:focus-within .frame{border-bottom-color:var(--zinc-2)}
 
 /* ---------- the strip: same cells, one row, bleeding off the right edge ---------- */
@@ -63,17 +64,17 @@ html.m-on .cell .frame iframe{animation:shutter .55s cubic-bezier(.2,.7,.2,1) bo
 .ch{display:grid;grid-template-columns:22px 8px minmax(0,1fr);align-items:center;gap:8px;width:100%;text-align:left;
   padding:6px 12px;color:var(--dyeline-2);font-size:.86rem;transition:background .12s,color .12s;border-left:2px solid transparent}
 .ch:hover{background:var(--steel);color:var(--dyeline)}
-.ch[aria-selected="true"]{background:var(--steel-2);color:var(--dyeline);border-left-color:var(--live)}
+.ch[aria-selected="true"]{background:var(--steel-2);color:var(--dyeline);border-left-color:var(--live-text)}
 .ch .n{font-family:var(--mono);font-size:.68rem;color:var(--dyeline-3);font-variant-numeric:tabular-nums slashed-zero}
-.ch[aria-selected="true"] .n{color:var(--live)}
+.ch[aria-selected="true"] .n{color:var(--live-text)}
 .ch .sw{width:7px;height:7px;border-radius:50%}
 .ch .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:900px){ .rail{border-right:0;border-bottom:1px solid var(--zinc)} .rail-list{max-height:280px} }
 
 .stage{display:flex;flex-direction:column;min-width:0;background:var(--ink)}
 /* the unit shows which channel it is running: a 2px strip in that build's own colour */
-.stage .chrome{box-shadow:inset 0 2px 0 var(--chan,var(--zinc-2));transition:box-shadow .3s}
-.viewport.sz-phone,.viewport.sz-tab{background:color-mix(in srgb, var(--chan,#0d1116) 9%, #0d1116);transition:background .3s}
+.stage .chrome{box-shadow:inset 0 3px 0 var(--live);transition:box-shadow .3s}
+.viewport.sz-phone,.viewport.sz-tab{background:var(--steel-3)}
 .chrome{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--zinc);background:var(--steel)}
 .chrome .pips{display:flex;gap:5px;flex:none}
 .chrome .pips i{width:8px;height:8px;border-radius:50%;background:var(--zinc-2)}
@@ -87,15 +88,15 @@ html.m-on .cell .frame iframe{animation:shutter .55s cubic-bezier(.2,.7,.2,1) bo
 .sizes button[aria-pressed="true"]{background:var(--steel-3);color:var(--dyeline)}
 .chrome .pop{flex:none;color:var(--dyeline-3);font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
   text-decoration:none;white-space:nowrap;padding:.36rem .2rem}
-.chrome .pop:hover{color:var(--live)}
+.chrome .pop:hover{color:var(--live-text)}
 @media(max-width:640px){ .chrome .url{display:none} }
 
-.viewport{position:relative;background:#0d1116;height:min(680px,74vh);display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
+.viewport{position:relative;background:var(--steel-3);height:min(680px,74vh);display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
 .viewport iframe{width:100%;height:100%;border:0;background:#fff;transition:width .28s ease}
 .viewport.sz-phone iframe{width:390px;box-shadow:0 0 0 1px var(--zinc-2)}
 .viewport.sz-tab iframe{width:834px;box-shadow:0 0 0 1px var(--zinc-2)}
 .boot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--dyeline-3);
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;background:#0d1116}
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;background:var(--steel-3)}
 .rig-cap{border-top:1px solid var(--zinc);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:start;padding:14px 16px}
 .rig-cap h3{margin-bottom:4px}
 .rig-cap p{font-size:.9rem;color:var(--dyeline-2);max-width:64ch}
@@ -113,3 +114,52 @@ html.m-on .cell .frame iframe{animation:shutter .55s cubic-bezier(.2,.7,.2,1) bo
 .rig-cap .proves{color:var(--dyeline)}
 
 .rig-cap-side a.lnk{display:block !important;margin-top:10px}
+
+/* ---------- lanes (the gallery, the Websites and Tools pages) ---------- */
+.filter-bar{padding-block:.2rem 1.6rem}
+.filters.chips-row{display:inline-flex;flex-wrap:wrap}
+.filters.chips-row button{border-bottom:1px solid var(--zinc-2)}
+@media(max-width:600px){ .filters.chips-row{display:flex;width:100%} .filters.chips-row button{flex:1 1 auto;text-align:center;padding:.7rem .5rem} }
+.lane{margin-top:1.6rem}
+.lane:first-of-type{margin-top:.4rem}
+.lane-head{display:flex;flex-wrap:wrap;gap:.8rem 2rem;align-items:flex-end;justify-content:space-between;padding:1.1rem 0 .9rem;border-top:1px solid var(--zinc)}
+.lane-copy{min-width:0;max-width:62ch}
+.lane-copy .spec{display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem}
+.lane-copy h3{font-size:clamp(1.25rem,2.2vw,1.7rem);letter-spacing:-.03em;line-height:1.1}
+.lane-copy p{color:var(--dyeline-2);font-size:.92rem;margin-top:.45rem;max-width:56ch}
+.lane-head .plate a{text-decoration:none;color:var(--dyeline)}
+.lane-head .plate a:hover{color:var(--live-text)}
+.panel.lane{margin-top:0}
+.panel.lane .body .rack{margin-top:.4rem}
+.nameplate.trades dd{display:flex;flex-wrap:wrap;gap:.2rem .3rem}
+
+/* ---------- desktop rig vs phone poster ---------- */
+.phone-only{display:none}
+@media(max-width:900px){
+  .desk{display:none !important}
+  .phone-only{display:block}
+  .rig-note{padding-bottom:1.2rem}
+}
+.poster{border:1px solid var(--zinc);border-radius:var(--r-cell);overflow:hidden;background:var(--ink);box-shadow:inset 0 2px 0 var(--chan,var(--zinc-2))}
+.poster img{width:100%;height:auto;display:block;border-bottom:1px solid var(--zinc)}
+.poster-foot{display:flex;flex-wrap:wrap;gap:.8rem 1rem;align-items:center;justify-content:space-between;padding:12px 14px}
+.poster-foot .spec{display:flex;align-items:center;gap:.5rem;text-transform:none;letter-spacing:.06em}
+
+/* ---------- cells on phones: one column, the still first, real tap targets ---------- */
+@media(max-width:600px){
+  .rack{grid-template-columns:minmax(0,1fr)}
+  .cell .meta{padding:12px 14px 14px}
+  .cell .foot{flex-wrap:wrap;gap:.6rem 1.2rem}
+}
+
+
+/* ---------- cells you can actually press: the whole still opens the page, the foot is two real buttons ---------- */
+.cell{transition:transform .18s ease,background-color .55s ease,border-color .55s ease}
+.cell:hover{transform:translateY(-2px)}
+.cell .frame a.cover{position:absolute;inset:0;z-index:2;text-indent:-9999px;overflow:hidden}
+.cell .frame a.cover:focus-visible{outline:2px solid var(--live);outline-offset:-2px}
+.cell .foot{gap:.6rem}
+.cell .foot a{border:1px solid var(--zinc-2);border-radius:var(--r-btn);padding:.55rem .8rem;text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:.86rem;font-weight:600;color:var(--dyeline);display:inline-flex;align-items:center;gap:.4rem}
+.cell .foot a.go{background:var(--live);color:var(--live-ink);border-color:var(--live)}
+.cell .foot a:hover{border-color:var(--dyeline-3);color:var(--dyeline)}
+.cell .foot a.go:hover{background:var(--live-lift);color:var(--live-ink)}

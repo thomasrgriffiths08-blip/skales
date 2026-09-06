@@ -1,0 +1,31 @@
+{
+  "n": 17,
+  "slug": "long-exposure",
+  "file": "17-long-exposure.html",
+  "kind": "site",
+  "lane": "motion",
+  "trade": "Film production company",
+  "mobile": true,
+  "name": "Long Exposure",
+  "biz": "Long Exposure",
+  "c": "#E8A84B",
+  "pg": "#0B0B0C",
+  "short": "A film company's site that plays like a film you can scrub.",
+  "long": "The page opens on a countdown leader and then runs inside a letterboxed gate with a timecode burned into the corner. Scrolling scrubs the cut; pressing play lets it run on its own; three reels swap the whole shot list. Every frame is drawn in code — no video, no images, nothing to buffer.",
+  "proves": "You can show a showreel moving without hosting a single video file.",
+  "tags": [
+    "scroll-driven",
+    "canvas",
+    "showreel"
+  ],
+  "features": [
+    "Countdown leader, letterbox gate and a timecode that keeps running",
+    "Scroll position is the playhead — it works with Reduce Motion on",
+    "Play, pause and a scrub bar with a tick per shot",
+    "Three reels that swap the entire shot list mid-scrub",
+    "Services set out as a real call sheet, dated to next Tuesday",
+    "Draggable dailies strip — pick a frame and the gate cuts to it",
+    "Enquiry form that prints back a formatted call sheet request"
+  ],
+  "story": "Film companies tend to put a video embed on a black page and call it a website. This one makes the page itself the film, so it opens instantly on a phone and the work is moving before anything has downloaded."
+}

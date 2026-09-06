@@ -10,11 +10,11 @@ shot(){ D=$(mktemp -d); rm -f "$2"
   kill -9 $P 2>/dev/null; wait $P 2>/dev/null; rm -rf "$D"; }
 node -e '
 const jobs=require("./tools/og-jobs.json");const enc=encodeURIComponent;
-for(const j of jobs) console.log(j.key+"\t"+"http://localhost:8746/tools/og.html?wm="+enc(process.argv[1])+"&t="+enc(j.title)+"&k="+enc(j.kicker||"")+"&s="+enc(j.sub||"")+(j.colour?"&c="+enc(j.colour):""));
+for(const j of jobs) console.log(j.key+"\t"+"http://localhost:8746/tools/og.html?wm="+enc(process.argv[1])+"&t="+enc(j.title)+"&k="+enc(j.kicker||"")+"&s="+enc(j.sub||"")+(j.colour?"&c="+enc(j.colour):"")+(j.sheet?"&bg="+enc(j.sheet):""));
 ' "$WM" | while IFS=$'\t' read -r key url; do shot "$url" "og/$key.png"; [[ -f "og/$key.png" ]] && echo "ok $key" || echo "FAIL $key"; done
 # icon: 512×512 from the favicon mark
 cat > /tmp/_icon.html <<'H'
-<!doctype html><body style="margin:0;width:512px;height:512px;background:#0A0C10;display:grid;place-items:center"><svg width="400" height="400" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0A0C10"/><path d="M20 20 L44 44 M44 20 L20 44" stroke="#FF5A1F" stroke-width="7" stroke-linecap="round"/></svg></body>
+<!doctype html><body style="margin:0;width:512px;height:512px;background:#F4F2ED;display:grid;place-items:center"><svg width="400" height="400" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#F4F2ED"/><path d="M20 20 L44 44 M44 20 L20 44" stroke="#B33A1B" stroke-width="7" stroke-linecap="round"/></svg></body>
 H
 cp /tmp/_icon.html tools/_icon.html; shot "http://localhost:8746/tools/_icon.html" "og/icon.png" 512 512; rm -f tools/_icon.html; echo "icon $( [[ -f og/icon.png ]] && echo ok || echo FAIL )"
 # compress: PNG → keep as PNG but strip to 8-bit palette via sips is lossy; keep PNG, they are ~200KB each

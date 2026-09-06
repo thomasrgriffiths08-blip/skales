@@ -1,0 +1,31 @@
+{
+  "n": 18,
+  "slug": "overhead",
+  "file": "18-overhead.html",
+  "kind": "site",
+  "lane": "motion",
+  "trade": "Drone survey & filming",
+  "mobile": true,
+  "name": "Overhead",
+  "biz": "Overhead",
+  "c": "#B7791F",
+  "pg": "#EFEBDD",
+  "short": "Scroll to climb — the valley draws itself in contours as you rise.",
+  "long": "The page is an ascent. Scrolling is altitude: the telemetry counts up, a fictional Peak District dale inks itself in from the valley floor to the tops, and by 120 m the whole view has tilted from an oblique into a flat survey sheet. The map is generated in the browser from one height field, so the contours, the dry-stone walls, the hedgerows and the brook all come out of the same arithmetic.",
+  "proves": "A survey outfit can show what it actually hands over instead of a gallery of aerial photos.",
+  "tags": [
+    "scroll-driven",
+    "mapping",
+    "before-after"
+  ],
+  "features": [
+    "Scroll is altitude — the contour map draws itself in as the aircraft climbs",
+    "Telemetry pinned at the top: altitude, a moving heading tape, wind and battery",
+    "At the top the view tilts from oblique through to a full plan-view sheet",
+    "Services as a real flight log; hover a job and its contour band lights up on the keymap",
+    "A picker rewrites the log for a roof, a site, land or a property to sell",
+    "Before and after roof: the frame as flown against a measurable orthomosaic, with a draggable divider",
+    "Enquiry form takes a postcode and returns a draft flight plan"
+  ],
+  "story": "Drone operators all show the same thing — a gallery of pretty aerial photographs. What they are actually paid for is measurement, so this page is built out of a map that measures itself, and the roof survey is shown twice: once as a picture, once as something you can put a tape to."
+}

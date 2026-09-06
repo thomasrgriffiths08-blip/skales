@@ -7,7 +7,8 @@ Static, hand-built, no dependencies. Every page is generated from a few data fil
 | Want to… | Edit | Then |
 |---|---|---|
 | Rename the brand, change the domain, add the WhatsApp number or the Calendly link | `data/site.js` | `node tools/build.js` |
-| Add or edit one of the builds (a new channel on the rack) | `data/builds.js` — add an entry with a `slug`, copy the demo into `../showcase/`, run `NODE_PATH=<terser+clean-css dir> node tools/demos.js`, add a still to `assets/stills/NN.webp` | `node tools/build.js && ./tools/og.sh` |
+| Add a build | Build it against `../showcase/briefs/SPEC.md` (+ a per-build brief), then `node tools/ingest.js` — it validates the meta and copies it into `data/builds/` | `tools/stills.sh NN` · `NODE_PATH=<terser+clean-css dir> node tools/demos.js` · `node tools/build.js && ./tools/og.sh` |
+| Edit one of the original sixteen | `data/builds.js` | same as above |
 | Add a note | `data/notes.js` — add an entry with `slug`, `date`, `title`, `summary`, `body` | `node tools/build.js && ./tools/og.sh` |
 | Change page copy or layout | `tools/pages/*.js` | `node tools/build.js` |
 | Change the look | `assets/*.css` | nothing — CSS is served as-is |
@@ -17,6 +18,10 @@ Then `git add -A && git commit -m "…" && git push`. GitHub Pages redeploys in 
 ## What the build writes
 
 Every page (`index.html`, `work/`, `work/<slug>/`, `what-i-do/`, `why/`, `book/`, `notes/`, `teardown.html`, `404.html`), plus `sitemap.xml`, `robots.txt`, `llms.txt`, `llms-full.txt`, `manifest.webmanifest`, `humans.txt`, `assets/builds.js` and `tools/og-jobs.json` (the list `tools/og.sh` renders into `og/`).
+
+## The lanes
+
+Every build belongs to a lane. Websites: **loud** (kinetic, type as image), **motion** (the page is the film), **quiet** (plain, calm, expensive), **direct** (conversion first, for trades). Tools: **broad** (any service business) or **specific** (one trade's day). The gallery, the Websites and Tools pages, the rail, the footer and the case pages all group by lane, so a new build only needs the right `lane` in its JSON. New builds are also written to a brief first: see `../showcase/briefs/SPEC.md` and the per-build sheets there.
 
 ## The demos
 
@@ -29,3 +34,12 @@ Every page (`index.html`, `work/`, `work/<slug>/`, `what-i-do/`, `why/`, `book/`
 - No invented metrics, testimonials or client names anywhere.
 - Everything must work with Reduce Motion on (the hero switch and the demos are content, not decoration).
 - Check any page at 390px before pushing.
+
+## Checking it before you push
+
+```bash
+python3 ~/.claude/skills/deslop/scripts/deslop_check.py .            # the 22-point ship check
+python3 ~/.claude/skills/deslop/scripts/phone_check.py . / /work/ /book/   # a TRUE 390px viewport
+```
+
+The phone check exists because headless Chrome cannot render a layout viewport below about 500px: a `--window-size=390` screenshot is a crop of a 500px render, so it looks right while the real phone layout is untested. The script frames each page in a 390px same-origin iframe instead. `@media(pointer:coarse)` also never matches in headless, so tap-target rules are written by width as well.

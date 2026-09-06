@@ -1,0 +1,29 @@
+{
+  "n": 21,
+  "slug": "hale-and-partners",
+  "file": "21-hale-and-partners.html",
+  "kind": "site",
+  "lane": "quiet",
+  "trade": "Accountant",
+  "mobile": true,
+  "name": "Hale & Partners",
+  "biz": "Chartered accountants, Harrogate",
+  "c": "#A61E1E",
+  "pg": "#F7F4EA",
+  "short": "A year-end that settles, and the deadlines counted from today.",
+  "long": "A practice site set out as a well-kept ledger: services written as double entries — what you hand over on the left, what you get back on the right — and a real set of accounts with last year beside this year. The figures count to their values as the statement comes into view and a green tick draws itself beside Filed; the deadline calendar is worked out from the day the visitor opens the page, so it is never out of date.",
+  "proves": "The dates and the figures do the selling. Nothing else has to.",
+  "tags": [
+    "ledger layout",
+    "live deadlines",
+    "fee request"
+  ],
+  "features": [
+    "A year-end statement whose column settles as it enters view, tick and all",
+    "Services as Dr and Cr lines: what you hand over, what you get back",
+    "UK deadlines with the days remaining, computed from today's date",
+    "A three-question triage that points at one service line and stops",
+    "A fee request that asks for a band instead of publishing a price"
+  ],
+  "story": "Built to prove a quiet site can still work: no photographs of handshakes, no stock office, just the two things an accountant is actually judged on — the dates and the numbers."
+}

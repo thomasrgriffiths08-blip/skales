@@ -1,0 +1,29 @@
+{
+  "n": 29,
+  "slug": "doorstep",
+  "file": "29-doorstep.html",
+  "kind": "tool",
+  "lane": "broad",
+  "trade": "Any service business",
+  "mobile": true,
+  "name": "Doorstep",
+  "biz": "Heating firm’s customer",
+  "c": "#2B4FA2",
+  "pg": "#F8F9FB",
+  "short": "The page the customer opens on their phone after they have booked.",
+  "long": "Where the job is, who is coming, the paperwork, what is left to pay and somewhere to ask a question — all on one phone-width page. A business-view panel sits alongside it, and pressing \"On the way\" over there starts the customer's ETA counting down and walks the van along a drawn route line on this side.",
+  "proves": "That is one fewer \"what time is he coming?\" phone call, every single job.",
+  "tags": [
+    "Live ETA countdown",
+    "Drawn route line",
+    "Demo card payment",
+    "Business view"
+  ],
+  "features": [
+    "Seven-step job timeline from booked to paid, with the engineer, his van reg and a live ETA that counts down while he is on the way",
+    "Business view with status buttons that drive the customer page in real time — the route line and countdown start the moment it is pressed",
+    "Quote, invoice and certificate as document cards, each with a download that goes to a saved state and stays saved",
+    "Demo card payment against the balance with the deposit already taken, and a message thread the office answers"
+  ],
+  "story": "Customers ring because they cannot see anything. Giving them one link that answers where, who, what and how much turns the anxious afternoon phone call into a page they check once."
+}

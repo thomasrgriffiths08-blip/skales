@@ -1,0 +1,29 @@
+{
+  "n": 22,
+  "slug": "fern-physio",
+  "file": "22-fern-physio.html",
+  "kind": "site",
+  "lane": "quiet",
+  "trade": "Physiotherapy clinic",
+  "mobile": true,
+  "name": "Fern Physio",
+  "biz": "Fern Physio",
+  "c": "#6F8F79",
+  "pg": "#FAFAF7",
+  "short": "A drawn body with ten tappable points, and a booking flow behind it.",
+  "long": "A two-room physiotherapy clinic where the hero is a hand-drawn standing figure, front and back, with ten points you can tap. Each one names what the problem usually turns out to be, what the physio would actually do about it, and books that assessment in four questions. The diary is generated from the real clock, so the slots are never stale.",
+  "proves": "A visitor can say where it hurts before they have to say anything to a receptionist.",
+  "tags": [
+    "quiet",
+    "booking",
+    "drawn SVG"
+  ],
+  "features": [
+    "Line-drawn figure in SVG, front and back, ten hotspots with plaster-pink regions",
+    "Four-step booking: problem, physio, slot, details, ending in a real confirmation card",
+    "Slot grid built from today's date, each physio's working days and a two-hour lead time",
+    "Opening hours that read open now or opens at from the visitor's own clock",
+    "The booking survives a reload; Reset demo clears it"
+  ],
+  "story": "Clinics lose people at the phone call, because a sore shoulder is hard to describe to a stranger. Pointing at a drawing is not."
+}
