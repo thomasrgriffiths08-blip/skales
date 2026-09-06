@@ -7,7 +7,7 @@ module.exports = {
   tagline: 'Websites & systems for service businesses',
   // ORIGIN — the live address. Everything (canonicals, sitemap, schema, OG, the demo lock) derives from it.
   // Do NOT point this at a domain that is not registered and pointing here: every link becomes a parking page.
-  origin: 'https://thomasrgriffiths08-blip.github.io/tomxsystems-site',   // skales.com is not bought yet — switch this line the day it is, then rebuild
+  origin: 'https://thomasrgriffiths08-blip.github.io/skales',   // skales.com is not bought yet — switch this line the day it is, then rebuild
   // extra hosts the locked demos may run under (dev + any future domain)
   allowedHosts: ['localhost', '127.0.0.1', 'thomasrgriffiths08-blip.github.io', 'skales.com', 'www.skales.com'],
   locale: 'en-GB',
