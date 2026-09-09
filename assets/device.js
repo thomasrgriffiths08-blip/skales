@@ -7,7 +7,7 @@
   var d = document, S = window.SITE || {}, b = S.base || '', B = window.BUILDS || [], LN = window.LANES || {};
   var ORDER = ['loud', 'motion', 'quiet', 'direct', 'broad', 'specific'];
   var pad = function(n){ return (n < 10 ? '0' : '') + n; };
-  var demo = function(x){ return b + 'demos/' + x.slug + '/'; };
+  var demo = function(x){ return b + 'demos/' + x.slug + '/#s=1'; };
   var page = function(x){ return b + 'work/' + x.slug + '/'; };
   var phone = function(x){ return b + 'assets/phones/' + pad(x.n) + '.webp'; };
   var byN = function(n){ for (var i = 0; i < B.length; i++) if (B[i].n === n) return B[i]; return null; };

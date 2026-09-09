@@ -69,7 +69,7 @@ const device = (b, x, { thumbs = false } = {}) => `<div class="hero-device">
   <div class="device" id="device" data-start="${x.n}"><div class="screen"><div class="loading">Loading ${esc(x.name)}</div></div></div>
   <div class="device-cap">
     <div class="who"><b id="devName">${esc(x.name)}</b><span id="devWho">${esc(kindWord(x))} &middot; ${esc(x.trade || x.biz)}</span></div>
-    <div class="ways"><a id="devOpen" href="${b}demos/${x.slug}/" target="_blank" rel="noopener">Open full size</a>${thumbs ? `<a id="devPage" href="${b}work/${x.slug}/">Its page</a>` : ''}</div>
+    <div class="ways"><a id="devOpen" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Open full size</a>${thumbs ? `<a id="devPage" href="${b}work/${x.slug}/">Its page</a>` : ''}</div>
   </div>
 </div>${thumbs ? `<div class="thumbs" id="thumbs" role="tablist" aria-label="Choose a build"></div>` : ''}`;
 const forgeInvite = (b, line) => `<section class="invite">

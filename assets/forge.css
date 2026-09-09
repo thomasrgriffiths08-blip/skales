@@ -86,3 +86,5 @@
   .phone-lit .screen{border-radius:28px}
   .phone-lit::after{display:none}
 }
+.forge .need{font-size:.9375rem;font-weight:500;color:var(--live);margin-top:-6px}
+.forge .lead em{font-style:normal;color:#fff;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--live)}

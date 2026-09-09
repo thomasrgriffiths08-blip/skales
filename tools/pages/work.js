@@ -173,7 +173,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
         <div class="copy">
           <p class="lead">${esc(x.long)}</p>
           <div class="meta"><span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span></div>
-          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/" target="_blank" rel="noopener">Open it full size</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
+          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Open it full size</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
           <p class="hint">This is the build itself, not a recording. Use it like a customer would. State is kept in your browser; there is a reset inside.</p>
         </div>
         <div class="side">${L.device(b, x)}</div>
