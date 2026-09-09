@@ -23,7 +23,11 @@ for (const p of pages){
   if (p.meta) ogJobs.push(p.meta);
 }
 
-/* client-side data: only what the rack needs (no long copy) */
+/* the trades the forge can build for — colours resolved through the same contrast maths as the builds */
+const trades = require('../data/trades.js').map(t => Object.assign({}, t, L.world(t.c)));
+write('assets/trades.js', `/* generated from data/trades.js — do not edit by hand */\nwindow.TRADES=${JSON.stringify(trades.map(t => ({ key: t.key, label: t.label, plate: t.plate, c: t.c, cInk: t.cInk, cText: t.cText, demo: t.demo, word: t.word, head: t.head, sub: t.sub, creds: t.creds, services: t.services, review: t.review, cta: t.cta })))};`);
+
+/* client-side data: only what the wall needs (no long copy) */
 write('assets/builds.js', `/* generated from data/builds.js — do not edit by hand */\nwindow.LANES=${JSON.stringify(Object.fromEntries(Object.entries(L.LANES).map(([k, v]) => [k, { name: v.name, kindWord: v.kindWord, kind: v.kind }])))};\nwindow.BUILDS=${JSON.stringify(builds.map(x => ({ n: x.n, slug: x.slug, kind: x.kind, lane: x.lane, trade: x.trade, mobile: !!x.mobile, group: x.group, name: x.name, biz: x.biz, c: x.c, sheet: x.sheet, cInk: x.cInk, cText: x.cText, short: x.short, long: x.long, proves: x.proves, tags: x.tags })))};`);
 
 /* sitemap + robots (AI crawlers explicitly allowed) */

@@ -2,18 +2,17 @@ const L = require('../lib.js');
 const { site, builds, esc, Words } = L;
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
 const B = n => builds.find(x => x.n === n);
-const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);   // the eight on the home page
+const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
 
 module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
-  meta: { key: 'home', title: 'The website your customers will actually use.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `${Words(builds.length)} working builds you can use. Hand-built, owned by you.` },
+  meta: { key: 'home', title: 'Watch your website build itself.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `Pick your trade and a working site for your business appears in a couple of seconds. ${Words(builds.length)} finished ones are on the page too.` },
   render(b){
     const title = `Websites & booking systems for UK trades | ${site.name}`;
-    const description = 'Websites, online booking and missed-call text-back for UK trades, built by one person and owned by you. ' + Words(builds.length) + ' working builds run live on this site.';
+    const description = 'Pick your trade and watch a working website for your business build itself on the page. Websites, booking and missed-call text-back for UK trades, owned by you.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
     ];
-    const start = L.defaultBuild();
     const svc = [
       { s: site.services[0], x: B(13), see: 'a roofing firm’s site, before and after' },
       { s: site.services[1], x: B(14), see: 'a heating engineer’s booking' },
@@ -22,25 +21,46 @@ module.exports = { pages: [{
     const body = `
 ${L.header(b, 'home')}
 <main id="main">
-<section class="hero" aria-label="Introduction">
+
+<section class="forge" aria-labelledby="h-forge">
   <div class="wrap">
     <div class="grid">
-      <div class="copy">
-        <h1>The website your customers will actually use.</h1>
-        <p class="lead">${esc(site.name)} builds websites, online booking and follow-up for UK trades and service businesses. Hand-built, fast, and yours from day one. <strong>${esc(Words(builds.length))} working examples are on this page.</strong> Pick one up and use it.</p>
-        <div class="cta-row"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${b}work/">See all ${builds.length}</a></div>
+      <div class="fhead">
+        <h1 id="h-forge">Watch your website build itself.</h1>
+        <p class="lead">Pick your trade, put your business name in, and a real working website appears in the phone &mdash; one you can scroll, press and open in a new tab. <strong>It takes a couple of seconds.</strong> The proper one is hand-built, and it is yours from day one.</p>
       </div>
-      <div class="side">${L.device(b, start, { thumbs: false })}</div>
-    </div>
-    <div class="thumbs" id="thumbs" role="tablist" aria-label="Choose a build"></div>
+      <div class="side" id="forgePhone">
+        <div class="phone-lit"><div class="screen" id="forgeScreen"></div><button class="tapguard" type="button" id="forgeGuard"><span>Tap the screen to use this site</span></button></div>
+        <div class="forge-cap"><div class="who" id="forgeCap"></div><div class="side-r"><span class="tap-hint" id="tapHint">Tap to use it</span><span class="t" id="forgeTimer" hidden>0.0s</span></div></div>
+        <div class="forge-after" id="forgeAfter" hidden>
+          <p><b>That is a sketch, drawn in a couple of seconds by the same rules every build on this site follows.</b> A real one is hand-written for your business: your photographs, your services, your booking system and your Google listing wired in behind it.</p>
+          <div class="cta-row">
+            <a class="btn btn-live" href="${b}book/">Book a call</a>
+            <button class="btn btn-ghost" type="button" id="forgeOpen">Open it full size</button>
+          </div>
+          <a class="lnk" id="forgeDemo" href="${b}work/" hidden></a>
+        </div>
+      </div>
+      <div class="panel-f">
+        <div class="step"><span>1 &nbsp;What do you do?</span><div class="trades" id="forgeTrades" role="tablist" aria-label="Your trade"></div></div>
+        <div class="step"><span>2 &nbsp;What are you called, and where?</span>
+          <div class="two-up">
+            <input id="forgeBiz" type="text" placeholder="Business name" aria-label="Business name" autocomplete="organization" maxlength="34">
+            <input id="forgeTown" type="text" placeholder="Town" aria-label="Town" autocomplete="address-level2" maxlength="22">
+          </div>
+        </div>
+        <button class="btn-go" type="button" id="forgeGo">Build my site</button>
+        <p class="fine">Nothing is sent anywhere and nothing is saved. The photograph is a stand-in made for this page, not a stock library &mdash; a real one uses pictures of your own work. The phone number is an Ofcom drama number, so nobody gets rung.</p>
+      </div>
+          </div>
   </div>
 </section>
 
 <section class="sec" id="work" aria-labelledby="h-work">
   <div class="wrap">
     <div class="sec-head">
-      <h2 id="h-work">${esc(Words(builds.length))} builds. All of them running.</h2>
-      <p class="lead">${SITES.length} full websites and ${TOOLS.length} business tools, each made for an invented business so no client is ever on show. Every one opens and works like the real thing.</p>
+      <h2 id="h-work">That was a sketch. These are finished.</h2>
+      <p class="lead">${Words(builds.length)} builds: ${SITES.length} full websites and ${TOOLS.length} business tools, each made for an invented business so no client is ever on show. Every one opens and works like the real thing.</p>
     </div>
     ${L.wall(b, FEATURED)}
     <div class="sec-foot"><a class="btn btn-dark" href="${b}work/">See all ${builds.length}</a><a class="btn btn-ghost" href="${b}work/websites/">Websites</a><a class="btn btn-ghost" href="${b}work/tools/">Tools</a></div>
@@ -66,6 +86,7 @@ ${L.header(b, 'home')}
 </section>
 
 <section class="night" id="night" aria-labelledby="h-night">
+  <img class="night-plate" src="${b}assets/plates/night.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
   <div class="wrap">
     <div class="sec-head">
       <h2 id="h-night">What happens at 9:47pm.</h2>
@@ -112,6 +133,7 @@ ${L.header(b, 'home')}
 </main>
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css'], nodes }), body, L.scripts(b, ['builds.js', 'device.js', 'nightline.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'forge.css'], nodes }), body,
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'forge.js', 'nightline.js']));
   }
 }]};

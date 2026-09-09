@@ -1,0 +1,88 @@
+/* ============================================================
+   The forge — the dark room at the top of the site where a website
+   builds itself in a phone. The only dark ground on a white site, so
+   the lit screen is the brightest thing on the page.
+   ============================================================ */
+.forge{background:var(--hand);color:#fff;padding:clamp(32px,5vw,64px) 0 clamp(40px,6vw,80px);position:relative;overflow:hidden}
+.forge .wrap{position:relative}
+.forge .grid{display:grid;grid-template-columns:minmax(0,1fr) 414px;column-gap:clamp(32px,5vw,80px);align-items:start;
+  grid-template-areas:"head phone" "panel phone";grid-template-rows:auto 1fr}
+.forge .fhead{grid-area:head}
+.forge .side{grid-area:phone}
+.forge .panel-f{grid-area:panel}
+
+.forge h1{font-size:clamp(2.5rem,5.6vw,4.6rem);letter-spacing:-.042em;line-height:.98;max-width:14ch}
+.forge .lead{color:rgba(255,255,255,.72);margin-top:20px;max-width:48ch;font-size:clamp(1.05rem,1.35vw,1.2rem)}
+.forge .lead strong{color:#fff;font-weight:600}
+
+/* the control panel */
+.panel-f{margin-top:clamp(28px,3.5vw,40px);display:grid;gap:18px;max-width:560px;align-content:start}
+.panel-f .step{display:grid;gap:10px}
+.panel-f .step>span{font-size:.9375rem;font-weight:500;color:rgba(255,255,255,.62)}
+.trades{display:flex;flex-wrap:wrap;gap:8px}
+.trades button{height:44px;padding:0 15px;border-radius:999px;border:1px solid rgba(255,255,255,.24);background:transparent;color:rgba(255,255,255,.86);font:inherit;font-size:.9375rem;font-weight:500;cursor:pointer;transition:background-color .18s var(--ease),color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)}
+.trades button:hover{border-color:#fff;color:#fff}
+.trades button:active{transform:scale(.97)}
+.trades button[aria-selected="true"]{background:#fff;color:var(--hand);border-color:#fff}
+.two-up{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.forge input{width:100%;height:54px;padding:0 16px;border-radius:var(--r-s);border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.05);color:#fff;font:inherit;font-size:1rem}
+.forge input::placeholder{color:rgba(255,255,255,.38)}
+.forge input:focus{outline:2px solid #fff;outline-offset:0;border-color:transparent;background:rgba(255,255,255,.09)}
+.forge .btn-go{height:58px;padding:0 28px;border-radius:var(--r-s);border:0;background:var(--live);color:var(--live-ink);font:inherit;font-size:1.0625rem;font-weight:600;cursor:pointer;justify-self:start;transition:transform .18s var(--ease),filter .18s var(--ease),background-color .4s var(--ease)}
+.forge .btn-go:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.forge .btn-go:active{transform:scale(.985)}
+.forge .fine{font-size:.8125rem;color:rgba(255,255,255,.55);max-width:46ch;line-height:1.5}
+.forge .fine a{color:rgba(255,255,255,.72);text-decoration:underline;text-underline-offset:3px}
+
+/* the phone */
+.forge .side{display:grid;justify-items:center;gap:16px;position:sticky;top:calc(var(--head-h) + 24px)}
+.phone-lit{position:relative;width:414px;max-width:100%;padding:12px;background:#000;border-radius:58px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 50px 90px -40px rgba(0,0,0,.9)}
+.phone-lit::after{content:"";position:absolute;inset:-40px;border-radius:90px;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.10),transparent 68%);z-index:-1;pointer-events:none}
+.phone-lit .screen{position:relative;width:390px;max-width:100%;height:min(720px,calc(100vh - 230px));min-height:540px;border-radius:46px;overflow:hidden;background:#fff}
+.phone-lit .screen iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+/* on touch the demo scrolls itself, which would trap the page scroll — so the first tap opts in */
+.tapguard{display:none;position:absolute;inset:12px;border:0;border-radius:46px;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tapguard span{position:absolute;left:-9999px}
+.tap-hint{display:none;font-size:.8125rem;color:rgba(255,255,255,.55);white-space:nowrap}
+@media (hover:none) and (pointer:coarse){.tapguard,.tap-hint{display:block}}
+@media (max-width:900px){.tapguard{display:block;inset:10px;border-radius:32px}.tap-hint{display:block}}
+@media (max-width:520px){.tapguard{inset:8px;border-radius:28px}}
+.forge-cap{display:flex;align-items:baseline;justify-content:space-between;gap:16px;width:414px;max-width:100%;min-height:44px}
+.forge-cap .who{display:grid;gap:2px;min-width:0}
+.forge-cap .who b{font-size:1.0625rem;letter-spacing:-.015em}
+.forge-cap .who span{font-size:.875rem;color:rgba(255,255,255,.55)}
+.forge-cap .side-r{display:flex;align-items:baseline;gap:14px}
+.forge-cap .t{font-variant-numeric:tabular-nums;font-size:1.75rem;font-weight:600;letter-spacing:-.03em;color:var(--live);transition:color .4s var(--ease)}
+.forge-after{width:414px;max-width:100%;display:grid;gap:14px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14)}
+.forge-after p{font-size:.9375rem;line-height:1.55;color:rgba(255,255,255,.72)}
+.forge-after p b{color:#fff;font-weight:600}
+.forge-after .cta-row .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.32)}
+.forge-after .cta-row .btn-ghost:hover{border-color:#fff}
+.forge-after a.lnk{color:rgba(255,255,255,.72);text-decoration-color:rgba(255,255,255,.3)}
+.forge-after a.lnk:hover{color:#fff;text-decoration-color:#fff}
+
+@media (max-width:1080px){
+  .forge .grid{grid-template-columns:1fr 380px;gap:40px}
+  .phone-lit,.forge-cap,.forge-after{width:380px}
+  .phone-lit .screen{width:356px}
+}
+@media (max-width:900px){
+  .forge .grid{grid-template-columns:minmax(0,1fr);grid-template-areas:none;grid-template-rows:auto;row-gap:26px;column-gap:0}
+  .forge .side{display:contents}
+  .forge .fhead,.forge .panel-f,.forge .forge-after,.forge .phone-lit,.forge .forge-cap{grid-area:auto;grid-column:1}
+  .forge .fhead{order:1}.forge .phone-lit{order:2}.forge .forge-cap{order:3}.forge .panel-f{order:4}.forge .forge-after{order:5}
+  .forge h1{max-width:none}
+  .phone-lit{width:100%;padding:10px;border-radius:40px}
+  .phone-lit .screen{width:100%;height:min(600px,64vh);min-height:440px;border-radius:32px}
+  .forge-cap,.forge-after{width:100%}
+  .forge .forge-cap{margin-top:-8px}
+  .panel-f{max-width:none;margin-top:0}
+}
+@media (max-width:520px){
+  .two-up{grid-template-columns:1fr}
+  .forge .btn-go{justify-self:stretch}
+  .phone-lit{padding:8px;border-radius:34px;box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+  .phone-lit .screen{border-radius:28px}
+  .phone-lit::after{display:none}
+}

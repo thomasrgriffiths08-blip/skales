@@ -49,6 +49,7 @@ ${L.header(b, 'work')}
 <div class="wrap">${filters('all')}</div>
 ${[...SITE_LANES, ...TOOL_LANES].map(k => laneSection(b, k)).join('')}
 </main>
+${L.forgeInvite(b, 'Pick your trade on the home page, put your business name in, and a working website for your business builds itself in a couple of seconds. Nothing to fill in but a name and a town.')}
 ${L.ctaBand(b, 'These are demos. Yours would have your name on it.', 'Same approach, your business: a site that captures the enquiry, a system that answers it in seconds, and a place where every job lives. Hand-built, owned by you.')}
 ${L.footer(b)}`;
     return L.page(L.head({ b, path: '/work/', title, description, og: 'work', css: ['device.css'], nodes }), body, L.scripts(b, ['builds.js', 'device.js']));
@@ -219,7 +220,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
       <div class="lab"><span class="sheet">More &middot; ${esc(lane.name)}</span><span class="name">${peers.length > 1 ? `The next ${esc(lane.name.toLowerCase())} ${lane.kind === 'site' ? 'websites' : 'tools'}` : 'Every build has its own page'}</span></div>
       <div class="body">
         <div class="pair">${L.tile(b, prev, { dir: 'Previous' })}${L.tile(b, next, { dir: 'Next' })}</div>
-        <p class="f-note" style="margin-top:20px">${related.length ? `Same trade: ${related.map(y => `<a class="lnk" href="${b}work/${y.slug}/">${esc(y.name)}</a>`).join(', ')}. ` : ''}<a class="lnk" href="${b}${lane.path}#${x.lane}">Every ${esc(lane.name.toLowerCase())} ${lane.kind === 'site' ? 'website' : 'tool'}</a> &middot; <a class="lnk" href="${b}work/">all ${builds.length} builds</a></p>
+        <p class="f-note" style="margin-top:20px">${related.length ? `Same trade: ${related.map(y => `<a class="lnk" href="${b}work/${y.slug}/">${esc(y.name)}</a>`).join(', ')}. ` : ''}<a class="lnk" href="${b}${lane.path}#${x.lane}">Every ${esc(lane.name.toLowerCase())} ${lane.kind === 'site' ? 'website' : 'tool'}</a> &middot; <a class="lnk" href="${b}work/">all ${builds.length} builds</a>. Or <a class="lnk" href="${b}">build one for your own business</a> in a couple of seconds.</p>
       </div>
     </div>
   </nav>

@@ -72,6 +72,12 @@ const device = (b, x, { thumbs = false } = {}) => `<div class="hero-device">
     <div class="ways"><a id="devOpen" href="${b}demos/${x.slug}/" target="_blank" rel="noopener">Open full size</a>${thumbs ? `<a id="devPage" href="${b}work/${x.slug}/">Its page</a>` : ''}</div>
   </div>
 </div>${thumbs ? `<div class="thumbs" id="thumbs" role="tablist" aria-label="Choose a build"></div>` : ''}`;
+const forgeInvite = (b, line) => `<section class="invite">
+  <div class="wrap">
+    <div><h2>Now see your own name on one.</h2><p>${line}</p></div>
+    <a class="btn btn-live" href="${b}">Build mine</a>
+  </div>
+</section>`;
 const ctaBand = (b, h, p, extra = '') => `<section class="cta-band">
   <div class="wrap grid">
     <div><h2>${h}</h2><p class="lead" style="margin-top:12px">${p}</p></div>
@@ -203,4 +209,4 @@ function scripts(b, extra = []){
 const page = (h, body, s) => `${h}\n<body>\n${body}\n${s}\n</body>\n</html>\n`;
 
 site.facts = site.facts.map(f => f.replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
-module.exports = { LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, phoneSrc };
+module.exports = { LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };

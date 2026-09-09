@@ -286,3 +286,14 @@ strong,b{font-weight:600}
 .why3 h3{margin-bottom:10px}
 .why3 p{color:var(--tx-2);line-height:1.55}
 @media (max-width:800px){.why3{grid-template-columns:1fr;gap:28px}}
+
+/* the night section carries a real photograph, darkened until the type wins */
+.night{position:relative;isolation:isolate}
+.night .night-plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.5}
+.night::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,20,22,.86),rgba(20,20,22,.94))}
+
+/* ---------- the invite back to the forge ---------- */
+.invite{background:var(--hand);color:#fff;padding:clamp(40px,6vw,72px) 0}
+.invite .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+.invite h2{font-size:clamp(1.5rem,2.8vw,2.2rem)}
+.invite p{margin-top:10px;color:rgba(255,255,255,.72);max-width:56ch;line-height:1.55}
