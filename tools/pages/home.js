@@ -22,25 +22,49 @@ module.exports = { pages: [{
 ${L.header(b, 'home')}
 <main id="main">
 
-<section class="cold" id="cold" aria-label="A missed call at 9:47pm">
+<section class="cold" id="cold" aria-label="One evening of missed calls, and the same evening with a system running">
   <div class="cold-stage">
     <video id="coldFilm" muted playsinline preload="auto" disablepictureinpicture
            poster="${b}assets/film/poster.jpg" data-lut="${b}assets/film/lut.json"
-           aria-label="A phone lighting up on the passenger seat of a van at night, in the rain">
+           aria-label="A phone turning in the dark and lighting up">
       <source src="${b}assets/film/film.mp4" type="video/mp4">
     </video>
     <img class="cold-park" id="coldPark" src="${b}assets/film/park.jpg" alt="" aria-hidden="true" decoding="async">
+    <div class="cold-frame" id="coldFrame" aria-hidden="true">
+    <div class="cold-void" id="coldVoid">
+      ${[
+        ['Missed call', '21:47 &middot; 07700 900 461', ''],
+        ['Voicemail', '21:48 &middot; not listened to', ''],
+        ['Website enquiry', 'no reply &middot; 3 days', ''],
+        ['Missed call', '21:52 &middot; unknown number', ''],
+        ['Quote sent', 'never chased', ''],
+        ['Missed call', '22:06 &middot; 07700 900 118', ''],
+        ['Review request', 'never sent', ''],
+        ['Missed call', '07:58 &middot; 07700 900 902', ''],
+        ['Enquiry', 'gone to the next firm', ''],
+      ].map(([a, c]) => `<div class="n"><i></i><b>${a}</b><span>${c}</span></div>`).join('')}
+    </div>
+    <div class="cold-screen" id="coldScreen" aria-hidden="true">
+      <span class="hd">Booked</span>
+      <span class="row"><s></s><b>Texted back</b><em>11s</em></span>
+      <span class="row"><s></s><b>Replied</b><em>2m</em></span>
+      <span class="row"><s></s><b>Slot taken</b><em>8:00</em></span>
+      <span class="row"><s></s><b>Deposit held</b><em>&pound;45</em></span>
+      <span class="ft">While you were out.</span>
+    </div>
+    </div>
     <div class="cold-cap" aria-hidden="true"><div class="wrap">
-      <p data-from="0.34" data-to="0.99">Somebody is trying to reach you.</p>
+      <p data-from="0.24" data-to="0.58">Every one of these is a job going to somebody else.</p>
+      <p data-from="0.88" data-to="0.97">This is the same evening, with a system running.</p>
     </div></div>
     <div class="cold-title" id="coldTitle"><div class="wrap">
       <span class="t">9:47pm</span>
       <span class="rule"></span>
-      <p class="s">A customer has just found you on Google and rung the number. Your phone is on the passenger seat.</p>
+      <p class="s">One evening on a phone that nobody is watching.</p>
       <span class="cold-cue"><i></i>Scroll</span>
     </div></div>
     <div class="cold-out"><div class="wrap">
-      <p>They rang the number on your website. Everything after this is about that website.</p>
+      <p>That is what gets built here. It starts with the website it runs on.</p>
       <a href="#h-forge">Build yours &mdash; it takes seconds</a>
     </div></div>
     <div class="cold-load" id="coldLoad"><span class="bar"><i></i></span></div>

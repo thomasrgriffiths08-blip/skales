@@ -14,6 +14,9 @@
 /* the box that reproduces the object-fit: cover rectangle, so type sits on the picture */
 .cold-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:max(100%,calc(100svh * 16 / 9));aspect-ratio:16/9;pointer-events:none}
+/* measured off the film's own last frame, as percentages OF THE PICTURE, so the screen
+   overlay stays on the glass at every aspect ratio the cover crop produces */
+.cold-frame{--sx:39.6%;--sy:13.1%;--sw:20.7%;--sh:73.9%}
 
 /* title card — a visitor on a full-bleed film waits for it to play unless told to scroll */
 .cold-title{position:absolute;inset:0;z-index:3;display:grid;align-content:end;justify-items:start;
@@ -71,3 +74,33 @@
 /* Reduce Motion never hides anything here: the film is scrubbed by scroll, which is not an
    animation. Only the scroll cue's pulse stops. */
 @media (prefers-reduced-motion:reduce){.cold-cue i{animation:none;opacity:.8}}
+
+/* ---------- the swarm: real cards flying through the void the film is shot in ----------
+   The video model cannot draw an interface — every screen it invents is unreadable. So the
+   film supplies the handset, the light and the dust, and everything with words on it is DOM. */
+.cold-void{position:absolute;inset:0;z-index:2;perspective:900px;perspective-origin:50% 46%;pointer-events:none;
+  transform-style:preserve-3d;transition:opacity .45s var(--ease)}
+.cold.settled .cold-void{opacity:0}
+.cold-void .n{position:absolute;left:50%;top:50%;width:calc(var(--fw,1200px) * .215);
+  padding:.75em .85em;border-radius:.7em;background:rgba(16,17,20,.82);border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 24px 60px -30px rgba(0,0,0,.9);color:#fff;font-size:calc(var(--fw,1200px) * .0108);
+  line-height:1.35;will-change:transform,opacity;opacity:0;backface-visibility:hidden}
+.cold-void .n b{display:block;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cold-void .n span{display:block;color:rgba(255,255,255,.58);font-size:.86em;margin-top:.15em}
+.cold-void .n i{position:absolute;left:0;top:.85em;bottom:.85em;width:2px;border-radius:2px;background:#FF5A4E}
+.cold-void .n.ok i{background:#43C06A}
+.cold-void .n{padding-left:1.15em}
+
+/* ---------- the screen: laid exactly over the glass in the film's last frame ---------- */
+.cold-screen{position:absolute;z-index:3;opacity:0;overflow:hidden;pointer-events:none;
+  transition:opacity .5s var(--ease);border-radius:calc(var(--fw,1200px) * .009);
+  left:var(--sx);top:var(--sy);width:var(--sw);height:var(--sh);
+  display:flex;flex-direction:column;justify-content:center;gap:.55em;
+  padding:0 .9em;font-size:calc(var(--fw,1200px) * .0092);color:#141416}
+.cold.settled .cold-screen{opacity:1}
+.cold-screen .row{display:flex;align-items:center;gap:.6em;line-height:1.25}
+.cold-screen .row s{flex:none;width:.5em;height:.5em;border-radius:50%;background:#43C06A;text-decoration:none}
+.cold-screen .row b{font-weight:600}
+.cold-screen .row em{font-style:normal;margin-left:auto;color:#6B6B70;font-size:.88em;font-variant-numeric:tabular-nums}
+.cold-screen .hd{font-weight:700;letter-spacing:-.02em;font-size:1.25em;margin-bottom:.2em}
+.cold-screen .ft{margin-top:.3em;padding-top:.5em;border-top:1px solid rgba(0,0,0,.10);color:#6B6B70;font-size:.9em}
