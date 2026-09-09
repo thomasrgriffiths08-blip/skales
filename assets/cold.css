@@ -1,0 +1,73 @@
+/* ============================================================
+   The cold open. A film that does not play: scroll drives currentTime.
+   Classes are namespaced `cold-` because the host page already owns
+   .stage, .frame, .cap and .shell.
+   ============================================================ */
+.cold{position:relative;background:#000;height:100svh;margin-top:calc(-1 * var(--head-h))}
+.cold-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#000}
+.cold-stage video,.cold-park{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cold-park{opacity:0;transition:opacity .45s var(--ease)}
+.cold.arrived .cold-park{opacity:1}
+.cold-stage::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 58%,rgba(0,0,0,.72) 100%)}
+
+/* the box that reproduces the object-fit: cover rectangle, so type sits on the picture */
+.cold-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:max(100%,calc(100svh * 16 / 9));aspect-ratio:16/9;pointer-events:none}
+
+/* title card — a visitor on a full-bleed film waits for it to play unless told to scroll */
+.cold-title{position:absolute;inset:0;z-index:3;display:grid;align-content:end;justify-items:start;
+  padding:0 var(--pad) clamp(5rem,18vh,10rem);pointer-events:none;color:#fff}
+.cold-title .wrap{width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto}
+.cold-title .t{font-size:clamp(3.2rem,11vw,8rem);font-weight:600;letter-spacing:-.05em;line-height:.92;font-variant-numeric:tabular-nums}
+.cold-title .rule{display:block;width:64px;height:3px;background:var(--live);margin:22px 0 18px;border-radius:2px}
+.cold-title .s{font-size:clamp(1.05rem,1.5vw,1.3rem);color:rgba(255,255,255,.78);max-width:34ch;line-height:1.4}
+.cold-cue{display:flex;align-items:center;gap:10px;margin-top:28px;font-size:.875rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.cold-cue i{display:block;width:1px;height:34px;background:linear-gradient(180deg,rgba(255,255,255,.7),transparent);animation:coldcue 1.8s var(--ease) infinite}
+@keyframes coldcue{0%{transform:scaleY(.3);transform-origin:top;opacity:0}40%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
+
+/* the line that runs under the film, keyed to scroll */
+.cold-cap{position:absolute;inset:0;z-index:3;display:grid;align-content:end;pointer-events:none;
+  padding:0 var(--pad) clamp(5rem,18vh,10rem)}
+.cold-cap .wrap{width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto}
+.cold-cap p{font-size:clamp(1.5rem,3.4vw,2.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;
+  color:#fff;max-width:20ch;opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.cold-cap p.on{opacity:1;transform:none}
+
+/* the hand-off: at the arrival the film points into the forge below */
+.cold-out{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 var(--pad) clamp(1.6rem,4vh,2.6rem);
+  opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease);pointer-events:none}
+.cold.arrived .cold-out{opacity:1;transform:none;pointer-events:auto}
+.cold-out .wrap{width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.cold-out p{color:#fff;font-size:clamp(1.05rem,1.5vw,1.25rem);font-weight:500;max-width:32ch}
+.cold-out a{display:inline-flex;align-items:center;height:50px;padding:0 22px;border-radius:var(--r-s);
+  background:#fff;color:#141416;font-weight:600;font-size:1rem;transition:transform .18s var(--ease)}
+.cold-out a:hover{transform:translateY(-1px)}
+
+/* loader: real buffered progress, never a spinner that lies */
+.cold-load{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:#000;
+  transition:opacity .5s var(--ease)}
+.cold-load[hidden]{display:none !important}
+.cold.ready .cold-load{opacity:0;pointer-events:none}
+.cold-load .bar{width:min(220px,40vw);height:2px;background:rgba(255,255,255,.18);border-radius:2px;overflow:hidden}
+.cold-load .bar i{display:block;height:100%;width:0;background:#fff;transition:width .3s linear}
+
+/* the masthead sits over the film, so it goes transparent until the film is behind us */
+.site-head.on-dark{background:transparent;border-bottom-color:transparent}
+.site-head.on-dark .wordmark{color:#fff}
+.site-head.on-dark .nav a{color:rgba(255,255,255,.72)}
+.site-head.on-dark .nav a:hover,.site-head.on-dark .nav a[aria-current="page"]{color:#fff;background:rgba(255,255,255,.10)}
+.site-head.on-dark .mtoggle{background:transparent;border-color:rgba(255,255,255,.34)}
+.site-head.on-dark .mtoggle span{background:#fff}
+
+@media (max-width:760px){
+  .cold-title{padding-bottom:clamp(4rem,14vh,7rem)}
+  .cold-cap{padding-bottom:clamp(4rem,14vh,7rem)}
+  .cold-cap p{max-width:14ch}
+  .cold-out .wrap{gap:12px}
+  .cold-out a{width:100%;justify-content:center}
+}
+/* Reduce Motion never hides anything here: the film is scrubbed by scroll, which is not an
+   animation. Only the scroll cue's pulse stops. */
+@media (prefers-reduced-motion:reduce){.cold-cue i{animation:none;opacity:.8}}

@@ -22,6 +22,31 @@ module.exports = { pages: [{
 ${L.header(b, 'home')}
 <main id="main">
 
+<section class="cold" id="cold" aria-label="A missed call at 9:47pm">
+  <div class="cold-stage">
+    <video id="coldFilm" muted playsinline preload="auto" disablepictureinpicture
+           poster="${b}assets/film/poster.jpg" data-lut="${b}assets/film/lut.json"
+           aria-label="A phone lighting up on the passenger seat of a van at night, in the rain">
+      <source src="${b}assets/film/film.mp4" type="video/mp4">
+    </video>
+    <img class="cold-park" id="coldPark" src="${b}assets/film/park.jpg" alt="" aria-hidden="true" decoding="async">
+    <div class="cold-cap" aria-hidden="true"><div class="wrap">
+      <p data-from="0.34" data-to="0.99">Somebody is trying to reach you.</p>
+    </div></div>
+    <div class="cold-title" id="coldTitle"><div class="wrap">
+      <span class="t">9:47pm</span>
+      <span class="rule"></span>
+      <p class="s">A customer has just found you on Google and rung the number. Your phone is on the passenger seat.</p>
+      <span class="cold-cue"><i></i>Scroll</span>
+    </div></div>
+    <div class="cold-out"><div class="wrap">
+      <p>They rang the number on your website. Everything after this is about that website.</p>
+      <a href="#h-forge">Build yours &mdash; it takes seconds</a>
+    </div></div>
+    <div class="cold-load" id="coldLoad"><span class="bar"><i></i></span></div>
+  </div>
+</section>
+
 <section class="forge" aria-labelledby="h-forge">
   <div class="wrap">
     <div class="grid">
@@ -134,7 +159,7 @@ ${L.header(b, 'home')}
 </main>
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'forge.css'], nodes }), body,
-      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'forge.js', 'nightline.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'forge.css', 'cold.css'], nodes }), body,
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'forge.js', 'cold.js', 'nightline.js']));
   }
 }]};
