@@ -7,7 +7,7 @@ Static, hand-built, no dependencies. Every page is generated from a few data fil
 | Want to… | Edit | Then |
 |---|---|---|
 | Rename the brand, change the domain, add the WhatsApp number or the Calendly link | `data/site.js` | `node tools/build.js` |
-| Add a build | Build it against `../showcase/briefs/SPEC.md` (+ a per-build brief), then `node tools/ingest.js` — it validates the meta and copies it into `data/builds/` | `tools/stills.sh NN` · `NODE_PATH=<terser+clean-css dir> node tools/demos.js` · `node tools/build.js && ./tools/og.sh` |
+| Add a build | Build it against `../showcase/briefs/SPEC.md` (+ a per-build brief), then `node tools/ingest.js` — it validates the meta and copies it into `data/builds/` | `python3 tools/phones.py NN` (the phone still every tile uses) · `NODE_PATH=<terser+clean-css dir> node tools/demos.js` · `node tools/build.js && ./tools/og.sh` |
 | Edit one of the original sixteen | `data/builds.js` | same as above |
 | Add a note | `data/notes.js` — add an entry with `slug`, `date`, `title`, `summary`, `body` | `node tools/build.js && ./tools/og.sh` |
 | Change page copy or layout | `tools/pages/*.js` | `node tools/build.js` |
@@ -21,7 +21,7 @@ Every page (`index.html`, `work/`, `work/<slug>/`, `what-i-do/`, `why/`, `book/`
 
 ## The lanes
 
-Every build belongs to a lane. Websites: **loud** (kinetic, type as image), **motion** (the page is the film), **quiet** (plain, calm, expensive), **direct** (conversion first, for trades). Tools: **broad** (any service business) or **specific** (one trade's day). The gallery, the Websites and Tools pages, the rail, the footer and the case pages all group by lane, so a new build only needs the right `lane` in its JSON. New builds are also written to a brief first: see `../showcase/briefs/SPEC.md` and the per-build sheets there.
+Every build belongs to a lane. Websites: **loud** (kinetic, type as image), **motion** (the page is the film), **quiet** (plain, calm, expensive), **direct** (conversion first, for trades). Tools: **broad** (any service business) or **specific** (one trade's day). The gallery, the Websites and Tools pages, the thumbnails, the footer and the case pages all group by lane, so a new build only needs the right `lane` in its JSON. New builds are also written to a brief first: see `../showcase/briefs/SPEC.md` and the per-build sheets there.
 
 ## The demos
 

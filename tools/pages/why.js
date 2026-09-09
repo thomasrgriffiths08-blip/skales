@@ -25,9 +25,8 @@ module.exports = { FAQ, pages: [{
 ${L.header(b, 'why')}
 <main id="main">
 <section class="hero-w wrap">
-  <span class="plate"><span>Why</span><span>One person</span><span>Built in public</span></span>
   <h1>Own it.<br><span class="off">Don&rsquo;t rent it.</span></h1>
-  <div class="row"><p class="lead">${esc(site.name)} exists because most service businesses are renting their own website from whoever built it, and getting a brochure for the money. This page is the reasoning, and the straight answers.</p></div>
+  <p class="lead">${esc(site.name)} exists because most service businesses are renting their own website from whoever built it, and getting a brochure for the money. This page is the reasoning, and the straight answers.</p>
 </section>
 
 <section class="panel">
@@ -65,7 +64,7 @@ ${L.header(b, 'why')}
     <div class="lab"><span class="sheet">In public</span><span class="name">Watch the next one</span></div>
     <div class="body">
       <h2>Why build in public?</h2>
-      <p class="lead">Because it is the only honest portfolio. A logo wall proves someone paid; a build made in front of you proves what was built. ${esc(site.name)} makes one system a week in public, and the sixteen on this site are the result &mdash; all for invented businesses, so no client&rsquo;s numbers are ever on show.</p>
+      <p class="lead">Because it is the only honest portfolio. A logo wall proves someone paid; a build made in front of you proves what was built. ${esc(site.name)} makes one system a week in public, and the builds on this site are the result &mdash; all for invented businesses, so no client&rsquo;s numbers are ever on show.</p>
       <p class="f-note">Updated ${L.monthYear(L.UPDATED)}.</p>
     </div>
   </div>

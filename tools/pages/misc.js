@@ -12,19 +12,18 @@ ${L.header(b, '')}
 <main id="main" class="wrap td-main">
   <div class="td">
     <div>
-      <span class="plate"><span>Free teardown</span><span>10 minutes</span><span>No pitch attached</span></span>
-      <h1>Ten minutes on your setup.<br>Three things back<span class="on">.</span></h1>
+      <h1>Ten minutes on your setup.<br>Three things back.</h1>
       <p class="lead">${esc(site.founder.name)} goes through your <strong>website, your Google listing, and what actually happens when someone tries to reach you</strong> &mdash; the way a customer experiences it, not the way an agency audits it.</p>
       <ul class="gets">
         <li><span class="n">01</span><span><b>What&rsquo;s leaking</b><span class="d">Where enquiries are going cold right now, with the specific step they die at.</span></span></li>
         <li><span class="n">02</span><span><b>What to fix first</b><span class="d">One thing. Not a forty-page report you&rsquo;ll never open.</span></span></li>
         <li><span class="n">03</span><span><b>What it&rsquo;s worth</b><span class="d">In jobs per month, so you can decide for yourself whether it matters.</span></span></li>
       </ul>
-      <p class="f-note" style="margin-top:1.6rem">Rather talk it through? <a class="lnk" href="${b}book/">Book a call instead</a>. Want to see the work first? <a class="lnk" href="${b}work/">Sixteen builds are running on the rack</a>.</p>
+      <p class="f-note" style="margin-top:1.6rem">Rather talk it through? <a class="lnk" href="${b}book/">Book a call instead</a>. Want to see the work first? <a class="lnk" href="${b}work/">Every build is running on the work page</a>.</p>
     </div>
     <div>
       <div class="card">
-        <div class="card-hd"><span class="lamp is-live"></span> Line 2 &middot; this form is switched on</div>
+        <div class="card-hd">Three details. One reply, from a person.</div>
         <form id="f" novalidate>
           <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required placeholder="e.g. Dave"></div>
           <div class="field"><label for="phone">WhatsApp or mobile</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="07…"></div>
@@ -56,9 +55,9 @@ const notfound = {
 ${L.header(b, '')}
 <main id="main" class="wrap nf">
   <p class="big">404</p>
-  <h1>That channel isn&rsquo;t wired up.</h1>
-  <p class="lead">The page you were after has moved or never existed. Everything that is switched on is one click away.</p>
-  <div class="cta-row"><a class="btn btn-live" href="${b}work/">Open the rack</a><a class="btn btn-ghost" href="${b}">Back to the start</a></div>
+  <h1>That page is not here.</h1>
+  <p class="lead">The page you were after has moved or never existed. Everything on the site is one click away.</p>
+  <div class="cta-row"><a class="btn btn-live" href="${b}work/">See the work</a><a class="btn btn-ghost" href="${b}">Back to the start</a></div>
 </main>
 ${L.footer(b)}`;
     return L.page(L.head({ b, path: '/404.html', title, description: 'That page has moved or never existed. Every working build and page on the site is one click away.', og: 'home', noindex: true }), body, L.scripts(b));

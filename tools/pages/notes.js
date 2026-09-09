@@ -14,9 +14,8 @@ const index = {
 ${L.header(b, 'notes')}
 <main id="main">
 <section class="hero-w wrap">
-  <span class="plate"><span>Notes</span><span>${notes.length} so far</span><span>Added to</span></span>
   <h1>Short, straight notes.</h1>
-  <div class="row"><p class="lead">Working notes on websites and systems for service businesses: what a missed call costs, why you should own your site, why the demos are fictional. Short, specific, no filler.</p></div>
+  <p class="lead">Working notes on websites and systems for service businesses: what a missed call costs, why you should own your site, why the demos are fictional. Short, specific, no filler.</p>
 </section>
 <section class="panel"><div class="wrap inner">
   <div class="lab"><span class="sheet">Index</span><span class="name">Newest first</span></div>
@@ -45,8 +44,8 @@ const posts = notes.map(n => ({
 ${L.header(b, 'notes')}
 <main id="main">
 <article class="note wrap">
-  <nav class="crumbs spec" aria-label="Breadcrumb"><a href="${b}">Home</a><span>/</span><a href="${b}notes/">Notes</a></nav>
-  <p class="spec"><time datetime="${n.date}">${fmt(n.date)}</time> &middot; ${esc(site.founder.name)}</p>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="${b}">Home</a><span>/</span><a href="${b}notes/">Notes</a></nav>
+  <p class="hint"><time datetime="${n.date}">${fmt(n.date)}</time> &middot; ${esc(site.founder.name)}</p>
   <h1>${esc(n.title)}</h1>
   <p class="lead">${esc(n.summary)}</p>
   <div class="prose">${n.body}</div>

@@ -1,156 +1,117 @@
 const L = require('../lib.js');
-const { site, builds, esc, words, Words } = L;
+const { site, builds, esc, Words } = L;
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
-const STRIP = [14, 25, 17, 2, 19, 27, 1, 23, 12, 33, 8, 10, 7, 21, 36, 29].filter(n => builds.some(x => x.n === n));   // channel order on the homepage strip
+const B = n => builds.find(x => x.n === n);
+const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);   // the eight on the home page
 
 module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
-  meta: { key: 'home', title: `${site.name} — websites & systems for service businesses`, kicker: 'Websites & systems · UK', sub: `${Words(builds.length)} working builds you can use. Booking, missed-call text-back, quotes, CRMs — hand-built, owned by you.` },
+  meta: { key: 'home', title: 'The website your customers will actually use.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `${Words(builds.length)} working builds you can use. Hand-built, owned by you.` },
   render(b){
     const title = `Websites & booking systems for UK trades | ${site.name}`;
     const description = 'Websites, online booking and missed-call text-back for UK trades, built by one person and owned by you. ' + Words(builds.length) + ' working builds run live on this site.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
     ];
-    const proof = [
-      [String(builds.length), 'working builds, live on this site'],
-      ['Every one', 'you can open and use'],
-      ['One person', 'the one you message builds it'],
-      ['Weekly', 'a new system built in public'],
-      ['Yours', 'domain, code and accounts from day one'],
+    const start = L.defaultBuild();
+    const svc = [
+      { s: site.services[0], x: B(13), see: 'a roofing firm’s site, before and after' },
+      { s: site.services[1], x: B(14), see: 'a heating engineer’s booking' },
+      { s: site.services[2], x: B(25), see: 'a missed call, texted back' },
     ];
     const body = `
 ${L.header(b, 'home')}
 <main id="main">
-<section class="hero" id="top" aria-label="Introduction">
-  <div class="wrap hero-top">
-    <div>
-      <span class="plate title-block"><span>Sheet 01</span><span>Rev ${L.monthYear(L.UPDATED)}</span><span>Scale 1:1</span><span class="on"><i class="lamp is-live"></i>${builds.length} builds live</span></span>
-      <h1>Drawn first.<br>Built by hand.<br><span class="on">Switched on.</span></h1>
-    </div>
-    <div class="hero-side">
-      <p class="lead">${esc(site.name)} builds websites and systems for UK service businesses &mdash; the kind that <strong>catch the enquiry at 9:47pm, answer it in seconds and put the job in the diary</strong> while you&rsquo;re asleep. ${Words(builds.length)} of them are running on this site. <strong>Every colour on this page is borrowed from the one that is running.</strong> Pick another and watch the page change.</p>
-      <div class="cta-row">
-        <a class="btn btn-live btn-xl" href="${b}book/">Book a call <span class="arr">&rarr;</span></a>
-        <a class="btn btn-ghost btn-xl" href="${b}work/">Open the rack <sup class="cnt">${builds.length}</sup></a>
+<section class="hero" aria-label="Introduction">
+  <div class="wrap">
+    <div class="grid">
+      <div class="copy">
+        <h1>The website your customers will actually use.</h1>
+        <p class="lead">${esc(site.name)} builds websites, online booking and follow-up for UK trades and service businesses. Hand-built, fast, and yours from day one. <strong>${esc(Words(builds.length))} working examples are on this page.</strong> Pick one up and use it.</p>
+        <div class="cta-row"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${b}work/">See all ${builds.length}</a></div>
       </div>
-      <p class="mon-note spec"><span class="lamp is-live" id="rigLamp"></span><span><b id="monWord">Booting</b> &mdash; the build below is real, not a picture of one. Use it like a customer would.</span></p>
+      <div class="side">${L.device(b, start, { thumbs: false })}</div>
     </div>
+    <div class="thumbs" id="thumbs" role="tablist" aria-label="Choose a build"></div>
   </div>
-  <div class="hero-stage">
-    <div class="stage desk">
-      <div class="chrome">
-        <span class="pips" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="url" id="rigUrl"></span>
-        <a class="pop" id="rigPop" href="${b}work/" target="_blank" rel="noopener">Open full size</a>
+</section>
+
+<section class="sec" id="work" aria-labelledby="h-work">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-work">${esc(Words(builds.length))} builds. All of them running.</h2>
+      <p class="lead">${SITES.length} full websites and ${TOOLS.length} business tools, each made for an invented business so no client is ever on show. Every one opens and works like the real thing.</p>
+    </div>
+    ${L.wall(b, FEATURED)}
+    <div class="sec-foot"><a class="btn btn-dark" href="${b}work/">See all ${builds.length}</a><a class="btn btn-ghost" href="${b}work/websites/">Websites</a><a class="btn btn-ghost" href="${b}work/tools/">Tools</a></div>
+  </div>
+</section>
+
+<section class="sec sec-alu" id="services" aria-labelledby="h-svc">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-svc">Three things, built to be used on a phone.</h2>
+      <p class="lead">Because that is where your customer is when they find you: in a van, on a sofa, at 9:47pm.</p>
+    </div>
+    <div class="svc">
+      ${svc.map(({ s, x, see }) => `<article>
+        <a class="shell" href="${b}work/${x.slug}/" aria-label="${esc(x.name)}"><img src="${L.phoneSrc(b, x)}" width="585" height="1266" alt="${esc(x.name)} on a phone" loading="lazy" decoding="async"></a>
+        <h3>${esc(s.name)}</h3>
+        <p>${esc(s.long)}</p>
+        <a class="lnk" href="${b}work/${x.slug}/">See it running: ${esc(see)}</a>
+      </article>`).join('')}
+    </div>
+    <div class="sec-foot"><a class="btn btn-ghost" href="${b}what-i-do/">More on what I build</a></div>
+  </div>
+</section>
+
+<section class="night" id="night" aria-labelledby="h-night">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-night">What happens at 9:47pm.</h2>
+      <p class="lead">A customer rings. You are at your daughter&rsquo;s birthday tea. This is the follow-up system doing your job for you, in real time. <strong>Every message below is sent by the system, not by a person.</strong></p>
+    </div>
+    <div class="night-grid">
+      <div class="thread" id="thread" aria-live="polite"></div>
+      <div>
+        <ul class="log" id="log" aria-live="polite"></ul>
+        <div class="out-line" id="lineOut"></div>
+        <button class="btn btn-ghost" id="ring" type="button">Run it</button><span id="lineLamp" hidden></span>
       </div>
-      <div class="viewport" id="viewport"><div class="boot" id="boot"><span class="lamp"></span> Powering up</div></div>
-      <div class="rig-cap" id="rigCap"></div>
-    </div>
-    <div class="poster phone-only" id="heroPoster">
-      <img src="${b}assets/stills/${L.pad(L.DEFAULT_CH)}.webp" width="800" height="500" alt="${esc(L.defaultBuild().name)} — ${esc(L.defaultBuild().short)}" decoding="async">
-      <div class="poster-foot"><span class="spec"><i class="lamp is-live"></i><span>${L.defaultBuild().mobile ? 'Built for phones too' : 'Best on a bigger screen'}</span></span><a class="btn btn-live btn-sm" href="${b}demos/${L.defaultBuild().slug}/" target="_blank" rel="noopener">${L.defaultBuild().mobile ? 'Open it full screen' : 'Open it anyway'}</a></div>
-    </div>
-    <div class="hstrip" id="rail" role="tablist" aria-label="Switch channel"></div>
-  </div>
-</section>
-
-<section class="marq" aria-label="Every build, by name">
-  <div class="marq-track" id="marq"></div>
-</section>
-<div class="wrap proof-row">
-  <ul class="proof" aria-label="Why this is the right option">
-    ${proof.map(([k, v]) => `<li><b>${esc(k)}</b><span>${esc(v)}</span></li>`).join('')}
-  </ul>
-</div>
-
-<section class="panel night" id="night">
-  <div class="wrap inner">
-    <div class="lab"><span class="sheet">The problem</span><span class="name">Most jobs aren&rsquo;t lost. They&rsquo;re missed.</span></div>
-    <div class="body">
-      <h2>What happens to a call you can&rsquo;t take at teatime?</h2>
-      <p class="lead">A call you can&rsquo;t take at teatime is a customer ringing the next firm on the list by half past. You don&rsquo;t need to answer faster. You need something that answers for you. This is the sequence ${esc(site.name)} installs, played out on an invented heating firm.</p>
-      <div class="line">
-        <div class="phone">
-          <div class="ph-head"><span class="av">R</span><span><b>Redgate Heating</b><span>07700 900461</span></span></div>
-          <div class="thread" id="thread"></div>
-        </div>
-        <div class="log-panel">
-          <div class="log-head">
-            <span class="lamp" id="lineLamp"></span>
-            <span class="spec">Line 1 &middot; residential</span>
-            <span class="sp"></span>
-            <button class="btn btn-live btn-sm" type="button" id="ring">Ring the line</button>
-          </div>
-          <ol class="log" id="log"><li style="border:0"><span class="log-empty">Press <b style="color:var(--dyeline)">Ring the line</b> and watch what happens to a call nobody picks up.</span></li></ol>
-          <div class="log-foot" id="lineOut"><span>What happens to that call is the whole business.</span></div>
-        </div>
-      </div>
-      <p class="f-note" style="margin-top:1rem">Invented business, invented customer, Ofcom drama number. The sequence is the one that actually gets built.</p>
     </div>
   </div>
 </section>
 
-<section class="panel" id="build">
-  <div class="wrap inner">
-    <div class="lab"><span class="sheet">What I build</span><span class="name">Three things, each running on this site</span></div>
-    <div class="body">
-      <h2>What does ${esc(site.name)} build?</h2>
-      <p class="lead">Three things, and each one is proven by a working build you can open: a website that captures the enquiry, booking and a pipeline that chase themselves, and follow-up that runs without you.</p>
-      ${site.services.map(s => { const pb = builds.find(x => x.n === s.proof); return `
-      <a class="brow" href="${b}work/${pb.slug}/">
-        <span><h3>${esc(s.name)}</h3><p>${esc(s.long)}</p></span>
-        <span class="plate"><span>Proven on</span><span class="on">CH ${L.pad(pb.n)}</span><span><i class="sw" style="background:${pb.c}"></i>${esc(pb.name)}</span></span>
-      </a>`; }).join('')}
-      <p class="f-note" style="margin-top:1.4rem">Every one of these has a full page: <a class="lnk" href="${b}what-i-do/">what I do, with the systems running</a>.</p>
+<section class="sec" id="how" aria-labelledby="h-how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-how">How it works after you get in touch.</h2>
+      <p class="lead">No proposal deck. No account manager. The person you message is the person who builds it.</p>
     </div>
+    <ol class="steps">
+      <li><b>A ten-minute teardown, free.</b> Your website, your Google listing and what happens when someone tries to reach you, the way a customer experiences it. Three things back by message: what is leaking, what to fix first, what it is worth in jobs.</li>
+      <li><b>A flat quote with a date.</b> Agreed before anything starts. No surprises, and no meeting that should have been a message.</li>
+      <li><b>Built in days, in public.</b> A website takes days; a full system with booking and follow-up usually one to two weeks. You can watch it being made.</li>
+      <li><b>Handed over in your name.</b> Domain, code and accounts set up as yours. Walk away tomorrow and everything keeps working.</li>
+    </ol>
+    <div class="sec-foot"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${b}teardown.html">Get the free teardown</a></div>
   </div>
 </section>
 
-<section class="flood rack-flood" id="rack">
-  <div class="wrap rack-head" style="padding-block:clamp(2.2rem,5vw,3.6rem) 1.6rem">
-    <div>
-      <h2>${Words(builds.length)} builds. Every one running.</h2>
-      <p class="lead" style="margin-top:.9rem">${SITES.length} full websites in four lanes and ${TOOLS.length} working tools, from booking and quotes to a window cleaner&rsquo;s round. Hover one and it wakes; press it and it opens.</p>
+<section class="sec sec-alu" id="why" aria-labelledby="h-why">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-why">Why ${esc(site.name)}.</h2></div>
+    <div class="why3">
+      <div><h3>You own it</h3><p>The domain, the code and every account sit in your name from the first day. Nothing is rented back to you monthly, and there is no platform your site cannot leave.</p></div>
+      <div><h3>One person</h3><p>${esc(site.founder.name)} builds every site and system personally. No sales call handed to a junior, nothing lost in a handover, because there is not one.</p></div>
+      <div><h3>Proof, not promises</h3><p>${esc(Words(builds.length))} working builds on this site, one new system a week made in public on <a class="lnk" href="${site.instagram}" target="_blank" rel="noopener">Instagram</a>. Open any of them and use it.</p></div>
     </div>
-    <a class="btn btn-live btn-xl" href="${b}work/">Open the rack <span class="arr">&rarr;</span></a>
-  </div>
-  <div class="strip" id="stripRack" data-strip="${STRIP.join(',')}"></div>
-  <div class="wrap"><p class="f-note" style="padding:1rem 0 1.8rem">Every business in them is invented &mdash; deliberately, so nothing here exposes a real client.</p></div>
-</section>
-
-<section class="panel" id="operator">
-  <div class="wrap inner">
-    <div class="lab"><span class="sheet">Who</span><span class="name">One person. The one you message builds it.</span></div>
-    <div class="body">
-      <h2>Who is behind ${esc(site.name)}?</h2>
-      <dl class="nameplate">
-        <div><dt>Operator</dt><dd><b>${esc(site.founder.name)}.</b> No account manager, no handover to a junior. You talk to the person doing the work.</dd></div>
-        <div><dt>Base</dt><dd>${esc(site.areaServed)}. Built for the way UK service businesses actually get their work &mdash; the phone, Google, word of mouth.</dd></div>
-        <div><dt>Cadence</dt><dd>One system a week, built in public on Instagram. You can watch the next one being made.</dd></div>
-        <div><dt>Method</dt><dd>By hand. No page-builders, no themes, no platform that charges you monthly to keep your own site alive.</dd></div>
-        <div><dt>Ownership</dt><dd>Domain, code and accounts in your name from day one. Walk away tomorrow and it all keeps working.</dd></div>
-        <div><dt>The demos</dt><dd>${Words(builds.length)}, all fictional businesses. Real working software &mdash; just nothing that exposes a client.</dd></div>
-      </dl>
-      <p class="f-note" style="margin-top:1.2rem"><a class="lnk" href="${b}why/">Why it works this way</a></p>
-    </div>
+    <div class="sec-foot"><a class="btn btn-ghost" href="${b}why/">More about the studio</a></div>
   </div>
 </section>
 </main>
-
-<section class="flood cta-band">
-  <div class="wrap grid">
-    <div>
-      <h2>Ready when you are.</h2>
-      <p class="lead" style="margin-top:.8rem">A short call to find out what is leaking and what to fix first. No pitch, no proposal deck. If ${esc(site.name)} is the wrong fit, you will hear that on the call too.</p>
-    </div>
-    <div class="cta-col">
-      <a class="btn btn-live" href="${b}book/">Book a call</a>
-      <a class="btn btn-ghost" href="${b}teardown.html">Or get a free teardown by message</a>
-    </div>
-  </div>
-</section>
+${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['rack.css', 'hero.css'], nodes }), body, L.scripts(b, ['builds.js', 'rack.js', 'hero.js', 'nightline.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css'], nodes }), body, L.scripts(b, ['builds.js', 'device.js', 'nightline.js']));
   }
 }]};

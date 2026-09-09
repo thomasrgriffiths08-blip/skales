@@ -15,9 +15,8 @@ module.exports = { pages: [{
 ${L.header(b, 'book')}
 <main id="main">
 <section class="hero-w wrap book-head">
-  <span class="plate"><span>Book a call</span><span>Four questions</span><span>Then a slot</span></span>
   <h1>A short call. A few questions first.</h1>
-  <div class="row"><p class="lead">Four quick questions so the call is about your business and not a pitch, then pick a time straight into the diary. Takes about a minute.</p></div>
+  <p class="lead">Four quick questions so the call is about your business and not a pitch, then pick a time straight into the diary. Takes about a minute.</p>
 </section>
 
 <section class="wrap book-wrap">
@@ -33,7 +32,7 @@ ${L.header(b, 'book')}
 
     <fieldset class="bstep" data-step="2" hidden>
       <legend><h2>What is the problem right now?</h2></legend>
-      <p class="spec" style="margin-bottom:.8rem">Pick everything that applies</p>
+      <p class="hint" style="margin-bottom:12px">Pick everything that applies</p>
       <div class="chips">${chips('problem', ['No website','Website brings no work','Missing calls','No online booking','Quotes go cold','Reviews are thin','Google listing is weak','Something else'], true)}</div>
       <p class="err" hidden>Pick at least one.</p>
       <div class="bnav"><button class="btn btn-ghost" type="button" data-back>Back</button><button class="btn btn-live" type="button" data-next>Next</button></div>

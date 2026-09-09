@@ -28,10 +28,8 @@ module.exports = { pages: [{
 ${L.header(b, 'whatido')}
 <main id="main">
 <section class="hero-w wrap">
-  <span class="plate"><span>What I do</span><span>Three systems</span><span class="on"><i class="lamp is-live"></i>All running below</span></span>
   <h1>Websites, booking and follow-up for service businesses.</h1>
-  <div class="row">
-    <p class="lead">${esc(site.name)} builds three things for UK service businesses &mdash; plumbers, electricians, roofers, fitters, cleaners, salons, anyone whose work comes in by phone: a website that captures the enquiry, booking and a pipeline that chase themselves, and follow-up that runs without you. Every one is running on this page.</p>
+  <p class="lead">${esc(site.name)} builds three things for UK service businesses &mdash; plumbers, electricians, roofers, fitters, cleaners, salons, anyone whose work comes in by phone: a website that captures the enquiry, booking and a pipeline that chase themselves, and follow-up that runs without you. Every one is running on this page.</p>
   </div>
 </section>
 
@@ -45,7 +43,7 @@ ${L.header(b, 'whatido')}
         <div class="rig rig-solo" style="--chan:${t.c}">
           <div class="stage">
             <div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><b>${esc(t.name)}</b> &middot; before and after a rebuild</span><a class="pop" href="${b}work/${t.slug}/">Its page</a></div>
-            <div class="viewport vp-short" data-solo="${t.slug}"><div class="boot">Powering up</div></div>
+            <div class="viewport vp-short" data-solo="${t.slug}"><div class="boot">Loading</div></div>
           </div>
         </div>
         <p class="hint spec"><span class="lamp is-live"></span> Drag the tape line across the same roofing firm &mdash; its 2011 site on one side, the rebuild on the other.</p>
@@ -71,7 +69,7 @@ ${L.header(b, 'whatido')}
           <div class="rig rig-solo" style="--chan:${f.c}">
             <div class="stage">
               <div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><b>${esc(f.name)}</b></span><a class="pop" href="${b}work/${f.slug}/">Its page</a></div>
-              <div class="viewport vp-short" data-solo="${f.slug}"><div class="boot">Powering up</div></div>
+              <div class="viewport vp-short" data-solo="${f.slug}"><div class="boot">Loading</div></div>
             </div>
           </div>
           <p class="hint spec"><span class="lamp is-live"></span> Service, slot, deposit, confirmed &mdash; no phone tag.</p>
@@ -165,6 +163,6 @@ ${L.header(b, 'whatido')}
 </section>
 </main>
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/what-i-do/', title, description, og: 'what-i-do', css: ['rack.css', 'systems.css'], nodes }), body, L.scripts(b, ['builds.js', 'rack.js', 'systems.js']));
+    return L.page(L.head({ b, path: '/what-i-do/', title, description, og: 'what-i-do', css: ['device.css', 'systems.css'], nodes }), body, L.scripts(b, ['builds.js', 'device.js', 'systems.js']));
   }
 }]};

@@ -70,7 +70,7 @@ write('llms.txt', short);
 const strip = h => h.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim();
 write('llms-full.txt', short + `\n\n---\n\n## Full page text\n\n` + pages.filter(p => p.sitemap !== false && !p.noindex).map(p => `### ${p.meta ? p.meta.title : p.url} — ${L.abs(p.url)}\n\n${strip(p.render(baseFor(p.url)))}\n`).join('\n'));
 
-write('manifest.webmanifest', JSON.stringify({ name: site.name, short_name: site.name, description: site.tagline, start_url: site.origin.replace(/^https?:\/\/[^/]+/, '') + '/', display: 'browser', background_color: L.defaultBuild().sheet, theme_color: L.defaultBuild().sheet, icons: [{ src: 'og/icon.png', sizes: '512x512', type: 'image/png' }] }, null, 2));
+write('manifest.webmanifest', JSON.stringify({ name: site.name, short_name: site.name, description: site.tagline, start_url: site.origin.replace(/^https?:\/\/[^/]+/, '') + '/', display: 'browser', background_color: '#FFFFFF', theme_color: '#FFFFFF', icons: [{ src: 'og/icon.png', sizes: '512x512', type: 'image/png' }] }, null, 2));
 write('tools/og-jobs.json', JSON.stringify(ogJobs, null, 2));
 write('humans.txt', `/* TEAM */\n${site.founder.name} — ${site.founder.jobTitle}\n${site.instagram}\n\n/* SITE */\nLast update: ${today}\nStandards: HTML5, CSS, vanilla JS. No frameworks, no page-builders, no runtime dependencies.\n`);
 console.log(`built ${pages.length} pages · sitemap ${sitemap.length} urls · ${ogJobs.length} OG jobs`);
