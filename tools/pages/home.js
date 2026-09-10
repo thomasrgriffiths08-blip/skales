@@ -4,22 +4,38 @@ const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => 
 const B = n => builds.find(x => x.n === n);
 /* ---- iOS app tiles: drawn, never fetched. 24-unit box, a flat brand colour and
    a top sheen, which is what a real icon reads as at notification size. ---- */
+const SHEEN = '<path d="M0 0h24v11H0z" fill="#fff" opacity=".15"/>';
+const HANDSET = 'M8.5 5.5 6.7 7.3a1.4 1.4 0 0 0-.1 1.9c3 3.6 5.7 6.3 9.3 9.3a1.4 1.4 0 0 0 1.9-.1l1.8-1.8c.4-.4.4-1 0-1.4l-2.2-1.9a1 1 0 0 0-1.3 0l-.9.8a17.4 17.4 0 0 1-3.8-3.8l.8-.9a1 1 0 0 0 0-1.3l-1.9-2.2a1 1 0 0 0-1.4 0Z';
+const BUBBLE = 'M12 5.4c-4 0-7.2 2.6-7.2 5.8 0 1.9 1.1 3.5 2.8 4.6-.2 1-.7 2-1.5 2.8 1.5-.2 2.9-.7 4.1-1.5.6.1 1.2.2 1.8.2 4 0 7.2-2.6 7.2-5.9S16 5.4 12 5.4Z';
 const IC = {
-  phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#34C759"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".14"/><path d="M8.5 5.5 6.7 7.3a1.4 1.4 0 0 0-.1 1.9c3 3.6 5.7 6.3 9.3 9.3a1.4 1.4 0 0 0 1.9-.1l1.8-1.8c.4-.4.4-1 0-1.4l-2.2-1.9a1 1 0 0 0-1.3 0l-.9.8a17.4 17.4 0 0 1-3.8-3.8l.8-.9a1 1 0 0 0 0-1.3l-1.9-2.2a1 1 0 0 0-1.4 0Z" fill="#fff"/></svg>',
+  phone: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#34C759"/>${SHEEN}<path d="${HANDSET}" fill="#fff"/></svg>`,
+  msg:   `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#4CD264"/>${SHEEN}<path d="${BUBBLE}" fill="#fff"/></svg>`,
+  wa:    `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#25D366"/>${SHEEN}<path d="${BUBBLE}" fill="#fff"/><path d="${HANDSET}" fill="#25D366" transform="translate(12 11.6) scale(.44) translate(-12 -11.6)"/></svg>`,
+  mail:  `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#1E8FFF"/>${SHEEN}<rect x="4.4" y="7" width="15.2" height="10.4" rx="2.1" fill="#fff"/><path d="M5.2 8.4 12 13.1l6.8-4.7" fill="none" stroke="#1E8FFF" stroke-width="1.4" stroke-linecap="round"/></svg>`,
   web:   '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#0A84FF"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".16"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="#fff" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="3" ry="6.6" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M5.6 9.9h12.8M5.6 14.1h12.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>',
   cal:   '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#FF3B30"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".14"/><rect x="5.2" y="6.4" width="13.6" height="12.4" rx="2.1" fill="#fff"/><path d="M5.2 10.1h13.6" stroke="#FF3B30" stroke-width="1.2"/><rect x="8" y="4.6" width="1.5" height="3.4" rx=".75" fill="#fff"/><rect x="14.5" y="4.6" width="1.5" height="3.4" rx=".75" fill="#fff"/><rect x="7.4" y="12" width="3" height="2.6" rx=".6" fill="#FF3B30" opacity=".82"/><rect x="12" y="12" width="3" height="2.6" rx=".6" fill="#FF3B30" opacity=".3"/></svg>'
 };
 /* one notification, built the way iOS builds one: tile, app name, time, title, body */
 const note = (k, app, time, t1, t2) =>
   `<span class="ic">${IC[k]}</span><span class="tx"><span class="hd"><b>${app}</b><em>${time}</em></span><span class="t1">${t1}</span><span class="t2">${t2}</span></span>`;
-/* the evening, in the order it actually happened */
+/* One evening on a working phone, in the order it happened. It is meant to be more than fits:
+   six apps, four and a half hours, and the same number ringing three times. */
 const EVENING = [
-  ['phone', 'PHONE',    '21:47', 'Missed call',        '07700 900 461'],
-  ['web',   'WEBSITE',  '21:48', 'Website enquiry',    '&ldquo;Boiler&rsquo;s gone off, no heat&rdquo;'],
-  ['phone', 'PHONE',    '21:52', 'Missed call',        'Unknown number'],
-  ['cal',   'CALENDAR', '22:04', 'Appointment request','Thursday, 8:00 am'],
-  ['phone', 'PHONE',    '22:06', 'Missed call',        '07700 900 118'],
-  ['web',   'WEBSITE',  '22:31', 'New booking',        'No deposit taken &middot; unconfirmed']
+  ['phone','PHONE',    '17:02','Missed call',        '07700 900 461'],
+  ['phone','PHONE',    '17:04','Voicemail',          '0:34 &middot; not listened to'],
+  ['wa',   'WHATSAPP', '17:26','Dave &mdash; kitchen job', 'Any chance you could come Thursday?'],
+  ['phone','PHONE',    '17:48','Missed call',        '07700 900 118'],
+  ['web',  'WEBSITE',  '18:05','New enquiry',        '&ldquo;Boiler&rsquo;s gone off, no heat&rdquo;'],
+  ['msg',  'MESSAGES', '18:31','07700 900 902',      'Hi, are you still doing bathrooms?'],
+  ['phone','PHONE',    '18:52','Missed call',        '07700 900 461 &middot; 2nd time'],
+  ['mail', 'MAIL',     '19:14','Quote request',      'Northgate Lettings &mdash; 4 properties'],
+  ['phone','PHONE',    '19:40','Missed call',        'Unknown number'],
+  ['cal',  'CALENDAR', '20:03','Appointment request','Thursday, 8:00 am'],
+  ['wa',   'WHATSAPP', '20:22','Dave &mdash; kitchen job', 'Did you get my message?'],
+  ['phone','PHONE',    '20:47','Missed call',        '07700 900 461 &middot; 3rd time'],
+  ['web',  'WEBSITE',  '21:05','New booking',        'No deposit taken &middot; unconfirmed'],
+  ['msg',  'MESSAGES', '21:26','07700 900 774',      'Still waiting on that quote mate'],
+  ['phone','PHONE',    '21:46','Missed call',        '07700 900 774']
 ];
 const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
 
@@ -52,11 +68,8 @@ ${L.header(b, 'home')}
     <div class="cold-frame" id="coldFrame" aria-hidden="true">
 
     <div class="cold-void" id="coldVoid">
-      ${EVENING.concat([
-        ['phone', 'PHONE',   '22:44', 'Missed call',     '07700 900 902'],
-        ['web',   'WEBSITE', '22:52', 'Quote request',   'Never chased'],
-        ['cal',   'CALENDAR','23:10', 'Reminder',        'Review not asked for']
-      ]).map(n => `<div class="n nc">${note(n[0], n[1], n[2], n[3], n[4])}</div>`).join('')}
+      ${[0,2,4,6,8,10,12,13,14].map(i => EVENING[i])
+        .map(n => `<div class="n nc">${note(n[0], n[1], n[2], n[3], n[4])}</div>`).join('')}
     </div>
 
     <div class="ios" id="coldIos">
@@ -81,13 +94,14 @@ ${L.header(b, 'home')}
         <div class="oc">
           <span class="ic ic-sk">s<i>k</i></span>
           <span class="tx"><span class="hd"><b>SKALES</b><em>now</em></span>
-            <span class="t1">Tonight, handled</span><span class="t2">6 things, grouped into one</span></span>
+            <span class="t1">Tonight, handled</span><span class="t2">15 things, while you were on a job</span></span>
         </div>
         <div class="op">
-          <div class="op-r"><b>3 missed calls</b><em>texted back in 11s</em></div>
-          <div class="op-r"><b>2 jobs booked</b><em>Thu 08:00 &middot; Fri 13:30</em></div>
-          <div class="op-r"><b>1 deposit held</b><em>&pound;45</em></div>
-          <div class="op-f">Nothing left in your inbox.</div>
+          <div class="op-r"><b>7 calls &amp; voicemails</b><em>texted back in 11s</em></div>
+          <div class="op-r"><b>4 messages</b><em>answered and quoted</em></div>
+          <div class="op-r"><b>3 jobs booked</b><em>Thu 08:00 &middot; Fri 13:30</em></div>
+          <div class="op-r"><b>1 deposit taken</b><em>&pound;45</em></div>
+          <div class="op-f">You did none of it.</div>
         </div>
       </div>
 
@@ -96,9 +110,9 @@ ${L.header(b, 'home')}
 
     </div>
     <div class="cold-cap" aria-hidden="true"><div class="wrap">
-      <p data-from="0.13" data-to="0.56">Every one of these is a job going to somebody else.</p>
-      <p data-from="0.63" data-to="0.77">One system picks all of it up.</p>
-      <p data-from="0.84" data-to="0.99">Answered, booked and paid for, while you were out.</p>
+      <p data-from="0.32" data-to="0.62">Every one of these is a job, or a job lost.</p>
+      <p data-from="0.68" data-to="0.80">Then it goes quiet.</p>
+      <p data-from="0.86" data-to="0.99">Every one of them answered. Not by you.</p>
     </div></div>
     <div class="cold-title" id="coldTitle"><div class="wrap">
       <span class="t">9:47pm</span>

@@ -130,7 +130,7 @@
 
 /* the stack: bottom-anchored, newest at the bottom, older ones pushed up — as on the phone */
 .ios-stack{position:absolute;left:calc(var(--u) * .034);right:calc(var(--u) * .034);
-  bottom:calc(var(--u) * .085);height:calc(var(--u) * 1.34)}
+  bottom:calc(var(--u) * .085);height:calc(var(--u) * 1.62)}   /* up to the clock: more arrives than fits */
 .ios-stack .nc{position:absolute;left:0;right:0;bottom:0;opacity:0;
   background:rgba(255,255,255,.9);box-shadow:0 .08em .5em rgba(62,50,28,.10);
   will-change:transform,opacity}

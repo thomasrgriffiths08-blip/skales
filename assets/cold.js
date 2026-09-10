@@ -23,13 +23,13 @@
   var FILM_END = 0.28;      /* the turn is over inside the first 28% of the walk; raise to slow it */
   var DWELL = 0.35;         /* screens of held picture after the story lands, before the page moves on */
   /* the evening */
-  var LAND_FROM = 0.29, LAND_TO = 0.60;    /* six notifications, one at a time */
-  var SWARM_END = 0.62, SETTLE = 0.66;     /* the cards in the void funnel into the handset */
-  var FOLD_FROM = 0.63, FOLD_TO = 0.78;    /* six tuck into a stack, the stack becomes one */
-  var OPEN_FROM = 0.79, OPEN_TO = 0.94;    /* the one opens, and the evening is sorted */
-
+  var LAND_FROM = 0.30, LAND_TO = 0.575;   /* fifteen of them, faster than they can be read */
+  var SWARM_END = 0.63, SETTLE = 0.66;     /* the cards in the void funnel into the handset */
+  var CLEAR_FROM = 0.635, CLEAR_TO = 0.720;/* the backlog sweeps away up the screen */
+  var ONE_FROM = 0.79, ONE_SPAN = 0.05;    /* a held, empty screen sits between those two: the quiet */
+  var OPEN_FROM = 0.845, OPEN_TO = 0.955;  /* the one opens, and the evening is accounted for */
   var lut = null, current = 0, target = 0, laidOutFor = 0, walkPx = 1, arrived = false, raf = null;
-  var u = 300, slot = 60, cardH = 52, ocH = 52, panelH = 90, sized = false;
+  var u = 300, slot = 60, cardH = 52, ocH = 52, panelH = 90, stackH = 400, sized = false;
 
   fetch(film.getAttribute('data-lut')).then(function(r){ return r.json(); })
     .then(function(j){ if (Array.isArray(j) && j.length > 2) lut = j; }).catch(function(){});
@@ -78,6 +78,7 @@
     u = fw0 * 0.1797;                                   /* the glass width: iOS's own 393pt */
     cardH = (cards[0] && cards[0].offsetHeight) || u * 0.19;
     slot = cardH + u * 0.022;
+    stackH = (stackEl && stackEl.clientHeight) || u * 1.62;
     /* measured, never arithmetic: let the card find its own height, read it, put it back. Working
        the panel out from em ratios got it 25% short and the last line never appeared. */
     if (one && oc){
@@ -101,40 +102,38 @@
   function glass(){
     if (!cards.length) return;
     var n = cards.length, step = (LAND_TO - LAND_FROM) / n,
-        fold = ease((current - FOLD_FROM) / (FOLD_TO - FOLD_FROM)),
-        gone = ease((current - 0.712) / 0.050),           /* the last card leaves... */
-        oneIn = ease((current - 0.728) / 0.048),          /* ...and the Skales one takes its place, close
-           enough behind it to read as the same card changing, far enough not to double-expose */
-        land = [], ent = [];
+        clear = ease((current - CLEAR_FROM) / (CLEAR_TO - CLEAR_FROM)),
+        lift = u * 0.13, land = [], ent = [];
     for (var k = 0; k < n; k++){
-      var x = (current - (LAND_FROM + k * step)) / (step * 0.8);
+      var x = (current - (LAND_FROM + k * step)) / (step * 0.85);
       land[k] = ease(x);                                 /* fade and shove: monotonic, so the stack never wobbles */
       ent[k] = back(x);                                  /* the card's own arrival, which does */
     }
     for (var i = 0; i < n; i++){
       var push = 0;                                     /* every newer card that has arrived shoves this one up a slot */
       for (var j = i + 1; j < n; j++) push += land[j];
-      /* the fold ripples from the oldest down, and each card fades as it travels, so no two of
-         them are ever legible in the same place — six cards pouring into the one at the bottom */
-      var fi = ease((fold - i * 0.045) / 0.6),
-          yl = (1 - ent[i]) * slot * 1.06 - push * slot,
-          y = yl * (1 - fi * fi),                       /* it barely moves until it is already faint */
-          s = (0.965 + 0.035 * land[i]) * (1 - 0.045 * fi * (i < n - 1 ? 1 : 0)),
-          o = land[i] * (i < n - 1 ? 1 - cl(fi * 1.9) : 1 - cl(gone * 2));
+      /* the sweep is staggered from the BOTTOM up, because the cards at the bottom are the ones
+         actually on screen — rippling from the oldest spent the whole window on cards nobody can see */
+      var ci = ease((clear - (n - 1 - i) * 0.014) / 0.80),
+          y = (1 - ent[i]) * slot * 1.06 - push * slot - ci * lift,
+          /* more arrives than fits, so a card shoved off the top of the list dissolves there
+             instead of sailing over the clock — which is what a phone does with a long list */
+          top = cl((stackH - cardH + y) / (cardH * 0.9)),
+          o = land[i] * top * (1 - ci);
       var c = cards[i];
       c.style.opacity = o.toFixed(3);
-      c.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0) scale(' + s.toFixed(3) + ')';
+      c.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0) scale(' + (0.965 + 0.035 * land[i]).toFixed(3) + ')';
       c.style.zIndex = i + 1;
     }
     if (!one) return;
     var open = ease((current - OPEN_FROM) / (OPEN_TO - OPEN_FROM));
     /* the panel's real height, read once, at the first frame it is needed — measuring it up front
        raced the stage settling and came out short every time, so the last line never showed */
-    if (open > 0 && !sized){
+    if (!sized && current > ONE_FROM - 0.02){
       sized = true; ocH = oc.offsetHeight || cardH;
       panelH = Math.max(0, one.scrollHeight - ocH);
     }
-    one.style.opacity = oneIn.toFixed(3);
+    one.style.opacity = ease((current - ONE_FROM) / ONE_SPAN).toFixed(3);
     one.style.height = (ocH + panelH * open).toFixed(1) + 'px';
     if (op) op.style.opacity = ease((open - 0.22) / 0.5);
     if (dim) dim.style.opacity = (0.12 * open).toFixed(3);
@@ -192,6 +191,9 @@
     if (Math.abs(target - current) > 0.0002) raf = requestAnimationFrame(tick);
   }
   function kick(){ if (!raf) raf = requestAnimationFrame(tick); }
+  /* a read-only window on the scrub, so a harness can check a beat instead of inferring it from
+     pixels: every wrong guess this session came from assuming where a screenshot actually was */
+  window.__cold = function(){ return { p: current, walk: walkPx, start: sec.getBoundingClientRect().top + window.scrollY }; };
 
   var done = false;
   function ready(){
