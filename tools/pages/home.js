@@ -2,6 +2,25 @@ const L = require('../lib.js');
 const { site, builds, esc, Words } = L;
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
 const B = n => builds.find(x => x.n === n);
+/* ---- iOS app tiles: drawn, never fetched. 24-unit box, a flat brand colour and
+   a top sheen, which is what a real icon reads as at notification size. ---- */
+const IC = {
+  phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#34C759"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".14"/><path d="M8.5 5.5 6.7 7.3a1.4 1.4 0 0 0-.1 1.9c3 3.6 5.7 6.3 9.3 9.3a1.4 1.4 0 0 0 1.9-.1l1.8-1.8c.4-.4.4-1 0-1.4l-2.2-1.9a1 1 0 0 0-1.3 0l-.9.8a17.4 17.4 0 0 1-3.8-3.8l.8-.9a1 1 0 0 0 0-1.3l-1.9-2.2a1 1 0 0 0-1.4 0Z" fill="#fff"/></svg>',
+  web:   '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#0A84FF"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".16"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="#fff" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="3" ry="6.6" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M5.6 9.9h12.8M5.6 14.1h12.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>',
+  cal:   '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#FF3B30"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".14"/><rect x="5.2" y="6.4" width="13.6" height="12.4" rx="2.1" fill="#fff"/><path d="M5.2 10.1h13.6" stroke="#FF3B30" stroke-width="1.2"/><rect x="8" y="4.6" width="1.5" height="3.4" rx=".75" fill="#fff"/><rect x="14.5" y="4.6" width="1.5" height="3.4" rx=".75" fill="#fff"/><rect x="7.4" y="12" width="3" height="2.6" rx=".6" fill="#FF3B30" opacity=".82"/><rect x="12" y="12" width="3" height="2.6" rx=".6" fill="#FF3B30" opacity=".3"/></svg>'
+};
+/* one notification, built the way iOS builds one: tile, app name, time, title, body */
+const note = (k, app, time, t1, t2) =>
+  `<span class="ic">${IC[k]}</span><span class="tx"><span class="hd"><b>${app}</b><em>${time}</em></span><span class="t1">${t1}</span><span class="t2">${t2}</span></span>`;
+/* the evening, in the order it actually happened */
+const EVENING = [
+  ['phone', 'PHONE',    '21:47', 'Missed call',        '07700 900 461'],
+  ['web',   'WEBSITE',  '21:48', 'Website enquiry',    '&ldquo;Boiler&rsquo;s gone off, no heat&rdquo;'],
+  ['phone', 'PHONE',    '21:52', 'Missed call',        'Unknown number'],
+  ['cal',   'CALENDAR', '22:04', 'Appointment request','Thursday, 8:00 am'],
+  ['phone', 'PHONE',    '22:06', 'Missed call',        '07700 900 118'],
+  ['web',   'WEBSITE',  '22:31', 'New booking',        'No deposit taken &middot; unconfirmed']
+];
 const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
 
 module.exports = { pages: [{
@@ -31,36 +50,55 @@ ${L.header(b, 'home')}
     </video>
     <img class="cold-park" id="coldPark" src="${b}assets/film/park.jpg" alt="" aria-hidden="true" decoding="async">
     <div class="cold-frame" id="coldFrame" aria-hidden="true">
+
     <div class="cold-void" id="coldVoid">
-      ${[
-        ['Missed call', '21:47 &middot; 07700 900 461', ''],
-        ['Voicemail', '21:48 &middot; not listened to', ''],
-        ['Website enquiry', 'no reply &middot; 3 days', ''],
-        ['Missed call', '21:52 &middot; unknown number', ''],
-        ['Quote sent', 'never chased', ''],
-        ['Missed call', '22:06 &middot; 07700 900 118', ''],
-        ['Review request', 'never sent', ''],
-        ['Missed call', '07:58 &middot; 07700 900 902', ''],
-        ['Enquiry', 'gone to the next firm', ''],
-      ].map(([a, c]) => `<div class="n"><i></i><b>${a}</b><span>${c}</span></div>`).join('')}
+      ${EVENING.concat([
+        ['phone', 'PHONE',   '22:44', 'Missed call',     '07700 900 902'],
+        ['web',   'WEBSITE', '22:52', 'Quote request',   'Never chased'],
+        ['cal',   'CALENDAR','23:10', 'Reminder',        'Review not asked for']
+      ]).map(n => `<div class="n nc">${note(n[0], n[1], n[2], n[3], n[4])}</div>`).join('')}
     </div>
-    <div class="cold-notes" id="coldNotes" aria-hidden="true">
-      ${[['Missed call','21:47'],['Voicemail','21:48'],['Missed call','21:52'],
-         ['Enquiry','no reply'],['Missed call','22:06'],['Missed call','07:58']]
-        .map(([a, t]) => `<span class="r"><s></s><b>${a}</b><em>${t}</em></span>`).join('')}
+
+    <div class="ios" id="coldIos">
+      <div class="ios-wall"></div>
+      <div class="ios-dim" id="coldDim"></div>
+      <div class="ios-notch"></div>
+      <svg class="ios-stat" viewBox="0 0 74 12" aria-hidden="true">
+        <rect x="0" y="7.5" width="2.6" height="4.5" rx="1" /><rect x="4.4" y="5.4" width="2.6" height="6.6" rx="1" />
+        <rect x="8.8" y="3.3" width="2.6" height="8.7" rx="1" /><rect x="13.2" y="1.2" width="2.6" height="10.8" rx="1" />
+        <path d="M21.4 4.3a8.6 8.6 0 0 1 10.8 0M23.4 7a5.6 5.6 0 0 1 6.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        <circle cx="26.8" cy="10.2" r="1.5"/>
+        <rect x="52" y="1.6" width="19" height="9.4" rx="3" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".42"/>
+        <rect x="53.5" y="3.1" width="13" height="6.4" rx="1.8"/><path d="M72.4 5.1v2.4a2.4 2.4 0 0 0 0-2.4Z" opacity=".42"/>
+      </svg>
+      <div class="ios-lock" id="coldLock"><span class="dt">Wednesday 9 September</span><span class="ck">21:47</span></div>
+
+      <div class="ios-stack" id="coldStack">
+        ${EVENING.map(n => `<div class="nc">${note(n[0], n[1], n[2], n[3], n[4])}</div>`).join('')}
+      </div>
+
+      <div class="ios-one" id="coldOne">
+        <div class="oc">
+          <span class="ic ic-sk">s<i>k</i></span>
+          <span class="tx"><span class="hd"><b>SKALES</b><em>now</em></span>
+            <span class="t1">Tonight, handled</span><span class="t2">6 things, grouped into one</span></span>
+        </div>
+        <div class="op">
+          <div class="op-r"><b>3 missed calls</b><em>texted back in 11s</em></div>
+          <div class="op-r"><b>2 jobs booked</b><em>Thu 08:00 &middot; Fri 13:30</em></div>
+          <div class="op-r"><b>1 deposit held</b><em>&pound;45</em></div>
+          <div class="op-f">Nothing left in your inbox.</div>
+        </div>
+      </div>
+
+      <div class="ios-home"></div>
     </div>
-    <div class="cold-screen" id="coldScreen" aria-hidden="true">
-      <span class="hd">Booked</span>
-      <span class="row"><s></s><b>Texted back</b><em>11s</em></span>
-      <span class="row"><s></s><b>Replied</b><em>2m</em></span>
-      <span class="row"><s></s><b>Slot taken</b><em>8am</em></span>
-      <span class="row"><s></s><b>Deposit held</b><em>&pound;45</em></span>
-      <span class="ft">While you were out.</span>
-    </div>
+
     </div>
     <div class="cold-cap" aria-hidden="true"><div class="wrap">
-      <p data-from="0.20" data-to="0.66">Every one of these is a job going to somebody else.</p>
-      <p data-from="0.84" data-to="0.99">This is the same evening, with a system running.</p>
+      <p data-from="0.13" data-to="0.56">Every one of these is a job going to somebody else.</p>
+      <p data-from="0.63" data-to="0.77">One system picks all of it up.</p>
+      <p data-from="0.84" data-to="0.99">Answered, booked and paid for, while you were out.</p>
     </div></div>
     <div class="cold-title" id="coldTitle"><div class="wrap">
       <span class="t">9:47pm</span>

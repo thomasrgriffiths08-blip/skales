@@ -12,11 +12,16 @@
   background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 58%,rgba(0,0,0,.72) 100%)}
 
 /* the box that reproduces the object-fit: cover rectangle, so type sits on the picture */
-.cold-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+/* z-index:1 is load-bearing. The transform makes this a stacking context, so without it the
+   stage's vignette paints OVER the handset and greys the lit screen out — a screen is emissive,
+   and nothing in front of the camera should dim it. Below the captions (z:3), above the film. */
+.cold-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;
   width:max(100%,calc(100svh * 16 / 9));aspect-ratio:16/9;pointer-events:none}
-/* measured off the film's own last frame, as percentages OF THE PICTURE, so the screen
-   overlay stays on the glass at every aspect ratio the cover crop produces */
-.cold-frame{--sx:41.2%;--sy:18.0%;--sw:17.4%;--sh:67.0%}
+/* Measured off the film's own parked frame by flood-filling the lit glass: on 1280x720 it is
+   x 524..753, y 107..624 — 230 x 518, a ratio of 2.25 against a real iPhone's 2.17. So the
+   overlay is not "near enough": it is the handset's screen, and --u (its width) is the unit
+   every iOS proportion below is expressed in, exactly as Apple expresses them against 393pt. */
+.cold-frame{--sx:40.94%;--sy:14.86%;--sw:17.97%;--sh:71.94%;--u:calc(var(--fw,1200px) * .1797)}
 
 /* title card — a visitor on a full-bleed film waits for it to play unless told to scroll */
 .cold-title{position:absolute;inset:0;z-index:3;display:grid;align-content:end;justify-items:start;
@@ -33,7 +38,10 @@
 /* the line that runs under the film, keyed to scroll */
 .cold-cap{position:absolute;inset:0;z-index:3;display:grid;align-content:end;pointer-events:none;
   padding:0 var(--pad) clamp(5rem,18vh,10rem)}
-.cold-cap .wrap{width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto}
+/* every line lands in the SAME place: as separate grid rows they stacked, so the first caption
+   appeared a third of the way up the screen and the last one on the handset */
+.cold-cap .wrap{width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto;display:grid}
+.cold-cap .wrap p{grid-area:1/1;align-self:end}
 .cold-cap p{font-size:clamp(1.5rem,3.1vw,2.4rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;
   color:#fff;max-width:min(18ch,34vw);text-shadow:0 2px 22px rgba(0,0,0,.72);opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .cold-cap p.on{opacity:1;transform:none}
@@ -57,58 +65,98 @@
 @media (max-width:760px){
   /* the picture is cropped hard, so the lit glass fills most of the screen: darken the lower
      band or white type lands on it */
-  .cold-stage::after{background:linear-gradient(180deg,rgba(0,0,0,.44) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 52%,rgba(0,0,0,.66) 74%,rgba(0,0,0,.92) 100%)}
+  .cold-stage::after{background:linear-gradient(180deg,rgba(0,0,0,.44) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 58%,rgba(0,0,0,.52) 80%,rgba(0,0,0,.86) 100%)}
+  /* the handset fills a phone screen top to bottom, so a caption at the foot lands ON the glass.
+     The title card may stay there — it only shows while the screen is still dark — but the running
+     line moves to the black band between the masthead and the top of the handset. */
   .cold-title{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom))}
-  .cold-cap{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom))}
-  .cold-cap p{max-width:14ch}
   .cold-title .s{max-width:30ch}
+  .cold-cap{align-content:start;padding:calc(var(--head-h) + 10px) var(--pad) 0}
+  .cold-cap p{font-size:.95rem;line-height:1.3;max-width:none;letter-spacing:-.01em;
+    text-shadow:0 1px 14px rgba(0,0,0,.9),0 0 34px rgba(0,0,0,.7);transform:translateY(-8px)}
+  .cold-cap p.on{transform:none}
 }
 /* Reduce Motion never hides anything here: the film is scrubbed by scroll, which is not an
    animation. Only the scroll cue's pulse stops. */
 @media (prefers-reduced-motion:reduce){.cold-cue i{animation:none;opacity:.8}}
 
-/* ---------- the swarm: real cards flying through the void the film is shot in ----------
-   The video model cannot draw an interface — every screen it invents is unreadable. So the
-   film supplies the handset, the light and the dust, and everything with words on it is DOM. */
+/* ============================================================
+   The two DOM layers the video model cannot draw: the notifications, and the screen.
+   The film supplies the handset, the light and the dust. Everything with words on it
+   is real markup, in the real system typeface, at real iOS proportions.
+   ============================================================ */
+
+/* ---------- one notification, built the way iOS builds one ---------- */
+.nc{display:flex;align-items:flex-start;gap:.62em;padding:.66em .74em .72em;border-radius:1.5em;
+  box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+.nc .ic{flex:none;width:2.53em;height:2.53em;border-radius:.62em;overflow:hidden;display:block}
+.nc .ic svg{display:block;width:100%;height:100%}
+.nc .tx{flex:1;min-width:0;display:block}
+.nc .hd{display:flex;align-items:center;gap:.4em;font-size:.867em;line-height:1.2;letter-spacing:.02em}
+.nc .hd b{font-weight:590;letter-spacing:.045em}
+.nc .hd em{margin-left:auto;font-style:normal;font-variant-numeric:tabular-nums}
+.nc .t1,.nc .t2{display:block;line-height:1.26;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc .t1{font-weight:600;letter-spacing:-.012em;margin-top:.06em}
+
+/* ---------- the swarm: the same cards, flying through the void the film was shot in ---------- */
 .cold-void{position:absolute;inset:0;z-index:2;perspective:900px;perspective-origin:50% 46%;pointer-events:none;
-  transform-style:preserve-3d;transition:opacity .45s var(--ease)}
+  transform-style:preserve-3d;font-size:calc(var(--nw,1200px) * .0122);transition:opacity .45s var(--ease)}
 .cold.settled .cold-void{opacity:0}
-.cold-void .n{position:absolute;left:50%;top:50%;width:calc(var(--nw,1200px) * .21);
-  padding:.75em .85em;border-radius:.7em;background:rgba(16,17,20,.82);border:1px solid rgba(255,255,255,.16);
-  box-shadow:0 24px 60px -30px rgba(0,0,0,.9);color:#fff;font-size:calc(var(--nw,1200px) * .0108);
-  line-height:1.35;will-change:transform,opacity;opacity:0;backface-visibility:hidden}
-.cold-void .n b{display:block;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cold-void .n span{display:block;color:rgba(255,255,255,.58);font-size:.86em;margin-top:.15em}
-.cold-void .n i{position:absolute;left:0;top:.85em;bottom:.85em;width:2px;border-radius:2px;background:#FF5A4E}
-.cold-void .n.ok i{background:#43C06A}
-.cold-void .n{padding-left:1.15em}
+.cold-void .n{position:absolute;left:50%;top:50%;width:calc(var(--nw,1200px) * .235);
+  background:rgba(20,20,23,.82);border:1px solid rgba(255,255,255,.14);color:#fff;
+  box-shadow:0 1.4em 3em -1.5em rgba(0,0,0,.92);
+  will-change:transform,opacity;opacity:0;backface-visibility:hidden}
+.cold-void .n .hd{color:rgba(255,255,255,.5)}
+.cold-void .n .t2{color:rgba(255,255,255,.58)}
 
-/* ---------- the glass filling up: rows land on the phone itself as you scroll ---------- */
-.cold-notes{position:absolute;z-index:3;overflow:hidden;pointer-events:none;
-  left:var(--sx);top:var(--sy);width:var(--sw);height:var(--sh);
-  border-radius:calc(var(--fw,1200px) * .009);
-  display:flex;flex-direction:column;justify-content:flex-start;gap:.34em;
-  padding:1.1em .6em 0;font-size:calc(var(--fw,1200px) * .0078);color:#1A1A1C;
-  transition:opacity .4s var(--ease)}
-.cold.settled .cold-notes{opacity:0}
-.cold-notes .r{display:flex;align-items:center;gap:.5em;line-height:1.2;padding:.42em .4em;
-  border-radius:.5em;background:rgba(20,20,22,.055);
-  opacity:0;transform:translateY(-.5em);transition:opacity .28s var(--ease),transform .28s var(--ease)}
-.cold-notes .r.on{opacity:1;transform:none}
-.cold-notes .r s{flex:none;width:.42em;height:.42em;border-radius:50%;background:#E5484D;text-decoration:none}
-.cold-notes .r b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cold-notes .r em{font-style:normal;margin-left:auto;color:#6B6B70;font-variant-numeric:tabular-nums}
+/* ---------- the screen: an iPhone lock screen, painted over the film's blank glass ---------- */
+.ios{position:absolute;z-index:3;opacity:0;left:var(--sx);top:var(--sy);width:var(--sw);height:var(--sh);
+  border-radius:calc(var(--u) * .105);overflow:hidden;pointer-events:none;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  font-size:calc(var(--u) * .0382);color:#17171A;-webkit-font-smoothing:antialiased}
+/* the wallpaper is the film's own cream, sampled off the frame: rgb(248,239,222) */
+.ios-wall{position:absolute;inset:0;background:#F8EFDE;
+  background-image:radial-gradient(120% 58% at 50% -12%,#FFFAF0 0%,rgba(255,250,240,0) 62%)}
+/* iOS dims the wallpaper behind an expanded notification; so does this */
+.ios-dim{position:absolute;inset:0;background:#0E0D0B;opacity:0}
+.ios-notch{position:absolute;top:-1px;left:21.7%;width:56.1%;height:calc(var(--u) * .080);
+  background:#07070A;border-radius:0 0 calc(var(--u) * .046) calc(var(--u) * .046)}
+.ios-stat{position:absolute;top:calc(var(--u) * .0245);right:calc(var(--u) * .058);
+  width:calc(var(--u) * .195);height:auto;color:#1B1B1F;fill:currentColor}
+.ios-lock{position:absolute;left:0;right:0;top:calc(var(--u) * .295);text-align:center}
+.ios-lock .dt{display:block;font-size:1.13em;font-weight:590;letter-spacing:-.006em;opacity:.9}
+.ios-lock .ck{display:block;font-size:5.5em;font-weight:500;line-height:1;letter-spacing:-.035em;
+  margin-top:.07em;font-variant-numeric:tabular-nums}
 
-/* ---------- the screen: laid exactly over the glass in the film's last frame ---------- */
-.cold-screen{position:absolute;z-index:3;opacity:0;overflow:hidden;pointer-events:none;
-  transition:opacity .5s var(--ease);border-radius:calc(var(--fw,1200px) * .009);
-  left:var(--sx);top:var(--sy);width:var(--sw);height:var(--sh);
-  display:flex;flex-direction:column;justify-content:center;gap:.55em;
-  padding:0 .7em;font-size:calc(var(--fw,1200px) * .0080);color:#141416}
-.cold.settled .cold-screen{opacity:1}
-.cold-screen .row{display:flex;align-items:center;gap:.6em;line-height:1.25}
-.cold-screen .row s{flex:none;width:.5em;height:.5em;border-radius:50%;background:#43C06A;text-decoration:none}
-.cold-screen .row b{font-weight:600}
-.cold-screen .row em{font-style:normal;margin-left:auto;color:#6B6B70;font-size:.88em;font-variant-numeric:tabular-nums}
-.cold-screen .hd{font-weight:700;letter-spacing:-.02em;font-size:1.25em;margin-bottom:.2em}
-.cold-screen .ft{margin-top:.3em;padding-top:.5em;border-top:1px solid rgba(0,0,0,.10);color:#6B6B70;font-size:.9em}
+/* the stack: bottom-anchored, newest at the bottom, older ones pushed up — as on the phone */
+.ios-stack{position:absolute;left:calc(var(--u) * .034);right:calc(var(--u) * .034);
+  bottom:calc(var(--u) * .085);height:calc(var(--u) * 1.34)}
+.ios-stack .nc{position:absolute;left:0;right:0;bottom:0;opacity:0;
+  background:rgba(255,255,255,.9);box-shadow:0 .08em .5em rgba(62,50,28,.10);
+  will-change:transform,opacity}
+.ios .nc .hd{color:rgba(28,28,32,.56)}
+.ios .nc .t2{color:rgba(28,28,32,.62)}
+
+/* the one that replaces the six, and then opens */
+.ios-one{position:absolute;left:calc(var(--u) * .034);right:calc(var(--u) * .034);
+  bottom:calc(var(--u) * .085);border-radius:1.5em;overflow:hidden;opacity:0;height:0;
+  background:rgba(255,255,255,.9);box-shadow:0 .3em 1.5em rgba(48,38,18,.18);will-change:height,opacity}
+.ios-one .oc{display:flex;align-items:flex-start;gap:.62em;padding:.66em .74em .72em}
+.ios-one .tx{flex:1;min-width:0}
+.ios-one .hd{display:flex;align-items:center;gap:.4em;font-size:.867em;line-height:1.2;
+  letter-spacing:.02em;color:rgba(28,28,32,.56)}
+.ios-one .hd b{font-weight:590;letter-spacing:.045em}
+.ios-one .hd em{margin-left:auto;font-style:normal}
+.ios-one .t1{display:block;font-weight:600;letter-spacing:-.012em;margin-top:.06em;line-height:1.26}
+.ios-one .t2{display:block;color:rgba(28,28,32,.62);line-height:1.26}
+.ic-sk{flex:none;width:2.53em;height:2.53em;border-radius:.62em;background:#101114;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:1.3em;font-weight:700;letter-spacing:-.06em}
+.ic-sk i{font-style:normal;color:var(--live)}
+.ios-one .op{padding:0 .9em .75em;opacity:0}
+.op-r{display:flex;align-items:baseline;gap:.6em;padding:.46em .04em;border-top:1px solid rgba(22,20,16,.10)}
+.op-r b{font-weight:600;letter-spacing:-.01em}
+.op-r em{margin-left:auto;font-style:normal;color:rgba(28,28,32,.6);font-variant-numeric:tabular-nums}
+.op-f{padding:.5em .04em 0;color:rgba(28,28,32,.5)}
+
+.ios-home{position:absolute;left:50%;bottom:calc(var(--u) * .021);transform:translateX(-50%);
+  width:calc(var(--u) * .35);height:calc(var(--u) * .0125);border-radius:99px;background:#17171A;opacity:.28}
