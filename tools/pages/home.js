@@ -44,28 +44,29 @@ ${L.header(b, 'home')}
         ['Enquiry', 'gone to the next firm', ''],
       ].map(([a, c]) => `<div class="n"><i></i><b>${a}</b><span>${c}</span></div>`).join('')}
     </div>
+    <div class="cold-notes" id="coldNotes" aria-hidden="true">
+      ${[['Missed call','21:47'],['Voicemail','21:48'],['Missed call','21:52'],
+         ['Enquiry','no reply'],['Missed call','22:06'],['Missed call','07:58']]
+        .map(([a, t]) => `<span class="r"><s></s><b>${a}</b><em>${t}</em></span>`).join('')}
+    </div>
     <div class="cold-screen" id="coldScreen" aria-hidden="true">
       <span class="hd">Booked</span>
       <span class="row"><s></s><b>Texted back</b><em>11s</em></span>
       <span class="row"><s></s><b>Replied</b><em>2m</em></span>
-      <span class="row"><s></s><b>Slot taken</b><em>8:00</em></span>
+      <span class="row"><s></s><b>Slot taken</b><em>8am</em></span>
       <span class="row"><s></s><b>Deposit held</b><em>&pound;45</em></span>
       <span class="ft">While you were out.</span>
     </div>
     </div>
     <div class="cold-cap" aria-hidden="true"><div class="wrap">
-      <p data-from="0.24" data-to="0.58">Every one of these is a job going to somebody else.</p>
-      <p data-from="0.88" data-to="0.97">This is the same evening, with a system running.</p>
+      <p data-from="0.20" data-to="0.66">Every one of these is a job going to somebody else.</p>
+      <p data-from="0.84" data-to="0.99">This is the same evening, with a system running.</p>
     </div></div>
     <div class="cold-title" id="coldTitle"><div class="wrap">
       <span class="t">9:47pm</span>
       <span class="rule"></span>
       <p class="s">One evening on a phone that nobody is watching.</p>
       <span class="cold-cue"><i></i>Scroll</span>
-    </div></div>
-    <div class="cold-out"><div class="wrap">
-      <p>That is what gets built here. It starts with the website it runs on.</p>
-      <a href="#h-forge">Build yours &mdash; it takes seconds</a>
     </div></div>
     <div class="cold-load" id="coldLoad"><span class="bar"><i></i></span></div>
   </div>

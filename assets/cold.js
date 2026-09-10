@@ -9,9 +9,13 @@
       bar = load && load.querySelector('i'), head = d.querySelector('.site-head'),
       caps = [].slice.call(d.querySelectorAll('.cold-cap p')), title = d.getElementById('coldTitle'),
       voidEl = d.getElementById('coldVoid'), notes = voidEl ? [].slice.call(voidEl.children) : [],
+      rows = [].slice.call(d.querySelectorAll('.cold-notes .r')),
       stage = d.querySelector('.cold-stage');
-  var SETTLE = 0.82;                                   /* where the swarm clears and the screen comes up */
-  var PX_PER_FRAME = 5, DWELL = 1.0, FPS = 24;
+  var SETTLE = 0.80;                                   /* where the swarm clears and the screen comes up */
+  var PX_PER_FRAME = 3.6, DWELL = 1.0, FPS = 24;
+  var FILM_END = 0.34;                                 /* the spin is done inside the first 40% of the
+       scroll — everything after it is the glass filling up and then clearing. Raising this slows
+       the spin; lowering it speeds it up. */
   var lut = null, current = 0, target = 0, laidOutFor = 0, walkPx = 1, arrived = false, raf = null;
 
   fetch(film.getAttribute('data-lut')).then(function(r){ return r.json(); })
@@ -32,11 +36,13 @@
     var h = stage.clientHeight || window.innerHeight || 800;
     return Math.max(w, h * 16 / 9);
   }
+  /* hand-placed, not scattered: the lower left belongs to the type, so nothing flies through it */
+  var SPOTS = [[0.26,-0.16],[-0.25,-0.20],[0.30,0.06],[-0.29,-0.06],[0.22,0.17],
+               [-0.20,-0.24],[0.31,-0.10],[-0.31,0.01],[0.17,-0.03]];
   function seed(){
     notes.forEach(function(n, i){
-      var a = (i / notes.length) * Math.PI * 2 + 0.7;
-      n._x = Math.cos(a) * (0.26 + (i % 3) * 0.07);     /* fractions of the frame width */
-      n._y = Math.sin(a * 1.7) * 0.20 + (i % 2 ? 0.04 : -0.05);
+      var sp = SPOTS[i % SPOTS.length];
+      n._x = sp[0]; n._y = sp[1];
       n._z = -2600 + i * 250;
       n._r = (i % 2 ? 1 : -1) * (5 + (i % 4) * 3);
     });
@@ -45,7 +51,11 @@
     if (!film.duration) return;
     walkPx = Math.round(film.duration * FPS) * PX_PER_FRAME;
     sec.style.height = (walkPx + window.innerHeight * (1 + DWELL)) + 'px';
-    sec.style.setProperty('--fw', frameWidth() + 'px');
+    var fw0 = frameWidth();
+    sec.style.setProperty('--fw', fw0 + 'px');
+    /* the picture is cropped hard on a narrow screen, so the cards are spread against the
+       SCREEN, not the picture — otherwise every one of them flies off a phone. */
+    sec.style.setProperty('--nw', Math.min(fw0, (window.innerWidth || 1200) * 1.55) + 'px');
     laidOutFor = window.innerHeight;
   }
   function progress(){
@@ -61,7 +71,7 @@
     current += (target - current) * 0.14;
     if (Math.abs(target - current) < 0.0006) current = target;
     if (film.duration){
-      var t = filmFraction(current) * Math.max(0, film.duration - 0.06);
+      var t = filmFraction(Math.min(1, current / FILM_END)) * Math.max(0, film.duration - 0.06);
       if (Math.abs(film.currentTime - t) > 0.01) film.currentTime = t;
     }
     /* the title card dissolves over the first sliver of scroll; fall back to raw scroll
@@ -75,17 +85,23 @@
     });
     /* the swarm: cards rush the camera through the void the film was shot in */
     if (notes.length){
-      var fw = frameWidth(), u = Math.min(1, current / SETTLE), rush = u * u * 2700;
+      var fw = Math.min(frameWidth(), (window.innerWidth || 1200) * 1.55),
+          u = Math.min(1, current / SETTLE), rush = u * u * 2700;
       for (var i = 0; i < notes.length; i++){
         var n = notes[i], z = n._z + rush;
-        if (z > 700 || z < -2700){ if (n.style.opacity !== '0') n.style.opacity = '0'; continue; }
-        var fade = z < -1500 ? (z + 2700) / 1200 : z > 300 ? (700 - z) / 400 : 1;
+        if (z > 380 || z < -2700){ if (n.style.opacity !== '0') n.style.opacity = '0'; continue; }
+        var fade = z < -1500 ? (z + 2700) / 1200 : z > 180 ? (380 - z) / 200 : 1;
         n.style.opacity = Math.max(0, Math.min(1, fade)) * (1 - Math.max(0, (current - SETTLE + 0.06) / 0.06));
         n.style.transform = 'translate3d(' + (n._x * fw - 50) + '%,' + (n._y * fw) + 'px,' + z + 'px) rotateY(' + n._r + 'deg)';
       }
     }
+    if (rows.length){
+      var from = 0.36, to = 0.76, step = (to - from) / rows.length;
+      for (var j = 0; j < rows.length; j++) rows[j].classList.toggle('on', current >= from + j * step);
+    }
     sec.classList.toggle('settled', current >= SETTLE);
-    if ((current >= 1) !== arrived){ arrived = current >= 1; sec.classList.toggle('arrived', arrived); }
+    var atEnd = current >= 0.99;
+    if (atEnd !== arrived){ arrived = atEnd; sec.classList.toggle('arrived', arrived); }
     if (head){
       var r = sec.getBoundingClientRect(), hh = head.offsetHeight || 64;
       head.classList.toggle('on-dark', r.top <= hh && r.bottom > hh);
