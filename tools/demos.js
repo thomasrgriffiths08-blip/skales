@@ -1,4 +1,4 @@
-/* Copy-proofing the sixteen demos.
+/* Copy-proofing the demos.
    Reads the readable, commented originals from ../showcase (soon a private repo),
    strips every comment, minifies + mangles every script and stylesheet, and prepends
    a lock so the file only renders when it has been reached from this site.

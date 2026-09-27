@@ -71,7 +71,7 @@ ${L.header(b, 'book')}
       <div class="summary" id="summary"></div>
       <div id="calendly" class="calendly"></div>
       <div id="fallback" class="fallback" hidden>
-        <p class="lead">The diary is not connected yet, so send this straight over and you will get a reply with times.</p>
+        <p class="lead">Send this straight over and you will get a reply with times to choose from.</p>
         <div class="cta-row">${site.whatsapp ? `<a class="btn btn-live" id="fbWa" href="${L.waHref('Hi Tom — booking enquiry from your site.')}">Send on WhatsApp</a>` : ''}<a class="btn btn-ghost" id="fbMail" href="mailto:${site.email}">Send by email</a></div>
       </div>
       <p class="f-note" id="notfit" hidden>This studio builds for service businesses, so if that is not you, send the note anyway and you will get a straight answer about whether it is the wrong fit.</p>

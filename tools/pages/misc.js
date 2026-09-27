@@ -49,7 +49,10 @@ ${L.footer(b)}`;
 };
 const notfound = {
   url: '/404.html', og: 'home', noindex: true, sitemap: false,
-  render(b){
+  render(){
+    /* GitHub Pages serves this file for ANY missing URL, at any depth (/work/nope/, /notes/x/y/),
+       so relative paths break the moment the 404 is nested. Everything on it is absolute. */
+    const b = L.abs('/');
     const title = `Not found | ${site.name}`;
     const body = `
 ${L.header(b, '')}
@@ -66,4 +69,5 @@ ${L.footer(b)}`;
 /* old URLs that are already out there (Instagram, Google) keep working */
 const redirect = (from, to) => ({ url: from, sitemap: false, raw: true, render(b){
   return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Moved</title><link rel="canonical" href="${L.abs(to)}"><meta http-equiv="refresh" content="0;url=${b}${to.replace(/^\//,'')}"><meta name="robots" content="noindex"></head><body><p>Moved to <a href="${b}${to.replace(/^\//,'')}">${L.abs(to)}</a>.</p></body></html>`; } });
-module.exports = { pages: [teardown, notfound, redirect('/work.html', '/work/'), redirect('/systems.html', '/what-i-do/')] };
+module.exports = { pages: [teardown, notfound, redirect('/work.html', '/work/'), redirect('/systems.html', '/what-i-do/'),
+  redirect('/notes/sixteen-builds-all-fictional/', '/notes/builds-for-businesses-that-dont-exist/')] };   // the note outgrew its slug
