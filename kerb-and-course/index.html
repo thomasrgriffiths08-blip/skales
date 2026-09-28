@@ -132,7 +132,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(-
 .sp-a{display:grid;gap:8px}
 .spec-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .spec-lbl{font:500 12px var(--f);color:var(--muted)}
-.spec-price{margin:6px 0 0;font:500 clamp(36px,3vw,44px)/1.02 var(--d);letter-spacing:-.035em;font-variant-numeric:tabular-nums;color:var(--ink);text-wrap:balance}
+.spec-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .28em;margin:6px 0 0;font:500 clamp(36px,3vw,44px)/1.02 var(--d);letter-spacing:-.035em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.spec-price .to{white-space:nowrap}
+.spec-price .to::before{content:"to ";font-size:.42em;font-weight:500;letter-spacing:0;color:var(--muted);vertical-align:.12em;margin-right:.1em}
 .spec-sub{margin:0;font-size:12.5px;color:var(--muted)}
 .spec-for{margin:2px 0 0;font-size:13.5px;line-height:1.45;color:var(--ink);padding-top:12px;border-top:1px solid var(--rule)}
 .spec .ro{display:grid;grid-template-columns:1fr 1fr;margin:0;border-top:1px solid var(--rule)}
@@ -142,18 +144,23 @@ input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(-
 .spec .ro dt{font:500 12px var(--f);color:var(--muted)}
 .spec .ro dd{margin:3px 0 0;font:500 16px var(--m);letter-spacing:-.01em;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
 .spec .ro dd.bad{color:var(--bad)}
+.spec .ro dd.txt{font:600 15px var(--f);letter-spacing:0}
+.spec-inc{list-style:none;margin:0;padding:0;display:grid}
+.spec-inc li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--rule-2);font-size:12.5px;line-height:1.35;color:var(--ink-2)}
+.spec-inc li span:last-child{flex:none;font:500 11.5px var(--m);color:var(--muted);font-variant-numeric:tabular-nums}
+.spec-inc .h{font:500 12px var(--f);color:var(--muted);padding:0 0 6px;border-bottom:0}
 .sp-c{display:grid;gap:12px;margin-top:auto}
 .spec-chip{margin:0;font-size:13px;line-height:1.45;color:var(--ink-2);padding-top:12px;border-top:1px solid var(--rule)}
 .spec-cta{width:100%}
 
 /* the plan */
-.stage{position:relative;display:flex;flex-direction:column;min-width:0;background:#fff}
-.stage-cv{position:relative;flex:1;min-width:0;display:flex;align-items:center}
-#plan{display:block;width:100%;outline:0;touch-action:pan-y}
+.stage{position:relative;display:flex;flex-direction:column;min-width:0;background:var(--background)}
+.stage-cv{position:relative;flex:1;min-width:0;display:flex;align-items:center;padding:16px}
+#plan{display:block;width:100%;outline:0;touch-action:pan-y;background:#fff;box-shadow:0 0 0 1px var(--rule),0 1px 2px rgba(26,26,23,.05),0 18px 40px -28px rgba(26,26,23,.45)}
 #plan.editing,#plan.cmp{touch-action:none}
 #plan:focus-visible{box-shadow:inset 0 0 0 2px var(--ink)}
 #plan.grabbing{cursor:grabbing!important}
-.plan-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 10px 7px 14px;border-top:1px solid var(--rule-2);background:#fff}
+.plan-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 10px 7px 16px;border-top:1px solid var(--rule-2);background:var(--background)}
 .plan-hint{margin:0;font:400 12px/1.4 var(--f);color:var(--muted)}
 .plan-foot .seg{flex:none}
 
@@ -636,7 +643,6 @@ form.sv .ck input{height:16px;width:16px;padding:0;margin:2px 0 0}
 
 /* ---------- band: behind the scenes ---------- */
 .band{position:relative;overflow:hidden;background:var(--primary);color:var(--on-dark);padding-block:112px;isolation:isolate}
-.band-bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
 .band-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
 .band .eyebrow{color:var(--on-dark-2)}
 .band h2{margin-top:14px;font:500 clamp(32px,3.5vw,50px)/1.04 var(--d);letter-spacing:-.04em;color:#fff}
@@ -852,6 +858,7 @@ form.sv .ck input{height:16px;width:16px;padding:0;margin:2px 0 0}
   .spec{border-right:0;border-top:1px solid var(--rule-2)}
   .spec-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) minmax(0,.9fr);align-items:center;gap:18px 32px;padding:20px 24px}
   .spec-in .spec-price{font-size:clamp(30px,3.1vw,40px)}
+  .spec-inc{grid-column:1/-1;grid-template-columns:1fr 1fr;column-gap:24px}
   .spec .ro{border-top:0}
   .spec .ro div:nth-child(n+3){border-bottom:0}
   .sp-c{margin-top:0}
@@ -900,6 +907,8 @@ form.sv .ck input{height:16px;width:16px;padding:0;margin:2px 0 0}
   .sp-c{grid-template-columns:1fr}
   .spec-cta{width:100%}
   .spec-in .spec-price{font-size:36px}
+  .spec-inc{grid-template-columns:1fr}
+  .stage-cv{padding:10px}
   .tgs{grid-template-columns:1fr}
   .story{padding-block:80px 30px}
   .st-fig{top:calc(env(safe-area-inset-top,0px) + 64px)}
@@ -956,7 +965,7 @@ form.sv .ck input{height:16px;width:16px;padding:0;margin:2px 0 0}
           <div class="spec-in">
             <div class="sp-a">
               <div class="spec-top"><span class="spec-lbl">Guide price</span><div class="seg sm" role="group" aria-label="VAT"><button type="button" data-vat="1">inc VAT</button><button type="button" data-vat="0">ex VAT</button></div></div>
-              <p class="spec-price" id="heroPrice" role="status" aria-live="polite"></p>
+              <p class="spec-price" id="heroPrice" role="status" aria-live="polite"><span id="heroLo"></span><span class="to" id="heroHi"></span></p>
               <p class="spec-sub" id="heroSub"></p>
               <p class="spec-for" id="specFor"></p>
             </div>
@@ -966,6 +975,7 @@ form.sv .ck input{height:16px;width:16px;padding:0;margin:2px 0 0}
               <div><dt>On site</dt><dd id="spD">–</dd></div>
               <div><dt>Planning</dt><dd id="spP">–</dd></div>
             </dl>
+            <ul class="spec-inc" id="specInc"></ul>
             <div class="sp-c">
               <p class="spec-chip" id="specChip"></p>
               <button type="button" class="btn spec-cta" id="specCta">Full breakdown and PDF</button>
@@ -1175,7 +1185,6 @@ form.sv .ck input{height:16px;width:16px;padding:0;margin:2px 0 0}
 </div>
 
 <section class="band" id="office" aria-labelledby="h-office">
-  <svg class="band-bg" viewBox="0 0 1440 640" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="bgB" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="115"/></filter></defs><rect width="1440" height="640" fill="#1a1a17"/><circle cx="844" cy="428" r="291" fill="#23221d" filter="url(#bgB)"/><circle cx="1166" cy="427" r="309" fill="#2d2a22" filter="url(#bgB)"/><circle cx="245" cy="305" r="312" fill="#4a3813" filter="url(#bgB)"/></svg>
   <div class="wrap band-grid">
     <div class="band-l">
       <p class="eyebrow">Behind the scenes · the office</p>
@@ -1600,7 +1609,7 @@ function drawSurface(c,P,surf,pattern,colour,view){const b=bbox(P);c.save();poly
   if(view==='drawing'){c.fillStyle='#fff';c.fillRect(b.x0-1,b.y0-1,b.x1-b.x0+2,b.y1-b.y0+2);hatch(c,P,surf,pattern);}
   else{const key=surf==='printed'&&pattern==='ashlar'?'printed-ashlar':surf,T=tex(texFile(surf,colour,pattern),TEXM[key]);
     if(T)c.fillStyle=pat(c,T,(TEXR[surf]||{})[pattern]||0);else{const S=SURF[surf],col=(S.colours.find(x=>x[0]===colour)||S.colours[0]);c.fillStyle=col[2][0];}
-    c.fillRect(b.x0-1,b.y0-1,b.x1-b.x0+2,b.y1-b.y0+2);
+    c.fillRect(b.x0-1,b.y0-1,b.x1-b.x0+2,b.y1-b.y0+2);c.fillStyle='rgba(255,255,255,.12)';c.fillRect(b.x0-1,b.y0-1,b.x1-b.x0+2,b.y1-b.y0+2);
     if(surf==='porcelain'||key==='printed-ashlar'){hatch(c,P,surf,pattern);c.strokeStyle='rgba(20,20,18,.28)';c.stroke();}}
   c.restore();}
 function drawOld(c,P){const b=bbox(P);c.save();polyPath(c,P);c.clip();
@@ -1662,7 +1671,7 @@ function drawCar(c,r){const lw=1/CV.s;c.save();c.translate(r.x+r.w/2,r.y+r.h/2);
   c.moveTo(-Wd/2+.1,-L/2+.5);c.lineTo(Wd/2-.1,-L/2+.5);c.moveTo(-Wd/2+.12,L/2-.42);c.lineTo(Wd/2-.12,L/2-.42);c.stroke();c.restore();}
 
 /* ----- frame: sizing, annotations, sheet furniture, interaction (screen space) ----- */
-function sizeCanvas(){const wrap=CV.el.parentElement,w=WX(),ww=wrap.clientWidth,maxH=Math.min(620,Math.max(360,innerHeight*.58));
+function sizeCanvas(){const wrap=CV.el.parentElement,w=WX(),cs=getComputedStyle(wrap),ww=Math.max(200,wrap.clientWidth-parseFloat(cs.paddingLeft||0)-parseFloat(cs.paddingRight||0)),maxH=Math.min(620,Math.max(360,innerHeight*.58));
   const s=Math.min(ww/(w.x1-w.x0),(maxH-STRIP)/(w.y1-w.y0));CV.s=s;CV.W=ww;CV.DH=Math.round(s*(w.y1-w.y0));CV.H=CV.DH+STRIP;CV.ox=(ww-s*(w.x1-w.x0))/2;CV.oy=0;
   CV.dpr=Math.min(2,devicePixelRatio||1);CV.el.width=Math.round(ww*CV.dpr);CV.el.height=Math.round(CV.H*CV.dpr);CV.el.style.height=CV.H+'px';}
 const toPx=(x,y)=>{const w=WX();return [CV.ox+(x-w.x0)*CV.s,CV.oy+(y-w.y0)*CV.s];};
@@ -1704,13 +1713,15 @@ function sheet(c){const y=CV.DH,W=CV.W,cy=y+STRIP/2;c.fillStyle='#fff';c.fillRec
   // north arrow
   const nx=22;c.fillStyle=INK;c.strokeStyle=INK;c.font='600 8.5px '+FONT;c.textAlign='center';c.textBaseline='middle';c.fillText('N',nx,y+12);
   c.beginPath();c.moveTo(nx,y+18);c.lineTo(nx-4.5,y+40);c.lineTo(nx,y+34);c.closePath();c.fill();c.beginPath();c.moveTo(nx,y+18);c.lineTo(nx+4.5,y+40);c.lineTo(nx,y+34);c.closePath();c.stroke();
-  // scale bar
-  const narrow=W<560,segs=narrow?[[0,1,1],[1,2,0]]:[[0,1,1],[1,2,0],[2,5,1]],x0=44,s=CV.s,by=cy+3;
+  // title block, measured first so the scale bar only takes the room that is left
+  const A=m2(polyArea(DS.poly)),parts1=[['Proposed driveway','500 11px '+FONT,INK],[' · ','500 11px '+FONT,INK2],[A,'500 10.5px '+MONO,INK]],parts2=[['Scale 1:100','500 11px '+FONT,INK2],[' · ','500 11px '+FONT,INK2],['KC-DRW-01','500 10.5px '+MONO,INK]];
+  const measure=parts=>parts.reduce((w,p)=>{c.font=p[1];return w+c.measureText(p[0]).width;},0);
+  const narrow=W<560,titleW=narrow?Math.max(measure(parts1),measure(parts2)):measure([...parts1,[' · ','500 11px '+FONT,INK2],...parts2]);
+  const x0=44,s=CV.s,by=cy+3,room=W-14-titleW-x0-34,segs=5*s<=room?[[0,1,1],[1,2,0],[2,5,1]]:2*s<=room?[[0,1,1],[1,2,0]]:[[0,1,1]];
   c.font='500 10px '+MONO;c.textBaseline='alphabetic';
   for(const [a,b,f] of segs){c.beginPath();c.rect(x0+a*s,by,(b-a)*s,5);if(f){c.fillStyle=INK;c.fill();}else{c.fillStyle='#fff';c.fill();c.stroke();}}
   c.fillStyle=INK;[...new Set(segs.flatMap(s=>[s[0],s[1]]))].forEach((v,i,arr)=>{c.textAlign=i===0?'left':i===arr.length-1?'right':'center';c.fillText(i===arr.length-1?v+' m':String(v),x0+v*s+(i===0?-1:i===arr.length-1?9:0),by-4);});
   // title block
-  const A=m2(polyArea(DS.poly)),parts1=[['Proposed driveway','500 11px '+FONT,INK],[' · ','500 11px '+FONT,INK2],[A,'500 10.5px '+MONO,INK]],parts2=[['Scale 1:100','500 11px '+FONT,INK2],[' · ','500 11px '+FONT,INK2],['KC-DRW-01','500 10.5px '+MONO,INK]];
   const rtext=(parts,X,Y)=>{c.textAlign='left';c.textBaseline='middle';let x=X;for(let i=parts.length-1;i>=0;i--){c.font=parts[i][1];const w=c.measureText(parts[i][0]).width;x-=w;c.fillStyle=parts[i][2];c.fillText(parts[i][0],x,Y);}};
   if(narrow){rtext(parts1,W-12,cy-7);rtext(parts2,W-12,cy+8);}else rtext([...parts1,[' · ','500 11px '+FONT,INK2],...parts2],W-14,cy);}
 function handles(c){if(!CV.editing||DS.compare)return;const P=DS.poly;c.lineWidth=1;
@@ -1939,10 +1950,12 @@ function renderControls(){const S=SURF[DS.surface];
   $('#planHint').textContent=DS.compare?'Drag across the plan to compare your drive now with the new one.':CV.editing?'Drag a corner. Tap + to add one. Double-click a corner to remove it. Drag the middle to move it.':'Tap “Edit shape” to change the outline.';
   $('#bEdit').hidden=!matchMedia('(pointer:coarse)').matches;$('#bEdit').textContent=CV.editing?'Done':'Edit shape';$('#plan').classList.toggle('editing',CV.editing);$('#plan').classList.toggle('cmp',DS.compare);}
 function renderHeroSpec(){const q=dquote(),P=showQ(q),n=carBays().length,R=rules();
-  $('#specFor').textContent=designText();tween($('#heroPrice'),P,(a,b)=>money(a)+' – '+money(b));
+  $('#specFor').textContent=designText();tween($('#heroLo'),P[0],money);tween($('#heroHi'),P[1],money);$('#heroPrice').setAttribute('aria-label',money(P[0])+' to '+money(P[1]));
   $('#heroSub').textContent=`${DS.vat?'Inc':'Ex'} VAT · fixed after a free site visit`;
   $('#spA').textContent=m2(q.A);$('#spC').textContent=n+(n===1?' car':' cars');$('#spD').textContent=q.days+' days';
-  const p=$('#spP');p.textContent=R.items[0].l===2?'Needed':q.perm?'Not needed':'Not needed';p.className=R.items[0].l===2?'bad':'';
+  const p=$('#spP');p.textContent=R.items[0].l===2?'Needed':'Not needed';p.className='txt'+(R.items[0].l===2?' bad':'');
+  const inc=[['dig','Dig out and waste'],['base','Sub-base and membrane'],['surface',q.S.t+(colourName()?', '+colourName().toLowerCase():'')],['labour',`Laying, about ${q.days} days`],['edging',`Edging kerbs, ${q.edgeL.toFixed(1)} m`],['drain','Channel drain and soakaway']].filter(([k])=>q.cats[k][1]>0).map(([k,t])=>[t,q.cats[k]]).concat(q.ex);
+  $('#specInc').innerHTML='<li class="h">What the price covers</li>'+inc.map(([t,v])=>`<li><span>${esc(t)}</span><span>${krange(v[0]*(DS.vat?1.2:1),v[1]*(DS.vat?1.2:1))}</span></li>`).join('');
   $('#specChip').textContent=q.perm?'Permeable: rain soaks through':needsDrain()?(DS.drain?'Channel drain to a soakaway':'Drains onto the road'):'Under 5 m² of hard surface';
   $('#rvPrice').textContent=krange(P[0],P[1]);
   $$('[data-vat]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.vat==='1')===DS.vat)));}
