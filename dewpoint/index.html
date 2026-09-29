@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dewpoint Detailing</title>
+<meta name="description" content="Mobile car detailing, paint correction and ceramic coating in Bristol and Bath. Watch a car get cleaned as you scroll, see your price, book a day.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Dewpoint · five colour roles: text eeede9 · background 0c0d0e · primary eeede9 · secondary 1a1c1f · accent 8fd3ff */
+:root{
+  color-scheme:dark;
+  --text:#eeede9;--background:#0c0d0e;--primary:#eeede9;--secondary:#1a1c1f;--accent:#8fd3ff;
+  --panel:#121315;--muted:color-mix(in srgb,var(--text) 60%,var(--background));--faint:color-mix(in srgb,var(--text) 36%,var(--background));
+  --rule:rgba(238,237,233,.11);--rule-2:rgba(238,237,233,.06);
+  --f:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--d:"Inter Tight","Inter",ui-sans-serif,system-ui,sans-serif;--m:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:8px;--wrap:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--background);color:var(--text);font:400 15px/1.55 var(--f);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:32px}
+.mono{font-family:var(--m);font-variant-numeric:tabular-nums}
+.eyebrow{margin:0;font:500 12.5px/1.4 var(--f);color:var(--muted)}
+h1,h2,h3{margin:0;font-family:var(--d);font-weight:500;text-wrap:balance}
+[hidden]{display:none!important}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--text);color:var(--background);padding:8px 12px;border-radius:var(--r)}
+.skip:focus{top:12px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:42px;padding:0 18px;border-radius:var(--r);border:0;background:var(--primary);color:var(--background);font:500 14px var(--f);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s,box-shadow .15s}
+.btn:hover{background:#fff}
+.btn.acc{background:var(--accent);color:#06131b}
+.btn.acc:hover{background:color-mix(in srgb,var(--accent) 86%,#fff)}
+.btn.ghost{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1px var(--rule)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--text)}
+.btn.sm{height:34px;padding:0 13px;font-size:13px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;transition:background .2s,box-shadow .2s}
+.nav.solid{background:rgba(12,13,14,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--rule-2)}
+.nav-in{display:flex;align-items:center;gap:28px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:26px;height:26px}
+.brand b{font:600 16px/1 var(--d);letter-spacing:-.01em}
+.nav-links{display:flex;gap:4px;margin-left:8px}
+.nav-links a{font-size:13.5px;color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:var(--r)}
+.nav-links a:hover{color:var(--text)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:14px}
+.nav-tel{font:500 13px var(--m);color:var(--muted);text-decoration:none}
+
+/* the scene: one real car, photographed at every stage, wiped from one state to the next as you scroll */
+.scene{position:relative;height:640svh}
+.stick{position:sticky;top:0;height:100svh;overflow:hidden;background:#0e0f11}
+.shot{position:absolute;right:0;top:50%;width:min(calc(80svh * 1.7684),86vw);aspect-ratio:2688/1520;transform:translateY(-47%);overflow:hidden}
+.cam{position:absolute;inset:0;transform-origin:66% 58%;will-change:transform}
+.cam img{position:absolute;inset:0;display:block;width:100%;height:100%;user-select:none;-webkit-user-drag:none}
+.cam img:not(:first-child){visibility:hidden}
+.shot{--mk:linear-gradient(90deg,transparent 0,#000 24%),linear-gradient(0deg,transparent 0,#000 20%),linear-gradient(180deg,transparent 0,#000 12%);-webkit-mask-image:var(--mk);mask-image:var(--mk);-webkit-mask-composite:source-in;mask-composite:intersect}
+.seam{position:absolute;top:22%;bottom:24%;left:0;width:2px;margin-left:-1px;opacity:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,0),var(--glow,#fff) 22%,var(--glow,#fff) 78%,rgba(255,255,255,0))}
+.seam::before{content:"";position:absolute;left:-46px;right:-46px;top:-6%;bottom:-6%;background:radial-gradient(closest-side,var(--glow,#fff),rgba(255,255,255,0));opacity:.28}
+.sheen{position:absolute;inset:0;pointer-events:none;opacity:0;mix-blend-mode:overlay;background:linear-gradient(100deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.7) 50%,rgba(255,255,255,0) 58%) no-repeat;background-size:300% 100%;-webkit-mask-image:linear-gradient(180deg,transparent 24%,#000 34%,#000 70%,transparent 78%);mask-image:linear-gradient(180deg,transparent 24%,#000 34%,#000 70%,transparent 78%)}
+.layer{position:absolute;inset:0;pointer-events:none}
+.intro{position:absolute;left:32px;top:50%;transform:translateY(-50%);max-width:470px;pointer-events:auto;transition:opacity .25s}
+.intro h1{margin-top:14px;font-size:clamp(44px,5.2vw,80px);line-height:.96;letter-spacing:-.045em}
+.intro .lede{margin:18px 0 0;max-width:36ch;font-size:17px;color:color-mix(in srgb,var(--text) 82%,var(--background))}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.stg{position:absolute;left:32px;top:50%;width:min(400px,32vw);transform:translateY(-50%);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.stg.on{opacity:1;visibility:visible;pointer-events:auto}
+.stg .n{font:500 12px var(--m);color:var(--muted)}
+.stg h2{margin-top:10px;font-size:clamp(32px,3.4vw,50px);line-height:1;letter-spacing:-.035em}
+.stg p{margin:14px 0 0;font-size:16px;line-height:1.6;color:color-mix(in srgb,var(--text) 80%,var(--background))}
+.stg .ctas{margin-top:22px}
+.steps{position:absolute;left:50%;bottom:4.5vh;transform:translateX(-50%);display:flex;gap:6px;pointer-events:auto}
+.steps button{display:grid;gap:7px;justify-items:start;min-width:112px;border:0;background:none;padding:0;cursor:pointer;color:var(--faint);font:500 12.5px var(--f);text-align:left}
+.steps button i{display:block;width:100%;height:2px;border-radius:1px;background:rgba(238,237,233,.14);overflow:hidden}
+.steps button i b{display:block;height:100%;width:0;background:var(--text)}
+.steps button:hover{color:var(--muted)}
+.steps button[aria-current="step"]{color:var(--text)}
+.hint{position:absolute;left:32px;bottom:4.5vh;margin:0;font-size:12.5px;color:var(--muted);transition:opacity .25s}
+@media (max-width:1060px){.stg{width:min(360px,34vw)}.steps button{min-width:84px}}
+@media (max-width:760px){
+  .shot{left:-37vw;right:auto;width:142vw;top:max(96px,calc(46svh - 250px));transform:none}
+  .shot{--mk:linear-gradient(0deg,transparent 0,#000 22%),linear-gradient(180deg,transparent 0,#000 14%)}
+  .intro{left:16px;right:16px;top:auto;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:none}
+  .intro h1{font-size:clamp(40px,12vw,56px)}
+  .intro .lede{font-size:16px}
+  .ctas .btn{flex:1}
+  .stg{left:16px;right:16px;width:auto;top:auto;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:none}
+  .stg h2{font-size:32px}
+  .stg p{font-size:15px}
+  .steps{left:16px;right:16px;transform:none;bottom:calc(24px + env(safe-area-inset-bottom,0px));gap:4px}
+  .steps button{min-width:0;flex:1;font-size:11px;gap:6px;white-space:nowrap}
+  .steps button:not([aria-current]){color:transparent}
+  .hint{display:none}
+}
+
+/* sections */
+.sec{padding-block:112px}
+.sec-h{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:20px 56px;align-items:end;margin-bottom:40px}
+.sec-h h2{margin-top:12px;font-size:clamp(32px,3.6vw,52px);line-height:1.02;letter-spacing:-.04em}
+.sec-h .lede{margin:0;max-width:52ch;color:color-mix(in srgb,var(--text) 78%,var(--background))}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease-out,transform .5s ease-out}
+.reveal.in{opacity:1;transform:none}
+
+.panel{border-radius:12px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--rule-2);overflow:hidden}
+.lbl{display:block;margin:0 0 8px;font:500 12.5px var(--f);color:var(--muted)}
+.seg{display:flex;gap:2px;padding:2px;border-radius:9px;background:var(--secondary);box-shadow:inset 0 0 0 1px var(--rule-2)}
+.seg button{flex:1;border:0;background:transparent;border-radius:7px;padding:8px 10px;cursor:pointer;color:var(--muted);text-align:left;display:grid;gap:1px;min-width:0}
+.seg button b{font-size:13.5px;font-weight:500;color:inherit}
+.seg button small{font-size:11.5px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seg button:hover{color:var(--text)}
+.seg button[aria-checked="true"]{background:#26292d;color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.4)}
+.seg button[aria-checked="true"] small{color:var(--muted)}
+
+/* price builder */
+.bld{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.bld-l{padding:24px;display:grid;gap:22px;align-content:start;border-right:1px solid var(--rule-2)}
+.pk{display:grid;gap:6px}
+.pk button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;align-items:baseline;text-align:left;border:0;background:transparent;padding:12px 14px;border-radius:9px;box-shadow:inset 0 0 0 1px var(--rule-2);cursor:pointer;transition:box-shadow .15s,background .15s}
+.pk button:hover{box-shadow:inset 0 0 0 1px var(--rule)}
+.pk button[aria-checked="true"]{background:#17191c;box-shadow:inset 0 0 0 1.5px var(--text)}
+.pk b{font-size:15px;font-weight:500}
+.pk em{font:500 13px var(--m);font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
+.pk small{grid-column:1/-1;font-size:12.5px;color:var(--muted)}
+.xs{display:grid;gap:2px}
+.xs label{display:flex;align-items:center;gap:12px;padding:9px 2px;border-bottom:1px solid var(--rule-2);cursor:pointer;font-size:14px}
+.xs label:last-child{border-bottom:0}
+.xs input{width:16px;height:16px;margin:0;accent-color:var(--text)}
+.xs em{margin-left:auto;font:500 12.5px var(--m);font-style:normal;color:var(--muted)}
+.bld-r{padding:24px;display:grid;gap:20px;align-content:start;background:#0f1012}
+.quote .for{font-size:13px;color:var(--muted)}
+.quote .v{margin-top:6px;font:500 clamp(38px,4vw,54px)/1 var(--d);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.quote .s{margin-top:8px;font-size:13.5px;color:var(--muted)}
+.inc{list-style:none;margin:0;padding:0;display:grid}
+.inc li{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule-2);font-size:14px;color:color-mix(in srgb,var(--text) 86%,var(--background))}
+.inc li::before{content:"";flex:none;width:5px;height:5px;margin-top:9px;border-radius:50%;background:var(--muted)}
+.res{display:grid;grid-template-columns:1fr 1fr;border-radius:9px;box-shadow:inset 0 0 0 1px var(--rule-2)}
+.res div{padding:11px 13px}
+.res div+div{border-left:1px solid var(--rule-2)}
+.res span{display:block;font-size:12px;color:var(--muted)}
+.res b{display:block;margin-top:3px;font:500 15px var(--m)}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.note{margin:0;font-size:13px;color:var(--muted)}
+
+/* on the day */
+.day{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule)}
+.day div{padding:22px 22px 0 0}
+.day div+div{padding-left:22px;border-left:1px solid var(--rule-2)}
+.day b{display:block;font:500 17px/1.3 var(--d);letter-spacing:-.01em}
+.day p{margin:8px 0 0;font-size:14px;color:var(--muted)}
+.day .k{display:block;margin-bottom:14px;font:500 12px var(--m);color:var(--faint)}
+
+/* booking */
+.bk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.bk-l{padding:24px;display:grid;gap:20px;align-content:start;border-right:1px solid var(--rule-2)}
+.days{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.days button{display:grid;gap:1px;padding:9px 8px;border:0;border-radius:8px;background:transparent;box-shadow:inset 0 0 0 1px var(--rule-2);text-align:left;cursor:pointer;min-width:0}
+.days button:hover:not(:disabled){box-shadow:inset 0 0 0 1px var(--rule)}
+.days button b{font-size:12.5px;font-weight:500;color:var(--muted)}
+.days button span{font:500 15px var(--m);white-space:nowrap}
+.days button small{font-size:11px;color:var(--faint)}
+.days button[aria-checked="true"]{background:var(--text);color:var(--background);box-shadow:none}
+.days button[aria-checked="true"] b,.days button[aria-checked="true"] small{color:#55544f}
+.days button:disabled{opacity:.35;cursor:not-allowed}
+.slots{display:flex;gap:6px}
+.slots button{flex:1;border:0;border-radius:8px;padding:10px;background:transparent;box-shadow:inset 0 0 0 1px var(--rule-2);cursor:pointer;font:500 14px var(--m)}
+.slots button[aria-checked="true"]{background:var(--text);color:var(--background);box-shadow:none}
+.bk-r{padding:24px;background:#0f1012}
+form.f{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fld{display:grid;gap:6px;min-width:0}
+.fld.full{grid-column:1/-1}
+.fld input{height:44px;border:0;border-radius:8px;padding:0 12px;background:var(--secondary);box-shadow:inset 0 0 0 1px var(--rule-2);font-size:15px;width:100%;min-width:0}
+.fld input:focus{outline:0;box-shadow:inset 0 0 0 1px var(--text)}
+.fld .err{margin:0;font-size:12.5px;color:#ff9b8f}
+.fld.bad input{box-shadow:inset 0 0 0 1px #ff9b8f}
+.summ{grid-column:1/-1;padding:13px 14px;border-radius:9px;box-shadow:inset 0 0 0 1px var(--rule);font-size:14px}
+.summ b{font-weight:500}
+.summ span{display:block;margin-top:2px;font-size:13px;color:var(--muted)}
+.done{display:grid;gap:10px}
+.done .ref{font:500 30px var(--m);letter-spacing:-.02em}
+.done ol{margin:4px 0 0;padding-left:20px;display:grid;gap:4px;font-size:14px;color:color-mix(in srgb,var(--text) 82%,var(--background))}
+
+/* faq */
+.faq{border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font:500 18px/1.35 var(--d);letter-spacing:-.01em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;font:400 20px/1 var(--f);color:var(--muted);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{margin:0;padding:0 0 22px;max-width:70ch;color:color-mix(in srgb,var(--text) 78%,var(--background))}
+
+/* footer */
+.foot{padding-block:72px 32px;border-top:1px solid var(--rule-2)}
+.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.foot-cols p{margin:6px 0 0;font-size:14px;color:color-mix(in srgb,var(--text) 80%,var(--background))}
+.foot-mark{margin:64px 0 24px;font:500 min(17vw,230px)/.8 var(--d);letter-spacing:-.06em;color:#1a1c1f;white-space:nowrap}
+.foot-b{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-top:14px;border-top:1px solid var(--rule-2);font-size:12px;color:var(--faint)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:70;transform:translate(-50%,16px);opacity:0;pointer-events:none;padding:10px 14px;border-radius:8px;background:var(--text);color:var(--background);font-size:13.5px;font-weight:500;transition:opacity .2s,transform .2s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* responsive */
+@media (max-width:1060px){
+  .nav-links{display:none}
+  .sec-h{grid-template-columns:1fr}
+  .bld,.bk{grid-template-columns:1fr}
+  .bld-l,.bk-l{border-right:0;border-bottom:1px solid var(--rule-2)}
+  .day{grid-template-columns:1fr 1fr}
+  .day div:nth-child(3){padding-left:0;border-left:0}
+  .day div:nth-child(n+3){padding-top:22px}
+}
+@media (max-width:760px){
+  .wrap{padding-inline:16px}
+  .nav-tel{display:none}
+  .sec{padding-block:80px}
+  .days{grid-template-columns:repeat(4,minmax(0,1fr))}
+  form.f{grid-template-columns:1fr}
+  .day{grid-template-columns:1fr}
+  .day div,.day div+div{padding:18px 0 0;border-left:0}
+  .foot-cols{grid-template-columns:1fr 1fr}
+  .seg button small{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#prices">Skip to prices</a>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Dewpoint Detailing, back to the top"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="6" fill="#eeede9"/><path d="M13 5.5c3 3.6 5 6.5 5 9.2a5 5 0 0 1-10 0c0-2.7 2-5.6 5-9.2Z" fill="#0c0d0e"/><path d="M10.6 15.6a2.6 2.6 0 0 0 2.2 2.3" stroke="#eeede9" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg><b>Dewpoint</b></a>
+    <nav class="nav-links" aria-label="Main"><a href="#scene">The process</a><a href="#prices">Prices</a><a href="#day">On the day</a><a href="#book">Book</a><a href="#faq">Questions</a></nav>
+    <div class="nav-r"><a class="nav-tel" href="tel:01174960735">0117 496 0735</a><a class="btn acc sm" href="#book">Book a detail</a></div>
+  </div>
+</header>
+
+<main id="top">
+<section class="scene" id="scene" aria-label="A car cleaned stage by stage as you scroll">
+  <div class="stick" id="stick">
+    <div class="shot" id="shot" role="img" aria-label="A blue hatchback in a studio, shown dirty, then foamed, rinsed, polished and coated">
+      <div class="cam" id="cam">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GeMIik6SP3DkY5OZpRDZytvNxR/hf_20260929_174938_2f3079b0-e9ea-4b0a-9d86-9fa9aba048bd_min.webp" data-k="dirty" alt="" width="2688" height="1520" decoding="async" fetchpriority="high">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GeMIik6SP3DkY5OZpRDZytvNxR/hf_20260929_174938_1af96eee-d82a-4b7c-a51d-4d4da4861ed4_min.webp" data-k="foam" alt="" width="2688" height="1520" decoding="async" fetchpriority="auto">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GeMIik6SP3DkY5OZpRDZytvNxR/hf_20260929_174938_9edacfef-bea9-4fca-8410-e5a21e931a71_min.webp" data-k="rinsed" alt="" width="2688" height="1520" decoding="async" fetchpriority="auto">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GeMIik6SP3DkY5OZpRDZytvNxR/hf_20260929_173856_5724d2e1-2a65-4370-b405-99b1fda07f06_min.webp" data-k="polished" alt="" width="2688" height="1520" decoding="async" fetchpriority="auto">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GeMIik6SP3DkY5OZpRDZytvNxR/hf_20260929_174938_f5db29ba-780d-4991-9673-d5400eb031fa_min.webp" data-k="coated" alt="" width="2688" height="1520" decoding="async" fetchpriority="auto">
+        <div class="sheen" id="sheen"></div>
+      </div>
+      <div class="seam" id="seam"></div>
+    </div>
+    <div class="layer">
+      <div class="intro" id="intro">
+        <p class="eyebrow">Mobile detailing · Bristol and Bath</p>
+        <h1>Your car is better than it looks.</h1>
+        <p class="lede">Scroll down and watch us clean this one, the same way we'd do yours on your drive.</p>
+        <div class="ctas"><a class="btn acc" href="#book">Book a detail</a><a class="btn ghost" href="#prices">See prices</a></div>
+      </div>
+      <div id="stages"></div>
+      <nav class="steps" id="rail" aria-label="Cleaning stages"></nav>
+      <p class="hint" id="hint">Scroll to clean it</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="prices" aria-labelledby="h-prices">
+  <div class="wrap">
+    <header class="sec-h reveal"><div><p class="eyebrow">Prices · 2026 guide rates</p><h2 id="h-prices">Price your car in three taps</h2></div><p class="lede">Pick the size, how tired the paint is and what you want back. The price is a guide range; we fix it after a free look at the car.</p></header>
+    <div class="panel bld reveal">
+      <div class="bld-l">
+        <div><span class="lbl" id="lSize">Size</span><div class="seg" role="radiogroup" aria-labelledby="lSize" id="size"></div></div>
+        <div><span class="lbl" id="lCond">How bad are the swirls?</span><div class="seg" role="radiogroup" aria-labelledby="lCond" id="cond"></div></div>
+        <div><span class="lbl" id="lPk">What you want</span><div class="pk" role="radiogroup" aria-labelledby="lPk" id="pk"></div></div>
+        <div><span class="lbl">Add on</span><div class="xs" id="xs"></div></div>
+      </div>
+      <div class="bld-r">
+        <div class="quote"><div class="for" id="qFor"></div><div class="v" id="qV" aria-live="polite"></div><div class="s" id="qS"></div></div>
+        <div class="res"><div><span>On your drive</span><b id="qT"></b></div><div><span>Swirls removed</span><b id="qR"></b></div></div>
+        <ul class="inc" id="qInc"></ul>
+        <div class="acts"><button type="button" class="btn acc" id="qBook">Book this</button><button type="button" class="btn ghost" id="qShow">Show me on the car</button></div>
+        <p class="note" id="qPlan"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="day" aria-labelledby="h-day" style="padding-top:0">
+  <div class="wrap">
+    <header class="sec-h reveal"><div><p class="eyebrow">On the day</p><h2 id="h-day">You don't have to be in</h2></div><p class="lede">Leave us the keys and go to work. We text when it's done, with photos under the same inspection light, before and after.</p></header>
+    <div class="day reveal">
+      <div><span class="k">01</span><b>We bring water and power</b><p>The van carries 450 litres of filtered water and a quiet generator. We don't need your tap or a socket.</p></div>
+      <div><span class="k">02</span><b>We measure before we polish</b><p>A paint depth gauge on every panel, so we know how much clear coat there is to work with.</p></div>
+      <div><span class="k">03</span><b>Photos under the light</b><p>The same inspection light, the same angles, before and after. You see exactly what changed.</p></div>
+      <div><span class="k">04</span><b>Rain doesn't cancel a wash</b><p>We work under a gazebo. Polishing and coating need the car dry, so for those we check the forecast with you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="book" aria-labelledby="h-book" style="padding-top:0">
+  <div class="wrap">
+    <header class="sec-h reveal"><div><p class="eyebrow">Book</p><h2 id="h-book">Pick a day</h2></div><p class="lede">Choose a start day. Longer jobs need the car for two days in a row, and the calendar only offers days that fit.</p></header>
+    <div class="panel bk reveal">
+      <div class="bk-l">
+        <div class="summ" id="bSum"></div>
+        <div><span class="lbl" id="lDays">Start day</span><div class="days" role="radiogroup" aria-labelledby="lDays" id="days"></div></div>
+        <div id="slotW"><span class="lbl" id="lSlot">Arrival</span><div class="slots" role="radiogroup" aria-labelledby="lSlot" id="slots"></div></div>
+        <p class="note" id="dNote"></p>
+      </div>
+      <div class="bk-r">
+        <form class="f" id="bf" novalidate>
+          <div class="fld"><label class="lbl" for="fName">Name</label><input id="fName" autocomplete="name"><p class="err" hidden>Add your name.</p></div>
+          <div class="fld"><label class="lbl" for="fTel">Mobile</label><input id="fTel" type="tel" autocomplete="tel" inputmode="tel"><p class="err" hidden>Add a UK mobile number.</p></div>
+          <div class="fld"><label class="lbl" for="fPc">Postcode where the car is</label><input id="fPc" autocomplete="postal-code" maxlength="8" style="text-transform:uppercase"><p class="err" hidden>Enter a full postcode, like BS6 5AB.</p><p class="note" id="pcNote"></p></div>
+          <div class="fld"><label class="lbl" for="fReg">Registration <span style="color:var(--faint)">optional</span></label><input id="fReg" autocomplete="off" maxlength="8" style="text-transform:uppercase;font-family:var(--m)"></div>
+          <div class="fld full"><button class="btn acc" type="submit" id="bGo" style="justify-self:start">Request this day</button></div>
+          <p class="note full" style="grid-column:1/-1">We confirm by text within two working hours. Nothing is charged until the job is done.</p>
+        </form>
+        <div class="done" id="bDone" hidden></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq" aria-labelledby="h-faq" style="padding-top:0">
+  <div class="wrap">
+    <header class="sec-h reveal"><div><p class="eyebrow">Questions</p><h2 id="h-faq">Straight answers</h2></div></header>
+    <div class="faq reveal">
+      <details><summary>Will it take out every scratch?</summary><p>Swirls and light marks, yes. A scratch you can catch with a fingernail has gone through the clear coat. We can make it much less visible, but only paint fixes it properly. We'll show you which is which under the light before we start.</p></details>
+      <details><summary>How long does a ceramic coating last?</summary><p>The coating we use is rated for about three years. Wash it every couple of weeks with a pH-neutral shampoo and it keeps beading. We check it for free at six months.</p></details>
+      <details><summary>Do you need my water or electricity?</summary><p>No. The van carries its own filtered water and a quiet generator, so we can work on a street or in a car park.</p></details>
+      <details><summary>Can I stay in the car's house while you work?</summary><p>Of course, or go out. We only need the keys and room to walk round the car. We text you when it's done.</p></details>
+      <details><summary>What if it rains?</summary><p>Washes go ahead under a gazebo. Polishing and coating need dry paint and some cover, so we'll check the forecast with you the day before, or use your garage if you have one.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-cols">
+      <div><p class="eyebrow">Van</p><p>Mobile, based in Bishopston, Bristol</p></div>
+      <div><p class="eyebrow">Call or text</p><p class="mono">0117 496 0735</p><p>Mon–Sat 8:00–18:00</p></div>
+      <div><p class="eyebrow">We cover</p><p>Bristol (BS1–BS16, BS20–BS41) and Bath (BA1, BA2)</p></div>
+      <div><p class="eyebrow">This page</p><p><a href="#scene">The process</a> · <a href="#prices">Prices</a> · <a href="#book">Book</a> · <a href="#faq">Questions</a></p></div>
+    </div>
+    <p class="foot-mark" aria-hidden="true">Dewpoint</p>
+    <div class="foot-b"><span>© 2026 Dewpoint Detailing</span><span>A demo site. The business, prices and number are examples.</span><span>Bishopston, Bristol</span></div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(()=>{"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const gbp=n=>'£'+(Math.round(n/5)*5).toLocaleString('en-GB');
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2200);}
+const lerpKeys=(ks,vs,x)=>{if(x<=ks[0])return vs[0];for(let i=1;i<ks.length;i++)if(x<=ks[i]){const t=(x-ks[i-1])/(ks[i]-ks[i-1]);return vs[i-1]+(vs[i]-vs[i-1])*t;}return vs[vs.length-1];};
+
+/* ================= the car ================= */
+const STAGES=[
+  {t:'Before',h:'A car that needs us',p:'Months of road film, tar spots, and brake dust on the wheels. The paint underneath is usually fine. It just can\'t be seen.'},
+  {t:'Snow foam',h:'Foam first',p:'Thick snow foam goes on and sits for five minutes. It lifts the grit off before anything touches the paint, which is how we avoid scratching it.'},
+  {t:'Rinse',h:'Rinse it all away',p:'Pressure-rinsed top to bottom, then washed by hand with two buckets. Wheels and arches too.'},
+  {t:'Polish',h:'Bring the shine back',p:'A machine polish takes out the swirl marks and haze, so the paint reflects the studio lights again.'},
+  {t:'Protect',h:'Lock it in',p:'A ceramic coating keeps the gloss for years. Water beads up and rolls straight off.'},
+  {t:'Done',h:'Ready when you get home',p:'We text you before and after photos when it\'s finished. You don\'t even need to be in.',cta:true}];
+$('#stages').innerHTML=STAGES.map((s,i)=>`<article class="stg" data-i="${i}" aria-hidden="true"><span class="n">${String(i+1).padStart(2,'0')} / 06</span><h2>${s.h}</h2><p>${s.p}</p>${s.cta?'<div class="ctas"><a class="btn acc" href="#book">Book a detail</a><a class="btn ghost" href="#prices">See prices</a></div>':''}</article>`).join('');
+$('#rail').innerHTML=STAGES.map((s,i)=>`<button type="button" data-go="${i}" aria-label="Go to ${s.t}">${s.t}<i><b></b></i></button>`).join('');
+/* five photos of the same car; each one wipes in over the last, left to right */
+const IM=$$('#cam img'),seam=$('#seam'),sheen=$('#sheen'),cam=$('#cam');
+const WIPES=[{i:1,a:1.04,b:1.56,glow:'#ffffff'},{i:2,a:2.04,b:2.56,glow:'#a9d4ff'},{i:3,a:3.04,b:3.56,glow:'#ffd2a6'},{i:4,a:4.04,b:4.56,glow:'#d4efff'}];
+const scene=$('#scene'),S={s:0,target:0,visible:true,snap:false,t0:performance.now()};
+const sm=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
+const memo=new Map(),put=(e,k,v)=>{const m=memo.get(e)||{};if(m[k]!==v){m[k]=v;memo.set(e,m);e.style[k]=v;}};
+function mask(e,v){put(e,'webkitMaskImage',v);put(e,'maskImage',v);}
+function progress(){const r=scene.getBoundingClientRect(),span=r.height-innerHeight;return clamp(-r.top/Math.max(1,span));}
+function stageY(i){const top=scene.offsetTop,span=scene.offsetHeight-innerHeight;return top+span*clamp((i+.6)/6);}
+function draw(now){const s=S.s,t=(now-S.t0)/1000;
+  put(cam,'transform',RM?'none':`scale(${(1+.05*sm(0,6,s)).toFixed(4)})`);
+  let seamX=null,seamO=0,glow='#fff';
+  WIPES.forEach(w=>{const p=sm(w.a,w.b,s),e=IM[w.i];
+    if(p<=0){put(e,'visibility','hidden');return;}
+    put(e,'visibility','visible');
+    if(p>=1){mask(e,'none');return;}
+    /* move quickly over the empty studio, slowly over the car */
+    const x=lerpKeys([0,.1,.92,1],[-5,26,96,105],p);
+    mask(e,`linear-gradient(90deg,#000 ${(x-2.5).toFixed(2)}%,rgba(0,0,0,0) ${(x+2.5).toFixed(2)}%)`);
+    seamX=x;seamO=Math.min(1,p*10,(1-p)*10);glow=w.glow;});
+  if(seamX!==null){put(seam,'left',seamX.toFixed(2)+'%');put(seam,'opacity',seamO.toFixed(2));seam.style.setProperty('--glow',glow);}else put(seam,'opacity','0');
+  /* once coated, a light passes along the paint */
+  let k=-1;if(s>4.6&&s<5.05)k=sm(4.6,5.05,s);else if(s>=5.05&&!RM){const q=(t%6)/2;if(q<1)k=q;}
+  if(k>=0&&k<=1){put(sheen,'opacity','1');put(sheen,'backgroundPosition',`${((1-k)*100).toFixed(1)}% 0`);}else put(sheen,'opacity','0');}
+function ui(){const s=S.s;
+  const io=1-clamp((s-.12)/.26);$('#intro').style.opacity=String(io);$('#intro').style.visibility=s>.4?'hidden':'visible';$('#hint').style.opacity=String(io);
+  const idx=s<.4?-1:Math.min(5,Math.floor(s));
+  $$('.stg').forEach(a=>{const on=+a.dataset.i===idx;a.classList.toggle('on',on);a.setAttribute('aria-hidden',String(!on));});
+  $$('#rail button').forEach((b,i)=>{const on=i===Math.max(0,idx);if(on)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');b.querySelector('b').style.width=(clamp(s-i)*100).toFixed(1)+'%';});}
+let raf=0,last=performance.now();
+function frame(now){raf=0;const dt=Math.min(.05,(now-last)/1000);last=now;S.target=progress()*6;
+  S.s=RM||S.snap?S.target:S.s+(S.target-S.s)*Math.min(1,dt*10);draw(now);ui();
+  const moving=Math.abs(S.target-S.s)>.001,idle=!RM&&S.s>=5;
+  if(S.visible&&(moving||idle))raf=requestAnimationFrame(frame);}
+const kick=()=>{if(!raf)raf=requestAnimationFrame(frame);};
+addEventListener('scroll',kick,{passive:true});addEventListener('resize',kick);
+new IntersectionObserver(es=>{S.visible=es[0].isIntersecting;if(S.visible)kick();},{rootMargin:'100px'}).observe(scene);
+$('#rail').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)scrollTo({top:stageY(+b.dataset.go),behavior:RM?'auto':'smooth'});});
+kick();
+
+/* ================= price builder ================= */
+const SIZES=[['small','Small','Fiesta, Polo, Mini',1],['medium','Medium','Golf, 3 Series, Qashqai',1.2],['large','Large','X5, Range Rover, vans',1.45]];
+const COND=[['light','Light','A few in sunlight',1],['moderate','Moderate','All over under a torch',1.1],['heavy','Heavy','Dull and hazy',1.25]];
+const PKGS=[
+  {k:'wash',t:'Maintenance wash',p:[45,60],days:0,time:'About 2 hours',rm:'None',stage:2,cond:false,note:'Clean paint, swirls still there',items:['Snow foam and two-bucket hand wash','Wheels, tyres and arches','Spray sealant, lasts 4 to 6 weeks']},
+  {k:'enh',t:'Enhancement',p:[240,320],days:1,time:'About 6 hours',rm:'About 65%',stage:3,cond:true,note:'One polish, most of the swirls out',items:['Everything in the wash','Iron fallout remover and clay bar','One-step machine polish','Sealant, lasts about 6 months']},
+  {k:'corr',t:'Paint correction',p:[420,560],days:2,time:'1 to 2 days',rm:'85 to 90%',stage:3,cond:true,note:'Two stages, close to new',items:['Everything in the enhancement','Paint depth readings on every panel','Two-stage machine correction','Sealant, lasts about 12 months']},
+  {k:'cer',t:'Ceramic protection',p:[650,850],days:2,time:'2 days',rm:'85 to 90%',stage:4,cond:true,note:'Corrected, then coated for years',items:['Two-stage paint correction','Ceramic coating, rated for about 3 years','Wheel faces and glass coated too','Free check-up at 6 months']}];
+const XS=[['int','Interior valet',[70,110]],['lights','Headlight restoration',[60,80]],['wheels','Wheels off, barrels cleaned and coated',[120,160]]];
+const Q={size:1,cond:1,pk:3,xs:new Set()};
+const segHTML=(arr,cur,key)=>arr.map((x,i)=>`<button type="button" role="radio" data-${key}="${i}" aria-checked="${i===cur}"><b>${x[1]}</b><small>${x[2]}</small></button>`).join('');
+function price(){const P=PKGS[Q.pk],sz=SIZES[Q.size][3],c=P.cond?COND[Q.cond][3]:1;let lo=P.p[0]*sz*c,hi=P.p[1]*sz*c;XS.forEach(x=>{if(Q.xs.has(x[0])){lo+=x[2][0];hi+=x[2][1];}});return [lo,hi];}
+function renderQ(){const P=PKGS[Q.pk],[lo,hi]=price();
+  $('#size').innerHTML=segHTML(SIZES,Q.size,'sz');$('#cond').innerHTML=segHTML(COND,Q.cond,'cd');
+  $$('#cond button').forEach(b=>{b.disabled=!P.cond;b.style.opacity=P.cond?'':'.45';});
+  $('#pk').innerHTML=PKGS.map((p,i)=>{const sz=SIZES[Q.size][3],c=p.cond?COND[Q.cond][3]:1;return `<button type="button" role="radio" data-pk="${i}" aria-checked="${i===Q.pk}"><b>${p.t}</b><em>from ${gbp(p.p[0]*sz*c)}</em><small>${p.note}</small></button>`;}).join('');
+  $('#xs').innerHTML=XS.map(x=>`<label><input type="checkbox" data-x="${x[0]}" ${Q.xs.has(x[0])?'checked':''}>${x[1]}<em>+${gbp(x[2][0])}–${gbp(x[2][1]).slice(1)}</em></label>`).join('');
+  $('#qFor').textContent=`${P.t} · ${SIZES[Q.size][1].toLowerCase()} car${P.cond?' · '+COND[Q.cond][1].toLowerCase()+' swirls':''}`;
+  $('#qV').textContent=`${gbp(lo)} – ${gbp(hi)}`;$('#qS').textContent='Guide price including VAT. Fixed after a free look at the car.';
+  $('#qT').textContent=P.time;$('#qR').textContent=P.rm;
+  $('#qInc').innerHTML=P.items.concat(XS.filter(x=>Q.xs.has(x[0])).map(x=>x[1])).map(t=>`<li>${esc(t)}</li>`).join('');
+  $('#qPlan').textContent=P.k==='cer'||P.k==='corr'?'Keep it that way: a maintenance wash every four weeks is £40 a month, and it keeps the coating topped up.':'Book it every four weeks and it\'s £40 a month.';
+  renderBook();}
+$('#size').addEventListener('click',e=>{const b=e.target.closest('[data-sz]');if(b){Q.size=+b.dataset.sz;renderQ();}});
+$('#cond').addEventListener('click',e=>{const b=e.target.closest('[data-cd]');if(b&&!b.disabled){Q.cond=+b.dataset.cd;renderQ();}});
+$('#pk').addEventListener('click',e=>{const b=e.target.closest('[data-pk]');if(b){Q.pk=+b.dataset.pk;renderQ();}});
+$('#xs').addEventListener('change',e=>{const x=e.target.dataset.x;if(!x)return;e.target.checked?Q.xs.add(x):Q.xs.delete(x);renderQ();});
+$('#qShow').addEventListener('click',()=>scrollTo({top:stageY(PKGS[Q.pk].stage),behavior:RM?'auto':'smooth'}));
+$('#qBook').addEventListener('click',()=>$('#book').scrollIntoView({behavior:RM?'auto':'smooth'}));
+
+/* ================= booking ================= */
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],DAY=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const hsh=s=>{let h=2166136261;for(const ch of s)h=Math.imul(h^ch.charCodeAt(0),16777619);return (h>>>0)/4294967296;};
+const B={day:null,slot:'08:00',done:null};
+function days(){const out=[],d0=new Date();d0.setHours(0,0,0,0);for(let i=1;out.length<12&&i<24;i++){const d=new Date(d0);d.setDate(d.getDate()+i);if(d.getDay()===0)continue;out.push({d,id:iso(d),full:hsh(iso(d)+'dp')<.16});}return out;}
+function fits(list,i,need){if(list[i].full)return false;if(need<2)return true;const n=list[i+1];if(!n||n.full)return false;return (n.d-list[i].d)/864e5===1;}
+function renderBook(){if(B.done)return;const P=PKGS[Q.pk],need=Math.max(1,P.days),L=days();
+  if(B.day&&!L.some((x,i)=>x.id===B.day&&fits(L,i,need)))B.day=null;if(!B.day){const i=L.findIndex((x,j)=>fits(L,j,need));B.day=i>=0?L[i].id:null;}
+  $('#days').innerHTML=L.map((x,i)=>{const ok=fits(L,i,need);return `<button type="button" role="radio" data-day="${x.id}" aria-checked="${x.id===B.day}" ${ok?'':'disabled'} aria-label="${DAY[x.d.getDay()]} ${x.d.getDate()} ${MON[x.d.getMonth()]}${ok?'':', not available'}"><b>${DAY[x.d.getDay()]}</b><span>${x.d.getDate()} ${MON[x.d.getMonth()]}</span><small>${x.full?'Full':ok?'Free':'Next day full'}</small></button>`;}).join('');
+  const slots=P.days===0?['08:00','12:30']:['08:00'];if(!slots.includes(B.slot))B.slot=slots[0];
+  $('#slots').innerHTML=slots.map(t=>`<button type="button" role="radio" data-slot="${t}" aria-checked="${t===B.slot}">${t}</button>`).join('');
+  const [lo,hi]=price(),d=B.day?new Date(B.day+'T00:00'):null;
+  $('#bSum').innerHTML=`<b>${esc(PKGS[Q.pk].t)}</b>, ${SIZES[Q.size][1].toLowerCase()} car, ${gbp(lo)} – ${gbp(hi)}<span>${d?`Starting ${DAY[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]} at ${B.slot}${need>1?', two days':''}`:'No free days in the next two weeks. Call 0117 496 0735.'}</span>`;
+  $('#dNote').textContent=need>1?'Correction and ceramic need the car two days in a row, so single free days are greyed out.':'Washes take about two hours. Pick a morning or afternoon start.';
+  $('#bGo').disabled=!B.day;}
+$('#days').addEventListener('click',e=>{const b=e.target.closest('[data-day]');if(b&&!b.disabled){B.day=b.dataset.day;renderBook();}});
+$('#slots').addEventListener('click',e=>{const b=e.target.closest('[data-slot]');if(b){B.slot=b.dataset.slot;renderBook();}});
+const AREA=/^(BS([1-9]|1[0-6]|2[0-9]|3[0-9]|4[01])|BA[12])$/;
+const pcOK=v=>/^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i.test(v.trim()),dist=v=>{const m=v.toUpperCase().replace(/\s+/g,'').match(/^([A-Z]{1,2}\d[A-Z\d]?)\d[A-Z]{2}$/);return m?m[1]:'';};
+$('#fPc').addEventListener('input',e=>{const d=dist(e.target.value),n=$('#pcNote');n.textContent=!d?'':AREA.test(d)?`We cover ${d}.`:`${d} is outside our usual area. Send it anyway and we'll call you.`;});
+$('#bf').addEventListener('submit',e=>{e.preventDefault();let ok=true;const chk=(id,bad)=>{const f=$(id).closest('.fld');f.classList.toggle('bad',bad);f.querySelector('.err').hidden=!bad;if(bad)ok=false;};
+  chk('#fName',!$('#fName').value.trim());chk('#fTel',$('#fTel').value.replace(/\D/g,'').length<10);chk('#fPc',!pcOK($('#fPc').value));
+  if(!ok){const b=$('#bf .bad input');b&&b.focus();return;}if(!B.day){toast('Pick a day first');return;}
+  const ref='DP-'+String(1000+Math.floor(Math.random()*9000)),P=PKGS[Q.pk],[lo,hi]=price(),d=new Date(B.day+'T00:00'),name=$('#fName').value.trim().split(/\s+/)[0];
+  B.done={ref,pk:P.t,day:B.day,slot:B.slot,lo,hi,at:Date.now()};try{const k='dp-requests',a=JSON.parse(localStorage.getItem(k)||'[]');a.push(B.done);localStorage.setItem(k,JSON.stringify(a));}catch(x){}
+  const [h,m]=B.slot.split(':').map(Number),st=new Date(d);st.setHours(h,m);const en=new Date(st.getTime()+(P.days>1?33:P.days?6:2)*36e5);const g=t=>iso(t).replace(/-/g,'')+'T'+String(t.getHours()).padStart(2,'0')+String(t.getMinutes()).padStart(2,'0')+'00';
+  const cal=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Dewpoint detail · '+ref)}&dates=${g(st)}/${g(en)}&ctz=Europe/London&details=${encodeURIComponent(P.t+'. Reference '+ref+'. Questions: 0117 496 0735.')}`;
+  $('#bf').hidden=true;const dn=$('#bDone');dn.hidden=false;
+  dn.innerHTML=`<span class="lbl">Request sent</span><span class="ref">${ref}</span><b style="font-size:18px;font-weight:500">${DAY[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]} at ${B.slot}</b><p class="note">Thanks, ${esc(name)}. ${esc(P.t)}, ${gbp(lo)} – ${gbp(hi)}. We'll text you to confirm within two working hours.</p>
+    <ol><li>We look at the paint under the light and fix the price before we start.</li><li>You leave us the keys. We bring water and power.</li><li>You get before and after photos by text when it's done.</li></ol>
+    <div class="acts" style="margin-top:6px"><a class="btn sm" href="${cal}" target="_blank" rel="noopener">Add to Google Calendar</a><button type="button" class="btn ghost sm" id="bAgain">Change the request</button></div>`;
+  $('#bAgain').addEventListener('click',()=>{B.done=null;dn.hidden=true;$('#bf').hidden=false;renderBook();});});
+
+/* ================= nav and reveals ================= */
+const nav=$('#nav');const navCheck=()=>nav.classList.toggle('solid',scene.getBoundingClientRect().bottom<innerHeight*.6);addEventListener('scroll',navCheck,{passive:true});navCheck();
+if('IntersectionObserver' in window&&!RM){const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{rootMargin:'0px 0px -10% 0px'});$$('.reveal').forEach(x=>io.observe(x));}else $$('.reveal').forEach(x=>x.classList.add('in'));
+renderQ();
+window.__dp={S,stageY,Q,B};
+})();
+</script>
+</body>
+</html>
