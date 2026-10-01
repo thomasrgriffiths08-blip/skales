@@ -21,7 +21,7 @@ Key facts:
 - [Why](https://thomasrgriffiths08-blip.github.io/skales/why/): ownership (clients own domain, code and accounts), one person, built in public, and the FAQ.
 - [Book a call](https://thomasrgriffiths08-blip.github.io/skales/book/): four qualifying questions, then a slot straight into the diary.
 - [Free teardown](https://thomasrgriffiths08-blip.github.io/skales/teardown.html): three details in, three findings back by message.
-- [Notes](https://thomasrgriffiths08-blip.github.io/skales/notes/): short pieces — what a missed call actually costs a service business; why i don’t rent you your own website; sixteen builds for businesses that don’t exist, on purpose.
+- [Notes](https://thomasrgriffiths08-blip.github.io/skales/notes/): short pieces — what a missed call actually costs a service business; why i don’t rent you your own website; thirty-six builds for businesses that don’t exist, on purpose.
 
 ## The thirty-six builds
 - [Northgate Quote Engine](https://thomasrgriffiths08-blip.github.io/skales/work/northgate-quote-engine/): business tool for an invented kitchen fitter — A quote that assembles itself while the customer answers.
