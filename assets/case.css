@@ -1,0 +1,91 @@
+/* /your-case/ — the questions reuse the booking form; this is the case file they produce. */
+.case-head .spec{margin-bottom:18px}
+.cq{margin-top:24px}
+.cq:first-of-type{margin-top:0}
+.cq-l{font-weight:600;margin:0 0 12px}
+.cq-l .opt{font-weight:400;color:var(--tx-2);font-size:.9375rem}
+.num{position:relative}
+.num .pre{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--tx-2);font-variant-numeric:tabular-nums;pointer-events:none}
+.num.has-pre input{padding-left:30px}
+.field input[type=number]{font-variant-numeric:tabular-nums;-moz-appearance:textfield}
+.field input[aria-invalid=true]{border-color:#B42318}
+.bnav{display:flex;gap:12px;margin-top:28px}
+.bstep .err{margin-top:16px;color:#B42318;font-size:.9375rem}
+
+/* ---------- the file ---------- */
+.cf-wrap{padding:clamp(40px,7vw,96px) 0 clamp(56px,8vw,104px);max-width:960px}
+.cf-in{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.cf-in.on{opacity:1;transform:none}
+.cf-top{padding-bottom:clamp(28px,4vw,40px);border-bottom:2px solid var(--tx)}
+.cf-id{display:flex;flex-wrap:wrap;gap:6px 18px;font:400 .8125rem/1.4 var(--mono);color:var(--tx-2);text-transform:uppercase;letter-spacing:.06em}
+.cf-id b{font-weight:400;color:var(--tx)}
+.cf-h{margin-top:20px;font-size:clamp(2.35rem,5.6vw,4.4rem);letter-spacing:-.035em;line-height:1.02;outline:0}
+.cf-h span{display:block;margin-top:12px;font-size:clamp(1.05rem,1.4vw,1.25rem);font-weight:500;letter-spacing:0;color:var(--tx-2)}
+.cf-facts{margin:28px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.cf-facts>div{padding:16px 16px 0 0}
+.cf-facts>div+div{padding-left:16px;border-left:1px solid var(--line)}
+.cf-facts dt{font-size:.8125rem;color:var(--tx-2)}
+.cf-facts dd{margin:4px 0 0;font-weight:600;font-size:1.375rem;letter-spacing:-.02em}
+@media (max-width:700px){.cf-facts{grid-template-columns:1fr 1fr}.cf-facts>div:nth-child(3){padding-left:0;border-left:0}.cf-facts>div:nth-child(n+3){border-top:1px solid var(--line);margin-top:16px}}
+
+.cf-sec{padding:clamp(32px,5vw,56px) 0;border-bottom:1px solid var(--line)}
+.cf-n{font:400 .8125rem/1.4 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--tx-2);margin:0 0 18px}
+.cf-lead{font-size:clamp(1.125rem,1.6vw,1.375rem);line-height:1.5;max-width:62ch;color:var(--tx);text-wrap:pretty}
+.cf-lead strong{font-weight:600}
+.cf-note{margin:22px 0 0;padding:4px 0 4px 18px;border-left:2px solid var(--live);color:var(--tx-2);font-size:1.0625rem;max-width:60ch}
+
+.cf-big{display:grid;gap:8px;margin-bottom:28px}
+.cf-figure{font-weight:600;font-size:clamp(3rem,9vw,6.5rem);letter-spacing:-.04em;line-height:.95}
+.cf-cap{color:var(--tx-2);max-width:52ch;font-size:1.0625rem}
+.cf-cap b{color:var(--tx)}
+.cf-leaks{list-style:none;margin:0 0 20px;padding:0;counter-reset:lk}
+.cf-leaks li{counter-increment:lk;padding:20px 0 20px 56px;border-top:1px solid var(--line);position:relative}
+.cf-leaks li:last-child{border-bottom:1px solid var(--line)}
+.cf-leaks li::before{content:counter(lk,decimal-leading-zero);position:absolute;left:0;top:20px;font-weight:600;font-size:1.25rem;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.cf-lh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 20px}
+.cf-lh b{font-size:1.1875rem;letter-spacing:-.01em}
+.cf-v{font-weight:600;font-size:1.25rem;text-align:right}
+.cf-v small{display:block;font-weight:400;font-size:.8125rem;color:var(--tx-2)}
+.cf-v.cf-q{font-weight:500;font-size:.875rem;color:var(--tx-3)}
+.cf-leaks p{margin:8px 0 0;color:var(--tx-2);max-width:64ch;line-height:1.5}
+.cf-work{font:400 .8125rem/1.6 var(--mono);color:var(--tx-2)!important;background:var(--alu);border-radius:10px;padding:10px 12px;max-width:none!important}
+.cf-work span{display:inline-block;margin-right:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--tx-3)}
+.cf-work b{color:var(--tx);font-weight:400}
+@media (max-width:560px){.cf-leaks li{padding-left:40px}.cf-lh{display:grid}.cf-v{text-align:left}}
+
+.cf-phase{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:24px 0;border-top:1px solid var(--line)}
+.cf-phase:first-of-type{border-top:0;padding-top:0}
+.cf-pn{margin:4px 0 0;font-weight:600;color:var(--tx-2)}
+.cf-pb{min-width:0}
+.cf-build+.cf-build{margin-top:40px;padding-top:32px;border-top:1px dashed var(--line)}
+.cf-build{display:grid;grid-template-columns:1fr minmax(0,320px);gap:clamp(20px,3vw,36px);align-items:start}
+.cf-bt h3{font-size:clamp(1.375rem,2.2vw,1.75rem)}
+.cf-bt p{margin:10px 0 0;color:var(--tx-2);line-height:1.55;max-width:56ch}
+.cf-bt .cf-for{font-size:.875rem;margin-top:8px}
+.cf-proofs{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.cf-proof{display:grid;gap:10px;min-width:0;align-content:start}
+.cf-proof .ph{aspect-ratio:390/460;border-radius:20px;padding:5px;background:var(--hand);overflow:hidden;transition:transform .25s var(--ease)}
+.cf-proof img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:16px;background:#FFF}
+.cf-proof:hover .ph{transform:translateY(-3px)}
+.cf-proof .cap{display:grid;gap:2px}
+.cf-proof .cap b{font-size:.9375rem;line-height:1.25}
+.cf-proof .cap span{font-size:.8125rem;color:var(--tx-2);line-height:1.35}
+@media (max-width:800px){.cf-phase{grid-template-columns:1fr;gap:12px}.cf-build{grid-template-columns:1fr}.cf-proofs{max-width:420px}}
+
+.cf-end{border-bottom:0}
+.cf-vh{font-size:clamp(1.75rem,3.4vw,2.6rem);margin-bottom:14px}
+.cf-cta{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 8px}
+.cf-redo{background:none;border:0;padding:0;font:inherit;color:var(--tx);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cf-fit .cf-vh::before,.cf-small .cf-vh::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--live);margin-right:14px;vertical-align:.2em}
+@media (max-width:560px){.cf-cta .btn{width:100%}}
+
+@media print{
+  .site-head,.site-foot,.mbar,.cf-cta,.cf-redo,.skip{display:none!important}
+  .cf-in{opacity:1!important;transform:none!important}
+  .cf-wrap{padding:0;max-width:none}
+  .cf-sec{break-inside:avoid-page}
+  .cf-build{break-inside:avoid}
+  .cf-work{background:none;border:1px solid #ccc}
+  .cf-proof .ph{max-height:220px}
+  a{color:inherit;text-decoration:none}
+}
