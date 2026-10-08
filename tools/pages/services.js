@@ -248,6 +248,7 @@ ${L.header(b, 'services')}
 ${panel('How it fits', 'One system', `<h2>Why one system rather than five suppliers?</h2><p class="lead">Because the gaps between them are where the jobs go missing. An ad that lands on a page that cannot book, a booking that never gets a reminder, a missed call nobody returns. Here the ad points at the website, the website books into the CRM, and the CRM sends the texts, so nothing falls between two suppliers.</p><p>You can start with one piece and add the rest. Most owners start with the website or the missed-call text-back, because that is where the most work is leaking.</p>`)}
 ${panel('The process', 'Teardown, quote, build, handover', `<h2>How does a build work?</h2><ol class="steps">${PROCESS.map(([n, t]) => `<li><b>${esc(n)}.</b> ${esc(t)}</li>`).join('')}</ol>`, ' id="process"')}
 ${autoCards(b, AU.map(a => a.slug), 'The automations')}
+${panel('By trade', 'Your kind of business', `<h2>What does a website for your trade need?</h2><p class="lead">It depends on how your work comes in. A locksmith lives on the emergency call, a salon on the rebooking, a roofer on the quote. <a class="lnk" href="${b}for/">Find your trade</a> to see what its website needs and the demos set up for it.</p>`)}
 ${fill(faqPanel(GQ.slice(0, 6), `Questions people ask ${site.name}`), b)}
 </main>
 ${band(b, 'services', 'index')}
@@ -442,4 +443,4 @@ ${L.footer(b)}`;
   },
 };
 
-module.exports = { SV, AU, CP, GQ, pages: [servicesIndex, ...SV.map(servicePage), autoIndex, ...AU.map(autoPage), compareIndex, ...CP.map(comparePage), faqHub] };
+module.exports = { SV, AU, CP, GQ, parts: { crumbs, crumbNodes, faqNode, panel, faqPanel, buildWall, band, fill, svcId, autoId, demo, auto }, pages: [servicesIndex, ...SV.map(servicePage), autoIndex, ...AU.map(autoPage), compareIndex, ...CP.map(comparePage), faqHub] };

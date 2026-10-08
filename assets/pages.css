@@ -113,3 +113,6 @@ a.hub-card:hover{background:var(--alu-2);transform:translateY(-2px)}
   .cmp td:last-child{background:none;margin-top:6px;padding:8px 0 0 12px;border-left:3px solid var(--live)}
   .cmp td::before{content:attr(data-label);display:block;margin-bottom:2px;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--tx-2)}
 }
+.rel-h2{margin-top:clamp(40px,6vw,64px)}
+.seg-g{padding-bottom:clamp(16px,3vw,32px)}
+.seg-g:last-of-type{padding-bottom:clamp(56px,9vw,120px)}
