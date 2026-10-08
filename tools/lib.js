@@ -4,6 +4,7 @@
    subpath today and at a root domain later without touching a template. */
 const site = require('../data/site.js');
 const builds = require('../data/builds.js');
+const SERVICES = require('../data/services.js');
 
 const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const pad = n => String(n).padStart(2, '0');
@@ -93,10 +94,11 @@ function baseGraph(){
       description: site.tagline + ' — ' + site.facts[0],
       founder: { '@id': PERSON_ID }, foundingDate: site.founded,
       areaServed: { '@type': 'Country', name: site.areaServed },
-      knowsAbout: ['Web design for service businesses','Online booking systems','Missed-call text-back automation','Customer follow-up automation','Trades websites','Review request automation'],
+      knowsAbout: ['Web design for service businesses','Online booking systems','CRM for trades','Missed-call text-back automation','Customer follow-up automation','Trades websites','Review request automation','Facebook and Instagram advertising','Google Ads','Local SEO'],
       sameAs: [site.instagram],
       contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: site.email, availableLanguage: 'en-GB', areaServed: 'GB' },
-      logo: { '@type': 'ImageObject', url: abs('/og/home.png') } },
+      logo: { '@type': 'ImageObject', url: abs('/og/home.png') },
+      hasOfferCatalog: { '@type': 'OfferCatalog', name: site.legalName + ' services', itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(`/services/${s.slug}/`) + '#service', name: s.name, url: abs(`/services/${s.slug}/`) } })) } },
     { '@type': 'Person', '@id': PERSON_ID, name: site.founder.name, alternateName: site.founder.alternateName,
       jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram], nationality: 'GB' },
     { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.legalName, alternateName: site.name, description: site.tagline,
@@ -159,9 +161,8 @@ ${jsonld(nodes)}
 const NAV = [
   { key: 'work',    label: 'Work',         path: 'work/' },
   { key: 'try',     label: 'Try it',       path: 'try/' },
-  { key: 'whatido', label: 'What I build', path: 'what-i-do/' },
+  { key: 'services', label: 'Services',    path: 'services/' },
   { key: 'why',     label: 'About',        path: 'why/' },
-  { key: 'notes',   label: 'Notes',        path: 'notes/' },
 ];
 const isWork = k => ['work', 'websites', 'tools'].includes(k);
 function header(b, active){
@@ -184,7 +185,7 @@ function header(b, active){
 function footer(b){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
   const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['Tools', 'work/tools/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ...TOOL_LANES.map(k => [`${LANES[k].name} tools`, `work/tools/#${k}`])];
-  const studio = [['Try it: live demos', 'try/'], ['What I build', 'what-i-do/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
+  const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
   return `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>
 <footer class="site-foot">

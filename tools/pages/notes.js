@@ -32,7 +32,7 @@ const posts = notes.map(n => ({
   url: `/notes/${n.slug}/`, og: `notes-${n.slug}`, priority: 0.6, changefreq: 'yearly',
   meta: { key: `notes-${n.slug}`, title: n.title, kicker: 'Notes · ' + fmt(n.date), sub: n.summary },
   render(b){
-    const title = n.title.length > 46 ? n.title : `${n.title} | ${site.name}`;
+    const t0 = n.seo || n.title, title = t0.length > 46 ? t0 : `${t0} | ${site.name}`;
     const description = n.summary;
     const nodes = [ L.webPage({ path: `/notes/${n.slug}/`, title, description }),
       L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Notes', path: '/notes/' }, { name: n.title, path: `/notes/${n.slug}/` }]),

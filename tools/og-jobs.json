@@ -348,10 +348,118 @@
     "phone": "assets/phones/36.webp"
   },
   {
-    "key": "what-i-do",
-    "title": "What I build for service businesses",
-    "kicker": "Websites · booking · follow-up",
-    "sub": "Three systems, each one running on the page. Hand-built, owned by you."
+    "key": "services",
+    "title": "Websites, booking, follow-up and ads",
+    "kicker": "Services",
+    "sub": "Five services, one system: a search, a tap or a missed call, turned into a booked job."
+  },
+  {
+    "key": "services-websites",
+    "title": "Websites",
+    "kicker": "Services",
+    "sub": "A fast site built to turn a visit into a call, a booking or an enquiry you can ring back."
+  },
+  {
+    "key": "services-booking-and-crm",
+    "title": "Booking and CRM",
+    "kicker": "Services",
+    "sub": "Customers book a free slot and pay a deposit at any hour. Every enquiry sits on one board."
+  },
+  {
+    "key": "services-follow-up-automation",
+    "title": "Follow-up automation",
+    "kicker": "Services",
+    "sub": "Missed-call text-back, quote chasers, reminders and review requests. Set up once, runs itself."
+  },
+  {
+    "key": "services-meta-ads",
+    "title": "Meta ads",
+    "kicker": "Services",
+    "sub": "Facebook and Instagram ads that land on a page built to book, with follow-up for anyone who does not."
+  },
+  {
+    "key": "services-google-ads",
+    "title": "Google ads",
+    "kicker": "Services",
+    "sub": "Search ads and Local Services Ads, so you show up when someone nearby searches for what you do."
+  },
+  {
+    "key": "automations",
+    "title": "Six texts that send themselves",
+    "kicker": "Automations",
+    "sub": "Missed-call text-back, review requests, reminders, quote chasing, deposits and on-my-way texts."
+  },
+  {
+    "key": "automations-missed-call-text-back",
+    "title": "Missed-call text-back",
+    "kicker": "Automations",
+    "sub": "Anyone whose call you miss gets a text seconds later, with a link to book."
+  },
+  {
+    "key": "automations-review-requests",
+    "title": "Review requests",
+    "kicker": "Automations",
+    "sub": "Every customer gets asked for a Google review when the job is done, with one tap to leave it."
+  },
+  {
+    "key": "automations-service-reminders",
+    "title": "Service reminders",
+    "kicker": "Automations",
+    "sub": "Customers get a text when they are due again: the boiler service, the MOT, the next cut."
+  },
+  {
+    "key": "automations-quote-chasing",
+    "title": "Quote chasing",
+    "kicker": "Automations",
+    "sub": "Quotes that go quiet get a friendly chaser, with a link to accept."
+  },
+  {
+    "key": "automations-booking-deposits",
+    "title": "Booking deposits",
+    "kicker": "Automations",
+    "sub": "A deposit taken at booking holds the slot and comes off the bill."
+  },
+  {
+    "key": "automations-on-my-way-texts",
+    "title": "On-my-way texts",
+    "kicker": "Automations",
+    "sub": "One tap tells the customer you have set off, when you will arrive and who is coming."
+  },
+  {
+    "key": "compare",
+    "title": "Honest comparisons",
+    "kicker": "Compare",
+    "sub": "Page builders, pay-monthly trade sites, missed-call apps and directories, side by side."
+  },
+  {
+    "key": "compare-page-builders",
+    "title": "Skales vs a page builder",
+    "kicker": "Compare",
+    "sub": "Wix, Squarespace and the rest, against a site built by hand for your business."
+  },
+  {
+    "key": "compare-trade-website-templates",
+    "title": "Skales vs a monthly trade website",
+    "kicker": "Compare",
+    "sub": "The pay-monthly trade website, against one built for you and owned outright."
+  },
+  {
+    "key": "compare-missed-call-apps",
+    "title": "Skales vs a missed-call app",
+    "kicker": "Compare",
+    "sub": "A standalone text-back app, against text-back that ends in a booked job."
+  },
+  {
+    "key": "compare-directories",
+    "title": "Skales vs a directory listing",
+    "kicker": "Compare",
+    "sub": "Checkatrade, lead sites and listings, against a website that is yours."
+  },
+  {
+    "key": "faq",
+    "title": "Every question, answered",
+    "kicker": "FAQ",
+    "sub": "Short, straight answers about websites, booking, follow-up, ads and how a build works."
   },
   {
     "key": "why",

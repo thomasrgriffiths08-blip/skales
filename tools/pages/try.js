@@ -290,7 +290,7 @@ ${L.header(b, 'try')}
   </div>
   <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/">The other demos</a></p>
 </section>
-<noscript><section class="wrap tm-nos"><p>This demo needs JavaScript. You can <a class="lnk" href="${b}what-i-do/">read how it works</a> or <a class="lnk" href="${b}book/">book a call</a>.</p></section></noscript>
+<noscript><section class="wrap tm-nos"><p>This demo needs JavaScript. You can <a class="lnk" href="${b}services/">read how it works</a> or <a class="lnk" href="${b}book/">book a call</a>.</p></section></noscript>
 </main>
 ${L.footer(b)}
 <script>window.TRYKINDS=${JSON.stringify(kinds)};window.TRYJOBS=${JSON.stringify(JOBS)};window.TRYSITES=${JSON.stringify(SITES)};</script>`;
