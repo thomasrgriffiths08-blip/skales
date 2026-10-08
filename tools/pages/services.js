@@ -37,6 +37,10 @@ const FILMS = {
     desc: 'A film of a website build for a fictional heating engineer: built in seven days, found on Google, and the enquiries arriving in the Skales CRM. Fictional business, illustrative numbers.' },
   'missed-call': { name: 'A missed call, booked in two minutes', dur: 'PT31S', label: 'A missed call to a heating engineer becomes a lead, a text, a booking with a deposit and a job in the diary',
     desc: 'A film of a missed call to a fictional heating engineer: the call becomes a lead in the Skales CRM, the customer is texted a booking link, books with a deposit, and the job lands in the diary. Fictional business, illustrative numbers.' },
+  'ads-meta': { name: 'From a Facebook ad to a booked job', dur: 'PT28S', label: 'A Facebook ad for a heating engineer is tapped, the customer books and pays a deposit, and the job lands on the CRM board tagged with the ad',
+    desc: 'A film of a Facebook ad for a fictional heating engineer: one tap, a booking with a £30 deposit, the job on the CRM board tagged with the ad it came from, the confirmation and reminder texts, and what each booked job cost. Fictional business, illustrative numbers.' },
+  'ads-google': { name: 'From a Google search ad to a booked job', dur: 'PT28S', label: 'A Google search ad for a heating engineer is tapped, the customer books and pays a deposit, and the job lands on the CRM board tagged with the search',
+    desc: 'A film of a Google search ad for a fictional heating engineer: one tap from the results, a booking with a £30 deposit, the job on the CRM board tagged with the search it came from, the confirmation and reminder texts, and what each booked job cost. Fictional business, illustrative numbers.' },
 };
 const filmNode = (key, pagePath) => { const f = FILMS[key]; return { '@type': 'VideoObject', '@id': L.abs(pagePath) + '#film', name: f.name, description: f.desc,
   thumbnailUrl: L.abs(`/assets/film/${key}.jpg`), contentUrl: L.abs(`/assets/film/${key}.mp4`), uploadDate: '2026-10-08', duration: f.dur, publisher: { '@id': L.ORG_ID } }; };
