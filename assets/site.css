@@ -318,5 +318,5 @@ a.try-card:hover{background:var(--alu-2);transform:translateY(-2px)}
 .film video{display:block;width:100%;aspect-ratio:16/9;border-radius:var(--r-m);background:var(--hand);object-fit:cover}
 .film.is-phone video{aspect-ratio:4/5}
 .film figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;font-size:.8125rem;color:var(--tx-2)}
-.film-tg{height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:600;font-size:.875rem;cursor:pointer}
+.film-tg{flex:none;white-space:nowrap;height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:600;font-size:.875rem;cursor:pointer}
 .film-tg:hover{border-color:var(--tx)}
