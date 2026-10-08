@@ -297,3 +297,26 @@ strong,b{font-weight:600}
 .invite .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
 .invite h2{font-size:clamp(1.5rem,2.8vw,2.2rem)}
 .invite p{margin-top:10px;color:rgba(255,255,255,.72);max-width:56ch;line-height:1.55}
+
+/* ---------- /try/ index and the home page: the demo cards ---------- */
+.try-hero{padding:clamp(40px,7vw,96px) 0 28px}
+.try-hero h1{margin-top:14px;max-width:16ch}
+.try-hero .lead{margin-top:18px}
+.try-list{display:grid;gap:14px;padding-bottom:clamp(48px,7vw,96px)}
+@media (min-width:860px){.try-list{grid-template-columns:repeat(3,1fr)}}
+.try-card{display:flex;flex-direction:column;gap:10px;min-height:220px;padding:24px;border-radius:var(--r-m);background:var(--alu);transition:transform .18s var(--ease),background-color .2s}
+a.try-card:hover{background:var(--alu-2);transform:translateY(-2px)}
+.try-card h2,.try-card h3{font-size:1.6rem}
+.try-card p{color:var(--tx-2);line-height:1.5}
+.try-n{font:500 .8125rem/1 var(--sans);color:var(--tx-2)}
+.try-go{margin-top:auto;font-weight:600}
+.try-card.is-soon{background:none;border:1px dashed var(--line-2)}
+.try-card.is-soon .try-go{color:var(--tx-3);font-weight:500}
+
+/* ---------- films on the pages (assets/films.js) ---------- */
+.film{margin:0}
+.film video{display:block;width:100%;aspect-ratio:16/9;border-radius:var(--r-m);background:var(--hand);object-fit:cover}
+.film.is-phone video{aspect-ratio:4/5}
+.film figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;font-size:.8125rem;color:var(--tx-2)}
+.film-tg{height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:600;font-size:.875rem;cursor:pointer}
+.film-tg:hover{border-color:var(--tx)}

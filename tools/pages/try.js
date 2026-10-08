@@ -30,7 +30,7 @@ const DEMOS = [
     line: 'Call your own business, let it ring out, and watch the text turn into a booking with a deposit.',
     proves: 'Missed calls stop being lost jobs.' },
   { slug: 'booking', name: 'Book and pay a deposit', live: true,
-    line: 'Book a slot on a sample booking page at 10pm, then see it land in the diary.',
+    line: 'Book a job on your own website at 10pm, pay the deposit, then find it in your diary the next morning.',
     proves: 'Customers book without you.' },
   { slug: 'crm-board', name: 'The CRM board', live: true,
     line: 'Drag a lead from enquiry to done and watch the follow-up texts and review request send themselves.',
