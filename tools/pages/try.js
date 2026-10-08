@@ -28,7 +28,7 @@ const DEMOS = [
   { slug: 'missed-call', name: 'Missed call, booked', live: true,
     line: 'Call your own business, let it ring out, and watch the text turn into a booking with a deposit.',
     proves: 'Missed calls stop being lost jobs.' },
-  { slug: 'booking', name: 'Book and pay a deposit', live: false,
+  { slug: 'booking', name: 'Book and pay a deposit', live: true,
     line: 'Book a slot on a sample booking page at 10pm, then see it land in the diary.',
     proves: 'Customers book without you.' },
   { slug: 'crm-board', name: 'The CRM board', live: false,
@@ -49,16 +49,27 @@ const ic = (n, s = 16) => `<svg class="ic" width="${s}" height="${s}" viewBox="0
   keypad: '<circle cx="6" cy="5" r="1.3"/><circle cx="12" cy="5" r="1.3"/><circle cx="18" cy="5" r="1.3"/><circle cx="6" cy="11" r="1.3"/><circle cx="12" cy="11" r="1.3"/><circle cx="18" cy="11" r="1.3"/><circle cx="6" cy="17" r="1.3"/><circle cx="12" cy="17" r="1.3"/><circle cx="18" cy="17" r="1.3"/>',
   speaker: '<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>',
   plus: '<path d="M12 5v14M5 12h14"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-  back: '<path d="M15 5l-7 7 7 7"/>', lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>', bell: '<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>', lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
 })[n]}</svg>`;
 
-/* the pretend phone: a plain screen in a thin black ring, the same device as the films */
-const phone = `
-<div class="ph-fit" id="fit"><div class="ph" id="ph" aria-label="A pretend phone" role="group">
-  <div class="ph-scr">
-    <div class="ph-island" aria-hidden="true"></div>
-    <div class="ph-sb" id="sb" aria-hidden="true"><span data-clock></span><span class="ph-sbi"><svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".7" fill="currentColor"/><rect x="5" y="5" width="3" height="6" rx=".7" fill="currentColor"/><rect x="10" y="2.5" width="3" height="8.5" rx=".7" fill="currentColor"/><rect x="15" y="0" width="3" height="11" rx=".7" fill="currentColor"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="15" height="8" rx="2" fill="currentColor"/><rect x="24" y="4" width="1.6" height="4" rx=".8" fill="currentColor" opacity=".5"/></svg></span></div>
+/* what the business's own small website says, per kind (trades from data/trades.js, the rest here).
+   All fictional; the visitor's business name goes on top. */
+const trades = require('../../data/trades.js');
+const SITES = Object.fromEntries([
+  ...trades.map(t => [t.key, { word: t.word, c: t.c, creds: t.creds, services: t.services.slice(0, 3).map(x => x[0]) }]),
+  ['clinic', { word: 'physio clinic', c: '#2C5D73', creds: ['HCPC registered', 'Evening appointments', 'Book online any hour'], services: ['Back and neck pain', 'Sports injuries', 'Massage'] }],
+  ['professional', { word: 'accountant', c: '#28344A', creds: ['Fixed monthly fees', 'Replies the same day', 'Making Tax Digital ready'], services: ['Self assessment', 'Bookkeeping', 'Limited company accounts'] }],
+  ['hospitality', { word: 'restaurant', c: '#6E2F2A', creds: ['Open late Friday and Saturday', 'Private room for 20', 'Book online any hour'], services: ['Dinner', 'Sunday lunch', 'Private hire'] }],
+]);
 
+const SB = `<div class="ph-sb" id="sb" aria-hidden="true"><span data-clock></span><span class="ph-sbi"><svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".7" fill="currentColor"/><rect x="5" y="5" width="3" height="6" rx=".7" fill="currentColor"/><rect x="10" y="2.5" width="3" height="8.5" rx=".7" fill="currentColor"/><rect x="15" y="0" width="3" height="11" rx=".7" fill="currentColor"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="15" height="8" rx="2" fill="currentColor"/><rect x="24" y="4" width="1.6" height="4" rx=".8" fill="currentColor" opacity=".5"/></svg></span></div>`;
+const MSG_ICON = `<svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.3 3 11.4c0 2.3 1.3 4.4 3.3 5.8L5.6 20l3.5-1.8c.9.2 1.9.4 2.9.4 5 0 9-3.3 9-7.4S17 4 12 4z" fill="#fff"/></svg>`;
+const SK_ICON = `<svg width="20" height="20" viewBox="0 0 64 64"><path d="M22 16v32M43 17L25 33l18 15" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const urlBar = attr => `<div class="wb-url" aria-hidden="true">${ic('lock', 12)}<span ${attr}></span></div>`;
+
+/* the pretend phone's screens. Each demo picks the ones its story needs. */
+const LY = {
+  contact: () => `
     <section class="ly ly-contact" data-ly="contact">
       <div class="ct-top"><span class="ct-back">${ic('back', 18)}Contacts</span><span>Edit</span></div>
       <div class="ct-av" data-initial></div>
@@ -72,8 +83,8 @@ const phone = `
       <div class="ct-card"><small>mobile</small><b data-bizno></b></div>
       <div class="ct-card"><small>website</small><b class="ct-url" data-site></b></div>
       <p class="ct-coach" aria-hidden="true">Tap <b>call</b></p>
-    </section>
-
+    </section>`,
+  call: () => `
     <section class="ly ly-call" data-ly="call" hidden>
       <p class="cl-st" data-callst>calling…</p>
       <h3 class="cl-nm" data-biz></h3>
@@ -82,19 +93,20 @@ const phone = `
         <div><i>${ic('plus', 26)}</i>add</div><div><i>${ic('keypad', 26)}</i>keypad</div><div><i>${ic('user', 26)}</i>contacts</div>
       </div>
       <button type="button" class="cl-end" data-act="hangup" aria-label="Hang up"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M3 14.5c4.8-4.6 13.2-4.6 18 0l-2.3 2.6-3.4-1.6v-2.3a10 10 0 0 0-6.6 0v2.3l-3.4 1.6z" fill="#fff"/></svg></button>
-    </section>
-
-    <section class="ly ly-lock" data-ly="lock" hidden>
+    </section>`,
+  /* a lock screen with one notification: who it is from, the app, what it says, what a tap does */
+  lock: ({ ly = 'lock', id = 'ntf', act = 'open', app = 'msg', from = '<b data-biz></b>', text = '<span class="ntf-tx" data-sms></span>' } = {}) => `
+    <section class="ly ly-lock" data-ly="${ly}" hidden>
       <p class="lk-date" data-date></p>
       <p class="lk-time" data-clock></p>
-      <button type="button" class="ntf" id="ntf" data-act="open" hidden>
-        <span class="ntf-ap" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.3 3 11.4c0 2.3 1.3 4.4 3.3 5.8L5.6 20l3.5-1.8c.9.2 1.9.4 2.9.4 5 0 9-3.3 9-7.4S17 4 12 4z" fill="#fff"/></svg></span>
-        <span class="ntf-hd"><b data-biz></b><small>now</small></span>
-        <span class="ntf-tx" data-sms></span>
+      <button type="button" class="ntf" id="${id}" data-act="${act}" hidden>
+        <span class="ntf-ap${app === 'skales' ? ' is-sk' : ''}" aria-hidden="true">${app === 'skales' ? SK_ICON : MSG_ICON}</span>
+        <span class="ntf-hd">${from}<small>now</small></span>
+        ${text}
       </button>
       <div class="lk-tools" aria-hidden="true"><span></span><span></span></div>
-    </section>
-
+    </section>`,
+  msgs: () => `
     <section class="ly ly-msgs" data-ly="msgs" hidden>
       <div class="ms-top"><span class="ms-back">${ic('back', 18)}</span><div class="ms-av" data-initial></div><small data-biz></small></div>
       <div class="ms-body">
@@ -103,22 +115,49 @@ const phone = `
         <button type="button" class="ms-lnk" data-act="link"><span class="ms-img"><b data-initial></b></span><span class="ms-tx"><b>Book online · <span data-biz></span></b><small data-site></small></span></button>
       </div>
       <div class="ms-in" aria-hidden="true">iMessage</div>
-    </section>
-
+    </section>`,
+  /* the business's own small website, as a customer meets it at night */
+  site: () => `
+    <section class="ly ly-web ly-site" data-ly="site" hidden>
+      <div class="wb-pg">
+        <div class="wb-brand"><i data-initial></i><b data-biz></b><span class="st-menu" aria-hidden="true"></span></div>
+        <div class="st-hero"><p class="st-word" data-word></p><h3 data-biz></h3><ul class="st-creds" id="creds"></ul></div>
+        <button type="button" class="wb-cta st-book" data-act="book">Book online</button>
+        <p class="wb-fine st-open">Booking open now. Takes about a minute.</p>
+        <p class="wb-lab">What we do</p>
+        <ul class="st-svcs" id="svcs"></ul>
+        <p class="st-call">Or call <b data-bizno></b></p>
+      </div>
+      ${urlBar('data-domain')}
+    </section>`,
+  web: ({ details = false } = {}) => `
     <section class="ly ly-web" data-ly="web" hidden>
       <div class="wb-pg" id="wb">
         <div class="wb-brand"><i data-initial></i><b data-biz></b></div>
-        <h3>Book online</h3>
-        <p class="wb-sub" data-websub></p>
-        <p class="wb-lab">What do you need?</p>
-        <div class="wb-jobs" id="jobs"></div>
-        <p class="wb-lab">When suits you?</p>
-        <div class="wb-days" id="days"></div>
-        <div class="wb-slots" id="slots"></div>
-        <button type="button" class="wb-cta" data-act="continue" disabled></button>
-        <p class="wb-fine" data-webfine></p>
+        <div id="wbPick">
+          <h3>Book online</h3>
+          <p class="wb-sub" data-websub></p>
+          <p class="wb-lab">What do you need?</p>
+          <div class="wb-jobs" id="jobs"></div>
+          <p class="wb-lab">When suits you?</p>
+          <div class="wb-days" id="days"></div>
+          <div class="wb-slots" id="slots"></div>
+          <button type="button" class="wb-cta" data-act="continue" disabled></button>
+          <p class="wb-fine" data-webfine></p>
+        </div>
+        ${details ? `<div id="wbDet" hidden>
+          <button type="button" class="wb-back" data-act="detback">${ic('back', 14)}Change time</button>
+          <h3>Your details</h3>
+          <p class="wb-sub"><b data-jobname></b> · <span data-when></span></p>
+          <div class="wb-f"><label>Name</label><span class="wb-in" id="fName"></span></div>
+          <div class="wb-f"><label>Mobile</label><span class="wb-in" id="fMob"></span></div>
+          <div class="wb-f"><label>Anything we should know?</label><div class="wb-notes" id="notes"></div></div>
+          <button type="button" class="wb-cta" data-act="confirm" disabled>Fill in your details</button>
+          <p class="wb-fine">We only use your number for this booking.</p>
+        </div>` : ''}
       </div>
-      <div class="wb-url" aria-hidden="true">${ic('lock', 12)}<span data-site></span></div>
+      ${details ? `<button type="button" class="af" id="af" data-act="fill" hidden><span>${ic('user', 15)}<b>Sam Carter</b> · 07700 900 418</span><small>AutoFill</small></button>` : ''}
+      ${urlBar('data-site')}
       <div class="pay" id="pay" hidden>
         <div class="pay-hd"><b>Pay deposit</b><button type="button" data-act="cancelpay" aria-label="Cancel">✕</button></div>
         <div class="pay-card"><i></i><span><b>Visa •••• 4242</b><small>Demo card</small></span></div>
@@ -126,19 +165,36 @@ const phone = `
         <button type="button" class="pay-go" data-act="pay"></button>
         <p class="pay-fine">Demo only. No money moves and no card is needed.</p>
       </div>
-    </section>
-
+    </section>`,
+  done: () => `
     <section class="ly ly-done" data-ly="done" hidden>
       <div class="dn-tk">${ic('check', 40)}</div>
       <h3>You're booked</h3>
       <p data-donetx></p>
       <div class="dn-box"><div><span>What</span><b data-jobname></b></div><div><span>When</span><b data-when></b></div><div data-deprow><span>Deposit</span><b data-dep-paid></b></div></div>
       <button type="button" class="ntf ntf-in" id="ntf2" hidden tabindex="-1">
-        <span class="ntf-ap" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.3 3 11.4c0 2.3 1.3 4.4 3.3 5.8L5.6 20l3.5-1.8c.9.2 1.9.4 2.9.4 5 0 9-3.3 9-7.4S17 4 12 4z" fill="#fff"/></svg></span>
+        <span class="ntf-ap" aria-hidden="true">${MSG_ICON}</span>
         <span class="ntf-hd"><b data-biz></b><small>now</small></span>
         <span class="ntf-tx" data-confirm></span>
       </button>
-    </section>
+    </section>`,
+  /* the owner's phone: the Skales app, today's jobs */
+  app: () => `
+    <section class="ly ly-app" data-ly="app" hidden>
+      <div class="ap-top"><span class="ap-ws"><i data-initial></i><b data-biz></b></span><span class="ap-bell">${ic('bell', 18)}</span></div>
+      <h3 data-appday></h3>
+      <p class="ap-sum" data-appsum></p>
+      <ol class="ap-list" id="appList"></ol>
+      <nav class="ap-tabs" aria-hidden="true"><span class="on">${ic('diary', 20)}Diary</span><span>${ic('leads', 20)}Leads</span><span>${ic('msg', 20)}Inbox</span></nav>
+    </section>`,
+};
+
+const phone = layers => `
+<div class="ph-fit" id="fit"><div class="ph" id="ph" aria-label="A pretend phone" role="group">
+  <div class="ph-scr">
+    <div class="ph-island" aria-hidden="true"></div>
+    ${SB}
+    ${layers.join('')}
     <div class="ph-home" aria-hidden="true"></div>
   </div>
 </div></div>`;
@@ -148,12 +204,12 @@ const crm = `
 <div class="crm" id="crm" aria-label="What the business sees">
   <div class="crm-tb"><span class="crm-tl" aria-hidden="true"><i></i><i></i><i></i></span><span class="crm-tt">Skales · <b data-biz></b></span></div>
   <div class="crm-lead" id="lead">
-    <div class="crm-who"><span class="crm-av">${ic('phone', 16)}</span><span><b data-custno>New caller</b><small id="leadsub">Waiting for a call</small></span><span class="crm-stage" id="stage">Quiet</span></div>
+    <div class="crm-who"><span class="crm-av">${ic('user', 16)}</span><span><b data-custno>New customer</b><small id="leadsub">Waiting</small></span><span class="crm-stage" id="stage">Quiet</span></div>
     <div class="crm-tags" id="tags"></div>
   </div>
   <div class="crm-feed">
     <h4>Activity <span class="crm-live"><i></i>Live</span></h4>
-    <ol id="feed"><li class="crm-empty">Nothing yet. Make the call.</li></ol>
+    <ol id="feed"><li class="crm-empty">Nothing yet.</li></ol>
   </div>
   <div class="crm-diary">
     <h4>${ic('diary', 14)}<span data-diaryday>Diary</span></h4>
@@ -161,7 +217,56 @@ const crm = `
   </div>
 </div>`;
 
-const steps = ['Call', 'Ring out', 'The text', 'Book', 'Your side'];
+const chip = k => `<button type="button" class="tm-k" data-kind="${k.key}" aria-pressed="false">${esc(k.label)}</button>`;
+/* one demo page: set-up, the running demo (narration, phone, CRM), the end */
+function demoPage(b, x, { n, lead, steps, layers }){
+  const camp = `utm_source=site&amp;utm_medium=try&amp;utm_campaign=${x.slug}`;
+  return `
+${L.header(b, 'try')}
+<main id="main" class="tm">
+<section class="tm-setup wrap" id="setup">
+  <p class="spec"><a class="lnk" href="${b}try/">Try it</a> · Demo ${n} of ${DEMOS.length}</p>
+  <h1>${esc(x.name)}.</h1>
+  <p class="lead">${esc(lead)}</p>
+  <form class="tm-form" id="setupForm" novalidate>
+    <label class="tm-l" for="bizName">Your business name <span class="opt">optional</span></label>
+    <input id="bizName" name="biz" maxlength="32" autocomplete="organization" placeholder="Larchfield Heating" enterkeyhint="go">
+    <p class="tm-l" id="kindL">What do you do?</p>
+    <div class="tm-kinds" role="group" aria-labelledby="kindL">${kinds.map(chip).join('')}</div>
+    <button class="btn btn-live tm-go" type="submit">Start the demo</button>
+    <p class="tm-fine">A pretend phone on this page. Nothing is sent, nobody is called, and your answers stay in your browser.</p>
+  </form>
+</section>
+
+<section class="tm-run" id="run" hidden>
+  <div class="tm-narr">
+    <ol class="tm-steps" aria-label="Steps">${steps.map((s, i) => `<li data-step="${i}"><span>${esc(s)}</span></li>`).join('')}</ol>
+    <p class="tm-say" id="say" aria-live="polite"></p>
+    <p class="tm-hint" id="hint"></p>
+    <p class="tm-lab">Demo · pretend business · nothing is sent</p>
+  </div>
+  <div class="tm-stage">
+    ${phone(layers)}
+    <div class="tm-toast" id="toast" role="status" hidden></div>
+  </div>
+  <div class="tm-side">${crm}</div>
+</section>
+
+<section class="tm-end wrap" id="end" hidden aria-live="polite">
+  <p class="spec">What just happened</p>
+  <h2 tabindex="-1" id="endH"></h2>
+  <p class="lead" id="endP"></p>
+  <div class="tm-acts">
+    <a class="btn btn-live" data-cta="check" href="${b}start/?${camp}">See what I'm missing <small>60 seconds</small></a>
+    <a class="btn btn-ghost" data-cta="call" href="${b}start/?${camp}#book">Book a call</a>
+  </div>
+  <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/">The other demos</a></p>
+</section>
+<noscript><section class="wrap tm-nos"><p>This demo needs JavaScript. You can <a class="lnk" href="${b}what-i-do/">read how it works</a> or <a class="lnk" href="${b}book/">book a call</a>.</p></section></noscript>
+</main>
+${L.footer(b)}
+<script>window.TRYKINDS=${JSON.stringify(kinds)};window.TRYJOBS=${JSON.stringify(JOBS)};window.TRYSITES=${JSON.stringify(SITES)};</script>`;
+}
 
 module.exports = { JOBS, DEMOS, pages: [
   {
@@ -198,11 +303,12 @@ ${L.footer(b)}`;
     url: '/try/missed-call/', og: 'try-missed-call', priority: 0.8, changefreq: 'monthly',
     meta: { key: 'try-missed-call', title: 'Missed call, booked. Try it.', kicker: 'Live demo · about a minute', sub: 'Call your own business, let it ring out, and watch the text-back turn into a booking with a deposit.' },
     render(b){
+      const x = DEMOS[0];
       const title = `Missed call text-back demo: try it on your phone | ${site.name}`;
       const description = `A live demo of missed-call text-back for UK service businesses: call, let it ring out, get the text, book and pay a deposit, and see the lead land in the CRM.`;
       const nodes = [
         L.webPage({ path: '/try/missed-call/', title, description }),
-        L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }, { name: 'Missed call, booked', path: '/try/missed-call/' }]),
+        L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }, { name: x.name, path: '/try/missed-call/' }]),
         { '@type': 'HowTo', name: 'How missed-call text-back works', description: 'What a caller gets when a business with missed-call text-back cannot answer.',
           step: [
             { '@type': 'HowToStep', name: 'The call rings out', text: 'The business is on a job and cannot answer. The call is logged as a missed call straight away.' },
@@ -211,53 +317,34 @@ ${L.footer(b)}`;
             { '@type': 'HowToStep', name: 'The lead is in the CRM', text: 'The business sees the lead move from missed call to booked, with the deposit and the slot in the diary, without touching the phone.' },
           ] },
       ];
-      const chip = k => `<button type="button" class="tm-k" data-kind="${k.key}" aria-pressed="false">${esc(k.label)}</button>`;
-      const body = `
-${L.header(b, 'try')}
-<main id="main" class="tm">
-<section class="tm-setup wrap" id="setup">
-  <p class="spec"><a class="lnk" href="${b}try/">Try it</a> · Demo 1 of 3</p>
-  <h1>Missed call, booked.</h1>
-  <p class="lead">Be your own customer. Call your business, let it ring out, and see what happens next. About a minute.</p>
-  <form class="tm-form" id="setupForm" novalidate>
-    <label class="tm-l" for="bizName">Your business name <span class="opt">optional</span></label>
-    <input id="bizName" name="biz" maxlength="32" autocomplete="organization" placeholder="Larchfield Heating" enterkeyhint="go">
-    <p class="tm-l" id="kindL">What do you do?</p>
-    <div class="tm-kinds" role="group" aria-labelledby="kindL">${kinds.map(chip).join('')}</div>
-    <button class="btn btn-live tm-go" type="submit">Start the demo</button>
-    <p class="tm-fine">A pretend phone on this page. Nothing is sent, nobody is called, and your answers stay in your browser.</p>
-  </form>
-</section>
-
-<section class="tm-run" id="run" hidden>
-  <div class="tm-narr">
-    <ol class="tm-steps" aria-label="Steps">${steps.map((s, i) => `<li data-step="${i}"><span>${esc(s)}</span></li>`).join('')}</ol>
-    <p class="tm-say" id="say" aria-live="polite"></p>
-    <p class="tm-hint" id="hint"></p>
-    <p class="tm-lab">Demo · pretend business · nothing is sent</p>
-  </div>
-  <div class="tm-stage">
-    ${phone}
-    <div class="tm-toast" id="toast" role="status" hidden></div>
-  </div>
-  <div class="tm-side">${crm}</div>
-</section>
-
-<section class="tm-end wrap" id="end" hidden aria-live="polite">
-  <p class="spec">What just happened</p>
-  <h2 tabindex="-1" id="endH"></h2>
-  <p class="lead" id="endP"></p>
-  <div class="tm-acts">
-    <a class="btn btn-live" data-cta="check" href="${b}start/?utm_source=site&amp;utm_medium=try&amp;utm_campaign=missed-call">See what I'm missing <small>60 seconds</small></a>
-    <a class="btn btn-ghost" data-cta="call" href="${b}start/?utm_source=site&amp;utm_medium=try&amp;utm_campaign=missed-call#book">Book a call</a>
-  </div>
-  <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/">The other demos</a></p>
-</section>
-<noscript><section class="wrap tm-nos"><p>This demo needs JavaScript. You can <a class="lnk" href="${b}what-i-do/">read how it works</a> or <a class="lnk" href="${b}book/">book a call</a>.</p></section></noscript>
-</main>
-${L.footer(b)}
-<script>window.TRYKINDS=${JSON.stringify(kinds)};window.TRYJOBS=${JSON.stringify(JOBS)};</script>`;
-      return L.page(L.head({ b, path: '/try/missed-call/', title, description, og: 'try-missed-call', nodes, css: ['try.css'] }), body, L.scripts(b, ['try-missed.js']));
+      const body = demoPage(b, x, { n: 1, lead: 'Be your own customer. Call your business, let it ring out, and see what happens next. About a minute.',
+        steps: ['Call', 'Ring out', 'The text', 'Book', 'Your side'],
+        layers: [LY.contact(), LY.call(), LY.lock(), LY.msgs(), LY.web(), LY.done()] });
+      return L.page(L.head({ b, path: '/try/missed-call/', title, description, og: 'try-missed-call', nodes, css: ['try.css'] }), body, L.scripts(b, ['try-kit.js', 'try-missed.js']));
+    },
+  },
+  {
+    url: '/try/booking/', og: 'try-booking', priority: 0.8, changefreq: 'monthly',
+    meta: { key: 'try-booking', title: 'Book and pay a deposit. Try it.', kicker: 'Live demo · about a minute', sub: 'Book a job on your own website at 10pm, then see it waiting in your diary the next morning.' },
+    render(b){
+      const x = DEMOS[1];
+      const title = `Online booking with deposits demo: try it on your phone | ${site.name}`;
+      const description = `A live demo of online booking for UK service businesses: a customer books and pays a deposit on your website at night, and the job is in your diary by morning.`;
+      const nodes = [
+        L.webPage({ path: '/try/booking/', title, description }),
+        L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }, { name: x.name, path: '/try/booking/' }]),
+        { '@type': 'HowTo', name: 'How online booking with a deposit works', description: 'What a customer does to book a business with online booking, and what the business sees.',
+          step: [
+            { '@type': 'HowToStep', name: 'The customer finds the website', text: 'Any time of day or night, the customer lands on the business website and taps Book online.' },
+            { '@type': 'HowToStep', name: 'They pick the job and a time', text: 'They choose what they need and a free slot from the real diary. Slots that are taken are already gone.' },
+            { '@type': 'HowToStep', name: 'They pay a deposit', text: 'Where the business takes one, a small deposit holds the slot and comes off the bill, so no-shows stop costing a morning.' },
+            { '@type': 'HowToStep', name: 'It is in the diary', text: 'The job lands in the business diary with the customer details and the deposit, and the customer gets a confirmation and a reminder.' },
+          ] },
+      ];
+      const body = demoPage(b, x, { n: 2, lead: 'It’s 22:14 and your customer has just got in. Book a job on your own website, then see what’s waiting for you in the morning. About a minute.',
+        steps: ['Your website', 'Pick a time', 'Their details', 'Pay', 'Next morning'],
+        layers: [LY.site(), LY.web({ details: true }), LY.done(), LY.lock({ ly: 'olock', id: 'ontf', act: 'oapp', app: 'skales', from: '<b>Skales</b>', text: '<span class="ntf-tx" data-otext></span>' }), LY.app()] });
+      return L.page(L.head({ b, path: '/try/booking/', title, description, og: 'try-booking', nodes, css: ['try.css'] }), body, L.scripts(b, ['try-kit.js', 'try-booking.js']));
     },
   },
 ]};

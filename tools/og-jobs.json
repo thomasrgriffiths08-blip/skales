@@ -418,5 +418,11 @@
     "title": "Missed call, booked. Try it.",
     "kicker": "Live demo · about a minute",
     "sub": "Call your own business, let it ring out, and watch the text-back turn into a booking with a deposit."
+  },
+  {
+    "key": "try-booking",
+    "title": "Book and pay a deposit. Try it.",
+    "kicker": "Live demo · about a minute",
+    "sub": "Book a job on your own website at 10pm, then see it waiting in your diary the next morning."
   }
 ]
