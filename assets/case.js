@@ -189,7 +189,7 @@
       + '</section>'
       + (phases.length ? '<section class="cf-sec cf-in"><p class="cf-n">03 &middot; What ' + esc(S.name || 'Skales') + ' would build</p>'
       +   phases.map(function(p, i){ return '<div class="cf-phase"><p class="cf-pn">' + PH[i] + '</p><div class="cf-pb">' + p.map(function(l){
-            return '<article class="cf-build"><div class="cf-bt"><h3>' + esc(l.fix.name) + '</h3><p class="cf-for">Fixes: ' + esc(l.title.toLowerCase()) + ' &middot; part of <a class="lnk" href="' + S.base + 'what-i-do/#' + l.fix.svc + '">' + esc(svc(l.fix.svc).name) + '</a></p><p>' + esc(l.fix.what) + '</p></div>'
+            return '<article class="cf-build"><div class="cf-bt"><h3>' + esc(l.fix.name) + '</h3><p class="cf-for">Fixes: ' + esc(l.title.toLowerCase()) + ' &middot; part of <a class="lnk" href="' + S.base + 'services/' + ({ 'capture-website': 'websites', 'booking-and-pipeline': 'booking-and-crm' }[l.fix.svc] || l.fix.svc) + '/">' + esc(svc(l.fix.svc).name) + '</a></p><p>' + esc(l.fix.what) + '</p></div>'
               + '<div class="cf-proofs">' + l.proof.map(proofCard).join('') + '</div></article>';
           }).join('') + '</div></div>'; }).join('')
       +   '<p class="hint">The builds above are running on this site for invented businesses, so you can try each piece before anything is built for you. Yours is built for your business, in your name, and you own it from day one.</p>'

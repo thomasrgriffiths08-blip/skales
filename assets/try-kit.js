@@ -45,7 +45,8 @@ window.TryKit = function(cfg){
   K.clear = function(){ timers.forEach(clearTimeout); timers = []; };
 
   /* ---------- set-up: their business name and trade ---------- */
-  var kind = (store.get('st-a') || {}).kind || store.get('try-kind') || 'heating';
+  var qk = null; try { qk = new URLSearchParams(location.search).get('kind'); } catch (e){}   /* /for/<trade>/ links preset the trade */
+  var kind = (qk && JOBS[qk] ? qk : null) || (store.get('st-a') || {}).kind || store.get('try-kind') || 'heating';
   if (!JOBS[kind]) kind = 'other';
   var chips = [].slice.call(form.querySelectorAll('.tm-k'));
   function pick(k){ kind = k; chips.forEach(function(c){ c.setAttribute('aria-pressed', String(c.getAttribute('data-kind') === k)); }); }

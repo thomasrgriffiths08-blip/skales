@@ -31,6 +31,7 @@ module.exports = [
     links: [['work', 'See the builds']] },
   { slug: 'builds-for-businesses-that-dont-exist', date: '2026-09-03',
     title: `${Words(N)} builds for businesses that don’t exist, on purpose`,
+    seo: `${Words(N)} builds for businesses that don’t exist`,   // the <title>: the full headline runs past 60 characters
     summary: 'Why every demo on this site is for an invented company, and why that is better proof than a client logo wall.',
     body: `
 <p>Every one of the ${words(N)} builds on this site was made for a business that does not exist: Redgate Heating, Northgate Kitchens, Atelier Voss, Fenwick Heating and the rest are invented, and so is every person, review and phone number inside them. That is deliberate. It means nothing on this site exposes a real client’s numbers, customers or setup.</p>

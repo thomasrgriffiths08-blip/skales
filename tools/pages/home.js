@@ -213,7 +213,7 @@ ${L.header(b, 'home')}
         <a class="lnk" href="${b}work/${x.slug}/">See it running: ${esc(see)}</a>
       </article>`).join('')}
     </div>
-    <div class="sec-foot"><a class="btn btn-ghost" href="${b}what-i-do/">More on what I build</a></div>
+    <div class="sec-foot"><a class="btn btn-ghost" href="${b}services/">All five services</a></div>
   </div>
 </section>
 

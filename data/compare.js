@@ -1,0 +1,91 @@
+/* Honest comparisons at /compare/<slug>/. Each one says plainly when the other option is the better
+   choice. Categories, not named competitors (bar the household page builders and directories people
+   actually search for), and nothing about them we cannot stand behind. No prices, theirs or ours. */
+module.exports = [
+  {
+    slug: 'page-builders', them: 'a page builder', short: 'Page builders',
+    title: 'Web designer or Wix? Skales vs page builders',
+    description: 'Wix, Squarespace or a hand-built site? An honest comparison for UK service businesses: cost, ownership, speed, booking, and when a page builder wins.',
+    card: 'Wix, Squarespace and the rest, against a site built by hand for your business.',
+    h1: 'Skales or a page builder like Wix or Squarespace?',
+    answer: 'A page builder is the right choice if you enjoy building, have the evenings to do it, and want a site online for a small monthly fee. A hand-built Skales site is the better choice when the website’s job is to bring in work: it is faster, it books and follows up on its own, and you own it outright.',
+    rows: [
+      ['Who builds it', 'You, from a template', 'Me, by hand, for your business'],
+      ['How you pay', 'A subscription for as long as the site is live', 'A flat quote for the build, agreed first. Nothing rented back to you'],
+      ['Who owns it', 'The platform. Leave, and you usually rebuild from scratch', 'You: the domain, code and accounts are in your name'],
+      ['Speed on a phone', 'Depends on the template and the apps you add', 'Hand-coded, with nothing loading that you did not ask for'],
+      ['Booking and follow-up', 'Through plans, add-ons or apps, each set up by you', 'Booking, deposits, the CRM and the texts, built in and connected'],
+      ['Your time', 'Your evenings and weekends', 'A call and a few messages'],
+    ],
+    them_when: ['You enjoy building and want to do it yourself.', 'The business is very new and you just need something online.', 'The site is a brochure and the work does not come in through it.'],
+    us_when: ['Your work comes in by phone and the site should turn visits into bookings.', 'You want missed calls, quotes and reminders followed up without you.', 'You would rather own the site than rent it.'],
+    faq: [
+      ['Is a page builder cheaper?', 'At the start, usually. Over a few years the subscription and the add-ons add up, and you still do not own the site. Which works out better depends on how long you keep it and what it brings in.'],
+      ['Can you move my Wix or Squarespace site?', 'Yes. The content comes across, every old address is redirected to its new page, and the new site replaces the subscription.'],
+    ],
+  },
+  {
+    slug: 'trade-website-templates', them: 'a monthly trade website', short: 'Monthly trade websites',
+    title: 'Skales vs a monthly trade website template',
+    description: 'A trade website on a monthly plan, or one built for you and owned outright? An honest comparison for UK tradespeople, and when the monthly plan makes sense.',
+    card: 'The pay-monthly trade website, against one built for you and owned outright.',
+    h1: 'Skales or a pay-monthly trade website?',
+    answer: 'A pay-monthly trade website gets you online quickly with no upfront cost, which can be the right start. A Skales site is built around your business and your area, comes with booking and follow-up, and belongs to you, so it keeps working whether or not you keep paying anyone.',
+    rows: [
+      ['How it is made', 'A template shared with other trades, with your name and logo added', 'Built by hand around your business, your services and your area'],
+      ['How you pay', 'Monthly, for as long as you want the site', 'A flat quote for the build. Nothing rented back to you'],
+      ['If you stop paying', 'The site usually goes with the subscription', 'It keeps working. The domain, code and accounts are yours'],
+      ['Enquiries', 'Usually a contact form to your inbox', 'One tap to call, booking with deposits, and every enquiry in your CRM'],
+      ['Follow-up', 'Usually none', 'Missed-call text-back, quote chasers, reminders and review requests'],
+      ['Search', 'Often the same pages and wording as other sites on the template', 'Pages written for the searches in your trade and your area'],
+    ],
+    them_when: ['You need something online this week with nothing to pay upfront.', 'Most of your work comes from word of mouth and the site is just a business card.'],
+    us_when: ['You want the website to bring in and book work, not just exist.', 'You want to own what you pay for.', 'You are missing calls and quotes are going quiet.'],
+    faq: [
+      ['Why not just pay monthly?', 'If the site is a business card, a monthly plan is fine. If it is meant to bring in work, it needs pages written for your searches, booking and follow-up, and it is better owned than rented.'],
+      ['Can I keep my domain if I move?', 'Usually, yes. If the domain is in your name, it moves with you. If the provider registered it in theirs, ask them to transfer it to you first.'],
+    ],
+  },
+  {
+    slug: 'missed-call-apps', them: 'a missed-call app', short: 'Missed-call apps',
+    title: 'Skales vs a missed-call text-back app',
+    description: 'A standalone missed-call text-back app, or text-back built into your website, booking and CRM? An honest comparison, and when the app on its own is enough.',
+    card: 'A standalone text-back app, against text-back that ends in a booked job.',
+    h1: 'Skales or a missed-call text-back app?',
+    answer: 'A missed-call app does one job, texting back the calls you miss, and if your website and diary already work well, that may be all you need. Skales builds text-back into the rest of the system, so the text leads to a booking page, the conversation lands in your CRM, and the job is confirmed, reminded and reviewed without you.',
+    rows: [
+      ['What it does', 'Texts back the calls you miss', 'Texts back the calls you miss, then books, confirms, reminds and asks for the review'],
+      ['Where the text sends people', 'Wherever you point it: your number, or your existing site', 'A booking page built for it, on your own website'],
+      ['Where replies go', 'The app’s own inbox', 'Your CRM, on the same card as the job'],
+      ['Setup', 'You set it up yourself', 'Set up with you, written in your words'],
+      ['How you pay', 'A subscription for the app', 'A flat quote for the setup, and a few pence per text'],
+    ],
+    them_when: ['Your website books well already and you only need the text-back.', 'You have a CRM you like and the app connects to it.'],
+    us_when: ['You want the missed call to end in a booked job, not just a reply.', 'You do not have a booking page, or a place where every enquiry lives.', 'You would rather have one system than several apps.'],
+    faq: [
+      ['Is missed-call text-back worth it on its own?', 'Yes, a reply in the first minute is better than no reply. It is worth more when the text leads somewhere the customer can book.'],
+      ['Can I keep my phone number?', 'Yes. Your phone forwards the calls you do not answer, and you answer calls exactly as you do now.'],
+    ],
+  },
+  {
+    slug: 'directories', them: 'a directory listing', short: 'Directories',
+    title: 'Skales vs Checkatrade and other directories',
+    description: 'Do you need a website if you are on Checkatrade or a lead site? An honest comparison of directory listings and a website you own, and why many trades use both.',
+    card: 'Checkatrade, lead sites and listings, against a website that is yours.',
+    h1: 'Do you need a website if you are on Checkatrade?',
+    answer: 'A directory or lead site can bring work in, especially when you are new and have few reviews of your own. But you pay for the listing or for each lead, your competitors sit on the same page, and the work stops when you stop paying. A website you own brings in the customers who search for you by name and by area, and keeps working.',
+    rows: [
+      ['How you pay', 'A membership, or a fee for each lead', 'A flat quote for the build, owned outright'],
+      ['Who else is on the page', 'Your competitors, side by side', 'Only you'],
+      ['Whose reviews', 'Reviews on the directory', 'Your Google reviews, on your own profile and site'],
+      ['If you stop paying', 'The leads stop', 'The site keeps working'],
+      ['What you build up', 'A profile on someone else’s site', 'A website, a Google ranking and a customer list that are yours'],
+    ],
+    them_when: ['You are new and need work while you build up your own reviews.', 'You want extra jobs to fill gaps in the diary.'],
+    us_when: ['Customers already search for you by name and find the directory first.', 'You are tired of paying for leads that also went to three competitors.', 'You want something that keeps working when you stop paying.'],
+    faq: [
+      ['Should I leave Checkatrade?', 'Not necessarily. Many trades use both: the directory for volume while the website builds up, and the website for the work that comes to you directly. The numbers in your CRM show when the balance has shifted.'],
+      ['Can my directory reviews go on my website?', 'You can link to them, but reviews on your own Google Business Profile are the ones that help you in search. Review requests can send every new customer there.'],
+    ],
+  },
+];

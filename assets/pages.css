@@ -1,0 +1,118 @@
+/* The answer pages: /services/, /automations/, /compare/, /faq/ and their children. Built from the
+   site's own components (panel, feat, steps, faq, try-card); only what those lack lives here. */
+.hero-w h1{max-width:18ch}
+.hero-w .answer{color:var(--tx);max-width:62ch}
+.hero-cta{margin-top:28px}
+
+/* hub cards: the index pages and the automation lists */
+.hub-list{display:grid;gap:14px}
+@media (min-width:700px){.hub-list{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.hub-list{grid-template-columns:repeat(3,1fr)}}
+.hub-card{display:flex;flex-direction:column;gap:10px;min-height:200px;padding:24px;border-radius:var(--r-m);background:var(--alu);transition:transform .18s var(--ease),background-color .2s}
+a.hub-card:hover{background:var(--alu-2);transform:translateY(-2px)}
+.hub-card h2,.hub-card h3{font-size:1.5rem}
+.hub-card p{color:var(--tx-2);line-height:1.5}
+.sec-alu .hub-card{background:var(--pg)}
+
+/* question blocks inside one panel */
+.qa+.qa{margin-top:clamp(36px,5vw,56px)}
+.qa h2{margin-bottom:14px}
+.qa p{max-width:64ch;color:var(--tx-2);line-height:1.6}
+.qa p+p{margin-top:12px}
+
+/* the example message */
+.msg{display:grid;gap:12px;justify-items:start;margin-top:8px}
+.msg-b{position:relative;max-width:36ch;padding:14px 18px;border-radius:20px 20px 20px 6px;background:var(--alu);color:var(--tx);font-size:1.0625rem;line-height:1.45}
+.msg-n{font-size:.875rem;color:var(--tx-2)}
+
+/* related links */
+.rel{padding-top:clamp(40px,6vw,72px)}
+.rel-h{font-size:clamp(1.35rem,2.4vw,1.75rem);margin-bottom:20px}
+.rel-list{display:grid;gap:0;border-top:1px solid var(--line)}
+@media (min-width:860px){.rel-list{grid-template-columns:repeat(2,1fr);column-gap:32px}}
+.rel-list a{display:grid;gap:4px;padding:16px 0;border-bottom:1px solid var(--line)}
+.rel-list a b{font-weight:600}
+.rel-list a span{color:var(--tx-2);line-height:1.45;font-size:.9375rem}
+.rel-list a:hover b{text-decoration:underline;text-underline-offset:3px}
+
+.faq-more{margin-top:20px;color:var(--tx-2)}
+.faq-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.faq-toc a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);font-size:.875rem;font-weight:500}
+.faq-toc a:hover{border-color:var(--tx)}
+.panel .lab a.name{color:var(--tx-2)}
+
+/* the comparison table: scrolls sideways inside itself on a phone, never the page */
+.cmp-h{margin-bottom:24px}
+.cmp-wrap{overflow-x:auto;border-radius:var(--r-m);background:var(--pg);border:1px solid var(--line)}
+.cmp{width:100%;min-width:620px;border-collapse:collapse;font-size:.9375rem;line-height:1.45}
+.cmp th,.cmp td{padding:16px 18px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+.cmp thead th{border-top:0;font-weight:600;font-size:1rem}
+.cmp thead th:last-child{color:var(--tx)}
+.cmp tbody th{font-weight:600;width:22%}
+.cmp td{color:var(--tx-2);width:39%}
+.cmp td:last-child{color:var(--tx);background:color-mix(in srgb,var(--live) 7%,transparent)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cmp-when h2{font-size:clamp(1.3rem,2.2vw,1.6rem);margin-bottom:16px}
+@media (min-width:801px){.cmp-when{grid-template-columns:repeat(2,1fr)}}
+
+/* the ads pages: the example ad next to what happens after the tap */
+.ad-grid{display:grid;gap:clamp(28px,5vw,64px);align-items:center}
+@media (min-width:900px){.ad-grid{grid-template-columns:minmax(0,420px) minmax(0,1fr)}}
+.ad-grid h2{margin-bottom:8px}
+.steps-tight li{padding:16px 0}
+.adp{margin:0;display:grid;gap:12px;justify-items:center}
+.adp figcaption{font-size:.8125rem;color:var(--tx-2);text-align:center}
+.adp-meta,.adp-g{width:100%;max-width:420px;background:#FFF;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 24px 48px -28px rgba(0,0,0,.28);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#050505;letter-spacing:0}
+.am-hd{display:flex;align-items:center;gap:10px;padding:12px 14px 8px}
+.am-av,.ag-fav{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#1D4F6E;color:#FFF;font-weight:700;font-size:1.05rem}
+.am-hd div{display:grid;gap:1px;min-width:0}
+.am-hd b{font-size:.9375rem;font-weight:600}
+.am-hd span{display:inline-flex;align-items:center;gap:4px;font-size:.8125rem;color:#65676B}
+.am-dots{margin-left:auto;font-weight:700;color:#65676B;letter-spacing:1px}
+.am-tx{padding:0 14px 12px;font-size:.9375rem;line-height:1.35}
+.am-img{position:relative;aspect-ratio:1.91/1;background:#DDD}
+.am-img img{display:block;width:100%;height:100%;object-fit:cover}
+.am-chip{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:#FFF;font-size:.8125rem;font-weight:600;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.am-chip i{width:8px;height:8px;border-radius:50%;background:#2E9E5B}
+.am-link{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#F0F2F5}
+.am-link div{display:grid;gap:2px;min-width:0}
+.am-link span:not(.am-btn){font-size:.75rem;color:#65676B;text-transform:uppercase}
+.am-link b{font-size:.9375rem;font-weight:600;line-height:1.25}
+.am-btn{flex:none;padding:8px 14px;border-radius:6px;background:#E4E6EB;font-weight:600;font-size:.875rem}
+.am-act{display:flex;justify-content:space-around;padding:10px 14px;border-top:1px solid #E4E6EB;font-size:.875rem;font-weight:600;color:#65676B}
+.adp-g{padding:16px 18px 18px;font-family:Arial,Helvetica,sans-serif}
+.ag-q{display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border-radius:22px;box-shadow:0 1px 6px rgba(32,33,36,.28);font-size:1rem;color:#202124}
+.ag-q svg{color:#9AA0A6}
+.ag-ad{padding:20px 2px 4px}
+.ag-sp{font-weight:700;font-size:.8125rem;color:#202124}
+.ag-who{display:flex;align-items:center;gap:10px;margin-top:10px}
+.ag-fav{width:28px;height:28px;font-size:.8125rem}
+.ag-who div{display:grid;min-width:0}
+.ag-who b{font-weight:400;font-size:.875rem;color:#202124}
+.ag-who span{font-size:.75rem;color:#4D5156;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ag-h{margin-top:8px;font-size:1.25rem;line-height:1.3;color:#1A0DAB}
+.ag-d{margin-top:4px;font-size:.875rem;line-height:1.55;color:#4D5156}
+.ag-sl{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px}
+.ag-sl span{font-size:.875rem;color:#1A0DAB}
+
+/* two plain sections in a row share one gap, and a pair of cards fills the row */
+.sec:not(.sec-alu)+.sec:not(.sec-alu){padding-top:0}
+@media (min-width:700px){.try-list.is-2,.hub-list.is-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.qa h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+@media (max-width:699px){
+  .hub-card{min-height:0}
+  .cmp-wrap{overflow:visible}
+  .cmp{min-width:0}
+  .cmp thead{display:none}
+  .cmp,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:auto}
+  .cmp tr{padding:18px;border-top:1px solid var(--line)}
+  .cmp tr:first-child{border-top:0}
+  .cmp th,.cmp td{padding:0;border:0}
+  .cmp tbody th{width:auto;margin-bottom:6px}
+  .cmp td{width:auto;padding-top:8px}
+  .cmp td:last-child{background:none;margin-top:6px;padding:8px 0 0 12px;border-left:3px solid var(--live)}
+  .cmp td::before{content:attr(data-label);display:block;margin-bottom:2px;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--tx-2)}
+}
+.rel-h2{margin-top:clamp(40px,6vw,64px)}
+.seg-g{padding-bottom:clamp(16px,3vw,32px)}
+.seg-g:last-of-type{padding-bottom:clamp(56px,9vw,120px)}

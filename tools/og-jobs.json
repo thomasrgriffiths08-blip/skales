@@ -348,10 +348,286 @@
     "phone": "assets/phones/36.webp"
   },
   {
-    "key": "what-i-do",
-    "title": "What I build for service businesses",
-    "kicker": "Websites · booking · follow-up",
-    "sub": "Three systems, each one running on the page. Hand-built, owned by you."
+    "key": "services",
+    "title": "Websites, booking, follow-up and ads",
+    "kicker": "Services",
+    "sub": "Five services, one system: a search, a tap or a missed call, turned into a booked job."
+  },
+  {
+    "key": "services-websites",
+    "title": "Websites",
+    "kicker": "Services",
+    "sub": "A fast site built to turn a visit into a call, a booking or an enquiry you can ring back."
+  },
+  {
+    "key": "services-booking-and-crm",
+    "title": "Booking and CRM",
+    "kicker": "Services",
+    "sub": "Customers book a free slot and pay a deposit at any hour. Every enquiry sits on one board."
+  },
+  {
+    "key": "services-follow-up-automation",
+    "title": "Follow-up automation",
+    "kicker": "Services",
+    "sub": "Missed-call text-back, quote chasers, reminders and review requests. Set up once, runs itself."
+  },
+  {
+    "key": "services-meta-ads",
+    "title": "Meta ads",
+    "kicker": "Services",
+    "sub": "Facebook and Instagram ads that land on a page built to book, with follow-up for anyone who does not."
+  },
+  {
+    "key": "services-google-ads",
+    "title": "Google ads",
+    "kicker": "Services",
+    "sub": "Search ads and Local Services Ads, so you show up when someone nearby searches for what you do."
+  },
+  {
+    "key": "automations",
+    "title": "Six texts that send themselves",
+    "kicker": "Automations",
+    "sub": "Missed-call text-back, review requests, reminders, quote chasing, deposits and on-my-way texts."
+  },
+  {
+    "key": "automations-missed-call-text-back",
+    "title": "Missed-call text-back",
+    "kicker": "Automations",
+    "sub": "Anyone whose call you miss gets a text seconds later, with a link to book."
+  },
+  {
+    "key": "automations-review-requests",
+    "title": "Review requests",
+    "kicker": "Automations",
+    "sub": "Every customer gets asked for a Google review when the job is done, with one tap to leave it."
+  },
+  {
+    "key": "automations-service-reminders",
+    "title": "Service reminders",
+    "kicker": "Automations",
+    "sub": "Customers get a text when they are due again: the boiler service, the MOT, the next cut."
+  },
+  {
+    "key": "automations-quote-chasing",
+    "title": "Quote chasing",
+    "kicker": "Automations",
+    "sub": "Quotes that go quiet get a friendly chaser, with a link to accept."
+  },
+  {
+    "key": "automations-booking-deposits",
+    "title": "Booking deposits",
+    "kicker": "Automations",
+    "sub": "A deposit taken at booking holds the slot and comes off the bill."
+  },
+  {
+    "key": "automations-on-my-way-texts",
+    "title": "On-my-way texts",
+    "kicker": "Automations",
+    "sub": "One tap tells the customer you have set off, when you will arrive and who is coming."
+  },
+  {
+    "key": "compare",
+    "title": "Honest comparisons",
+    "kicker": "Compare",
+    "sub": "Page builders, pay-monthly trade sites, missed-call apps and directories, side by side."
+  },
+  {
+    "key": "compare-page-builders",
+    "title": "Skales vs a page builder",
+    "kicker": "Compare",
+    "sub": "Wix, Squarespace and the rest, against a site built by hand for your business."
+  },
+  {
+    "key": "compare-trade-website-templates",
+    "title": "Skales vs a monthly trade website",
+    "kicker": "Compare",
+    "sub": "The pay-monthly trade website, against one built for you and owned outright."
+  },
+  {
+    "key": "compare-missed-call-apps",
+    "title": "Skales vs a missed-call app",
+    "kicker": "Compare",
+    "sub": "A standalone text-back app, against text-back that ends in a booked job."
+  },
+  {
+    "key": "compare-directories",
+    "title": "Skales vs a directory listing",
+    "kicker": "Compare",
+    "sub": "Checkatrade, lead sites and listings, against a website that is yours."
+  },
+  {
+    "key": "faq",
+    "title": "Every question, answered",
+    "kicker": "FAQ",
+    "sub": "Short, straight answers about websites, booking, follow-up, ads and how a build works."
+  },
+  {
+    "key": "for",
+    "title": "Websites and booking for your trade",
+    "kicker": "By trade",
+    "sub": "27 kinds of business, each with what its website needs and the demos set up for it."
+  },
+  {
+    "key": "for-plumbers",
+    "title": "Plumbers and heating engineers",
+    "kicker": "For your trade",
+    "sub": "Built for the night the boiler gives up."
+  },
+  {
+    "key": "for-electricians",
+    "title": "Electricians",
+    "kicker": "For your trade",
+    "sub": "Small jobs answered, big jobs quoted, EICRs remembered."
+  },
+  {
+    "key": "for-roofers",
+    "title": "Roofers",
+    "kicker": "For your trade",
+    "sub": "Show them the roof they cannot see."
+  },
+  {
+    "key": "for-builders",
+    "title": "Builders and joiners",
+    "kicker": "For your trade",
+    "sub": "Show the build, not just the finish."
+  },
+  {
+    "key": "for-kitchen-and-bathroom-fitters",
+    "title": "Kitchen and bathroom fitters",
+    "kicker": "For your trade",
+    "sub": "Kitchens and bathrooms people can picture before you measure up."
+  },
+  {
+    "key": "for-landscapers",
+    "title": "Landscapers and fencers",
+    "kicker": "For your trade",
+    "sub": "Gardens quoted before the spring rush buries you."
+  },
+  {
+    "key": "for-locksmiths",
+    "title": "Locksmiths",
+    "kicker": "For your trade",
+    "sub": "Proof you are the local locksmith, not a call centre."
+  },
+  {
+    "key": "for-tree-surgeons",
+    "title": "Tree surgeons",
+    "kicker": "For your trade",
+    "sub": "The tickets, the insurance and the tree, on one page."
+  },
+  {
+    "key": "for-cleaners",
+    "title": "Cleaning companies",
+    "kicker": "For your trade",
+    "sub": "Earn the key to someone’s house before you knock."
+  },
+  {
+    "key": "for-window-cleaners",
+    "title": "Window cleaners",
+    "kicker": "For your trade",
+    "sub": "Fill the gaps in your round, street by street."
+  },
+  {
+    "key": "for-pest-control",
+    "title": "Pest control",
+    "kicker": "For your trade",
+    "sub": "A page for every pest people type into Google."
+  },
+  {
+    "key": "for-removals",
+    "title": "Removal companies",
+    "kicker": "For your trade",
+    "sub": "Quotes that hold on while the chain sorts itself out."
+  },
+  {
+    "key": "for-garages",
+    "title": "Garages and MOT centres",
+    "kicker": "For your trade",
+    "sub": "MOTs booked onto the ramp, and remembered every year."
+  },
+  {
+    "key": "for-salons",
+    "title": "Hair salons and barbers",
+    "kicker": "For your trade",
+    "sub": "Every chair booked, without the phone ringing mid-cut."
+  },
+  {
+    "key": "for-beauty-clinics",
+    "title": "Beauty and aesthetics clinics",
+    "kicker": "For your trade",
+    "sub": "Consultation, treatment, top-up: each one booked at the right time."
+  },
+  {
+    "key": "for-physios",
+    "title": "Physiotherapists and clinics",
+    "kicker": "For your trade",
+    "sub": "From the first assessment to the last follow-up, booked."
+  },
+  {
+    "key": "for-dentists",
+    "title": "Dental practices",
+    "kicker": "For your trade",
+    "sub": "Say whether you are taking new patients, before they ring."
+  },
+  {
+    "key": "for-gyms",
+    "title": "Gyms and fitness studios",
+    "kicker": "For your trade",
+    "sub": "From free trial to first session, without the front desk."
+  },
+  {
+    "key": "for-restaurants",
+    "title": "Restaurants and bars",
+    "kicker": "For your trade",
+    "sub": "Tables booked on your own site, with deposits where they matter."
+  },
+  {
+    "key": "for-cafes",
+    "title": "Cafés",
+    "kicker": "For your trade",
+    "sub": "The café people find on the map, and then walk into."
+  },
+  {
+    "key": "for-accountants",
+    "title": "Accountants",
+    "kicker": "For your trade",
+    "sub": "Answer the first question before the first call."
+  },
+  {
+    "key": "for-solicitors",
+    "title": "Solicitors",
+    "kicker": "For your trade",
+    "sub": "Clear enough for a client, careful enough for your COLP."
+  },
+  {
+    "key": "for-architects",
+    "title": "Architects",
+    "kicker": "For your trade",
+    "sub": "Show the thinking, not just the photographs."
+  },
+  {
+    "key": "for-mortgage-brokers",
+    "title": "Mortgage brokers",
+    "kicker": "For your trade",
+    "sub": "Win the first mortgage, then remember when the rate ends."
+  },
+  {
+    "key": "for-estate-agents",
+    "title": "Estate and letting agents",
+    "kicker": "For your trade",
+    "sub": "The website a seller reads before choosing an agent."
+  },
+  {
+    "key": "for-videographers",
+    "title": "Film and photography",
+    "kicker": "For your trade",
+    "sub": "Hold the date, then let the work do the talking."
+  },
+  {
+    "key": "for-event-companies",
+    "title": "Event companies",
+    "kicker": "For your trade",
+    "sub": "Booked once, and asked back next year."
   },
   {
     "key": "why",
