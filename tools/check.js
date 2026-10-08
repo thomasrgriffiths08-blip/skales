@@ -1,12 +1,22 @@
 /* Build-time lint. Runs at the end of `node tools/build.js` and
    refuses to pass a page with: a title over 60 characters, a description missing or over 160, other
    than one H1, an image without alt, a broken internal link, a missing share image, JSON-LD that does
-   not parse, or an indexable page missing from the sitemap. Redirect pages and the demo builds are skipped. */
+   not parse, an indexable page missing from the sitemap, or a near-copy of another page (the thin,
+   one-word-swapped pages that sink a domain: 5-word overlap above 55% fails, above 45% warns; the
+   27 trade pages sit at 22% or less). Redirect pages and the demo builds are skipped. */
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 
+/* the words inside <main>, as overlapping runs of five, for the near-copy check */
+function shingles(html){
+  const m = html.match(/<main[\s\S]*?<\/main>/), w = (m ? m[0] : html).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ')
+    .replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/g, ' ').toLowerCase().match(/[a-z0-9£']+/g) || [];
+  const s = new Set(); for (let i = 0; i + 5 <= w.length; i++) s.add(w.slice(i, i + 5).join(' '));
+  return s;
+}
+
 function check(pages, L){
-  const errs = [], warn = [];
+  const errs = [], warn = [], texts = [];
   const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
   const exists = rel => { const p = path.join(ROOT, decodeURI(rel)); return fs.existsSync(p) && (fs.statSync(p).isFile() || fs.existsSync(path.join(p, 'index.html'))); };
   for (const pg of pages){
@@ -36,7 +46,15 @@ function check(pages, L){
       const rel = path.posix.normalize(path.posix.join(base, href));
       if (!exists(rel)) at(`broken link: ${href}`);
     });
-    if (pg.sitemap !== false && !pg.noindex && !/<meta name="robots" content="noindex/.test(html) && !sitemap.includes(`<loc>${L.abs(pg.url)}</loc>`)) at('indexable but not in the sitemap');
+    const indexable = pg.sitemap !== false && !pg.noindex && !/<meta name="robots" content="noindex/.test(html);
+    if (indexable && !sitemap.includes(`<loc>${L.abs(pg.url)}</loc>`)) at('indexable but not in the sitemap');
+    if (indexable) texts.push({ url: pg.url, s: shingles(html) });
+  }
+  for (let i = 0; i < texts.length; i++) for (let j = i + 1; j < texts.length; j++){
+    const a = texts[i].s, b = texts[j].s; let n = 0; for (const x of a) if (b.has(x)) n++;
+    const sim = n / (a.size + b.size - n || 1), pct = Math.round(sim * 100);
+    if (sim > 0.55) errs.push(`${texts[j].url}: ${pct}% the same as ${texts[i].url} (near-copy; max 55%)`);
+    else if (sim > 0.45) warn.push(`${texts[j].url}: ${pct}% the same as ${texts[i].url}`);
   }
   return { errs, warn };
 }
