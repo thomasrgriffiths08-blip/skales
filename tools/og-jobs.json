@@ -406,5 +406,17 @@
     "title": "See what missed calls are costing you.",
     "kicker": "Skales Studio · 60 seconds, all taps",
     "sub": "Six questions. Your own case file. The call booked on the same page."
+  },
+  {
+    "key": "try",
+    "title": "Try it: the systems, running.",
+    "kicker": "Live demos · about a minute each",
+    "sub": "Be your own customer. Call, book, pay a deposit, and see what the business sees."
+  },
+  {
+    "key": "try-missed-call",
+    "title": "Missed call, booked. Try it.",
+    "kicker": "Live demo · about a minute",
+    "sub": "Call your own business, let it ring out, and watch the text-back turn into a booking with a deposit."
   }
 ]
