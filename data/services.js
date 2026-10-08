@@ -155,7 +155,8 @@ module.exports = [
     card: 'Search ads and Local Services Ads, so you show up when someone nearby searches for what you do.',
     h1: 'Show up on Google when someone nearby needs you.',
     answer: 'I run Google search ads, and Local Services Ads where your trade qualifies, so you appear when someone nearby searches for exactly what you do. Every click lands on a page built to book, and every enquiry is tracked back to the search that brought it.',
-    film: null, adPreview: 'google',
+    film: { wide: 'ads-google', h2: 'Watch one search turn into a booked job.', p: 'Someone searches for a boiler service at 21:12, taps a heating engineer’s ad at the top, books a slot and pays a deposit. The job lands on the board tagged with the search, the texts go out on their own, and the week shows what each booked job cost. A made-up business, so the numbers are illustrative.' },
+    adPreview: 'google',
     sections: [
       { h2: 'Search ads or Local Services Ads?', p: [
         'Search ads appear above the results for the searches you choose, and you pay when someone clicks. Local Services Ads sit at the very top with a Google-checked badge, and you pay per enquiry rather than per click, but they are only open to some trades. I check whether yours qualifies first.' ] },
