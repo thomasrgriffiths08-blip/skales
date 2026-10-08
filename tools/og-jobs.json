@@ -384,8 +384,8 @@
     "sub": "Some builders charge every month, forever, to keep your own site alive. Here is what \"you own it\" actually means in practice."
   },
   {
-    "key": "notes-sixteen-builds-all-fictional",
-    "title": "Sixteen builds for businesses that don’t exist, on purpose",
+    "key": "notes-builds-for-businesses-that-dont-exist",
+    "title": "Thirty-six builds for businesses that don’t exist, on purpose",
     "kicker": "Notes · 3 September 2026",
     "sub": "Why every demo on this site is for an invented company, and why that is better proof than a client logo wall."
   },
@@ -394,5 +394,17 @@
     "title": "Ten minutes on your setup. Three things back.",
     "kicker": "Free teardown · by message",
     "sub": "What is leaking, what to fix first, what it is worth in jobs."
+  },
+  {
+    "key": "your-case",
+    "title": "Your business, written up as a case study.",
+    "kicker": "For owners · about four minutes",
+    "sub": "What is leaking, in pounds from your own numbers. What to build first. The proof."
+  },
+  {
+    "key": "start",
+    "title": "See what missed calls are costing you.",
+    "kicker": "Skales Studio · 60 seconds, all taps",
+    "sub": "Six questions. Your own case file. The call booked on the same page."
   }
 ]
