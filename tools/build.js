@@ -7,7 +7,7 @@ const { site, builds } = L;
 const ROOT = path.resolve(__dirname, '..');
 const notes = require('../data/notes.js');
 const why = require('./pages/why.js');
-const mods = [require('./pages/home.js'), require('./pages/work.js'), require('./pages/whatido.js'), why, require('./pages/book.js'), require('./pages/notes.js'), require('./pages/misc.js'), require('./pages/case.js'), require('./pages/start.js')];
+const mods = [require('./pages/home.js'), require('./pages/work.js'), require('./pages/whatido.js'), why, require('./pages/book.js'), require('./pages/notes.js'), require('./pages/misc.js'), require('./pages/case.js'), require('./pages/start.js'), require('./pages/try.js')];
 
 const write = (rel, content) => { const p = path.join(ROOT, rel); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, content); };
 const baseFor = url => { const depth = url.replace(/^\//, '').split('/').filter(Boolean).length - (url.endsWith('/') ? 0 : 1); return depth > 0 ? '../'.repeat(depth) : ''; };

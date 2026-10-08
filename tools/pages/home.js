@@ -2,6 +2,7 @@ const L = require('../lib.js');
 const { site, builds, esc, Words } = L;
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
 const B = n => builds.find(x => x.n === n);
+const TRY = require('./try.js').DEMOS.filter(x => x.live);
 /* ---- iOS app tiles: drawn, never fetched. 24-unit box, a flat brand colour and
    a top sheen, which is what a real icon reads as at notification size. ---- */
 const SHEEN = '<path d="M0 0h24v11H0z" fill="#fff" opacity=".15"/>';
@@ -47,6 +48,8 @@ module.exports = { pages: [{
     const description = 'Pick your trade and watch a working website for your business build itself on the page. Websites, booking and missed-call text-back for UK trades, owned by you.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
+      { '@type': 'VideoObject', '@id': L.abs('/#film'), name: 'Seven days from invisible to booked', description: 'A film of a website build for a fictional heating engineer: built in seven days, found on Google, and the enquiries arriving in the Skales CRM. Fictional business, illustrative numbers.',
+        thumbnailUrl: L.abs('/assets/film/website.jpg'), contentUrl: L.abs('/assets/film/website.mp4'), uploadDate: '2026-10-08', duration: 'PT33S', publisher: { '@id': L.ORG_ID } },
     ];
     const svc = [
       { s: site.services[0], x: B(13), see: 'a roofing firm’s site, before and after' },
@@ -170,6 +173,32 @@ ${L.header(b, 'home')}
   </div>
 </section>
 
+<section class="sec sec-alu" id="film" aria-labelledby="h-film">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-film">Seven days from invisible to booked.</h2>
+      <p class="lead">A heating engineer nobody could find on Google, a site built in a week, and what came in after. It is a film of the system I build, with a made-up business in it.</p>
+    </div>
+    <figure class="film">
+      <video data-film muted playsinline loop preload="none" disablepictureinpicture
+        data-wide="${b}assets/film/website.mp4" data-phone="${b}assets/film/website-phone.mp4"
+        data-wide-poster="${b}assets/film/website.jpg" data-phone-poster="${b}assets/film/website-phone.jpg" poster="${b}assets/film/website.jpg"
+        aria-label="A week-long website build for a heating engineer, then enquiries arriving in the Skales CRM"></video>
+      <figcaption><span>Fictional business · illustrative numbers</span><button type="button" class="film-tg" data-film-toggle aria-pressed="false">Play the film</button></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="try" aria-labelledby="h-try">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-try">Don't take my word for it. Try it.</h2>
+      <p class="lead">Three live demos that run on your phone. You play the customer, then see what the business sees. About a minute each.</p>
+    </div>
+    <div class="try-list">${TRY.map(x => `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
+  </div>
+</section>
+
 <section class="sec sec-alu" id="services" aria-labelledby="h-svc">
   <div class="wrap">
     <div class="sec-head">
@@ -237,6 +266,6 @@ ${L.header(b, 'home')}
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
     return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'forge.css', 'cold.css'], nodes }), body,
-      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'forge.js', 'cold.js', 'nightline.js']));
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'forge.js', 'cold.js', 'nightline.js', 'films.js']));
   }
 }]};
