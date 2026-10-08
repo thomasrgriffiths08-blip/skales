@@ -3,20 +3,22 @@ module.exports = {
   // BRAND — Skales (decided 2026-09-03). Instagram stays @tomxsystems.
   name: 'Skales',
   wordmark: { a: 's', x: 'k', b: 'ales' },   // the twisted letter is the accent
-  legalName: 'Skales',
+  legalName: 'Skales Studio',            // the full name search engines see (decided 2026-10-08); Skales is the short form
   tagline: 'Websites & systems for service businesses',
   // ORIGIN — the live address. Everything (canonicals, sitemap, schema, OG, the demo lock) derives from it.
   // Do NOT point this at a domain that is not registered and pointing here: every link becomes a parking page.
-  origin: 'https://thomasrgriffiths08-blip.github.io/skales',   // skales.com is not bought yet — switch this line the day it is, then rebuild
+  origin: 'https://thomasrgriffiths08-blip.github.io/skales',   // skales.studio is bought (2026-10-08) but not pointed yet — switch to 'https://skales.studio' the day DNS resolves, then rebuild
   // extra hosts the locked demos may run under (dev + any future domain)
-  allowedHosts: ['localhost', '127.0.0.1', 'thomasrgriffiths08-blip.github.io', 'skales.com', 'www.skales.com'],
+  allowedHosts: ['localhost', '127.0.0.1', 'thomasrgriffiths08-blip.github.io', 'skales.studio', 'www.skales.studio'],
   locale: 'en-GB',
   country: 'GB',
   areaServed: 'United Kingdom',
   founder: { name: 'Tom Griffiths', alternateName: 'Thomas Griffiths', jobTitle: 'Founder & builder' },
   email: 'thomasrgriffiths08@gmail.com',
   whatsapp: '',                       // international digits only, e.g. '447700900123'. Empty = WhatsApp controls hide.
-  calendly: '',                       // e.g. 'https://calendly.com/<handle>/<event>'. Empty = booking hands off by email/WhatsApp.
+  calendly: '',                       // Calendly or Cal.com link, e.g. 'https://calendly.com/<handle>/<event>' or 'https://cal.com/<handle>/20min'. Empty = booking hands off by email/WhatsApp.
+  leadEndpoint: '',                   // POST URL that texts a case file to the owner (the Cloudflare Worker). Empty = /start offers the share sheet instead.
+  introVideo: '',                     // e.g. 'assets/film/tom-intro.mp4' (+ a .jpg poster beside it): Tom's 30-second phone clip on /start. Empty = hidden.
   instagram: 'https://www.instagram.com/tomxsystems/',
   instagramHandle: '@tomxsystems',
   founded: '2026',

@@ -89,7 +89,7 @@ const ctaBand = (b, h, p, extra = '') => `<section class="cta-band">
 const ORG_ID = abs('/#organization'), SITE_ID = abs('/#website'), PERSON_ID = abs('/#founder');
 function baseGraph(){
   return [
-    { '@type': 'Organization', '@id': ORG_ID, name: site.name, legalName: site.legalName, url: abs('/'),
+    { '@type': 'Organization', '@id': ORG_ID, name: site.legalName, alternateName: site.name, legalName: site.legalName, url: abs('/'),
       description: site.tagline + ' — ' + site.facts[0],
       founder: { '@id': PERSON_ID }, foundingDate: site.founded,
       areaServed: { '@type': 'Country', name: site.areaServed },
@@ -99,7 +99,7 @@ function baseGraph(){
       logo: { '@type': 'ImageObject', url: abs('/og/home.png') } },
     { '@type': 'Person', '@id': PERSON_ID, name: site.founder.name, alternateName: site.founder.alternateName,
       jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram], nationality: 'GB' },
-    { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.name, description: site.tagline,
+    { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.legalName, alternateName: site.name, description: site.tagline,
       publisher: { '@id': ORG_ID }, inLanguage: site.locale },
   ];
 }
@@ -203,7 +203,7 @@ function footer(b){
 </footer>`;
 }
 function scripts(b, extra = []){
-  return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, defaultCh: DEFAULT_CH })};</script>`,
+  return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, leadEndpoint: site.leadEndpoint || '', defaultCh: DEFAULT_CH })};</script>`,
     `<script src="${b}assets/site.js"></script>`, ...extra.map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
 }
 const page = (h, body, s) => `${h}\n<body>\n${body}\n${s}\n</body>\n</html>\n`;
