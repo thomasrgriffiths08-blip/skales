@@ -241,6 +241,10 @@ const crmBoard = `
   </div>
 </div>`;
 
+/* each demo is a small web app that runs in the browser */
+const app = x => ({ '@type': 'WebApplication', '@id': L.abs(`/try/${x.slug}/#app`), name: x.name, url: L.abs(`/try/${x.slug}/`), description: x.line,
+  applicationCategory: 'BusinessApplication', operatingSystem: 'Any, in the browser', isAccessibleForFree: true, provider: { '@id': L.ORG_ID } });
+
 const chip = k => `<button type="button" class="tm-k" data-kind="${k.key}" aria-pressed="false">${esc(k.label)}</button>`;
 /* one demo page: set-up, the running demo (narration, phone, CRM), the end */
 function demoPage(b, x, { n, lead, steps, layers, side = crm, runClass = '' }){
@@ -297,7 +301,7 @@ module.exports = { JOBS, DEMOS, pages: [
     url: '/try/', og: 'try', priority: 0.8, changefreq: 'monthly',
     meta: { key: 'try', title: 'Try it: the systems, running.', kicker: 'Live demos · about a minute each', sub: 'Be your own customer. Call, book, pay a deposit, and see what the business sees.' },
     render(b){
-      const title = `Try it: live demos of missed-call text-back and booking | ${site.name}`;
+      const title = `Live demos: text-back, booking and CRM | ${site.name}`;
       const description = `Live demos you can use on your phone: call a business and let it ring out, get the text-back, book and pay a deposit, and see the lead land in the CRM.`;
       const live = DEMOS.filter(x => x.live);
       const nodes = [
@@ -333,6 +337,7 @@ ${L.footer(b)}`;
       const nodes = [
         L.webPage({ path: '/try/missed-call/', title, description }),
         L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }, { name: x.name, path: '/try/missed-call/' }]),
+        app(x),
         { '@type': 'HowTo', name: 'How missed-call text-back works', description: 'What a caller gets when a business with missed-call text-back cannot answer.',
           step: [
             { '@type': 'HowToStep', name: 'The call rings out', text: 'The business is on a job and cannot answer. The call is logged as a missed call straight away.' },
@@ -352,11 +357,12 @@ ${L.footer(b)}`;
     meta: { key: 'try-booking', title: 'Book and pay a deposit. Try it.', kicker: 'Live demo · about a minute', sub: 'Book a job on your own website at 10pm, then see it waiting in your diary the next morning.' },
     render(b){
       const x = DEMOS[1];
-      const title = `Online booking with deposits demo: try it on your phone | ${site.name}`;
+      const title = `Online booking with deposits: live demo | ${site.name}`;
       const description = `A live demo of online booking for UK service businesses: a customer books and pays a deposit on your website at night, and the job is in your diary by morning.`;
       const nodes = [
         L.webPage({ path: '/try/booking/', title, description }),
         L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }, { name: x.name, path: '/try/booking/' }]),
+        app(x),
         { '@type': 'HowTo', name: 'How online booking with a deposit works', description: 'What a customer does to book a business with online booking, and what the business sees.',
           step: [
             { '@type': 'HowToStep', name: 'The customer finds the website', text: 'Any time of day or night, the customer lands on the business website and taps Book online.' },
@@ -376,11 +382,12 @@ ${L.footer(b)}`;
     meta: { key: 'try-crm-board', title: 'The CRM board. Try it.', kicker: 'Live demo · about a minute', sub: 'Move a lead from enquiry to done and watch the replies, chasers, reminders and review request send themselves.' },
     render(b){
       const x = DEMOS[2];
-      const title = `CRM for trades demo: follow-ups that send themselves | ${site.name}`;
-      const description = `A live demo of a CRM for UK service businesses: move a lead from enquiry to quoted, booked and done, and watch the reply, quote chaser, reminder and review request send themselves.`;
+      const title = `CRM for trades: follow-ups that send themselves | ${site.name}`;
+      const description = `A live CRM demo for UK service businesses: move a lead to quoted, booked and done, and watch the reply, chaser, reminder and review request send themselves.`;
       const nodes = [
         L.webPage({ path: '/try/crm-board/', title, description }),
         L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }, { name: x.name, path: '/try/crm-board/' }]),
+        app(x),
         { '@type': 'HowTo', name: 'How a CRM with automatic follow-up works', description: 'What sends itself as a lead moves through a service business pipeline.',
           step: [
             { '@type': 'HowToStep', name: 'Enquiry', text: 'A new enquiry gets an instant reply, so the customer knows someone has it.' },

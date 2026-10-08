@@ -48,6 +48,8 @@ module.exports = { pages: [{
     const description = 'Pick your trade and watch a working website for your business build itself on the page. Websites, booking and missed-call text-back for UK trades, owned by you.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
+      { '@type': 'VideoObject', '@id': L.abs('/#film'), name: 'Seven days from invisible to booked', description: 'A film of a website build for a fictional heating engineer: built in seven days, found on Google, and the enquiries arriving in the Skales CRM. Fictional business, illustrative numbers.',
+        thumbnailUrl: L.abs('/assets/film/website.jpg'), contentUrl: L.abs('/assets/film/website.mp4'), uploadDate: '2026-10-08', duration: 'PT33S', publisher: { '@id': L.ORG_ID } },
     ];
     const svc = [
       { s: site.services[0], x: B(13), see: 'a roofing firm’s site, before and after' },
