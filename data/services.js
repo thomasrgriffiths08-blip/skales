@@ -119,7 +119,8 @@ module.exports = [
     card: 'Facebook and Instagram ads that land on a page built to book, with follow-up for anyone who does not.',
     h1: 'Facebook and Instagram ads that end in a booked job.',
     answer: 'I run Facebook and Instagram ads for UK service businesses, and send every click to a page built to book, with follow-up texts for anyone who does not book straight away. You see what each booked job cost you, not just clicks and likes.',
-    film: null, adPreview: 'meta',
+    film: { wide: 'ads-meta', h2: 'Watch one ad turn into a booked job.', p: 'Someone scrolling at 21:12 taps a heating engineer’s ad, books a slot and pays a deposit. The job lands on the board tagged with the ad, the texts go out on their own, and the week shows what each booked job cost. A made-up business, so the numbers are illustrative.' },
+    adPreview: 'meta',
     sections: [
       { h2: 'How is this different from an ads agency?', p: [
         'Most ads stop at the click. The person taps, lands on a home page that was never built for them, and leaves. Here the ad, the page it lands on and the follow-up are one system: the page makes the same promise the ad made, booking is one step away, and if they leave without booking, the CRM follows up.',
