@@ -462,6 +462,174 @@
     "sub": "Short, straight answers about websites, booking, follow-up, ads and how a build works."
   },
   {
+    "key": "for",
+    "title": "Websites and booking for your trade",
+    "kicker": "By trade",
+    "sub": "27 kinds of business, each with what its website needs and the demos set up for it."
+  },
+  {
+    "key": "for-plumbers",
+    "title": "Plumbers and heating engineers",
+    "kicker": "For your trade",
+    "sub": "Built for the night the boiler gives up."
+  },
+  {
+    "key": "for-electricians",
+    "title": "Electricians",
+    "kicker": "For your trade",
+    "sub": "Small jobs answered, big jobs quoted, EICRs remembered."
+  },
+  {
+    "key": "for-roofers",
+    "title": "Roofers",
+    "kicker": "For your trade",
+    "sub": "Show them the roof they cannot see."
+  },
+  {
+    "key": "for-builders",
+    "title": "Builders and joiners",
+    "kicker": "For your trade",
+    "sub": "Show the build, not just the finish."
+  },
+  {
+    "key": "for-kitchen-and-bathroom-fitters",
+    "title": "Kitchen and bathroom fitters",
+    "kicker": "For your trade",
+    "sub": "Kitchens and bathrooms people can picture before you measure up."
+  },
+  {
+    "key": "for-landscapers",
+    "title": "Landscapers and fencers",
+    "kicker": "For your trade",
+    "sub": "Gardens quoted before the spring rush buries you."
+  },
+  {
+    "key": "for-locksmiths",
+    "title": "Locksmiths",
+    "kicker": "For your trade",
+    "sub": "Proof you are the local locksmith, not a call centre."
+  },
+  {
+    "key": "for-tree-surgeons",
+    "title": "Tree surgeons",
+    "kicker": "For your trade",
+    "sub": "The tickets, the insurance and the tree, on one page."
+  },
+  {
+    "key": "for-cleaners",
+    "title": "Cleaning companies",
+    "kicker": "For your trade",
+    "sub": "Earn the key to someone’s house before you knock."
+  },
+  {
+    "key": "for-window-cleaners",
+    "title": "Window cleaners",
+    "kicker": "For your trade",
+    "sub": "Fill the gaps in your round, street by street."
+  },
+  {
+    "key": "for-pest-control",
+    "title": "Pest control",
+    "kicker": "For your trade",
+    "sub": "A page for every pest people type into Google."
+  },
+  {
+    "key": "for-removals",
+    "title": "Removal companies",
+    "kicker": "For your trade",
+    "sub": "Quotes that hold on while the chain sorts itself out."
+  },
+  {
+    "key": "for-garages",
+    "title": "Garages and MOT centres",
+    "kicker": "For your trade",
+    "sub": "MOTs booked onto the ramp, and remembered every year."
+  },
+  {
+    "key": "for-salons",
+    "title": "Hair salons and barbers",
+    "kicker": "For your trade",
+    "sub": "Every chair booked, without the phone ringing mid-cut."
+  },
+  {
+    "key": "for-beauty-clinics",
+    "title": "Beauty and aesthetics clinics",
+    "kicker": "For your trade",
+    "sub": "Consultation, treatment, top-up: each one booked at the right time."
+  },
+  {
+    "key": "for-physios",
+    "title": "Physiotherapists and clinics",
+    "kicker": "For your trade",
+    "sub": "From the first assessment to the last follow-up, booked."
+  },
+  {
+    "key": "for-dentists",
+    "title": "Dental practices",
+    "kicker": "For your trade",
+    "sub": "Say whether you are taking new patients, before they ring."
+  },
+  {
+    "key": "for-gyms",
+    "title": "Gyms and fitness studios",
+    "kicker": "For your trade",
+    "sub": "From free trial to first session, without the front desk."
+  },
+  {
+    "key": "for-restaurants",
+    "title": "Restaurants and bars",
+    "kicker": "For your trade",
+    "sub": "Tables booked on your own site, with deposits where they matter."
+  },
+  {
+    "key": "for-cafes",
+    "title": "Cafés",
+    "kicker": "For your trade",
+    "sub": "The café people find on the map, and then walk into."
+  },
+  {
+    "key": "for-accountants",
+    "title": "Accountants",
+    "kicker": "For your trade",
+    "sub": "Answer the first question before the first call."
+  },
+  {
+    "key": "for-solicitors",
+    "title": "Solicitors",
+    "kicker": "For your trade",
+    "sub": "Clear enough for a client, careful enough for your COLP."
+  },
+  {
+    "key": "for-architects",
+    "title": "Architects",
+    "kicker": "For your trade",
+    "sub": "Show the thinking, not just the photographs."
+  },
+  {
+    "key": "for-mortgage-brokers",
+    "title": "Mortgage brokers",
+    "kicker": "For your trade",
+    "sub": "Win the first mortgage, then remember when the rate ends."
+  },
+  {
+    "key": "for-estate-agents",
+    "title": "Estate and letting agents",
+    "kicker": "For your trade",
+    "sub": "The website a seller reads before choosing an agent."
+  },
+  {
+    "key": "for-videographers",
+    "title": "Film and photography",
+    "kicker": "For your trade",
+    "sub": "Hold the date, then let the work do the talking."
+  },
+  {
+    "key": "for-event-companies",
+    "title": "Event companies",
+    "kicker": "For your trade",
+    "sub": "Booked once, and asked back next year."
+  },
+  {
     "key": "why",
     "title": "Own it. Don’t rent it.",
     "kicker": "Why · one person · built in public",

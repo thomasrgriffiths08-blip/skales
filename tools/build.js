@@ -8,7 +8,8 @@ const ROOT = path.resolve(__dirname, '..');
 const notes = require('../data/notes.js');
 const why = require('./pages/why.js');
 const SVC = require('./pages/services.js');
-const mods = [require('./pages/home.js'), require('./pages/work.js'), SVC, why, require('./pages/book.js'), require('./pages/notes.js'), require('./pages/misc.js'), require('./pages/case.js'), require('./pages/start.js'), require('./pages/try.js')];
+const SEG = require('./pages/segments.js');
+const mods = [require('./pages/home.js'), require('./pages/work.js'), SVC, SEG, why, require('./pages/book.js'), require('./pages/notes.js'), require('./pages/misc.js'), require('./pages/case.js'), require('./pages/start.js'), require('./pages/try.js')];
 
 const write = (rel, content) => { const p = path.join(ROOT, rel); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, content); };
 const baseFor = url => { const depth = url.replace(/^\//, '').split('/').filter(Boolean).length - (url.endsWith('/') ? 0 : 1); return depth > 0 ? '../'.repeat(depth) : ''; };
@@ -63,6 +64,7 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 - [Automations](${L.abs('/automations/')}): ${SVC.AU.map(x => `[${x.name.toLowerCase()}](${L.abs('/automations/' + x.slug + '/')})`).join(', ')}.
 - [Try it](${L.abs('/try/')}): live demos that run in the browser — a missed call texted back and booked, online booking with a deposit, and a CRM board whose follow-up texts send themselves.
 - [Compare](${L.abs('/compare/')}): honest comparisons against ${SVC.CP.map(x => `[${x.them}](${L.abs('/compare/' + x.slug + '/')})`).join(', ')}.
+- [By trade](${L.abs('/for/')}): what a website needs for each kind of business — ${SEG.SG.map(x => `[${x.label.toLowerCase()}](${L.abs('/for/' + x.slug + '/')})`).join(', ')}.
 - [FAQ](${L.abs('/faq/')}): every question in one place, with short answers.
 - [Why](${L.abs('/why/')}): ownership (clients own domain, code and accounts), one person, built in public, and the FAQ.
 - [Book a call](${L.abs('/book/')}): four qualifying questions, then a slot straight into the diary.
