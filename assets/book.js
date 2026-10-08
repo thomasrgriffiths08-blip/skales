@@ -39,7 +39,10 @@
     d.getElementById('notfit').hidden = a.kind !== 'Not a service business';
     var text = 'Call request from the site\n' + ['Name: ' + a.name, 'Business: ' + a.business, 'Town: ' + a.town, 'Kind: ' + a.kind, 'Problem: ' + a.problem, 'Jobs come from: ' + a.source, 'Team: ' + a.size, 'Phone: ' + a.phone, 'Email: ' + a.email].join('\n');
     var cal = d.getElementById('calendly'), fb = d.getElementById('fallback');
-    if (S.calendly){
+    if (S.calendly && /cal\.com\//.test(S.calendly)){
+      fb.hidden = true;   // Cal.com takes the details as plain query parameters
+      cal.innerHTML = '<iframe title="Book a call" loading="lazy" src="' + S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'embed=true&theme=light&name=' + enc(a.name) + '&email=' + enc(a.email) + '&notes=' + enc(text) + '"></iframe>';
+    } else if (S.calendly){
       fb.hidden = true;
       var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&name=' + enc(a.name) + '&email=' + enc(a.email)
               + '&a1=' + enc(a.business + (a.town ? ' · ' + a.town : '')) + '&a2=' + enc(a.kind + ' · ' + a.size) + '&a3=' + enc(a.problem) + '&a4=' + enc(a.source + ' · ' + a.phone);
@@ -60,5 +63,11 @@
   });
   form.addEventListener('keydown', function(e){ if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox' && e.target.type !== 'radio'){ e.preventDefault(); var n = steps[cur].querySelector('[data-next]'); if (n) n.click(); } });
   form.addEventListener('submit', function(e){ e.preventDefault(); });
+  /* the booking itself happens inside Calendly's frame; it tells the page when a time is taken */
+  addEventListener('message', function(e){
+    if (!window.skTrack) return;
+    if (/calendly\.com$/.test(e.origin) && e.data && e.data.event === 'calendly.event_scheduled') skTrack('call_booked', { from: 'book', tool: 'calendly' });
+    if (/cal\.com$/.test(e.origin) && e.data && /booking(Successful|_successful)/i.test(JSON.stringify(e.data))) skTrack('call_booked', { from: 'book', tool: 'cal.com' });
+  });
   show(0);
 })();

@@ -706,5 +706,17 @@
     "title": "The CRM board. Try it.",
     "kicker": "Live demo · about a minute",
     "sub": "Move a lead from enquiry to done and watch the replies, chasers, reminders and review request send themselves."
+  },
+  {
+    "key": "privacy",
+    "title": "Privacy notice",
+    "kicker": "Skales Studio",
+    "sub": "What is collected, why, who sees it and how long it is kept."
+  },
+  {
+    "key": "cookies",
+    "title": "Cookies",
+    "kicker": "Skales Studio",
+    "sub": "No ad or analytics cookies."
   }
 ]

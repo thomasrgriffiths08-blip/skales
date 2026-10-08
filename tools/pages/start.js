@@ -87,6 +87,7 @@ module.exports = { QS, pages: [{
 <footer class="st-foot">
   <p>&copy; <span data-year></span> ${esc(site.legalName)} · ${esc(site.areaServed)} · <a href="${b}">The full site</a> · <a href="${b}work/">The work</a></p>
   <p>Every business, name and number in the films and demos is fictional. Your answers stay in your browser unless you choose to send them.</p>
+  <nav class="f-legal" aria-label="Legal">${L.legal(b)}</nav>
 </footer>
 <script>window.STARTQS=${JSON.stringify(QS)};window.STARTKINDS=${JSON.stringify(KINDS)};</script>`;
     return L.page(L.head({ b, path: '/start/', title, description, og: 'start', nodes, noindex: true, css: ['start.css'] }), body, L.scripts(b, ['builds.js', 'start.js']));

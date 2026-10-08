@@ -2,6 +2,23 @@
 (function(){
   var d = document, S = window.SITE || {};
   try{ if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) d.documentElement.classList.add('m-on'); }catch(e){}
+  /* tracking: one call for every page. The dataLayer always; Meta and Google only once the visitor has
+     accepted and assets/consent.js has loaded them. The events that matter to ads go as standard events. */
+  var STD = { casefile_sent: 'Lead', teardown_sent: 'Lead', call_booked: 'Schedule', whatsapp_click: 'Contact', email_click: 'Contact' };
+  var CONV = { casefile_sent: 'lead', teardown_sent: 'lead', call_booked: 'booked' };
+  window.skTrack = function(name, props){
+    props = props || {}; var T = S.track || {};
+    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: name }, props)); } catch (e){}
+    try { if (window.fbq){ if (STD[name]) fbq('track', STD[name], props); else fbq('trackCustom', name, props); } } catch (e){}
+    try { if (window.gtag){ gtag('event', name, props); var l = T.ads && T.labels && T.labels[CONV[name]]; if (l) gtag('event', 'conversion', { send_to: T.ads + '/' + l }); } } catch (e){}
+    try { if (window.plausible) plausible(name, { props: props }); } catch (e){}
+  };
+  d.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a || a.hasAttribute('data-track')) return;
+    var h = a.getAttribute('href');
+    if (/^mailto:/.test(h)) skTrack('email_click', { page: location.pathname });
+    else if (/wa\.me\//.test(h)) skTrack('whatsapp_click', { page: location.pathname });
+  });
   d.addEventListener('DOMContentLoaded', function(){
     var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, '');
     d.querySelectorAll('[data-wa]').forEach(function(el){

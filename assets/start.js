@@ -15,13 +15,7 @@
   var store = { get: function(k){ try { return JSON.parse(sessionStorage.getItem(k)); } catch (e){ return null; } }, set: function(k, v){ try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e){} } };
 
   /* ---------- tracking: one call, every tool the page happens to load ---------- */
-  function track(name, props){
-    props = props || {};
-    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: name }, props)); } catch (e){}
-    try { if (window.fbq) fbq('trackCustom', name, props); } catch (e){}
-    try { if (window.gtag) gtag('event', name, props); } catch (e){}
-    try { if (window.plausible) plausible(name, { props: props }); } catch (e){}
-  }
+  function track(name, props){ if (window.skTrack) skTrack(name, props); }   // assets/site.js
   d.addEventListener('click', function(e){ var t = e.target.closest('[data-track]'); if (t) track(t.getAttribute('data-track'), { from: 'start' }); });
 
   /* where they came from (bio, story, an ad): kept for the hand-off so Tom sees the channel */
