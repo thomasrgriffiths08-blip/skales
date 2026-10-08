@@ -18,6 +18,11 @@ module.exports = {
   whatsapp: '',                       // international digits only, e.g. '447700900123'. Empty = WhatsApp controls hide.
   calendly: '',                       // Calendly or Cal.com link, e.g. 'https://calendly.com/<handle>/<event>' or 'https://cal.com/<handle>/20min'. Empty = booking hands off by email/WhatsApp.
   leadEndpoint: '',                   // POST URL that texts a case file to the owner (the Cloudflare Worker). Empty = /start offers the share sheet instead.
+  // TRACKING — only with the visitor's consent (assets/consent.js shows the banner). All empty = no banner, no tags, nothing loads.
+  metaPixel: '',                      // Meta Pixel ID, digits only, from Events Manager
+  googleTag: '',                      // Google Analytics 4 measurement ID, e.g. 'G-ABC123XYZ'
+  googleAds: '',                      // Google Ads tag ID, e.g. 'AW-123456789'
+  googleAdsLabels: { lead: '', booked: '' },   // conversion labels from Google Ads (Goals > Conversions): a case file sent, a call booked
   introVideo: '',                     // e.g. 'assets/film/tom-intro.mp4' (+ a .jpg poster beside it): Tom's 30-second phone clip on /start. Empty = hidden.
   instagram: 'https://www.instagram.com/tomxsystems/',
   instagramHandle: '@tomxsystems',
