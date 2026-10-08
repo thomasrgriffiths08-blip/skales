@@ -68,7 +68,7 @@ window.TryKit = function(cfg){
     var A = K.A = { biz: biz, kind: kind, J: J, dep: J.dep, domain: slug + '.co.uk', site: slug + '.co.uk/book', bizNo: '07700 900 ' + (100 + h % 900), custNo: '07700 900 418', t: {}, job: null, day: null, slot: null };
     K.bind('[data-biz]', biz); K.bind('[data-initial]', biz.charAt(0).toUpperCase()); K.bind('[data-bizno]', A.bizNo);
     K.bind('[data-site]', A.site); K.bind('[data-domain]', A.domain); K.bind('[data-custno]', 'New customer');
-    resetCrm(); buildBooking(); K.diary(A.days[0], null);
+    resetCrm(); if ($('wb')){ buildBooking(); K.diary(A.days[0], null); }
     setup.hidden = true; end.hidden = true; run.hidden = false; run.classList.remove('is-owner');
     d.body.classList.add('tm-on');
     try { if (location.hash !== '#demo') history.pushState({ tm: 1 }, '', '#demo'); } catch (e){}
@@ -121,7 +121,7 @@ window.TryKit = function(cfg){
   K.feed = function(icon, col, html, t, toastText){
     var f = $('feed'), e = f.querySelector('.crm-empty'); if (e) e.remove();
     var c = COL[col], li = d.createElement('li');
-    li.innerHTML = '<span class="fi-i" style="background:' + c[0] + ';color:' + c[1] + '">' + K.ic(icon) + '</span><p>' + html + '</p><time>' + K.hms(t) + '</time>';
+    li.innerHTML = '<span class="fi-i" style="background:' + c[0] + ';color:' + c[1] + '">' + K.ic(icon) + '</span><p>' + html + '</p><time>' + (cfg.stamp || K.hms)(t) + '</time>';
     f.insertBefore(li, f.firstChild);
     if (typeof toastText === 'string') K.ping(toastText);
   };
@@ -137,6 +137,7 @@ window.TryKit = function(cfg){
   };
   function resetCrm(){
     $('feed').innerHTML = '<li class="crm-empty">' + K.esc(cfg.empty || 'Nothing yet.') + '</li>';
+    if (!$('lead')) return;
     $('tags').innerHTML = ''; K.stage('', 'Quiet'); $('leadsub').textContent = cfg.waiting || 'Waiting'; $('lead').classList.remove('is-new');
   }
   K.diary = function(day, mine, job){
@@ -177,7 +178,7 @@ window.TryKit = function(cfg){
     b.disabled = !ok;
     b.textContent = !ok ? (A.job == null ? 'Pick what you need' : 'Pick a time') : (cfg.ctaText ? cfg.ctaText(A) : (A.dep ? 'Continue · £' + A.dep + ' deposit holds it' : 'Book it'));
   }
-  $('wb').addEventListener('click', function(e){
+  if ($('wb')) $('wb').addEventListener('click', function(e){
     var A = K.A, j = e.target.closest('[data-job]'), dy = e.target.closest('[data-day]'), sl = e.target.closest('[data-slot]');
     if (j){ A.job = +j.getAttribute('data-job'); [].forEach.call($('jobs').children, function(c){ c.setAttribute('aria-pressed', String(c === j)); }); }
     if (dy){ A.day = +dy.getAttribute('data-day'); A.slot = null; [].forEach.call($('days').children, function(c){ c.setAttribute('aria-pressed', String(c === dy)); }); slots(); K.diary(A.days[A.day], null); }

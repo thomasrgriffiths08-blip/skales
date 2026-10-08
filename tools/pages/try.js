@@ -5,22 +5,23 @@ const L = require('../lib.js');
 const { site, esc } = L;
 const { KINDS } = require('./case.js');
 
-/* what a customer of each kind of business would book. `dep` = deposit taken to hold the slot
+/* what a customer of each kind of business would book. `quote` = a bigger job they would want priced
+   first (demo 3). `dep` = deposit taken to hold the slot
    (0 = a quote visit or a table, booked without paying). `sat` = works Saturdays. All fictional. */
 const JOBS = {
-  heating:      { dep: 30, sat: false, jobs: [['Boiler service', '1 hour'], ['Boiler not working', 'Repair visit'], ['Leak or radiator problem', 'Repair visit']], text: 'out on a job' },
-  electrical:   { dep: 30, sat: false, jobs: [['Fault finding', 'Up to 2 hours'], ['Extra sockets or lights', 'Half day'], ['Electrical safety certificate', '2 to 3 hours']], text: 'out on a job' },
-  roofing:      { dep: 0, sat: true, jobs: [['Roof leak inspection', 'Free visit'], ['Gutters and fascias', 'Free quote visit'], ['New roof quote', 'Free quote visit']], text: 'up on a roof' },
-  building:     { dep: 0, sat: true, jobs: [['Extension quote', 'Free quote visit'], ['Joinery repair', 'Free quote visit'], ['Small works', 'Free quote visit']], text: 'on site' },
-  kitchens:     { dep: 0, sat: true, jobs: [['Kitchen design visit', 'Free, about an hour'], ['Bathroom quote', 'Free quote visit'], ['Small repair', 'Free quote visit']], text: 'on a fit' },
-  garden:       { dep: 0, sat: true, jobs: [['Fence repair', 'Free quote visit'], ['Garden design quote', 'Free quote visit'], ['Hedge and tree work', 'Free quote visit']], text: 'out on a job' },
-  cleaning:     { dep: 30, sat: true, jobs: [['Regular home clean', '2 hours'], ['End of tenancy clean', 'Full day'], ['Oven clean', '2 hours']], text: 'out cleaning' },
-  salon:        { dep: 20, sat: true, jobs: [['Cut and finish', '45 minutes'], ['Colour', '2 hours'], ['Nails', '1 hour']], text: 'with a client' },
-  garage:       { dep: 0, sat: true, jobs: [['MOT', '1 hour'], ['Full service', 'Half day'], ['Warning light check', '1 hour']], text: 'under a car' },
-  clinic:       { dep: 30, sat: true, jobs: [['First assessment', '45 minutes'], ['Follow-up session', '30 minutes'], ['Sports massage', '1 hour']], text: 'with a patient' },
-  professional: { dep: 0, sat: false, jobs: [['Free intro call', '20 minutes'], ['Tax return meeting', '1 hour'], ['Bookkeeping review', '1 hour']], text: 'with a client' },
-  hospitality:  { dep: 0, sat: true, jobs: [['Table for 2', 'Tonight or later'], ['Table for 4', 'Tonight or later'], ['Private hire enquiry', 'We call you back']], text: 'mid-service' },
-  other:        { dep: 0, sat: false, jobs: [['Free consultation', '30 minutes'], ['Standard visit', '1 hour'], ['Quote visit', 'Free']], text: 'out on a job' },
+  heating: { quote: ['New combi boiler', '£2,850'], dep: 30, sat: false, jobs: [['Boiler service', '1 hour'], ['Boiler not working', 'Repair visit'], ['Leak or radiator problem', 'Repair visit']], text: 'out on a job' },
+  electrical: { quote: ['Consumer unit upgrade', '£650'], dep: 30, sat: false, jobs: [['Fault finding', 'Up to 2 hours'], ['Extra sockets or lights', 'Half day'], ['Electrical safety certificate', '2 to 3 hours']], text: 'out on a job' },
+  roofing: { quote: ['Re-roof, terraced house', '£6,400'], dep: 0, sat: true, jobs: [['Roof leak inspection', 'Free visit'], ['Gutters and fascias', 'Free quote visit'], ['New roof quote', 'Free quote visit']], text: 'up on a roof' },
+  building: { quote: ['Kitchen extension', '£38,000'], dep: 0, sat: true, jobs: [['Extension quote', 'Free quote visit'], ['Joinery repair', 'Free quote visit'], ['Small works', 'Free quote visit']], text: 'on site' },
+  kitchens: { quote: ['Kitchen supply and fit', '£9,200'], dep: 0, sat: true, jobs: [['Kitchen design visit', 'Free, about an hour'], ['Bathroom quote', 'Free quote visit'], ['Small repair', 'Free quote visit']], text: 'on a fit' },
+  garden: { quote: ['New fence, 12 panels', '£1,450'], dep: 0, sat: true, jobs: [['Fence repair', 'Free quote visit'], ['Garden design quote', 'Free quote visit'], ['Hedge and tree work', 'Free quote visit']], text: 'out on a job' },
+  cleaning: { quote: ['Weekly clean, 3 hours', '£60 a visit'], dep: 30, sat: true, jobs: [['Regular home clean', '2 hours'], ['End of tenancy clean', 'Full day'], ['Oven clean', '2 hours']], text: 'out cleaning' },
+  salon: { quote: ['Wedding hair and a trial', '£280'], dep: 20, sat: true, jobs: [['Cut and finish', '45 minutes'], ['Colour', '2 hours'], ['Nails', '1 hour']], text: 'with a client' },
+  garage: { quote: ['Clutch replacement', '£540'], dep: 0, sat: true, jobs: [['MOT', '1 hour'], ['Full service', 'Half day'], ['Warning light check', '1 hour']], text: 'under a car' },
+  clinic: { quote: ['Block of six sessions', '£270'], dep: 30, sat: true, jobs: [['First assessment', '45 minutes'], ['Follow-up session', '30 minutes'], ['Sports massage', '1 hour']], text: 'with a patient' },
+  professional: { quote: ['Year-end accounts', '£950'], dep: 0, sat: false, jobs: [['Free intro call', '20 minutes'], ['Tax return meeting', '1 hour'], ['Bookkeeping review', '1 hour']], text: 'with a client' },
+  hospitality: { quote: ['Private hire, 20 guests', '£1,200'], dep: 0, sat: true, jobs: [['Table for 2', 'Tonight or later'], ['Table for 4', 'Tonight or later'], ['Private hire enquiry', 'We call you back']], text: 'mid-service' },
+  other: { quote: ['Standard job', '£400'], dep: 0, sat: false, jobs: [['Free consultation', '30 minutes'], ['Standard visit', '1 hour'], ['Quote visit', 'Free']], text: 'out on a job' },
 };
 const kinds = KINDS.map(k => ({ key: k.key, label: k.label }));
 
@@ -31,7 +32,7 @@ const DEMOS = [
   { slug: 'booking', name: 'Book and pay a deposit', live: true,
     line: 'Book a slot on a sample booking page at 10pm, then see it land in the diary.',
     proves: 'Customers book without you.' },
-  { slug: 'crm-board', name: 'The CRM board', live: false,
+  { slug: 'crm-board', name: 'The CRM board', live: true,
     line: 'Drag a lead from enquiry to done and watch the follow-up texts and review request send themselves.',
     proves: 'Nothing slips through when you are busy.' },
 ];
@@ -114,6 +115,13 @@ const LY = {
         <p class="bub in" data-sms></p>
         <button type="button" class="ms-lnk" data-act="link"><span class="ms-img"><b data-initial></b></span><span class="ms-tx"><b>Book online · <span data-biz></span></b><small data-site></small></span></button>
       </div>
+      <div class="ms-in" aria-hidden="true">iMessage</div>
+    </section>`,
+  /* the customer's Messages thread with the business; the demo adds the bubbles */
+  thread: () => `
+    <section class="ly ly-msgs" data-ly="thread" hidden>
+      <div class="ms-top"><span class="ms-back">${ic('back', 18)}</span><div class="ms-av" data-initial></div><small data-biz></small></div>
+      <div class="ms-body ms-scroll" id="thread"></div>
       <div class="ms-in" aria-hidden="true">iMessage</div>
     </section>`,
   /* the business's own small website, as a customer meets it at night */
@@ -217,9 +225,25 @@ const crm = `
   </div>
 </div>`;
 
+/* the CRM board for demo 3: four columns, one lead to move through them, the activity under it.
+   The other cards are fictional and only set the scene. */
+const crmBoard = `
+<div class="crm crm-bd" id="crm" aria-label="The business's CRM board">
+  <div class="crm-tb"><span class="crm-tl" aria-hidden="true"><i></i><i></i><i></i></span><span class="crm-tt">Skales · <b data-biz></b></span></div>
+  <div class="bd-hd"><b>Leads</b><span>Drag a card, or use its button</span></div>
+  <div class="bd" id="board">
+    ${[['e', 'Enquiry', '#3B18E0'], ['q', 'Quoted', '#D98A0B'], ['b', 'Booked', '#2F6FDB'], ['d', 'Done', '#22A06B']].map(([k, nm, c]) => `
+    <div class="bd-col" data-col="${k}"><h4><i style="background:${c}"></i>${nm}<span data-count="${k}"></span></h4><div class="bd-cards" id="col-${k}"></div></div>`).join('')}
+  </div>
+  <div class="crm-feed">
+    <h4>Sent automatically <span class="crm-live"><i></i>Live</span></h4>
+    <ol id="feed"><li class="crm-empty">Nothing yet.</li></ol>
+  </div>
+</div>`;
+
 const chip = k => `<button type="button" class="tm-k" data-kind="${k.key}" aria-pressed="false">${esc(k.label)}</button>`;
 /* one demo page: set-up, the running demo (narration, phone, CRM), the end */
-function demoPage(b, x, { n, lead, steps, layers }){
+function demoPage(b, x, { n, lead, steps, layers, side = crm, runClass = '' }){
   const camp = `utm_source=site&amp;utm_medium=try&amp;utm_campaign=${x.slug}`;
   return `
 ${L.header(b, 'try')}
@@ -238,7 +262,7 @@ ${L.header(b, 'try')}
   </form>
 </section>
 
-<section class="tm-run" id="run" hidden>
+<section class="tm-run${runClass ? ' ' + runClass : ''}" id="run" hidden>
   <div class="tm-narr">
     <ol class="tm-steps" aria-label="Steps">${steps.map((s, i) => `<li data-step="${i}"><span>${esc(s)}</span></li>`).join('')}</ol>
     <p class="tm-say" id="say" aria-live="polite"></p>
@@ -249,7 +273,7 @@ ${L.header(b, 'try')}
     ${phone(layers)}
     <div class="tm-toast" id="toast" role="status" hidden></div>
   </div>
-  <div class="tm-side">${crm}</div>
+  <div class="tm-side">${side}</div>
 </section>
 
 <section class="tm-end wrap" id="end" hidden aria-live="polite">
@@ -345,6 +369,30 @@ ${L.footer(b)}`;
         steps: ['Your website', 'Pick a time', 'Their details', 'Pay', 'Next morning'],
         layers: [LY.site(), LY.web({ details: true }), LY.done(), LY.lock({ ly: 'olock', id: 'ontf', act: 'oapp', app: 'skales', from: '<b>Skales</b>', text: '<span class="ntf-tx" data-otext></span>' }), LY.app()] });
       return L.page(L.head({ b, path: '/try/booking/', title, description, og: 'try-booking', nodes, css: ['try.css'] }), body, L.scripts(b, ['try-kit.js', 'try-booking.js']));
+    },
+  },
+  {
+    url: '/try/crm-board/', og: 'try-crm-board', priority: 0.8, changefreq: 'monthly',
+    meta: { key: 'try-crm-board', title: 'The CRM board. Try it.', kicker: 'Live demo · about a minute', sub: 'Move a lead from enquiry to done and watch the replies, chasers, reminders and review request send themselves.' },
+    render(b){
+      const x = DEMOS[2];
+      const title = `CRM for trades demo: follow-ups that send themselves | ${site.name}`;
+      const description = `A live demo of a CRM for UK service businesses: move a lead from enquiry to quoted, booked and done, and watch the reply, quote chaser, reminder and review request send themselves.`;
+      const nodes = [
+        L.webPage({ path: '/try/crm-board/', title, description }),
+        L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }, { name: x.name, path: '/try/crm-board/' }]),
+        { '@type': 'HowTo', name: 'How a CRM with automatic follow-up works', description: 'What sends itself as a lead moves through a service business pipeline.',
+          step: [
+            { '@type': 'HowToStep', name: 'Enquiry', text: 'A new enquiry gets an instant reply, so the customer knows someone has it.' },
+            { '@type': 'HowToStep', name: 'Quoted', text: 'The quote goes out as a text with a link, and if the customer goes quiet a polite chaser follows two days later.' },
+            { '@type': 'HowToStep', name: 'Booked', text: 'A confirmation goes out straight away and a reminder the day before the job.' },
+            { '@type': 'HowToStep', name: 'Done', text: 'The invoice is sent, and a couple of hours later a review request with a link.' },
+          ] },
+      ];
+      const body = demoPage(b, x, { n: 3, lead: 'Be the business for a minute. Move one customer from enquiry to done, and watch what sends itself while you get on with the job.',
+        steps: ['Enquiry', 'Quoted', 'Booked', 'Done', 'Their side'],
+        layers: [LY.thread()], side: crmBoard, runClass: 'is-board' });
+      return L.page(L.head({ b, path: '/try/crm-board/', title, description, og: 'try-crm-board', nodes, css: ['try.css'] }), body, L.scripts(b, ['try-kit.js', 'try-board.js']));
     },
   },
 ]};

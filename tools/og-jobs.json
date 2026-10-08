@@ -424,5 +424,11 @@
     "title": "Book and pay a deposit. Try it.",
     "kicker": "Live demo · about a minute",
     "sub": "Book a job on your own website at 10pm, then see it waiting in your diary the next morning."
+  },
+  {
+    "key": "try-crm-board",
+    "title": "The CRM board. Try it.",
+    "kicker": "Live demo · about a minute",
+    "sub": "Move a lead from enquiry to done and watch the replies, chasers, reminders and review request send themselves."
   }
 ]
