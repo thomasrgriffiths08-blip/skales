@@ -320,3 +320,16 @@ a.try-card:hover{background:var(--alu-2);transform:translateY(-2px)}
 .film figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;font-size:.8125rem;color:var(--tx-2)}
 .film-tg{flex:none;white-space:nowrap;height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:600;font-size:.875rem;cursor:pointer}
 .film-tg:hover{border-color:var(--tx)}
+
+/* ---------- cookie choice (assets/consent.js; only on builds with a tag ID set) ---------- */
+.cnst{position:fixed;z-index:60;left:var(--pad);bottom:20px;max-width:400px;background:var(--pg);color:var(--tx);border:1px solid var(--line-2);border-radius:var(--r-m);padding:18px 20px;box-shadow:0 12px 40px rgba(20,20,22,.14)}
+.cnst[hidden]{display:none}
+.cnst-h{font-weight:600;margin:0 0 .35rem}
+.cnst-p{margin:0;color:var(--tx-2);font-size:.9375rem;line-height:1.5}
+.cnst-b{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.cnst-b .btn{width:100%;justify-content:center}
+@media (max-width:760px){.cnst{left:12px;right:12px;max-width:none;bottom:calc(84px + env(safe-area-inset-bottom))}}
+.f-legal{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:.9rem;font-size:.875rem}
+.f-legal a,.f-legal button{color:var(--tx-2);background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.f-legal button[hidden]{display:none}
+@media (max-width:760px){.st-foot~.cnst{bottom:calc(12px + env(safe-area-inset-bottom))}}

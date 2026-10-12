@@ -201,14 +201,19 @@ function footer(b){
       <span>Updated ${monthYear(UPDATED)}</span>
     </div>
     <p class="f-note">Every business, person, review and phone number in the demonstration builds on this site is invented. No client is named or shown anywhere.</p>
+    <nav class="f-legal" aria-label="Legal">${legal(b)}</nav>
   </div>
 </footer>`;
 }
+/* the ad and analytics tags, only when an ID is set; assets/consent.js holds them back until the visitor accepts */
+const TRACK = { pixel: site.metaPixel || '', ga: site.googleTag || '', ads: site.googleAds || '', labels: site.googleAdsLabels || {} };
+const tracking = !!(TRACK.pixel || TRACK.ga || TRACK.ads);
 function scripts(b, extra = []){
-  return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, leadEndpoint: site.leadEndpoint || '', defaultCh: DEFAULT_CH })};</script>`,
-    `<script src="${b}assets/site.js"></script>`, ...extra.map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
+  return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, leadEndpoint: site.leadEndpoint || '', defaultCh: DEFAULT_CH, track: tracking ? TRACK : undefined })};</script>`,
+    `<script src="${b}assets/site.js"></script>`, ...(tracking ? ['consent.js'] : []).concat(extra).map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
 }
+const legal = b => `<a href="${b}privacy/">Privacy</a><a href="${b}cookies/">Cookies</a>${tracking ? '<button type="button" data-consent-open hidden>Cookie settings</button>' : ''}`;
 const page = (h, body, s) => `${h}\n<body>\n${body}\n${s}\n</body>\n</html>\n`;
 
 site.facts = site.facts.map(f => f.replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
-module.exports = { LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };
+module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };

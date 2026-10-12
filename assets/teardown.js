@@ -12,6 +12,7 @@
     d.getElementById('doneTitle').textContent = 'Got it, ' + name.split(' ')[0] + '.';
     d.getElementById('doneBody').innerHTML = 'Sent at <strong style="color:var(--dyeline)">' + hh + ':' + mm + '</strong>. You’ll hear back personally, fast.';
     d.getElementById('done').classList.add('show');
+    if (window.skTrack) skTrack('teardown_sent');
     setTimeout(function(){
       location.href = wa ? 'https://wa.me/' + wa + '?text=' + encodeURIComponent(msg)
                          : 'mailto:' + S.email + '?subject=' + encodeURIComponent('Free teardown — ' + name) + '&body=' + encodeURIComponent(msg);

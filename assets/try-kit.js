@@ -13,13 +13,7 @@ window.TryKit = function(cfg){
   var K = { $: $, reduce: reduce, A: null };
   K.esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var store = K.store = { get: function(k){ try { return JSON.parse(sessionStorage.getItem(k)); } catch (e){ return null; } }, set: function(k, v){ try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e){} } };
-  K.track = function(name, props){
-    props = Object.assign({ demo: cfg.demo }, props || {});
-    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: name }, props)); } catch (e){}
-    try { if (window.fbq) fbq('trackCustom', name, props); } catch (e){}
-    try { if (window.gtag) gtag('event', name, props); } catch (e){}
-    try { if (window.plausible) plausible(name, { props: props }); } catch (e){}
-  };
+  K.track = function(name, props){ if (window.skTrack) skTrack(name, Object.assign({ demo: cfg.demo }, props || {})); };   // assets/site.js
   K.bind = function(sel, v){ [].forEach.call(d.querySelectorAll(sel), function(e){ e.textContent = v; }); };
 
   /* ---------- time ---------- */

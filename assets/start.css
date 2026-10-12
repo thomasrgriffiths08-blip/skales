@@ -115,3 +115,5 @@ body:not(.st-dark) .st-wa{background:var(--alu)}
 .st-foot a{text-decoration:underline;text-underline-offset:3px}
 body.st-dark .st-foot{color:rgba(242,241,238,.45);background:var(--hand)}
 @media (prefers-reduced-motion:reduce){.sq-o,.st-prog span{transition:none}}
+.st-foot .f-legal{justify-content:center;margin-top:0;font-size:inherit}
+body.st-dark .st-foot .f-legal a,body.st-dark .st-foot .f-legal button{color:inherit}
