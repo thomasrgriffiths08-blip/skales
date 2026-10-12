@@ -58,7 +58,7 @@ module.exports = [
       ['Where the text sends people', 'Wherever you point it: your number, or your existing site', 'A booking page built for it, on your own website'],
       ['Where replies go', 'The app’s own inbox', 'Your CRM, on the same card as the job'],
       ['Setup', 'You set it up yourself', 'Set up with you, written in your words'],
-      ['How you pay', 'A subscription for the app', 'A flat quote for the setup, and a few pence per text'],
+      ['How you pay', 'A subscription for the app', 'A flat quote for the setup, then only the texts themselves'],
     ],
     them_when: ['Your website books well already and you only need the text-back.', 'You have a CRM you like and the app connects to it.'],
     us_when: ['You want the missed call to end in a booked job, not just a reply.', 'You do not have a booking page, or a place where every enquiry lives.', 'You would rather have one system than several apps.'],

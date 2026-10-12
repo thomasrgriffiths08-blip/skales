@@ -423,7 +423,7 @@ module.exports = [
       'A waiting list form for when you are full, asking for the area, the gearbox and any test date.',
     ],
     autos: [
-      ['missed-call-text-back', 'You cannot use a handheld phone while you supervise a learner, so an enquiry that rings out gets a text with a link to book or join the waiting list.'],
+      ['missed-call-text-back', 'You cannot answer the phone in the middle of a lesson, so an enquiry that rings out gets a text with a link to book or join the waiting list.'],
       ['booking-deposits', 'A lesson cancelled that morning is an hour you cannot fill, and payment at booking means your cancellation policy covers it.'],
       ['on-my-way-texts', 'A text when you set off tells the pupil to be at the door, so the lesson does not start with you waiting outside.'],
     ],

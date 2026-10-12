@@ -115,7 +115,7 @@
       K.later(function(){
         var r = new Date(A.job); r.setHours(18, 30, 0, 0);
         K.tag('amb', 'msg', 'Review asked');
-        send(r, 'Hope it’s all working well, Priya! If you’re happy with the job, a quick Google review would really help a small business like ours: ' + A.domain + '/review', '<b>Review request</b> sent, two hours after the job', 'Review request');
+        send(r, 'Hope it’s all working well, Priya. If you’re happy with the job, a quick Google review would really help a small business like ours: ' + A.domain + '/review', '<b>Review request</b> sent, two hours after the job', 'Review request');
         K.track('demo_completed', { kind: A.kind, texts: A.sent });
         K.later(theirSide, 1800);
       }, 2200);
@@ -128,7 +128,7 @@
     K.narrate('Two days later, the chaser goes out on its own.', 'Wait a moment.');
     K.later(function(){
       var r = days(3, 10, 4);
-      bubble('out', 'Sorry, been manic! Yes please, can you do next week?', r);
+      bubble('out', 'Sorry, been manic. Yes please, can you do next week?', r);
       K.feed('msg', 'grn', '<b>Priya replied</b>: “Yes please, can you do next week?”', r);
       A.wait = false; label();
       K.narrate('The chaser did the chasing. Priya says yes.', 'Move Priya to Booked.');

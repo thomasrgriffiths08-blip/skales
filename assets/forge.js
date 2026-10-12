@@ -191,7 +191,7 @@
   function showBlank(t){
     built = false;
     var f = frame();
-    f.setAttribute('title', t ? 'An empty ' + t.label.toLowerCase() + ' page, waiting for your name' : 'An empty page, waiting for your trade');
+    f.setAttribute('title', t ? 'An empty ' + t.label.charAt(0).toLowerCase() + t.label.slice(1) + ' page, waiting for your name' : 'An empty page, waiting for your trade');
     f.srcdoc = blankDoc(t);
     if (after) after.hidden = true;
     if (timer){ clearInterval(tick); timer.hidden = true; }

@@ -109,7 +109,7 @@
     var r = analyse(), today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     var head = r.month > 0
       ? '<h2 tabindex="-1">Missed calls could be costing you about <em data-to="' + round(r.month) + '">' + money(r.month) + '</em> a month.</h2>'
-        + '<p class="sf-work"><span>The working</span>' + r.missed + ' missed calls a week (you said ' + esc(r.mo.t.toLowerCase()) + ') × 4.3 weeks × 1 in 3 becoming a job × ' + money(r.job) + ' a job (you said ' + esc(r.jo.t.replace(/^U/, 'u').replace(/^O/, 'o')) + ') = <b>' + money(r.month) + ' a month</b>. The one in three is a cautious assumption, not a promise.</p>'
+        + '<p class="sf-work"><span>The working</span>' + r.missed + ' missed calls a week (you said ' + esc(r.mo.t.toLowerCase()) + ') × 4.3 weeks × one in three becoming a job (an assumption, kept cautious) × ' + money(r.job) + ' a job (you said ' + esc(r.jo.t.replace(/^U/, 'u').replace(/^O/, 'o')) + ') = <b>' + money(r.month) + ' a month</b>. The one in three is a cautious assumption, not a promise.</p>'
       : a.site !== 'good'
         ? '<h2 tabindex="-1">Your phone is fine. ' + (a.site === 'none' ? 'Not having a website' : 'Your website') + ' is the leak.</h2><p class="sf-lead">You rarely miss calls, which most owners can’t say. The work you never hear about is the bigger cost: people who check you on Google ' + (a.site === 'none' ? 'and find nothing' : 'and find a site that doesn’t make it easy to book') + ', then ring someone else.</p>'
         : '<h2 tabindex="-1">You’re ahead of most owners.</h2><p class="sf-lead">You rarely miss calls and you’re proud of your website. The next gains are the ones that compound: reviews asked for automatically, customers reminded before they search, and ads that land on pages built to book.</p>';
@@ -118,9 +118,9 @@
       + '<p class="sf-id"><span>Your case file</span><span>' + esc(r.k.label) + '</span><span>' + today + '</span></p>'
       + head
       + '<section class="sf-sec"><h3>What I’d build first</h3><ol class="sf-builds">' + r.builds.map(function(x){ return '<li><b>' + esc(x.name) + '</b><p>' + esc(x.what) + '</p></li>'; }).join('') + '</ol></section>'
-      + (r.k.demo ? '<section class="sf-sec sf-demo"><h3>See it working for a ' + esc(r.k.label.toLowerCase()) + ' business</h3>' + proof(r.k.demo) + (r.builds[0] && r.builds[0].key === 'missed' && r.k.demo !== 25 ? proof(25) : '') + '</section>' : '')
-      + '<section class="sf-sec sf-end"><h3>' + (fit ? 'Worth a 20-minute call.' : 'Keep this file.') + '</h3>'
-      + '<p class="sf-lead">' + (fit ? 'Twenty minutes on this file with me, Tom: what to build first, what it is worth, and a flat quote with a date on it. Your answers come with you, so we skip the small talk.' : 'You said you’re just looking, which is the right time to read this and the wrong time for a call. Save it; the link opens this same file whenever you’re ready.') + '</p>'
+      + (r.k.demo ? '<section class="sf-sec sf-demo"><h3>See it working for ' + esc(r.k.noun) + '</h3>' + proof(r.k.demo) + (r.builds[0] && r.builds[0].key === 'missed' && r.k.demo !== 25 ? proof(25) : '') + '</section>' : '')
+      + '<section class="sf-sec sf-end"><h3>' + (fit ? 'Worth a 30-minute call.' : 'Keep this file.') + '</h3>'
+      + '<p class="sf-lead">' + (fit ? 'Half an hour on this file with me, Tom: what to build first, what it is worth, and a flat quote with a date on it. Your answers come with you, so we skip the small talk.' : 'You said you’re just looking, which is the right time to read this and the wrong time for a call. Save it; the link opens this same file whenever you’re ready.') + '</p>'
       + '<div class="sf-acts">'
       + (fit ? '<button class="btn btn-live" type="button" data-bk>Book the call</button><button class="btn btn-ghost" type="button" data-save>Send me my case file</button>' : '<button class="btn btn-live" type="button" data-save>Send me my case file</button><button class="btn btn-ghost" type="button" data-bk>Book a call anyway</button>')
       + '</div>'
@@ -173,10 +173,12 @@
         cal.innerHTML = '<iframe title="Book a call" src="' + S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'embed=true&theme=light&notes=' + enc(note) + '" loading="lazy"></iframe>';
       } else {
         var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&a1=' + enc(note);
-        var boot = function(){ cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
-        if (window.Calendly) boot(); else { var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true; s.onload = boot; d.head.appendChild(s); }
+        var boot = function(){ if (!window.Calendly) return fallback(); cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
+        if (window.Calendly) boot(); else { var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true; s.onload = boot; s.onerror = fallback; d.head.appendChild(s); }
+        setTimeout(function(){ if (!cal.querySelector('iframe')) fallback(); }, 6000);   // blocked script: show the message route, never an empty box
       }
-    } else {
+    } else fallback();
+    function fallback(){
       cal.innerHTML = ''; none.hidden = false;
       var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, ''), bw = $('bkWa');
       if (bw && wa) bw.href = 'https://wa.me/' + wa + '?text=' + enc('Hi Tom, I’d like a call.\n\n' + note);

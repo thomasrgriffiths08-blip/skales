@@ -86,14 +86,14 @@
       leaks.push({ key: 'quotes', title: 'Quotes that go quiet', gross: qv, back: qv / f, frac: 'one in ' + f,
         working: plain(lost) + ' enquiries a week not won × ' + money(a.job) + ' × ' + WEEKS + ' weeks of work asked about and not won',
         why: a.chase === 'rarely' ? 'Quotes are sent and then left. A customer who meant to say yes and got busy is the cheapest job you will ever win, and nobody is asking them.' : 'Quotes get chased when there is time, which is the week there is least of it. The ones that slip are usually the ones that just needed a nudge.',
-        fix: { svc: 'booking-and-pipeline', name: 'Quotes that chase themselves', what: 'Every enquiry sits in one pipeline with what happened to it. A quote that goes quiet gets a polite follow-up on day two and day seven without anyone remembering to send it.' },
+        fix: { svc: 'booking-and-pipeline', name: 'Quotes that chase themselves', what: 'Every enquiry sits in one pipeline with what happened to it. A quote that goes quiet gets a polite follow-up a couple of days later without anyone remembering to send it.' },
         proof: a.kind === 'kitchens' ? [1, 2] : a.kind === 'roofing' ? [35, 2] : [2, 27] });
     }
     if (a.repeat !== 'no' && won > 0){
       var cust = won * WEEKS, rf = a.repeat === 'yes' ? 5 : 10, rv = cust * a.job / rf;
       var rem = { heating: 31, garage: 32, salon: 33, hospitality: 34 }[a.kind] || 26;
       leaks.push({ key: 'repeat', title: 'Customers who should come back on their own', gross: null, back: rv, frac: 'one in ' + rf,
-        working: plain(won) + ' jobs a week × ' + WEEKS + ' weeks = ' + Math.round(cust).toLocaleString('en-GB') + ' customers a year; one in ' + rf + ' coming back × ' + money(a.job),
+        working: plain(won) + ' jobs a week × ' + WEEKS + ' weeks = ' + Math.round(cust).toLocaleString('en-GB') + ' customers a year; one in ' + ({ 5: 'five', 10: 'ten' }[rf] || rf) + ' coming back (an assumption) × ' + money(a.job),
         why: 'The work comes round again, but the reminder lives in your head. The customer does not forget you on purpose; somebody else just got to them first.',
         fix: { svc: 'follow-up-automation', name: 'Service reminders and rebooks', what: 'Every customer is logged with when they are next due. The reminder goes out before they think to search, and the reply books straight into the diary.' },
         proof: [rem, 29] });
@@ -149,13 +149,13 @@
   }
   function situation(a, r){
     var k = r.k, out = [];
-    out.push('<strong>' + esc(a.biz) + '</strong> is a ' + esc(k.label.toLowerCase()) + ' business in ' + esc(a.town) + ', ' + TEAM[a.team] + ', turning over ' + TURN[a.turnover] + '.');
+    out.push('<strong>' + esc(a.biz) + '</strong> is ' + esc(k.noun) + ' in ' + esc(a.town) + ', ' + TEAM[a.team] + ', turning over ' + TURN[a.turnover] + '.');
     out.push('Around ' + plain(a.enq) + ' enquiries arrive in a normal week and ' + plain(r.won) + ' become work: a ' + r.pct + '% win rate, at about ' + money(a.job) + ' a job.');
     var bits = [];
     if (a.missed > 0) bits.push(plain(a.missed) + ' calls a week go unanswered');
-    if (a.chase !== 'always') bits.push('quotes are chased ' + (a.chase === 'rarely' ? 'rarely, if at all' : 'when there is time'));
+    if (a.chase !== 'always') bits.push('quotes are chased ' + (a.chase === 'rarely' ? 'rarely or never' : 'when there is time'));
     if (a.admin > 0) bits.push(plain(a.admin) + ' hours a week go on admin');
-    if (bits.length){ var line = bits.length > 1 ? bits.slice(0, -1).join('; ') + '; and ' + bits[bits.length - 1] : bits[0]; out.push(line.charAt(0).toUpperCase() + line.slice(1) + '.'); }
+    if (bits.length){ var line = bits.length > 1 ? bits.slice(0, -1).join(', ') + ' and ' + bits[bits.length - 1] : bits[0]; out.push(line.charAt(0).toUpperCase() + line.slice(1) + '.'); }
     out.push('The aim for the next twelve months is ' + GOAL[a.goal] + '.');
     return out.join(' ');
   }
@@ -166,8 +166,8 @@
     var link = location.href.split('#')[0] + '#f=' + pack(a);
     if (!r.leaks.length && r.verdict === 'fit') r.verdict = 'small';
     var verdict = {
-      fit: ['This is a fit.', 'You run it, there is real money on the table and you would start soon. The next step is a call: twenty minutes on this file, what to build first, and a flat quote with a date on it. Bring the file.'],
-      small: ['A fit, with a small brief.', 'The leaks on these numbers are modest, which usually means the business is already run well. A call will tell you in twenty minutes whether one piece is worth building, or whether a free teardown covers it.'],
+      fit: ['This is a fit.', 'You run it, there is real money on the table and you would start soon. The next step is a call: half an hour on this file, what to build first, and a flat quote with a date on it. Bring the file.'],
+      small: ['A fit, with a small brief.', 'The leaks on these numbers are modest, which usually means the business is already run well. A call will tell you in half an hour whether one piece is worth building, or whether a free teardown covers it.'],
       later: ['Keep this file.', 'You said you are looking for now, which is the right time to read it and the wrong time for a call. Save it; when you are ready, the link opens the same file and the call starts from it.'],
       owner: ['Put this in front of the owner.', 'Everything in here is only worth doing if the person who signs it off has read it. Send them the link: it opens this exact file, with your answers, on their phone.'],
     }[r.verdict];

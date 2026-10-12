@@ -80,7 +80,7 @@ ${L.header(b, 'book')}
   </form>
   <aside class="book-side">
     <div class="nameplate one">
-      <div><dt>What the call is</dt><dd>Fifteen to twenty minutes on what is leaking, what to fix first and what it is worth in jobs. No pitch, no proposal deck.</dd></div>
+      <div><dt>What the call is</dt><dd>Up to half an hour on what is leaking, what to fix first and what it is worth in jobs. No pitch, no proposal deck.</dd></div>
       <div><dt>What it is not</dt><dd>A sales call with a junior. The person on the call is the person who builds it.</dd></div>
       <div><dt>Prefer not to talk</dt><dd><a class="lnk" href="${b}teardown.html">Get a free teardown by message instead</a>.</dd></div>
     </div>

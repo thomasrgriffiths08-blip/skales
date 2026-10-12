@@ -106,10 +106,10 @@ module.exports = [
     ],
     demos: ['missed-call', 'crm-board'], builds: [25, 26, 31, 32, 29], automations: ['missed-call-text-back', 'quote-chasing', 'booking-deposits', 'on-my-way-texts', 'review-requests', 'service-reminders'], showAllAutomations: true,
     faq: [
-      ['What does it cost to run?', 'The setup is quoted flat, like everything else. After that, each text costs a few pence from the text provider.'],
+      ['What does it cost to run?', 'The setup is quoted flat, like everything else. After that, the only running cost is the texts themselves, billed by the text provider.'],
       ['Can I change what the messages say?', 'Yes. Every message is written with you before it goes live, and any of them can be changed or paused with a message to me.'],
       ['Will it text my suppliers or family when I miss their calls?', 'Not if you do not want it to. Numbers you know can be left out, so only new callers get the text.'],
-      ['Do I need the website and CRM as well?', 'No, but they work best together. Missed-call text-back and review requests can run on their own; quote chasing and reminders need somewhere to keep the jobs, which is what the CRM is for.'],
+      ['Do I need the website and CRM as well?', 'No, but they work best together. Missed-call text-back runs on its own, and review requests only need a way to mark a job done, which can be an invoice being paid. Quote chasing and reminders need somewhere to keep the jobs, which is what the CRM is for.'],
     ],
   },
   {

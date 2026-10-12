@@ -34,7 +34,7 @@ module.exports = {
     '{{N}} working demonstration builds run live on the site; every business in them is fictional.',
     'One system a week is built in public on Instagram.',
     'Clients own their domain, code and accounts from day one; nothing is rented back to them monthly.',
-    'Every build is hand-coded with no page-builder, no theme and no third-party runtime dependencies.',
+    'Every build is hand-coded, with no page builder and no theme.',
   ],
   services: [
     { slug: 'capture-website',  name: 'Websites that capture the enquiry',

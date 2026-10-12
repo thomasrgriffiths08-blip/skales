@@ -177,7 +177,7 @@ const LY = {
   done: () => `
     <section class="ly ly-done" data-ly="done" hidden>
       <div class="dn-tk">${ic('check', 40)}</div>
-      <h3>You're booked</h3>
+      <h3>You’re booked</h3>
       <p data-donetx></p>
       <div class="dn-box"><div><span>What</span><b data-jobname></b></div><div><span>When</span><b data-when></b></div><div data-deprow><span>Deposit</span><b data-dep-paid></b></div></div>
       <button type="button" class="ntf ntf-in" id="ntf2" hidden tabindex="-1">
@@ -228,7 +228,7 @@ const crm = `
 /* the CRM board for demo 3: four columns, one lead to move through them, the activity under it.
    The other cards are fictional and only set the scene. */
 const crmBoard = `
-<div class="crm crm-bd" id="crm" aria-label="The business's CRM board">
+<div class="crm crm-bd" id="crm" aria-label="The business’s CRM board">
   <div class="crm-tb"><span class="crm-tl" aria-hidden="true"><i></i><i></i><i></i></span><span class="crm-tt">Skales · <b data-biz></b></span></div>
   <div class="bd-hd"><b>Leads</b><span>Drag a card, or use its button</span></div>
   <div class="bd" id="board">
@@ -285,7 +285,7 @@ ${L.header(b, 'try')}
   <h2 tabindex="-1" id="endH"></h2>
   <p class="lead" id="endP"></p>
   <div class="tm-acts">
-    <a class="btn btn-live" data-cta="check" href="${b}start/?${camp}">See what I'm missing <small>60 seconds</small></a>
+    <a class="btn btn-live" data-cta="check" href="${b}start/?${camp}">See what I’m missing <small>60 seconds</small></a>
     <a class="btn btn-ghost" data-cta="call" href="${b}start/?${camp}#book">Book a call</a>
   </div>
   <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/">The other demos</a></p>
@@ -317,11 +317,11 @@ ${L.header(b, 'try')}
 <main id="main">
 <section class="try-hero wrap">
   <p class="spec"><span class="lamp"></span>Live demos · about a minute each</p>
-  <h1>Don't take my word for it. Try it.</h1>
+  <h1>Don’t take my word for it. Try it.</h1>
   <p class="lead">Each demo runs right here on your phone. You play the customer, then see what the business sees. Every business in them is pretend, and nothing is sent.</p>
 </section>
 <section class="wrap try-list">${DEMOS.map(card).join('')}</section>
-${L.ctaBand(b, 'Want this running for your business?', 'Sixty seconds of taps shows what missed calls are likely costing you and what I would build first.', `<a class="btn btn-ghost" href="${b}start/?utm_source=site&amp;utm_medium=try">See what I'm missing</a>`)}
+${L.ctaBand(b, 'Want this running for your business?', 'Sixty seconds of taps shows what missed calls are likely costing you and what I would build first.', `<a class="btn btn-ghost" href="${b}start/?utm_source=site&amp;utm_medium=try">See what I’m missing</a>`)}
 </main>
 ${L.footer(b)}`;
       return L.page(L.head({ b, path: '/try/', title, description, og: 'try', nodes, css: ['try.css'] }), body, L.scripts(b));

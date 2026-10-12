@@ -72,7 +72,7 @@ module.exports = { QS, pages: [{
   <section class="st-book" id="book" hidden>
     <div class="st-bk">
       <button class="st-back st-back-l" type="button" data-close>Back</button>
-      <h2 tabindex="-1">Book a 20-minute call.</h2>
+      <h2 tabindex="-1">Book a 30-minute call.</h2>
       <p class="st-bk-sub">With me, Tom, the person who builds it. No pitch and no proposal deck: what is leaking, what to build first, and a flat quote with a date on it.</p>
       <div id="cal" class="st-cal"></div>
       <div id="calNone" class="st-cal-none" hidden>

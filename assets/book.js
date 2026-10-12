@@ -46,12 +46,14 @@
       fb.hidden = true;
       var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&name=' + enc(a.name) + '&email=' + enc(a.email)
               + '&a1=' + enc(text.split('\n').slice(1).join('\n'));   // the event has one question ("anything that will help prepare"), so every detail goes into it
-      var boot = function(){ cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
-      if (window.Calendly) boot(); else { var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true; s.onload = boot; d.head.appendChild(s); }
-    } else {
+      var boot = function(){ if (!window.Calendly) return fallback(); cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
+      if (window.Calendly) boot(); else { var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true; s.onload = boot; s.onerror = fallback; d.head.appendChild(s); }
+      setTimeout(function(){ if (!cal.querySelector('iframe')) fallback(); }, 6000);   // blocked by a privacy extension or a dead connection: never leave an empty box
+    } else fallback();
+    function fallback(){
       cal.innerHTML = ''; fb.hidden = false;
       var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, ''), waBtn = d.getElementById('fbWa'), mail = d.getElementById('fbMail');
-      if (wa){ waBtn.hidden = false; waBtn.href = 'https://wa.me/' + wa + '?text=' + enc(text); }
+      if (wa && waBtn){ waBtn.hidden = false; waBtn.href = 'https://wa.me/' + wa + '?text=' + enc(text); }
       mail.href = 'mailto:' + S.email + '?subject=' + enc('Call request — ' + a.business) + '&body=' + enc(text);
     }
   }

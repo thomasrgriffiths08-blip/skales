@@ -9,12 +9,15 @@ const trades = require('../../data/trades.js');
 
 /* what kind of business: the forge's trades (each knows its own demo) plus the non-trade sectors the
    builds already cover. `bookable`: customers would happily pick a slot themselves. */
+/* noun: the kind as it reads mid-sentence, article included ("is an electrical business", "see it working for a garage or MOT centre") */
+const NOUN = { heating: 'a plumbing and heating business', electrical: 'an electrical business', roofing: 'a roofing business', building: 'a building and joinery business',
+  kitchens: 'a kitchens and bathrooms business', garden: 'a landscaping and fencing business', cleaning: 'a cleaning business', salon: 'a salon or beauty business', garage: 'a garage or MOT centre' };
 const KINDS = [
-  ...trades.filter(t => t.key !== 'other').map(t => ({ key: t.key, label: t.label, demo: t.demo, bookable: ['heating', 'cleaning', 'salon', 'garage'].includes(t.key), recurs: ['heating', 'cleaning', 'salon', 'garage', 'garden'].includes(t.key) })),
-  { key: 'clinic', label: 'Clinic or physio', demo: 22, bookable: true, recurs: true },
-  { key: 'professional', label: 'Accountant or professional firm', demo: 21, bookable: false, recurs: true },
-  { key: 'hospitality', label: 'Restaurant, bar or café', demo: 34, bookable: true, recurs: true },
-  { key: 'other', label: 'Another service business', demo: 25, bookable: false, recurs: false },
+  ...trades.filter(t => t.key !== 'other').map(t => ({ key: t.key, label: t.label, noun: NOUN[t.key] || 'a ' + t.label.toLowerCase() + ' business', demo: t.demo, bookable: ['heating', 'cleaning', 'salon', 'garage'].includes(t.key), recurs: ['heating', 'cleaning', 'salon', 'garage', 'garden'].includes(t.key) })),
+  { key: 'clinic', label: 'Clinic or physio', noun: 'a clinic or physio practice', demo: 22, bookable: true, recurs: true },
+  { key: 'professional', label: 'Accountant or professional firm', noun: 'an accountant or professional firm', demo: 21, bookable: false, recurs: true },
+  { key: 'hospitality', label: 'Restaurant, bar or café', noun: 'a restaurant, bar or café', demo: 34, bookable: true, recurs: true },
+  { key: 'other', label: 'Another service business', noun: 'a service business', demo: 25, bookable: false, recurs: false },
 ];
 
 module.exports = { KINDS, pages: [{

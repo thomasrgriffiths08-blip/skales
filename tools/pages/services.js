@@ -329,7 +329,7 @@ ${L.header(b, 'services')}
 <section class="sec" aria-label="The six automations">
   <div class="wrap"><div class="hub-list">${AU.map(a => `<a class="hub-card" href="${b}automations/${a.slug}/"><h2>${esc(a.name)}</h2><p>${esc(a.card)}</p><span class="try-go">How it works <span aria-hidden="true">→</span></span></a>`).join('')}</div></div>
 </section>
-${panel('Where they live', 'Follow-up automation', `<h2>Do I need all six?</h2><p class="lead">No. Most businesses start with missed-call text-back and review requests, because they work on their own. Quote chasing, reminders, deposits and on-my-way texts need somewhere to keep the jobs, which is the <a class="lnk" href="${b}services/booking-and-crm/">booking and CRM</a> service.</p><p>All six together are the <a class="lnk" href="${b}services/follow-up-automation/">follow-up automation</a> service.</p>`)}
+${panel('Where they live', 'Follow-up automation', `<h2>Do I need all six?</h2><p class="lead">No. Most businesses start with missed-call text-back and review requests. The text-back runs on its own, and review requests only need a way to mark a job done, which can be an invoice being paid. Quote chasing, reminders, deposits and on-my-way texts need somewhere to keep the jobs, which is the <a class="lnk" href="${b}services/booking-and-crm/">booking and CRM</a> service.</p><p>All six together are the <a class="lnk" href="${b}services/follow-up-automation/">follow-up automation</a> service.</p>`)}
 </main>
 ${band(b, 'automations', 'index')}
 ${L.footer(b)}`;
