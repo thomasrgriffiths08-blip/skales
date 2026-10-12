@@ -88,3 +88,4 @@ Once Search Console data exists, check the pages that are 28 days old or more. L
 Append one line per run: the date, the pages proposed, the pages merged, and the sources that were missing.
 
 - 2026-10-08: engine set up. The first run is Monday 12 October. Search Console and the lead home are not connected yet.
+- 2026-10-12: 8 pages proposed: six trades (tattoo studios, dog groomers, personal trainers, mobile mechanics, car valeting, driving instructors) and two comparisons (Google Business Profile, Facebook page), plus a Checkatrade question on /compare/directories/. Merged: none yet, as the site pages are still waiting to merge, so the run was based on the page-engine branch. Missing: Search Console, /start data and keyword volumes; the Ahrefs and Similarweb connectors failed to connect, so demand was read from Google UK autocomplete.

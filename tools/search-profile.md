@@ -53,7 +53,9 @@ Anything not on this list, and not already on the site, does not get published. 
 | /compare/page-builders/ | Wix vs web designer | Should I use Wix or pay a web designer? |
 | /compare/trade-website-templates/ | pay monthly website for trades | Is a pay-monthly website worth it for a tradesperson? |
 | /compare/missed-call-apps/ | missed call text back app | Do I need a missed-call app or a full system? |
-| /compare/directories/ | Checkatrade alternative, do I need a website if I am on Checkatrade | Do I need a website if I am on Checkatrade? |
+| /compare/directories/ | Checkatrade alternative, do I need a website if I am on Checkatrade, is Checkatrade worth it | Do I need a website if I am on Checkatrade? Is Checkatrade worth it? |
+| /compare/google-business-profile/ | do I need a website for Google Business Profile | Is a Google Business Profile enough without a website? |
+| /compare/facebook-page/ | Facebook page vs website | Do I need a website if I have a Facebook page? |
 | /for/<trade>/ | website for <trade>, booking system for <trade> | What does a website for a <trade> need? |
 | /faq/ | long-tail owner questions | All of the above, as short answers |
 | /try/<demo>/ | missed call text back demo, booking system demo | Can I try a booking system before buying? |

@@ -456,6 +456,18 @@
     "sub": "Checkatrade, lead sites and listings, against a website that is yours."
   },
   {
+    "key": "compare-google-business-profile",
+    "title": "Skales vs a Google Business Profile alone",
+    "kicker": "Compare",
+    "sub": "Your free Google profile on its own, against a profile with a website behind it."
+  },
+  {
+    "key": "compare-facebook-page",
+    "title": "Skales vs a Facebook page",
+    "kicker": "Compare",
+    "sub": "A Facebook or Instagram page on its own, against a website you own."
+  },
+  {
     "key": "faq",
     "title": "Every question, answered",
     "kicker": "FAQ",
@@ -465,7 +477,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "27 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "33 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -546,6 +558,24 @@
     "sub": "MOTs booked onto the ramp, and remembered every year."
   },
   {
+    "key": "for-mobile-mechanics",
+    "title": "Mobile mechanics",
+    "kicker": "For your trade",
+    "sub": "The garage that comes to the driveway, booked properly."
+  },
+  {
+    "key": "for-car-valeting",
+    "title": "Car valeting and detailing",
+    "kicker": "For your trade",
+    "sub": "Packages booked online, and regulars kept on the books."
+  },
+  {
+    "key": "for-driving-instructors",
+    "title": "Driving instructors",
+    "kicker": "For your trade",
+    "sub": "Lessons booked and paid for, with no calls mid-lesson."
+  },
+  {
     "key": "for-salons",
     "title": "Hair salons and barbers",
     "kicker": "For your trade",
@@ -574,6 +604,24 @@
     "title": "Gyms and fitness studios",
     "kicker": "For your trade",
     "sub": "From free trial to first session, without the front desk."
+  },
+  {
+    "key": "for-tattoo-studios",
+    "title": "Tattoo studios",
+    "kicker": "For your trade",
+    "sub": "Portfolios that bring the enquiry, deposits that hold the chair."
+  },
+  {
+    "key": "for-dog-groomers",
+    "title": "Dog groomers",
+    "kicker": "For your trade",
+    "sub": "Every dog booked in, and booked back."
+  },
+  {
+    "key": "for-personal-trainers",
+    "title": "Personal trainers",
+    "kicker": "For your trade",
+    "sub": "From first message to a booked block of sessions."
   },
   {
     "key": "for-restaurants",
