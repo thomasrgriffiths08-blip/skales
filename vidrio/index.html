@@ -539,7 +539,7 @@ html:not(.scrub-on) .hero-foot .prog{visibility:hidden}
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add("js");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("scrub-on")</script>
+<script>document.documentElement.classList.add("js","scrub-on")</script>
 
 <div class="ann">
   <div class="wrap">
@@ -979,7 +979,7 @@ const specLine=r=>`${shapeLabel(r)} · ${r.w} · ${r.bal}`;
 /* ---------- header: glass over the films, solid once the hero has passed ---------- */
 const hdr=$('#hdr'), heroEl=$('#hero');
 const onScroll=()=>hdr.classList.toggle('solid',heroEl.getBoundingClientRect().bottom<110);
-addEventListener('scroll',onScroll,{passive:true});onScroll();
+document.addEventListener('scroll',onScroll,{passive:true,capture:true});onScroll();
 
 /* ---------- scroll films ----------
    Frames load coarse-to-fine (every 16th, then 8th, 4th...), so scrubbing works
@@ -1027,7 +1027,7 @@ class Film{
     }
     if(SCRUB)for(const b of this.beats){
       const a=b.i?ss(b.i[0],b.i[1],this.t):1,o=b.o?ss(b.o[0],b.o[1],this.t):0,v=a*(1-o);
-      b.el.style.opacity=v.toFixed(3);b.el.style.transform=`translateY(${((1-a)*28-o*36).toFixed(1)}px)`;
+      b.el.style.opacity=v.toFixed(3);b.el.style.transform=RM?'none':`translateY(${((1-a)*28-o*36).toFixed(1)}px)`;
       b.el.style.pointerEvents=v<.2?'none':'';b.el.style.visibility=v<.01?'hidden':'';
     }
   }
@@ -1037,17 +1037,35 @@ let raf=0;
 const tick=()=>{raf=0;let moving=false;
   for(const f of films){if(!f.vis&&f.drawn>=0)continue;
     const tgt=f.progress(),d=tgt-f.t;
-    if(Math.abs(d)<.0008)f.t=tgt;else{f.t+=d*.2;moving=true}
+    if(RM||Math.abs(d)<.0008)f.t=tgt;else{f.t+=d*.2;moving=true}
     f.render();
     if(f.name==='hero')$('#heroBar').style.transform=`scaleX(${f.t.toFixed(4)})`;
   }
-  if(moving)raf=requestAnimationFrame(tick)};
+  onScroll();
+  if(moving||films.some(f=>f.vis))raf=requestAnimationFrame(tick)};
 function kick(){if(!raf)raf=requestAnimationFrame(tick)}
 const fio=new IntersectionObserver(es=>es.forEach(e=>{const f=films.find(x=>x.el===e.target);f.vis=e.isIntersecting;if(e.isIntersecting){f.load();f.dirty=true;kick()}}),{rootMargin:'120% 0px'});
 films.forEach(f=>fio.observe(f.el));
 films[0].load();
-addEventListener('scroll',kick,{passive:true});
+document.addEventListener('scroll',kick,{passive:true,capture:true});
+if(window.visualViewport)visualViewport.addEventListener('scroll',kick,{passive:true});
 addEventListener('resize',()=>{films.forEach(f=>f.dirty=true);kick()});
+
+
+/* ---------- #debug: what this browser reports (open the page with #debug on the end) ---------- */
+if(location.hash==='#debug'){
+  const box=document.createElement('pre');let evs=0;
+  box.style.cssText='position:fixed;left:8px;bottom:8px;z-index:200;margin:0;padding:10px 12px;background:rgba(0,0,0,.82);color:#DDF247;font:11px/1.45 ui-monospace,monospace;border-radius:6px;pointer-events:none;white-space:pre';
+  document.body.appendChild(box);
+  document.addEventListener('scroll',()=>evs++,{capture:true,passive:true});
+  const se=document.scrollingElement;
+  setInterval(()=>{box.textContent=[
+    'reduced motion: '+RM,
+    'viewport: '+innerWidth+'×'+innerHeight+'  page height: '+(se?se.scrollHeight:'?'),
+    'scrollY: '+Math.round(scrollY)+'  scroll events: '+evs,
+    ...films.map(f=>f.name+': '+f.imgs.filter(Boolean).length+'/'+f.n+' frames  t='+f.t.toFixed(2)+'  showing '+f.drawn)
+  ].join('\n')},250);
+}
 
 /* ---------- footer film (plain looping video) ---------- */
 const want=new Set();
@@ -1055,7 +1073,7 @@ const tryPlay=v=>v.play().then(()=>{const p=v.parentElement.querySelector(':scop
 const vio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
   if(e.isIntersecting){if(!v.src&&v.dataset.src)v.src=v.dataset.src;want.add(v);tryPlay(v)}else{want.delete(v);if(v.src)v.pause()}
 }),{rootMargin:'200px 0px',threshold:.15});
-if(!RM)$$('video[data-src]').forEach(v=>vio.observe(v)); else $$('video[data-src]').forEach(v=>v.remove());
+$$('video[data-src]').forEach(v=>vio.observe(v));
 ['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,()=>want.forEach(v=>{if(v.src&&v.paused)tryPlay(v)}),{passive:true}));
 $$('.knock img').forEach(i=>i.style.transition='opacity .8s');
 
