@@ -9,12 +9,12 @@
 <meta name="theme-color" content="#08101F">
 <meta property="og:title" content="Vidrio — Play it off the glass">
 <meta property="og:description" content="The padel specialist. Bullpadel and Babolat, fitted to how you play.">
-<meta property="og:image" content="film/hero-poster.jpg">
+<meta property="og:image" content="film/seq/hero/d/000.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2308101F'/%3E%3Crect x='8' y='7' width='16' height='18' fill='none' stroke='%23F3F2EE' stroke-width='2'/%3E%3Cpath d='M12 21 20 11' stroke='%23DDF247' stroke-width='2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="preload" as="image" href="film/hero-poster.jpg">
+<link rel="preload" as="image" href="film/seq/hero/d/000.webp">
 <style>
 /* =========================================================
    VIDRIO · the padel specialist
@@ -112,26 +112,38 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 @keyframes pop{40%{transform:scale(1.35)}}
 .burger{display:none}
 
-/* ================= hero ================= */
-.hero{position:relative;min-height:max(680px,100svh);color:var(--paper);background:var(--night);overflow:hidden;display:flex;align-items:flex-end}
-.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,31,.55) 0%,rgba(8,16,31,0) 22%,rgba(8,16,31,0) 46%,rgba(8,16,31,.82) 100%);pointer-events:none}
-.hero .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(28px,5vh,56px)}
+/* ================= scroll films (shared) =================
+   Each film is a frame sequence drawn to a canvas; scroll position picks the frame. */
+.stick{position:relative;height:max(640px,100svh);overflow:hidden}
+.scrub-on .scrub{height:var(--len)}
+.scrub-on .scrub .stick{position:sticky;top:0}
+.cv,.still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.still{transition:opacity .6s}
+.scrub-on .beat[data-in]{opacity:0}
+html:not(.scrub-on) .b2,html:not(.scrub-on) .b3{display:none}
+
+/* ================= hero: scroll through the glass ================= */
+.hero{position:relative;color:var(--paper);background:var(--night);--len:340vh}
+.hero .stick::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,16,31,.55) 0%,rgba(8,16,31,0) 22%,rgba(8,16,31,0) 46%,rgba(8,16,31,.82) 100%);pointer-events:none}
+.hero-in{position:absolute;left:0;right:0;bottom:0;z-index:3;padding-bottom:clamp(28px,5vh,56px)}
 .hero-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end}
-.hero-t{grid-column:1/9}
-.hero h1{font-size:clamp(3.6rem,9.6vw,10.25rem);font-weight:700;letter-spacing:-.05em;line-height:.86}
-.hero h1 .serif{display:block;font-size:1.06em;letter-spacing:-.025em;line-height:.9;margin-top:.06em;color:var(--paper)}
-.hero h1 .serif em{font-style:italic;color:var(--ball)}
+.hero-t{grid-column:1/9;display:grid}
+.hero-t>.beat{grid-area:1/1;align-self:end}
+.hero h1,.hero .hl{font-size:clamp(3.6rem,9.6vw,10.25rem);font-weight:700;letter-spacing:-.05em;line-height:.86;margin:0}
+.hero h1 .serif,.hero .hl .serif{display:block;font-size:1.06em;letter-spacing:-.025em;line-height:.9;margin-top:.06em;color:var(--paper)}
+.hero h1 .serif em,.hero .hl .serif em{font-style:italic;color:var(--ball)}
 .hero .eyebrow{color:color-mix(in srgb,var(--paper) 78%,transparent);margin:0 0 22px;font-size:12px;letter-spacing:.08em}
 .hero-side{grid-column:9/13;padding-bottom:10px}
 .hero-side p{margin:0 0 26px;font-size:1.08rem;line-height:1.5;color:color-mix(in srgb,var(--paper) 86%,transparent);max-width:36ch}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .hero-cta .link{color:var(--paper);margin-left:8px}
-.hero-foot{display:flex;justify-content:space-between;align-items:center;margin-top:clamp(28px,5vh,52px);padding-top:18px;border-top:1px solid color-mix(in srgb,var(--paper) 18%,transparent);color:color-mix(in srgb,var(--paper) 66%,transparent)}
-.hero-foot .scroll{display:inline-flex;gap:10px;align-items:center}
-.hero-foot .scroll span{width:1px;height:26px;background:currentColor;position:relative;overflow:hidden}
-.hero-foot .scroll span::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--ball);animation:drip 2.2s var(--ease) infinite}
-@keyframes drip{to{top:100%}}
+.b2{position:absolute;inset:0;z-index:2;display:grid;place-items:center;text-align:center;pointer-events:none;padding-inline:var(--gut)}
+.b2 p{margin:0;font-size:clamp(3rem,8.4vw,8.5rem);font-weight:700;letter-spacing:-.05em;line-height:.9;color:var(--paper)}
+.b2 .serif{display:block;font-weight:400;letter-spacing:-.02em;color:var(--ball)}
+.hero-foot{display:flex;align-items:center;gap:24px;margin-top:clamp(28px,5vh,52px);padding-top:18px;border-top:1px solid color-mix(in srgb,var(--paper) 18%,transparent);color:color-mix(in srgb,var(--paper) 66%,transparent)}
+.hero-foot .prog{flex:1;height:1px;position:relative;background:color-mix(in srgb,var(--paper) 16%,transparent)}
+.hero-foot .prog i{position:absolute;left:0;top:-1px;width:100%;height:3px;background:var(--ball);transform:scaleX(0);transform-origin:left}
+html:not(.scrub-on) .hero-foot .prog{visibility:hidden}
 
 /* brand strip */
 .stockist{border-bottom:1px solid var(--rule)}
@@ -221,15 +233,15 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 .house li button[aria-current="true"] .nm::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ball);box-shadow:0 0 0 1px var(--ink);margin-right:10px;vertical-align:2px}
 .house .shop{margin-top:18px}
 
-/* ================= glass interstitial ================= */
-.glass{position:relative;min-height:max(620px,92vh);display:flex;align-items:center;overflow:hidden;color:var(--paper)}
-.glass video,.glass img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.glass::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,16,31,.08) 0%,rgba(8,16,31,.0) 40%,rgba(8,16,31,.72) 100%);z-index:1}
-.glass .wrap{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
-.glass blockquote{grid-column:7/13;margin:0}
-.glass blockquote p{font-family:var(--s);font-size:clamp(2.6rem,4.8vw,4.8rem);line-height:.98;letter-spacing:-.015em;margin:0 0 28px}
-.glass blockquote p em{color:var(--ball)}
-.glass blockquote span{display:block;max-width:44ch;color:color-mix(in srgb,var(--paper) 80%,transparent);font-size:1.05rem}
+/* ================= glass interstitial (scroll film) ================= */
+.glass{position:relative;color:var(--paper);background:var(--night);--len:260vh}
+.glass .stick::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(8,16,31,.88) 0%,rgba(8,16,31,.4) 36%,rgba(8,16,31,0) 60%);pointer-events:none}
+.glass .wrap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:clamp(40px,8vh,96px);display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.glass blockquote{grid-column:1/8;margin:0}
+.glass blockquote p{font-family:var(--s);font-size:clamp(2.6rem,5vw,5rem);line-height:.98;letter-spacing:-.015em;margin:0 0 24px}
+.glass blockquote .beat{display:inline-block}
+.glass blockquote em{color:var(--ball)}
+.glass .sub{display:block;max-width:46ch;color:color-mix(in srgb,var(--paper) 80%,transparent);font-size:1.05rem}
 
 /* ================= 03 the fitting ================= */
 .fit-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,48px)}
@@ -285,8 +297,7 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 
 /* ================= 04 anatomy ================= */
 .anat{display:grid;grid-template-columns:repeat(12,1fr);gap:0;min-height:100vh}
-.anat .film{grid-column:1/7;position:relative;min-height:520px;overflow:hidden}
-.anat .film video,.anat .film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.anat .film{grid-column:1/7;position:sticky;top:0;align-self:start;height:100vh;min-height:520px;overflow:hidden}
 .anat .film .cap{position:absolute;left:var(--gut);bottom:24px;z-index:2;color:var(--on-night-2)}
 .anat .copy{grid-column:7/13;padding:clamp(56px,7vw,120px) var(--gut) clamp(56px,7vw,120px) clamp(32px,5vw,88px);display:flex;flex-direction:column;justify-content:center}
 .anat .copy .idx{margin-bottom:28px}
@@ -457,9 +468,12 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
   .nav{gap:20px;font-size:14px}
   .hero-t{grid-column:1/13}
   .hero-side{grid-column:1/10}
-  .glass blockquote{grid-column:5/13}
   .fcols{grid-template-columns:1fr 1fr}
   .fcols .about{grid-column:1/3}
+}
+@media (max-width:1100px){
+  .scrub-on .hero-grid>.hero-t,.scrub-on .hero-grid>.hero-side{grid-column:1/13;grid-row:1;align-self:end}
+  .scrub-on .b3{display:none}
 }
 @media (max-width:900px){
   :root{--hdr:58px}
@@ -473,12 +487,12 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
   .house{min-height:auto}
   .house .stage{min-height:340px}
   .house .bot{grid-template-columns:1fr}
-  .glass::before{background:linear-gradient(180deg,rgba(8,16,31,.1) 0%,rgba(8,16,31,.78) 70%)}
-  .glass{align-items:flex-end;padding-bottom:48px}
   .glass blockquote{grid-column:1/13}
+  .hero{--len:280vh}
+  .glass{--len:220vh}
   .stagewrap,.qwrap{grid-column:1/13}
   .anat .film,.anat .copy{grid-column:1/13}
-  .anat .film{min-height:56vh}
+  .anat .film{position:relative;height:56vh;min-height:360px}
   .anat .copy{padding:64px var(--gut)}
   .kit .feature{grid-column:1/13;grid-row:auto;min-height:440px}
   .kit .row4{grid-column:1/13;grid-row:auto;grid-template-columns:repeat(2,1fr)}
@@ -489,7 +503,6 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
   .modal .box{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:start;max-height:92vh;border-radius:12px 12px 0 0}
   .gal{min-height:auto;height:min(92vw,420px)}
   .stagewrap{display:none}
-  .glass video,.glass img.poster{object-position:28% 50%}
 }
 @media (max-width:600px){
   body{font-size:15.5px}
@@ -497,12 +510,12 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
   .ann a span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:86vw;display:block}
   .bagbtn .t{display:none}
   .bagbtn{padding:0 10px}
-  .hero{min-height:max(640px,100svh)}
   .hero h1{font-size:clamp(3.3rem,15.5vw,5rem)}
   .hero-side{grid-column:1/13}
   .hero-cta .btn{flex:1 1 auto;justify-content:center}
   .hero-cta .link{margin:6px 0 0}
   .hero-foot .r{display:none}
+  .hero-foot .lbl{font-size:10.5px}
   .stockist .facts{display:grid;gap:8px}
   .track{grid-auto-columns:76vw}
   .card .qv{opacity:1;transform:none}
@@ -526,6 +539,7 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("js");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("scrub-on")</script>
 
 <div class="ann">
   <div class="wrap">
@@ -558,24 +572,31 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 
 <main id="top">
 
-<!-- ================= HERO: through the glass ================= -->
-<section class="hero" aria-label="Vidrio">
-  <img class="poster" src="film/hero-poster.jpg" alt="" aria-hidden="true">
-  <video id="heroVid" muted playsinline loop preload="auto" poster="film/hero-poster.jpg" aria-hidden="true"></video>
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-t rv"><p class="mono eyebrow">Padel only. Nothing else.</p><h1>Play it<span class="serif">off the <em>glass.</em></span></h1></div>
-      <div class="hero-side rv" data-d="2">
-        <p>Bullpadel and Babolat, chosen by people who play and fitted to the way you play. Every racket on the wall has been on court before it’s on sale.</p>
-        <div class="hero-cta">
-          <a class="btn btn-ball" href="#wall">Shop the 2027 wall <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-          <a class="link" href="#fitting">Find your racket <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+<!-- ================= HERO: scroll through the glass ================= -->
+<section class="hero scrub" id="hero" data-seq="hero" data-n="100" aria-label="Vidrio">
+  <div class="stick">
+    <img class="still" src="film/seq/hero/d/000.webp" alt="" aria-hidden="true">
+    <canvas class="cv" aria-hidden="true"></canvas>
+    <div class="beat b2" data-in=".33,.43" data-out=".58,.68" aria-hidden="true"><p>Padel only.<span class="serif">Nothing else.</span></p></div>
+    <div class="wrap hero-in">
+      <div class="hero-grid">
+        <div class="hero-t">
+          <div class="beat b1" data-out=".2,.34"><p class="mono eyebrow">The padel specialist</p><h1>Play it<span class="serif">off the <em>glass.</em></span></h1></div>
+          <div class="beat b3" data-in=".7,.84"><p class="mono eyebrow">Court 01 · 20 × 10 m</p><p class="hl">Every racket<span class="serif">worth <em>playing.</em></span></p></div>
+        </div>
+        <div class="beat hero-side" data-in=".74,.88">
+          <p>Bullpadel and Babolat, chosen by people who play and fitted to the way you play. Every racket on the wall has been on court before it’s on sale.</p>
+          <div class="hero-cta">
+            <a class="btn btn-ball" href="#wall">Shop the 2027 wall <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+            <a class="link" href="#fitting">Find your racket <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="hero-foot mono">
-      <span class="scroll"><span></span>Step through the glass</span>
-      <span class="r">Court 01 · 20 × 10 m · Floodlights on</span>
+      <div class="hero-foot mono">
+        <span class="lbl">Scroll to step through the glass</span>
+        <span class="prog" aria-hidden="true"><i id="heroBar"></i></span>
+        <span class="r">Floodlights on</span>
+      </div>
     </div>
   </div>
 </section>
@@ -652,15 +673,17 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
   </div>
 </section>
 
-<!-- ================= GLASS INTERSTITIAL ================= -->
-<section class="glass" aria-label="Why the racket matters">
-  <img class="poster" src="film/glass-poster.jpg" alt="" aria-hidden="true">
-  <video data-src="film/glass-1600.mp4" muted playsinline preload="none" poster="film/glass-poster.jpg" data-once aria-hidden="true"></video>
-  <div class="wrap">
-    <blockquote class="rv">
-      <p>The glass gives every ball a <em>second life.</em></p>
-      <span>Padel is the only racket sport where the walls are in play, so the racket matters more than you think. Weight, balance, shape and feel all change what happens after the bounce.</span>
-    </blockquote>
+<!-- ================= GLASS INTERSTITIAL (scroll film) ================= -->
+<section class="glass scrub" data-seq="glass" data-n="61" aria-label="Why the racket matters">
+  <div class="stick">
+    <img class="still" src="film/seq/glass/d/000.webp" alt="" aria-hidden="true">
+    <canvas class="cv" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <blockquote>
+        <p><span class="beat" data-in="-1,0">The glass gives every ball a</span> <em class="beat" data-in=".14,.3">second life.</em></p>
+        <span class="beat sub" data-in=".4,.56">Padel is the only racket sport where the walls are in play, so the racket matters more than you think. Weight, balance, shape and feel all change what happens after the bounce.</span>
+      </blockquote>
+    </div>
   </div>
 </section>
 
@@ -728,9 +751,9 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 <!-- ================= 04 ANATOMY ================= -->
 <section class="night" aria-labelledby="anaT">
   <div class="anat">
-    <div class="film">
-      <img src="film/carbon-poster.jpg" alt="" aria-hidden="true">
-      <video data-src="film/carbon-1600.mp4" muted playsinline loop preload="none" poster="film/carbon-poster.jpg" aria-hidden="true"></video>
+    <div class="film" data-seq="carbon" data-n="48" data-mode="pass">
+      <img class="still" src="film/seq/carbon/d/000.webp" alt="" aria-hidden="true">
+      <canvas class="cv" aria-hidden="true"></canvas>
       <span class="cap mono">Carbon face, drilled · macro</span>
     </div>
     <div class="copy">
@@ -953,37 +976,88 @@ const ALL=[...R,...K], BY=Object.fromEntries(ALL.map(x=>[x.id,x]));
 const shapeLabel=r=>r.shapeName||r.shape[0].toUpperCase()+r.shape.slice(1);
 const specLine=r=>`${shapeLabel(r)} · ${r.w} · ${r.bal}`;
 
-/* ---------- header ---------- */
-const hdr=$('#hdr');
-const onScroll=()=>hdr.classList.toggle('solid',scrollY>innerHeight*0.72-64);
+/* ---------- header: glass over the films, solid once the hero has passed ---------- */
+const hdr=$('#hdr'), heroEl=$('#hero');
+const onScroll=()=>hdr.classList.toggle('solid',heroEl.getBoundingClientRect().bottom<110);
 addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-/* ---------- hero film ---------- */
-document.documentElement.classList.add('js');
-const hv=$('#heroVid'), want=new Set();
-const hidePoster=v=>{const p=v.parentElement.querySelector(':scope > img');if(p)p.style.opacity=0};
-const tryPlay=v=>v.play().then(()=>hidePoster(v)).catch(()=>{});
-if(!RM){
-  hv.src=innerWidth<900?'film/hero-1080.mp4':'film/hero-1920.mp4';
-  want.add(hv);
-  hv.addEventListener('canplay',()=>tryPlay(hv),{once:true});
-  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){want.add(hv);tryPlay(hv)}else{want.delete(hv);hv.pause()}})).observe($('.hero'));
-  /* autoplay can be refused (iPhone Low Power Mode, data saver): the first tap or key starts whatever is on screen */
-  const kick=()=>want.forEach(v=>{if(v.src&&v.paused&&!(v.hasAttribute('data-once')&&v.ended))tryPlay(v)});
-  ['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,kick,{passive:true}));
-}else hv.remove();
+/* ---------- scroll films ----------
+   Frames load coarse-to-fine (every 16th, then 8th, 4th...), so scrubbing works
+   before the whole sequence has arrived; the nearest loaded frame is drawn. */
+const SCRUB=document.documentElement.classList.contains('scrub-on');
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ss=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t)};
+const lerpKeys=(keys,p)=>{for(let i=1;i<keys.length;i++){if(p<=keys[i][0]){const[a,va]=keys[i-1],[b,vb]=keys[i];return va+(vb-va)*clamp((p-a)/(b-a))}}return keys[keys.length-1][1]};
+const FOCUS={glass:p=>[lerpKeys([[0,.27],[.5,.43],[1,.64]],p),.5]};
+class Film{
+  constructor(el){
+    this.el=el;this.name=el.dataset.seq;this.n=+el.dataset.n;this.mode=el.dataset.mode||'pin';
+    this.cv=$('.cv',el);this.ctx=this.cv.getContext('2d');this.still=$('.still',el);
+    this.size=innerWidth<900?'m':'d';this.imgs=new Array(this.n);this.t=0;this.drawn=-1;this.dirty=true;this.vis=false;
+    this.beats=$$('.beat',el).map(b=>({el:b,i:b.dataset.in?b.dataset.in.split(',').map(Number):null,o:b.dataset.out?b.dataset.out.split(',').map(Number):null}));
+    this.focus=FOCUS[this.name]||(()=>[.5,.5]);
+  }
+  src(i){return `film/seq/${this.name}/${this.size}/${String(i).padStart(3,'0')}.webp`}
+  load(){
+    if(this.started)return;this.started=true;
+    const order=[],seen=new Set(),push=i=>{if(i>=0&&i<this.n&&!seen.has(i)){seen.add(i);order.push(i)}};
+    if(!SCRUB)push(this.mode==='pass'?Math.round((this.n-1)/2):0);
+    else{push(0);push(this.n-1);[16,8,4,2,1].forEach(st=>{for(let i=0;i<this.n;i+=st)push(i)})}
+    let next=0;const pump=()=>{if(next>=order.length)return;const i=order[next++];const im=new Image();im.decoding='async';
+      im.onload=()=>{this.imgs[i]=im;if(this.drawn<0||Math.abs(i-this.want())<Math.abs(this.drawn-this.want())){this.dirty=true;kick()}pump()};
+      im.onerror=pump;im.src=this.src(i)};
+    for(let k=0;k<6;k++)pump();
+  }
+  progress(){
+    const r=this.el.getBoundingClientRect(),vh=innerHeight;
+    if(!SCRUB)return this.mode==='pass'?.5:0;
+    return this.mode==='pass'?clamp((vh-r.top)/(vh+r.height)):clamp(-r.top/Math.max(1,r.height-vh));
+  }
+  want(){return Math.round(this.t*(this.n-1))}
+  nearest(i){if(this.imgs[i])return i;for(let d=1;d<this.n;d++){if(this.imgs[i-d])return i-d;if(this.imgs[i+d])return i+d}return -1}
+  render(){
+    const i=this.nearest(this.want());
+    if(i>=0&&(i!==this.drawn||this.dirty)){
+      const cv=this.cv,dpr=Math.min(devicePixelRatio||1,2),w=Math.round(cv.clientWidth*dpr),h=Math.round(cv.clientHeight*dpr);
+      if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
+      const im=this.imgs[i],s=Math.max(w/im.naturalWidth,h/im.naturalHeight),dw=im.naturalWidth*s,dh=im.naturalHeight*s,[fx,fy]=this.focus(this.t);
+      const dx=clamp(w/2-fx*dw,w-dw,0),dy=clamp(h/2-fy*dh,h-dh,0);
+      this.ctx.drawImage(im,dx,dy,dw,dh);this.drawn=i;this.dirty=false;
+      if(this.still.style.opacity!=='0')this.still.style.opacity='0';
+    }
+    if(SCRUB)for(const b of this.beats){
+      const a=b.i?ss(b.i[0],b.i[1],this.t):1,o=b.o?ss(b.o[0],b.o[1],this.t):0,v=a*(1-o);
+      b.el.style.opacity=v.toFixed(3);b.el.style.transform=`translateY(${((1-a)*28-o*36).toFixed(1)}px)`;
+      b.el.style.pointerEvents=v<.2?'none':'';b.el.style.visibility=v<.01?'hidden':'';
+    }
+  }
+}
+const films=$$('[data-seq]').map(el=>new Film(el));
+let raf=0;
+const tick=()=>{raf=0;let moving=false;
+  for(const f of films){if(!f.vis&&f.drawn>=0)continue;
+    const tgt=f.progress(),d=tgt-f.t;
+    if(Math.abs(d)<.0008)f.t=tgt;else{f.t+=d*.2;moving=true}
+    f.render();
+    if(f.name==='hero')$('#heroBar').style.transform=`scaleX(${f.t.toFixed(4)})`;
+  }
+  if(moving)raf=requestAnimationFrame(tick)};
+function kick(){if(!raf)raf=requestAnimationFrame(tick)}
+const fio=new IntersectionObserver(es=>es.forEach(e=>{const f=films.find(x=>x.el===e.target);f.vis=e.isIntersecting;if(e.isIntersecting){f.load();f.dirty=true;kick()}}),{rootMargin:'120% 0px'});
+films.forEach(f=>fio.observe(f.el));
+films[0].load();
+addEventListener('scroll',kick,{passive:true});
+addEventListener('resize',()=>{films.forEach(f=>f.dirty=true);kick()});
 
-/* ---------- lazy films ---------- */
-const vio=new IntersectionObserver(es=>es.forEach(e=>{
-  const v=e.target;
-  if(e.isIntersecting){
-    if(!v.src&&v.dataset.src){v.src=v.dataset.src}
-    if(v.hasAttribute('data-once')){v.currentTime=0}
-    want.add(v);tryPlay(v);
-  }else{want.delete(v);if(v.src)v.pause()}
+/* ---------- footer film (plain looping video) ---------- */
+const want=new Set();
+const tryPlay=v=>v.play().then(()=>{const p=v.parentElement.querySelector(':scope > img');if(p)p.style.opacity=0}).catch(()=>{});
+const vio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
+  if(e.isIntersecting){if(!v.src&&v.dataset.src)v.src=v.dataset.src;want.add(v);tryPlay(v)}else{want.delete(v);if(v.src)v.pause()}
 }),{rootMargin:'200px 0px',threshold:.15});
 if(!RM)$$('video[data-src]').forEach(v=>vio.observe(v)); else $$('video[data-src]').forEach(v=>v.remove());
-$$('.glass img.poster,.anat .film img,.knock img,.hero .poster').forEach(i=>i.style.transition='opacity .8s');
+['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,()=>want.forEach(v=>{if(v.src&&v.paused)tryPlay(v)}),{passive:true}));
+$$('.knock img').forEach(i=>i.style.transition='opacity .8s');
 
 /* ---------- reveals ---------- */
 const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
