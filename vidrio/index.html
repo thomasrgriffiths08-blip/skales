@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vidrio — The Padel Specialist</title>
+<meta name="description" content="Bullpadel and Babolat, chosen by people who play and fitted to how you play. The 2027 racket wall, a racket finder that asks about your game, and a glass fitting court.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#08101F">
+<meta property="og:title" content="Vidrio — Play it off the glass">
+<meta property="og:description" content="The padel specialist. Bullpadel and Babolat, fitted to how you play.">
+<meta property="og:image" content="film/seq/hero/d/000.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2308101F'/%3E%3Crect x='8' y='7' width='16' height='18' fill='none' stroke='%23F3F2EE' stroke-width='2'/%3E%3Cpath d='M12 21 20 11' stroke='%23DDF247' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="preload" as="image" href="film/seq/hero/d/000.webp">
+<style>
+/* =========================================================
+   VIDRIO · the padel specialist
+   Concept: the page is a glass court at night. You enter
+   through the back glass; everything is played off it.
+   Five colour roles (Realtime Colors):
+   text 0A0D14 · background F3F2EE · primary 08101F (night court)
+   secondary 2457D6 (court blue) · accent DDF247 (ball)
+   ========================================================= */
+:root{
+  color-scheme:light;
+  --text:#0A0D14; --background:#F3F2EE; --primary:#08101F; --secondary:#2457D6; --accent:#DDF247;
+  --ink:var(--text); --paper:var(--background); --night:var(--primary); --court:var(--secondary); --ball:var(--accent);
+  --tile:#EBEBEB; /* matches the brands' packshot grey, so tiles are seamless */
+  --muted:color-mix(in srgb,var(--text) 58%,var(--background));
+  --faint:color-mix(in srgb,var(--text) 34%,var(--background));
+  --rule:color-mix(in srgb,var(--text) 13%,transparent);
+  --rule-2:color-mix(in srgb,var(--text) 7%,transparent);
+  --on-night:color-mix(in srgb,var(--background) 94%,var(--primary));
+  --on-night-2:color-mix(in srgb,var(--background) 58%,var(--primary));
+  --night-rule:color-mix(in srgb,var(--background) 14%,transparent);
+  --d:"Inter Tight",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --s:"Instrument Serif",ui-serif,Georgia,serif;
+  --m:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --wrap:1440px; --gut:clamp(16px,3.2vw,48px);
+  --ease:cubic-bezier(.2,.75,.15,1);
+  --hdr:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--d);letter-spacing:.002em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+::selection{background:var(--ball);color:var(--ink)}
+:focus-visible{outline:2px solid var(--court);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font-family:var(--m);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.serif{font-family:var(--s);font-weight:400;font-style:italic;letter-spacing:-.01em}
+.idx{display:flex;gap:14px;align-items:center;color:var(--muted)}
+.idx b{font-weight:500;color:var(--ink)}
+.night .idx{color:var(--on-night-2)} .night .idx b{color:var(--ball)}
+.idx::after{content:"";flex:0 0 48px;height:1px;background:currentColor;opacity:.5}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
+.h2{font-size:clamp(2.5rem,5.4vw,5.25rem)}
+.lead{font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.5;color:var(--muted);max-width:46ch;margin:0}
+.night{background:var(--night);color:var(--on-night)}
+.night .lead{color:var(--on-night-2)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;font-weight:600;font-size:15px;letter-spacing:-.005em;transition:transform .3s var(--ease),background .3s,color .3s;white-space:nowrap}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-ball{background:var(--ball);color:var(--ink)}
+.btn-ball:hover{background:color-mix(in srgb,var(--ball) 86%,#fff)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:color-mix(in srgb,var(--ink) 82%,var(--court))}
+.btn-ghost{box-shadow:inset 0 0 0 1px currentColor}
+.btn-ghost:hover{background:color-mix(in srgb,currentColor 8%,transparent)}
+.link{display:inline-flex;align-items:center;gap:8px;font-weight:600;border-bottom:1px solid currentColor;padding-bottom:2px}
+.link svg{width:14px;height:14px;transition:transform .3s var(--ease)}
+.link:hover svg{transform:translateX(3px)}
+
+/* reveal */
+.js .rv:not(.in){transform:translateY(18px)}
+.rv{transition:transform 1s var(--ease)}
+.rv[data-d="1"]{transition-delay:.08s}.rv[data-d="2"]{transition-delay:.16s}.rv[data-d="3"]{transition-delay:.24s}
+
+/* ================= announcement + header ================= */
+.ann{position:relative;z-index:60;background:var(--ink);color:var(--on-night);font-size:12.5px}
+.ann .wrap{display:flex;justify-content:space-between;gap:24px;height:36px;align-items:center}
+.ann a{display:inline-flex;gap:10px;align-items:center}
+.ann i{font-style:normal;width:6px;height:6px;border-radius:50%;background:var(--ball);display:inline-block}
+.ann .r{color:var(--on-night-2)}
+.hdr{position:sticky;top:0;z-index:50;height:var(--hdr);margin-bottom:calc(-1 * var(--hdr));color:var(--paper);transition:color .4s,background .4s,box-shadow .4s,backdrop-filter .4s}
+.hdr .wrap{height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
+.hdr.solid{color:var(--ink);background:color-mix(in srgb,var(--paper) 74%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);box-shadow:0 1px 0 var(--rule)}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:.24em;justify-self:start}
+.logo svg{width:22px;height:24px}
+.nav{display:flex;gap:30px;font-size:14.5px;font-weight:500}
+.nav a{position:relative;padding:6px 0}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav a:hover::after{transform:scaleX(1)}
+.tools{justify-self:end;display:flex;gap:6px;align-items:center}
+.ic{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;transition:background .25s}
+.ic:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+.ic svg{width:20px;height:20px}
+.bagbtn{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px 0 14px;border-radius:999px;font-weight:600;font-size:14px;box-shadow:inset 0 0 0 1px currentColor;transition:background .25s}
+.bagbtn:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+.bagbtn svg{width:18px;height:18px}
+.bagbtn .n{min-width:20px;height:20px;border-radius:10px;background:var(--ball);color:var(--ink);font-size:11.5px;display:grid;place-items:center;padding:0 6px;font-variant-numeric:tabular-nums}
+.bagbtn .n.pop{animation:pop .5s var(--ease)}
+@keyframes pop{40%{transform:scale(1.35)}}
+.burger{display:none}
+
+/* ================= scroll films (shared) =================
+   Each film is a frame sequence drawn to a canvas; scroll position picks the frame. */
+.stick{position:relative;height:max(640px,100svh);overflow:hidden}
+.scrub-on .scrub{height:var(--len)}
+.scrub-on .scrub .stick{position:sticky;top:0}
+.cv,.still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.still{transition:opacity .6s}
+.scrub-on .beat[data-in]{opacity:0}
+html:not(.scrub-on) .b2,html:not(.scrub-on) .b3{display:none}
+
+/* ================= hero: scroll through the glass ================= */
+.hero{position:relative;color:var(--paper);background:var(--night);--len:340vh}
+.hero .stick::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,16,31,.55) 0%,rgba(8,16,31,0) 22%,rgba(8,16,31,0) 46%,rgba(8,16,31,.82) 100%);pointer-events:none}
+.hero-in{position:absolute;left:0;right:0;bottom:0;z-index:3;padding-bottom:clamp(28px,5vh,56px)}
+.hero-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end}
+.hero-t{grid-column:1/9;display:grid}
+.hero-t>.beat{grid-area:1/1;align-self:end}
+.hero h1,.hero .hl{font-size:clamp(3.6rem,9.6vw,10.25rem);font-weight:700;letter-spacing:-.05em;line-height:.86;margin:0}
+.hero h1 .serif,.hero .hl .serif{display:block;font-size:1.06em;letter-spacing:-.025em;line-height:.9;margin-top:.06em;color:var(--paper)}
+.hero h1 .serif em,.hero .hl .serif em{font-style:italic;color:var(--ball)}
+.hero .eyebrow{color:color-mix(in srgb,var(--paper) 78%,transparent);margin:0 0 22px;font-size:12px;letter-spacing:.08em}
+.hero-side{grid-column:9/13;padding-bottom:10px}
+.hero-side p{margin:0 0 26px;font-size:1.08rem;line-height:1.5;color:color-mix(in srgb,var(--paper) 86%,transparent);max-width:36ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-cta .link{color:var(--paper);margin-left:8px}
+.b2{position:absolute;inset:0;z-index:2;display:grid;place-items:center;text-align:center;pointer-events:none;padding-inline:var(--gut)}
+.b2 p{margin:0;font-size:clamp(3rem,8.4vw,8.5rem);font-weight:700;letter-spacing:-.05em;line-height:.9;color:var(--paper)}
+.b2 .serif{display:block;font-weight:400;letter-spacing:-.02em;color:var(--ball)}
+.hero-foot{display:flex;align-items:center;gap:24px;margin-top:clamp(28px,5vh,52px);padding-top:18px;border-top:1px solid color-mix(in srgb,var(--paper) 18%,transparent);color:color-mix(in srgb,var(--paper) 66%,transparent)}
+.hero-foot .prog{flex:1;height:1px;position:relative;background:color-mix(in srgb,var(--paper) 16%,transparent)}
+.hero-foot .prog i{position:absolute;left:0;top:-1px;width:100%;height:3px;background:var(--ball);transform:scaleX(0);transform-origin:left}
+html:not(.scrub-on) .hero-foot .prog{visibility:hidden}
+
+/* brand strip */
+.stockist{border-bottom:1px solid var(--rule)}
+.stockist .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px;min-height:84px;flex-wrap:wrap;padding-block:18px}
+.stockist .marks{display:flex;gap:clamp(28px,5vw,72px);align-items:center}
+.wm{font-weight:800;letter-spacing:-.02em;font-size:clamp(1.4rem,2.2vw,1.9rem);line-height:1}
+.wm.bab{letter-spacing:.06em;font-weight:700;font-style:italic}
+.stockist .facts{display:flex;gap:28px;color:var(--muted)}
+.stockist .facts span{display:inline-flex;gap:8px;align-items:center}
+.stockist .facts svg{width:16px;height:16px;color:var(--ink)}
+
+/* ================= 01 the wall ================= */
+.sec{padding-block:clamp(84px,11vw,160px)}
+.wall-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:44px}
+.wall-head .t{grid-column:1/7}
+.wall-head .t .idx{margin-bottom:28px}
+.wall-head .lead{grid-column:7/11;align-self:end}
+.wall-head .arrows{grid-column:11/13;justify-self:end;display:flex;gap:8px}
+.arr{width:52px;height:52px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule);display:grid;place-items:center;transition:background .25s,box-shadow .25s}
+.arr:hover{background:var(--ink);color:var(--paper);box-shadow:none}
+.arr svg{width:18px;height:18px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{height:38px;padding:0 16px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--rule);font-size:14px;font-weight:500;transition:background .25s,color .25s,box-shadow .25s}
+.chip:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);box-shadow:none}
+.wall-bar{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:20px}
+.scale{flex:1 1 360px;max-width:560px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;color:var(--muted)}
+.scale .rail{position:relative;height:1px;background:var(--rule)}
+.scale .rail::before,.scale .rail::after{content:"";position:absolute;top:-4px;width:1px;height:9px;background:var(--faint)}
+.scale .rail::before{left:0}.scale .rail::after{right:0}
+.scale .dot{position:absolute;top:-6px;left:0;width:13px;height:13px;border-radius:50%;background:var(--ball);box-shadow:0 0 0 1px var(--ink);transform:translateX(-50%);transition:left .12s linear}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(250px,22vw,320px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding-inline:var(--gut);scroll-padding-inline:var(--gut);margin-inline:calc(-1 * var(--gut))}
+.track::-webkit-scrollbar{display:none}
+.wall-wrap{overflow:hidden}
+.card{scroll-snap-align:start;position:relative;border-right:1px solid var(--rule);padding:18px 18px 22px;display:flex;flex-direction:column;gap:14px;background:var(--paper);transition:background .3s}
+.card:first-child{border-left:1px solid var(--rule)}
+.card:hover{background:color-mix(in srgb,var(--paper) 60%,#fff)}
+.card .img{position:relative;aspect-ratio:4/5;background:var(--tile);overflow:hidden;border-radius:2px}
+.card .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .5s var(--ease),transform .9s var(--ease)}
+.card .img .alt{opacity:0}
+.card:hover .img .alt{opacity:1}
+.card:hover .img img.main.has-alt{opacity:0}
+.card:hover .img img:not(.has-alt){transform:scale(1.035)}
+.card .tag{position:absolute;top:10px;left:10px;z-index:2;background:var(--paper);padding:5px 8px;border-radius:2px;color:var(--ink)}
+.card .tag.new{background:var(--ink);color:var(--ball)}
+.card .brand{position:absolute;top:12px;right:12px;z-index:2;color:var(--muted)}
+.card .qv{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;height:40px;border-radius:999px;background:color-mix(in srgb,var(--paper) 86%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-weight:600;font-size:13.5px;opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.card:hover .qv,.card .qv:focus-visible{opacity:1;transform:none}
+.card h3{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.2}
+.card .spec{color:var(--muted);margin-top:4px;font-size:11px}
+.card .meter{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;color:var(--faint);font-size:10px}
+.card .meter .ln{position:relative;height:1px;background:var(--rule)}
+.card .meter .ln i{position:absolute;top:-3.5px;width:8px;height:8px;border-radius:50%;background:var(--ink);transform:translateX(-50%)}
+.card .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.price{font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.add{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;transition:background .25s,transform .25s var(--ease)}
+.add:hover{background:var(--court);transform:rotate(90deg)}
+.add svg{width:16px;height:16px}
+.card.hide{display:none}
+
+/* ================= 02 two houses ================= */
+.houses{display:grid;grid-template-columns:1fr 1fr;min-height:min(980px,100vh)}
+.house{position:relative;overflow:hidden;padding:clamp(40px,5vw,80px) clamp(24px,4vw,64px);display:grid;grid-template-rows:auto 1fr auto;gap:24px}
+.house.bp{background:var(--tile)}
+.house.bb{background:var(--night);color:var(--on-night)}
+.house .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.house .top .mono{color:var(--muted)}
+.house.bb .top .mono{color:var(--on-night-2)}
+.house .name{font-size:clamp(3rem,6.4vw,6.5rem);font-weight:800;letter-spacing:-.05em;line-height:.85}
+.house.bb .name{font-style:italic;font-weight:700;letter-spacing:-.02em}
+.house .stage{position:relative;display:grid;place-items:center;min-height:380px}
+.house .stage img{position:absolute;max-height:100%;width:auto;height:100%;object-fit:contain;opacity:0;transform:translateY(16px) rotate(-6deg);transition:opacity .6s var(--ease),transform .9s var(--ease)}
+.house.bb .stage img{transform:translateY(16px) rotate(6deg)}
+.house .stage img.on{opacity:1;transform:translateY(0) rotate(-6deg)}
+.house.bb .stage img.on{transform:translateY(0) rotate(6deg)}
+.house .bot{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:end}
+.house .bot p{margin:0;color:var(--muted);max-width:40ch;font-size:15.5px}
+.house.bb .bot p{color:var(--on-night-2)}
+.house ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.house.bb ul{border-color:var(--night-rule)}
+.house li button{width:100%;display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--rule);text-align:left;transition:padding .35s var(--ease)}
+.house.bb li button{border-color:var(--night-rule)}
+.house li button .who{color:var(--muted);font-size:13.5px}
+.house.bb li button .who{color:var(--on-night-2)}
+.house li button .nm{font-weight:600;font-size:16.5px;letter-spacing:-.01em}
+.house li button:hover,.house li button[aria-current="true"]{padding-left:10px}
+.house li button[aria-current="true"] .nm::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ball);box-shadow:0 0 0 1px var(--ink);margin-right:10px;vertical-align:2px}
+.house .shop{margin-top:18px}
+
+/* ================= glass interstitial (scroll film) ================= */
+.glass{position:relative;color:var(--paper);background:var(--night);--len:260vh}
+.glass .stick::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(8,16,31,.88) 0%,rgba(8,16,31,.4) 36%,rgba(8,16,31,0) 60%);pointer-events:none}
+.glass .wrap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:clamp(40px,8vh,96px);display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.glass blockquote{grid-column:1/8;margin:0}
+.glass blockquote p{font-family:var(--s);font-size:clamp(2.6rem,5vw,5rem);line-height:.98;letter-spacing:-.015em;margin:0 0 24px}
+.glass blockquote .beat{display:inline-block}
+.glass blockquote em{color:var(--ball)}
+.glass .sub{display:block;max-width:46ch;color:color-mix(in srgb,var(--paper) 80%,transparent);font-size:1.05rem}
+
+/* ================= 03 the fitting ================= */
+.fit-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,48px)}
+.stagewrap{grid-column:1/6}
+.fitstage{position:sticky;top:calc(var(--hdr) + 24px);height:calc(100vh - var(--hdr) - 48px);min-height:560px;max-height:860px;background:var(--tile);border-radius:3px;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.fitstage .hd{display:flex;justify-content:space-between;padding:20px 22px;color:var(--muted)}
+.fitstage .hd b{color:var(--ink);font-weight:500}
+.fitstage .pic{position:relative}
+.fitstage .pic img{position:absolute;inset:0;margin:auto;height:100%;width:100%;object-fit:contain;padding:0 10%;transition:opacity .45s var(--ease),transform .7s var(--ease)}
+.fitstage .pic img.out{opacity:0;transform:translateY(10px) scale(.98)}
+.fitstage .ft{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;padding:20px 22px 22px;border-top:1px solid var(--rule)}
+.fitstage .ft h3{font-size:clamp(1.4rem,2vw,1.9rem);letter-spacing:-.03em;line-height:1}
+.fitstage .ft .mono{color:var(--muted);margin-top:8px}
+.shapes{display:flex;gap:10px}
+.shape{display:grid;justify-items:center;gap:6px;color:var(--faint);transition:color .3s}
+.shape svg{width:34px;height:52px}
+.shape .head{fill:none;stroke:currentColor;stroke-width:2}
+.shape .handle{fill:currentColor}
+.shape .spot{fill:var(--ball);opacity:0;transition:opacity .3s}
+.shape.on{color:var(--ink)}
+.shape.on .spot{opacity:1}
+.shape .mono{font-size:9.5px}
+.qwrap{grid-column:6/13;padding-top:8px}
+.qwrap .idx{margin-bottom:28px}
+.qwrap .lead{margin-top:22px}
+.qs{margin:clamp(40px,5vw,64px) 0 0;display:grid;gap:clamp(28px,3.4vw,44px)}
+.q{border-top:1px solid var(--rule);padding-top:22px}
+.q .ql{display:flex;gap:14px;align-items:baseline;margin-bottom:14px;color:var(--muted)}
+.q .say{font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin:0 0 16px}
+.q .say .serif{font-weight:400}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{height:46px;padding:0 20px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--rule);font-size:15px;font-weight:500;transition:background .25s,color .25s,box-shadow .25s}
+.opt:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.opt[aria-checked="true"]{background:var(--ink);color:var(--paper);box-shadow:none}
+.res{margin-top:clamp(48px,6vw,80px)}
+.res-hd{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:14px}
+.res-hd h3{font-size:clamp(1.6rem,2.4vw,2.2rem);letter-spacing:-.03em}
+.pick{display:grid;grid-template-columns:44px 96px 1fr auto;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--rule);animation:slide .6s var(--ease) both}
+.pick:nth-child(2){animation-delay:.06s}.pick:nth-child(3){animation-delay:.12s}
+@keyframes slide{from{opacity:0;transform:translateY(10px)}}
+.pick .rk{font-size:2.4rem;font-weight:300;letter-spacing:-.04em;color:var(--faint);font-variant-numeric:tabular-nums;line-height:1}
+.pick:first-child .rk{color:var(--ink)}
+.pick .th{aspect-ratio:4/5;background:var(--tile);border-radius:2px;overflow:hidden}
+.pick .th img{width:100%;height:100%;object-fit:contain}
+.pick .nm{font-weight:600;font-size:17.5px;letter-spacing:-.015em;cursor:pointer}
+.pick .nm:hover{text-decoration:underline;text-underline-offset:3px}
+.pick .reason{margin:6px 0 0;color:var(--muted);font-size:14.5px;max-width:52ch}
+.pick .mono{color:var(--faint);margin-top:8px;font-size:10.5px}
+.pick .act{display:grid;justify-items:end;gap:10px}
+.second{margin-top:32px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:24px;background:var(--night);color:var(--on-night);border-radius:3px}
+.second p{margin:0;color:var(--on-night-2);max-width:52ch}
+.second b{color:var(--on-night);font-weight:600}
+
+/* ================= 04 anatomy ================= */
+.anat{display:grid;grid-template-columns:repeat(12,1fr);gap:0;min-height:100vh}
+.anat .film{grid-column:1/7;position:sticky;top:0;align-self:start;height:100vh;min-height:520px;overflow:hidden}
+.anat .film .cap{position:absolute;left:var(--gut);bottom:24px;z-index:2;color:var(--on-night-2)}
+.anat .copy{grid-column:7/13;padding:clamp(56px,7vw,120px) var(--gut) clamp(56px,7vw,120px) clamp(32px,5vw,88px);display:flex;flex-direction:column;justify-content:center}
+.anat .copy .idx{margin-bottom:28px}
+.parts{list-style:none;margin:clamp(36px,4vw,56px) 0 0;padding:0;border-top:1px solid var(--night-rule)}
+.parts li{display:grid;grid-template-columns:56px 1fr;gap:12px 20px;padding:22px 0;border-bottom:1px solid var(--night-rule)}
+.parts .n{color:var(--ball)}
+.parts h3{font-size:1.35rem;letter-spacing:-.025em;line-height:1.15;font-weight:600}
+.parts p{grid-column:2;margin:0;color:var(--on-night-2);font-size:15px;max-width:52ch}
+.parts .k{grid-column:2;color:var(--on-night-2);opacity:.8}
+
+/* ================= 05 kit ================= */
+.kit-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:44px}
+.kit-head .t{grid-column:1/8}
+.kit-head .t .idx{margin-bottom:28px}
+.kit-head .lead{grid-column:8/13}
+.kit{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.kit .feature{grid-column:1/6;grid-row:1/3;position:relative;min-height:620px;overflow:hidden;background:var(--night)}
+.kit .feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.kit .feature:hover img{transform:scale(1.03)}
+.kit .feature .cap{position:absolute;left:22px;right:22px;bottom:22px;z-index:2;color:var(--paper);display:flex;justify-content:space-between;align-items:end;gap:16px}
+.kit .feature .cap b{font-size:clamp(1.5rem,2.2vw,2rem);letter-spacing:-.03em;line-height:1.05;font-weight:600;max-width:16ch}
+.kit .feature::after{content:"";position:absolute;inset:auto 0 0 0;height:50%;background:linear-gradient(0deg,rgba(8,16,31,.7),transparent)}
+.kit .item{grid-column:span 7;background:var(--paper)}
+.kit .row4{grid-column:6/13;grid-row:1/3;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:1px;background:var(--rule)}
+.kitem{background:var(--paper);padding:14px 14px 18px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:background .3s}
+.kitem:hover{background:color-mix(in srgb,var(--paper) 60%,#fff)}
+.kitem .img{aspect-ratio:1;background:var(--tile);border-radius:2px;overflow:hidden}
+.kitem .img img{width:100%;height:100%;object-fit:contain;transition:transform .8s var(--ease)}
+.kitem:hover .img img{transform:scale(1.05)}
+.kitem .cat{color:var(--faint);font-size:10.5px}
+.kitem h3{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.kitem .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.kitem .add{width:34px;height:34px}
+
+/* ================= 06 why ================= */
+.why{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,48px)}
+.why .t{grid-column:1/13;margin-bottom:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.why .t .idx{grid-column:1/13;margin-bottom:4px}
+.why .t h2{grid-column:1/11}
+.why .t h2 .serif{font-weight:400}
+.why .pics{grid-column:1/6;position:relative}
+.why .pics .sticky{position:sticky;top:calc(var(--hdr) + 24px);aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:var(--night)}
+.why .pics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s var(--ease),transform 1.2s var(--ease);transform:scale(1.04)}
+.why .pics img.on{opacity:1;transform:none}
+.why ol{grid-column:6/13;list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.why li{display:grid;grid-template-columns:clamp(70px,8vw,120px) 1fr;gap:20px;padding:clamp(26px,3vw,40px) 0;border-bottom:1px solid var(--rule);cursor:default}
+.why li .num{font-size:clamp(3rem,5vw,4.6rem);font-weight:300;letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1px var(--faint);transition:color .4s,-webkit-text-stroke-color .4s}
+.why li.on .num{color:var(--ink);-webkit-text-stroke-color:var(--ink)}
+.why li h3{font-size:clamp(1.5rem,2.3vw,2.1rem);letter-spacing:-.03em;line-height:1.05;font-weight:600}
+.why li p{margin:12px 0 0;color:var(--muted);max-width:48ch}
+
+/* ================= 07 studio ================= */
+.studio{position:relative;min-height:max(720px,100vh);display:flex;align-items:flex-end;overflow:hidden;color:var(--paper)}
+.studio>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.studio::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,31,0) 40%,rgba(8,16,31,.75) 100%)}
+.studio .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(32px,5vw,64px)}
+.studio .card2{max-width:560px;padding:clamp(24px,3vw,36px);background:color-mix(in srgb,var(--night) 58%,transparent);-webkit-backdrop-filter:blur(22px) saturate(1.3);backdrop-filter:blur(22px) saturate(1.3);border:1px solid color-mix(in srgb,var(--paper) 14%,transparent);border-radius:4px}
+.studio .card2 .idx{color:color-mix(in srgb,var(--paper) 64%,transparent);margin-bottom:22px}
+.studio .card2 .idx b{color:var(--ball)}
+.studio h2{font-size:clamp(2.4rem,4.4vw,4rem)}
+.studio p{margin:18px 0 26px;color:color-mix(in srgb,var(--paper) 80%,transparent);max-width:44ch}
+.studio .hours{margin-top:22px;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--paper) 14%,transparent);display:flex;gap:24px;flex-wrap:wrap;color:color-mix(in srgb,var(--paper) 60%,transparent)}
+
+/* ================= newsletter + footer ================= */
+.news{padding-block:clamp(72px,9vw,128px)}
+.news .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end}
+.news h2{grid-column:1/7;font-size:clamp(2.6rem,5vw,4.8rem)}
+.news h2 .serif{font-weight:400;color:var(--ball)}
+.news form{grid-column:7/13}
+.news p{margin:0 0 18px;color:var(--on-night-2)}
+.field{display:flex;gap:8px;border-bottom:1px solid var(--on-night-2);padding-bottom:8px}
+.field input{flex:1;min-width:0;background:none;border:0;outline:0;font-size:clamp(1.2rem,1.8vw,1.6rem);font-weight:500;letter-spacing:-.02em;color:var(--on-night);padding:10px 0}
+.field input::placeholder{color:color-mix(in srgb,var(--on-night) 38%,transparent)}
+.news .ok{margin-top:14px;color:var(--ball);min-height:1.4em}
+.foot{position:relative}
+.knock{position:relative;isolation:isolate;overflow:hidden;border-top:1px solid var(--night-rule);border-bottom:1px solid var(--night-rule)}
+.knock video,.knock img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.knock::after{content:"";position:absolute;inset:0;background:var(--night);mix-blend-mode:lighten;pointer-events:none}
+.knock .word{position:relative;background:#000;color:#fff;mix-blend-mode:multiply;font-weight:800;font-size:clamp(5rem,25.5vw,26rem);letter-spacing:-.06em;line-height:.8;text-align:center;padding:.06em 0 .02em;margin:0;user-select:none}
+.fcols{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:32px;padding-block:56px 40px}
+.fcols h4{margin:0 0 16px;color:var(--on-night-2);font-weight:500}
+.fcols ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fcols a:hover{color:var(--ball)}
+.fcols .about p{margin:0;color:var(--on-night-2);max-width:40ch}
+.legal{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:22px 34px;border-top:1px solid var(--night-rule);color:var(--on-night-2);font-size:12.5px}
+.legal p{margin:0;max-width:90ch}
+
+/* ================= overlays: bag, quick view, search, menu ================= */
+.scrim{position:fixed;inset:0;z-index:80;background:rgba(8,16,31,.5);opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:90;width:min(440px,100vw);background:var(--paper);transform:translateX(104%);visibility:hidden;transition:transform .5s var(--ease),visibility 0s .5s;display:grid;grid-template-rows:auto 1fr auto}
+.drawer.on{transform:none;visibility:visible;transition:transform .5s var(--ease);box-shadow:-30px 0 80px -40px rgba(8,16,31,.6)}
+.dr-hd{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--rule)}
+.dr-hd h2{font-size:22px;letter-spacing:-.02em}
+.dr-body{overflow:auto;padding:8px 22px}
+.free{padding:16px 0 18px;border-bottom:1px solid var(--rule)}
+.free p{margin:0 0 10px;font-size:14px}
+.free .bar{height:3px;background:var(--rule);border-radius:2px;overflow:hidden}
+.free .bar i{display:block;height:100%;width:0;background:var(--court);transition:width .6s var(--ease)}
+.line{display:grid;grid-template-columns:76px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--rule);align-items:start}
+.line .th{aspect-ratio:4/5;background:var(--tile);border-radius:2px;overflow:hidden}
+.line .th img{width:100%;height:100%;object-fit:contain}
+.line h4{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.line .mono{color:var(--faint);margin-top:4px;font-size:10.5px}
+.qty{display:inline-flex;align-items:center;margin-top:12px;box-shadow:inset 0 0 0 1px var(--rule);border-radius:999px;height:32px}
+.qty button{width:32px;height:32px;display:grid;place-items:center;border-radius:50%}
+.qty button:hover{background:var(--rule-2)}
+.qty span{min-width:22px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums}
+.line .rm{color:var(--muted);font-size:12.5px;text-decoration:underline;text-underline-offset:2px;margin-top:10px;display:block}
+.empty{padding:48px 0;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-size:20px;letter-spacing:-.02em;margin-bottom:6px}
+.dr-ft{padding:18px 22px 22px;border-top:1px solid var(--rule)}
+.dr-ft .tot{display:flex;justify-content:space-between;font-weight:600;font-size:17px;margin-bottom:6px}
+.dr-ft .mono{color:var(--faint);margin-bottom:16px;display:block}
+.dr-ft .btn{width:100%;justify-content:center}
+.dr-ft .note{margin:10px 0 0;font-size:12.5px;color:var(--muted);text-align:center;min-height:1.2em}
+
+.modal{position:fixed;inset:0;z-index:95;display:grid;place-items:center;padding:20px;pointer-events:none}
+.modal .box{pointer-events:auto;width:min(1080px,100%);max-height:calc(100vh - 40px);overflow:auto;background:var(--paper);border-radius:4px;display:grid;grid-template-columns:1.05fr 1fr;opacity:0;transform:translateY(16px) scale(.985);transition:opacity .4s var(--ease),transform .5s var(--ease);visibility:hidden}
+.modal.on .box{opacity:1;transform:none;visibility:visible}
+.gal{background:var(--tile);display:grid;grid-template-rows:1fr auto;min-height:560px}
+.gal .main{position:relative}
+.gal .main img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:24px}
+.gal .thumbs{display:flex;gap:8px;padding:0 16px 16px}
+.gal .thumbs button{width:58px;aspect-ratio:4/5;background:color-mix(in srgb,var(--tile) 70%,#fff);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 0 1px transparent}
+.gal .thumbs button[aria-current="true"]{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.gal .thumbs img{width:100%;height:100%;object-fit:contain}
+.info{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px;position:relative}
+.info .x{position:absolute;top:14px;right:14px}
+.info .mono.b{color:var(--muted)}
+.info h2{font-size:clamp(2rem,3vw,2.8rem);letter-spacing:-.04em;line-height:.95;padding-right:40px}
+.info .price{font-size:22px}
+.info .take{margin:0;padding:16px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:var(--s);font-size:1.45rem;line-height:1.2;letter-spacing:-.005em}
+.info .take::before{content:"Our take — ";font-family:var(--m);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:9px 24px;margin:0;font-size:14.5px}
+.specs dt{color:var(--muted)}
+.specs dd{margin:0;font-weight:500}
+.info .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.info .acts .btn{flex:1;justify-content:center}
+
+.search{position:fixed;left:0;right:0;top:0;z-index:96;background:var(--paper);transform:translateY(-104%);visibility:hidden;transition:transform .5s var(--ease),visibility 0s .5s;box-shadow:0 30px 80px -40px rgba(8,16,31,.5);max-height:86vh;overflow:auto}
+.search.on{transform:none;visibility:visible;transition:transform .5s var(--ease)}
+.search .wrap{padding-block:22px 34px}
+.search .bar{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--ink);padding-bottom:10px}
+.search input{flex:1;min-width:0;border:0;outline:0;background:none;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:600;letter-spacing:-.03em;padding:8px 0}
+.sres{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;margin-top:22px}
+.sres button{text-align:left;display:grid;gap:8px}
+.sres .th{aspect-ratio:4/5;background:var(--tile);border-radius:2px;overflow:hidden}
+.sres .th img{width:100%;height:100%;object-fit:contain}
+.sres b{font-weight:600;font-size:14px;letter-spacing:-.01em}
+.sres .mono{color:var(--faint);font-size:10.5px}
+.search .hint{color:var(--muted);margin-top:16px}
+
+.menu{position:fixed;inset:0;z-index:97;background:var(--night);color:var(--on-night);transform:translateY(-100%);visibility:hidden;transition:transform .55s var(--ease),visibility 0s .55s;display:flex;flex-direction:column;padding:20px var(--gut) 32px}
+.menu.on{transform:none;visibility:visible;transition:transform .55s var(--ease)}
+.menu .top{display:flex;justify-content:space-between;align-items:center;height:44px}
+.menu nav{display:grid;gap:4px;margin-top:40px}
+.menu nav a{font-size:2.6rem;font-weight:700;letter-spacing:-.04em;line-height:1.15}
+.menu .btm{margin-top:auto;color:var(--on-night-2)}
+
+.toast{position:fixed;left:50%;bottom:24px;z-index:99;transform:translate(-50%,180%);visibility:hidden;background:var(--ink);color:var(--paper);padding:12px 14px 12px 12px;border-radius:999px;display:flex;align-items:center;gap:12px;font-size:14px;transition:transform .5s var(--ease);box-shadow:0 20px 40px -20px rgba(8,16,31,.6)}
+.toast.on{transform:translate(-50%,0);visibility:visible}
+.toast img{width:34px;height:34px;border-radius:50%;background:var(--tile);object-fit:contain}
+.toast button{color:var(--ball);font-weight:600;margin-left:6px}
+
+/* ================= responsive ================= */
+@media (max-width:1100px){
+  .nav{gap:20px;font-size:14px}
+  .hero-t{grid-column:1/13}
+  .hero-side{grid-column:1/10}
+  .fcols{grid-template-columns:1fr 1fr}
+  .fcols .about{grid-column:1/3}
+}
+@media (max-width:1100px){
+  .scrub-on .hero-grid>.hero-t,.scrub-on .hero-grid>.hero-side{grid-column:1/13;grid-row:1;align-self:end}
+  .scrub-on .b3{display:none}
+}
+@media (max-width:900px){
+  :root{--hdr:58px}
+  .nav,.ann .r{display:none}
+  .hdr .wrap{grid-template-columns:auto 1fr auto}
+  .burger{display:grid}
+  .tools .ic.s{display:none}
+  .wall-head .t,.wall-head .lead,.kit-head .t,.kit-head .lead{grid-column:1/13}
+  .wall-head .arrows{display:none}
+  .houses{grid-template-columns:1fr}
+  .house{min-height:auto}
+  .house .stage{min-height:340px}
+  .house .bot{grid-template-columns:1fr}
+  .glass blockquote{grid-column:1/13}
+  .hero{--len:280vh}
+  .glass{--len:220vh}
+  .stagewrap,.qwrap{grid-column:1/13}
+  .anat .film,.anat .copy{grid-column:1/13}
+  .anat .film{position:relative;height:56vh;min-height:360px}
+  .anat .copy{padding:64px var(--gut)}
+  .kit .feature{grid-column:1/13;grid-row:auto;min-height:440px}
+  .kit .row4{grid-column:1/13;grid-row:auto;grid-template-columns:repeat(2,1fr)}
+  .why .pics{display:none}
+  .why ol{grid-column:1/13}
+  .news h2,.news form{grid-column:1/13}
+  .modal{padding:0;place-items:end center}
+  .modal .box{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:start;max-height:92vh;border-radius:12px 12px 0 0}
+  .gal{min-height:auto;height:min(92vw,420px)}
+  .stagewrap{display:none}
+}
+@media (max-width:600px){
+  body{font-size:15.5px}
+  .ann .wrap{justify-content:center;font-size:12px}
+  .ann a span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:86vw;display:block}
+  .bagbtn .t{display:none}
+  .bagbtn{padding:0 10px}
+  .hero h1{font-size:clamp(3.3rem,15.5vw,5rem)}
+  .hero-side{grid-column:1/13}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .hero-cta .link{margin:6px 0 0}
+  .hero-foot .r{display:none}
+  .hero-foot .lbl{font-size:10.5px}
+  .stockist .facts{display:grid;gap:8px}
+  .track{grid-auto-columns:76vw}
+  .card .qv{opacity:1;transform:none}
+  .house .name{font-size:3.4rem}
+  .pick{grid-template-columns:30px 72px 1fr;gap:14px}
+  .pick .rk{font-size:1.7rem}
+  .pick .act{grid-column:2/4;justify-items:start;grid-auto-flow:column;align-items:center;justify-content:space-between}
+  .second{grid-template-columns:1fr}
+  .second .btn{justify-content:center}
+  .parts li{grid-template-columns:40px 1fr}
+  .why li{grid-template-columns:64px 1fr;gap:14px}
+  .studio .card2{padding:22px}
+  .studio .btn{flex:1 1 auto;justify-content:center}
+  .fcols{grid-template-columns:1fr 1fr;gap:28px}
+  .info .acts .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .js .rv:not(.in){transform:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js","scrub-on")</script>
+
+<div class="ann">
+  <div class="wrap">
+    <a href="#wall"><i></i><span>The Bullpadel 2027 Pro Line is in: Hack 05, Vertex 05, XPLO, Neuron</span></a>
+    <span class="r">Free UK delivery over £50 · 30-day returns · Demo rackets from £10</span>
+  </div>
+</div>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Vidrio home">
+      <svg viewBox="0 0 22 24" fill="none" aria-hidden="true"><rect x="1" y="1" width="20" height="22" stroke="currentColor" stroke-width="2"/><path d="M6 18 16 6" stroke="currentColor" stroke-width="2"/><circle cx="16.5" cy="17.5" r="2.5" fill="#DDF247"/></svg>
+      VIDRIO
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#wall">Rackets</a>
+      <a href="#kit">Shoes</a>
+      <a href="#kit">Bags &amp; balls</a>
+      <a href="#houses">Brands</a>
+      <a href="#fitting">Racket finder</a>
+      <a href="#studio">Fitting court</a>
+    </nav>
+    <div class="tools">
+      <button class="ic s" data-open="search" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></button>
+      <button class="bagbtn" data-open="bag" aria-label="Open bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="t">Bag</span><span class="n" id="bagN">0</span></button>
+      <button class="ic burger" data-open="menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h16M4 16h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO: scroll through the glass ================= -->
+<section class="hero scrub" id="hero" data-seq="hero" data-n="100" aria-label="Vidrio">
+  <div class="stick">
+    <img class="still" src="film/seq/hero/d/000.webp" alt="" aria-hidden="true">
+    <canvas class="cv" aria-hidden="true"></canvas>
+    <div class="beat b2" data-in=".33,.43" data-out=".58,.68" aria-hidden="true"><p>Padel only.<span class="serif">Nothing else.</span></p></div>
+    <div class="wrap hero-in">
+      <div class="hero-grid">
+        <div class="hero-t">
+          <div class="beat b1" data-out=".2,.34"><p class="mono eyebrow">The padel specialist</p><h1>Play it<span class="serif">off the <em>glass.</em></span></h1></div>
+          <div class="beat b3" data-in=".7,.84"><p class="mono eyebrow">Court 01 · 20 × 10 m</p><p class="hl">Every racket<span class="serif">worth <em>playing.</em></span></p></div>
+        </div>
+        <div class="beat hero-side" data-in=".74,.88">
+          <p>Bullpadel and Babolat, chosen by people who play and fitted to the way you play. Every racket on the wall has been on court before it’s on sale.</p>
+          <div class="hero-cta">
+            <a class="btn btn-ball" href="#wall">Shop the 2027 wall <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+            <a class="link" href="#fitting">Find your racket <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-foot mono">
+        <span class="lbl">Scroll to step through the glass</span>
+        <span class="prog" aria-hidden="true"><i id="heroBar"></i></span>
+        <span class="r">Floodlights on</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- stockist strip -->
+<section class="stockist" aria-label="Official stockist">
+  <div class="wrap">
+    <div class="marks">
+      <span class="mono" style="color:var(--muted)">Official stockist</span>
+      <span class="wm">Bullpadel</span>
+      <span class="wm bab">BABOLAT</span>
+    </div>
+    <div class="facts mono">
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 4h9v7H1zM10 6h3l2 2v3h-5"/><circle cx="4" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/></svg>Next-day UK delivery</span>
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8a6 6 0 1 0 2-4.5M2 2v3h3"/></svg>30-day play-test returns</span>
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="1.5" width="10" height="13"/><path d="M5.5 11 10.5 5"/></svg>Free fitting on rackets over £150</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 THE WALL ================= -->
+<section class="sec" id="wall" aria-labelledby="wallT">
+  <div class="wrap">
+    <div class="wall-head">
+      <div class="t rv">
+        <div class="idx mono"><b>01</b>The wall</div>
+        <h2 class="h2" id="wallT">The 2027 wall.</h2>
+      </div>
+      <p class="lead rv" data-d="1">This season’s Bullpadel and Babolat rackets, hung the way we hang them in the studio: control on the left, power on the right. Find where your game sits and look either side of it.</p>
+      <div class="arrows rv" data-d="2">
+        <button class="arr" data-scroll="-1" aria-label="Scroll left"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button>
+        <button class="arr" data-scroll="1" aria-label="Scroll right"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+      </div>
+    </div>
+    <div class="wall-bar rv">
+      <div class="filters" role="group" aria-label="Filter rackets">
+        <button class="chip" data-f="all" aria-pressed="true">All rackets</button>
+        <button class="chip" data-f="Bullpadel" aria-pressed="false">Bullpadel</button>
+        <button class="chip" data-f="Babolat" aria-pressed="false">Babolat</button>
+        <button class="chip" data-f="first" aria-pressed="false">First rackets</button>
+        <button class="chip" data-f="soft" aria-pressed="false">Arm-friendly</button>
+      </div>
+      <div class="scale mono" aria-hidden="true"><span>Control</span><div class="rail"><span class="dot" id="scaleDot"></span></div><span>Power</span></div>
+    </div>
+  </div>
+  <div class="wall-wrap"><div class="wrap"><div class="track" id="track" tabindex="0" aria-label="Rackets, control to power"></div></div></div>
+</section>
+
+<!-- ================= 02 TWO HOUSES ================= -->
+<section class="houses" id="houses" aria-label="Our brands">
+  <div class="house bp" data-house="bp">
+    <div class="top rv"><span class="mono">02 · Spain, since 1995</span><span class="mono">Pro Line 2027</span></div>
+    <div class="stage" aria-hidden="true"></div>
+    <div class="bot">
+      <div class="rv">
+        <h2 class="name">Bullpadel</h2>
+        <p style="margin-top:18px">Started in 1995 by a group of Argentine and Spanish pros, and still built around the players who use them. The 2027 Pro Line is four clear families: four ways to play.</p>
+        <a class="link shop" href="#wall" data-filter="Bullpadel">Shop Bullpadel <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </div>
+      <ul class="rv" data-d="1"></ul>
+    </div>
+  </div>
+  <div class="house bb night" data-house="bb">
+    <div class="top rv"><span class="mono">Lyon, since 1875</span><span class="mono">Viper collection</span></div>
+    <div class="stage" aria-hidden="true"></div>
+    <div class="bot">
+      <div class="rv">
+        <h2 class="name">Babolat</h2>
+        <p style="margin-top:18px">A hundred and fifty years of strings, and the Viper: Juan Lebrón’s own racket. Three lines for three players: Technical for power, Air for speed, Counter for control.</p>
+        <a class="link shop" href="#wall" data-filter="Babolat">Shop Babolat <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </div>
+      <ul class="rv" data-d="1"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GLASS INTERSTITIAL (scroll film) ================= -->
+<section class="glass scrub" data-seq="glass" data-n="61" aria-label="Why the racket matters">
+  <div class="stick">
+    <img class="still" src="film/seq/glass/d/000.webp" alt="" aria-hidden="true">
+    <canvas class="cv" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <blockquote>
+        <p><span class="beat" data-in="-1,0">The glass gives every ball a</span> <em class="beat" data-in=".14,.3">second life.</em></p>
+        <span class="beat sub" data-in=".4,.56">Padel is the only racket sport where the walls are in play, so the racket matters more than you think. Weight, balance, shape and feel all change what happens after the bounce.</span>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 THE FITTING ================= -->
+<section class="sec" id="fitting" aria-labelledby="fitT">
+  <div class="wrap fit-grid">
+    <div class="stagewrap">
+      <div class="fitstage" aria-live="polite">
+        <div class="hd mono"><span>Top match</span><b id="fitMatch">—</b></div>
+        <div class="pic" id="fitPic"></div>
+        <div class="ft">
+          <div><h3 id="fitName">—</h3><div class="mono" id="fitSpec"></div></div>
+          <div class="shapes" id="shapes">
+            <div class="shape" data-shape="round"><svg viewBox="0 0 60 90"><ellipse class="head" cx="30" cy="33" rx="24" ry="27"/><ellipse class="spot" cx="30" cy="38" rx="9" ry="8"/><rect class="handle" x="27" y="62" width="6" height="26" rx="3"/></svg><span class="mono">Round</span></div>
+            <div class="shape" data-shape="teardrop"><svg viewBox="0 0 60 90"><path class="head" d="M30 5C47 5 55 17 54 31 53 45 42 57 33 62h-6C18 57 7 45 6 31 5 17 13 5 30 5Z"/><ellipse class="spot" cx="30" cy="30" rx="9" ry="8"/><rect class="handle" x="27" y="62" width="6" height="26" rx="3"/></svg><span class="mono">Teardrop</span></div>
+            <div class="shape" data-shape="diamond"><svg viewBox="0 0 60 90"><path class="head" d="M30 4c12 0 22 8 25 22 0 10-10 24-22 36h-6C15 50 5 36 5 26 8 12 18 4 30 4Z"/><ellipse class="spot" cx="30" cy="22" rx="9" ry="8"/><rect class="handle" x="27" y="62" width="6" height="26" rx="3"/></svg><span class="mono">Diamond</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="qwrap">
+      <div class="idx mono rv"><b>03</b>The fitting</div>
+      <h2 class="h2 rv" id="fitT">Three questions.<br><span class="serif" style="font-weight:400">Three rackets.</span></h2>
+      <p class="lead rv" data-d="1">The same three questions our coaches ask on the fitting court. Answer honestly: the right racket for your game is rarely the most expensive one on the wall.</p>
+      <div class="qs">
+        <div class="q rv">
+          <div class="ql mono"><span>01</span><span>Experience</span></div>
+          <p class="say">I’ve been playing padel for…</p>
+          <div class="opts" role="radiogroup" aria-label="Experience" data-q="lvl">
+            <button class="opt" role="radio" aria-checked="false" data-v="1">under a year</button>
+            <button class="opt" role="radio" aria-checked="true" data-v="2">one to three years</button>
+            <button class="opt" role="radio" aria-checked="false" data-v="3">longer than that</button>
+          </div>
+        </div>
+        <div class="q rv">
+          <div class="ql mono"><span>02</span><span>Game</span></div>
+          <p class="say">On court, I’d rather…</p>
+          <div class="opts" role="radiogroup" aria-label="Playing style" data-q="style">
+            <button class="opt" role="radio" aria-checked="false" data-v="c">defend from the back</button>
+            <button class="opt" role="radio" aria-checked="true" data-v="a">do a bit of everything</button>
+            <button class="opt" role="radio" aria-checked="false" data-v="p">attack the net</button>
+          </div>
+        </div>
+        <div class="q rv">
+          <div class="ql mono"><span>03</span><span>Arm</span></div>
+          <p class="say">And my elbow…</p>
+          <div class="opts" role="radiogroup" aria-label="Arm comfort" data-q="arm">
+            <button class="opt" role="radio" aria-checked="true" data-v="ok">is absolutely fine</button>
+            <button class="opt" role="radio" aria-checked="false" data-v="sore">complains sometimes</button>
+          </div>
+        </div>
+      </div>
+      <div class="res">
+        <div class="res-hd"><h3>Your three</h3><span class="mono" style="color:var(--muted)" id="resNote">Updated as you answer</span></div>
+        <div id="picks"></div>
+        <div class="second">
+          <p><b>Want a second opinion?</b> Book thirty minutes on the fitting court with a coach watching your swing, or do it on video from your own court.</p>
+          <a class="btn btn-ball" href="#studio">Book a fitting <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 ANATOMY ================= -->
+<section class="night" aria-labelledby="anaT">
+  <div class="anat">
+    <div class="film" data-seq="carbon" data-n="48" data-mode="pass">
+      <img class="still" src="film/seq/carbon/d/000.webp" alt="" aria-hidden="true">
+      <canvas class="cv" aria-hidden="true"></canvas>
+      <span class="cap mono">Carbon face, drilled · macro</span>
+    </div>
+    <div class="copy">
+      <div class="idx mono rv"><b>04</b>Anatomy</div>
+      <h2 class="h2 rv" id="anaT">What you’re<br>actually paying for.</h2>
+      <ol class="parts">
+        <li class="rv"><span class="n mono">Face</span><h3>3K, 12K, 18K carbon</h3><p>The K is thousands of filaments per carbon bundle. Lower tends to feel softer and more connected; higher is stiffer and hands you more pace. Fibreglass is softer still, and kinder for a first racket.</p></li>
+        <li class="rv"><span class="n mono">Core</span><h3>Hard EVA, soft EVA, MultiEVA</h3><p>The foam inside is the engine. Hard EVA returns pace when you swing big; soft EVA does the work for you on slow balls and is easier on the elbow. MultiEVA tries to do both.</p></li>
+        <li class="rv"><span class="n mono">Balance</span><h3>Head-heavy or even</h3><p>Weight towards the head adds power on the smash and costs you speed at the net. Even balance is quicker in your hands and forgives a late swing.</p></li>
+        <li class="rv"><span class="n mono">Shape</span><h3>Round, teardrop, diamond</h3><p>Shape moves the sweet spot. Round keeps it low and central for control, diamond pushes it high for power, and teardrop sits in between.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 KIT ================= -->
+<section class="sec" id="kit" aria-labelledby="kitT">
+  <div class="wrap">
+    <div class="kit-head">
+      <div class="t rv">
+        <div class="idx mono"><b>05</b>The rest of the bag</div>
+        <h2 class="h2" id="kitT">Everything else that<br>goes in the bag.</h2>
+      </div>
+      <p class="lead rv" data-d="1">Shoes with an outsole made for sand-dressed turf, racket bags that keep the heat off your carbon, and balls by the tube or the box.</p>
+    </div>
+    <div class="kit rv">
+      <div class="feature">
+        <img src="img/feet.webp" alt="A player’s trainers beside a padel racket and ball on blue court turf" loading="lazy" width="1600" height="1200">
+        <div class="cap"><b>Turf eats running shoes. Buy the right sole.</b><span class="mono">Shoes · Bags · Balls</span></div>
+      </div>
+      <div class="row4" id="kitGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 WHY ================= -->
+<section class="sec" style="padding-top:0" aria-labelledby="whyT">
+  <div class="wrap why">
+    <div class="t">
+      <div class="idx mono rv"><b>06</b>Why a specialist</div>
+      <h2 class="h2 rv" id="whyT">A superstore sells you a racket. <span class="serif">We’d rather sell you the right one.</span></h2>
+    </div>
+    <div class="pics"><div class="sticky" id="whyPics">
+      <img class="on" src="img/smash.webp" alt="A player hitting an overhead smash under floodlights" loading="lazy">
+      <img src="img/racket-net.webp" alt="A padel racket and ball lying on blue turf in the shadow of the net" loading="lazy">
+      <img src="img/pov.webp" alt="Looking down at a racket and ball on the court lines between a player’s feet" loading="lazy">
+      <img src="img/player-bw.webp" alt="A player at the net, in black and white" loading="lazy">
+    </div></div>
+    <ol id="whyList">
+      <li class="on rv" data-i="0"><span class="num">01</span><div><h3>Played before it’s listed.</h3><p>Nothing goes on the wall until one of us has had it on court for a week. Our honest notes are on every racket, including the ones we wouldn’t buy.</p></div></li>
+      <li class="rv" data-i="1"><span class="num">02</span><div><h3>Demo it first.</h3><p>Take any demo racket for seven days for £10. Keep the one you love and the £10 comes off the price.</p></div></li>
+      <li class="rv" data-i="2"><span class="num">03</span><div><h3>Fitted, not picked.</h3><p>A coach looks at your game, not your basket. Most people leave the fitting court with a cheaper racket than the one they came in for.</p></div></li>
+      <li class="rv" data-i="3"><span class="num">04</span><div><h3>Looked after all season.</h3><p>Overgrip and frame protector fitted free on every racket, and free regrips for the first season. Bring it in, we’ll do it while you wait.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= 07 STUDIO ================= -->
+<section class="studio" id="studio" aria-labelledby="stuT">
+  <img src="img/studio.webp" alt="The Vidrio studio: a wall of padel rackets under pin spots, with a floodlit glass practice court behind the window" loading="lazy">
+  <div class="wrap">
+    <div class="card2 rv">
+      <div class="idx mono"><b>07</b>The studio</div>
+      <h2 id="stuT">The fitting court.</h2>
+      <p>Hit with a dozen rackets on a real glass court while a coach watches your swing. Thirty minutes, and free when you buy a racket over £150.</p>
+      <div class="hero-cta">
+        <button class="btn btn-ball" data-book>Book a fitting <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+        <button class="btn btn-ghost" data-book="video">Fit me on video</button>
+      </div>
+      <div class="hours mono"><span>Mon–Fri 7am–10pm</span><span>Sat–Sun 8am–8pm</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= NEWSLETTER + FOOTER ================= -->
+<footer class="night foot">
+  <section class="news" aria-labelledby="newsT">
+    <div class="wrap">
+      <h2 id="newsT">First on<br><span class="serif">court.</span></h2>
+      <form id="newsForm" novalidate>
+        <p>New drops, demo days and honest reviews. One email a fortnight, no noise.</p>
+        <div class="field">
+          <label class="vh" for="em">Email address</label>
+          <input id="em" type="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn btn-ball" type="submit">Sign up</button>
+        </div>
+        <div class="ok mono" id="newsOk" role="status"></div>
+      </form>
+    </div>
+  </section>
+  <div class="knock" aria-hidden="true">
+    <img src="film/aerial-poster.jpg" alt="">
+    <video data-src="film/aerial-1600.mp4" muted playsinline loop preload="none" poster="film/aerial-poster.jpg"></video>
+    <p class="word">VIDRIO</p>
+  </div>
+  <div class="wrap">
+    <div class="fcols">
+      <div class="about"><h4 class="mono">Vidrio</h4><p>The padel specialist. Bullpadel and Babolat, chosen by players and fitted on a glass court. Rackets, shoes, bags and balls, and nothing from any other sport.</p></div>
+      <div><h4 class="mono">Shop</h4><ul><li><a href="#wall">Rackets</a></li><li><a href="#kit">Shoes</a></li><li><a href="#kit">Bags</a></li><li><a href="#kit">Balls</a></li><li><a href="#wall" data-filter="first">First rackets</a></li></ul></div>
+      <div><h4 class="mono">Help</h4><ul><li><a href="#fitting">Racket finder</a></li><li><a href="#studio">Book a fitting</a></li><li><a href="#top">Delivery &amp; returns</a></li><li><a href="#top">Contact</a></li></ul></div>
+      <div><h4 class="mono">Follow</h4><ul><li><a href="#top">Instagram</a></li><li><a href="#top">YouTube</a></li><li><a href="#top">Strava club</a></li></ul></div>
+    </div>
+    <div class="legal">
+      <p>© 2026 Vidrio. A concept site. Bullpadel® and Babolat® are trademarks of their respective owners; product photography is the brands’ own. Lifestyle photography from Pexels; films made for this site.</p>
+      <p class="mono">Prices in GBP</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= overlays ================= -->
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="bag" aria-label="Your bag" aria-hidden="true">
+  <div class="dr-hd"><h2>Your bag</h2><button class="ic" data-close aria-label="Close bag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="dr-body">
+    <div class="free" id="free"><p id="freeTxt"></p><div class="bar"><i id="freeBar"></i></div></div>
+    <div id="lines"></div>
+  </div>
+  <div class="dr-ft">
+    <div class="tot"><span>Subtotal</span><span id="sub">£0.00</span></div>
+    <span class="mono">Delivery and any demo credit applied at checkout</span>
+    <button class="btn btn-ink" id="checkout">Checkout <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+    <p class="note" id="coNote" role="status"></p>
+  </div>
+</aside>
+
+<div class="modal" id="qv" role="dialog" aria-modal="true" aria-labelledby="qvName" aria-hidden="true">
+  <div class="box">
+    <div class="gal"><div class="main" id="qvMain"></div><div class="thumbs" id="qvThumbs"></div></div>
+    <div class="info">
+      <button class="ic x" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <span class="mono b" id="qvBrand"></span>
+      <h2 id="qvName"></h2>
+      <span class="price" id="qvPrice"></span>
+      <p class="take" id="qvTake"></p>
+      <dl class="specs" id="qvSpecs"></dl>
+      <div class="acts">
+        <button class="btn btn-ink" id="qvAdd">Add to bag</button>
+        <a class="btn btn-ghost" href="#studio" data-close>Try it on the fitting court</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="Search" aria-hidden="true">
+  <div class="wrap">
+    <div class="bar">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <label class="vh" for="q">Search</label>
+      <input id="q" type="search" placeholder="Search rackets, shoes, bags…" autocomplete="off">
+      <button class="ic" data-close aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <p class="hint mono" id="hint">Try “Viper”, “diamond”, “soft” or “shoes”</p>
+    <div class="sres" id="sres"></div>
+  </div>
+</div>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="top"><span class="logo">VIDRIO</span><button class="ic" data-close aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <nav aria-label="Mobile">
+    <a href="#wall" data-close>Rackets</a>
+    <a href="#kit" data-close>Shoes &amp; bags</a>
+    <a href="#houses" data-close>Brands</a>
+    <a href="#fitting" data-close>Racket finder</a>
+    <a href="#studio" data-close>Fitting court</a>
+    <a href="#" data-close data-open="search">Search</a>
+  </nav>
+  <p class="btm mono">Free UK delivery over £50 · 30-day returns</p>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><img id="toastImg" alt=""><span id="toastTxt"></span><button data-open="bag">View bag</button></div>
+
+<script>
+(()=>{
+'use strict';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const money=n=>'£'+n.toFixed(2);
+const ico={plus:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3v10M3 8h10"/></svg>'};
+
+/* ---------- catalogue ----------
+   axis: 0 = all control, 100 = all power (the order of the wall)
+   lvl: 1 first racket · 2 improver · 3 advanced
+   feel: soft · medium · hard        style: c control · a all-round · p power */
+const R=[
+ {id:'counter-origin',b:'Babolat',n:'Counter Origin',p:90,shape:'round',w:'355 g',bal:'Head-light',face:'Fibreglass',core:'EVA',feel:'soft',lvl:1,style:'c',axis:6,first:1,take:'Round, light in the head and soft fibreglass. The right first racket, not a cheap one.'},
+ {id:'counter-veron',b:'Babolat',n:'Counter Veron 2.6',p:210,shape:'round',w:'365 g',bal:'Head-heavy',face:'Carbon Flex',core:'Black EVA',feel:'soft',lvl:2,style:'c',axis:15,take:'Round, soft and easy to place. The racket we hand most improving players first.'},
+ {id:'counter-viper',b:'Babolat',n:'Counter Viper 2.6',p:280,shape:'round',w:'365 g',bal:'Head-heavy',face:'3K carbon',core:'X-EVA',feel:'medium',lvl:3,style:'c',axis:24,take:'Round shape, 3K face. A control racket for players who still want to finish the point.'},
+ {id:'neuron',b:'Bullpadel',n:'Neuron 02',p:289.99,shape:'teardrop',shapeName:'Hybrid',w:'365–375 g',bal:'Medium',face:'X-Tend Carbon 3K',core:'HardEVA',feel:'hard',lvl:3,style:'c',axis:32,pro:'Fede Chingotto',take:'Chingotto’s control racket: firm, dry and stable. It rewards placement over pace.'},
+ {id:'air-origin',b:'Babolat',n:'Air Origin',p:100,shape:'teardrop',w:'345 g',bal:'Even',face:'Fibreglass',core:'EVA',feel:'soft',lvl:1,style:'a',axis:38,first:1,take:'A 345 g teardrop that’s easy to swing and easy to love in your first year.'},
+ {id:'air-veron',b:'Babolat',n:'Air Veron 2.6',p:210,shape:'teardrop',w:'355 g',bal:'Even',face:'Carbon Flex',core:'Black EVA',feel:'soft',lvl:2,style:'a',axis:44,take:'Light, forgiving teardrop for improvers who want a bit of everything.'},
+ {id:'air-viper',b:'Babolat',n:'Air Viper 2.6',p:280,shape:'teardrop',w:'355 g',bal:'Even',face:'16K carbon',core:'X-EVA',feel:'medium',lvl:3,style:'a',axis:50,take:'The quickest racket in the Viper family. Built for players who live at the net.'},
+ {id:'vertex-w',b:'Bullpadel',n:'Vertex 05 W',p:254.99,shape:'diamond',w:'350–360 g',bal:'Medium-high',face:'Fibrix',core:'MultiEVA',feel:'medium',lvl:2,style:'a',axis:55,women:1,pro:'Delfi Brea',take:'The Vertex in a lighter, Fibrix-faced build. Quicker hands, kinder on the arm.'},
+ {id:'technical-origin',b:'Babolat',n:'Technical Origin+',p:130,shape:'diamond',w:'355 g',bal:'Even',face:'Fibreglass',core:'EVA',feel:'soft',lvl:1,style:'p',axis:58,first:1,take:'A diamond for beginners who already know they like to hit hard.'},
+ {id:'flow',b:'Bullpadel',n:'Flow Legend',p:229.99,shape:'diamond',w:'350–360 g',bal:'High',face:'Fibrix',core:'EVA',feel:'medium',lvl:2,style:'p',axis:61,women:1,pro:'Alejandra Salazar',take:'Light, fast and attacking without being stiff. Alejandra Salazar’s line.'},
+ {id:'vertex-05',b:'Bullpadel',n:'Vertex 05',p:299.99,shape:'diamond',w:'365–375 g',bal:'High',face:'X-Tend Carbon 12K',core:'Vertex Core',feel:'medium',lvl:3,style:'a',axis:65,isNew:1,pro:'Juan Tello',take:'Diamond power with a bigger sweet spot than it has any right to. The one most advanced players should try first.'},
+ {id:'technical-viper-soft',b:'Babolat',n:'Technical Viper Soft 3.0',p:250,shape:'diamond',w:'365 g',bal:'Head-heavy',face:'Soft carbon',core:'Black EVA',feel:'soft',lvl:3,style:'p',axis:69,take:'Viper shape and power over a softer Black EVA core. The arm-friendly way into a diamond.'},
+ {id:'vertex-geo',b:'Bullpadel',n:'Vertex 05 Geo',p:299.99,shape:'diamond',shapeName:'Geometric',w:'365–375 g',bal:'High',face:'X-Tend Carbon 3K',core:'MultiEVA',feel:'medium',lvl:3,style:'p',axis:73,isNew:1,pro:'Pablo Cardona',take:'A Vertex with a wider, geometric head: more surface and more bite at the net.'},
+ {id:'neuron-edge',b:'Bullpadel',n:'Neuron 02 Edge',p:289.99,shape:'diamond',shapeName:'Geometric',w:'365–375 g',bal:'High',face:'X-Tend Carbon 3K',core:'HardEVA',feel:'hard',lvl:3,style:'p',axis:77,isNew:1,take:'Neuron precision with the dial turned towards attack. Stiff, direct and very stable.'},
+ {id:'technical-viper',b:'Babolat',n:'Technical Viper 3.0',p:320,shape:'diamond',w:'370 g',bal:'Head-heavy',face:'3K carbon',core:'Hard EVA',feel:'hard',lvl:3,style:'p',axis:82,alt:['technical-viper-34','technical-viper-side'],take:'Babolat’s power diamond: 3K carbon over Hard EVA. A heavy ball and a high balance.'},
+ {id:'viper-jl',b:'Babolat',n:'Viper Juan Lebrón 3.1',p:340,shape:'diamond',w:'370 g',bal:'Head-heavy',face:'3K carbon',core:'Hard EVA',feel:'hard',lvl:3,style:'p',axis:86,isNew:1,pro:'Juan Lebrón',take:'Juan Lebrón’s own racket. Everything the Technical Viper does, with a little more.'},
+ {id:'hack-05',b:'Bullpadel',n:'Hack 05',p:299.99,shape:'diamond',w:'365–375 g',bal:'High',face:'Tricarbon 18K',core:'MultiEVA',feel:'hard',lvl:3,style:'p',axis:91,isNew:1,pro:'Paquito Navarro',alt:['hack-05-34','hack-05-side','hack-05-top'],take:'The fastest-feeling racket on the wall. Brutal on the smash and unforgiving if you’re late, so buy it for your arm speed, not your ambitions.'},
+ {id:'xplo',b:'Bullpadel',n:'XPLO',p:284.99,shape:'diamond',shapeName:'Geometric',w:'365–375 g',bal:'High',face:'X-Tend Carbon 3K',core:'MultiEVA',feel:'medium',lvl:3,style:'p',axis:96,isNew:1,pro:'Martín Di Nenno',take:'Di Nenno’s racket and the most explosive thing Bullpadel makes. It demands clean contact.'}
+];
+R.forEach(r=>{r.kind='Racket';r.img=`img/p/${r.id}.webp`});
+const K=[
+ {id:'shoe-hack',b:'Bullpadel',n:'Hack Vibram',cat:'Shoes',p:79.99,spec:'Vibram outsole · men’s'},
+ {id:'shoe-neuron',b:'Bullpadel',n:'Neuron Vibram',cat:'Shoes',p:69.99,spec:'Vibram outsole · men’s'},
+ {id:'shoe-pearl',b:'Bullpadel',n:'Pearl Vibram',cat:'Shoes',p:72.99,spec:'Vibram outsole · women’s'},
+ {id:'shoe-vertex',b:'Bullpadel',n:'Vertex Vibram',cat:'Shoes',p:74.99,spec:'Vibram outsole · men’s'},
+ {id:'bag-hack',b:'Bullpadel',n:'Hack racket bag',cat:'Bags',p:94.99,spec:'Thermal racket pocket'},
+ {id:'bag-neuron',b:'Bullpadel',n:'Neuron racket bag',cat:'Bags',p:94.99,spec:'Thermal racket pocket'},
+ {id:'balls-premium-pro',b:'Bullpadel',n:'Premium Pro balls',cat:'Balls',p:4.99,spec:'Tube of 3'},
+ {id:'balls-next-pro',b:'Bullpadel',n:'Next Pro balls',cat:'Balls',p:5.49,spec:'Tube of 3 · FIP official'}
+];
+K.forEach(k=>{k.kind=k.cat;k.img=`img/p/${k.id}.webp`;k.take={Shoes:'Turf and sand chew through running shoes. A herringbone Vibram sole grips and lets you slide.',Bags:'Carbon hates a hot car. A thermal pocket keeps your racket’s core happy.',Balls:'Fresh balls change the game more than most rackets do. Open a new tube for anything that matters.'}[k.cat]});
+const ALL=[...R,...K], BY=Object.fromEntries(ALL.map(x=>[x.id,x]));
+const shapeLabel=r=>r.shapeName||r.shape[0].toUpperCase()+r.shape.slice(1);
+const specLine=r=>`${shapeLabel(r)} · ${r.w} · ${r.bal}`;
+
+/* ---------- header: glass over the films, solid once the hero has passed ---------- */
+const hdr=$('#hdr'), heroEl=$('#hero');
+const onScroll=()=>hdr.classList.toggle('solid',heroEl.getBoundingClientRect().bottom<110);
+document.addEventListener('scroll',onScroll,{passive:true,capture:true});onScroll();
+
+/* ---------- scroll films ----------
+   Frames load coarse-to-fine (every 16th, then 8th, 4th...), so scrubbing works
+   before the whole sequence has arrived; the nearest loaded frame is drawn. */
+const SCRUB=document.documentElement.classList.contains('scrub-on');
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const ss=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t)};
+const lerpKeys=(keys,p)=>{for(let i=1;i<keys.length;i++){if(p<=keys[i][0]){const[a,va]=keys[i-1],[b,vb]=keys[i];return va+(vb-va)*clamp((p-a)/(b-a))}}return keys[keys.length-1][1]};
+const FOCUS={glass:p=>[lerpKeys([[0,.27],[.5,.43],[1,.64]],p),.5]};
+class Film{
+  constructor(el){
+    this.el=el;this.name=el.dataset.seq;this.n=+el.dataset.n;this.mode=el.dataset.mode||'pin';
+    this.cv=$('.cv',el);this.ctx=this.cv.getContext('2d');this.still=$('.still',el);
+    this.size=innerWidth<900?'m':'d';this.imgs=new Array(this.n);this.t=0;this.drawn=-1;this.dirty=true;this.vis=false;
+    this.beats=$$('.beat',el).map(b=>({el:b,i:b.dataset.in?b.dataset.in.split(',').map(Number):null,o:b.dataset.out?b.dataset.out.split(',').map(Number):null}));
+    this.focus=FOCUS[this.name]||(()=>[.5,.5]);
+  }
+  src(i){return `film/seq/${this.name}/${this.size}/${String(i).padStart(3,'0')}.webp`}
+  load(){
+    if(this.started)return;this.started=true;
+    const order=[],seen=new Set(),push=i=>{if(i>=0&&i<this.n&&!seen.has(i)){seen.add(i);order.push(i)}};
+    if(!SCRUB)push(this.mode==='pass'?Math.round((this.n-1)/2):0);
+    else{push(0);push(this.n-1);[16,8,4,2,1].forEach(st=>{for(let i=0;i<this.n;i+=st)push(i)})}
+    let next=0;const pump=()=>{if(next>=order.length)return;const i=order[next++];const im=new Image();im.decoding='async';
+      im.onload=()=>{this.imgs[i]=im;if(this.drawn<0||Math.abs(i-this.want())<Math.abs(this.drawn-this.want())){this.dirty=true;kick()}pump()};
+      im.onerror=pump;im.src=this.src(i)};
+    for(let k=0;k<6;k++)pump();
+  }
+  progress(){
+    const r=this.el.getBoundingClientRect(),vh=innerHeight;
+    if(!SCRUB)return this.mode==='pass'?.5:0;
+    return this.mode==='pass'?clamp((vh-r.top)/(vh+r.height)):clamp(-r.top/Math.max(1,r.height-vh));
+  }
+  want(){return Math.round(this.t*(this.n-1))}
+  nearest(i){if(this.imgs[i])return i;for(let d=1;d<this.n;d++){if(this.imgs[i-d])return i-d;if(this.imgs[i+d])return i+d}return -1}
+  render(){
+    const i=this.nearest(this.want());
+    if(i>=0&&(i!==this.drawn||this.dirty)){
+      const cv=this.cv,dpr=Math.min(devicePixelRatio||1,2),w=Math.round(cv.clientWidth*dpr),h=Math.round(cv.clientHeight*dpr);
+      if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
+      const im=this.imgs[i],s=Math.max(w/im.naturalWidth,h/im.naturalHeight),dw=im.naturalWidth*s,dh=im.naturalHeight*s,[fx,fy]=this.focus(this.t);
+      const dx=clamp(w/2-fx*dw,w-dw,0),dy=clamp(h/2-fy*dh,h-dh,0);
+      this.ctx.drawImage(im,dx,dy,dw,dh);this.drawn=i;this.dirty=false;
+      if(this.still.style.opacity!=='0')this.still.style.opacity='0';
+    }
+    if(SCRUB)for(const b of this.beats){
+      const a=b.i?ss(b.i[0],b.i[1],this.t):1,o=b.o?ss(b.o[0],b.o[1],this.t):0,v=a*(1-o);
+      b.el.style.opacity=v.toFixed(3);b.el.style.transform=RM?'none':`translateY(${((1-a)*28-o*36).toFixed(1)}px)`;
+      b.el.style.pointerEvents=v<.2?'none':'';b.el.style.visibility=v<.01?'hidden':'';
+    }
+  }
+}
+const films=$$('[data-seq]').map(el=>new Film(el));
+let raf=0;
+const tick=()=>{raf=0;let moving=false;
+  for(const f of films){if(!f.vis&&f.drawn>=0)continue;
+    const tgt=f.progress(),d=tgt-f.t;
+    if(RM||Math.abs(d)<.0008)f.t=tgt;else{f.t+=d*.2;moving=true}
+    f.render();
+    if(f.name==='hero')$('#heroBar').style.transform=`scaleX(${f.t.toFixed(4)})`;
+  }
+  onScroll();
+  if(moving||films.some(f=>f.vis))raf=requestAnimationFrame(tick)};
+function kick(){if(!raf)raf=requestAnimationFrame(tick)}
+const fio=new IntersectionObserver(es=>es.forEach(e=>{const f=films.find(x=>x.el===e.target);f.vis=e.isIntersecting;if(e.isIntersecting){f.load();f.dirty=true;kick()}}),{rootMargin:'120% 0px'});
+films.forEach(f=>fio.observe(f.el));
+films[0].load();
+document.addEventListener('scroll',kick,{passive:true,capture:true});
+if(window.visualViewport)visualViewport.addEventListener('scroll',kick,{passive:true});
+addEventListener('resize',()=>{films.forEach(f=>f.dirty=true);kick()});
+
+
+/* ---------- #debug: what this browser reports (open the page with #debug on the end) ---------- */
+if(location.hash==='#debug'){
+  const box=document.createElement('pre');let evs=0;
+  box.style.cssText='position:fixed;left:8px;bottom:8px;z-index:200;margin:0;padding:10px 12px;background:rgba(0,0,0,.82);color:#DDF247;font:11px/1.45 ui-monospace,monospace;border-radius:6px;pointer-events:none;white-space:pre';
+  document.body.appendChild(box);
+  document.addEventListener('scroll',()=>evs++,{capture:true,passive:true});
+  const se=document.scrollingElement;
+  setInterval(()=>{box.textContent=[
+    'reduced motion: '+RM,
+    'viewport: '+innerWidth+'×'+innerHeight+'  page height: '+(se?se.scrollHeight:'?'),
+    'scrollY: '+Math.round(scrollY)+'  scroll events: '+evs,
+    ...films.map(f=>f.name+': '+f.imgs.filter(Boolean).length+'/'+f.n+' frames  t='+f.t.toFixed(2)+'  showing '+f.drawn)
+  ].join('\n')},250);
+}
+
+/* ---------- footer film (plain looping video) ---------- */
+const want=new Set();
+const tryPlay=v=>v.play().then(()=>{const p=v.parentElement.querySelector(':scope > img');if(p)p.style.opacity=0}).catch(()=>{});
+const vio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
+  if(e.isIntersecting){if(!v.src&&v.dataset.src)v.src=v.dataset.src;want.add(v);tryPlay(v)}else{want.delete(v);if(v.src)v.pause()}
+}),{rootMargin:'200px 0px',threshold:.15});
+$$('video[data-src]').forEach(v=>vio.observe(v));
+['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,()=>want.forEach(v=>{if(v.src&&v.paused)tryPlay(v)}),{passive:true}));
+$$('.knock img').forEach(i=>i.style.transition='opacity .8s');
+
+/* ---------- reveals ---------- */
+const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+$$('.rv').forEach(el=>RM?el.classList.add('in'):rio.observe(el));
+
+/* ---------- the wall ---------- */
+const track=$('#track');
+track.innerHTML=R.map(r=>`
+ <article class="card" data-id="${r.id}" data-b="${r.b}">
+  <div class="img">
+   ${r.isNew?`<span class="tag new mono">${r.b==='Bullpadel'?'New 2027':'New season'}</span>`:r.first?'<span class="tag mono">First racket</span>':''}
+   <span class="brand mono">${r.b}</span>
+   <img class="main${r.alt?' has-alt':''}" src="${r.img}" alt="${r.b} ${r.n} padel racket" loading="lazy" width="800" height="1000">
+   ${r.alt?`<img class="alt" src="img/p/${r.alt[0]}.webp" alt="" loading="lazy" width="800" height="1000">`:''}
+   <button class="qv" data-qv="${r.id}">Quick view</button>
+  </div>
+  <div><h3>${r.n}</h3><div class="spec mono">${specLine(r)}</div></div>
+  <div class="meter mono" aria-label="Control to power: ${r.axis} of 100"><span>C</span><span class="ln"><i style="left:${r.axis}%"></i></span><span>P</span></div>
+  <div class="row"><span class="price">${money(r.p)}</span><button class="add" data-add="${r.id}" aria-label="Add ${r.n} to bag">${ico.plus}</button></div>
+ </article>`).join('');
+const dot=$('#scaleDot');
+const upd=()=>{const vis=$$('.card:not(.hide)',track);if(!vis.length)return;const max=track.scrollWidth-track.clientWidth;const t=max>0?track.scrollLeft/max:0;
+  const a0=+BY[vis[0].dataset.id].axis, a1=+BY[vis[vis.length-1].dataset.id].axis; dot.style.left=(a0+(a1-a0)*t)+'%'};
+track.addEventListener('scroll',upd,{passive:true});upd();
+$$('[data-scroll]').forEach(b=>b.addEventListener('click',()=>track.scrollBy({left:+b.dataset.scroll*track.clientWidth*.8,behavior:'smooth'})));
+const filt=f=>{
+  $$('.chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.f===f));
+  $$('.card',track).forEach(c=>{const r=BY[c.dataset.id];const show=f==='all'||r.b===f||(f==='first'&&r.lvl===1)||(f==='soft'&&r.feel==='soft');c.classList.toggle('hide',!show)});
+  track.scrollTo({left:0});upd();
+};
+$$('.chip').forEach(c=>c.addEventListener('click',()=>filt(c.dataset.f)));
+$$('[data-filter]').forEach(a=>a.addEventListener('click',()=>filt(a.dataset.filter)));
+
+/* ---------- two houses ---------- */
+const HOUSE={bp:['hack-05','neuron','xplo','vertex-05'],bb:['viper-jl','technical-viper','air-viper','counter-viper']};
+$$('.house').forEach(h=>{
+  const ids=HOUSE[h.dataset.house], st=$('.stage',h), ul=$('ul',h);
+  st.innerHTML=ids.map((id,i)=>{const r=BY[id];const cut=h.dataset.house==='bb'?`img/p/${id}-cut.webp`:r.img;return `<img src="${cut}" alt="" loading="lazy" class="${i?'':'on'}" data-id="${id}">`}).join('');
+  ul.innerHTML=ids.map((id,i)=>{const r=BY[id];return `<li><button data-show="${id}" aria-current="${!i}"><span class="nm">${r.n}</span><span class="who">${r.pro||shapeLabel(r)}</span></button></li>`}).join('');
+  const show=id=>{$$('img',st).forEach(im=>im.classList.toggle('on',im.dataset.id===id));$$('[data-show]',ul).forEach(b=>b.setAttribute('aria-current',b.dataset.show===id))};
+  $$('[data-show]',ul).forEach(b=>{b.addEventListener('mouseenter',()=>show(b.dataset.show));b.addEventListener('focus',()=>show(b.dataset.show));b.addEventListener('click',()=>openQV(b.dataset.show))});
+});
+
+/* ---------- the fitting ---------- */
+const A={lvl:2,style:'a',arm:'ok'};
+const shapeFor={c:'round',a:'teardrop',p:'diamond'};
+const score=r=>{
+  let s=0; const why=[];
+  const dl=r.lvl-A.lvl;
+  s-= dl>0 ? dl*(A.lvl===1?5:3) : (-dl)*2;
+  if(r.style===A.style) s+=4; else if(r.style==='a'||A.style==='a') s+=1.5; else s-=2;
+  if(r.shape===shapeFor[A.style]) s+=2;
+  if(A.arm==='sore'){ if(r.feel==='soft')s+=3.5; else if(r.feel==='medium')s+=1; else s-=4; }
+  else if(A.lvl===3&&r.feel==='hard'&&A.style==='p') s+=1;
+  s-= (r.p/1000); // tie-break: cheaper first
+  return s;
+};
+const reason=r=>{
+  const shapeTxt={round:'Round head, so the sweet spot sits low and central and forgives a late swing.',teardrop:'Teardrop head: the sweet spot sits mid-face, quick enough at the net and steady at the back.',diamond:'Diamond head pushes the sweet spot high, where your overheads live.'}[r.shape];
+  const feelTxt={soft:` ${r.core} core is soft and easy on the arm.`,medium:` ${r.core} core sits in the middle: lively without the sting.`,hard:` ${r.core} core is firm, so it rewards a fast, clean swing.`}[r.feel];
+  const lvlTxt=r.lvl<A.lvl?' Comfortable for where you are, with room to spare.':r.lvl>A.lvl?' A step up: it’ll ask more of your technique.':'';
+  return shapeTxt+feelTxt+lvlTxt;
+};
+const picksEl=$('#picks'), fitPic=$('#fitPic');
+let curTop=null;
+const fit=()=>{
+  const ranked=[...R].sort((a,b)=>score(b)-score(a)).slice(0,3);
+  picksEl.innerHTML=ranked.map((r,i)=>`
+   <div class="pick">
+    <span class="rk">${i+1}</span>
+    <div class="th"><img src="${r.img}" alt="" loading="lazy"></div>
+    <div><span class="nm" data-qv="${r.id}" role="button" tabindex="0">${r.b} ${r.n}</span><p class="reason">${reason(r)}</p><div class="mono">${specLine(r)} · ${r.face}</div></div>
+    <div class="act"><span class="price">${money(r.p)}</span><button class="add" data-add="${r.id}" aria-label="Add ${r.n} to bag">${ico.plus}</button></div>
+   </div>`).join('');
+  const top=ranked[0];
+  $('#fitName').textContent=`${top.b} ${top.n}`;
+  $('#fitSpec').textContent=`${specLine(top)} · ${money(top.p)}`;
+  const pct=Math.round(Math.max(72,Math.min(98,80+score(top)*2)));
+  $('#fitMatch').textContent=`${pct}% match`;
+  $$('.shape').forEach(s=>s.classList.toggle('on',s.dataset.shape===top.shape));
+  if(curTop!==top.id){
+    const old=$('img',fitPic); const im=new Image(); im.src=top.img; im.alt=`${top.b} ${top.n}`; im.className='out';
+    fitPic.appendChild(im); requestAnimationFrame(()=>requestAnimationFrame(()=>im.classList.remove('out')));
+    if(old){old.classList.add('out');setTimeout(()=>old.remove(),500)}
+    curTop=top.id;
+  }
+};
+$$('.opts').forEach(g=>g.addEventListener('click',e=>{
+  const b=e.target.closest('.opt');if(!b)return;
+  $$('.opt',g).forEach(o=>o.setAttribute('aria-checked',o===b));
+  const q=g.dataset.q;A[q]=q==='lvl'?+b.dataset.v:b.dataset.v;fit();
+}));
+$$('.opts').forEach(g=>g.addEventListener('keydown',e=>{
+  if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key))return;
+  const os=$$('.opt',g),i=os.indexOf(document.activeElement);if(i<0)return;e.preventDefault();
+  const n=os[(i+(e.key==='ArrowRight'||e.key==='ArrowDown'?1:-1)+os.length)%os.length];n.focus();n.click();
+}));
+fit();
+
+/* ---------- kit ---------- */
+$('#kitGrid').innerHTML=K.map(k=>`
+ <article class="kitem" data-qv="${k.id}">
+  <div class="img"><img src="${k.img}" alt="${k.b} ${k.n}" loading="lazy" width="800" height="800"></div>
+  <span class="cat mono">${k.cat} · ${k.b}</span>
+  <h3>${k.n}</h3>
+  <div class="row"><span class="price">${money(k.p)}</span><button class="add" data-add="${k.id}" aria-label="Add ${k.n} to bag">${ico.plus}</button></div>
+ </article>`).join('');
+
+/* ---------- why: index list drives the sticky picture ---------- */
+const wl=$$('#whyList li'), wp=$$('#whyPics img');
+const setWhy=i=>{wl.forEach((l,j)=>l.classList.toggle('on',j===i));wp.forEach((p,j)=>p.classList.toggle('on',j===i))};
+wl.forEach((l,i)=>l.addEventListener('mouseenter',()=>setWhy(i)));
+const wio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)setWhy(+e.target.dataset.i)}),{rootMargin:'-45% 0px -45% 0px'});
+wl.forEach(l=>wio.observe(l));
+
+/* ---------- bag ---------- */
+let bag={};
+try{bag=JSON.parse(localStorage.getItem('vidrio-bag')||'{}')||{}}catch(e){bag={}}
+Object.keys(bag).forEach(k=>{if(!BY[k])delete bag[k]});
+const save=()=>{try{localStorage.setItem('vidrio-bag',JSON.stringify(bag))}catch(e){}};
+const FREE=50;
+const renderBag=()=>{
+  const ids=Object.keys(bag);const n=ids.reduce((a,k)=>a+bag[k],0);const sub=ids.reduce((a,k)=>a+bag[k]*BY[k].p,0);
+  const nEl=$('#bagN');if(nEl.textContent!==String(n)){nEl.textContent=n;nEl.classList.remove('pop');void nEl.offsetWidth;nEl.classList.add('pop')}
+  $('#sub').textContent=money(sub);
+  $('#freeTxt').innerHTML=sub>=FREE?'<b>Free next-day delivery</b> is on us.':`You’re <b>${money(FREE-sub)}</b> away from free next-day delivery.`;
+  $('#freeBar').style.width=Math.min(100,sub/FREE*100)+'%';
+  $('#lines').innerHTML=ids.length?ids.map(k=>{const x=BY[k];return `
+   <div class="line">
+    <div class="th"><img src="${x.img}" alt=""></div>
+    <div><h4>${x.b} ${x.n}</h4><div class="mono">${x.kind==='Racket'?specLine(x):x.spec}</div>
+     <div class="qty"><button data-q="-1" data-k="${k}" aria-label="One fewer">−</button><span>${bag[k]}</span><button data-q="1" data-k="${k}" aria-label="One more">+</button></div>
+     <button class="rm" data-rm="${k}">Remove</button></div>
+    <span class="price">${money(x.p*bag[k])}</span>
+   </div>`}).join(''):'<div class="empty"><b>Your bag is empty.</b>Start with the wall, or let the racket finder pick three.</div>';
+  $('#coNote').textContent='';
+};
+let tt;
+const add=id=>{bag[id]=(bag[id]||0)+1;save();renderBag();const x=BY[id];$('#toastImg').src=x.img;$('#toastTxt').textContent=`${x.n} added`;const t=$('#toast');t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
+renderBag();
+$('#lines').addEventListener('click',e=>{const q=e.target.closest('[data-q]'),rm=e.target.closest('[data-rm]');
+  if(q){const k=q.dataset.k;bag[k]+= +q.dataset.q;if(bag[k]<=0)delete bag[k];save();renderBag()}
+  if(rm){delete bag[rm.dataset.rm];save();renderBag()}});
+$('#checkout').addEventListener('click',()=>{$('#coNote').textContent=Object.keys(bag).length?'This is a concept site: checkout isn’t connected.':'Add something first.'});
+
+/* ---------- quick view ---------- */
+let qvId=null;
+const openQV=id=>{
+  const x=BY[id];qvId=id;
+  const imgs=[x.img,...(x.alt||[]).map(a=>`img/p/${a}.webp`)];
+  $('#qvMain').innerHTML=`<img src="${imgs[0]}" alt="${x.b} ${x.n}">`;
+  $('#qvThumbs').innerHTML=imgs.length>1?imgs.map((s,i)=>`<button aria-current="${!i}" data-src="${s}" aria-label="View ${i+1}"><img src="${s}" alt=""></button>`).join(''):'';
+  $('#qvBrand').textContent=`${x.b} · ${x.kind}${x.isNew?(x.b==='Bullpadel'?' · New 2027':' · New season'):''}`;
+  $('#qvName').textContent=x.n;$('#qvPrice').textContent=money(x.p);$('#qvTake').textContent=x.take;
+  const sp=x.kind==='Racket'?[['Shape',shapeLabel(x)],['Weight',x.w],['Balance',x.bal],['Face',x.face],['Core',x.core],['Feel',x.feel[0].toUpperCase()+x.feel.slice(1)],['Level',['','First racket','Improver','Advanced'][x.lvl]],...(x.pro?[['Played by',x.pro]]:[])]:[['Category',x.cat],['Details',x.spec]];
+  $('#qvSpecs').innerHTML=sp.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
+  open('qv');
+};
+$('#qvThumbs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('#qvThumbs button').forEach(x=>x.setAttribute('aria-current',x===b));$('#qvMain img').src=b.dataset.src});
+$('#qvAdd').addEventListener('click',()=>{add(qvId);close()});
+
+/* ---------- search ---------- */
+const q=$('#q');
+const doSearch=()=>{const t=q.value.trim().toLowerCase();
+  if(!t){$('#sres').innerHTML='';$('#hint').textContent='Try “Viper”, “diamond”, “soft” or “shoes”';return}
+  const hits=ALL.filter(x=>[x.b,x.n,x.kind,x.shape,x.shapeName,x.feel,x.face,x.core,x.pro,x.cat].join(' ').toLowerCase().includes(t));
+  $('#hint').textContent=hits.length?`${hits.length} result${hits.length>1?'s':''}`:'Nothing on the wall matches that. Try a brand or a shape.';
+  $('#sres').innerHTML=hits.map(x=>`<button data-qv="${x.id}"><div class="th"><img src="${x.img}" alt=""></div><b>${x.b} ${x.n}</b><span class="mono">${money(x.p)}</span></button>`).join('');
+};
+q.addEventListener('input',doSearch);
+
+/* ---------- overlay plumbing ---------- */
+const scrim=$('#scrim');let openEl=null,lastFocus=null;
+function open(name){
+  close(true);
+  const el=$('#'+name);if(!el)return;lastFocus=document.activeElement;
+  el.classList.add('on');el.setAttribute('aria-hidden','false');openEl=el;
+  if(name!=='menu')scrim.classList.add('on');
+  document.documentElement.style.overflow='hidden';
+  if(name==='bag'){$('#toast').classList.remove('on')}
+  setTimeout(()=>{(name==='search'?q:el.querySelector('[data-close]'))?.focus({preventScroll:true})},60);
+}
+function close(silent){
+  if(!openEl)return;openEl.classList.remove('on');openEl.setAttribute('aria-hidden','true');openEl=null;scrim.classList.remove('on');
+  document.documentElement.style.overflow='';
+  if(!silent&&lastFocus)lastFocus.focus?.();
+}
+document.addEventListener('click',e=>{
+  const o=e.target.closest('[data-open]'),c=e.target.closest('[data-close]'),a=e.target.closest('[data-add]'),v=e.target.closest('[data-qv]');
+  if(a){e.stopPropagation();add(a.dataset.add);return}
+  if(o){e.preventDefault();open(o.dataset.open);return}
+  if(v){openQV(v.dataset.qv);return}
+  if(c){close(c.tagName==='A');return}
+  const card=e.target.closest('.card');if(card){openQV(card.dataset.id)}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')close();
+  if(e.key==='Enter'&&e.target.matches('.pick .nm'))openQV(e.target.dataset.qv);
+  if(e.key==='/'&&!openEl&&!e.target.matches('input')){e.preventDefault();open('search')}
+});
+scrim.addEventListener('click',()=>close());
+$('.modal').addEventListener('click',e=>{if(e.target.id==='qv')close()});
+
+/* ---------- studio + newsletter ---------- */
+$$('[data-book]').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.book==='video';b.textContent=v?'We’ll text you a link':'Slots open this week: we’ll be in touch';b.disabled=true}));
+$('#newsForm').addEventListener('submit',e=>{e.preventDefault();const v=$('#em').value.trim();$('#newsOk').textContent=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)?'You’re on the list. First email lands with the next drop.':'That email doesn’t look right.'});
+})();
+</script>
+</body>
+</html>
