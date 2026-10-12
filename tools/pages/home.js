@@ -3,49 +3,17 @@ const { site, builds, esc, Words } = L;
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
 const B = n => builds.find(x => x.n === n);
 const TRY = require('./try.js').DEMOS.filter(x => x.live);
-/* ---- iOS app tiles: drawn, never fetched. 24-unit box, a flat brand colour and
-   a top sheen, which is what a real icon reads as at notification size. ---- */
-const SHEEN = '<path d="M0 0h24v11H0z" fill="#fff" opacity=".15"/>';
-const HANDSET = 'M8.5 5.5 6.7 7.3a1.4 1.4 0 0 0-.1 1.9c3 3.6 5.7 6.3 9.3 9.3a1.4 1.4 0 0 0 1.9-.1l1.8-1.8c.4-.4.4-1 0-1.4l-2.2-1.9a1 1 0 0 0-1.3 0l-.9.8a17.4 17.4 0 0 1-3.8-3.8l.8-.9a1 1 0 0 0 0-1.3l-1.9-2.2a1 1 0 0 0-1.4 0Z';
-const BUBBLE = 'M12 5.4c-4 0-7.2 2.6-7.2 5.8 0 1.9 1.1 3.5 2.8 4.6-.2 1-.7 2-1.5 2.8 1.5-.2 2.9-.7 4.1-1.5.6.1 1.2.2 1.8.2 4 0 7.2-2.6 7.2-5.9S16 5.4 12 5.4Z';
-const IC = {
-  phone: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#34C759"/>${SHEEN}<path d="${HANDSET}" fill="#fff"/></svg>`,
-  msg:   `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#4CD264"/>${SHEEN}<path d="${BUBBLE}" fill="#fff"/></svg>`,
-  wa:    `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#25D366"/>${SHEEN}<path d="${BUBBLE}" fill="#fff"/><path d="${HANDSET}" fill="#25D366" transform="translate(12 11.6) scale(.44) translate(-12 -11.6)"/></svg>`,
-  mail:  `<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#1E8FFF"/>${SHEEN}<rect x="4.4" y="7" width="15.2" height="10.4" rx="2.1" fill="#fff"/><path d="M5.2 8.4 12 13.1l6.8-4.7" fill="none" stroke="#1E8FFF" stroke-width="1.4" stroke-linecap="round"/></svg>`,
-  web:   '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#0A84FF"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".16"/><circle cx="12" cy="12" r="6.6" fill="none" stroke="#fff" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="3" ry="6.6" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M5.6 9.9h12.8M5.6 14.1h12.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></svg>',
-  cal:   '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.6" fill="#FF3B30"/><path d="M0 0h24v11H0z" fill="#fff" opacity=".14"/><rect x="5.2" y="6.4" width="13.6" height="12.4" rx="2.1" fill="#fff"/><path d="M5.2 10.1h13.6" stroke="#FF3B30" stroke-width="1.2"/><rect x="8" y="4.6" width="1.5" height="3.4" rx=".75" fill="#fff"/><rect x="14.5" y="4.6" width="1.5" height="3.4" rx=".75" fill="#fff"/><rect x="7.4" y="12" width="3" height="2.6" rx=".6" fill="#FF3B30" opacity=".82"/><rect x="12" y="12" width="3" height="2.6" rx=".6" fill="#FF3B30" opacity=".3"/></svg>'
-};
-/* one notification, built the way iOS builds one: tile, app name, time, title, body */
-const note = (k, app, time, t1, t2) =>
-  `<span class="ic">${IC[k]}</span><span class="tx"><span class="hd"><b>${app}</b><em>${time}</em></span><span class="t1">${t1}</span><span class="t2">${t2}</span></span>`;
-/* One evening on a working phone, in the order it happened. It is meant to be more than fits:
-   six apps, four and a half hours, and the same number ringing three times. */
-const EVENING = [
-  ['phone','PHONE',    '17:02','Missed call',        '07700 900 461'],
-  ['phone','PHONE',    '17:04','Voicemail',          '0:34 &middot; not listened to'],
-  ['wa',   'WHATSAPP', '17:26','Dave &mdash; kitchen job', 'Any chance you could come Thursday?'],
-  ['phone','PHONE',    '17:48','Missed call',        '07700 900 118'],
-  ['web',  'WEBSITE',  '18:05','New enquiry',        '&ldquo;Boiler&rsquo;s gone off, no heat&rdquo;'],
-  ['msg',  'MESSAGES', '18:31','07700 900 902',      'Hi, are you still doing bathrooms?'],
-  ['phone','PHONE',    '18:52','Missed call',        '07700 900 461 &middot; 2nd time'],
-  ['mail', 'MAIL',     '19:14','Quote request',      'Northgate Lettings &mdash; 4 properties'],
-  ['phone','PHONE',    '19:40','Missed call',        'Unknown number'],
-  ['cal',  'CALENDAR', '20:03','Appointment request','Thursday, 8:00 am'],
-  ['wa',   'WHATSAPP', '20:22','Dave &mdash; kitchen job', 'Did you get my message?'],
-  ['phone','PHONE',    '20:47','Missed call',        '07700 900 461 &middot; 3rd time'],
-  ['web',  'WEBSITE',  '21:05','New booking',        'No deposit taken &middot; unconfirmed'],
-  ['msg',  'MESSAGES', '21:26','07700 900 774',      'Still waiting on that quote mate'],
-  ['phone','PHONE',    '21:46','Missed call',        '07700 900 774']
-];
+/* the same slug rule as assets/builder.js, so the example pages match what the builder writes */
+const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
 const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
 
 module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
-  meta: { key: 'home', title: 'Watch your website build itself.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `Pick your trade and a working site for your business appears in a couple of seconds. ${Words(builds.length)} finished ones are on the page too.` },
+  meta: { key: 'home', title: 'Type your business name. Watch your website build.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `Pick your trade, add your name and town, and a working site for your business builds itself on the page, with a reference number for the call. ${Words(builds.length)} finished ones are on the page too.` },
   render(b){
     const title = `Websites & booking systems for UK trades | ${site.name}`;
-    const description = 'Pick your trade and watch a working website for your business build itself on the page. Websites, booking and missed-call text-back for UK trades, owned by you.';
+    const description = 'Type your business name and watch a working website for it build on the page. Websites, online booking and missed-call text-back for UK trades.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
       { '@type': 'VideoObject', '@id': L.abs('/#film'), name: 'Seven days from invisible to booked', description: 'A film of a website build for a fictional heating engineer: built in seven days, found on Google, and the enquiries arriving in the Skales CRM. Fictional business, illustrative numbers.',
@@ -60,112 +28,110 @@ module.exports = { pages: [{
 ${L.header(b, 'home')}
 <main id="main">
 
-<section class="cold" id="cold" aria-label="One evening of missed calls, and the same evening with a system running">
-  <div class="cold-stage">
-    <video id="coldFilm" muted playsinline preload="auto" disablepictureinpicture
-           poster="${b}assets/film/poster.jpg" data-lut="${b}assets/film/lut.json"
-           aria-label="A phone turning in the dark and lighting up">
-      <source src="${b}assets/film/film.mp4" type="video/mp4">
-    </video>
-    <img class="cold-park" id="coldPark" src="${b}assets/film/park.jpg" alt="" aria-hidden="true" decoding="async">
-    <div class="cold-frame" id="coldFrame" aria-hidden="true">
-
-    <div class="cold-void" id="coldVoid">
-      ${[0,2,4,6,8,10,12,13,14].map(i => EVENING[i])
-        .map(n => `<div class="n nc">${note(n[0], n[1], n[2], n[3], n[4])}</div>`).join('')}
+<section class="builder" id="build" aria-labelledby="h-build">
+  <div class="wrap b-grid">
+    <div class="b-copy">
+      <p class="b-kick">Websites, booking and follow-up for UK trades</p>
+      <h1 id="h-build">Type your business name. Watch your website build.</h1>
+      <p class="lead" id="bLead">Pick what you do, add your name and town, and a working site for your business builds itself here, with booking, prices and a page for every service. It gets a reference number, so on the call I already have it open.</p>
     </div>
 
-    <div class="ios" id="coldIos">
-      <div class="ios-wall"></div>
-      <div class="ios-dim" id="coldDim"></div>
-      <div class="ios-notch"></div>
-      <svg class="ios-stat" viewBox="0 0 74 12" aria-hidden="true">
-        <rect x="0" y="7.5" width="2.6" height="4.5" rx="1" /><rect x="4.4" y="5.4" width="2.6" height="6.6" rx="1" />
-        <rect x="8.8" y="3.3" width="2.6" height="8.7" rx="1" /><rect x="13.2" y="1.2" width="2.6" height="10.8" rx="1" />
-        <path d="M21.4 4.3a8.6 8.6 0 0 1 10.8 0M23.4 7a5.6 5.6 0 0 1 6.8 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-        <circle cx="26.8" cy="10.2" r="1.5"/>
-        <rect x="52" y="1.6" width="19" height="9.4" rx="3" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".42"/>
-        <rect x="53.5" y="3.1" width="13" height="6.4" rx="1.8"/><path d="M72.4 5.1v2.4a2.4 2.4 0 0 0 0-2.4Z" opacity=".42"/>
-      </svg>
-      <div class="ios-lock" id="coldLock"><span class="dt">Wednesday 9 September</span><span class="ck">21:47</span></div>
-
-      <div class="ios-stack" id="coldStack">
-        ${EVENING.map(n => `<div class="nc">${note(n[0], n[1], n[2], n[3], n[4])}</div>`).join('')}
+    <form class="b-form" id="bForm" novalidate>
+      <div class="b-step"><span class="b-lab" id="bTradesLab">What do you do?</span><div class="b-trades" id="bTrades" role="group" aria-labelledby="bTradesLab"></div></div>
+      <div class="b-two">
+        <label class="b-in"><span class="b-lab">Business name</span><input id="bBiz" type="text" placeholder="e.g. Hartley Heating" autocomplete="organization" maxlength="34" enterkeyhint="next"></label>
+        <label class="b-in"><span class="b-lab">Town</span><input id="bTown" type="text" placeholder="e.g. Leeds" autocomplete="address-level2" maxlength="22" enterkeyhint="go"></label>
       </div>
+      <button class="b-go" type="submit">Build my website</button>
+      <p class="b-need" id="bNeed" role="alert" hidden></p>
+      <p class="b-fine">Nothing is sent anywhere until you book a call. The photos are examples, and the phone number is one Ofcom keeps for TV dramas, so nobody gets rung.</p>
+    </form>
 
-      <div class="ios-one" id="coldOne">
-        <div class="oc">
-          <span class="ic ic-sk">s<i>k</i></span>
-          <span class="tx"><span class="hd"><b>SKALES</b><em>now</em></span>
-            <span class="t1">Tonight, handled</span><span class="t2">15 things, while you were on a job</span></span>
-        </div>
-        <div class="op">
-          <div class="op-r"><b>7 calls &amp; voicemails</b><em>texted back in 11s</em></div>
-          <div class="op-r"><b>4 messages</b><em>answered and quoted</em></div>
-          <div class="op-r"><b>3 jobs booked</b><em>Thu 08:00 &middot; Fri 13:30</em></div>
-          <div class="op-r"><b>1 deposit taken</b><em>&pound;45</em></div>
-          <div class="op-f">You did none of it.</div>
-        </div>
+    <div class="b-done" id="bDone" hidden>
+      <div class="b-ref">
+        <span class="b-ref-l">Your draft</span>
+        <span class="b-ref-n" id="dRef">SK-0000</span>
+        <span class="b-ref-m" id="dMeta"></span>
       </div>
-
-      <div class="ios-home"></div>
+      <a class="btn btn-live b-book" id="dBook" href="${b}book/">Book a call about this draft</a>
+      <p class="b-why">Thirty minutes, free. I will show you how the real one gets found on Google in your town, and what it would take.</p>
+      <div class="b-more">
+        <button class="b-ln" type="button" id="dOpen">Open it full size</button>
+        <button class="b-ln" type="button" id="dCopy">Copy the link</button>
+        <button class="b-ln" type="button" id="dEdit">Change the details</button>
+      </div>
     </div>
 
+    <div class="b-stage" id="bStage">
+      <div class="b-win" id="bWin">
+        <div class="b-bar" aria-hidden="true"><i></i><i></i><i></i>
+          <span class="b-url"><svg viewBox="0 0 16 16"><path d="M4.5 7V5.2a3.5 3.5 0 0 1 7 0V7" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="3" y="7" width="10" height="7" rx="1.6" fill="currentColor"/></svg><span id="bUrl">hartleyheating.co.uk</span></span>
+        </div>
+        <div class="b-view" id="bView"></div>
+        <button class="b-guard" type="button" data-guard="bWin"><span>Click to scroll this site</span></button>
+      </div>
+      <div class="b-phone" id="bPhone">
+        <div class="b-pscreen" id="bPScreen"></div>
+        <button class="b-guard" type="button" data-guard="bPhone"><span>Tap to use this site</span></button>
+      </div>
+      <div class="b-log" id="bLog" hidden>
+        <div class="b-log-h"><span class="b-log-n" id="bLogHead">Building</span><span class="b-log-t" id="bLogT"></span><button type="button" class="b-skip" id="bSkip">Skip</button></div>
+        <ol class="b-log-l" id="bLogList" aria-live="polite"></ol>
+      </div>
+      <p class="b-cap" id="bCap">Example draft · fictional business</p>
     </div>
-    <div class="cold-cap" aria-hidden="true"><div class="wrap">
-      <p data-from="0.32" data-to="0.62">Every one of these is a job, or a job lost.</p>
-      <p data-from="0.68" data-to="0.80">Then it goes quiet.</p>
-      <p data-from="0.86" data-to="0.99">Every one of them answered. Not by you.</p>
-    </div></div>
-    <div class="cold-title" id="coldTitle"><div class="wrap">
-      <span class="t">9:47pm</span>
-      <span class="rule"></span>
-      <p class="s">One evening on a phone that nobody is watching.</p>
-      <span class="cold-cue"><i></i>Scroll</span>
-    </div></div>
-    <div class="cold-load" id="coldLoad"><span class="bar"><i></i></span></div>
   </div>
 </section>
 
-<section class="forge" aria-labelledby="h-forge">
+<section class="sec dx" id="draft" aria-labelledby="h-draft">
   <div class="wrap">
-    <div class="grid">
-      <div class="fhead">
-        <h1 id="h-forge">Watch your website build itself.</h1>
-        <p class="lead">The phone is empty because it is waiting for you. Pick what you do and put your name in, and a real working website for <em>your</em> business fills it &mdash; one you can scroll, press and open in a new tab. <strong>It takes a couple of seconds.</strong> The proper one is hand-built, and it is yours from day one.</p>
+    <div class="sec-head">
+      <h2 id="h-draft">A website is only worth the jobs it brings in.</h2>
+      <p class="lead">The draft is the easy part. This is how the real one gets found in <span data-dx="town">your town</span>, and what happens when someone lands on it.</p>
+    </div>
+    <div class="dx-grid">
+      <div class="dx-col">
+        <h3>How you get found</h3>
+        <ol class="dx-list">
+          <li><b>A page for every service, in your town.</b><span>People search for the job and the place, not your name. Each service gets its own page, written for where you work.</span>
+            <ul class="dx-pages" id="dxPages"><li class="dom">hartleyheating.co.uk</li>${HEAT_KW.map(k => `<li>/<b>${esc(slug(k + ' leeds'))}</b></li>`).join('')}</ul></li>
+          <li><b>Your Google Business Profile, matched to the site.</b><span>The same name, number, hours and services in both places, so Google trusts them. That is what gets you into the map results.</span></li>
+          <li><b>Reviews that ask for themselves.</b><span>After every job the customer gets a text with a link to review you. More reviews, and recent ones, keep you near the top of the map.</span></li>
+          <li><b>Written so AI answers can quote it.</b><span>Plain answers to what your customers ask, with the structured data search engines read, so ChatGPT and Google&rsquo;s AI answers can name you.</span></li>
+          <li><b>Ads for when you want work this week.</b><span>Google and Meta ads pointed at the booking page, and tracked to the booked job, not to clicks.</span></li>
+        </ol>
       </div>
-      <div class="side" id="forgePhone">
-        <div class="phone-lit"><div class="screen" id="forgeScreen"></div><button class="tapguard" type="button" id="forgeGuard"><span>Tap the screen to use this site</span></button></div>
-        <div class="forge-cap"><div class="who" id="forgeCap"></div><div class="side-r"><span class="tap-hint" id="tapHint">Tap to use it</span><span class="t" id="forgeTimer" hidden>0.0s</span></div></div>
-        <div class="forge-after" id="forgeAfter" hidden>
-          <p><b>That is a sketch, drawn in a couple of seconds by the same rules every build on this site follows.</b> A real one is hand-written for your business: your photographs, your services, your booking system and your Google listing wired in behind it.</p>
-          <div class="cta-row">
-            <a class="btn btn-live" href="${b}book/">Book a call</a>
-            <button class="btn btn-ghost" type="button" id="forgeOpen">Open it full size</button>
-          </div>
-          <a class="lnk" id="forgeDemo" href="${b}work/" hidden></a>
-        </div>
+      <div class="dx-col">
+        <h3>How visits turn into booked jobs</h3>
+        <ol class="dx-list">
+          <li><b>Booking with a deposit.</b><span>Real slots from your diary, any hour. A deposit holds the slot, so nobody books and vanishes.</span></li>
+          <li><b>Missed calls get a text back.</b><span>On a job when they ring? They get a text within a minute with a link to book, before they ring the next name on Google.</span></li>
+          <li><b>Quotes chase themselves.</b><span>A polite nudge goes out if a quote has not been answered, so fewer of them go cold.</span></li>
+          <li><b>One place for every enquiry.</b><span>Calls, texts, forms and bookings in one list on your phone, each with where it came from.</span></li>
+        </ol>
       </div>
-      <div class="panel-f">
-        <div class="step"><span>1 &nbsp;What do you do?</span><div class="trades" id="forgeTrades" role="tablist" aria-label="Your trade"></div></div>
-        <div class="step"><span>2 &nbsp;What are you called, and where?</span>
-          <div class="two-up">
-            <input id="forgeBiz" type="text" placeholder="Business name" aria-label="Business name" autocomplete="organization" maxlength="34">
-            <input id="forgeTown" type="text" placeholder="Town" aria-label="Town" autocomplete="address-level2" maxlength="22">
-          </div>
-        </div>
-        <button class="btn-go" type="button" id="forgeGo">Build my site</button>
-        <p class="need" id="forgeNeed" hidden></p>
-        <p class="fine">Nothing is sent anywhere and nothing is saved. The photograph is a stand-in made for this page, not a stock library &mdash; a real one uses pictures of your own work. The phone number is an Ofcom drama number, so nobody gets rung.</p>
+    </div>
+    <div class="dx-call">
+      <div>
+        <h3>On the call, I have your draft open.</h3>
+        <ol class="dx-steps">
+          <li><span><b data-dx="draft">Your draft</b>, and what people in <span data-dx="town">your town</span> type into Google when they need you.</span></li>
+          <li><span>Who is getting those jobs now, and what they are doing that you are not.</span></li>
+          <li><span>A flat price and a date, if it is a fit. If it is not, you will hear that too.</span></li>
+        </ol>
       </div>
-          </div>
+      <div class="dx-cta">
+        <a class="btn btn-live" id="dxBook" href="${b}book/">Book a free call</a>
+        <p id="dxRefline">Thirty minutes, free. Build a draft first and it comes with you.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="sec" id="work" aria-labelledby="h-work">
   <div class="wrap">
     <div class="sec-head">
-      <h2 id="h-work">That was a sketch. These are finished.</h2>
+      <h2 id="h-work">That was a draft. These are finished.</h2>
       <p class="lead">${Words(builds.length)} builds: ${SITES.length} full websites and ${TOOLS.length} business tools, each made for an invented business so no client is ever on show. Every one opens and works like the real thing.</p>
     </div>
     ${L.wall(b, FEATURED)}
@@ -265,7 +231,7 @@ ${L.header(b, 'home')}
 </main>
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'forge.css', 'cold.css'], nodes }), body,
-      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'forge.js', 'cold.js', 'nightline.js', 'films.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'builder.css'], nodes }), body,
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'nightline.js', 'films.js']));
   }
 }]};

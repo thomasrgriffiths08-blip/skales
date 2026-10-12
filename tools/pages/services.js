@@ -96,7 +96,7 @@ const metaAd = b => `<figure class="adp">
   <div class="adp-meta" role="img" aria-label="A Facebook feed ad for Larchfield Heating, a fictional heating engineer, offering a free boiler service slot tomorrow">
     <div class="am-hd"><span class="am-av" aria-hidden="true">L</span><div><b>Larchfield Heating</b><span>Sponsored · <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 8h13M8 1.5c2 2 2 11 0 13M8 1.5c-2 2-2 11 0 13" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></div><span class="am-dots" aria-hidden="true">···</span></div>
     <p class="am-tx">Boiler due a service? We’ve got free slots in Ealing this week. Pick one tonight and it’s yours, no phone tag. Gas Safe engineers, and the certificate emailed the same day.</p>
-    <div class="am-img"><img src="${b}assets/plates/heating.webp" width="900" height="506" alt="" loading="lazy" decoding="async"><span class="am-chip"><i></i>Next free slot · Tomorrow, 10:30</span></div>
+    <div class="am-img"><img src="${b}assets/photos/heating-sm.webp" width="820" height="546" alt="" loading="lazy" decoding="async"><span class="am-chip"><i></i>Next free slot · Tomorrow, 10:30</span></div>
     <div class="am-link"><div><span>larchfield.co.uk</span><b>Boiler service in Ealing, book online</b></div><span class="am-btn">Book now</span></div>
     <div class="am-act" aria-hidden="true"><span>Like</span><span>Comment</span><span>Share</span></div>
   </div>

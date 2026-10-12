@@ -188,7 +188,15 @@ strong,b{font-weight:600}
 .book-wrap{display:grid;grid-template-columns:1fr 320px;gap:clamp(28px,5vw,72px);padding-bottom:clamp(56px,8vw,104px)}
 .book-steps{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 28px;padding:0;list-style:none;font-size:.875rem;color:var(--tx-3)}
 .book-steps li[aria-current]{color:var(--tx);font-weight:600}
-.book-steps li.done{color:var(--tx-2)}
+.book-steps li.done{display:block;color:var(--tx-2)}   /* .done is also the teardown card's hidden state */
+.draft-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin:0 0 28px;padding:16px 18px;border-radius:var(--r-m);background:var(--alu)}
+.draft-card>div:first-child{display:grid;gap:2px}
+.draft-card .dc-l{font-size:.875rem;color:var(--tx-2)}
+.draft-card .dc-n{font-family:var(--mono);font-size:1.25rem;font-weight:500;letter-spacing:.02em}
+.draft-card .dc-m{font-size:.9375rem;font-weight:500}
+.draft-card .dc-a{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:.9375rem}
+.draft-card .dc-a .lnk{min-height:40px;display:inline-flex;align-items:center}
+.dc-x{border:0;background:none;padding:0;cursor:pointer;font:inherit;color:var(--tx-2)}
 .bstep{border:0;padding:0;margin:0}
 .bstep legend{padding:0;margin-bottom:20px}
 .bstep legend h2{font-size:clamp(1.5rem,2.6vw,2rem)}
