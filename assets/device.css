@@ -67,6 +67,7 @@
 .filters button:hover{border-color:var(--tx)}
 .filters button[aria-pressed="true"]{background:var(--tx);color:var(--pg);border-color:var(--tx)}
 .filters .sep{width:1px;background:var(--line-2);margin:8px 4px}
+@media (max-width:600px){.filters .sep{display:none}}
 
 /* hero: headline beside the device */
 .hero{padding:clamp(28px,5vw,72px) 0 clamp(40px,6vw,80px)}

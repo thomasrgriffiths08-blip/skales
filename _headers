@@ -1,0 +1,17 @@
+# Cloudflare Pages response headers (ignored by GitHub Pages). Decided 2026-10-08: the site moves to
+# Cloudflare Pages for real redirects, these headers and the small Worker behind /start.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/og/*
+  Cache-Control: public, max-age=604800
+
+/start/*
+  X-Robots-Tag: noindex, follow

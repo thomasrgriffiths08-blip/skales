@@ -71,7 +71,7 @@ ${L.header(b, 'book')}
       <div class="summary" id="summary"></div>
       <div id="calendly" class="calendly"></div>
       <div id="fallback" class="fallback" hidden>
-        <p class="lead">The diary is not connected yet, so send this straight over and you will get a reply with times.</p>
+        <p class="lead">Send this straight over and you will get a reply with times to choose from.</p>
         <div class="cta-row">${site.whatsapp ? `<a class="btn btn-live" id="fbWa" href="${L.waHref('Hi Tom — booking enquiry from your site.')}">Send on WhatsApp</a>` : ''}<a class="btn btn-ghost" id="fbMail" href="mailto:${site.email}">Send by email</a></div>
       </div>
       <p class="f-note" id="notfit" hidden>This studio builds for service businesses, so if that is not you, send the note anyway and you will get a straight answer about whether it is the wrong fit.</p>
@@ -80,14 +80,14 @@ ${L.header(b, 'book')}
   </form>
   <aside class="book-side">
     <div class="nameplate one">
-      <div><dt>What the call is</dt><dd>Fifteen to twenty minutes on what is leaking, what to fix first and what it is worth in jobs. No pitch, no proposal deck.</dd></div>
+      <div><dt>What the call is</dt><dd>Up to half an hour on what is leaking, what to fix first and what it is worth in jobs. No pitch, no proposal deck.</dd></div>
       <div><dt>What it is not</dt><dd>A sales call with a junior. The person on the call is the person who builds it.</dd></div>
       <div><dt>Prefer not to talk</dt><dd><a class="lnk" href="${b}teardown.html">Get a free teardown by message instead</a>.</dd></div>
     </div>
   </aside>
 </section>
 </main>
-${L.footer(b)}`;
+${L.footer(b, { mbar: false })}`;   // the sticky "Book a call" bar would point at this page and cover its Next button
     return L.page(L.head({ b, path: '/book/', title, description, og: 'book', nodes }), body, L.scripts(b, ['book.js']));
   }
 }]};

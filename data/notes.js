@@ -1,5 +1,10 @@
 // Notes: the part of the site Tom keeps adding to. Add an entry, run `node tools/build.js`, push.
 // Every claim must be true and already on the site. No invented numbers.
+const N = require('./builds.js').length;                 // the build count, so a note never goes stale
+const WORDS = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+const TENS = ['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+const words = n => n < 20 ? WORDS[n] : TENS[Math.floor(n / 10)] + (n % 10 ? '-' + WORDS[n % 10] : '');
+const Words = n => { const w = words(n); return w[0].toUpperCase() + w.slice(1); };
 module.exports = [
   { slug: 'what-a-missed-call-costs', date: '2026-09-03',
     title: 'What a missed call actually costs a service business',
@@ -9,7 +14,7 @@ module.exports = [
 <h2>Why the model has a "gone for good" factor</h2>
 <p>Most missed-call calculators quietly assume every missed caller would have booked. They would not. Some ring back, some were price-checking, some booked elsewhere before you saw the voicemail. Stopcock makes that share an explicit slider, so the headline figure is a floor a sceptical owner can defend, not a marketing number.</p>
 <h2>What a text-back in under a minute changes</h2>
-<p>A missed-call text-back sends the customer a message seconds after the ring-out, asks one question, and turns a voicemail into a conversation. The customer who was about to dial the next number replies instead. The follow-up automation on this site does exactly that, and the Redgate demo on the Why page shows the sequence end to end.</p>
+<p>A missed-call text-back sends the customer a message seconds after the ring-out, asks one question, and turns a voicemail into a conversation. The customer who was about to dial the next number replies instead. The follow-up automation on this site does exactly that, and the missed-call demo on the Try page shows the sequence end to end.</p>
 <p>Open the calculator, put your own numbers in, and argue with it. That is what it is for.</p>`,
     links: [['stopcock', 'Open the Stopcock calculator']] },
   { slug: 'why-i-dont-rent-you-your-own-website', date: '2026-09-03',
@@ -24,11 +29,12 @@ module.exports = [
 <h2>Why do it this way</h2>
 <p>Because the work should be good enough that people stay by choice. Rent is what you charge when you are not sure it is.</p>`,
     links: [['work', 'See the builds']] },
-  { slug: 'sixteen-builds-all-fictional', date: '2026-09-03',
-    title: 'Sixteen builds for businesses that don’t exist, on purpose',
+  { slug: 'builds-for-businesses-that-dont-exist', date: '2026-09-03',
+    title: `${Words(N)} builds for businesses that don’t exist, on purpose`,
+    seo: `${Words(N)} builds for businesses that don’t exist`,   // the <title>: the full headline runs past 60 characters
     summary: 'Why every demo on this site is for an invented company, and why that is better proof than a client logo wall.',
     body: `
-<p>Every one of the sixteen builds on this site was made for a business that does not exist: Redgate Heating, Northgate Kitchens, Atelier Voss, Fenwick Heating and the rest are invented, and so is every person, review and phone number inside them. That is deliberate. It means nothing on this site exposes a real client’s numbers, customers or setup.</p>
+<p>Every one of the ${words(N)} builds on this site was made for a business that does not exist: Redgate Heating, Northgate Kitchens, Atelier Voss, Fenwick Heating and the rest are invented, and so is every person, review and phone number inside them. That is deliberate. It means nothing on this site exposes a real client’s numbers, customers or setup.</p>
 <h2>Why fictional beats a logo wall</h2>
 <p>A logo wall proves someone paid. A working build proves what was built. Each demo here runs live in the page: you can drag a job across the dispatch board, take a slot in the booking flow, or watch the quote engine price a kitchen. A screenshot of a client site cannot do that, and a client site should not be handed to strangers to click through.</p>
 <h2>What a real build shares with these</h2>

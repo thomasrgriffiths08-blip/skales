@@ -29,13 +29,14 @@ ${L.header(b, '')}
           <div class="field"><label for="phone">WhatsApp or mobile</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="07…"></div>
           <div class="field"><label for="biz">Your business &mdash; and what&rsquo;s bugging you <span class="opt">(one line is plenty)</span></label><textarea id="biz" name="biz" placeholder="e.g. Roofing, Wakefield. Website gets visits, phone doesn't ring."></textarea></div>
           <div class="hp" aria-hidden="true"><label>Leave this empty<input name="company" tabindex="-1" autocomplete="off"></label></div>
+          <p class="err" id="fErr" role="alert" hidden></p>
           <button class="btn btn-live send" type="submit">Send it over</button>
         </form>
         <div class="done" id="done">
           <div class="badge">&#10003;</div>
-          <h2 id="doneTitle">Got it.</h2>
-          <p id="doneBody">You&rsquo;ll hear back personally, fast.</p>
-          <p class="ps">PS &mdash; this instant confirmation? Your business could answer missed calls the same way, at 9:47pm, without you touching the phone. That is the kind of thing that gets built here.</p>
+          <h2 id="doneTitle">Nearly there.</h2>
+          <p id="doneBody">Your message is opening. Press send and it comes straight to ${esc(site.founder.name.split(" ")[0])}.</p>
+          <p class="ps">PS &mdash; a missed call to your business could get an instant reply like this at 9:47pm, without you touching the phone. That is the kind of thing that gets built here.</p>
         </div>
       </div>
       ${site.whatsapp ? `<p class="alt" id="waAlt">Prefer to skip the form? <a id="waDirect" href="${L.waHref('Hi Tom — saw your page, fancy the free teardown.')}">Message straight on WhatsApp</a></p>` : ''}
@@ -49,7 +50,10 @@ ${L.footer(b)}`;
 };
 const notfound = {
   url: '/404.html', og: 'home', noindex: true, sitemap: false,
-  render(b){
+  render(){
+    /* GitHub Pages serves this file for ANY missing URL, at any depth (/work/nope/, /notes/x/y/),
+       so relative paths break the moment the 404 is nested. Everything on it is absolute. */
+    const b = L.abs('/');
     const title = `Not found | ${site.name}`;
     const body = `
 ${L.header(b, '')}
@@ -64,6 +68,7 @@ ${L.footer(b)}`;
   }
 };
 /* old URLs that are already out there (Instagram, Google) keep working */
-const redirect = (from, to) => ({ url: from, sitemap: false, raw: true, render(b){
+const redirect = (from, to) => ({ url: from, to, sitemap: false, raw: true, render(b){
   return `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Moved</title><link rel="canonical" href="${L.abs(to)}"><meta http-equiv="refresh" content="0;url=${b}${to.replace(/^\//,'')}"><meta name="robots" content="noindex"></head><body><p>Moved to <a href="${b}${to.replace(/^\//,'')}">${L.abs(to)}</a>.</p></body></html>`; } });
-module.exports = { pages: [teardown, notfound, redirect('/work.html', '/work/'), redirect('/systems.html', '/what-i-do/')] };
+module.exports = { pages: [teardown, notfound, redirect('/work.html', '/work/'), redirect('/systems.html', '/services/'), redirect('/what-i-do/', '/services/'),
+  redirect('/notes/sixteen-builds-all-fictional/', '/notes/builds-for-businesses-that-dont-exist/')] };   // the note outgrew its slug

@@ -212,6 +212,10 @@
   film.addEventListener('loadedmetadata', function(){ layout(); kick(); });
   film.addEventListener('canplaythrough', ready);
   film.addEventListener('error', ready);
+  /* a browser with no H.264 decoder fails on the <source>, not the <video>: the video element
+     never fires error, so without this the loader would sit for the whole timeout below */
+  [].forEach.call(film.querySelectorAll('source'), function(s){ s.addEventListener('error', ready); });
+  if (film.networkState === 3) ready();                  /* NETWORK_NO_SOURCE: already given up */
   setTimeout(ready, 12000);                              /* a broken film must never trap the visitor */
 
   window.addEventListener('scroll', kick, { passive: true });

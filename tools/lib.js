@@ -4,6 +4,7 @@
    subpath today and at a root domain later without touching a template. */
 const site = require('../data/site.js');
 const builds = require('../data/builds.js');
+const SERVICES = require('../data/services.js');
 
 const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const pad = n => String(n).padStart(2, '0');
@@ -89,17 +90,18 @@ const ctaBand = (b, h, p, extra = '') => `<section class="cta-band">
 const ORG_ID = abs('/#organization'), SITE_ID = abs('/#website'), PERSON_ID = abs('/#founder');
 function baseGraph(){
   return [
-    { '@type': 'Organization', '@id': ORG_ID, name: site.name, legalName: site.legalName, url: abs('/'),
+    { '@type': 'Organization', '@id': ORG_ID, name: site.legalName, alternateName: site.name, legalName: site.legalName, url: abs('/'),
       description: site.tagline + ' — ' + site.facts[0],
       founder: { '@id': PERSON_ID }, foundingDate: site.founded,
       areaServed: { '@type': 'Country', name: site.areaServed },
-      knowsAbout: ['Web design for service businesses','Online booking systems','Missed-call text-back automation','Customer follow-up automation','Trades websites','Review request automation'],
+      knowsAbout: ['Web design for service businesses','Online booking systems','CRM for trades','Missed-call text-back automation','Customer follow-up automation','Trades websites','Review request automation','Facebook and Instagram advertising','Google Ads','Local SEO'],
       sameAs: [site.instagram],
       contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: site.email, availableLanguage: 'en-GB', areaServed: 'GB' },
-      logo: { '@type': 'ImageObject', url: abs('/og/home.png') } },
+      logo: { '@type': 'ImageObject', url: abs('/og/home.png') },
+      hasOfferCatalog: { '@type': 'OfferCatalog', name: site.legalName + ' services', itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(`/services/${s.slug}/`) + '#service', name: s.name, url: abs(`/services/${s.slug}/`) } })) } },
     { '@type': 'Person', '@id': PERSON_ID, name: site.founder.name, alternateName: site.founder.alternateName,
       jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram], nationality: 'GB' },
-    { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.name, description: site.tagline,
+    { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.legalName, alternateName: site.name, description: site.tagline,
       publisher: { '@id': ORG_ID }, inLanguage: site.locale },
   ];
 }
@@ -158,9 +160,9 @@ ${jsonld(nodes)}
 /* ---------- header / footer ---------- */
 const NAV = [
   { key: 'work',    label: 'Work',         path: 'work/' },
-  { key: 'whatido', label: 'What I build', path: 'what-i-do/' },
+  { key: 'try',     label: 'Try it',       path: 'try/' },
+  { key: 'services', label: 'Services',    path: 'services/' },
   { key: 'why',     label: 'About',        path: 'why/' },
-  { key: 'notes',   label: 'Notes',        path: 'notes/' },
 ];
 const isWork = k => ['work', 'websites', 'tools'].includes(k);
 function header(b, active){
@@ -180,12 +182,12 @@ function header(b, active){
   </nav>
 </header>`;
 }
-function footer(b){
+function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
   const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['Tools', 'work/tools/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ...TOOL_LANES.map(k => [`${LANES[k].name} tools`, `work/tools/#${k}`])];
-  const studio = [['What I build', 'what-i-do/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
+  const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
-  return `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>
+  return `${o.mbar === false ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
 <footer class="site-foot">
   <div class="wrap">
     <div class="f-top">
@@ -199,14 +201,22 @@ function footer(b){
       <span>Updated ${monthYear(UPDATED)}</span>
     </div>
     <p class="f-note">Every business, person, review and phone number in the demonstration builds on this site is invented. No client is named or shown anywhere.</p>
+    <nav class="f-legal" aria-label="Legal">${legal(b)}</nav>
   </div>
 </footer>`;
 }
+/* the ad and analytics tags, only when an ID is set; assets/consent.js holds them back until the visitor accepts */
+const TRACK = { pixel: site.metaPixel || '', ga: site.googleTag || '', ads: site.googleAds || '', labels: site.googleAdsLabels || {} };
+const tracking = !!(TRACK.pixel || TRACK.ga || TRACK.ads);
 function scripts(b, extra = []){
-  return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, defaultCh: DEFAULT_CH })};</script>`,
-    `<script src="${b}assets/site.js"></script>`, ...extra.map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
+  return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, leadEndpoint: site.leadEndpoint || '', defaultCh: DEFAULT_CH, track: tracking ? TRACK : undefined })};</script>`,
+    `<script src="${b}assets/site.js"></script>`, ...(tracking ? ['consent.js'] : []).concat(extra).map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
 }
-const page = (h, body, s) => `${h}\n<body>\n${body}\n${s}\n</body>\n</html>\n`;
+const legal = b => `<a href="${b}privacy/">Privacy</a><a href="${b}cookies/">Cookies</a>${tracking ? '<button type="button" data-consent-open hidden>Cookie settings</button>' : ''}`;
+/* a heading never breaks at its own hyphen ("follow-/up", "text-/back"): hyphenated words in h1–h3 text are kept whole */
+const keepHyphens = html => html.replace(/<(h[1-3])\b([^>]*)>([\s\S]*?)<\/\1>/g, (m, tag, attrs, inner) =>
+  `<${tag}${attrs}>${inner.split(/(<[^>]+>)/).map(part => part.startsWith('<') ? part : part.replace(/[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)+/gu, w => `<span class="nw">${w}</span>`)).join('')}</${tag}>`);
+const page = (h, body, s) => `${h}\n<body>\n${keepHyphens(body)}\n${s}\n</body>\n</html>\n`;
 
 site.facts = site.facts.map(f => f.replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
-module.exports = { LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };
+module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };
