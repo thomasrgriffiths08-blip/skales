@@ -81,8 +81,8 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 .link:hover svg{transform:translateX(3px)}
 
 /* reveal */
-.rv{opacity:0;transform:translateY(22px);filter:blur(6px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
-.rv.in{opacity:1;transform:none;filter:none}
+.js .rv:not(.in){transform:translateY(18px)}
+.rv{transition:transform 1s var(--ease)}
 .rv[data-d="1"]{transition-delay:.08s}.rv[data-d="2"]{transition-delay:.16s}.rv[data-d="3"]{transition-delay:.24s}
 
 /* ================= announcement + header ================= */
@@ -521,7 +521,7 @@ h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .rv{opacity:1;transform:none;filter:none}
+  .js .rv:not(.in){transform:none}
 }
 </style>
 </head>
@@ -959,11 +959,18 @@ const onScroll=()=>hdr.classList.toggle('solid',scrollY>innerHeight*0.72-64);
 addEventListener('scroll',onScroll,{passive:true});onScroll();
 
 /* ---------- hero film ---------- */
-const hv=$('#heroVid');
+document.documentElement.classList.add('js');
+const hv=$('#heroVid'), want=new Set();
+const hidePoster=v=>{const p=v.parentElement.querySelector(':scope > img');if(p)p.style.opacity=0};
+const tryPlay=v=>v.play().then(()=>hidePoster(v)).catch(()=>{});
 if(!RM){
   hv.src=innerWidth<900?'film/hero-1080.mp4':'film/hero-1920.mp4';
-  hv.addEventListener('canplay',()=>{hv.play().catch(()=>{});},{once:true});
-  hv.addEventListener('playing',()=>$('.hero .poster').style.opacity=0,{once:true});
+  want.add(hv);
+  hv.addEventListener('canplay',()=>tryPlay(hv),{once:true});
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){want.add(hv);tryPlay(hv)}else{want.delete(hv);hv.pause()}})).observe($('.hero'));
+  /* autoplay can be refused (iPhone Low Power Mode, data saver): the first tap or key starts whatever is on screen */
+  const kick=()=>want.forEach(v=>{if(v.src&&v.paused&&!(v.hasAttribute('data-once')&&v.ended))tryPlay(v)});
+  ['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,kick,{passive:true}));
 }else hv.remove();
 
 /* ---------- lazy films ---------- */
@@ -972,8 +979,8 @@ const vio=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){
     if(!v.src&&v.dataset.src){v.src=v.dataset.src}
     if(v.hasAttribute('data-once')){v.currentTime=0}
-    v.play().then(()=>{const p=v.parentElement.querySelector(':scope > img');if(p)p.style.opacity=0}).catch(()=>{});
-  }else if(v.src){v.pause()}
+    want.add(v);tryPlay(v);
+  }else{want.delete(v);if(v.src)v.pause()}
 }),{rootMargin:'200px 0px',threshold:.15});
 if(!RM)$$('video[data-src]').forEach(v=>vio.observe(v)); else $$('video[data-src]').forEach(v=>v.remove());
 $$('.glass img.poster,.anat .film img,.knock img,.hero .poster').forEach(i=>i.style.transition='opacity .8s');
