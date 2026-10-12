@@ -7,13 +7,26 @@ const TRY = require('./try.js').DEMOS.filter(x => x.live);
 const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
 const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
+/* the reel in the first screen: real builds, played live. depth = how many screens each one glides down */
+const REEL = [
+  { n: 19, biz: 'boxing club website, Leeds', depth: 1.6 },
+  { n: 1,  biz: 'kitchen fitter’s quote engine', depth: 1.5, crop: '#modebar' },
+  { n: 23, biz: 'electrician’s website', depth: 1.5 },
+  { n: 20, biz: 'tattoo studio website, Bristol', depth: 1.6 },
+  { n: 2,  biz: 'job and lead system for a heating firm', depth: 1 },
+  { n: 17, biz: 'film company website', depth: 1.4 },
+  { n: 24, biz: 'MOT centre website', depth: 1.4 },
+  { n: 22, biz: 'physio clinic site with booking', depth: 1.4 },
+  { n: 21, biz: 'accountants’ website, Harrogate', depth: 1.4 },
+  { n: 3,  biz: 'dispatch board for a heating team', depth: 1 },
+].map(r => ({ ...B(r.n), ...r, rb: r.biz })).filter(x => x.slug);
 
 module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
-  meta: { key: 'home', title: 'Type your business name. Watch your website build.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `Pick your trade, add your name and town, and a working site for your business builds itself on the page, with a reference number for the call. ${Words(builds.length)} finished ones are on the page too.` },
+  meta: { key: 'home', title: 'Be the one they call.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `Websites, booking and follow-up for UK trades. Real builds run live on the page, and you can build a draft of your own with a reference number for the call.` },
   render(b){
     const title = `Websites & booking systems for UK trades | ${site.name}`;
-    const description = 'Type your business name and watch a working website for it build on the page. Websites, online booking and missed-call text-back for UK trades.';
+    const description = 'Websites, online booking and missed-call text-back for UK trades. Watch real builds run on the page, then type your business name and see a draft of yours.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
       { '@type': 'VideoObject', '@id': L.abs('/#film'), name: 'Seven days from invisible to booked', description: 'A film of a website build for a fictional heating engineer: built in seven days, found on Google, and the enquiries arriving in the Skales CRM. Fictional business, illustrative numbers.',
@@ -28,11 +41,41 @@ module.exports = { pages: [{
 ${L.header(b, 'home')}
 <main id="main">
 
+<script>document.documentElement.classList.add('js')</script>
+<section class="reel" id="reel" aria-labelledby="h-top">
+  <div class="wrap reel-head">
+    <p class="reel-kick"><i></i><span class="kn">${esc(site.name)} · </span>Websites, booking and follow-up for UK trades</p>
+    <h1 id="h-top"><span class="ln"><span>Be the one</span></span><span class="ln"><span>they call<em>.</em></span></span></h1>
+    <div class="reel-side">
+      <p class="lead">People search, open a few websites and ring one. I build the one they ring: easy to find on Google, bookable while you are on the tools, and followed up by text. <strong>Everything playing below is a real build. Click it and use it.</strong></p>
+      <div class="reel-ctas"><a class="btn btn-live" href="${b}book/">Book a 30-minute call</a><a class="btn btn-line" href="#build">Build a draft of yours</a></div>
+    </div>
+  </div>
+  <div class="reel-stage">
+    <div class="reel-now">
+      <p class="reel-tag" aria-live="polite"><i></i><span><b>${esc(REEL[0].name)}</b> <span>· ${esc(REEL[0].rb)}</span></span></p>
+      <p class="reel-count">01&nbsp;/&nbsp;${String(REEL.length).padStart(2, '0')}</p>
+    </div>
+    <div class="reel-frame" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Live builds. Press Enter to use the one playing.">
+      ${REEL.map((x, i) => `<figure class="reel-slide${i ? '' : ' is-on'}" data-slug="${x.slug}" data-name="${esc(x.name)}" data-biz="${esc(x.rb)}" data-c="${x.c}" data-depth="${x.depth}"${x.crop ? ` data-crop="${x.crop}"` : ''} data-src="${b}demos/${x.slug}/#s=1">
+        <picture><source media="(max-width:700px)" srcset="${b}assets/reel/${x.slug}-m.webp"><img src="${b}assets/reel/${x.slug}.webp" alt="${esc(x.name)}, ${esc(x.rb)}" width="1440" height="900"${i ? ' loading="lazy"' : ' fetchpriority="high"'}></picture>
+      </figure>`).join('\n      ')}
+      <button class="reel-back" type="button">Back to the reel</button>
+      <span class="reel-cursor" aria-hidden="true">Click to<br>try it</span>
+    </div>
+    <ol class="reel-index">
+      ${REEL.map((x, i) => `<li><button type="button" data-i="${i}" aria-current="${i ? 'false' : 'true'}">${esc(x.name.replace(/ (Quote Engine|Job & Lead System)$/, ''))}</button></li>`).join('\n      ')}
+      <li class="all"><a href="${b}work/">All ${builds.length} builds →</a></li>
+    </ol>
+    <p class="reel-note">Every build is made for an invented business, so no client is ever on show.</p>
+  </div>
+</section>
+
 <section class="builder" id="build" aria-labelledby="h-build">
   <div class="wrap b-grid">
     <div class="b-copy">
-      <p class="b-kick">Websites, booking and follow-up for UK trades</p>
-      <h1 id="h-build">Type your business name. Watch your website build.</h1>
+      <p class="b-kick">Now see yours</p>
+      <h2 id="h-build">Type your business name. Watch your website build.</h2>
       <p class="lead" id="bLead">Pick what you do, add your name and town, and a working site for your business builds itself here, with booking, prices and a page for every service. It gets a reference number, so on the call I already have it open.</p>
     </div>
 
@@ -231,7 +274,7 @@ ${L.header(b, 'home')}
 </main>
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'builder.css'], nodes }), body,
-      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'nightline.js', 'films.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'reel.css', 'builder.css'], nodes }), body,
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'reel.js', 'nightline.js', 'films.js']));
   }
 }]};

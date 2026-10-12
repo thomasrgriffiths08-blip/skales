@@ -1,0 +1,129 @@
+/* ============================================================
+   The reel: the home page's first screen. Real builds, running live, one after another.
+   --p is scroll progress (0 at the top, 1 once the frame meets the header), set by reel.js.
+   ============================================================ */
+.reel{--p:0;--gut:var(--pad);--rad:22px;--ink:#0E0E10;position:relative;background:var(--ink);color:#fff;padding-top:clamp(28px,4.2vw,64px);overflow:clip}
+.reel-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,440px);grid-template-areas:"kick kick" "h1 side";column-gap:clamp(24px,4vw,64px);align-items:end;
+  transform:translate3d(0,calc(var(--p) * -48px),0);opacity:calc(1 - var(--p) * .7)}
+.reel-kick{grid-area:kick;display:flex;align-items:center;gap:10px;margin-bottom:clamp(18px,2.4vw,30px);font-family:var(--mono);font-size:.8125rem;letter-spacing:.01em;color:rgba(255,255,255,.6)}
+.reel-kick .kn{color:rgba(255,255,255,.85)}
+.reel-kick i{width:8px;height:8px;border-radius:50%;background:var(--live);flex:none}
+.reel h1{grid-area:h1;font-size:clamp(3.35rem,9.4vw,9.25rem);line-height:.9;letter-spacing:-.055em;font-weight:600;color:#fff;text-wrap:nowrap}
+.reel h1 .ln{display:block;overflow:clip;padding-bottom:.06em;margin-bottom:-.06em}
+.reel h1 .ln>span{display:block}
+.reel h1 em{font-style:normal;color:var(--live)}
+.reel-side{grid-area:side;padding-bottom:.5vw}
+.reel-side .lead{color:rgba(255,255,255,.72);font-size:clamp(1rem,1.2vw,1.125rem);max-width:44ch}
+.reel-side .lead strong{color:#fff}
+.reel-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.reel .btn-line{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
+.reel .btn-line:hover{border-color:#fff}
+.reel .btn svg{width:18px;height:18px}
+
+/* the stage: a full-bleed frame, clipped in from the gutters until you scroll */
+.reel-stage{position:relative;margin-top:clamp(28px,3.6vw,52px)}
+.reel-frame{position:relative;width:100%;height:min(56.25vw,calc(100svh - var(--head-h)));min-height:420px;background:#18181b;
+  clip-path:inset(0 calc(var(--gut) * (1 - var(--p))) round calc(var(--rad) * (1 - var(--p))));-webkit-clip-path:inset(0 calc(var(--gut) * (1 - var(--p))) round calc(var(--rad) * (1 - var(--p))));
+  cursor:none;isolation:isolate}
+.reel-slide{position:absolute;inset:0;margin:0;overflow:hidden;visibility:hidden;background:var(--pg)}
+.reel-slide.is-on,.reel-slide.is-off{visibility:visible}
+.reel-slide.is-on{animation:reel-wipe 1.05s cubic-bezier(.76,0,.24,1) both}
+.reel-slide.is-off{animation:reel-out 1.05s cubic-bezier(.76,0,.24,1) both}
+@keyframes reel-wipe{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes reel-out{from{transform:none;filter:brightness(1)}to{transform:translate3d(0,-6%,0) scale(1.02);filter:brightness(.45)}}
+.reel-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.reel-slide iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;max-width:none;pointer-events:none;opacity:0;transition:opacity .5s var(--ease);background:transparent}
+.reel-slide.is-loaded iframe{opacity:1}
+.reel.is-live .reel-slide.is-on iframe{pointer-events:auto}
+.reel.is-live .reel-frame{cursor:auto}
+
+/* above the frame: what is playing, and how far through */
+.reel-now{display:flex;align-items:center;justify-content:space-between;gap:16px;width:min(var(--shell),100% - 2 * var(--pad));margin:0 auto 14px;font-size:.875rem;color:rgba(255,255,255,.55);
+  opacity:calc(1 - var(--p) * 1.2)}
+.reel-now p{display:flex;align-items:center;gap:10px;min-width:0;overflow:hidden;white-space:nowrap}
+.reel-tag i{width:7px;height:7px;border-radius:50%;background:#3ddc84;flex:none;box-shadow:0 0 0 3px rgba(61,220,132,.18);animation:reel-pulse 2s ease-in-out infinite}
+@keyframes reel-pulse{50%{box-shadow:0 0 0 6px rgba(61,220,132,0)}}
+.reel-tag>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.reel-tag b{font-weight:600;color:#fff}
+.reel-count{flex:none;font-family:var(--mono);font-size:.75rem;color:rgba(255,255,255,.5)}
+.reel-count .reel-swap{color:#fff}
+.reel-back{position:absolute;z-index:5;top:16px;right:16px;align-items:center;height:40px;padding:0 16px;border-radius:999px;border:0;
+  background:rgba(14,14,16,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;font:inherit;font-size:.8125rem;font-weight:600;cursor:pointer}
+.reel-back{display:none}
+.reel.is-live .reel-back{display:inline-flex}
+.reel-swap{display:inline-block;animation:reel-rise .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes reel-rise{from{transform:translateY(110%);opacity:0}to{transform:none;opacity:1}}
+
+/* the follower: a round label that says what a click does */
+.reel-cursor{position:absolute;z-index:6;top:0;left:0;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;display:grid;place-items:center;text-align:center;
+  background:var(--live);color:var(--live-ink);font-size:.8125rem;font-weight:600;line-height:1.15;pointer-events:none;opacity:0;transform:translate3d(var(--cx,50%),var(--cy,50%),0) scale(.4);
+  transition:opacity .25s var(--ease),scale .35s var(--ease)}
+.reel-frame.is-hover .reel-cursor{opacity:1;scale:2.5}
+.reel.is-live .reel-cursor{display:none}
+
+/* under the frame: every build in the reel, the bar on the one playing */
+.reel-index{display:flex;gap:4px;margin:0;padding:18px var(--pad) clamp(40px,5vw,72px);list-style:none;overflow-x:auto;scrollbar-width:none;
+  width:min(var(--shell),100%);margin-inline:auto}
+.reel-index::-webkit-scrollbar{display:none}
+.reel-index li{flex:1 0 auto}
+.reel-index button{position:relative;display:block;width:100%;min-width:92px;height:52px;padding:14px 10px 0 0;border:0;background:none;color:rgba(255,255,255,.45);text-align:left;font-size:.8125rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:color .25s}
+.reel-index button::before,.reel-index button::after{content:"";position:absolute;top:0;left:0;right:10px;height:2px;border-radius:2px;background:rgba(255,255,255,.16)}
+.reel-index button::after{right:auto;width:calc(100% - 10px);background:var(--live);transform:scaleX(0);transform-origin:0 50%}
+.reel-index button:hover{color:rgba(255,255,255,.8)}
+.reel-index button[aria-current="true"]{color:#fff}
+.reel-index button[aria-current="true"]::after{animation:reel-bar var(--dur,7.6s) linear both}
+.reel.is-paused .reel-index button[aria-current="true"]::after,.reel.is-live .reel-index button[aria-current="true"]::after{animation-play-state:paused}
+@keyframes reel-bar{to{transform:scaleX(1)}}
+.reel-index .all a{display:flex;align-items:flex-start;height:52px;padding-top:14px;color:var(--live);font-size:.8125rem;font-weight:600;white-space:nowrap}
+.reel-note{width:min(var(--shell),100% - 2 * var(--pad));margin:-28px auto 0;padding-bottom:clamp(40px,5vw,64px);font-size:.8125rem;color:rgba(255,255,255,.42)}
+
+/* first paint: the headline rises line by line */
+.js .reel h1 .ln>span{animation:reel-rise 1s cubic-bezier(.2,.7,.2,1) both}
+.js .reel h1 .ln:nth-child(2)>span{animation-delay:.09s}
+.js .reel-side{animation:reel-fade .9s .35s var(--ease) both}
+.js .reel-stage{animation:reel-up 1.1s .2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes reel-fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes reel-up{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+
+/* the header sits dark while it is over the reel */
+.site-head.on-dark{background:rgba(14,14,16,.96);border-bottom-color:rgba(255,255,255,.08)}
+.site-head.on-dark .wordmark{color:#fff}
+.site-head.on-dark .nav a{color:rgba(255,255,255,.7)}
+.site-head.on-dark .nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.site-head.on-dark .nav a.btn{color:var(--live-ink)}
+.site-head.on-dark .mtoggle{background:transparent;border-color:rgba(255,255,255,.25)}
+.site-head.on-dark .mtoggle span{background:#fff}
+.site-head.on-dark .mtoggle[aria-expanded="true"]{background:var(--pg)}
+.site-head.on-dark .mtoggle[aria-expanded="true"] span{background:var(--tx)}
+
+@media (max-width:980px){
+  .reel-head{grid-template-columns:1fr;grid-template-areas:"kick" "h1" "side";row-gap:18px}
+  .reel-side{max-width:560px}
+}
+@media (max-width:700px){
+  /* on a phone the build plays straight under the headline; the words and buttons follow it */
+  .reel{--gut:16px;--rad:18px;display:flex;flex-direction:column}
+  .reel-head{display:contents}
+  .reel-kick,.reel h1,.reel-side{margin-inline:var(--pad)}
+  .reel-kick{order:1;margin-bottom:14px}
+  .reel-kick .kn{display:none}
+  .reel h1{order:2}
+  .reel-stage{order:3;margin-top:24px}
+  .reel-side{order:4;margin-top:4px;padding-bottom:40px}
+  .reel-note{margin-bottom:0;padding-bottom:28px}
+  .reel h1{font-size:clamp(3rem,15.2vw,4.6rem);letter-spacing:-.05em}
+  .reel-kick{font-size:.75rem}
+  .reel-ctas .btn{flex:1 1 auto}
+  .reel-frame{height:min(74svh,640px);min-height:480px;cursor:auto}
+  .reel-cursor{display:none}
+  .reel-now{font-size:.8125rem;margin-bottom:12px}
+  .reel-index button{min-width:84px}
+  .reel-note{margin-top:-20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .reel-head,.reel-now{transform:none;opacity:1}
+  .reel-tag i{animation:none}
+  .reel-slide.is-on,.reel-slide.is-off,.reel-swap,.js .reel h1 .ln>span,.js .reel-side,.js .reel-stage{animation:none}
+  .reel-slide.is-off{visibility:hidden}
+  .reel-index button[aria-current="true"]::after{animation:none;transform:scaleX(1)}
+}

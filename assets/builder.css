@@ -3,13 +3,13 @@
    and on the right the visitor's own website building in a browser window and a phone.
    The only dark section on a white site, so the draft is the brightest thing on the page.
    ============================================================ */
-.builder{background:var(--hand);color:#fff;padding:clamp(28px,3.4vw,44px) 0 clamp(48px,6vw,80px);overflow:hidden}
+.builder{background:var(--hand);color:#fff;padding:clamp(56px,7vw,104px) 0 clamp(48px,6vw,80px);overflow:hidden;border-top:1px solid rgba(255,255,255,.08)}
 .b-grid{display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);column-gap:clamp(36px,4.5vw,64px);
   grid-template-areas:"copy stage" "form stage" "done stage";grid-template-rows:auto auto 1fr;align-items:start}
 .b-copy{grid-area:copy}.b-form{grid-area:form}.b-done{grid-area:done}.b-stage{grid-area:stage}
 
 .b-kick{font-size:.9375rem;font-weight:500;color:rgba(255,255,255,.58);margin-bottom:12px}
-.builder h1{font-size:clamp(2.3rem,3.5vw,3.15rem);letter-spacing:-.04em;line-height:1}
+.builder h1,.builder #h-build{font-size:clamp(2.3rem,3.5vw,3.15rem);letter-spacing:-.04em;line-height:1}
 .builder .lead{color:rgba(255,255,255,.7);margin-top:16px;font-size:clamp(1rem,1.2vw,1.125rem)}
 .builder .lead b{color:#fff;font-family:var(--mono);font-weight:500;letter-spacing:-.01em}
 
