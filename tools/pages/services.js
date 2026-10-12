@@ -366,7 +366,7 @@ ${L.header(b, 'services')}
 <section class="sec" aria-label="Which to choose">
   <div class="wrap why3 cmp-when">
     <div><h2>When ${esc(c.them)} is the better choice</h2><ul class="feat">${c.them_when.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
-    <div><h2>When ${esc(site.name)} is</h2><ul class="feat">${c.us_when.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div><h2>When ${esc(site.name)} is the better choice</h2><ul class="feat">${c.us_when.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
   </div>
 </section>
 ${fill(faqPanel(c.faq, 'Questions people ask'), b)}

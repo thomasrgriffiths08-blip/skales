@@ -182,12 +182,12 @@ function header(b, active){
   </nav>
 </header>`;
 }
-function footer(b){
+function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
   const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['Tools', 'work/tools/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ...TOOL_LANES.map(k => [`${LANES[k].name} tools`, `work/tools/#${k}`])];
   const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
-  return `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>
+  return `${o.mbar === false ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
 <footer class="site-foot">
   <div class="wrap">
     <div class="f-top">
@@ -213,7 +213,10 @@ function scripts(b, extra = []){
     `<script src="${b}assets/site.js"></script>`, ...(tracking ? ['consent.js'] : []).concat(extra).map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
 }
 const legal = b => `<a href="${b}privacy/">Privacy</a><a href="${b}cookies/">Cookies</a>${tracking ? '<button type="button" data-consent-open hidden>Cookie settings</button>' : ''}`;
-const page = (h, body, s) => `${h}\n<body>\n${body}\n${s}\n</body>\n</html>\n`;
+/* a heading never breaks at its own hyphen ("follow-/up", "text-/back"): hyphenated words in h1–h3 text are kept whole */
+const keepHyphens = html => html.replace(/<(h[1-3])\b([^>]*)>([\s\S]*?)<\/\1>/g, (m, tag, attrs, inner) =>
+  `<${tag}${attrs}>${inner.split(/(<[^>]+>)/).map(part => part.startsWith('<') ? part : part.replace(/[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)+/gu, w => `<span class="nw">${w}</span>`)).join('')}</${tag}>`);
+const page = (h, body, s) => `${h}\n<body>\n${keepHyphens(body)}\n${s}\n</body>\n</html>\n`;
 
 site.facts = site.facts.map(f => f.replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
 module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };

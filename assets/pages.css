@@ -39,6 +39,7 @@ a.hub-card:hover{background:var(--alu-2);transform:translateY(-2px)}
 .faq-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
 .faq-toc a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);font-size:.875rem;font-weight:500}
 .faq-toc a:hover{border-color:var(--tx)}
+@media (max-width:640px){.faq-toc{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad)}.faq-toc::-webkit-scrollbar{display:none}.faq-toc a{flex:none}}
 .panel .lab a.name{color:var(--tx-2)}
 
 /* the comparison table: scrolls sideways inside itself on a phone, never the page */

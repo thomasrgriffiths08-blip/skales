@@ -87,7 +87,7 @@ ${L.header(b, 'book')}
   </aside>
 </section>
 </main>
-${L.footer(b)}`;
+${L.footer(b, { mbar: false })}`;   // the sticky "Book a call" bar would point at this page and cover its Next button
     return L.page(L.head({ b, path: '/book/', title, description, og: 'book', nodes }), body, L.scripts(b, ['book.js']));
   }
 }]};

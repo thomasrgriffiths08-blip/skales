@@ -29,7 +29,8 @@ function guard(b){
     const cssJobs = [];
     html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/g, (m, attrs, css) => {
       const out = new CleanCSS({ level: 1 }).minify(css);
-      return `<style${attrs}>${out.styles}</style>`;
+      // clean-css turns a reduced-motion '.01ms' into 'NaNs', which browsers drop, so Reduce Motion stopped working
+      return `<style${attrs}>${out.styles.replace(/:NaNs/g, ':.01ms')}</style>`;
     });
     // scripts (inline only; external src blocks are left alone — there are none)
     const parts = html.split(/(<script(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>)/g);
