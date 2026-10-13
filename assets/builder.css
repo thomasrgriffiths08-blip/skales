@@ -96,10 +96,18 @@
 .dx-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px)}
 .dx-col h3{font-size:1.375rem;padding-bottom:16px;border-bottom:1px solid var(--tx)}
 .dx-list{list-style:none;margin:0;padding:0;counter-reset:dx}
-.dx-list>li{counter-increment:dx;display:grid;grid-template-columns:40px 1fr;padding:20px 0;border-bottom:1px solid var(--line)}
-.dx-list>li::before{content:counter(dx,decimal-leading-zero);grid-row:1/4;font-weight:600;font-size:.9375rem;color:var(--tx-3);font-variant-numeric:tabular-nums;line-height:1.6}
-.dx-list>li>b{display:block;font-size:1.0625rem;line-height:1.4;margin-bottom:4px}
-.dx-list>li>span{color:var(--tx-2);line-height:1.55;max-width:56ch}
+.dx-list>li{--dxp:20px;counter-increment:dx;display:grid;grid-template-columns:40px 1fr;border-bottom:1px solid var(--line)}
+.dx-list>li::before{content:counter(dx,decimal-leading-zero);padding-top:var(--dxp);font-weight:600;font-size:.9375rem;color:var(--tx-3);font-variant-numeric:tabular-nums;line-height:1.6}
+/* each point is a disclosure: open on wide screens, a tap to open on a phone so the page stays short */
+.dx-d summary{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:var(--dxp) 0;list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dx-d summary::-webkit-details-marker{display:none}
+.dx-d summary b{font-size:1.0625rem;line-height:1.4}
+.dx-d summary::after{content:"+";flex:none;font-size:1.375rem;font-weight:400;line-height:1;color:var(--tx-3);transition:transform .2s var(--ease)}
+.dx-d[open] summary::after{transform:rotate(45deg)}
+.dx-d>span{display:block;margin-top:calc(4px - var(--dxp));padding-bottom:var(--dxp);color:var(--tx-2);line-height:1.55;max-width:56ch}
+.dx-d .dx-pages{margin-top:calc(-1 * var(--dxp) + 12px);margin-bottom:var(--dxp)}
+@media (min-width:981px){.dx-d summary{pointer-events:none;cursor:default}.dx-d summary::after{display:none}}
+@media (max-width:980px){.dx-list>li{--dxp:16px}}
 .dx-pages{list-style:none;margin:14px 0 2px;padding:12px 14px;border-radius:var(--r-s);background:var(--alu);display:grid;gap:6px;font:400 .8125rem/1.45 var(--mono);color:var(--tx-2);overflow-wrap:break-word}
 .dx-pages .dom{font-family:var(--sans);font-size:.8125rem;font-weight:500;color:var(--tx-3);margin-bottom:2px}
 .dx-pages b{color:var(--tx);font-weight:500}
@@ -132,7 +140,11 @@
   .b-cap{display:block;position:absolute;left:0;right:0;bottom:0;text-align:center}
   .b-done{margin-top:8px}
   .dx-grid,.dx-call{grid-template-columns:1fr}
+  /* on a phone the home page keeps to four builds and compact demo cards; the rest are one tap away */
+  #try .try-card{min-height:0;padding:20px}
+  #try .try-card h3{font-size:1.35rem}
 }
+@media (max-width:640px){.wall-home .tile:nth-child(n+5){display:none}}
 @media (max-width:520px){
   .b-two{grid-template-columns:1fr}
   .b-trades button{height:42px}

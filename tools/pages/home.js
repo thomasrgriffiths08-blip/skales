@@ -114,24 +114,25 @@ ${L.header(b, 'home')}
       <div class="dx-col">
         <h3>How you get found</h3>
         <ol class="dx-list">
-          <li><b>A page for every service, in your town.</b><span>People search for the job and the place, not your name. Each service gets its own page, written for where you work.</span>
-            <ul class="dx-pages" id="dxPages"><li class="dom">hartleyheating.co.uk</li>${HEAT_KW.map(k => `<li>/<b>${esc(slug(k + ' leeds'))}</b></li>`).join('')}</ul></li>
-          <li><b>Your Google Business Profile, matched to the site.</b><span>The same name, number, hours and services in both places, so Google trusts them. That is what gets you into the map results.</span></li>
-          <li><b>Reviews that ask for themselves.</b><span>After every job the customer gets a text with a link to review you. More reviews, and recent ones, keep you near the top of the map.</span></li>
-          <li><b>Written so AI answers can quote it.</b><span>Plain answers to what your customers ask, with the structured data search engines read, so ChatGPT and Google&rsquo;s AI answers can name you.</span></li>
-          <li><b>Ads for when you want work this week.</b><span>Google and Meta ads pointed at the booking page, and tracked to the booked job, not to clicks.</span></li>
+          <li><details class="dx-d"><summary><b>A page for every service, in your town.</b></summary><span>People search for the job and the place, not your name. Each service gets its own page, written for where you work.</span>
+            <ul class="dx-pages" id="dxPages"><li class="dom">hartleyheating.co.uk</li>${HEAT_KW.map(k => `<li>/<b>${esc(slug(k + ' leeds'))}</b></li>`).join('')}</ul></details></li>
+          <li><details class="dx-d"><summary><b>Your Google Business Profile, matched to the site.</b></summary><span>The same name, number, hours and services in both places, so Google trusts them. That is what gets you into the map results.</span></details></li>
+          <li><details class="dx-d"><summary><b>Reviews that ask for themselves.</b></summary><span>After every job the customer gets a text with a link to review you. More reviews, and recent ones, keep you near the top of the map.</span></details></li>
+          <li><details class="dx-d"><summary><b>Written so AI answers can quote it.</b></summary><span>Plain answers to what your customers ask, with the structured data search engines read, so ChatGPT and Google&rsquo;s AI answers can name you.</span></details></li>
+          <li><details class="dx-d"><summary><b>Ads for when you want work this week.</b></summary><span>Google and Meta ads pointed at the booking page, and tracked to the booked job, not to clicks.</span></details></li>
         </ol>
       </div>
       <div class="dx-col">
         <h3>How visits turn into booked jobs</h3>
         <ol class="dx-list">
-          <li><b>Booking with a deposit.</b><span>Real slots from your diary, any hour. A deposit holds the slot, so nobody books and vanishes.</span></li>
-          <li><b>Missed calls get a text back.</b><span>On a job when they ring? They get a text within a minute with a link to book, before they ring the next name on Google.</span></li>
-          <li><b>Quotes chase themselves.</b><span>A polite nudge goes out if a quote has not been answered, so fewer of them go cold.</span></li>
-          <li><b>One place for every enquiry.</b><span>Calls, texts, forms and bookings in one list on your phone, each with where it came from.</span></li>
+          <li><details class="dx-d"><summary><b>Booking with a deposit.</b></summary><span>Real slots from your diary, any hour. A deposit holds the slot, so nobody books and vanishes.</span></details></li>
+          <li><details class="dx-d"><summary><b>Missed calls get a text back.</b></summary><span>On a job when they ring? They get a text within a minute with a link to book, before they ring the next name on Google.</span></details></li>
+          <li><details class="dx-d"><summary><b>Quotes chase themselves.</b></summary><span>A polite nudge goes out if a quote has not been answered, so fewer of them go cold.</span></details></li>
+          <li><details class="dx-d"><summary><b>One place for every enquiry.</b></summary><span>Calls, texts, forms and bookings in one list on your phone, each with where it came from.</span></details></li>
         </ol>
       </div>
     </div>
+    <script>if(matchMedia('(min-width:981px)').matches)document.querySelectorAll('.dx-d').forEach(function(e){e.open=true})</script>
     <div class="dx-call">
       <div>
         <h3>On the call, I have your draft open.</h3>
@@ -155,7 +156,7 @@ ${L.header(b, 'home')}
       <h2 id="h-work">That was a draft. These are finished.</h2>
       <p class="lead">${Words(builds.length)} builds: ${SITES.length} full websites and ${TOOLS.length} business tools, each made for an invented business so no client is ever on show. Every one opens and works like the real thing.</p>
     </div>
-    ${L.wall(b, FEATURED)}
+    ${L.wall(b, FEATURED, 'wall-home')}
     <div class="sec-foot"><a class="btn btn-dark" href="${b}work/">See all ${builds.length}</a><a class="btn btn-ghost" href="${b}work/websites/">Websites</a><a class="btn btn-ghost" href="${b}work/tools/">Tools</a></div>
   </div>
 </section>
@@ -167,22 +168,6 @@ ${L.header(b, 'home')}
       <p class="lead">Three live demos that run on your phone. You play the customer, then see what the business sees. About a minute each.</p>
     </div>
     <div class="try-list">${TRY.map(x => `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
-  </div>
-</section>
-
-<section class="sec" id="how" aria-labelledby="h-how">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="h-how">How it works after you get in touch.</h2>
-      <p class="lead">No proposal deck. No account manager. The person you message is the person who builds it.</p>
-    </div>
-    <ol class="steps">
-      <li><b>A ten-minute teardown, free.</b> Your website, your Google listing and what happens when someone tries to reach you, the way a customer experiences it. Three things back by message: what is leaking, what to fix first, what it is worth in jobs.</li>
-      <li><b>A flat quote with a date.</b> Agreed before anything starts. No surprises, and no meeting that should have been a message.</li>
-      <li><b>Built in days, in public.</b> A website takes days; a full system with booking and follow-up usually one to two weeks. You can watch it being made.</li>
-      <li><b>Handed over in your name.</b> Domain, code and accounts set up as yours. Walk away tomorrow and everything keeps working.</li>
-    </ol>
-    <div class="sec-foot"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${b}teardown.html">Get the free teardown</a></div>
   </div>
 </section>
 
