@@ -1,0 +1,104 @@
+/* ============================================================
+   The opening: the home page's first screen is one film, played by scroll.
+   A van on a wet street, the town from above, the x-ray, the phone on the dash,
+   then the page pushes into the phone's screen and its white becomes the page.
+   opening.js sets --p (scroll through the hero, 0 to 1) and --z (the final push, 0 to 1).
+   Without JS, or with Reduce Motion, it is one still with the words on it.
+   ============================================================ */
+.op{--ink:#0B0C0E;--p:0;--z:0;position:relative;background:var(--ink);color:#fff}
+.op-stick{position:relative;height:calc(100svh - var(--head-h));min-height:560px;overflow:hidden;isolation:isolate}
+.js .op.is-film{height:calc(560svh - var(--head-h))}
+.js .op.is-film .op-stick{position:sticky;top:var(--head-h)}
+
+/* the film: a poster in the HTML so the first screen paints at once, the canvas over it once frames arrive */
+.op-poster,.op-poster img,.op-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.op-poster img{object-fit:cover}
+.op-canvas{opacity:0;transition:opacity .6s var(--ease)}
+.op.is-ready .op-canvas{opacity:1}
+.op-shade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,12,14,.55) 0%,rgba(11,12,14,0) 30%,rgba(11,12,14,0) 62%,rgba(11,12,14,.6) 100%)}
+
+/* the three lines: typed letter by letter, the newest letter in amber */
+.op-lines{position:absolute;left:0;right:0;bottom:clamp(88px,15svh,170px);width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto;pointer-events:none}
+.op-line{position:absolute;left:0;bottom:0;max-width:17ch;font-size:clamp(2.1rem,5.2vw,4.75rem);line-height:1.02;letter-spacing:-.04em;font-weight:600;text-wrap:balance;color:#fff;
+  text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.op-line span{visibility:hidden}
+.op-line span.on{visibility:visible}
+.op-line span.tip{color:var(--c)}
+
+/* the booking that lands on the phone's screen: real type, pinned to the screen's place in the last frame */
+.op-card{position:absolute;left:0;top:0;width:var(--sw,240px);transform-origin:0 0;pointer-events:none;opacity:0;
+  font-family:var(--sans);color:var(--tx);will-change:transform,opacity}
+.op-card .bk{margin:0 auto;width:86%;padding:14px 14px 12px;border-radius:16px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.12);
+  transform:translateY(calc((1 - var(--in,0)) * 18px));opacity:var(--in,0)}
+.op-card .bk-top{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--tx-2)}
+.op-card .bk-top i{width:18px;height:18px;border-radius:5px;background:var(--hand);flex:none;display:grid;place-items:center;color:var(--c);font:700 11px/1 var(--sans);font-style:normal}
+.op-card .bk-top span:last-child{margin-left:auto}
+.op-card h3{margin:8px 0 2px;font-size:15px;letter-spacing:-.01em}
+.op-card p{font-size:13px;line-height:1.35;color:var(--tx-2)}
+.op-card .bk-paid{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:4px 8px;border-radius:999px;background:#E9F7EE;color:#17663A;font-size:12px;font-weight:600}
+.op-card .bk-paid::before{content:"";width:6px;height:6px;border-radius:50%;background:#1F9D55}
+
+/* the end: the screen's white becomes the page, and the headline arrives on it */
+.op-white{position:absolute;inset:0;background:var(--pg);opacity:0;pointer-events:none}
+.op-end{position:absolute;inset:0;display:grid;align-content:center;color:var(--tx);opacity:0;visibility:hidden}
+.op-end .wrap{display:grid;gap:22px;justify-items:start}
+.op-kick{font-size:.875rem;color:var(--tx-2);display:flex;align-items:center;gap:10px}
+.op-kick i{width:8px;height:8px;border-radius:50%;background:var(--live)}
+.op h1{font-size:clamp(3.2rem,9vw,8.75rem);line-height:.92;letter-spacing:-.055em;max-width:12ch}
+.op h1 em{font-style:normal;color:var(--live)}
+.op-end .lead{max-width:52ch}
+.op-ctas{display:flex;flex-wrap:wrap;gap:10px}
+.op.is-end .op-end{visibility:visible}
+
+/* the way out, for anyone who would rather not watch */
+.op-skip{position:absolute;z-index:3;right:var(--pad);bottom:22px;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;
+  background:rgba(11,12,14,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:rgba(255,255,255,.86);font-size:.8125rem;font-weight:600;transition:opacity .3s var(--ease)}
+.op-skip:hover{color:#fff;background:rgba(11,12,14,.72)}
+.op-cue{position:absolute;z-index:3;left:50%;bottom:22px;transform:translateX(-50%);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:opacity .4s var(--ease)}
+.op-cue::after{content:"";display:block;width:1px;height:28px;margin:8px auto 0;background:linear-gradient(rgba(255,255,255,.7),rgba(255,255,255,0));animation:op-cue 1.8s var(--ease) infinite}
+@keyframes op-cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.op.is-moving .op-cue{opacity:0}
+.op.is-end .op-skip,.op.is-end .op-cue{opacity:0;pointer-events:none}
+
+/* the still version: no JS, Reduce Motion or Data Saver. The words sit on frame one and the page scrolls as normal */
+.op-still{display:none}
+.op:not(.is-film) .op-lines,.op:not(.is-film) .op-cue,.op:not(.is-film) .op-skip,.op:not(.is-film) .op-card,.op:not(.is-film) .op-white{display:none}
+.op:not(.is-film) .op-stick{height:auto;min-height:0;display:grid}
+.op:not(.is-film) .op-poster{position:relative;grid-area:1/1}
+.op:not(.is-film) .op-poster img{position:relative;height:min(78svh,760px)}
+.op:not(.is-film) .op-shade{grid-area:1/1}
+.op:not(.is-film) .op-still{display:block;grid-area:1/1;align-self:end;width:min(var(--shell),100% - 2*var(--pad));margin:0 auto clamp(28px,6vw,64px);position:relative}
+.op-still li{list-style:none;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.08;letter-spacing:-.03em;font-weight:600;max-width:24ch}
+.op-still li+li{margin-top:.25em}
+.op-still li:last-child{color:var(--c)}
+.op-still ol{margin:0;padding:0}
+.op:not(.is-film) .op-end{position:relative;inset:auto;opacity:1;visibility:visible;background:var(--pg);padding:clamp(48px,8vw,104px) 0}
+
+/* the header sits dark over the film, and goes back to normal when the page arrives */
+.site-head.on-dark{background:rgba(11,12,14,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:rgba(255,255,255,.08)}
+.site-head.on-dark .wordmark{color:#fff}
+.site-head.on-dark .nav a{color:rgba(255,255,255,.72)}
+.site-head.on-dark .nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.site-head.on-dark .nav a.btn{color:var(--live-ink)}
+.site-head.on-dark .mtoggle{background:transparent;border-color:rgba(255,255,255,.25)}
+.site-head.on-dark .mtoggle span{background:#fff}
+.site-head.on-dark .mtoggle[aria-expanded="true"]{background:var(--pg)}
+.site-head.on-dark .mtoggle[aria-expanded="true"] span{background:var(--tx)}
+
+@media (max-width:700px){
+  .op-lines{bottom:clamp(96px,16svh,150px)}
+  .op-line{font-size:clamp(2rem,9.6vw,2.9rem);max-width:13ch}
+  .op h1{font-size:clamp(3rem,15vw,4.6rem)}
+  .op-ctas .btn{flex:1 1 auto}
+  .op:not(.is-film) .op-poster img{height:min(70svh,640px)}
+}
+@media (max-width:760px){
+  /* clear of the fixed bar with The work and Book a call */
+  .op-skip{bottom:calc(84px + env(safe-area-inset-bottom));right:16px}
+  .op-cue{bottom:calc(88px + env(safe-area-inset-bottom));left:var(--pad);transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .op-cue::after{animation:none}
+  .op-canvas{transition:none}
+}

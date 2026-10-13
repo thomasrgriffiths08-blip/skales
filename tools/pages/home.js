@@ -7,6 +7,14 @@ const TRY = require('./try.js').DEMOS.filter(x => x.live);
 const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
 const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
+/* the opening film: frame count, and where the phone screen sits in the last frame (x, y, w, h as shares of the frame) */
+const OPENING = {
+  frames: 336,
+  screenD: '0.44,0.30,0.12,0.40',
+  screenM: '0.30,0.30,0.40,0.36',
+  lines: ['Right now, someone near you needs a tradesperson.', 'They search, compare, and ring one.', 'We make sure it\u2019s you.']
+};
+
 /* the reel in the first screen: real builds, played live. depth = how many screens each one glides down */
 const REEL = [
   { n: 19, biz: 'boxing club website, Leeds', depth: 1.6 },
@@ -42,32 +50,25 @@ ${L.header(b, 'home')}
 <main id="main">
 
 <script>document.documentElement.classList.add('js')</script>
-<section class="reel" id="reel" aria-labelledby="h-top">
-  <div class="wrap reel-head">
-    <p class="reel-kick"><i></i><span class="kn">${esc(site.name)} · </span>Websites, booking and follow-up for UK trades</p>
-    <h1 id="h-top"><span class="ln"><span>Be the one</span></span><span class="ln"><span>they call<em>.</em></span></span></h1>
-    <div class="reel-side">
-      <p class="lead">People search, open a few websites and ring one. I build the one they ring: easy to find on Google, bookable while you are on the tools, and followed up by text. <strong>Everything playing below is a real build. Click it and use it.</strong></p>
-      <div class="reel-ctas"><a class="btn btn-live" href="${b}book/">Book a 30-minute call</a><a class="btn btn-line" href="#build">Build a draft of yours</a></div>
+<section class="op" id="top" aria-labelledby="h-top" data-frames="${OPENING.frames}" data-base="${b}assets/opening/" data-screen-d="${OPENING.screenD}" data-screen-m="${OPENING.screenM}">
+  <div class="op-stick">
+    <picture class="op-poster"><source media="(max-aspect-ratio: 17/20)" srcset="${b}assets/opening/m/0001.webp"><img src="${b}assets/opening/d/0001.webp" alt="A plain van parked on a wet terraced street at dusk" width="1600" height="900" fetchpriority="high"></picture>
+    <canvas class="op-canvas" aria-hidden="true"></canvas>
+    <div class="op-shade" aria-hidden="true"></div>
+    <div class="op-lines" aria-hidden="true">
+      ${OPENING.lines.map(l => `<p class="op-line">${esc(l)}</p>`).join('\n      ')}
     </div>
-  </div>
-  <div class="reel-stage">
-    <div class="reel-now">
-      <p class="reel-tag" aria-live="polite"><i></i><span><b>${esc(REEL[0].name)}</b> <span>· ${esc(REEL[0].rb)}</span></span></p>
-      <p class="reel-count">01&nbsp;/&nbsp;${String(REEL.length).padStart(2, '0')}</p>
-    </div>
-    <div class="reel-frame" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Live builds. Press Enter to use the one playing.">
-      ${REEL.map((x, i) => `<figure class="reel-slide${i ? '' : ' is-on'}" data-slug="${x.slug}" data-name="${esc(x.name)}" data-biz="${esc(x.rb)}" data-c="${x.c}" data-depth="${x.depth}"${x.crop ? ` data-crop="${x.crop}"` : ''} data-src="${b}demos/${x.slug}/#s=1">
-        <picture><source media="(max-width:700px)" srcset="${b}assets/reel/${x.slug}-m.webp"><img src="${b}assets/reel/${x.slug}.webp" alt="${esc(x.name)}, ${esc(x.rb)}" width="1440" height="900"${i ? ' loading="lazy"' : ' fetchpriority="high"'}></picture>
-      </figure>`).join('\n      ')}
-      <button class="reel-back" type="button">Back to the reel</button>
-      <span class="reel-cursor" aria-hidden="true">Click to<br>try it</span>
-    </div>
-    <ol class="reel-index">
-      ${REEL.map((x, i) => `<li><button type="button" data-i="${i}" aria-current="${i ? 'false' : 'true'}">${esc(x.name.replace(/ (Quote Engine|Job & Lead System)$/, ''))}</button></li>`).join('\n      ')}
-      <li class="all"><a href="${b}work/">All ${builds.length} builds →</a></li>
-    </ol>
-    <p class="reel-note">Every build is made for an invented business, so no client is ever on show.</p>
+    <div class="op-still"><ol>${OPENING.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ol></div>
+    <div class="op-card" aria-hidden="true"><div class="bk"><div class="bk-top"><i></i><span>Bookings</span><span>now</span></div><h3>New booking: boiler service</h3><p>Tomorrow, 8:00 · booked on your website</p><span class="bk-paid">£30 deposit paid</span></div></div>
+    <div class="op-white" aria-hidden="true"></div>
+    <div class="op-end"><div class="wrap">
+      <p class="op-kick"><i></i>${esc(site.name)} · Websites, booking and follow-up for UK trades</p>
+      <h1 id="h-top">Be the one they call<em>.</em></h1>
+      <p class="lead">People search, open a few websites and ring one. I build the one they ring: easy to find on Google, bookable while you are on the tools, and followed up by text.</p>
+      <div class="op-ctas"><a class="btn btn-live" href="${b}book/">Book a 30-minute call</a><a class="btn btn-ghost" href="#build">Build a draft of yours</a></div>
+    </div></div>
+    <a class="op-skip" href="#build">Skip the film</a>
+    <span class="op-cue" aria-hidden="true">Scroll</span>
   </div>
 </section>
 
@@ -274,7 +275,7 @@ ${L.header(b, 'home')}
 </main>
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'reel.css', 'builder.css'], nodes }), body,
-      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'reel.js', 'nightline.js', 'films.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'opening.css', 'builder.css'], nodes }), body,
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'opening.js', 'nightline.js', 'films.js']));
   }
 }]};
