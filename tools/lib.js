@@ -122,7 +122,7 @@ function webPage({ path, title, description, type = 'WebPage', extra = {} }){
 const jsonld = nodes => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [...baseGraph(), ...nodes] }).replace(/</g,'\\u003c')}</script>`;
 
 /* ---------- head ---------- */
-function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette }){
+function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette, preconnect = [] }){
   const canon = abs(path);
   return `<!doctype html>
 <html lang="${site.locale}" style="${paletteStyle(palette || defaultBuild())}">
@@ -132,7 +132,7 @@ function head({ b, path, title, description, og, type = 'website', css = [], nod
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canon}">
-${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
+${preconnect.map(u => `<link rel="preconnect" href="${u}">`).join('\n')}${preconnect.length ? '\n' : ''}${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
 <meta name="theme-color" content="#FFFFFF">
 <meta name="author" content="${esc(site.founder.name)}">
 <meta property="og:site_name" content="${esc(site.name)}">
