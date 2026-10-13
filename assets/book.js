@@ -47,7 +47,7 @@
       var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&name=' + enc(a.name) + '&email=' + enc(a.email)
               + '&a1=' + enc(text.split('\n').slice(1).join('\n'));   // the event has one question ("anything that will help prepare"), so every detail goes into it
       var boot = function(){ if (!window.Calendly) return fallback(); cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
-      if (window.Calendly) boot(); else { var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true; s.onload = boot; s.onerror = fallback; d.head.appendChild(s); }
+      if (window.Calendly) boot(); else calScript(boot, fallback);
       setTimeout(function(){ if (!cal.querySelector('iframe')) fallback(); }, 6000);   // blocked by a privacy extension or a dead connection: never leave an empty box
     } else fallback();
     function fallback(){
@@ -63,6 +63,25 @@
     if (n){ if (!valid(cur)) return; if (cur === 4) finish(); show(cur + 1, true); }
     if (p) show(cur - 1, true);
   });
+  /* a single-choice question moves on by itself once it is answered: one tap, not two */
+  form.addEventListener('change', function(e){
+    if (e.target.type !== 'radio' || (cur !== 0 && cur !== 3)) return;
+    var at = cur;
+    setTimeout(function(){ if (cur === at && valid(at)) show(at + 1, true); }, 260);
+  });
+  /* the diary's script starts loading while they type their details, so the calendar is there when they arrive */
+  var calTag = null, calWait = [];
+  function calScript(ok, bad){
+    if (calTag && calTag.done){ if (ok) ok(); return; }
+    if (ok) calWait.push([ok, bad]);
+    if (calTag) return;
+    calTag = d.createElement('script'); calTag.src = 'https://assets.calendly.com/assets/external/widget.js'; calTag.async = true;
+    calTag.onload = function(){ calTag.done = 1; calWait.splice(0).forEach(function(w){ w[0](); }); };
+    calTag.onerror = function(){ calWait.splice(0).forEach(function(w){ if (w[1]) w[1](); }); };
+    d.head.appendChild(calTag);
+  }
+  function warm(){ if (S.calendly && !/cal\.com\//.test(S.calendly) && !window.Calendly) calScript(); }
+  form.addEventListener('focusin', function(e){ if (cur === 4) warm(); });
   form.addEventListener('keydown', function(e){ if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox' && e.target.type !== 'radio'){ e.preventDefault(); var n = steps[cur].querySelector('[data-next]'); if (n) n.click(); } });
   form.addEventListener('submit', function(e){ e.preventDefault(); });
   /* the booking itself happens inside Calendly's frame; it tells the page when a time is taken */

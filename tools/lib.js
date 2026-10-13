@@ -9,7 +9,6 @@ const SERVICES = require('../data/services.js');
 const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const pad = n => String(n).padStart(2, '0');
 const abs = p => site.origin.replace(/\/$/, '') + '/' + String(p).replace(/^\//, '');
-const FONTS = 'https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap';
 const FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Cpath d='M22 16v32M43 17L25 33l18 15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 const UPDATED = new Date();
 const monthYear = d => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
@@ -73,6 +72,12 @@ const device = (b, x, { thumbs = false } = {}) => `<div class="hero-device">
     <div class="ways"><a id="devOpen" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Open full size</a>${thumbs ? `<a id="devPage" href="${b}work/${x.slug}/">Its page</a>` : ''}</div>
   </div>
 </div>${thumbs ? `<div class="thumbs" id="thumbs" role="tablist" aria-label="Choose a build"></div>` : ''}`;
+/* the hero's phone: the build that fits the page, as a sharp still that turns into the running build on a
+   wide screen (assets/hero-phone.js); on a phone it is a small card under the buttons, so the words come first */
+const heroPhone = (b, x) => `<figure class="hph" data-hp="${x.slug}">
+  <div class="hph-shell"><img src="${phoneSrc(b, x)}" width="585" height="1266" alt="${esc(x.name)} on a phone: ${esc(x.short)}" fetchpriority="high" decoding="async"></div>
+  <figcaption><span class="hph-who"><b>${esc(x.name)}</b><span>${esc(kindWord(x))} for a made-up ${esc((x.trade || x.biz).toLowerCase())}<span class="hph-live">Running live</span></span></span><a class="hph-go" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Use it <span aria-hidden="true">&rarr;</span></a></figcaption>
+</figure>`;
 const forgeInvite = (b, line) => `<section class="invite">
   <div class="wrap">
     <div><h2>Now see your own name on one.</h2><p>${line}</p></div>
@@ -117,7 +122,7 @@ function webPage({ path, title, description, type = 'WebPage', extra = {} }){
 const jsonld = nodes => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [...baseGraph(), ...nodes] }).replace(/</g,'\\u003c')}</script>`;
 
 /* ---------- head ---------- */
-function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette }){
+function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette, preconnect = [] }){
   const canon = abs(path);
   return `<!doctype html>
 <html lang="${site.locale}" style="${paletteStyle(palette || defaultBuild())}">
@@ -127,7 +132,7 @@ function head({ b, path, title, description, og, type = 'website', css = [], nod
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canon}">
-${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
+${preconnect.map(u => `<link rel="preconnect" href="${u}">`).join('\n')}${preconnect.length ? '\n' : ''}${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
 <meta name="theme-color" content="#FFFFFF">
 <meta name="author" content="${esc(site.founder.name)}">
 <meta property="og:site_name" content="${esc(site.name)}">
@@ -148,9 +153,7 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <link rel="apple-touch-icon" href="${b}og/icon.png">
 <link rel="manifest" href="${b}manifest.webmanifest">
 <link rel="sitemap" type="application/xml" href="${b}sitemap.xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="${FONTS}" rel="stylesheet">
+<link rel="preload" href="${b}assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${b}assets/site.css">
 ${css.map(c => `<link rel="stylesheet" href="${b}assets/${c}">`).join('\n')}
 ${jsonld(nodes)}
@@ -219,4 +222,4 @@ const keepHyphens = html => html.replace(/<(h[1-3])\b([^>]*)>([\s\S]*?)<\/\1>/g,
 const page = (h, body, s) => `${h}\n<body>\n${keepHyphens(body)}\n${s}\n</body>\n</html>\n`;
 
 site.facts = site.facts.map(f => f.replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
-module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };
+module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc, heroPhone };
