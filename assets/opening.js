@@ -2,8 +2,8 @@
    The opening: one film, played by scroll.
    The film is cut into still frames (assets/opening/d for wide screens, m for tall ones) and drawn to a canvas.
    Scroll picks the frame and the film eases towards it, so it glides rather than jumps; the wheel is never taken over.
-   Three lines type in, one per third of the film. At the end the page pushes into the phone's screen in the last
-   frame, a booking lands on it, and the screen's white becomes the page.
+   The lines type in, each owning an equal share of the film. The film ends inside the shop window; then the page
+   fades to white and the headline comes up.
    Reduce Motion, Data Saver or no canvas: nothing here runs and the still version stays.
    ============================================================ */
 (function(){
@@ -16,10 +16,10 @@
 
   var N = +root.getAttribute('data-frames') || 0, base = root.getAttribute('data-base') || '';
   if (!N) return;
-  var FILM = .86;                               /* share of the scroll the film itself takes; the push and the page take the rest */
+  var FILM = .9;                                /* share of the scroll the film itself takes; the fade and the headline take the rest */
   var stick = root.querySelector('.op-stick'), head = d.querySelector('.site-head');
   var lines = [].slice.call(root.querySelectorAll('.op-line'));
-  var card = root.querySelector('.op-card'), white = root.querySelector('.op-white'), end = root.querySelector('.op-end');
+  var white = root.querySelector('.op-white'), end = root.querySelector('.op-end');
   var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
   var span = function(p, a, b){ return clamp((p - a) / (b - a), 0, 1); };
   var ease = function(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
@@ -27,7 +27,7 @@
   root.classList.add('is-film');
 
   /* ---------- frames ---------- */
-  var set = '', imgs = [], loaded = 0, queue = [], busy = 0, screenRect = null;
+  var set = '', imgs = [], loaded = 0, queue = [], busy = 0;
   function pickSet(){ return innerWidth / innerHeight < .85 ? 'm' : 'd'; }
   function order(){
     var seen = {}, out = [0, N - 1];
@@ -54,8 +54,6 @@
   }
   function start(){
     set = pickSet(); imgs = new Array(N); loaded = 0; queue = order();
-    var r = (root.getAttribute('data-screen-' + set) || '').split(',').map(Number);
-    screenRect = r.length === 4 && r.every(isFinite) ? r : null;
     pump();
   }
   function nearest(t){
@@ -79,13 +77,6 @@
     var s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
     return { x: (W - w) / 2, y: (H - h) / 2, w: w, h: h };
   }
-  /* the push: scale about the phone screen until it fills the view, moving its centre to the view's centre */
-  function push(c, z){
-    if (!screenRect || z <= 0) return { S: 1, ox: 0, oy: 0, r: null };
-    var r = { x: c.x + screenRect[0] * c.w, y: c.y + screenRect[1] * c.h, w: screenRect[2] * c.w, h: screenRect[3] * c.h };
-    var cx = r.x + r.w / 2, cy = r.y + r.h / 2, Z = Math.max(W / r.w, H / r.h) * 1.06, e = ease(z), S = 1 + (Z - 1) * e;
-    return { S: S, ox: cx * (1 - S) + (W / 2 - cx) * e, oy: cy * (1 - S) + (H / 2 - cy) * e, r: r };
-  }
 
   /* ---------- the lines ---------- */
   lines.forEach(function(el){
@@ -103,11 +94,11 @@
     for (var i = 0; i < c.length; i++){ c[i].className = i < n ? (i === n - 1 ? 'on tip' : 'on') : ''; }
     el._shown = n;
   }
-  /* each line owns a third of the film: types over the first half, holds, erases, then a breath of nothing */
+  /* each line owns an equal share of the film: types over the first half, holds, erases, then a breath of nothing */
   var intro = 0, t0 = performance.now();
   function words(pf){
     lines.forEach(function(el, i){
-      var l = pf * 3 - i, n;
+      var l = pf * lines.length - i, n;
       if (i === 0 && l < .5) l = Math.max(l, intro * .5);
       if (l <= 0 || l >= .8) n = 0;
       else if (l < .5) n = Math.ceil(el._n * l / .5);
@@ -137,20 +128,11 @@
   function draw(){
     var pf = Math.min(1, (cur / (N - 1)));
     words(pf);
-    var z = span(p, .86, .96), im = nearest(cur);
+    var im = nearest(cur);
     if (im){
-      var c = cover(im), k = push(c, z);
-      ctx.setTransform(dpr * k.S, 0, 0, dpr * k.S, dpr * k.ox, dpr * k.oy);
+      var c = cover(im);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.drawImage(im, c.x, c.y, c.w, c.h);
-      if (card){
-        var r = k.r || (screenRect && { x: c.x + screenRect[0] * c.w, y: c.y + screenRect[1] * c.h, w: screenRect[2] * c.w, h: screenRect[3] * c.h });
-        if (r){
-          var s = k.S, cw = 240;
-          card.style.transform = 'translate(' + (r.x * s + k.ox).toFixed(1) + 'px,' + (r.y * s + k.oy + r.h * s * .28).toFixed(1) + 'px) scale(' + (r.w * s / cw).toFixed(4) + ')';
-          card.style.opacity = (span(p, .8, .84) * (1 - span(p, .9, .94))).toFixed(3);
-          card.style.setProperty('--in', span(p, .81, .86).toFixed(3));
-        }
-      }
     }
     white.style.opacity = span(p, .9, .95).toFixed(3);
     var e = span(p, .95, .99);

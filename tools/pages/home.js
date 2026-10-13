@@ -7,27 +7,12 @@ const TRY = require('./try.js').DEMOS.filter(x => x.live);
 const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
 const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
-/* the opening film: frame count, and where the phone screen sits in the last frame (x, y, w, h as shares of the frame) */
+/* the opening film: Your town. One square film (a white model town at night; calls bend to one shop; the camera
+   pushes into its window), cut into a wide set and a tall set of frames. Each line owns an equal share of the film. */
 const OPENING = {
-  frames: 336,
-  screenD: '0.44,0.30,0.12,0.40',
-  screenM: '0.30,0.30,0.40,0.36',
-  lines: ['Right now, someone near you needs a tradesperson.', 'They search, compare, and ring one.', 'We make sure it\u2019s you.']
+  frames: 240,
+  lines: ['Tonight, people near you need a tradesperson.', 'Most of their calls go nowhere.', 'One business answers every one.']
 };
-
-/* the reel in the first screen: real builds, played live. depth = how many screens each one glides down */
-const REEL = [
-  { n: 19, biz: 'boxing club website, Leeds', depth: 1.6 },
-  { n: 1,  biz: 'kitchen fitter’s quote engine', depth: 1.5, crop: '#modebar' },
-  { n: 23, biz: 'electrician’s website', depth: 1.5 },
-  { n: 20, biz: 'tattoo studio website, Bristol', depth: 1.6 },
-  { n: 2,  biz: 'job and lead system for a heating firm', depth: 1 },
-  { n: 17, biz: 'film company website', depth: 1.4 },
-  { n: 24, biz: 'MOT centre website', depth: 1.4 },
-  { n: 22, biz: 'physio clinic site with booking', depth: 1.4 },
-  { n: 21, biz: 'accountants’ website, Harrogate', depth: 1.4 },
-  { n: 3,  biz: 'dispatch board for a heating team', depth: 1 },
-].map(r => ({ ...B(r.n), ...r, rb: r.biz })).filter(x => x.slug);
 
 module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
@@ -37,33 +22,25 @@ module.exports = { pages: [{
     const description = 'Websites, online booking and missed-call text-back for UK trades. Watch real builds run on the page, then type your business name and see a draft of yours.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
-      { '@type': 'VideoObject', '@id': L.abs('/#film'), name: 'Seven days from invisible to booked', description: 'A film of a website build for a fictional heating engineer: built in seven days, found on Google, and the enquiries arriving in the Skales CRM. Fictional business, illustrative numbers.',
-        thumbnailUrl: L.abs('/assets/film/website.jpg'), contentUrl: L.abs('/assets/film/website.mp4'), uploadDate: '2026-10-08', duration: 'PT33S', publisher: { '@id': L.ORG_ID } },
-    ];
-    const svc = [
-      { s: site.services[0], x: B(13), see: 'a roofing firm’s site, before and after' },
-      { s: site.services[1], x: B(14), see: 'a heating engineer’s booking' },
-      { s: site.services[2], x: B(25), see: 'a missed call, texted back' },
     ];
     const body = `
 ${L.header(b, 'home')}
 <main id="main">
 
 <script>document.documentElement.classList.add('js')</script>
-<section class="op" id="top" aria-labelledby="h-top" data-frames="${OPENING.frames}" data-base="${b}assets/opening/" data-screen-d="${OPENING.screenD}" data-screen-m="${OPENING.screenM}">
+<section class="op" id="top" aria-labelledby="h-top" data-frames="${OPENING.frames}" data-base="${b}assets/opening/">
   <div class="op-stick">
-    <picture class="op-poster"><source media="(max-aspect-ratio: 17/20)" srcset="${b}assets/opening/m/0001.webp"><img src="${b}assets/opening/d/0001.webp" alt="A plain van parked on a wet terraced street at dusk" width="1600" height="900" fetchpriority="high"></picture>
+    <picture class="op-poster"><source media="(max-aspect-ratio: 17/20)" srcset="${b}assets/opening/m/0001.webp"><img src="${b}assets/opening/d/0001.webp" alt="A white architect's model of a British town at night, a few windows lit warm" width="1440" height="810" fetchpriority="high"></picture>
     <canvas class="op-canvas" aria-hidden="true"></canvas>
     <div class="op-shade" aria-hidden="true"></div>
     <div class="op-lines" aria-hidden="true">
       ${OPENING.lines.map(l => `<p class="op-line">${esc(l)}</p>`).join('\n      ')}
     </div>
     <div class="op-still"><ol>${OPENING.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ol></div>
-    <div class="op-card" aria-hidden="true"><div class="bk"><div class="bk-top"><i></i><span>Bookings</span><span>now</span></div><h3>New booking: boiler service</h3><p>Tomorrow, 8:00 · booked on your website</p><span class="bk-paid">£30 deposit paid</span></div></div>
     <div class="op-white" aria-hidden="true"></div>
     <div class="op-end"><div class="wrap">
       <p class="op-kick"><i></i>${esc(site.name)} · Websites, booking and follow-up for UK trades</p>
-      <h1 id="h-top">Be the one they call<em>.</em></h1>
+      <h1 id="h-top">We make that business yours<em>.</em></h1>
       <p class="lead">People search, open a few websites and ring one. I build the one they ring: easy to find on Google, bookable while you are on the tools, and followed up by text.</p>
       <div class="op-ctas"><a class="btn btn-live" href="${b}book/">Book a 30-minute call</a><a class="btn btn-ghost" href="#build">Build a draft of yours</a></div>
     </div></div>
@@ -183,22 +160,6 @@ ${L.header(b, 'home')}
   </div>
 </section>
 
-<section class="sec sec-alu" id="film" aria-labelledby="h-film">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="h-film">Seven days from invisible to booked.</h2>
-      <p class="lead">A heating engineer nobody could find on Google, a site built in a week, and what came in after. It is a film of the system I build, with a made-up business in it.</p>
-    </div>
-    <figure class="film">
-      <video data-film muted playsinline loop preload="none" disablepictureinpicture
-        data-wide="${b}assets/film/website.mp4" data-phone="${b}assets/film/website-phone.mp4"
-        data-wide-poster="${b}assets/film/website.jpg" data-phone-poster="${b}assets/film/website-phone.jpg" poster="${b}assets/film/website.jpg"
-        aria-label="A week-long website build for a heating engineer, then enquiries arriving in the Skales CRM"></video>
-      <figcaption><span>Fictional business · illustrative numbers</span><button type="button" class="film-tg" data-film-toggle aria-pressed="false">Play the film</button></figcaption>
-    </figure>
-  </div>
-</section>
-
 <section class="sec" id="try" aria-labelledby="h-try">
   <div class="wrap">
     <div class="sec-head">
@@ -206,42 +167,6 @@ ${L.header(b, 'home')}
       <p class="lead">Three live demos that run on your phone. You play the customer, then see what the business sees. About a minute each.</p>
     </div>
     <div class="try-list">${TRY.map(x => `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
-  </div>
-</section>
-
-<section class="sec sec-alu" id="services" aria-labelledby="h-svc">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="h-svc">Three things, built to be used on a phone.</h2>
-      <p class="lead">Because that is where your customer is when they find you: in a van, on a sofa, at 9:47pm.</p>
-    </div>
-    <div class="svc">
-      ${svc.map(({ s, x, see }) => `<article>
-        <a class="shell" href="${b}work/${x.slug}/" aria-label="${esc(x.name)}"><img src="${L.phoneSrc(b, x)}" width="585" height="1266" alt="${esc(x.name)} on a phone" loading="lazy" decoding="async"></a>
-        <h3>${esc(s.name)}</h3>
-        <p>${esc(s.long)}</p>
-        <a class="lnk" href="${b}work/${x.slug}/">See it running: ${esc(see)}</a>
-      </article>`).join('')}
-    </div>
-    <div class="sec-foot"><a class="btn btn-ghost" href="${b}services/">All five services</a></div>
-  </div>
-</section>
-
-<section class="night" id="night" aria-labelledby="h-night">
-  <img class="night-plate" src="${b}assets/plates/night.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 id="h-night">What happens at 9:47pm.</h2>
-      <p class="lead">A customer rings. You are at your daughter&rsquo;s birthday tea. This is the follow-up system doing your job for you, in real time. <strong>Every message below is sent by the system, not by a person.</strong></p>
-    </div>
-    <div class="night-grid">
-      <div class="thread" id="thread" aria-live="polite"></div>
-      <div>
-        <ul class="log" id="log" aria-live="polite"></ul>
-        <div class="out-line" id="lineOut"></div>
-        <button class="btn btn-ghost" id="ring" type="button">Run it</button><span id="lineLamp" hidden></span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -276,6 +201,6 @@ ${L.header(b, 'home')}
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
     return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'opening.css', 'builder.css'], nodes }), body,
-      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'opening.js', 'nightline.js', 'films.js']));
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'opening.js']));
   }
 }]};
