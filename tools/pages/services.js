@@ -185,14 +185,18 @@ const servicePage = s => ({
     ];
     const qa = s.sections.map(x => `<div class="qa"><h2>${esc(x.h2)}</h2>${x.p.map(p => `<p>${esc(p)}</p>`).join('')}</div>`).join('');
     const others = SV.filter(x => x !== s);
+    const hx = s.builds.length ? B(s.builds[0]) : null;
     const body = `
 ${L.header(b, 'services')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap${hx ? ' hero-split' : ''}">
+  <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(s.h1)}</h1>
   <p class="lead answer">${esc(s.answer)}</p>
   ${ctaRow(b, s.demos, 'services', s.slug)}
+  </div>
+  ${hx ? L.heroPhone(b, hx) : ''}
 </section>
 ${s.film ? `<section class="sec sec-alu" id="film" aria-labelledby="h-film">
   <div class="wrap">
@@ -217,8 +221,8 @@ ${fill(faqPanel(s.faq, `${s.name}: questions people ask`), b)}
 ${band(b, 'services', s.slug)}
 ${L.footer(b)}`;
     const live = s.slug === 'websites' || s.slug === 'follow-up-automation';
-    const css = ['pages.css', ...(s.builds.length || live ? ['device.css'] : []), ...(live ? ['systems.css'] : [])];
-    const js = [...(s.film ? ['films.js'] : []), ...(live ? ['builds.js', 'device.js', 'systems.js'] : [])];
+    const css = ['pages.css', ...(s.builds.length || live ? ['device.css'] : []), ...(live ? ['systems.css'] : []), ...(hx ? ['hero-phone.css'] : [])];
+    const js = [...(s.film ? ['films.js'] : []), ...(live ? ['builds.js', 'device.js', 'systems.js'] : []), ...(hx ? ['hero-phone.js'] : [])];
     return L.page(L.head({ b, path, title, description: s.description, og: `services-${s.slug}`, css, nodes }), fill(body, b), L.scripts(b, js));
   },
 });
@@ -280,14 +284,18 @@ const autoPage = a => ({
       faqNode(a.faq, path),
     ];
     const others = AU.filter(x => x !== a);
+    const hx = a.builds.length ? B(a.builds[0]) : null;
     const body = `
 ${L.header(b, 'services')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap${hx ? ' hero-split' : ''}">
+  <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(a.h1)}</h1>
   <p class="lead answer">${esc(a.answer)}</p>
   ${ctaRow(b, a.demos, 'automations', a.slug)}
+  </div>
+  ${hx ? L.heroPhone(b, hx) : ''}
 </section>
 ${panel('Why it matters', esc(a.name), `<h2>Why does it matter?</h2><p class="lead">${esc(a.why)}</p>`)}
 ${panel('How it works', 'Step by step', `<h2>How does ${esc(a.name.toLowerCase())} work?</h2><ol class="steps">${a.steps.map(([n, t]) => `<li><b>${esc(n)}.</b> ${esc(t)}</li>`).join('')}</ol>`, ' id="how"')}
@@ -302,7 +310,7 @@ ${fill(faqPanel(a.faq, `${a.name}: questions people ask`), b)}
 </main>
 ${band(b, 'automations', a.slug)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css'], nodes }), body, L.scripts(b));
+    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css', ...(hx ? ['hero-phone.css'] : [])], nodes }), body, L.scripts(b, hx ? ['hero-phone.js'] : []));
   },
 });
 

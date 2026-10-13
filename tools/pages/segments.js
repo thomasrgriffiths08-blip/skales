@@ -32,11 +32,14 @@ const segPage = s => ({
     const body = `
 ${L.header(b, 'services')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap hero-split">
+  <div class="hs-copy">
   ${P.crumbs(b, cr)}
   <h1>${esc(s.h1)}</h1>
   <p class="lead answer">${esc(s.answer)}</p>
   <div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${tryHref(s.demos[0])}">Try it as ${article(s.word)} ${esc(s.word)}</a></div>
+  </div>
+  ${L.heroPhone(b, L.builds.find(x => x.n === s.builds[0]))}
 </section>
 ${P.panel('What it needs', esc(s.label), `<h2>What should a website for ${esc(lc(s.label))} do?</h2><ul class="feat cols">${s.needs.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`)}
 ${P.panel('Your customers', 'How the work comes in', `<h2>How do customers choose ${article(s.word)} ${esc(s.word)}?</h2><p class="lead">${esc(s.journey)}</p>`)}
@@ -61,7 +64,7 @@ ${P.fill(P.faqPanel(s.faq, `${s.label}: questions people ask`), b)}
 </main>
 ${P.band(b, 'trades', s.slug)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path, title, description: s.description, og: `for-${s.slug}`, css: ['pages.css', 'device.css'], nodes }), body, L.scripts(b));
+    return L.page(L.head({ b, path, title, description: s.description, og: `for-${s.slug}`, css: ['pages.css', 'device.css', 'hero-phone.css'], nodes }), body, L.scripts(b, ['hero-phone.js']));
   },
 });
 
