@@ -14,7 +14,7 @@
   var canvas = root.querySelector('.op-canvas'), ctx = canvas && canvas.getContext && canvas.getContext('2d');
   if (RM || SAVE || !ctx) return;
 
-  var N = +root.getAttribute('data-frames') || 0, base = root.getAttribute('data-base') || '';
+  var N = +root.getAttribute('data-frames') || 0, base = root.getAttribute('data-base') || '', ext = root.getAttribute('data-ext') || 'webp';
   if (!N) return;
   var FILM = .9;                                /* share of the scroll the film itself takes; the fade and the headline take the rest */
   var stick = root.querySelector('.op-stick'), head = d.querySelector('.site-head');
@@ -35,7 +35,7 @@
     [24, 12, 6, 3, 1].forEach(function(s){ for (var i = 0; i < N; i += s) if (!seen[i]){ seen[i] = 1; out.push(i); } });
     return out;
   }
-  function name(i){ var s = String(i + 1); while (s.length < 4) s = '0' + s; return base + set + '/' + s + '.webp'; }
+  function name(i){ var s = String(i + 1); while (s.length < 4) s = '0' + s; return base + set + '/' + s + '.' + ext; }
   function pump(){
     while (busy < 6 && queue.length){
       var i = queue.shift(), im = new Image();
@@ -122,17 +122,25 @@
     var target = Math.min(1, p / FILM) * (N - 1);
     cur += (target - cur) * (1 - Math.pow(1 - .16, dt / 16.7));
     if (Math.abs(target - cur) < .02) cur = target;
-    draw();
+    draw(cur === target);
     if (cur !== target || intro < 1) kick();
   }
-  function draw(){
+  function draw(still){
     var pf = Math.min(1, (cur / (N - 1)));
     words(pf);
     var im = nearest(cur);
     if (im){
-      var c = cover(im);
+      var c = cover(im), i0 = Math.floor(cur), f = cur - i0, a = imgs[i0], b = imgs[i0 + 1];
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.drawImage(im, c.x, c.y, c.w, c.h);
+      ctx.globalAlpha = 1;
+      /* between two frames that have both arrived, the next one is laid over the last at the
+         fraction scrolled, so the film glides instead of stepping; at rest it shows one clean frame */
+      if (!still && a && b && f > .02){
+        ctx.drawImage(a, c.x, c.y, c.w, c.h);
+        ctx.globalAlpha = f;
+        ctx.drawImage(b, c.x, c.y, c.w, c.h);
+        ctx.globalAlpha = 1;
+      } else ctx.drawImage(im, c.x, c.y, c.w, c.h);
     }
     white.style.opacity = span(p, .9, .95).toFixed(3);
     var e = span(p, .95, .99);
