@@ -1,81 +1,77 @@
 /* ============================================================
    The opening: one film, played by scroll.
-   The film is cut into still frames (assets/opening/d for wide screens, m for tall ones) and drawn to a canvas.
-   Scroll picks the frame and the film eases towards it, so it glides rather than jumps; the wheel is never taken over.
-   The lines type in, each owning an equal share of the film. The film ends inside the shop window; then the page
+   The film is a short video with a keyframe every few frames (assets/film/town-d for wide screens, town-m for
+   tall ones; an AV1 copy of each for browsers without H.264), fetched whole so every seek is local. Scroll sets the time and the film eases towards it, so it
+   glides rather than jumps; the wheel is never taken over. Until the film has arrived, its first frame (the
+   poster) is on screen and the lines still type over it.
+   The lines type in, each owning an equal share of the film. The film ends on the one house still lit; then the page
    fades to white and the headline comes up.
-   Reduce Motion, Data Saver or no canvas: nothing here runs and the still version stays.
+   Reduce Motion, Data Saver or no video: nothing here runs and the still version stays.
    ============================================================ */
 (function(){
   var d = document, root = d.getElementById('top');
   if (!root || !root.classList.contains('op')) return;
   var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SAVE = navigator.connection && navigator.connection.saveData;
-  var canvas = root.querySelector('.op-canvas'), ctx = canvas && canvas.getContext && canvas.getContext('2d');
-  if (RM || SAVE || !ctx) return;
+  var video = root.querySelector('.op-film');
+  if (RM || SAVE || !video || !video.canPlayType) return;
+  /* H.264 everywhere it plays (decoded in hardware almost everywhere); AV1 for the few browsers without it */
+  var tail = video.canPlayType('video/mp4; codecs="avc1.640028"') ? '.mp4' : video.canPlayType('video/mp4; codecs="av01.0.08M.08"') ? '-av1.mp4' : '';
+  if (!tail) return;
 
-  var N = +root.getAttribute('data-frames') || 0, base = root.getAttribute('data-base') || '', ext = root.getAttribute('data-ext') || 'webp';
-  if (!N) return;
+  var base = root.getAttribute('data-film') || '', FPS = +root.getAttribute('data-fps') || 24;
+  if (!base) return;
   var FILM = .9;                                /* share of the scroll the film itself takes; the fade and the headline take the rest */
   var stick = root.querySelector('.op-stick'), head = d.querySelector('.site-head');
   var lines = [].slice.call(root.querySelectorAll('.op-line'));
   var white = root.querySelector('.op-white'), end = root.querySelector('.op-end');
   var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
   var span = function(p, a, b){ return clamp((p - a) / (b - a), 0, 1); };
-  var ease = function(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
 
   root.classList.add('is-film');
 
-  /* ---------- frames ---------- */
-  var set = '', imgs = [], loaded = 0, queue = [], busy = 0;
+  /* ---------- the film ---------- */
+  var set = '', N = 0, ready = false, seeking = 0, shown = -1, url = '';
+  video.muted = true;
   function pickSet(){ return innerWidth / innerHeight < .85 ? 'm' : 'd'; }
-  function order(){
-    var seen = {}, out = [0, N - 1];
-    seen[0] = seen[N - 1] = 1;
-    [24, 12, 6, 3, 1].forEach(function(s){ for (var i = 0; i < N; i += s) if (!seen[i]){ seen[i] = 1; out.push(i); } });
-    return out;
-  }
-  function name(i){ var s = String(i + 1); while (s.length < 4) s = '0' + s; return base + set + '/' + s + '.' + ext; }
-  function pump(){
-    while (busy < 6 && queue.length){
-      var i = queue.shift(), im = new Image();
-      busy++;
-      im.decoding = 'async';
-      im.onload = (function(i, im, s){ return function(){
-        busy--;
+  function load(){
+    set = pickSet(); ready = false; seeking = 0; shown = -1;
+    root.classList.remove('is-ready');
+    var s = set, src = base + s + tail;
+    /* the whole file first, so scrubbing never waits on the network; straight from the URL if fetch is refused */
+    (window.fetch ? fetch(src).then(function(r){ if (!r.ok) throw 0; return r.blob(); }).then(function(b){ return URL.createObjectURL(b); }) : Promise.reject())
+      .catch(function(){ return src; })
+      .then(function(u){
         if (s !== set) return;
-        imgs[i] = im; loaded++;
-        if (i === 0 && !root.classList.contains('is-ready')){ root.classList.add('is-ready'); kick(); }
-        pump();
-      }; })(i, im, set);
-      im.onerror = function(){ busy--; pump(); };
-      im.src = name(i);
-    }
+        if (url && url.indexOf('blob:') === 0) URL.revokeObjectURL(url);
+        url = u; video.src = u; video.load();
+      });
   }
-  function start(){
-    set = pickSet(); imgs = new Array(N); loaded = 0; queue = order();
-    pump();
-  }
-  function nearest(t){
-    t = Math.round(t);
-    for (var k = 0; k < N; k++){
-      if (imgs[t - k]) return imgs[t - k];
-      if (imgs[t + k]) return imgs[t + k];
-    }
-    return null;
-  }
-
-  /* ---------- the canvas ---------- */
-  var W = 0, H = 0, dpr = 1;
-  function size(){
-    dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-    W = stick.clientWidth; H = stick.clientHeight;
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-  }
-  /* where the frame sits on screen: cover-fit, centred */
-  function cover(im){
-    var s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
-    return { x: (W - w) / 2, y: (H - h) / 2, w: w, h: h };
+  /* a page that refuses blob: video gets the file straight from its URL instead */
+  video.addEventListener('error', function(){
+    if (url.indexOf('blob:') !== 0) return;
+    URL.revokeObjectURL(url); url = base + set + tail; video.src = url; video.load();
+  });
+  video.addEventListener('loadeddata', function(){
+    N = Math.max(1, Math.round(video.duration * FPS));
+    /* iOS paints seeked frames only once the video has played; muted inline play is allowed, and it stops at once */
+    var pr = video.play();
+    if (pr && pr.then) pr.then(function(){ video.pause(); seekTo(true); }, function(){ seekTo(true); });
+    else { video.pause(); seekTo(true); }
+  });
+  video.addEventListener('seeked', function(){
+    seeking = 0;
+    if (!ready){ ready = true; root.classList.add('is-ready'); }
+    kick();
+  });
+  /* the frame the eased position lands on; a seek goes to the middle of it so no browser rounds to the one before */
+  function seekTo(force){
+    /* one seek at a time; a seek that never reports back is given up on after half a second */
+    if (!N || seeking && !force && performance.now() - seeking < 500) return;
+    var f = clamp(Math.round(cur), 0, N - 1);
+    if (f === shown && !force) return;
+    shown = f; seeking = performance.now();
+    video.currentTime = Math.min((f + .5) / FPS, video.duration - .001);
   }
 
   /* ---------- the lines ---------- */
@@ -109,7 +105,7 @@
   }
 
   /* ---------- scroll ---------- */
-  var p = 0, cur = 0, raf = 0, last = 0;
+  var p = 0, pe = 0, cur = 0, raf = 0, last = 0;
   function progress(){
     var r = root.getBoundingClientRect(), hh = head ? head.offsetHeight : 64;
     return clamp((hh - r.top) / Math.max(1, root.offsetHeight - stick.offsetHeight), 0, 1);
@@ -119,35 +115,20 @@
     var dt = Math.min(64, now - (last || now)); last = now;
     intro = clamp((now - t0 - 500) / 1700, 0, 1);
     p = progress();
-    var target = Math.min(1, p / FILM) * (N - 1);
-    cur += (target - cur) * (1 - Math.pow(1 - .16, dt / 16.7));
-    if (Math.abs(target - cur) < .02) cur = target;
-    draw(cur === target);
-    if (cur !== target || intro < 1) kick();
-  }
-  function draw(still){
-    var pf = Math.min(1, (cur / (N - 1)));
-    words(pf);
-    var im = nearest(cur);
-    if (im){
-      var c = cover(im), i0 = Math.floor(cur), f = cur - i0, a = imgs[i0], b = imgs[i0 + 1];
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.globalAlpha = 1;
-      /* between two frames that have both arrived, the next one is laid over the last at the
-         fraction scrolled, so the film glides instead of stepping; at rest it shows one clean frame */
-      if (!still && a && b && f > .02){
-        ctx.drawImage(a, c.x, c.y, c.w, c.h);
-        ctx.globalAlpha = f;
-        ctx.drawImage(b, c.x, c.y, c.w, c.h);
-        ctx.globalAlpha = 1;
-      } else ctx.drawImage(im, c.x, c.y, c.w, c.h);
-    }
+    /* the eased share of the film; it drives the words at once and the video as fast as it can seek */
+    var target = Math.min(1, p / FILM);
+    pe += (target - pe) * (1 - Math.pow(1 - .16, dt / 16.7));
+    if (Math.abs(target - pe) < .0005) pe = target;
+    cur = pe * Math.max(0, N - 1);
+    if (ready) seekTo(false);
+    words(pe);
     white.style.opacity = span(p, .9, .95).toFixed(3);
     var e = span(p, .95, .99);
     end.style.opacity = e.toFixed(3);
     root.classList.toggle('is-end', e > 0);
     root.classList.toggle('is-moving', p > .01);
     if (head) head.classList.toggle('on-dark', p < .95 && root.getBoundingClientRect().bottom > (head.offsetHeight || 64));
+    if (pe !== target || intro < 1) kick();
   }
   function kick(){ if (!raf) raf = requestAnimationFrame(frame); }
 
@@ -155,12 +136,12 @@
   var rz = 0;
   window.addEventListener('resize', function(){
     clearTimeout(rz);
-    rz = setTimeout(function(){ size(); if (pickSet() !== set) start(); kick(); }, 120);
+    rz = setTimeout(function(){ if (pickSet() !== set) load(); kick(); }, 150);
   });
   /* keyboard users who tab into the headline's buttons before the film ends are taken to the end */
   end.addEventListener('focusin', function(){
     if (p < .99) window.scrollTo({ top: root.offsetTop + root.offsetHeight - stick.offsetHeight - (head ? head.offsetHeight : 64), behavior: 'instant' });
   });
 
-  size(); start(); kick();
+  load(); kick();
 })();

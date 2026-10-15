@@ -1,7 +1,7 @@
 /* ============================================================
    The opening: the home page's first screen is one film, played by scroll.
-   A white model of a British town at night: calls go unanswered at other firms, then all of them
-   bend to one shop on the high street and the film pushes into its window. Then the page turns white
+   A white model of a British town at night, one continuous take: the lit windows go out one by one
+   until a single house is still lit. Then the page turns white
    and the headline arrives. About two screens of scroll, with a Skip button.
    Without JS, or with Reduce Motion, it is one still with the words on it.
    ============================================================ */
@@ -10,11 +10,11 @@
 .js .op.is-film{height:calc(300svh - var(--head-h))}
 .js .op.is-film .op-stick{position:sticky;top:var(--head-h)}
 
-/* the film: a poster in the HTML so the first screen paints at once, the canvas over it once frames arrive */
-.op-poster,.op-poster img,.op-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.op-poster img{object-fit:cover}
-.op-canvas{opacity:0;transition:opacity .6s var(--ease)}
-.op.is-ready .op-canvas{opacity:1}
+/* the film: its first frame is in the HTML so the first screen paints at once; the video fades in over it once it has arrived */
+.op-poster,.op-poster img,.op-film{position:absolute;inset:0;width:100%;height:100%;display:block}
+.op-poster img,.op-film{object-fit:cover}
+.op-film{opacity:0;transition:opacity .6s var(--ease);pointer-events:none}
+.op.is-ready .op-film{opacity:1}
 .op-shade{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(11,12,14,.55) 0%,rgba(11,12,14,0) 30%,rgba(11,12,14,0) 62%,rgba(11,12,14,.6) 100%)}
 
@@ -50,7 +50,7 @@
 
 /* the still version: no JS, Reduce Motion or Data Saver. The words sit on frame one and the page scrolls as normal */
 .op-still{display:none}
-.op:not(.is-film) .op-lines,.op:not(.is-film) .op-cue,.op:not(.is-film) .op-skip,.op:not(.is-film) .op-white{display:none}
+.op:not(.is-film) .op-film,.op:not(.is-film) .op-lines,.op:not(.is-film) .op-cue,.op:not(.is-film) .op-skip,.op:not(.is-film) .op-white{display:none}
 .op:not(.is-film) .op-stick{height:auto;min-height:0;display:grid}
 .op:not(.is-film) .op-poster{position:relative;grid-area:1/1}
 .op:not(.is-film) .op-poster img{position:relative;height:min(78svh,760px)}
@@ -83,9 +83,11 @@
 @media (max-width:760px){
   /* clear of the fixed bar with The work and Book a call */
   .op-skip{bottom:calc(84px + env(safe-area-inset-bottom));right:16px}
-  .op-cue{bottom:calc(88px + env(safe-area-inset-bottom));left:var(--pad);transform:none}
+  .op-cue{bottom:calc(84px + env(safe-area-inset-bottom));left:var(--pad);transform:none}
+  /* the lines sit above the Scroll cue and the Skip button, never on them */
+  .op-lines{bottom:calc(150px + env(safe-area-inset-bottom))}
 }
 @media (prefers-reduced-motion:reduce){
   .op-cue::after{animation:none}
-  .op-canvas{transition:none}
+  .op-film{transition:none}
 }
