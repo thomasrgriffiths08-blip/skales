@@ -11,7 +11,7 @@ const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
    out one by one until a single house is still lit. Cut into a wide strip (town-d) and a tall strip (town-m), each with
    its first frame as the poster. Each line owns an equal share of the film. */
 const OPENING = {
-  fps: 24,
+  frames: 243,
   lines: ['Tonight, people near you need a tradesperson.', 'Most of their calls go nowhere.', 'One business answers every one.']
 };
 
@@ -29,10 +29,10 @@ ${L.header(b, 'home')}
 <main id="main">
 
 <script>document.documentElement.classList.add('js')</script>
-<section class="op" id="top" aria-labelledby="h-top" data-film="${b}assets/film/town-" data-fps="${OPENING.fps}">
+<section class="op" id="top" aria-labelledby="h-top" data-film="${b}assets/film/town-" data-frames="${OPENING.frames}">
   <div class="op-stick">
     <picture class="op-poster"><source media="(max-aspect-ratio: 17/20)" srcset="${b}assets/film/town-m.webp" width="810" height="1440"><img src="${b}assets/film/town-d.webp" alt="A white architect's model of a British town at night, windows lit warm along the terraces" width="1440" height="810" fetchpriority="high"></picture>
-    <video class="op-film" muted playsinline preload="none" disablepictureinpicture disableremoteplayback tabindex="-1" aria-hidden="true"></video>
+    <canvas class="op-film" aria-hidden="true"></canvas>
     <div class="op-shade" aria-hidden="true"></div>
     <div class="op-lines" aria-hidden="true">
       ${OPENING.lines.map(l => `<p class="op-line">${esc(l)}</p>`).join('\n      ')}
