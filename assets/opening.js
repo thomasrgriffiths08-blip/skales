@@ -10,6 +10,10 @@
       browsers cannot stop it.
    2. Where that is missing, a muted <video> whose time is set by scroll (started once so iPhones paint its frames).
    3. Neither: the first frame (the poster) stays, and the lines still type over it.
+   If the first way has not put a frame on screen within a few seconds, the second takes over.
+
+   Where the page cannot be scrolled at all (shown inside a fixed frame, say), the film plays through on its own once,
+   at its real speed, so nobody is left looking at a still.
 
    The lines type in, each owning an equal share of the film. The film ends on the one house still lit; then the page
    fades to white and the headline comes up.
@@ -25,7 +29,7 @@
   if (RM || SAVE || !video || !base || !window.fetch || !window.Promise) return;
 
   var FILM = .9;                                /* share of the scroll the film itself takes; the fade and the headline take the rest */
-  var HOLD = 40;                                /* decoded frames held at once (about 190MB of bitmaps); the rest are decoded again when needed */
+  var HOLD = 32;                                /* decoded frames held at once (about 150MB of bitmaps); the rest are decoded again when needed */
   var CODEC = { '.mp4': 'avc1.640032', '-av1.mp4': 'av01.0.08M.08' };
   var stick = root.querySelector('.op-stick'), head = d.querySelector('.site-head');
   var lines = [].slice.call(root.querySelectorAll('.op-line'));
@@ -34,6 +38,9 @@
   var span = function(p, a, b){ return clamp((p - a) / (b - a), 0, 1); };
 
   root.classList.add('is-film');
+  /* what happened, for anyone checking a device: which way frames reach the screen, how many were drawn, what failed */
+  var stat = root.opStat = { path: '', tail: '', err: [], drawn: 0, mode: 'scroll', moved: false, t0: performance.now() };
+  function fail(what){ if (stat.err.length < 12) stat.err.push(what + '@' + Math.round(performance.now() - stat.t0)); }
 
   /* ---------- reading the MP4: where each frame's bytes are, when it plays, which frames are keyframes ---------- */
   function readMp4(buf){
@@ -139,13 +146,18 @@
     decoderTail().then(function(t){
       if (my !== gen) return;
       var useWc = !!t; t = t || videoTail();
-      if (!t) return;
+      stat.tail = t;
+      if (!t){ fail('no-codec'); return; }
       var src = base + set + t;
       fetch(src).then(function(r){ if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(function(buf){
         if (my !== gen) return;
         if (useWc) startWc(buf, t, my); else startVideo(URL.createObjectURL(new Blob([buf], { type: 'video/mp4' })), src);
-      }, function(){
-        if (my === gen && !useWc) startVideo(src, src);
+      }, function(e){
+        if (my !== gen) return;
+        fail('fetch ' + (e && e.message || e));
+        /* the file could not be read whole: let a video element stream it instead */
+        var vt = videoTail();
+        if (vt) startVideo(base + set + vt, base + set + vt);
       });
     });
   }
@@ -154,34 +166,43 @@
     root.classList.remove('is-ready');
     stopWc(); stopVideo();
   }
-  function show(){ if (!ready){ ready = true; root.classList.add('is-ready'); } kick(); }
+  function show(){
+    if (!ready){ ready = true; root.classList.add('is-ready'); if (!scrollable()) byTime('fixed'); }
+    kick();
+  }
 
   /* ---------- 1. WebCodecs: decode a keyframe run, keep its frames as bitmaps, draw the one scroll asks for ---------- */
   var wc = null;
   function startWc(buf, t, my){
     var m, cv = d.createElement('canvas'), ctx, st;
-    try { m = readMp4(buf); } catch(e){ return wcFallback(buf, t, my); }
+    try { m = readMp4(buf); } catch(e){ fail('mp4 ' + e.message); return wcFallback(buf, t, my); }
     cv.className = 'op-film'; cv.setAttribute('aria-hidden', 'true');
     cv.width = m.width; cv.height = m.height;
     ctx = cv.getContext('2d');
-    if (!ctx) return wcFallback(buf, t, my);
-    st = { m: m, u8: new Uint8Array(buf), cv: cv, ctx: ctx, cache: {}, queue: [], job: null, drawn: -1, dead: false,
+    if (!ctx){ fail('no-2d'); return wcFallback(buf, t, my); }
+    st = { m: m, t: t, u8: new Uint8Array(buf), cv: cv, ctx: ctx, cache: {}, queue: [], job: null, drawn: -1, dead: false,
            keep: Math.max(3, Math.round(HOLD * m.gops.length / m.samples.length)) };
     try {
       st.dec = new VideoDecoder({
         output: function(fr){ wcFrame(st, fr); },
-        error: function(){ if (!st.dead && wc === st){ stopWc(); wcFallback(buf, t, my); } }
+        error: function(e){ if (!st.dead && wc === st){ fail('decoder ' + (e && e.message || e)); stopWc(); wcFallback(buf, t, my); } }
       });
       st.dec.configure({ codec: m.codec, description: m.description, codedWidth: m.width, codedHeight: m.height, optimizeForLatency: true });
-    } catch(e){ return wcFallback(buf, t, my); }
-    wc = st; N = m.frames.length;
+    } catch(e){ fail('configure ' + e.message); return wcFallback(buf, t, my); }
+    wc = st; N = m.frames.length; stat.path = 'decoder';
+    /* a decoder that takes the frames but never hands any back is given five seconds, then the video element takes over */
+    setTimeout(function(){ if (wc === st && !stat.decoded){ fail('decoder-silent'); wcBroken(st); } }, 5000);
     film.parentNode.replaceChild(cv, film); film = cv;
     want(m.frames[clamp(Math.round(cur), 0, N - 1)].gop, true);
   }
+  /* frames come back in the order they are shown, so the n-th one out of a run is the run's n-th frame; timestamps are
+     only checked, since some browsers hand them back rounded */
   function wcFrame(st, fr){
-    var job = st.job, s = st.m.byUs[fr.timestamp];
-    if (st.dead || !job || !s){ fr.close(); return; }
-    job.waits.push(keep(fr).then(function(b){ job.frames[s.frame] = b; }, function(){ job.bad = true; }).then(function(){ fr.close(); }));
+    var job = st.job, f = job && job.order[job.got++], s = st.m.byUs[fr.timestamp];
+    if (st.dead || !job || f === undefined){ fr.close(); return; }
+    stat.decoded = (stat.decoded || 0) + 1;
+    if (s && s.frame !== f && !job.odd){ job.odd = true; fail('order ' + s.frame + '/' + f); }
+    job.waits.push(keep(fr).then(function(b){ job.frames[f] = b; }, function(){ job.bad = true; }).then(function(){ fr.close(); }));
   }
   /* a decoded frame is copied out so the decoder can reuse its memory: as a bitmap, or on a canvas where a
      browser cannot make bitmaps from video frames */
@@ -211,18 +232,19 @@
     if (!st || st.job || !st.queue.length) return;
     var g = st.queue.shift(), S = st.m.samples, a = st.m.gops[g], b = g + 1 < st.m.gops.length ? st.m.gops[g + 1] : S.length;
     if (st.cache[g]) return pump();
-    var job = st.job = { g: g, frames: {}, waits: [] };
+    var job = st.job = { g: g, frames: {}, waits: [], got: 0,
+      order: S.slice(a, b).map(function(s){ return s.frame; }).sort(function(x, y){ return x - y; }) };
     try {
       for (var i = a; i < b; i++) st.dec.decode(new EncodedVideoChunk({ type: i === a ? 'key' : 'delta', timestamp: S[i].us, duration: S[i].dur, data: st.u8.subarray(S[i].off, S[i].off + S[i].size) }));
-    } catch(e){ return wcBroken(st); }
+    } catch(e){ fail('decode ' + e.message); return wcBroken(st); }
     st.dec.flush().then(function(){ return Promise.all(job.waits); }).then(function(){
       if (st.dead){ drop(job.frames); return; }
-      if (job.bad) return wcBroken(st);
+      if (job.bad || !job.got){ fail(job.bad ? 'bitmap' : 'no-frames'); return wcBroken(st); }
       st.cache[g] = job.frames; st.job = null;
       evict(st);
       show();
       if (!st.queue.length) ahead(st); else pump();
-    }, function(){ if (!st.dead) wcBroken(st); });
+    }, function(e){ if (!st.dead){ fail('flush ' + (e && e.message || e)); wcBroken(st); } });
   }
   function drop(frames){ for (var f in frames){ var b = frames[f]; if (b && b.close) b.close(); else if (b) b.width = 0; } }
   function evict(st){
@@ -238,7 +260,7 @@
     if (!im){
       for (var r in st.cache) for (var k in st.cache[r]) if (!im || Math.abs(k - f) < Math.abs(best - f)){ im = st.cache[r][k]; best = +k; }
     }
-    if (im && st.drawn !== best){ st.ctx.drawImage(im, 0, 0); st.drawn = best; }
+    if (im && st.drawn !== best){ st.ctx.drawImage(im, 0, 0); st.drawn = best; stat.drawn++; }
     if (run) ahead(st);
   }
   function stopWc(){
@@ -248,20 +270,20 @@
     for (var g in st.cache) drop(st.cache[g]);
     if (film !== video && film.parentNode){ film.parentNode.replaceChild(video, film); film = video; }
   }
-  function wcBroken(st){ if (wc !== st) return; var buf = st.u8.buffer; stopWc(); wcFallback(buf, '', gen); }
+  function wcBroken(st){ if (wc !== st) return; var buf = st.u8.buffer; stopWc(); wcFallback(buf, st.t, gen); }
   /* the decoder refused: hand the same file to a video element if this browser can play it */
   function wcFallback(buf, t, my){
     if (my !== gen) return;
     var vt = videoTail(), src = base + set + vt;
-    if (!vt) return;
-    if (vt === t || t === '') startVideo(URL.createObjectURL(new Blob([buf], { type: 'video/mp4' })), src);
+    if (!vt){ fail('no-video-codec'); return; }
+    if (vt === t) startVideo(URL.createObjectURL(new Blob([buf], { type: 'video/mp4' })), src);
     else startVideo(src, src);
   }
 
   /* ---------- 2. A <video> scrubbed by its time ---------- */
   var vurl = '', vsrc = '', seeking = 0, shown = -1, primed = false;
   function startVideo(u, src){
-    vurl = u; vsrc = src; seeking = 0; shown = -1; primed = false;
+    vurl = u; vsrc = src; seeking = 0; shown = -1; primed = false; stat.path = 'video';
     video.muted = true; video.playsInline = true; video.preload = 'auto';
     video.src = u; video.load();
     prime();
@@ -276,6 +298,7 @@
   ['touchend', 'click', 'keydown'].forEach(function(ev){ d.addEventListener(ev, prime, { passive: true }); });
   video.addEventListener('playing', function(){ if (vurl){ primed = true; video.pause(); } });
   video.addEventListener('error', function(){
+    fail('video ' + (video.error && video.error.code));
     if (vurl.indexOf('blob:') !== 0) return;
     URL.revokeObjectURL(vurl); startVideo(vsrc, vsrc);
   });
@@ -284,7 +307,7 @@
     N = Math.max(1, Math.round(video.duration * FPS));
     seekTo(true);
   });
-  video.addEventListener('seeked', function(){ if (!vurl) return; seeking = 0; show(); });
+  video.addEventListener('seeked', function(){ if (!vurl) return; seeking = 0; stat.drawn++; show(); });
   /* one seek at a time, to the middle of the frame so no browser rounds to the one before; a seek that never
      reports back is given up on after half a second */
   function seekTo(force){
@@ -330,17 +353,26 @@
     });
   }
 
-  /* ---------- scroll ---------- */
-  var p = 0, pe = 0, raf = 0, last = 0;
+  /* ---------- scroll, or time where the page cannot scroll ---------- */
+  var p = 0, pe = 0, raf = 0, last = 0, vis = true, lastTop = null, timeAt = 0, swipeY = null, tries = 0, triedAt = 0;
+  var RUN = 12000;                              /* played by time: the film at its own speed (10.8s), then the fade and the headline */
   function progress(){
     var r = root.getBoundingClientRect(), hh = head ? head.offsetHeight : 64;
     return clamp((hh - r.top) / Math.max(1, root.offsetHeight - stick.offsetHeight), 0, 1);
   }
+  function scrollable(){ var se = d.scrollingElement || d.documentElement; return se.scrollHeight - se.clientHeight > 8; }
+  function byTime(why){ if (timeAt) return; timeAt = performance.now(); stat.mode = 'time:' + why; kick(); }
   function frame(now){
     raf = 0;
     var dt = Math.min(64, now - (last || now)); last = now;
+    var top = root.getBoundingClientRect().top, moved = lastTop !== null && Math.abs(top - lastTop) > .5;
+    lastTop = top;
+    if (moved) stat.moved = true;
     intro = clamp((now - t0 - 500) / 1700, 0, 1);
+    /* a reader swiping or wheeling forward while nothing moves means the page itself cannot scroll here */
+    if (!timeAt && ready && !stat.moved && tries >= 3 && now - triedAt > 400) byTime('stuck');
     p = progress();
+    if (timeAt) p = Math.max(p, clamp((now - timeAt) / RUN, 0, 1));
     /* the eased share of the film; it drives the words at once and the film as fast as frames can be had */
     var target = Math.min(1, p / FILM);
     if (target !== pe) dir = target > pe ? 1 : -1;
@@ -355,11 +387,24 @@
     root.classList.toggle('is-end', e > 0);
     root.classList.toggle('is-moving', p > .01);
     if (head) head.classList.toggle('on-dark', p < .95 && root.getBoundingClientRect().bottom > (head.offsetHeight || 64));
-    if (pe !== target || intro < 1) kick();
+    /* while the opening is on screen it keeps watching where it sits, so it follows however the page is scrolled */
+    if (pe !== target || intro < 1 || vis || timeAt && p < 1) kick();
   }
   function kick(){ if (!raf) raf = requestAnimationFrame(frame); }
 
-  window.addEventListener('scroll', kick, { passive: true });
+  ['scroll', 'resize'].forEach(function(ev){
+    window.addEventListener(ev, kick, { passive: true });
+    if (window.visualViewport) visualViewport.addEventListener(ev, kick, { passive: true });
+  });
+  d.addEventListener('scroll', kick, { passive: true, capture: true });
+  function tried(){ if (!tries++) triedAt = performance.now(); kick(); }
+  window.addEventListener('wheel', function(e){ if (e.deltaY > 0) tried(); }, { passive: true });
+  window.addEventListener('touchstart', function(e){ swipeY = e.touches[0] ? e.touches[0].clientY : null; }, { passive: true });
+  window.addEventListener('touchmove', function(e){
+    var y = e.touches[0] && e.touches[0].clientY;
+    if (swipeY !== null && y < swipeY - 24){ swipeY = y; tried(); }
+  }, { passive: true });
+  if (window.IntersectionObserver) new IntersectionObserver(function(es){ vis = es[es.length - 1].isIntersecting; kick(); }).observe(root);
   var rz = 0;
   window.addEventListener('resize', function(){
     clearTimeout(rz);
