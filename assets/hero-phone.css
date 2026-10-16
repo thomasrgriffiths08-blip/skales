@@ -1,0 +1,37 @@
+/* ============================================================
+   The hero's phone. The page's own concept, "every build shown the way it will be met:
+   in a hand, running", on the pages that answer a question: the words on the left, the build
+   that fits them on the right. A still first (it is the largest paint, so it must be sharp and
+   small), then the build itself, running, once the page has settled. On a phone the words come
+   first and the build is a card you can open.
+   ============================================================ */
+.hero-split{display:grid;gap:28px}
+.hph{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:16px;padding:12px;border-radius:var(--r-m);background:var(--alu);max-width:520px}
+.hph-shell{position:relative;aspect-ratio:390/500;border-radius:18px;padding:4px;background:var(--hand);overflow:hidden}
+.hph-shell img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:14px;background:#FFF}
+.hph-shell iframe{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);border:0;border-radius:38px;background:#FFF;opacity:0;transition:opacity .45s var(--ease)}
+.hph.is-live .hph-shell iframe{opacity:1}
+.hph-live{display:none}
+.hph figcaption{display:grid;gap:10px;min-width:0}
+.hph-who{display:grid;gap:2px;min-width:0}
+.hph-who b{font-size:1.0625rem;letter-spacing:-.01em}
+.hph-who span{color:var(--tx-2);font-size:.9375rem;line-height:1.4}
+.hph-go{justify-self:start;display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 16px;border-radius:10px;background:var(--pg);border:1px solid var(--line-2);font-weight:500;font-size:.9375rem}
+.hph-go:hover{border-color:var(--tx)}
+
+/* a wide screen: the build stands beside the words, at a real phone's size, and runs */
+@media (min-width:1100px){
+  .hero-split{grid-template-columns:minmax(0,1fr) 420px;column-gap:clamp(48px,6vw,96px);align-items:center;padding-top:clamp(32px,4vw,56px)}
+  .hero-split>.hs-copy{min-width:0}
+  .hph{display:grid;grid-template-columns:1fr;gap:18px;padding:0;background:none;max-width:none;justify-items:center}
+  .hph-shell{width:406px;aspect-ratio:auto;height:clamp(540px,calc(100vh - 290px),700px);padding:8px;border-radius:46px;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.06) inset;animation:hp-rise .9s var(--ease) .1s both}
+  .hph-shell img{border-radius:38px}
+  .hph-live{display:block;margin-top:2px;opacity:0;transition:opacity .3s var(--ease) .2s}
+  .hph-live::before{content:"";display:inline-block;width:6px;height:6px;margin:0 7px 1px 0;border-radius:50%;background:var(--live);vertical-align:middle}
+  .hph.is-live .hph-live{opacity:1}
+  .hph figcaption{width:406px;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+  .hph-go{background:none}
+}
+@keyframes hp-rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.hph-shell{animation:none}.hph-shell iframe,.hph-live{transition:none}}

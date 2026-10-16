@@ -1,0 +1,163 @@
+/* ============================================================
+   The builder — the top of the home page. Dark ground, three answers on the left,
+   and on the right the visitor's own website building in a browser window and a phone.
+   The only dark section on a white site, so the draft is the brightest thing on the page.
+   ============================================================ */
+.builder{background:var(--hand);color:#fff;padding:clamp(56px,7vw,104px) 0 clamp(48px,6vw,80px);overflow:hidden;border-top:1px solid rgba(255,255,255,.08)}
+.b-grid{display:grid;grid-template-columns:minmax(0,460px) minmax(0,1fr);column-gap:clamp(36px,4.5vw,64px);
+  grid-template-areas:"copy stage" "form stage" "done stage";grid-template-rows:auto auto 1fr;align-items:start}
+.b-copy{grid-area:copy}.b-form{grid-area:form}.b-done{grid-area:done}.b-stage{grid-area:stage}
+
+.b-kick{font-size:.9375rem;font-weight:500;color:rgba(255,255,255,.58);margin-bottom:12px}
+.builder h1,.builder #h-build{font-size:clamp(2.3rem,3.5vw,3.15rem);letter-spacing:-.04em;line-height:1}
+.builder .lead{color:rgba(255,255,255,.7);margin-top:16px;font-size:clamp(1rem,1.2vw,1.125rem)}
+.builder .lead b{color:#fff;font-family:var(--mono);font-weight:500;letter-spacing:-.01em}
+
+/* the three answers */
+.b-form{display:grid;gap:14px;margin-top:24px}
+.b-lab{display:block;font-size:.875rem;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:8px}
+.b-trades{display:flex;flex-wrap:wrap;gap:6px}
+.b-trades button{height:38px;padding:0 13px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:transparent;color:rgba(255,255,255,.86);font-size:.84375rem;font-weight:500;cursor:pointer;transition:background-color .18s var(--ease),color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)}
+.b-trades button:hover{border-color:rgba(255,255,255,.7);color:#fff}
+.b-trades button:active{transform:scale(.97)}
+.b-trades button[aria-pressed="true"]{background:#fff;color:var(--hand);border-color:#fff}
+.b-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.b-in{display:block}
+.b-in input{width:100%;height:52px;padding:0 15px;border-radius:var(--r-s);border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.05);color:#fff;font:inherit;font-size:1rem}
+.b-in input::placeholder{color:rgba(255,255,255,.34)}
+.b-in input:focus{outline:2px solid #fff;outline-offset:0;border-color:transparent;background:rgba(255,255,255,.08)}
+.b-go{height:56px;border:0;border-radius:var(--r-s);background:var(--live);color:var(--live-ink);font:inherit;font-size:1.0625rem;font-weight:600;cursor:pointer;transition:transform .18s var(--ease),filter .18s var(--ease),background-color .4s var(--ease),color .4s var(--ease)}
+.b-go:hover{transform:translateY(-1px);filter:brightness(1.07)}
+.b-go:active{transform:scale(.985)}
+.b-need{font-size:.9375rem;font-weight:500;color:#fff;margin-top:-4px}
+.b-need::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--live);margin-right:9px;vertical-align:middle}
+.b-fine{font-size:.8125rem;line-height:1.5;color:rgba(255,255,255,.48);max-width:48ch}
+
+/* after a build: the reference, and the reason to book */
+.b-done{display:grid;gap:16px;margin-top:28px}
+.b-ref{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 16px;padding:18px 20px;border-radius:var(--r-m);border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04)}
+.b-ref-l{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.6)}
+.b-ref-n{grid-row:1/3;grid-column:2;align-self:center;font-family:var(--mono);font-size:clamp(1.6rem,2.4vw,2rem);font-weight:500;letter-spacing:.02em;color:#fff}
+.b-ref-m{font-size:.9375rem;color:#fff;font-weight:500;min-width:0;overflow-wrap:anywhere}
+.b-book{height:58px;font-size:1.0625rem;width:100%}
+.b-why{font-size:.9375rem;line-height:1.5;color:rgba(255,255,255,.66)}
+.b-more{display:flex;flex-wrap:wrap;gap:6px 20px}
+.b-ln{min-height:40px;padding:0;border:0;background:none;color:rgba(255,255,255,.78);font-size:.9375rem;font-weight:500;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,.28);text-underline-offset:4px}
+.b-ln:hover{color:#fff;text-decoration-color:#fff}
+
+/* ---------- the stage: a browser window, with the phone over its corner ---------- */
+.b-stage{position:relative;padding-bottom:64px}
+.b-win{position:relative;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 40px 80px -36px rgba(0,0,0,.9)}
+.b-bar{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;background:#ECECEA;border-bottom:1px solid #DCDCD9}
+.b-bar i{width:11px;height:11px;border-radius:50%;background:#D3D3D0}
+.b-url{flex:0 1 340px;margin:0 auto;transform:translateX(-24px);display:flex;align-items:center;justify-content:center;gap:6px;height:26px;padding:0 12px;border-radius:7px;background:#fff;color:#55575D;font:500 12.5px/1 var(--mono);white-space:nowrap;overflow:hidden}
+.b-url svg{width:11px;height:11px;flex:none;color:#8C8E93}
+.b-view{position:relative;aspect-ratio:16/10.4;overflow:hidden;background:#fff}
+.b-view iframe,.b-pscreen iframe{display:block;max-width:none;border:0;background:#fff;transform-origin:0 0}
+
+.b-phone{position:absolute;right:-22px;bottom:14px;width:clamp(170px,17vw,206px);padding:7px;border-radius:36px;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.16),0 34px 60px -24px rgba(0,0,0,.95)}
+.b-pscreen{position:relative;aspect-ratio:9/19;border-radius:29px;overflow:hidden;background:#fff}
+
+/* a frame only takes the pointer once asked, so the page never gets stuck scrolling inside it */
+.b-view iframe,.b-pscreen iframe{pointer-events:none}
+.b-win.live .b-view iframe,.b-phone.live .b-pscreen iframe{pointer-events:auto}
+.b-guard{position:absolute;inset:38px 0 0;border:0;padding:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.b-phone .b-guard{inset:7px;border-radius:29px}
+.b-guard span{position:absolute;left:50%;bottom:22px;transform:translate(-50%,6px);opacity:0;padding:9px 14px;border-radius:999px;background:rgba(14,14,16,.88);color:#fff;font-size:.8125rem;font-weight:500;white-space:nowrap;transition:opacity .2s var(--ease),transform .2s var(--ease);pointer-events:none}
+.b-guard:hover span,.b-guard:focus-visible span{opacity:1;transform:translate(-50%,0)}
+.b-phone .b-guard span{bottom:auto;top:50%;font-size:.75rem;padding:8px 12px}
+.b-win.live .b-guard,.b-phone.live .b-guard{display:none}
+
+/* the build log: what is being put on the page, in the order it goes on */
+.b-log{position:absolute;left:-34px;bottom:8px;width:300px;padding:14px 16px 12px;border-radius:16px;background:#fff;color:var(--tx);box-shadow:0 0 0 1px rgba(0,0,0,.06),0 26px 50px -20px rgba(0,0,0,.7);z-index:2;transition:width .35s var(--ease),padding .35s var(--ease)}
+.b-log-h{display:flex;align-items:center;gap:10px;font-size:.875rem;font-weight:600}
+.b-log-n{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-log-n b{font-family:var(--mono);font-weight:500}
+.b-log-t{font-variant-numeric:tabular-nums;font-weight:500;color:var(--tx-2)}
+.b-skip{height:28px;padding:0 10px;border-radius:8px;border:1px solid var(--line-2);background:#fff;font-size:.8125rem;font-weight:500;color:var(--tx-2);cursor:pointer}
+.b-skip:hover{color:var(--tx);border-color:var(--tx)}
+.b-log-l{list-style:none;margin:10px 0 0;padding:8px 0 0;border-top:1px solid var(--line);max-height:146px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 34px);mask-image:linear-gradient(180deg,transparent 0,#000 34px)}
+.b-log-l li{flex:none;display:grid;grid-template-columns:18px minmax(0,1fr) auto;align-items:center;gap:9px;height:29px;font-size:.84375rem;color:var(--tx);animation:b-in .28s var(--ease) both}
+.b-log-l li span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-log-l li em{font-style:normal;font-size:.78125rem;color:var(--tx-3);white-space:nowrap}
+.b-log-l li.fin{font-weight:600}
+.b-log-l .sp{width:14px;height:14px;border-radius:50%;border:2px solid var(--line-2);border-top-color:var(--live);animation:b-spin .7s linear infinite}
+.b-log-l li.ok .sp{border:0;animation:none;background:var(--live) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3.6 7.3l2.2 2.2 4.6-4.8' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+@keyframes b-spin{to{transform:rotate(360deg)}}
+@keyframes b-in{from{opacity:0;transform:translateY(6px)}}
+@keyframes b-hint{0%{opacity:0;transform:translate(-50%,6px)}12%,78%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,0)}}
+.b-log.min{width:auto;max-width:calc(100% - 40px);padding:10px 14px}
+.b-log.min .b-log-l,.b-log.min .b-skip,.b-log.min .b-log-t:empty{display:none}
+.b-log.min .b-log-h::before{content:"";flex:none;width:16px;height:16px;border-radius:50%;background:var(--live) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3.6 7.3l2.2 2.2 4.6-4.8' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.b-cap{display:none;font-size:.8125rem;color:rgba(255,255,255,.5)}
+
+/* ---------- the explainer under it ---------- */
+.dx-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px)}
+.dx-col h3{font-size:1.375rem;padding-bottom:16px;border-bottom:1px solid var(--tx)}
+.dx-list{list-style:none;margin:0;padding:0;counter-reset:dx}
+.dx-list>li{--dxp:20px;counter-increment:dx;display:grid;grid-template-columns:40px 1fr;border-bottom:1px solid var(--line)}
+.dx-list>li::before{content:counter(dx,decimal-leading-zero);padding-top:var(--dxp);font-weight:600;font-size:.9375rem;color:var(--tx-3);font-variant-numeric:tabular-nums;line-height:1.6}
+/* each point is a disclosure: open on wide screens, a tap to open on a phone so the page stays short */
+.dx-d summary{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:var(--dxp) 0;list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dx-d summary::-webkit-details-marker{display:none}
+.dx-d summary b{font-size:1.0625rem;line-height:1.4}
+.dx-d summary::after{content:"+";flex:none;font-size:1.375rem;font-weight:400;line-height:1;color:var(--tx-3);transition:transform .2s var(--ease)}
+.dx-d[open] summary::after{transform:rotate(45deg)}
+.dx-d>span{display:block;margin-top:calc(4px - var(--dxp));padding-bottom:var(--dxp);color:var(--tx-2);line-height:1.55;max-width:56ch}
+.dx-d .dx-pages{margin-top:calc(-1 * var(--dxp) + 12px);margin-bottom:var(--dxp)}
+@media (min-width:981px){.dx-d summary{pointer-events:none;cursor:default}.dx-d summary::after{display:none}}
+@media (max-width:980px){.dx-list>li{--dxp:16px}}
+.dx-pages{list-style:none;margin:14px 0 2px;padding:12px 14px;border-radius:var(--r-s);background:var(--alu);display:grid;gap:6px;font:400 .8125rem/1.45 var(--mono);color:var(--tx-2);overflow-wrap:break-word}
+.dx-pages .dom{font-family:var(--sans);font-size:.8125rem;font-weight:500;color:var(--tx-3);margin-bottom:2px}
+.dx-pages b{color:var(--tx);font-weight:500}
+.dx-call{margin-top:clamp(40px,6vw,72px);display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(28px,4vw,56px);align-items:center;padding:clamp(28px,4vw,48px);border-radius:var(--r-l);background:var(--hand);color:#fff}
+.dx-call h3{font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.03em;margin-bottom:18px}
+.dx-steps{margin:0;padding:0;list-style:none;counter-reset:ds;display:grid;gap:12px}
+.dx-steps li{counter-increment:ds;display:grid;grid-template-columns:30px 1fr;color:rgba(255,255,255,.74);line-height:1.5}
+.dx-steps li::before{content:counter(ds);font-weight:600;color:var(--live);transition:color .35s var(--ease)}
+.dx-steps b{color:#fff;font-weight:600}
+.dx-steps [data-dx="draft"]{font-family:var(--mono);font-weight:500}
+.dx-cta{display:grid;gap:12px;justify-items:start}
+.dx-cta .btn{height:58px;padding:0 26px;font-size:1.0625rem}
+.dx-cta p{font-size:.9375rem;color:rgba(255,255,255,.6)}
+
+@media (max-width:1180px){.b-grid{grid-template-columns:minmax(0,400px) minmax(0,1fr)}.b-log{width:280px}}
+@media (max-width:980px){
+  .b-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:none;grid-template-rows:none;row-gap:0}
+  .b-copy,.b-form,.b-done,.b-stage{grid-area:auto}
+  .b-copy{order:1}.b-form{order:2}.b-stage{order:3;margin-top:36px}.b-done{order:4}
+  .b-win{display:none}
+  .b-stage{padding-bottom:30px}
+  .b-phone{position:relative;right:auto;bottom:auto;width:min(100%,420px);margin:0 auto;padding:8px;border-radius:42px}
+  .b-pscreen{aspect-ratio:auto;height:min(640px,74vh);min-height:460px;border-radius:34px}
+  .b-phone .b-guard{inset:8px;border-radius:34px}
+  .b-phone .b-guard span{top:auto;bottom:88px;font-size:.8125rem;padding:9px 14px}
+  .b-stage.is-done .b-phone .b-guard span{animation:b-hint 4.5s var(--ease) .4s both}
+  .b-log{left:50%;transform:translateX(-50%);bottom:52px;width:min(calc(100% - 32px),388px)}
+  .b-log.min{display:none}
+  .b-log-l{max-height:90px}
+  .b-cap{display:block;position:absolute;left:0;right:0;bottom:0;text-align:center}
+  .b-done{margin-top:8px}
+  .dx-grid,.dx-call{grid-template-columns:1fr}
+  /* on a phone the home page keeps to four builds and compact demo cards; the rest are one tap away */
+  #try .try-card{min-height:0;padding:20px}
+  #try .try-card h3{font-size:1.35rem}
+}
+@media (max-width:640px){.wall-home .tile:nth-child(n+5){display:none}}
+@media (max-width:520px){
+  .b-two{grid-template-columns:1fr}
+  .b-trades button{height:42px}
+  .b-phone{padding:7px;border-radius:38px}
+  .b-pscreen{border-radius:31px}
+  .b-phone .b-guard{inset:7px;border-radius:31px}
+  .b-log{width:calc(100% - 28px);bottom:48px}
+  .b-ref{padding:16px}
+  .dx-call{border-radius:var(--r-m);margin-inline:calc(var(--pad) * -.5)}
+  .dx-cta,.dx-cta .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .b-log-l li{animation:none}
+  .b-log-l .sp{animation:none}
+}
+.b-stage.is-building .b-guard span{opacity:0 !important}

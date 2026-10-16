@@ -1,0 +1,98 @@
+/* ============================================================
+   The opening: the home page's first screen is one film, played by scroll.
+   A white model of a British town at night, one continuous take: the lit windows go out one by one
+   until a single house is still lit. Then the page simply carries on: the picture darkens at the bottom into the
+   dark headline section under it, so there is no fade or card between the film and the site.
+   About two screens of scroll, with a Skip button. Without JS, or with Data Saver, it is one still with the words on it.
+   ============================================================ */
+.op{--ink:#0B0C0E;--p:0;--z:0;position:relative;background:var(--ink);color:#fff}
+.op-stick{position:relative;height:calc(100svh - var(--head-h));min-height:560px;overflow:hidden;isolation:isolate}
+.js .op.is-film{height:calc(300svh - var(--head-h))}
+.js .op.is-film .op-stick{position:sticky;top:var(--head-h)}
+
+/* the film: its first frame is in the HTML so the first screen paints at once; the video fades in over it once it has arrived */
+.op-poster,.op-poster img,.op-film{position:absolute;inset:0;width:100%;height:100%;display:block}
+.op-poster img,.op-film{object-fit:cover}
+.op-film{opacity:0;transition:opacity .6s var(--ease);pointer-events:none}
+.op.is-ready .op-film{opacity:1}
+.op-shade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,12,14,.55) 0%,rgba(11,12,14,0) 30%,rgba(11,12,14,0) 62%,rgba(11,12,14,.6) 100%)}
+
+/* the lines: typed letter by letter, the newest letter in amber */
+.op-lines{position:absolute;left:0;right:0;bottom:clamp(88px,15svh,170px);width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto;pointer-events:none}
+.op-line{position:absolute;left:0;bottom:0;max-width:17ch;font-size:clamp(2.1rem,5.2vw,4.75rem);line-height:1.02;letter-spacing:-.04em;font-weight:600;text-wrap:balance;color:#fff;
+  text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.op-line span{visibility:hidden}
+.op-line span.on{visibility:visible}
+.op-line span.tip{color:var(--c)}
+
+/* the hand-over: as the film ends, its bottom darkens to the colour of the section under it, so when the page moves on
+   the picture runs straight into the headline */
+.op-fade{position:absolute;left:0;right:0;bottom:0;height:45%;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,rgba(11,12,14,0) 0%,rgba(11,12,14,.55) 55%,var(--ink) 100%)}
+
+/* the headline: the first thing under the film, on the same dark ground */
+.op-after{--ink:#0B0C0E;background:var(--ink);color:#fff;padding:clamp(4px,1.5vw,20px) 0 clamp(56px,8vw,112px)}
+.op-after .wrap{display:grid;gap:22px;justify-items:start}
+.op-kick{font-size:.875rem;color:rgba(255,255,255,.62);display:flex;align-items:center;gap:10px}
+.op-kick i{width:8px;height:8px;border-radius:50%;background:var(--live)}
+.op-after h1{font-size:clamp(3.2rem,9vw,8.75rem);line-height:.92;letter-spacing:-.055em;max-width:12ch;color:#fff}
+.op-after h1 em{font-style:normal;color:var(--live)}
+.op-after .lead{max-width:52ch;color:rgba(255,255,255,.72)}
+.op-ctas{display:flex;flex-wrap:wrap;gap:10px}
+.op-after .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.op-after .btn-ghost:hover{border-color:#fff}
+.op-after + .builder{border-top:0}
+
+/* the way out, for anyone who would rather not watch */
+.op-skip{position:absolute;z-index:3;right:var(--pad);bottom:22px;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;
+  background:rgba(11,12,14,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:rgba(255,255,255,.86);font-size:.8125rem;font-weight:600;transition:opacity .3s var(--ease)}
+.op-skip:hover{color:#fff;background:rgba(11,12,14,.72)}
+.op-cue{position:absolute;z-index:3;left:50%;bottom:22px;transform:translateX(-50%);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:opacity .4s var(--ease)}
+.op-cue::after{content:"";display:block;width:1px;height:28px;margin:8px auto 0;background:linear-gradient(rgba(255,255,255,.7),rgba(255,255,255,0));animation:op-cue 1.8s var(--ease) infinite}
+@keyframes op-cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.op.is-moving .op-cue{opacity:0}
+.op.is-end .op-skip,.op.is-end .op-cue{opacity:0;pointer-events:none}
+
+/* the still version: no JS, Reduce Motion or Data Saver. The words sit on frame one and the page scrolls as normal */
+.op-still{display:none}
+.op:not(.is-film) .op-film,.op:not(.is-film) .op-lines,.op:not(.is-film) .op-cue,.op:not(.is-film) .op-skip,.op:not(.is-film) .op-fade{display:none}
+.op:not(.is-film) .op-stick{height:auto;min-height:0;display:grid}
+.op:not(.is-film) .op-poster{position:relative;grid-area:1/1}
+.op:not(.is-film) .op-poster img{position:relative;height:min(78svh,760px)}
+.op:not(.is-film) .op-shade{grid-area:1/1}
+.op:not(.is-film) .op-still{display:block;grid-area:1/1;align-self:end;width:min(var(--shell),100% - 2*var(--pad));margin:0 auto clamp(28px,6vw,64px);position:relative}
+.op-still li{list-style:none;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.08;letter-spacing:-.03em;font-weight:600;max-width:24ch}
+.op-still li+li{margin-top:.25em}
+.op-still li:last-child{color:var(--c)}
+.op-still ol{margin:0;padding:0}
+
+/* the header sits dark over the film and the headline, and goes back to normal after them */
+.site-head.on-dark{background:rgba(11,12,14,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:rgba(255,255,255,.08)}
+.site-head.on-dark .wordmark{color:#fff}
+.site-head.on-dark .nav a{color:rgba(255,255,255,.72)}
+.site-head.on-dark .nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.site-head.on-dark .nav a.btn{color:var(--live-ink)}
+.site-head.on-dark .mtoggle{background:transparent;border-color:rgba(255,255,255,.25)}
+.site-head.on-dark .mtoggle span{background:#fff}
+.site-head.on-dark .mtoggle[aria-expanded="true"]{background:var(--pg)}
+.site-head.on-dark .mtoggle[aria-expanded="true"] span{background:var(--tx)}
+
+@media (max-width:700px){
+  .op-lines{bottom:clamp(96px,16svh,150px)}
+  .op-line{font-size:clamp(2rem,9.6vw,2.9rem);max-width:13ch}
+  .op-after h1{font-size:clamp(3rem,15vw,4.6rem)}
+  .op-ctas .btn{flex:1 1 auto}
+  .op:not(.is-film) .op-poster img{height:min(70svh,640px)}
+}
+@media (max-width:760px){
+  /* clear of the fixed bar with The work and Book a call */
+  .op-skip{bottom:calc(84px + env(safe-area-inset-bottom));right:16px}
+  .op-cue{bottom:calc(84px + env(safe-area-inset-bottom));left:var(--pad);transform:none}
+  /* the lines sit above the Scroll cue and the Skip button, never on them */
+  .op-lines{bottom:calc(150px + env(safe-area-inset-bottom))}
+}
+@media (prefers-reduced-motion:reduce){
+  .op-cue::after{animation:none}
+  .op-film{transition:none}
+}
