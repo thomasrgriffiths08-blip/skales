@@ -10,7 +10,9 @@
    The lines type in, each owning an equal share of the film. The film ends on the one house still lit; then the page
    fades to white and the headline comes up.
    Where the page cannot be scrolled at all (shown inside a fixed frame, say), the film plays through on its own once.
-   Reduce Motion or Data Saver: nothing here runs and the still version stays.
+   Reduce Motion: the film still follows the reader's own scroll (it never moves unless they do), but it tracks the scroll
+   directly with no glide, nothing types or plays by itself, and the first line is simply there.
+   Data Saver: nothing here runs and the still version stays, since the frames are a large download.
    ============================================================ */
 (function(){
   var d = document, root = d.getElementById('top');
@@ -19,7 +21,7 @@
   var SAVE = navigator.connection && navigator.connection.saveData;
   var cv = root.querySelector('.op-film'), ctx = cv && cv.getContext && cv.getContext('2d');
   var base = root.getAttribute('data-film') || '', N = +root.getAttribute('data-frames') || 0;
-  if (RM || SAVE || !ctx || !base || !N) return;
+  if (SAVE || !ctx || !base || !N) return;
 
   var FILM = .9;                                /* share of the scroll the film itself takes; the fade and the headline take the rest */
   var PAR = 6;                                  /* frames downloading at once */
@@ -145,14 +147,14 @@
     return clamp((hh - r.top) / Math.max(1, root.offsetHeight - stick.offsetHeight), 0, 1);
   }
   function scrollable(){ var se = d.scrollingElement || d.documentElement; return se.scrollHeight - se.clientHeight > 8; }
-  function byTime(why){ if (timeAt) return; timeAt = performance.now(); stat.mode = 'time:' + why; kick(); }
+  function byTime(why){ if (timeAt || RM) return; timeAt = performance.now(); stat.mode = 'time:' + why; kick(); }
   function frame(now){
     raf = 0;
     var dt = Math.min(64, now - (last || now)); last = now;
     var top = root.getBoundingClientRect().top, moved = lastTop !== null && Math.abs(top - lastTop) > .5;
     lastTop = top;
     if (moved) stat.moved = true;
-    intro = clamp((now - t0 - 500) / 1700, 0, 1);
+    intro = RM ? 1 : clamp((now - t0 - 500) / 1700, 0, 1);
     /* a reader swiping or wheeling forward while nothing moves means the page itself cannot scroll here */
     if (!timeAt && ready && !stat.moved && tries >= 3 && now - triedAt > 400) byTime('stuck');
     p = progress();
@@ -160,7 +162,7 @@
     /* the eased share of the film; it drives the words at once and the film as fast as frames can be had */
     var target = Math.min(1, p / FILM);
     pe += (target - pe) * (1 - Math.pow(1 - .16, dt / 16.7));
-    if (Math.abs(target - pe) < .0005) pe = target;
+    if (RM || Math.abs(target - pe) < .0005) pe = target;
     cur = pe * Math.max(0, N - 1);
     if (ready) draw();
     words(pe);
