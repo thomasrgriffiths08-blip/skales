@@ -1,9 +1,9 @@
 /* ============================================================
    The opening: the home page's first screen is one film, played by scroll.
    A white model of a British town at night, one continuous take: the lit windows go out one by one
-   until a single house is still lit. Then the page turns white
-   and the headline arrives. About two screens of scroll, with a Skip button.
-   Without JS, or with Reduce Motion, it is one still with the words on it.
+   until a single house is still lit. Then the page simply carries on: the picture darkens at the bottom into the
+   dark headline section under it, so there is no fade or card between the film and the site.
+   About two screens of scroll, with a Skip button. Without JS, or with Data Saver, it is one still with the words on it.
    ============================================================ */
 .op{--ink:#0B0C0E;--p:0;--z:0;position:relative;background:var(--ink);color:#fff}
 .op-stick{position:relative;height:calc(100svh - var(--head-h));min-height:560px;overflow:hidden;isolation:isolate}
@@ -26,17 +26,23 @@
 .op-line span.on{visibility:visible}
 .op-line span.tip{color:var(--c)}
 
-/* the end: the page turns white and the headline arrives on it */
-.op-white{position:absolute;inset:0;background:var(--pg);opacity:0;pointer-events:none}
-.op-end{position:absolute;inset:0;display:grid;align-content:center;color:var(--tx);opacity:0;visibility:hidden}
-.op-end .wrap{display:grid;gap:22px;justify-items:start}
-.op-kick{font-size:.875rem;color:var(--tx-2);display:flex;align-items:center;gap:10px}
+/* the hand-over: as the film ends, its bottom darkens to the colour of the section under it, so when the page moves on
+   the picture runs straight into the headline */
+.op-fade{position:absolute;left:0;right:0;bottom:0;height:45%;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,rgba(11,12,14,0) 0%,rgba(11,12,14,.55) 55%,var(--ink) 100%)}
+
+/* the headline: the first thing under the film, on the same dark ground */
+.op-after{--ink:#0B0C0E;background:var(--ink);color:#fff;padding:clamp(4px,1.5vw,20px) 0 clamp(56px,8vw,112px)}
+.op-after .wrap{display:grid;gap:22px;justify-items:start}
+.op-kick{font-size:.875rem;color:rgba(255,255,255,.62);display:flex;align-items:center;gap:10px}
 .op-kick i{width:8px;height:8px;border-radius:50%;background:var(--live)}
-.op h1{font-size:clamp(3.2rem,9vw,8.75rem);line-height:.92;letter-spacing:-.055em;max-width:12ch}
-.op h1 em{font-style:normal;color:var(--live)}
-.op-end .lead{max-width:52ch}
+.op-after h1{font-size:clamp(3.2rem,9vw,8.75rem);line-height:.92;letter-spacing:-.055em;max-width:12ch;color:#fff}
+.op-after h1 em{font-style:normal;color:var(--live)}
+.op-after .lead{max-width:52ch;color:rgba(255,255,255,.72)}
 .op-ctas{display:flex;flex-wrap:wrap;gap:10px}
-.op.is-end .op-end{visibility:visible}
+.op-after .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.op-after .btn-ghost:hover{border-color:#fff}
+.op-after + .builder{border-top:0}
 
 /* the way out, for anyone who would rather not watch */
 .op-skip{position:absolute;z-index:3;right:var(--pad);bottom:22px;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;
@@ -50,7 +56,7 @@
 
 /* the still version: no JS, Reduce Motion or Data Saver. The words sit on frame one and the page scrolls as normal */
 .op-still{display:none}
-.op:not(.is-film) .op-film,.op:not(.is-film) .op-lines,.op:not(.is-film) .op-cue,.op:not(.is-film) .op-skip,.op:not(.is-film) .op-white{display:none}
+.op:not(.is-film) .op-film,.op:not(.is-film) .op-lines,.op:not(.is-film) .op-cue,.op:not(.is-film) .op-skip,.op:not(.is-film) .op-fade{display:none}
 .op:not(.is-film) .op-stick{height:auto;min-height:0;display:grid}
 .op:not(.is-film) .op-poster{position:relative;grid-area:1/1}
 .op:not(.is-film) .op-poster img{position:relative;height:min(78svh,760px)}
@@ -60,9 +66,8 @@
 .op-still li+li{margin-top:.25em}
 .op-still li:last-child{color:var(--c)}
 .op-still ol{margin:0;padding:0}
-.op:not(.is-film) .op-end{position:relative;inset:auto;opacity:1;visibility:visible;background:var(--pg);padding:clamp(48px,8vw,104px) 0}
 
-/* the header sits dark over the film, and goes back to normal when the page arrives */
+/* the header sits dark over the film and the headline, and goes back to normal after them */
 .site-head.on-dark{background:rgba(11,12,14,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:rgba(255,255,255,.08)}
 .site-head.on-dark .wordmark{color:#fff}
 .site-head.on-dark .nav a{color:rgba(255,255,255,.72)}
@@ -76,7 +81,7 @@
 @media (max-width:700px){
   .op-lines{bottom:clamp(96px,16svh,150px)}
   .op-line{font-size:clamp(2rem,9.6vw,2.9rem);max-width:13ch}
-  .op h1{font-size:clamp(3rem,15vw,4.6rem)}
+  .op-after h1{font-size:clamp(3rem,15vw,4.6rem)}
   .op-ctas .btn{flex:1 1 auto}
   .op:not(.is-film) .op-poster img{height:min(70svh,640px)}
 }

@@ -7,8 +7,9 @@
    sharpens to every frame as the rest arrive. Until a frame is in, the nearest one that is stands in for it, and the
    frame the reader is on jumps the queue.
 
-   The lines type in, each owning an equal share of the film. The film ends on the one house still lit; then the page
-   fades to white and the headline comes up.
+   The lines type in, each owning an equal share of the film; the last one stays. The film ends on the one house still
+   lit and the page simply carries on: the bottom of the picture darkens into the section below, so the film and the
+   headline under it read as one piece, with no fade or card in between.
    Where the page cannot be scrolled at all (shown inside a fixed frame, say), the film plays through on its own once.
    Reduce Motion: the film still follows the reader's own scroll (it never moves unless they do), but it tracks the scroll
    directly with no glide, nothing types or plays by itself, and the first line is simply there.
@@ -23,11 +24,11 @@
   var base = root.getAttribute('data-film') || '', N = +root.getAttribute('data-frames') || 0;
   if (SAVE || !ctx || !base || !N) return;
 
-  var FILM = .9;                                /* share of the scroll the film itself takes; the fade and the headline take the rest */
+  var FILM = .97;                               /* share of the scroll the film takes; the last frame holds for the rest, then the page moves on */
   var PAR = 6;                                  /* frames downloading at once */
   var stick = root.querySelector('.op-stick'), head = d.querySelector('.site-head');
   var lines = [].slice.call(root.querySelectorAll('.op-line'));
-  var white = root.querySelector('.op-white'), end = root.querySelector('.op-end');
+  var fade = root.querySelector('.op-fade'), after = d.querySelector('.op-after');
   var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
   var span = function(p, a, b){ return clamp((p - a) / (b - a), 0, 1); };
 
@@ -125,13 +126,15 @@
     for (var i = 0; i < c.length; i++){ c[i].className = i < n ? (i === n - 1 ? 'on tip' : 'on') : ''; }
     el._shown = n;
   }
-  /* each line owns an equal share of the film: types over the first half, holds, erases, then a breath of nothing */
+  /* each line owns an equal share of the film: types over the first half, holds, erases, then a breath of nothing.
+     The last line types and stays, so it is still there as the film hands over to the headline */
   var intro = 0, t0 = performance.now();
   function words(pf){
     lines.forEach(function(el, i){
       var l = pf * lines.length - i, n;
       if (i === 0 && l < .5) l = Math.max(l, intro * .5);
-      if (l <= 0 || l >= .8) n = 0;
+      if (i === lines.length - 1 && l >= .5) n = el._n;
+      else if (l <= 0 || l >= .8) n = 0;
       else if (l < .5) n = Math.ceil(el._n * l / .5);
       else if (l < .6) n = el._n;
       else n = Math.floor(el._n * (1 - (l - .6) / .2));
@@ -141,7 +144,7 @@
 
   /* ---------- scroll, or time where the page cannot scroll ---------- */
   var p = 0, pe = 0, raf = 0, last = 0, vis = true, lastTop = null, timeAt = 0, swipeY = null, tries = 0, triedAt = 0;
-  var RUN = 12000;                              /* played by time: the film at its own speed (10.8s), then the fade and the headline */
+  var RUN = 10500;                              /* played by time: the film at about its own speed (243 frames at 24 a second) */
   function progress(){
     var r = root.getBoundingClientRect(), hh = head ? head.offsetHeight : 64;
     return clamp((hh - r.top) / Math.max(1, root.offsetHeight - stick.offsetHeight), 0, 1);
@@ -166,12 +169,11 @@
     cur = pe * Math.max(0, N - 1);
     if (ready) draw();
     words(pe);
-    white.style.opacity = span(p, .9, .95).toFixed(3);
-    var e = span(p, .95, .99);
-    end.style.opacity = e.toFixed(3);
-    root.classList.toggle('is-end', e > 0);
+    if (fade) fade.style.opacity = span(pe, .78, 1).toFixed(3);
+    root.classList.toggle('is-end', p > .97);
     root.classList.toggle('is-moving', p > .01);
-    if (head) head.classList.toggle('on-dark', p < .95 && root.getBoundingClientRect().bottom > (head.offsetHeight || 64));
+    /* the header stays dark over the film and the dark headline under it */
+    if (head) head.classList.toggle('on-dark', (after || root).getBoundingClientRect().bottom > (head.offsetHeight || 64));
     /* while the opening is on screen it keeps watching where it sits, so it follows however the page is scrolled */
     if (pe !== target || intro < 1 || vis || timeAt && p < 1) kick();
   }
@@ -194,10 +196,6 @@
   window.addEventListener('resize', function(){
     clearTimeout(rz);
     rz = setTimeout(function(){ if (pickSet() !== set) load(); kick(); }, 150);
-  });
-  /* keyboard users who tab into the headline's buttons before the film ends are taken to the end */
-  end.addEventListener('focusin', function(){
-    if (p < .99) window.scrollTo({ top: root.offsetTop + root.offsetHeight - stick.offsetHeight - (head ? head.offsetHeight : 64), behavior: 'instant' });
   });
 
   load(); kick();
