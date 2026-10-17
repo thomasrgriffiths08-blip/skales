@@ -1,6 +1,6 @@
 /* ============================================================
    The opening: one film, drawn frame by frame as you scroll.
-   The film is 243 still frames (assets/film/town-d/ for wide screens, town-m/ for tall ones). Scroll picks the frame and
+   The film is a set of still frames (assets/film/town-d/ for wide screens, town-m/ for tall ones; data-frames says how many). Scroll picks the frame and
    the picture eases towards it, so it glides rather than jumps; the wheel is never taken over.
 
    Frames load coarse to fine: every 32nd first, then the gaps halve, so a rough version can be scrolled at once and it
@@ -144,7 +144,7 @@
 
   /* ---------- scroll, or time where the page cannot scroll ---------- */
   var p = 0, pe = 0, raf = 0, last = 0, vis = true, lastTop = null, timeAt = 0, swipeY = null, tries = 0, triedAt = 0;
-  var RUN = 10500;                              /* played by time: the film at about its own speed (243 frames at 24 a second) */
+  var RUN = (+root.getAttribute('data-seconds') || 10) * 1000 + 300;   /* played by time: the film at its own speed */
   function progress(){
     var r = root.getBoundingClientRect(), hh = head ? head.offsetHeight : 64;
     return clamp((hh - r.top) / Math.max(1, root.offsetHeight - stick.offsetHeight), 0, 1);

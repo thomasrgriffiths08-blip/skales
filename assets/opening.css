@@ -1,9 +1,9 @@
 /* ============================================================
    The opening: the home page's first screen is one film, played by scroll.
    A white model of a British town at night, one continuous take: the lit windows go out one by one
-   until a single house is still lit. Then the page simply carries on: the picture darkens at the bottom into the
+   until a single house is still lit, then glides down to its glowing back door. Then the page simply carries on: the picture darkens at the bottom into the
    dark headline section under it, so there is no fade or card between the film and the site.
-   About two screens of scroll, with a Skip button. Without JS, or with Data Saver, it is one still with the words on it.
+   About three screens of scroll, with a Skip button. Without JS, or with Data Saver, it is one still with the words on it.
    ============================================================ */
 .op{--ink:#0B0C0E;--p:0;--z:0;position:relative;background:var(--ink);color:#fff}
 .op-stick{position:relative;height:calc(100svh - var(--head-h));min-height:560px;overflow:hidden;isolation:isolate}

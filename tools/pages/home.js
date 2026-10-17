@@ -8,12 +8,15 @@ const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
 const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
 /* the opening film: Your town. One continuous take over a white model of a British town at night: the lit windows go
-   out one by one until a single house is still lit. Cut into a wide strip (town-d) and a tall strip (town-m), each with
+   out one by one until a single house is still lit, then the camera glides down to that house until its open, glowing
+   back door fills the screen. Two generated parts, the second starting on the first one's last frame, so there is no
+   cut. 16 frames a second. Cut into a wide strip (town-d) and a tall strip (town-m), each with
    its first frame as the poster. Each line owns an equal share of the film. The film runs straight on into the page:
    the headline is the first thing under it, not a card laid over it. */
 const OPENING = {
-  frames: 243,
-  screens: 2,                                   /* screens of scroll the film takes; keep it short */
+  frames: 323,
+  seconds: 20.2,                                /* the film's own length, for where it has to play by itself */
+  screens: 3,                                   /* screens of scroll the film takes; keep it short */
   lines: ['Tonight, people near you need a tradesperson.', 'Most of their calls go nowhere.', 'One business answers every one.']
 };
 
@@ -31,7 +34,7 @@ ${L.header(b, 'home')}
 <main id="main">
 
 <script>document.documentElement.classList.add('js')</script>
-<section class="op" id="top" aria-label="Opening film" style="--op-screens:${OPENING.screens}" data-film="${b}assets/film/town-" data-frames="${OPENING.frames}">
+<section class="op" id="top" aria-label="Opening film" style="--op-screens:${OPENING.screens}" data-film="${b}assets/film/town-" data-frames="${OPENING.frames}" data-seconds="${OPENING.seconds}">
   <div class="op-stick">
     <picture class="op-poster"><source media="(max-aspect-ratio: 17/20)" srcset="${b}assets/film/town-m.webp" width="810" height="1440"><img src="${b}assets/film/town-d.webp" alt="A white architect's model of a British town at night, windows lit warm along the terraces" width="1440" height="810" fetchpriority="high"></picture>
     <canvas class="op-film" aria-hidden="true"></canvas>
