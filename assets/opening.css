@@ -7,7 +7,7 @@
    ============================================================ */
 .op{--ink:#0B0C0E;--p:0;--z:0;position:relative;background:var(--ink);color:#fff}
 .op-stick{position:relative;height:calc(100svh - var(--head-h));min-height:560px;overflow:hidden;isolation:isolate}
-.js .op.is-film{height:calc(300svh - var(--head-h))}
+.js .op.is-film{height:calc((var(--op-screens,2) + 1) * 100svh - var(--head-h))}
 .js .op.is-film .op-stick{position:sticky;top:var(--head-h)}
 
 /* the film: its first frame is in the HTML so the first screen paints at once; the video fades in over it once it has arrived */
