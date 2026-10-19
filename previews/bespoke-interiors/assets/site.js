@@ -64,9 +64,10 @@ function Configurator(root,D){const st={};D.groups.forEach(g=>{st[g.id]=g.type==
   const stage=$('.cfg-stage',root),panel=$('.cfg-body',root),selEl=$('.sel',stage),cache={};
   function img(k){if(!cache[k]){const im=new Image();im.decoding='async';im.alt='';im.src=D.imgs[k];stage.insertBefore(im,stage.firstChild);cache[k]=im}return cache[k]}
   Object.keys(D.imgs).forEach(k=>{if(k!==D.key(st))setTimeout(()=>img(k),1200)});
-  let cur=null;
+  let cur=null,want=null;
   function opt(g,v){return g.opts.find(o=>o.v===v)}
-  function render(){const k=D.key(st),im=img(k);if(cur!==im){const show=()=>{if(cur)cur.classList.remove('on');im.classList.add('on');cur=im};im.complete?show():im.onload=show}
+  // only the latest pick may show, so a slow image finishing late can't replace it
+  function render(){const k=D.key(st),im=want=img(k);if(cur!==im){const show=()=>{if(want!==im)return;if(cur)cur.classList.remove('on');im.classList.add('on');cur=im};im.complete?show():im.onload=show}
     // header values
     D.groups.forEach(g=>{const h=$(`[data-h="${g.id}"]`,root);if(!h)return;h.textContent=g.type==='checks'?(st[g.id].length?st[g.id].length+' added':'none'):opt(g,st[g.id]).label;
       $$(`[data-g="${g.id}"] button`,root).forEach(b=>b.classList.toggle('on',b.dataset.v===st[g.id]));const d=$(`[data-desc="${g.id}"]`,root);if(d)d.textContent=opt(g,st[g.id]).desc||''});

@@ -42,13 +42,15 @@
     const mqs = [...D.querySelectorAll('.fx-mq')];
     if (mqs.length) {
       const vio = new IntersectionObserver(es => es.forEach(e => e.target._on = e.isIntersecting));
-      mqs.forEach(m => { const t = m.querySelector('.fx-mq-t'); t.innerHTML += t.innerHTML; m._x = 0; m._d = +(m.dataset.dir || -1); m._s = +(m.dataset.speed || .45); vio.observe(m) });
+      mqs.forEach(m => { const t = m.querySelector('.fx-mq-t'); t.innerHTML += t.innerHTML; m._x = 0; m._d = +(m.dataset.dir || -1); m._s = +(m.dataset.speed || .45); vio.observe(m);
+        /* measure the width only when it changes, not every frame (reading it each frame forces a layout) */
+        m._w = 0; window.ResizeObserver ? new ResizeObserver(() => m._w = 0).observe(t) : addEventListener('resize', () => m._w = 0) });
       let v = 0, ly = scrollY;
       (function loop(){
         const dy = scrollY - ly; ly = scrollY; v += (Math.abs(dy) - v) * .08;
         if (!reduce) mqs.forEach(m => {
           if (!m._on) return;
-          const t = m.firstElementChild, w = t.scrollWidth / 2; if (!w) return;
+          const t = m.firstElementChild, w = m._w || (m._w = t.scrollWidth / 2); if (!w) return;
           m._x += m._d * (m._s + Math.min(7, v * .22));
           if (m._x <= -w) m._x += w; if (m._x > 0) m._x -= w;
           t.style.transform = 'translate3d(' + m._x.toFixed(2) + 'px,0,0)';

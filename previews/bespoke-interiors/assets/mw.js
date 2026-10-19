@@ -47,8 +47,8 @@ const URLS={p303:'img/mw1.webp',drawerV:'media/drawer.mp4',p03d:'img/mwb4.webp',
     overlay(v);
     let i=0;for(let k=1;k<8;k++)if(v>=B[k])i=k;const nx=i<7?B[i+1]:1,t=c01((v-B[i])/(nx-B[i]));
     if(i!==lastI){lastI=i;lis.forEach((l,k)=>{l.classList.toggle('on',k===i);l.classList.toggle('past',k<i)})}
-    bar.style.transform=`scaleX(${v.toFixed(4)})`;pct.textContent=Math.round(v*100)+'%';
-    const end=v>=.985;st.classList.toggle('end',end);tag.textContent=end?'Finished · real photo':'Building · '+String(i+1).padStart(2,'0')+' of 08';
+    bar.style.transform=`scaleX(${v.toFixed(4)})`;const pt=Math.round(v*100)+'%';if(pct._t!==pt)pct.textContent=pct._t=pt;
+    const end=v>=.985;st.classList.toggle('end',end);const tg=end?'Finished · real photo':'Building · '+String(i+1).padStart(2,'0')+' of 08';if(tag._t!==tg)tag.textContent=tag._t=tg;
     const c=CO[i],show=!end&&t>.3&&t<.97;co.style.left=(52+(c[0]-52)*sc+tx*sc).toFixed(2)+'%';co.style.top=(62+(c[1]-62)*sc+ty*sc).toFixed(2)+'%';if(shownCo!==i){shownCo=i;coT.textContent=c[2];co.classList.remove('l');const sw=st.clientWidth;co.classList.toggle('m',sw<600);st.classList.toggle('sm',sw<600);if(sw>=600&&c[0]/100*sw+co.offsetWidth>sw-14)co.classList.add('l')}co.classList.toggle('on',show)}
   (function loop(){requestAnimationFrame(loop);if(cur<0)cur=target;const d=target-cur;if(Math.abs(d)<.00025){if(cur===target)return;cur=target}else cur+=d*.085;render(cur)})();
   render(target);
