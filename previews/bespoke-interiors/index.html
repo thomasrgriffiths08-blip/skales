@@ -49,7 +49,7 @@ h2 b,h1 b,h3 b{font-weight:500}
 
 /* nav */
 nav.top{position:fixed;left:0;right:0;top:0;z-index:100;height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;color:#fff;transition:background .45s,color .45s,height .45s,border-color .45s;border-bottom:1px solid transparent}
-nav.top.sc{background:rgba(246,243,238,.82);backdrop-filter:blur(18px) saturate(1.4);color:var(--ink);height:66px;border-color:var(--line)}
+nav.top.sc{background:rgba(246,243,238,.97);color:var(--ink);height:66px;border-color:var(--line)}
 .logo{display:flex;flex-direction:column;line-height:1.15;font-size:12px;letter-spacing:.3em;text-transform:uppercase}
 .logo b{font-weight:600}
 nav.top ul{display:flex;gap:30px;list-style:none;font-size:14px}
@@ -191,10 +191,10 @@ body.mmo .mbar{opacity:0;pointer-events:none}
 .steps li.past{color:var(--ink2)}
 .stage{position:relative;aspect-ratio:4/3;width:min(100%,calc((100vh - 150px)*4/3));justify-self:end;border-radius:6px;overflow:hidden;background:#e9e4dc;box-shadow:0 50px 100px -60px rgba(24,22,20,.5)}
 .stage video,.stage img,.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.stage .scene{position:absolute;inset:0;transform-origin:52% 62%;will-change:transform}
+.stage .scene{position:absolute;inset:0;transform-origin:52% 62%}
 .stage .scene img{position:absolute;display:block;max-width:none;pointer-events:none;user-select:none}
 .stage .scene .bg,.stage .scene .lit{left:0;top:0;width:100%;height:100%}
-.stage .scene .ly{right:auto;bottom:auto;height:auto;object-fit:fill;opacity:0;will-change:transform,opacity,filter}
+.stage .scene .ly{right:auto;bottom:auto;height:auto;object-fit:fill;opacity:0}.stage.live .scene,.stage.live .scene .ly{will-change:transform,opacity}
 .stage .scene .lit{opacity:0;will-change:opacity}
 .stage svg.so{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .so .lz{stroke:#ff4b34;stroke-width:1.6;fill:none;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 2.5px rgba(255,75,52,.9))}
@@ -1189,6 +1189,7 @@ $$('.fv video').forEach(v=>vio.observe(v));
   const c01=v=>v<0?0:v>1?1:v,eo=t=>1-Math.pow(1-t,3),eo5=t=>1-Math.pow(1-t,5),ez=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
   const W=(a,b)=>v=>c01((v-a)/(b-a));
   const el=k=>$('#L_'+k);
+  new IntersectionObserver(es=>st.classList.toggle('live',es[0].isIntersecting),{rootMargin:'50% 0px'}).observe(sec);
   // [layer, window, style] — styles: rise, drop, up (soft sweep upward), side (-1/1), sweep (soft sweep right), pop
   const A=[];
   for(let j=0;j<7;j++)A.push(['d'+j,W(.085+j*.026,.2+j*.026),'rise']);

@@ -65,8 +65,8 @@
     (C.cur || []).forEach(([s, l]) => D.querySelectorAll(s).forEach(e => { if (!e.dataset.cur) e.dataset.cur = l }));
     const cu = D.createElement('div'); cu.className = 'fx-cur'; cu.innerHTML = '<b></b>'; D.body.appendChild(cu);
     const lab = cu.firstChild;
-    let x = -100, y = -100, tx = x, ty = y;
-    addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; cu.classList.add('on') }, { passive: true });
+    let x = -100, y = -100, tx = x, ty = y, run = false;
+    addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; cu.classList.add('on'); if (!run) { run = true; requestAnimationFrame(f) } }, { passive: true });
     D.addEventListener('pointerleave', () => cu.classList.remove('on'));
     D.addEventListener('pointerover', e => {
       const m = e.target.closest('[data-cur]'), a = e.target.closest('a,button,input,select,textarea,label,[role=button]');
@@ -74,7 +74,7 @@
       cu.classList.toggle('big', !!big); cu.classList.toggle('lk', !big && !!a);
       if (big) lab.textContent = m.dataset.cur;
     });
-    (function f(){ x += (tx - x) * .22; y += (ty - y) * .22; cu.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)'; requestAnimationFrame(f) })();
+    function f(){ x += (tx - x) * .22; y += (ty - y) * .22; cu.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)'; if (Math.abs(tx - x) + Math.abs(ty - y) > .2) requestAnimationFrame(f); else run = false }
 
     /* magnetic buttons */
     D.querySelectorAll('.btn').forEach(b => {

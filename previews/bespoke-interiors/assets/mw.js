@@ -5,6 +5,7 @@ const URLS={p303:'img/mw1.webp',drawerV:'media/drawer.mp4',p03d:'img/mwb4.webp',
   const c01=v=>v<0?0:v>1?1:v,eo=t=>1-Math.pow(1-t,3),eo5=t=>1-Math.pow(1-t,5),ez=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
   const W=(a,b)=>v=>c01((v-a)/(b-a));
   const el=k=>$('#L_'+k);
+  new IntersectionObserver(es=>st.classList.toggle('live',es[0].isIntersecting),{rootMargin:'50% 0px'}).observe(sec);
   // [layer, window, style] — styles: rise, drop, up (soft sweep upward), side (-1/1), sweep (soft sweep right), pop
   const A=[];
   for(let j=0;j<7;j++)A.push(['d'+j,W(.085+j*.026,.2+j*.026),'rise']);

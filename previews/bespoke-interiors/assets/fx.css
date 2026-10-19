@@ -6,9 +6,7 @@
 .fx-w>span{display:inline-block;transform:translate3d(0,108%,0) rotate(2deg);filter:blur(5px);opacity:.001;transition:transform 1.1s cubic-bezier(.2,.8,.2,1),filter 1.1s cubic-bezier(.2,.8,.2,1),opacity .8s}
 .fx-split.fx-in .fx-w>span{transform:none;filter:none;opacity:1}
 
-/* photos open up as they arrive */
-.fx-clip{clip-path:inset(9% 7% 9% 7% round 26px);transition:clip-path 1.5s cubic-bezier(.2,.8,.2,1)}
-.fx-clip.fx-in{clip-path:inset(0 0 0 0 round 0)}
+/* photos settle in as they arrive (a composited zoom; a clip-path wipe repainted the whole photo every frame) */
 .fx-clip img,.fx-clip video{transition:transform 2s cubic-bezier(.2,.8,.2,1),opacity .6s}
 :where(.fx-clip:not(.fx-in)) img,:where(.fx-clip:not(.fx-in)) video{transform:scale(1.2)}
 
