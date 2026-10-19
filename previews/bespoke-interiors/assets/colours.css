@@ -1,0 +1,98 @@
+/* Bespoke Interiors · painted colour library, door styles, finishes (added round 4) */
+.cl-sec{--cl-ink:#181614;--cl-mut:#7a726a;--cl-card:#fbfaf7;--cl-line:rgba(24,22,20,.1);--cl-oak:#a87a4c;--cl-e:cubic-bezier(.2,.8,.2,1);padding:140px 0;position:relative;overflow:hidden}
+.cl-lbl{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cl-mut)}
+.cl-head{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;margin-bottom:46px}
+.cl-head h2{font-size:clamp(34px,4.2vw,62px);font-weight:300;letter-spacing:-.04em;line-height:1.02;margin-top:20px}
+.cl-head h2 b{font-weight:500}
+.cl-head p{color:var(--cl-mut);font-size:16.5px;max-width:440px;margin-bottom:6px}
+.cl-line{position:relative;height:150px;margin:-10px 0 30px}
+.cl-line img{position:absolute;right:0;bottom:0;height:100%;width:auto;mix-blend-mode:multiply;transform-origin:bottom right}
+.cl{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;align-items:stretch}
+.cl-stage{position:relative;border-radius:26px;overflow:hidden;background:#e7e1d7;min-height:600px}
+.cl-stage .clp{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .8s var(--cl-e),transform 1.6s var(--cl-e)}
+.cl-stage .clp.on{opacity:1;transform:none}
+.cl-plain{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,#eee9e1 0 74%,#d9cdbb 74%);opacity:0;transition:opacity .7s var(--cl-e)}
+.cl-plain.on{opacity:1}
+.cl-plain:after{content:"";position:absolute;left:0;right:0;top:74%;height:6px;background:rgba(0,0,0,.06)}
+.cl-plain .cl-dr{height:72%;margin-top:-6%}
+.cl-plain em{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);font-style:normal;font-size:13px;color:rgba(24,22,20,.55);white-space:nowrap}
+.cl-cap{position:absolute;left:16px;bottom:16px;z-index:3;display:flex;align-items:center;gap:10px;padding:9px 16px 9px 9px;border-radius:999px;background:rgba(251,250,247,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:13.5px;color:var(--cl-ink);max-width:calc(100% - 32px);transition:opacity .4s}
+.cl-cap i{width:24px;height:24px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);transition:background .6s}
+.cl-cap b{font-weight:500}
+.cl-tag{position:absolute;top:16px;right:16px;z-index:3;font-family:"Geist Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(17,16,14,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:7px 11px;border-radius:999px}
+.cl-panel{background:var(--cl-card);border-radius:26px;padding:26px;display:flex;flex-direction:column;gap:20px}
+.cl-now{display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid var(--cl-line)}
+.cl-now .cl-dr{height:96px;flex:none}
+.cl-now b{display:block;font-size:30px;font-weight:400;letter-spacing:-.035em;line-height:1.05;margin:6px 0 4px;color:var(--cl-ink)}
+.cl-now small{display:block;font-size:13.5px;color:var(--cl-mut);line-height:1.4}
+.cl-gs{display:grid;gap:16px}
+.cl-g .cl-lbl{display:block;margin-bottom:9px;font-size:10px}
+.cl-sw{display:flex;flex-wrap:wrap;gap:8px}
+.cl-sw button{position:relative;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.13);transition:transform .35s var(--cl-e)}
+.cl-sw button:hover{transform:scale(1.12)}
+.cl-sw button.on:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1.5px solid var(--cl-ink)}
+.cl-sw button.hasph:before{display:none;content:"";position:absolute;right:-1px;top:-1px;width:8px;height:8px;border-radius:50%;background:var(--cl-oak);box-shadow:0 0 0 2px var(--cl-card)}
+.cl-key{font-size:12px;color:var(--cl-mut);display:flex;align-items:center;gap:7px}
+.cl-key i{display:none;width:8px;height:8px;border-radius:50%;background:var(--cl-oak)}
+.cl-cta{display:grid;gap:8px;margin-top:auto}
+.cl-cta .btn{justify-content:center}
+.cl-cta small{font-size:12px;color:var(--cl-mut);text-align:center}
+/* painted door drawn in CSS */
+.cl-dr{position:relative;aspect-ratio:5/8;background:var(--c,#ddd);border-radius:3px;box-shadow:0 40px 70px -34px rgba(0,0,0,.5),inset 0 0 0 1px rgba(0,0,0,.07);transition:background .7s var(--cl-e)}
+.cl-dr:before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(100deg,rgba(255,255,255,.14),rgba(255,255,255,0) 45%,rgba(0,0,0,.09))}
+.cl-dr i{position:absolute;inset:9% 15%;box-shadow:inset 0 0 0 2px rgba(0,0,0,.13),inset 3px 3px 0 1px rgba(255,255,255,.16),0 0 0 1px rgba(255,255,255,.14)}
+.cl-dr b{position:absolute;right:7%;top:42%;width:4%;height:16%;border-radius:4px;background:linear-gradient(90deg,#d6b27a,#8e6d3e);box-shadow:0 2px 4px rgba(0,0,0,.25)}
+
+/* door styles */
+.ds-sw{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.ds-sw span{font-size:13.5px;color:#7a726a;margin-right:6px}
+.ds-sw button{width:30px;height:30px;border-radius:50%;border:0;cursor:pointer;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.13);transition:transform .3s}
+.ds-sw button:hover{transform:scale(1.1)}
+.ds-sw button.on:after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid #181614}
+.ds-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.ds-card{background:#fbfaf7;border-radius:20px;padding:16px 16px 18px;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.ds-card:hover{transform:translateY(-4px);box-shadow:0 26px 50px -30px rgba(24,22,20,.4)}
+.ds-door{position:relative;border-radius:10px;overflow:hidden;background:var(--paint,#fff);transition:background .7s cubic-bezier(.2,.8,.2,1);display:grid;place-items:center;padding:14px 18px;aspect-ratio:4/5.4}
+.ds-door img{height:100%;width:auto;mix-blend-mode:multiply;filter:contrast(1.06)}
+.ds-card.oak .ds-door{background:#f4f1ec}
+.ds-card b{display:block;font-weight:500;font-size:15.5px;letter-spacing:-.01em;margin-top:14px}
+.ds-card small{display:block;font-size:12.5px;color:#7a726a;line-height:1.4;margin-top:2px}
+.ds-group{font-family:"Geist Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7a726a;grid-column:1/-1;margin:16px 0 0}
+.ds-group:first-child{margin-top:0}
+/* handles */
+.hd{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px;margin-top:14px}
+.hd figure{position:relative;margin:0;border-radius:22px;overflow:hidden;min-height:230px;background:#2a2723}
+.hd img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.hd figure:hover img{transform:scale(1.05)}
+.hd figcaption{position:absolute;left:14px;bottom:14px;padding:7px 12px;border-radius:999px;background:rgba(251,250,247,.92);font-size:12.5px}
+/* bedroom finishes */
+.bf{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none}
+.bf::-webkit-scrollbar{display:none}
+.bf figure{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:3/4;scroll-snap-align:start;background:#ddd}
+.bf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.bf figure:hover img{transform:scale(1.05)}
+.bf figcaption{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(251,250,247,.93);backdrop-filter:blur(10px);font-size:13px}
+.bf figcaption i{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);flex:none}
+.bf figcaption b{font-weight:500}
+.fine-note{font-size:12.5px;color:#7a726a;margin-top:16px}
+
+@media (max-width:1100px){
+  .cl{grid-template-columns:1fr}
+  .cl-stage{position:sticky;top:66px;z-index:5;min-height:0;aspect-ratio:4/3;border-radius:20px;box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+  .cl-head{grid-template-columns:1fr;gap:16px}
+  .ds-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:700px){
+  .cl-sec{padding:96px 0}
+  .cl-line{height:84px;margin-bottom:18px}
+  .cl-stage{aspect-ratio:5/4;border-radius:18px}
+  .cl-cap{left:10px;bottom:10px;font-size:12px;padding:7px 12px 7px 7px}.cl-cap i{width:20px;height:20px}
+  .cl-tag{top:10px;right:10px;font-size:8.5px;padding:5px 8px}
+  .cl-plain em{display:none}
+  .cl-panel{padding:18px;border-radius:20px}
+  .cl-now .cl-dr{height:78px}.cl-now b{font-size:25px}
+  .cl-sw{gap:7px}.cl-sw button{width:32px;height:32px}
+  .ds-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .ds-card{padding:12px 12px 14px;border-radius:16px}
+  .hd{grid-template-columns:1fr}.hd figure{min-height:180px}
+}

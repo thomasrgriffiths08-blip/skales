@@ -1,0 +1,1530 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bespoke Interiors | Bespoke joinery, Maynooth · Dublin & Kildare</title>
+<meta name="description" content="Media walls, kitchens, fitted wardrobes and panelling. Designed with you, made in our Maynooth workshop and fitted by the same team.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f3ee;--paper2:#efeae2;--white:#fbfaf7;--ink:#181614;--ink2:#2a2723;--mut:#7a726a;--mut2:#a59d94;
+  --line:rgba(24,22,20,.1);--line2:rgba(24,22,20,.18);
+  --oak:#a87a4c;--oak2:#c79a68;--night:#11100e;--nmut:rgba(246,243,238,.62);--nline:rgba(246,243,238,.14);
+  --ease:cubic-bezier(.2,.8,.2,1);--ease2:cubic-bezier(.77,0,.18,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:Geist,system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.55;font-size:16px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,video{display:block;max-width:100%}
+.wrap{width:min(1320px,100% - 80px);margin:0 auto}
+.lbl{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+h1,h2,h3{font-weight:300;letter-spacing:-.035em;line-height:1.04}
+h2{font-size:clamp(34px,4vw,58px)}
+h2 b,h1 b,h3 b{font-weight:500}
+.mut{color:var(--mut)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 24px;border-radius:999px;font-size:15px;font-weight:400;transition:background .35s,color .35s,transform .5s var(--ease),box-shadow .4s;white-space:nowrap}
+.btn svg{width:16px;height:16px}
+.b-ink{background:var(--ink);color:var(--paper)}.b-ink:hover{background:#000;transform:translateY(-1px)}
+.b-light{background:var(--white);color:var(--ink)}.b-light:hover{background:#fff;transform:translateY(-1px)}
+.b-ghost{border:1px solid rgba(255,255,255,.4);color:#fff;backdrop-filter:blur(10px);background:rgba(255,255,255,.06)}.b-ghost:hover{background:rgba(255,255,255,.16)}
+.b-line{border:1px solid var(--line2)}.b-line:hover{background:var(--white)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.sec{padding:150px 0}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:56px;flex-wrap:wrap}
+.shead p{max-width:420px;color:var(--mut);font-size:16.5px}
+.shead .lbl{margin-bottom:22px;display:block}
+
+/* preloader */
+#pre{position:fixed;inset:0;z-index:500;background:var(--paper);display:grid;place-items:center;transition:opacity .9s var(--ease) .1s,visibility .9s .1s}
+#pre.done{opacity:0;visibility:hidden}
+#pre .w{font-size:15px;letter-spacing:.32em;text-transform:uppercase;font-weight:400;text-align:center}
+#pre .w b{font-weight:600}
+#pre .ln{width:180px;height:1px;background:var(--line2);margin:22px auto 0;overflow:hidden}
+#pre .ln i{display:block;height:100%;width:0;background:var(--ink);transition:width .2s linear}
+
+/* nav */
+nav.top{position:fixed;left:0;right:0;top:0;z-index:100;height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;color:#fff;transition:background .45s,color .45s,height .45s,border-color .45s;border-bottom:1px solid transparent}
+nav.top.sc{background:rgba(246,243,238,.97);color:var(--ink);height:66px;border-color:var(--line)}
+.logo{display:flex;flex-direction:column;line-height:1.15;font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+.logo b{font-weight:600}
+nav.top ul{display:flex;gap:30px;list-style:none;font-size:14px}
+nav.top ul a{opacity:.82;transition:opacity .3s}
+nav.top ul a:hover{opacity:1}
+nav.top .r{display:flex;align-items:center;gap:18px;font-size:14px}
+nav.top .btn{height:40px;padding:0 18px;font-size:13.5px;border:1px solid currentColor;background:transparent}
+nav.top.sc .btn{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.burger{display:none;width:40px;height:40px;flex-direction:column;align-items:center;justify-content:center}
+.burger span{display:block;width:20px;height:1.2px;background:currentColor;margin:5px 0;transition:transform .45s var(--ease)}
+body.mmo .burger span:first-child{transform:translateY(5.6px) rotate(45deg)}body.mmo .burger span:last-child{transform:translateY(-5.6px) rotate(-45deg)}
+.mm{position:fixed;inset:0;z-index:150;background:var(--paper);display:flex;flex-direction:column;justify-content:space-between;padding:110px 22px calc(28px + env(safe-area-inset-bottom));opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+.mm nav{display:grid}
+.mm nav a{font-size:34px;letter-spacing:-.035em;line-height:1.1;padding:10px 0;border-bottom:1px solid var(--line);opacity:0;transform:translateY(16px);transition:.6s var(--ease)}
+.mmf{display:grid;gap:10px;opacity:0;transition:opacity .6s .25s}
+.mmf .btn{justify-content:center;height:54px}
+.mmf p{font-size:13px;color:var(--mut);margin-top:8px}
+body.mmo .mm{opacity:1;visibility:visible}
+body.mmo .mm nav a{opacity:1;transform:none}
+.mm nav a:nth-child(1){transition-delay:0.04s}.mm nav a:nth-child(2){transition-delay:0.08s}.mm nav a:nth-child(3){transition-delay:0.12s}.mm nav a:nth-child(4){transition-delay:0.16s}.mm nav a:nth-child(5){transition-delay:0.20s}.mm nav a:nth-child(6){transition-delay:0.24s}
+body.mmo .mmf{opacity:1}
+body.mmo{overflow:hidden}
+body.mmo nav.top{background:transparent!important;color:var(--ink)!important;border-color:transparent!important;backdrop-filter:none!important;z-index:160}
+body.mmo .mbar{opacity:0;pointer-events:none}
+
+/* hero */
+.hero{position:relative;height:100svh;min-height:620px;overflow:hidden;background:#cfc7bb}
+.hshow{position:absolute;inset:0}
+.hsl{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.6s var(--ease)}
+.hsl.on{opacity:1;z-index:1}
+.hsl img{width:100%;height:100%;object-fit:cover;transform:scale(1.09);transition:transform 9s cubic-bezier(.25,.1,.25,1)}
+.hsl.on img{transform:scale(1)}
+.hnav{display:flex;gap:6px;margin-top:6px}
+.hnav button{position:relative;width:46px;height:30px;color:transparent;font-size:0}
+.hnav button:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(255,255,255,.3)}
+.hnav button i{position:absolute;left:0;top:50%;height:2px;width:0;background:#fff}
+.hnav button.on i{animation:hprog 6.5s linear forwards}
+.hnav button span{position:absolute;right:0;bottom:30px;white-space:nowrap;font-size:13px;color:#fff;opacity:0;transform:translateY(4px);transition:.6s var(--ease);pointer-events:none}
+.hnav button.on span{opacity:1;transform:none}
+@keyframes hprog{to{width:100%}}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,14,.42) 0%,rgba(17,16,14,0) 26%,rgba(17,16,14,0) 48%,rgba(17,16,14,.7) 100%),linear-gradient(90deg,rgba(17,16,14,.5) 0%,rgba(17,16,14,0) 55%)}
+.hero .c{position:absolute;left:0;right:0;bottom:64px;z-index:2;color:#fff}
+.hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.hero .lbl{color:rgba(255,255,255,.8);display:block;margin-bottom:20px}
+.hero h1{font-size:clamp(34px,3.9vw,58px);max-width:13em}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 span i{display:block;font-style:normal;transform:translateY(105%);transition:transform 1.3s var(--ease)}
+.loaded .hero h1 span i{transform:none}
+.hero h1 span:nth-child(2) i{transition-delay:.1s}
+.hero p{max-width:440px;margin-top:20px;color:rgba(255,255,255,.84);font-size:16px;opacity:0;transition:opacity 1.2s .5s}
+.hero .ctas{display:flex;gap:10px;margin-top:30px;opacity:0;transition:opacity 1.2s .7s}
+.loaded .hero p,.loaded .hero .ctas{opacity:1}
+.hero .side{text-align:right;color:rgba(255,255,255,.86);font-size:13.5px;display:grid;gap:14px;justify-items:end}
+.hero .stars{display:flex;align-items:center;gap:10px}
+.hero .stars i{font-style:normal;letter-spacing:2px;color:#f1d29a}
+.cue{display:flex;align-items:center;gap:12px}
+.cue em{display:block;width:1px;height:46px;background:rgba(255,255,255,.3);position:relative;overflow:hidden}
+.cue em:after{content:"";position:absolute;left:0;top:-50%;width:1px;height:50%;background:#fff;animation:cue 2s var(--ease) infinite}
+@keyframes cue{to{top:100%}}
+
+/* quote */
+.qs{position:relative;z-index:5;padding:90px 0 40px}
+.wiz{background:var(--white);border:1px solid var(--line);border-radius:28px;padding:44px;box-shadow:0 40px 90px -60px rgba(24,22,20,.35)}
+.wh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+.wh h3{font-size:clamp(26px,2.6vw,38px)}
+.dots{display:flex;gap:6px}
+.dots i{width:22px;height:2px;background:var(--line2);transition:.6s var(--ease)}
+.dots i.on{background:var(--ink);width:40px}
+.step{display:none}
+.step.on{display:block;animation:stepin .7s var(--ease)}
+@keyframes stepin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{position:relative;padding:22px 20px 20px;border-radius:20px;background:var(--paper);border:1px solid transparent;text-align:left;transition:.45s var(--ease)}
+.tile:hover{background:#f1ece4;transform:translateY(-3px)}
+.tile.sel{background:#fff;border-color:var(--ink);box-shadow:0 20px 40px -26px rgba(24,22,20,.5)}
+.tile svg{width:100%;height:92px;margin-bottom:14px;stroke:var(--oak);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.tile b{display:block;font-weight:500;font-size:16.5px;letter-spacing:-.01em}
+.tile small{display:block;font-size:13.5px;color:var(--mut);margin-top:2px}
+.tile .tick{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;background:var(--ink);display:grid;place-items:center;opacity:0;transform:scale(.4);transition:.4s var(--ease)}
+.tile.sel .tick{opacity:1;transform:none}
+.tick svg{width:11px!important;height:11px!important;margin:0!important;stroke:#fff!important;stroke-width:3!important}
+.door{animation:door 3.2s var(--ease2) infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes door{0%,20%,100%{transform:scaleX(1)}45%,75%{transform:scaleX(.18)}}
+.swing{animation:swing 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 0}
+@keyframes swing{0%,100%{transform:rotate(7deg)}50%{transform:rotate(-7deg)}}
+.slide{animation:slide 4s var(--ease2) infinite}
+@keyframes slide{0%,15%,100%{transform:translateX(0)}40%,65%{transform:translateX(30px)}}
+.flick{animation:flick .6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes flick{0%{transform:scale(1,1)}50%{transform:scale(.88,1.12) skewX(4deg)}100%{transform:scale(1.06,.9) skewX(-4deg)}}
+.glow{animation:glow 3s ease-in-out infinite}
+@keyframes glow{0%,100%{fill:rgba(168,122,76,.04)}50%{fill:rgba(168,122,76,.22)}}
+.book{animation:book 3.6s var(--ease) infinite;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes book{0%,8%{transform:scaleY(0)}22%,85%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+.pd{stroke-dasharray:140;stroke-dashoffset:140;animation:pd 3.6s var(--ease) infinite}
+@keyframes pd{0%{stroke-dashoffset:140}40%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-140}}
+.hb{animation:hb 3.4s var(--ease) infinite;opacity:0}
+@keyframes hb{0%{opacity:0;transform:translateY(-6px)}15%,80%{opacity:1;transform:none}100%{opacity:0}}
+.spin{animation:spin 2s linear infinite;transform-box:view-box}
+@keyframes spin{to{transform:rotate(360deg)}}
+.flipc{animation:flipc 2.6s var(--ease) infinite;transform-box:fill-box;transform-origin:50% 0}
+@keyframes flipc{0%,40%{transform:scaleY(1)}60%,100%{transform:scaleY(0);opacity:0}}
+.pulse{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+.shine{animation:shine 2.4s ease-in-out infinite}
+@keyframes shine{0%,100%{stroke-opacity:.3}50%{stroke-opacity:1}}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:860px}
+.fld{display:flex;flex-direction:column;gap:7px}
+.fld label{font-size:13px;color:var(--mut)}
+.fld input,.fld textarea{height:54px;border-radius:14px;border:1px solid var(--line2);background:var(--paper);color:var(--ink);padding:0 18px;font:inherit;font-size:16px;outline:none;transition:.3s}
+.fld textarea{height:92px;padding:15px 18px;resize:none}
+.fld input:focus,.fld textarea:focus{border-color:var(--ink);background:#fff}
+.fld.full{grid-column:1/-1}
+.upl{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;border:1px dashed var(--line2);color:var(--ink);font-size:15px;cursor:pointer}
+.upl svg{width:22px;height:22px;stroke:var(--oak);fill:none;stroke-width:1.6}
+.wf{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px;flex-wrap:wrap}
+.back{font-size:14.5px;color:var(--mut);display:flex;align-items:center;gap:8px}
+.back:hover{color:var(--ink)}
+.done{text-align:center;padding:30px 0 6px}
+.done .ok{width:76px;height:76px;margin:0 auto 22px;border-radius:50%;background:var(--ink);display:grid;place-items:center;animation:pop .8s var(--ease)}
+.done .ok svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2.2;stroke-dasharray:40;stroke-dashoffset:40;animation:drawin .6s .35s forwards}
+@keyframes pop{from{transform:scale(0)}}
+@keyframes drawin{to{stroke-dashoffset:0}}
+.sum{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.sum span{padding:8px 14px;border-radius:999px;border:1px solid var(--line2);font-size:14px}
+
+/* build */
+.build{position:relative;height:540vh;background:var(--paper)}
+.build .stick{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+.build .grid{display:grid;grid-template-columns:330px 1fr;gap:56px;align-items:center;width:min(1400px,100% - 80px);margin:0 auto;padding-top:40px}
+.bl .lbl{display:block;margin-bottom:22px}
+.bl h2{font-size:clamp(30px,3vw,44px);margin-bottom:28px}
+.steps{list-style:none;border-top:1px solid var(--line)}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:6px;padding:13px 0;border-bottom:1px solid var(--line);color:var(--mut2);transition:color .5s}
+.steps li span{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;padding-top:4px}
+.steps li b{font-weight:400;font-size:15px;display:block}
+.steps li small{display:block;font-size:13.5px;max-height:0;overflow:hidden;opacity:0;transition:max-height .6s var(--ease),opacity .5s,margin .5s;color:var(--mut)}
+.steps li.on{color:var(--ink)}
+.steps li.on small{max-height:70px;opacity:1;margin-top:4px}
+.steps li.past{color:var(--ink2)}
+.stage{position:relative;aspect-ratio:4/3;width:min(100%,calc((100vh - 150px)*4/3));justify-self:end;border-radius:6px;overflow:hidden;background:#e9e4dc;box-shadow:0 50px 100px -60px rgba(24,22,20,.5)}
+.stage video,.stage img,.stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage .scene{position:absolute;inset:0;transform-origin:52% 62%}
+.stage .scene img{position:absolute;display:block;max-width:none;pointer-events:none;user-select:none}
+.stage .scene .bg,.stage .scene .lit{left:0;top:0;width:100%;height:100%}
+.stage .scene .ly{right:auto;bottom:auto;height:auto;object-fit:fill;opacity:0}.stage.live .scene,.stage.live .scene .ly{will-change:transform,opacity}
+.stage .scene .lit{opacity:0;will-change:opacity}
+.stage svg.so{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.so .lz{stroke:#ff4b34;stroke-width:1.6;fill:none;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 2.5px rgba(255,75,52,.9))}
+.so .lz.x{stroke-width:1.4}
+.so .dm{stroke:#181614;stroke-width:1.1;fill:none;vector-effect:non-scaling-stroke}
+.so .ex{stroke:#181614;stroke-width:.8;fill:none;vector-effect:non-scaling-stroke;opacity:.55}
+.so .lb rect{fill:#fbfaf7;stroke:rgba(24,22,20,.14);vector-effect:non-scaling-stroke}
+.so .lb text{font-family:"Geist Mono",ui-monospace,monospace;font-size:var(--fs,21px);fill:#181614;letter-spacing:.04em}
+.co{position:absolute;z-index:4;display:flex;align-items:center;gap:10px;pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.co.on{opacity:1;transform:none}
+.co i{position:relative;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.35),0 2px 10px rgba(0,0,0,.25);flex:none}
+.co i:after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(255,255,255,.8);animation:ring 2.4s var(--ease) infinite}
+.co span{padding:8px 13px;border-radius:999px;background:rgba(24,22,20,.8);color:#fff;font-size:13px;white-space:nowrap;backdrop-filter:blur(10px);margin-top:-6px}
+.co.m{left:12px!important;top:auto!important;bottom:12px;transform:translateY(6px)}.co.m.on{transform:none}.co.m i{display:none}.co.m span{margin:0}
+.stage.sm .so .lb{display:none}
+.viewer.sm .meas .mn{display:none}
+.co.l{flex-direction:row-reverse;transform:translate(-100%,6px)}.co.l.on{transform:translateX(-100%)}.co.l i{margin:-6px -6px 0 0}
+.stage .tag{position:absolute;left:18px;top:18px;padding:7px 12px;border-radius:999px;background:rgba(251,250,247,.86);backdrop-filter:blur(10px);font-size:12.5px;display:flex;gap:8px;align-items:center}
+.stage .tag i{width:6px;height:6px;border-radius:50%;background:#c4492f;animation:pulse 1.4s infinite}
+.stage .fin{position:absolute;left:50%;bottom:22px;transform:translate(-50%,10px);opacity:0;transition:.8s var(--ease);padding:10px 16px;border-radius:999px;background:rgba(24,22,20,.78);color:#fff;font-size:13.5px;white-space:nowrap;backdrop-filter:blur(10px)}
+.stage.end .fin{opacity:1;transform:translate(-50%,0)}
+.bar{position:relative;height:2px;background:var(--line);margin-top:16px}
+.bar i{position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+.bar em{position:absolute;top:-4px;width:1px;height:10px;background:var(--line2)}
+.bmeta{display:flex;justify-content:space-between;margin-top:10px}
+
+/* explore */
+.explore{background:var(--night);color:var(--paper);padding:130px 0 120px}
+.explore .shead p{color:var(--nmut)}
+.explore .lbl{color:var(--nmut)}
+.viewer{position:relative;width:min(100%,calc((100vh - 170px)*4/3));aspect-ratio:4/3;margin:0 auto;border-radius:8px;overflow:hidden;background:#000;touch-action:pan-y;user-select:none;cursor:grab}
+.viewer.z,.viewer.ba{touch-action:none}
+.baH{touch-action:none}
+.viewer.drag{cursor:grabbing}
+.world{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
+.world img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.world .off{opacity:0;transition:opacity 1.2s var(--ease)}
+.viewer.dark .world .off{opacity:1}
+.world .emp{clip-path:inset(0 100% 0 0)}
+.viewer.ba .world .emp{clip-path:inset(0 var(--ba,50%) 0 0)}
+.baH{position:absolute;top:0;bottom:0;width:2px;background:#fff;z-index:6;display:none;transform:translateX(-1px);cursor:ew-resize}
+.baH i{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--ink);font-style:normal;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.viewer.ba .baH{display:block}
+.baL{position:absolute;top:18px;z-index:6;padding:7px 12px;border-radius:999px;background:rgba(17,16,14,.6);color:#fff;font-size:12.5px;display:none;backdrop-filter:blur(8px)}
+.viewer.ba .baL{display:block}
+.baL.l{left:18px}.baL.r{right:18px}
+.world .shade{position:absolute;inset:0;background:rgba(13,12,11,.66);opacity:0;transition:opacity .7s var(--ease);pointer-events:none}
+.viewer.ms .world .shade{opacity:1}
+svg.meas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .4s}
+.viewer.ms svg.meas{opacity:1}
+.meas .ln{stroke:#fff;stroke-width:1.05;fill:none;vector-effect:non-scaling-stroke;opacity:.92;stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s var(--ease)}
+.meas .ln.f{opacity:.32}.meas .ln.d{stroke-dasharray:none;opacity:0;transition:opacity .8s}
+.meas .dm,.meas .ex{stroke:#e9b77c;fill:none;vector-effect:non-scaling-stroke;stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset 1s var(--ease)}
+.meas .dm{stroke-width:1.15}.meas .ex{stroke-width:.8;opacity:.6}
+.viewer.ms .meas .ln,.viewer.ms .meas .dm,.viewer.ms .meas .ex{stroke-dashoffset:0}
+.viewer.ms .meas .ln.d{opacity:.55}
+.meas .lb{opacity:0;transition:opacity .6s}
+.viewer.ms .meas .lb{opacity:1}
+.meas .lb rect{fill:#151311;stroke:rgba(233,183,124,.45);vector-effect:non-scaling-stroke}
+.meas .lb text{font-family:"Geist Mono",ui-monospace,monospace;font-size:var(--fs,16px);fill:#f3dcbd;letter-spacing:.05em}
+.meas .lb .k{fill:rgba(243,220,189,.55);font-size:11px;letter-spacing:.14em}
+.mkey{position:absolute;right:64px;top:18px;z-index:8;padding:8px 13px;border-radius:999px;background:rgba(17,16,14,.72);color:#f3dcbd;font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em;backdrop-filter:blur(8px);opacity:0;transform:translateY(-4px);transition:.5s var(--ease);pointer-events:none}
+.viewer.ms .mkey{opacity:1;transform:none}
+.hs{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;z-index:5;transition:transform .4s var(--ease),opacity .4s}
+.hs:before{content:"";position:absolute;inset:0;border-radius:50%;background:rgba(255,255,255,.95);transform:scale(.42);transition:transform .4s var(--ease)}
+.hs:after{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.9);animation:ring 2.4s var(--ease) infinite}
+@keyframes ring{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.hs:hover:before,.hs.on:before{transform:scale(.62)}
+.hs span{position:absolute;left:36px;top:50%;transform:translateY(-50%);white-space:nowrap;padding:6px 11px;border-radius:999px;background:rgba(17,16,14,.72);color:#fff;font-size:12.5px;opacity:0;transition:opacity .3s;pointer-events:none;backdrop-filter:blur(8px)}
+.hs:hover span,.hs.on span{opacity:1}
+.viewer.ms .hs,.viewer.ba .hs{opacity:0;pointer-events:none}
+.tools{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(17,16,14,.62);backdrop-filter:blur(14px);z-index:8;border:1px solid rgba(255,255,255,.12)}
+.tools button{height:38px;padding:0 15px;border-radius:999px;font-size:13px;color:rgba(255,255,255,.82);display:flex;align-items:center;gap:7px;transition:.3s}
+.tools button svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.6}
+.tools button:hover{color:#fff;background:rgba(255,255,255,.08)}
+.tools button.on{background:#fff;color:var(--ink)}
+.tools .sep{width:1px;background:rgba(255,255,255,.14);margin:6px 2px}
+.zl{position:absolute;right:18px;top:18px;z-index:8;padding:6px 11px;border-radius:999px;background:rgba(17,16,14,.6);color:#fff;font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;backdrop-filter:blur(8px)}
+.hint{position:absolute;left:18px;top:18px;z-index:8;padding:6px 12px;border-radius:999px;background:rgba(17,16,14,.6);color:rgba(255,255,255,.86);font-size:12.5px;backdrop-filter:blur(8px);transition:opacity .6s}
+.panel{position:absolute;top:16px;right:16px;bottom:76px;width:min(380px,calc(100% - 32px));z-index:9;border-radius:18px;background:rgba(251,250,247,.96);color:var(--ink);backdrop-filter:blur(16px);transform:translateX(calc(100% + 30px));transition:transform .6s var(--ease);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.panel.on{transform:none}
+.panel .media{height:210px;flex:none;position:relative;background:#e9e4dc}
+.panel .media img,.panel .media video{width:100%;height:100%;object-fit:cover}
+.panel .bd{padding:22px 24px 24px;overflow-y:auto}
+.panel .bd .lbl{display:block;margin-bottom:10px}
+.panel h3{font-size:26px;font-weight:400;letter-spacing:-.03em;margin-bottom:12px}
+.panel p{color:var(--mut);font-size:15px}
+.panel ul{list-style:none;margin-top:16px;border-top:1px solid var(--line)}
+.panel li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.panel li span{color:var(--mut)}
+.panel .x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(251,250,247,.9);display:grid;place-items:center;z-index:2;font-size:18px}
+.panel .nav2{display:flex;gap:8px;margin-top:18px}
+.panel .nav2 button{flex:1;height:42px;border-radius:999px;border:1px solid var(--line2);font-size:13.5px}
+.panel .nav2 button:hover{background:#fff}
+.mini{position:absolute;left:18px;bottom:18px;z-index:8;width:140px;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.3);opacity:0;transition:opacity .4s;pointer-events:none}
+.mini img{width:100%;height:100%;object-fit:cover;opacity:.75}
+.mini i{position:absolute;border:1.5px solid #fff;box-shadow:0 0 0 999px rgba(0,0,0,.35)}
+.viewer.z .mini{opacity:1}
+.hsl{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;justify-content:center}
+.hsl button{padding:9px 15px;border-radius:999px;border:1px solid var(--nline);font-size:13.5px;color:var(--nmut);transition:.3s}
+.hsl button:hover,.hsl button.on{color:var(--ink);background:var(--paper);border-color:var(--paper)}
+
+/* details */
+.det{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:18px}
+.dc{position:relative;border-radius:8px;overflow:hidden;background:#e7e1d8;min-height:560px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;cursor:pointer}
+.dc img,.dc video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.dc:hover img{transform:scale(1.04)}
+.dc:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(17,16,14,.7))}
+.dc .t{position:relative;z-index:2;padding:28px}
+.dc .lbl{color:rgba(255,255,255,.75);display:block;margin-bottom:12px}
+.dc h3{font-size:clamp(24px,2.1vw,32px);margin-bottom:8px}
+.dc p{font-size:14.5px;color:rgba(255,255,255,.82);max-width:340px}
+.dc .play{position:absolute;top:22px;right:22px;z-index:2;padding:8px 14px;border-radius:999px;background:rgba(251,250,247,.9);color:var(--ink);font-size:12.5px}
+
+/* studio */
+.studio{margin-top:18px;display:grid;grid-template-columns:1fr 380px;gap:18px}
+.s3d{position:relative;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#f3efe8,#e6dfd4);min-height:600px}
+#c3{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.s3d .tip{position:absolute;left:20px;top:20px;padding:7px 13px;border-radius:999px;background:rgba(251,250,247,.9);font-size:12.5px;transition:opacity .6s}
+.s3d .sc{position:absolute;right:20px;top:20px;padding:7px 13px;border-radius:999px;background:var(--ink);color:#fff;font-size:12.5px;opacity:0;transform:translateY(-6px);transition:.4s var(--ease)}
+.s3d .sc.on{opacity:1;transform:none}
+.dl3{position:absolute;left:0;top:0;pointer-events:none;font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;color:var(--ink);background:rgba(251,250,247,.92);padding:3px 7px;border-radius:5px;white-space:nowrap;transition:opacity .4s}
+.sp{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:26px}
+.sp h3{font-size:28px}
+.sp .grp .lbl{display:block;margin-bottom:12px}
+.sw{display:flex;gap:10px;flex-wrap:wrap}
+.sw button{display:flex;flex-direction:column;align-items:center;gap:7px;width:68px;font-size:11.5px;color:var(--mut);transition:.3s}
+.sw button i{width:46px;height:46px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);transition:.35s var(--ease)}
+.sw button.on{color:var(--ink)}
+.sw button.on i{box-shadow:0 0 0 2px var(--white),0 0 0 3px var(--ink)}
+.acts{display:flex;gap:8px}
+.acts button{flex:1;height:46px;border-radius:999px;border:1px solid var(--line2);font-size:14px;transition:.3s}
+.acts button:hover{background:var(--paper)}
+.acts button.pr{background:var(--ink);color:#fff;border-color:var(--ink)}
+.graph{border-radius:12px;background:var(--paper);padding:14px 14px 8px}
+.graph canvas{width:100%;height:96px;display:block}
+.graph .gl{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-bottom:6px}
+
+/* real build strip */
+.real{background:var(--paper2)}
+.rs{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(40px,calc((100vw - 1320px)/2)) 20px;scrollbar-width:none}
+.rs::-webkit-scrollbar{display:none}
+.rc{flex:0 0 min(360px,78vw);scroll-snap-align:start}
+.rc .im{aspect-ratio:3/4;border-radius:6px;overflow:hidden;background:#ddd5c9}
+.rc img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.rc:hover img{transform:scale(1.04)}
+.rc .lbl{display:block;margin:16px 0 6px}
+.rc b{font-weight:500;font-size:17px;letter-spacing:-.01em}
+.rc p{color:var(--mut);font-size:14.5px;margin-top:4px}
+.rnav{display:flex;gap:8px}
+.rnav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;transition:.3s}
+.rnav button:hover{background:var(--white)}
+
+/* film */
+.film{background:var(--night);color:var(--paper)}
+.film .shead p,.film .lbl{color:var(--nmut)}
+.fg{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:18px;align-items:end}
+.fv{position:relative;border-radius:8px;overflow:hidden;background:#000;aspect-ratio:9/16}
+.fv video{width:100%;height:100%;object-fit:cover}
+.fv span{position:absolute;left:14px;bottom:14px;padding:7px 12px;border-radius:999px;background:rgba(17,16,14,.6);backdrop-filter:blur(8px);font-size:12.5px}
+.fq{padding:10px 0 10px 20px}
+.fq q{display:block;font-size:clamp(22px,2vw,30px);font-weight:300;letter-spacing:-.025em;line-height:1.3;quotes:none}
+.fq small{display:block;margin-top:18px;color:var(--nmut);font-size:14px}
+
+/* process */
+.pr3{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.pr3 div{padding:34px 34px 0 0}
+.pr3 div+div{padding-left:34px;border-left:1px solid var(--line)}
+.pr3 .n{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;color:var(--oak)}
+.pr3 h3{font-size:28px;margin:18px 0 12px}
+.pr3 p{color:var(--mut);font-size:15.5px;max-width:330px}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);margin-top:110px}
+.nums div{padding-top:20px;border-top:1px solid var(--line2)}
+.nums b{display:block;font-size:clamp(40px,4.4vw,66px);font-weight:200;letter-spacing:-.05em;line-height:1}
+.nums span{color:var(--mut);font-size:14.5px}
+
+/* reviews */
+.rvw{display:grid;grid-template-columns:1fr 1.4fr;gap:70px;align-items:start}
+.rvw .score b{font-size:96px;font-weight:200;letter-spacing:-.06em;line-height:1}
+.rvw .score i{font-style:normal;color:#b8862f;letter-spacing:3px}
+.rq{position:relative;min-height:280px}
+.rq blockquote{position:absolute;inset:0;opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease);pointer-events:none}
+.rq blockquote.on{opacity:1;transform:none;pointer-events:auto}
+.rq q{display:block;font-size:clamp(22px,2.2vw,32px);font-weight:300;letter-spacing:-.025em;line-height:1.32;quotes:none}
+.rq cite{display:block;margin-top:24px;font-style:normal;color:var(--mut);font-size:14.5px}
+.rctl{display:flex;align-items:center;gap:16px;margin-top:24px}
+.rctl .p{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;color:var(--mut)}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.gi{position:relative;border-radius:6px;overflow:hidden;background:#ddd5c9;cursor:zoom-in}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.gi:hover img{transform:scale(1.04)}
+.gi span{position:absolute;left:12px;bottom:12px;padding:6px 11px;border-radius:999px;background:rgba(251,250,247,.9);font-size:12.5px;opacity:0;transform:translateY(6px);transition:.4s var(--ease)}
+.gi:hover span{opacity:1;transform:none}
+.g1{grid-column:span 5;aspect-ratio:3/4}.g2{grid-column:span 7;aspect-ratio:4/3}.g3{grid-column:span 4;aspect-ratio:3/4}.g4{grid-column:span 4;aspect-ratio:3/4}.g5{grid-column:span 4;aspect-ratio:3/4}
+.svc{padding:150px 0 130px;background:var(--paper)}
+.sv{display:grid;grid-template-columns:minmax(280px,400px) 1fr;gap:64px;align-items:start}
+.svl{border-top:1px solid var(--line);position:sticky;top:100px}
+.svl button{position:relative;width:100%;display:grid;grid-template-columns:44px 1fr auto;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line);text-align:left;color:var(--mut2);font-size:clamp(19px,1.65vw,25px);letter-spacing:-.025em;line-height:1.2;transition:color .45s var(--ease)}
+.svl button span{font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em}
+.svl button em{font-style:normal;font-size:12.5px;letter-spacing:0;color:var(--mut);opacity:0;transform:translateX(-8px);transition:.45s var(--ease)}
+.svl button:hover{color:var(--ink2)}
+.svl button.on{color:var(--ink)}.svl button.on em{opacity:1;transform:none}
+.svl button i{position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--ink)}
+.sv.run:not(.man) .svl button.on i{animation:svp 7s linear forwards}
+.sv.hold .svl button.on i{animation-play-state:paused!important}
+.sv.man .svl button.on i{width:100%;transition:width .6s var(--ease)}
+@keyframes svp{to{width:100%}}
+.svr{position:relative}
+.svs{position:relative;aspect-ratio:16/11;max-height:calc(100vh - 130px);width:100%;border-radius:8px;overflow:hidden;background:#ddd5c9}
+.svs:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,transparent 45%,rgba(17,16,14,.35))}
+.svs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.07);transition:opacity 1.1s var(--ease),transform 2.2s var(--ease)}
+.svs img.on{opacity:1;transform:none;z-index:1}
+.svn{position:absolute;left:18px;top:18px;z-index:3;padding:6px 11px;border-radius:999px;background:rgba(251,250,247,.88);backdrop-filter:blur(10px);font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em}
+.svt{position:absolute;right:16px;top:16px;z-index:3;display:flex;gap:6px}
+.svt button{width:62px;height:46px;border-radius:6px;background-size:cover;background-position:center;border:2px solid rgba(255,255,255,.55);opacity:.82;transition:.35s var(--ease)}
+.svt button.on,.svt button:hover{border-color:#fff;opacity:1;transform:translateY(-2px)}
+.svcard{position:absolute;left:18px;bottom:18px;z-index:4;width:min(500px,calc(100% - 36px));display:grid;gap:18px;padding:24px 26px;border-radius:16px;background:rgba(251,250,247,.95);backdrop-filter:blur(16px);box-shadow:0 30px 60px -30px rgba(17,16,14,.45)}
+.svtx{max-width:560px}
+.svcard h3{font-size:clamp(24px,2.2vw,32px);font-weight:400;letter-spacing:-.03em;margin-bottom:8px}
+.svcard p{color:var(--mut);font-size:16px}
+.svch{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.svch span{padding:6px 12px;border-radius:999px;border:1px solid var(--line2);font-size:13px;color:var(--ink2)}
+.svb{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.svm{font-size:13.5px;color:var(--mut);text-decoration:underline;text-underline-offset:3px}
+.svtx.swin{animation:svin .7s var(--ease)}
+@keyframes svin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.bl .bsub{color:var(--mut);font-size:15px;margin:-14px 0 24px;max-width:320px}
+.gf{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.gf button{height:38px;padding:0 16px;border-radius:999px;border:1px solid var(--line2);font-size:13.5px;color:var(--ink2);transition:.35s var(--ease)}
+.gf button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.gal2{columns:3 280px;column-gap:14px}
+.gal2 .gi{display:block;break-inside:avoid;margin:0 0 14px;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.gal2 .gi img{height:auto;display:block}
+.gal2 .gi span{opacity:1;transform:none}
+.gal2 .gi.out{display:none}
+.lbx{position:fixed;inset:0;z-index:400;background:rgba(17,16,14,.94);display:none;place-items:center;padding:40px}
+.lbx.on{display:grid}
+.lbx img{max-height:88vh;border-radius:4px}
+.lbx button{position:absolute;top:24px;right:24px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:20px}
+.rooms2{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.r2{position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:#ddd5c9;color:#fff}
+.r2 img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.r2:hover img{transform:scale(1.05)}
+.r2:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(17,16,14,.65))}
+.r2 b{position:absolute;left:18px;bottom:16px;z-index:2;font-weight:400;font-size:17px}
+
+/* cta */
+.cta{position:relative;min-height:88vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#3a342d}
+.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,14,.1),rgba(17,16,14,.72))}
+.cta .wrap{position:relative;z-index:2;padding-bottom:70px;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:end}
+.cta h2{font-size:clamp(38px,4.6vw,70px)}
+.cta .cd{display:grid;gap:18px;font-size:15px}
+.cta .cd div{padding-top:14px;border-top:1px solid rgba(255,255,255,.25)}
+.cta .cd .lbl{color:rgba(255,255,255,.66);display:block;margin-bottom:4px}
+footer{background:var(--night);color:var(--nmut);padding:46px 0;font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a:hover{color:#fff}
+.mbar{display:none}
+
+@media (max-width:1100px){
+  .sv{grid-template-columns:1fr;gap:22px}
+  .svl{position:static;display:flex;overflow-x:auto;gap:8px;border:0;padding-bottom:4px;scrollbar-width:none}
+  .svl::-webkit-scrollbar{display:none}
+  .svl button{width:auto;flex:none;display:block;padding:10px 16px;border:1px solid var(--line2);border-radius:999px;font-size:15px;letter-spacing:-.01em}
+  .svl button span,.svl button em,.svl button i{display:none}
+  .svl button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .svcard{position:static;width:auto;padding:22px 2px 0;background:none;backdrop-filter:none;box-shadow:none;border-radius:0}
+  .svs{max-height:calc(100vh - 220px)}
+  nav.top ul{display:none}.burger{display:flex}
+  .build .grid{grid-template-columns:1fr;gap:20px;padding-top:70px}
+  .bl h2{margin-bottom:14px}
+  .steps li{padding:8px 0}.steps li:not(.on){display:none}
+  .stage{width:min(100%,calc(58vh*4/3));justify-self:center}
+  .det{grid-template-columns:1fr 1fr}.det .dc:first-child{grid-column:1/-1}
+  .studio{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr 1fr}.fq{grid-column:1/-1;padding:20px 0 0}
+  .rvw{grid-template-columns:1fr;gap:30px}
+  .rooms2{grid-template-columns:1fr 1fr}
+  .cta .wrap{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  .mbar{bottom:calc(12px + env(safe-area-inset-bottom))!important}
+  footer{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+  footer .wrap{flex-direction:column;gap:12px}footer a{display:inline-block;padding:6px 0}
+  .hs{width:44px;height:44px;margin:-22px 0 0 -22px}.hs:before{transform:scale(.3)}.hs:after{inset:8px}
+  .hint{font-size:11px}
+  .back{min-height:44px;padding-right:10px}
+  .sw{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.sw button{width:auto}
+  .gal2{columns:2;column-gap:8px}.gal2 .gi{margin-bottom:8px;border-radius:5px}.gal2 .gi span{left:8px;bottom:8px;font-size:11px;padding:4px 8px}
+  .stage .scene .ly{filter:none!important}
+  .hero .lbl{font-size:10px;letter-spacing:.12em}
+  .hero .c{bottom:110px}
+  .cta .cd a{display:inline-block;padding:4px 0}
+  .svc{padding:100px 0 90px}
+  .svs{aspect-ratio:4/3;max-height:none}
+  .svt button{width:46px;height:36px}
+  .hnav button{width:34px}
+  .wrap{width:calc(100% - 36px)}
+  nav.top{padding:0 18px;height:66px}
+  nav.top .r .tel,nav.top .r .btn{display:none}
+  .hero .c{bottom:96px}
+  .hero .row{flex-direction:column;align-items:flex-start;gap:26px}
+  .hero .side{display:none}
+  .hero h1{font-size:28px;letter-spacing:-.035em}
+  .hero p{font-size:15px}
+  .hero .ctas .b-ghost{display:none}
+  .sec{padding:100px 0}
+  .qs{padding:60px 0 20px}
+  .wiz{padding:24px 16px;border-radius:22px}
+  .tiles{grid-template-columns:1fr 1fr;gap:8px}
+  .tile{padding:14px 12px}
+  .tile svg{height:64px;margin-bottom:8px}
+  .tile b{font-size:14.5px}.tile small{font-size:12px}
+  .fields{grid-template-columns:1fr}
+  .build{height:420vh}
+  .build .grid{width:calc(100% - 36px)}
+  .stage{width:100%}
+  .co span{font-size:11.5px;padding:6px 10px}
+  .mkey{display:none}
+
+  .viewer{width:100%;aspect-ratio:4/3;border-radius:6px}
+  .hint{font-size:11px}
+  .tools{bottom:10px}
+  .tools button{padding:0 11px;font-size:12px;height:34px}.tools #zIn,.tools #zOut,.tools .sep{display:none}
+  .panel{position:fixed;top:auto;bottom:10px;right:10px;left:10px;width:auto;max-height:64vh;z-index:130;transform:translateY(calc(100% + 30px))}
+  .panel.on{transform:none}
+  .panel .media{height:140px}
+  .panel h3{font-size:22px}
+  .mini{display:none}
+  .det{grid-template-columns:1fr}
+  .dc{min-height:440px}
+  .s3d{min-height:440px}
+  .pr3{grid-template-columns:1fr}.pr3 div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}.pr3 div{padding:28px 0}
+  .nums{grid-template-columns:1fr 1fr;gap:26px 14px;margin-top:70px}
+  .gal{grid-template-columns:1fr 1fr}.g1,.g2,.g3,.g4,.g5{grid-column:span 1;aspect-ratio:3/4}.g2{grid-column:span 2;aspect-ratio:4/3}
+  .rooms2{grid-template-columns:1fr 1fr;gap:10px}
+  .fg{grid-template-columns:1fr 1fr;gap:10px}
+  .mbar{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:110;gap:8px;padding:6px;border-radius:999px;background:rgba(251,250,247,.92);border:1px solid var(--line);backdrop-filter:blur(16px)}
+  .mbar a{flex:1;height:46px;display:grid;place-items:center;border-radius:999px;font-size:14.5px}
+  .mbar a:last-child{background:var(--ink);color:#fff}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+
+/* ---- added: stronger hero shade for bright photos ---- */
+.hshow{z-index:0}.hero:after{z-index:1;background:linear-gradient(180deg,rgba(17,16,14,.45) 0%,rgba(17,16,14,0) 24%,rgba(17,16,14,.1) 45%,rgba(17,16,14,.8) 100%),linear-gradient(90deg,rgba(17,16,14,.6) 0%,rgba(17,16,14,.08) 62%)}
+/* ---- added: nav dropdown ---- */
+nav.top ul{gap:26px;align-items:center}
+.ddn{position:relative}
+.ddn>button{display:flex;align-items:center;gap:6px;opacity:.82;font-size:14px;transition:opacity .3s}
+.ddn>button:hover,.ddn.open>button{opacity:1}
+.ddn>button svg{width:12px;height:12px;transition:transform .35s var(--ease)}
+.ddn:hover>button svg,.ddn.open>button svg{transform:rotate(180deg)}
+.ddn:after{content:"";position:absolute;left:-20px;right:-20px;top:100%;height:24px}
+.ddp{position:absolute;top:calc(100% + 20px);left:-28px;width:600px;background:var(--white);color:var(--ink);border-radius:22px;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:2px;box-shadow:0 40px 80px -30px rgba(17,16,14,.45),0 0 0 1px var(--line);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .35s var(--ease),transform .45s var(--ease),visibility .35s}
+.ddn:hover .ddp,.ddn.open .ddp{opacity:1;visibility:visible;transform:none}
+nav.top .ddp a{display:flex;gap:12px;align-items:center;padding:8px;border-radius:14px;opacity:1;transition:background .3s}
+.ddp a:hover{background:var(--paper)}
+.ddp img{width:58px;height:44px;border-radius:9px;object-fit:cover;flex:none}
+.ddp b{display:block;font-weight:500;font-size:14px;letter-spacing:-.01em}
+.ddp small{display:block;font-size:12px;color:var(--mut);line-height:1.35}
+/* ---- added: mobile menu services ---- */
+.mm{overflow-y:auto;justify-content:flex-start;gap:26px}
+.mm>.lbl{opacity:0;transition:opacity .5s .1s}
+body.mmo .mm>.lbl{opacity:1}
+.mmsv{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:-14px;opacity:0;transform:translateY(12px);transition:.6s var(--ease)}
+body.mmo .mmsv{opacity:1;transform:none}
+.mmsv a{display:flex;align-items:center;gap:10px;padding:7px;border-radius:14px;background:var(--white);font-size:13.5px;line-height:1.2}
+.mmsv img{width:40px;height:40px;border-radius:9px;object-fit:cover;flex:none}
+.mm nav a{font-size:28px}
+.mmf{margin-top:auto}
+/* ---- added: wizard ---- */
+.tiles.t8{grid-template-columns:repeat(4,1fr)}
+.wdes{font-size:14px;color:var(--mut);margin-top:10px;display:none;max-width:560px}.wdes.on{display:block}.wdes b{color:var(--ink);font-weight:500}
+.fld.err input{border-color:#b4553d!important;box-shadow:0 0 0 3px rgba(180,85,61,.12)}
+/* ---- added: design it live ---- */
+.lvsec{background:var(--paper2)}
+.lv{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;align-items:stretch}
+.lv-stage{position:relative;border-radius:24px;overflow:hidden;background:#d9d2c7;min-height:520px}
+.lv-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.035);transition:opacity .8s var(--ease),transform 1.4s var(--ease)}
+.lv-stage img.on{opacity:1;transform:none}
+.lv-chips{position:absolute;left:16px;bottom:16px;right:16px;display:flex;gap:6px;flex-wrap:wrap;z-index:2}
+.lv-chips span{display:flex;align-items:center;gap:8px;background:rgba(251,250,247,.92);backdrop-filter:blur(12px);border-radius:999px;padding:8px 14px;font-size:13px}
+.lv-chips i{width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.lv-tag{position:absolute;top:16px;right:16px;z-index:2;font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(17,16,14,.42);backdrop-filter:blur(10px);padding:7px 11px;border-radius:999px}
+.lv-panel{background:var(--white);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:24px}
+.lv-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--paper);padding:4px;border-radius:999px}
+.lv-tabs button{height:40px;border-radius:999px;font-size:13.5px;color:var(--mut);transition:background .35s,color .35s}
+.lv-tabs button.on{background:var(--ink);color:var(--paper)}
+#lvBody{display:grid;gap:22px}
+.lv-g h5{display:flex;justify-content:space-between;align-items:baseline;font-weight:400;margin-bottom:12px}
+.lv-g h5 em{font-style:normal;font-size:14.5px}
+.lv-sw{display:flex;gap:12px;flex-wrap:wrap}
+.lv-sw button{position:relative;width:46px;height:46px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14);transition:transform .4s var(--ease)}
+.lv-sw button:hover{transform:scale(1.07)}
+.lv-sw button.on:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1.5px solid var(--ink)}
+.lv-op{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.lv-op button{text-align:left;padding:12px 13px;border-radius:14px;border:1px solid var(--line2);font-size:14px;line-height:1.25;transition:.35s var(--ease)}
+.lv-op button small{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+.lv-op button:hover{background:var(--paper)}
+.lv-op button.on{border-color:var(--ink);background:#fff;box-shadow:0 14px 30px -20px rgba(24,22,20,.5)}
+.lv-price{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;border-top:1px solid var(--line);padding-top:20px;margin-top:auto}
+.lv-price .lbl{display:block;margin-bottom:6px}
+.lv-price b{font-size:40px;font-weight:300;letter-spacing:-.035em;line-height:1;white-space:nowrap}
+.lv-price b small{font-size:.45em;color:var(--mut)}
+.lv-price>small{font-size:12.5px;text-align:right;max-width:170px;line-height:1.35}
+.lv-cta{display:grid;gap:8px}.lv-cta .btn{justify-content:center}
+.lv-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.lv-tool{position:relative;border-radius:22px;overflow:hidden;min-height:250px;color:#fff;display:flex;align-items:flex-end;padding:22px}
+.lv-tool img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.lv-tool:hover img{transform:scale(1.05)}
+.lv-tool:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,16,14,0) 30%,rgba(17,16,14,.78))}
+.lv-tool div{position:relative;z-index:2;padding-right:44px}
+.lv-tool .lbl{color:rgba(255,255,255,.72);display:block;margin-bottom:8px}
+.lv-tool b{display:block;font-weight:400;font-size:22px;letter-spacing:-.02em}
+.lv-tool small{display:block;font-size:13.5px;opacity:.8;margin-top:4px;line-height:1.4}
+.lv-tool em{position:absolute;right:0;bottom:2px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);display:grid;place-items:center;transition:background .35s}
+.lv-tool em svg{width:16px;height:16px}.lv-tool:hover em{background:#fff;color:var(--ink)}
+/* ---- added: footer ---- */
+footer .fgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:40px;margin-bottom:26px;border-bottom:1px solid var(--nline)}
+footer .fgrid .logo{color:#fff;margin-bottom:18px}
+footer .fgrid p{max-width:300px;line-height:1.6}
+footer .fgrid .lbl{display:block;margin-bottom:16px;color:rgba(246,243,238,.45)}
+footer .fgrid ul{list-style:none;display:grid;gap:9px}
+footer .fbot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:1100px){
+  .lv{grid-template-columns:1fr}
+  .lv-stage{position:sticky;top:66px;z-index:5;min-height:0;aspect-ratio:4/3;border-radius:20px;box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+  footer .fgrid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:700px){
+  .tiles.t8{grid-template-columns:1fr 1fr}
+  .lv-stage{aspect-ratio:5/4;border-radius:18px}
+  .lv-chips{left:10px;bottom:10px;gap:4px}.lv-chips span{padding:6px 10px;font-size:11.5px}
+  .lv-tag{top:10px;right:10px;font-size:8.5px;padding:5px 8px}
+  .lv-panel{padding:18px;border-radius:20px;gap:20px}
+  .lv-tabs button{font-size:12.5px;height:38px}
+  .lv-op button{padding:10px;font-size:13px}
+  .lv-price b{font-size:32px}
+  .lv-tools{grid-template-columns:1fr;gap:10px}
+  .lv-tool{min-height:180px;padding:18px;border-radius:18px}
+  footer .fgrid{grid-template-columns:1fr 1fr;gap:30px 20px}
+  footer .fgrid>div:first-child,footer .fgrid>div:last-child{grid-column:1/-1}
+  footer .fbot{flex-direction:column;gap:10px}
+}
+
+/* ===== round 3: hero ===== */
+.hero{height:100svh;min-height:660px}
+.hshow{will-change:transform}
+.hsl video{width:100%;height:100%;object-fit:cover}
+.hsl{transition:opacity 0s 1.7s}
+.hsl.on{transition:none;animation:hwipe 1.7s cubic-bezier(.77,0,.18,1) both}
+@keyframes hwipe{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
+.hshade{position:absolute;inset:0;z-index:1;background:#11100e;opacity:0;pointer-events:none}
+.hero .lbl .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#7fd08a;margin-right:10px;vertical-align:1px;box-shadow:0 0 0 0 rgba(127,208,138,.6);animation:hdot 2.4s infinite}
+@keyframes hdot{0%{box-shadow:0 0 0 0 rgba(127,208,138,.55)}70%{box-shadow:0 0 0 9px rgba(127,208,138,0)}100%{box-shadow:0 0 0 0 rgba(127,208,138,0)}}
+.hero h1{font-size:clamp(48px,7.2vw,124px);max-width:none;line-height:.98;letter-spacing:-.045em;font-weight:200}
+.hero h1 em{font-style:normal;font-weight:400;color:#e2c391}
+.hero h1 b{font-weight:500;color:#fff}
+.hero .lbl.chap{display:flex;align-items:center;gap:14px;color:#e2c391}
+.hero .lbl.chap:before{content:"";width:40px;height:1px;background:currentColor;opacity:.8}
+.hero h1 span{padding-bottom:.04em}
+.hero h1 span:first-child{margin-bottom:-.06em}
+.loaded .hero h1 span i{transition-delay:.2s}.loaded .hero h1 span:nth-child(2) i{transition-delay:.32s}.loaded .hero h1 span:nth-child(3) i{transition-delay:.44s}
+.loaded .hero p{transition-delay:.7s}.loaded .hero .ctas{transition-delay:.85s}
+.hero .lbl{opacity:0;transform:translateY(10px);transition:opacity 1s .1s,transform 1s var(--ease) .1s}
+.loaded .hero .lbl{opacity:1;transform:none}
+.rw{position:relative;display:inline-block;vertical-align:top;font-style:normal;font-weight:500;height:1.16em;margin-bottom:-.1em;overflow:hidden;transition:width .9s cubic-bezier(.77,0,.18,1)}
+.rw u{position:absolute;left:0;top:0;text-decoration:none;white-space:nowrap;transform:translateY(105%);filter:blur(6px);opacity:0;transition:transform 1s cubic-bezier(.2,.8,.2,1),filter 1s,opacity .7s}
+.rw u.on{position:relative;transform:none;filter:none;opacity:1}
+.rw u.out{transform:translateY(-100%);filter:blur(6px);opacity:0}
+.rw:after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.05em;min-height:2px;background:#c79a68;transform-origin:0 50%;animation:rwl 6.5s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes rwl{0%{transform:scaleX(0)}18%,82%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:100% 50%}}
+.hero .side{gap:18px}
+.hlive{display:flex;align-items:center;gap:14px;width:340px;padding:10px 14px 10px 10px;border-radius:22px;background:rgba(251,250,247,.14);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);color:#fff;text-align:left;opacity:0;transform:translateY(16px);transition:opacity 1s 1.9s,transform 1.1s var(--ease) 1.9s,background .4s}
+.loaded .hlive{opacity:1;transform:none}
+.hlive:hover{background:rgba(251,250,247,.24)}
+.hl-im{position:relative;width:86px;height:66px;border-radius:14px;overflow:hidden;flex:none;background:#3a342d}
+.hl-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .8s,transform 1.6s var(--ease)}
+.hl-im img.on{opacity:1;transform:none}
+.hl-tx{flex:1;min-width:0}
+.hl-tx .lbl{display:block;color:rgba(255,255,255,.7);font-size:9.5px;margin-bottom:5px}
+.hl-tx b{display:block;font-weight:500;font-size:14.5px;letter-spacing:-.01em;line-height:1.25}
+.hl-sw{display:flex;gap:6px;margin-top:8px}
+.hl-sw i{width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.35);transition:box-shadow .4s,transform .4s}
+.hl-sw i.on{box-shadow:0 0 0 1.5px #fff,0 0 0 3.5px rgba(255,255,255,.25);transform:scale(1.1)}
+.hlive em{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;flex:none;transition:transform .4s var(--ease)}
+.hlive em svg{width:15px;height:15px}.hlive:hover em{transform:translateX(3px)}
+.scue{position:absolute;left:50%;bottom:58px;z-index:3;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(255,255,255,.75);font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;transition:opacity 1s 2.2s}
+.loaded .scue{opacity:1}
+.scue i{position:relative;width:1px;height:46px;background:rgba(255,255,255,.25);overflow:hidden}
+.scue i:after{content:"";position:absolute;left:0;top:-46px;width:1px;height:46px;background:#fff;animation:scue 2.2s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes scue{to{top:46px}}
+/* quote card rises over the hero */
+.qs{background:var(--paper);margin-top:-40px;border-radius:40px 40px 0 0;padding-top:80px}
+
+/* ===== round 3: band ===== */
+.band{padding:40px 0 30px;overflow:hidden;border-bottom:1px solid var(--line)}
+.bmq{font-size:clamp(52px,7.4vw,124px);font-weight:300;letter-spacing:-.05em;line-height:1.1}
+.bmq a{display:inline-flex;align-items:center;gap:.28em;padding:0 .12em;transition:color .4s}
+.bmq a:hover{color:var(--oak)}
+.bmq img{width:1.55em;height:.86em;border-radius:999px;object-fit:cover;transition:transform .6s var(--ease)}
+.bmq a:hover img{transform:scale(1.1) rotate(-3deg)}
+.bmq .st{width:.32em;height:.32em;fill:var(--oak);margin:0 .32em;flex:none;animation:stspin 9s linear infinite}
+@keyframes stspin{to{transform:rotate(360deg)}}
+.tmq{margin-top:18px;font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.tmq span{padding-right:.5em}.tmq i{font-style:normal;color:var(--oak2);margin:0 1.1em}
+
+/* ===== round 3: reviews wall ===== */
+.rwall{margin-top:70px;display:grid;gap:14px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.rcard{display:inline-flex;flex-direction:column;justify-content:space-between;gap:16px;width:380px;min-height:190px;margin:0 7px;padding:24px;border-radius:22px;background:var(--paper);white-space:normal;vertical-align:top;transition:transform .5s var(--ease),box-shadow .5s}
+.rcard:hover{transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(24,22,20,.45)}
+.rcard i{font-style:normal;color:#d9a441;letter-spacing:.12em;font-size:13px}
+.rcard blockquote{font-size:16px;line-height:1.5;letter-spacing:-.01em}
+.rcard figcaption{font-size:13px;color:var(--mut)}.rcard figcaption b{display:block;color:var(--ink);font-weight:500}
+
+/* ===== round 3: gallery ===== */
+.gal2.lim .gi:nth-child(n+13){display:none}
+.gmore{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:34px}
+.gmore.all #gmb{display:none}
+
+/* ===== round 3: cta ===== */
+.cta img{animation:ctakb 26s ease-in-out infinite alternate}
+@keyframes ctakb{from{transform:scale(1.02)}to{transform:scale(1.14) translate(-2%,-1%)}}
+.cta h2{font-size:clamp(46px,6vw,104px);letter-spacing:-.045em;line-height:.98}
+
+@media (max-width:1100px){.hlive{display:none}}
+@media (max-width:700px){
+  .hero h1{font-size:clamp(42px,12.4vw,64px)}
+  .rw{height:1.08em}
+  .scue{display:none}
+  .qs{margin-top:-28px;border-radius:28px 28px 0 0;padding-top:56px}
+  .band{padding:28px 0 22px}
+  .bmq{font-size:56px}
+  .tmq{font-size:10.5px;margin-top:12px}
+  .rwall{margin-top:46px;gap:10px}
+  .rcard{width:290px;min-height:170px;padding:18px;margin:0 5px;border-radius:18px}
+  .rcard blockquote{font-size:14.5px}
+  .gal2.lim .gi:nth-child(n+11){display:none}
+}
+</style>
+<link rel="stylesheet" href="assets/fx.css">
+<link rel="preload" as="image" href="img/k7.webp">
+<link rel="stylesheet" href="assets/colours.css">
+<link rel="stylesheet" href="assets/brand.css">
+</head>
+<body>
+<div id="pre"><div><div class="w">Bespoke <b>Interiors</b></div><div class="ln"><i id="preln"></i></div></div></div>
+
+<nav class="top" id="nav">
+  <a href="#top" class="logo">Bespoke<b>Interiors</b></a>
+  <ul><li class="ddn"><button aria-haspopup="true">What we make <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg></button><div class="ddp"><a href="kitchens.html"><img src="img/k2-s.webp" alt="" loading="lazy"><span><b>Kitchens</b><small>Painted shaker or handleless</small></span></a><a href="fitted-wardrobes.html"><img src="img/w1-s.webp" alt="" loading="lazy"><span><b>Fitted wardrobes</b><small>Floor to ceiling, built around the room</small></span></a><a href="media-walls.html"><img src="img/v2/p303.webp" alt="" loading="lazy"><span><b>Media walls</b><small>TV, fire, storage and light in one piece</small></span></a><a href="alcove-units.html"><img src="img/a2-s.webp" alt="" loading="lazy"><span><b>Alcove units</b><small>Cupboards and shelving, painted to match</small></span></a><a href="wall-panelling.html"><img src="img/p1-s.webp" alt="" loading="lazy"><span><b>Wall panelling</b><small>Wainscoting, shaker and fluted</small></span></a><a href="herringbone-flooring.html"><img src="img/h1-s.webp" alt="" loading="lazy"><span><b>Herringbone floors</b><small>Oak, walnut and engineered</small></span></a><a href="home-offices.html"><img src="img/o1-s.webp" alt="" loading="lazy"><span><b>Home offices & libraries</b><small>Desks and bookcases built in</small></span></a><a href="bathrooms.html"><img src="img/g0-s.webp" alt="" loading="lazy"><span><b>Bathrooms</b><small>Full renovations, design to final tile</small></span></a></div></li><li><a href="#build">How we build</a></li><li><a href="#live">Design it live</a></li><li><a href="our-work.html">Our work</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <div class="r"><a class="tel" href="tel:0874000789">087 400 0789</a><a class="btn" href="#quote">Book a design visit</a><button class="burger" aria-label="Menu"><span></span><span></span></button></div>
+</nav>
+
+<div class="mm" id="mm" aria-hidden="true">
+  <span class="lbl">What we make</span><div class="mmsv"><a href="kitchens.html"><img src="img/k2-s.webp" alt="" loading="lazy">Kitchens</a><a href="fitted-wardrobes.html"><img src="img/w1-s.webp" alt="" loading="lazy">Fitted wardrobes</a><a href="media-walls.html"><img src="img/v2/p303.webp" alt="" loading="lazy">Media walls</a><a href="alcove-units.html"><img src="img/a2-s.webp" alt="" loading="lazy">Alcove units</a><a href="wall-panelling.html"><img src="img/p1-s.webp" alt="" loading="lazy">Wall panelling</a><a href="herringbone-flooring.html"><img src="img/h1-s.webp" alt="" loading="lazy">Herringbone floors</a><a href="home-offices.html"><img src="img/o1-s.webp" alt="" loading="lazy">Home offices & libraries</a><a href="bathrooms.html"><img src="img/g0-s.webp" alt="" loading="lazy">Bathrooms</a></div><nav><a href="#build">How we build</a><a href="#live">Design it live</a><a href="our-work.html">Our work</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+  <div class="mmf"><a href="#quote" class="btn b-ink">Book a design visit</a><a href="tel:0874000789" class="btn b-line">Call Mark · 087 400 0789</a><p>Block B, Maynooth Business Campus, Straffan Rd, Maynooth, Co. Kildare</p></div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hshow" id="hshow"><figure class="hsl on"><img src="img/k7.webp" alt="Kitchens" fetchpriority="high"></figure><figure class="hsl"><img src="img/w1.webp" alt="Fitted wardrobes" loading="eager"></figure><figure class="hsl"><video src="media/hero-wall.mp4" poster="img/hero-wall.webp" muted loop playsinline preload="metadata" aria-label="Media wall"></video></figure><figure class="hsl"><img src="img/p1.webp" alt="Wall panelling" loading="eager"></figure><figure class="hsl"><img src="img/b2.webp" alt="Bathrooms" loading="eager"></figure></div>
+  <div class="c"><div class="wrap row">
+    <div>
+      <span class="lbl chap">Maynooth workshop · Dublin & Kildare · 20+ years</span>
+      <h1 class="h3l"><span><i>Made by hand.</i></span><span><i>Made to <em>measure.</em></i></span><span><i>Made for <b>your home.</b></i></span></h1>
+      <p>Kitchens, wardrobes, media walls, panelling and bathrooms. Designed with you, built in our own workshop and fitted by the same team, with one point of contact from the first measure to the final fit.</p>
+      <div class="ctas"><a href="#quote" class="btn b-light">Book a design visit</a><a href="#build" class="btn b-ghost">Watch it being made</a></div>
+    </div>
+    <div class="side"><div class="stars"><i>★★★★★</i>5.0 on Google · 725+ projects</div><div class="hnav" id="hnav"><button class="on" data-i="0"><span>Kitchens</span><i></i></button><button class="" data-i="1"><span>Fitted wardrobes</span><i></i></button><button class="" data-i="2"><span>Media walls</span><i></i></button><button class="" data-i="3"><span>Wall panelling</span><i></i></button><button class="" data-i="4"><span>Bathrooms</span><i></i></button></div></div>
+  </div></div>
+  <a class="scue" href="#quote" aria-label="Scroll down"><span>Scroll</span><i></i></a>
+</section>
+
+<!-- QUOTE -->
+<section class="qs" id="quote">
+  <div class="wrap">
+    <div class="wiz rv">
+      <div class="wh"><div><span class="lbl" style="display:block;margin-bottom:12px">Design visit · about 60 seconds</span><h3 id="wt">What are your requirements?</h3><p class="wdes" id="wdes"></p></div><div class="dots" id="dots"><i class="on"></i><i></i><i></i><i></i></div></div>
+      <div class="step on">
+        <div class="tiles t8">
+          <button class="tile" data-v="Kitchen"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><path d="M70 2v14"/><g class="swing"><path d="M70 16v6"/><path d="M58 30 C58 22 82 22 82 30 Z"/><path class="pulse" d="M64 36 l-3 5 M70 37 v6 M76 36 l3 5"/></g><rect x="14" y="52" width="112" height="40" rx="2"/><path d="M10 52h120"/><rect x="20" y="58" width="30" height="30" rx="1"/><rect class="door" x="55" y="58" width="30" height="30" rx="1" style="fill:rgba(230,200,150,.08)"/><rect x="90" y="58" width="30" height="13" rx="1"/><rect x="90" y="75" width="30" height="13" rx="1"/><path d="M80 73v3M47 73v3M100 64h10M100 81h10"/></svg>
+            <b>Kitchen</b><small>Painted, shaker or handleless</small></button>
+          <button class="tile" data-v="Fitted wardrobes"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="22" y="4" width="96" height="88" rx="2"/><path d="M22 16h96"/><path d="M46 30h28M50 30v18M60 30v22M70 30v16"/><rect x="26" y="20" width="44" height="68" style="fill:rgba(15,13,11,.6)"/><g class="slide"><rect x="26" y="20" width="44" height="68" rx="1" style="fill:rgba(230,200,150,.1)"/><path d="M62 50v8"/></g><rect x="72" y="20" width="42" height="68" rx="1"/><path d="M78 50v8"/></svg>
+            <b>Fitted wardrobes</b><small>Hinged or sliding, floor to ceiling</small></button>
+          <button class="tile" data-v="Media wall"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="6" y="4" width="128" height="88" rx="2"/><rect x="38" y="14" width="64" height="38" rx="2" class="glow"/><path d="M6 64h128M14 4v88M126 4v88"/><path d="M14 26h20M14 46h20M106 26h20M106 46h20"/><rect x="48" y="70" width="44" height="16" rx="1"/><path class="flick" d="M64 84 C60 80 62 76 66 72 C67 76 71 77 70 81 C70 83 68 84 66 84Z" style="fill:rgba(230,200,150,.35)"/><path class="flick" style="animation-delay:.2s" d="M74 84 C71 81 72 78 75 75 C76 78 79 79 78 82 C78 83 77 84 75 84Z"/></svg>
+            <b>Media wall</b><small>TV, fire, storage, lighting</small></button>
+          <button class="tile" data-v="Alcove units"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="10" y="4" width="40" height="88" rx="1"/><rect x="90" y="4" width="40" height="88" rx="1"/><path d="M50 4 C62 0 78 0 90 4"/><path d="M10 30h40M10 56h40M90 30h40M90 56h40M10 62v30M90 62v30"/><g><rect class="book" x="16" y="12" width="5" height="18"/><rect class="book" style="animation-delay:.15s" x="22" y="15" width="5" height="15"/><rect class="book" style="animation-delay:.3s" x="28" y="11" width="6" height="19"/><rect class="book" style="animation-delay:.45s" x="96" y="38" width="5" height="18"/><rect class="book" style="animation-delay:.6s" x="102" y="41" width="5" height="15"/><rect class="book" style="animation-delay:.75s" x="108" y="37" width="6" height="19"/><rect class="book" style="animation-delay:.9s" x="36" y="44" width="10" height="12" rx="5"/></g><path d="M60 92h20M70 60v32"/></svg>
+            <b>Alcove units</b><small>Bookcases and shelving</small></button>
+          <button class="tile" data-v="Wall panelling"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="4" y="4" width="132" height="88" rx="1"/><path d="M4 50h132"/><rect class="pd" x="12" y="56" width="32" height="30"/><rect class="pd" style="animation-delay:.2s" x="54" y="56" width="32" height="30"/><rect class="pd" style="animation-delay:.4s" x="96" y="56" width="32" height="30"/><rect class="pd" style="animation-delay:.6s" x="12" y="12" width="32" height="32"/><rect class="pd" style="animation-delay:.8s" x="54" y="12" width="32" height="32"/><rect class="pd" style="animation-delay:1s" x="96" y="12" width="32" height="32"/></svg>
+            <b>Wall panelling</b><small>Wainscoting, shaker, fluted</small></button>
+          <button class="tile" data-v="Herringbone floor"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96" style="overflow:hidden"><g transform="translate(70 48) rotate(45)"><g id="hbg"></g></g></svg>
+            <b>Herringbone floor</b><small>Oak, walnut, engineered</small></button>
+        <button class="tile" data-v="Bathroom"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><path d="M22 6v30"/><path d="M22 6h18"/><path d="M34 10 C34 6 46 6 46 10 Z"/><path class="pulse" d="M36 15v8M40 15v10M44 15v8"/><path d="M12 54h116"/><path d="M18 54v14c0 12 10 20 22 20h60c12 0 22-8 22-20V54"/><path d="M36 88l-4 6M104 88l4 6"/><rect x="88" y="24" width="30" height="22" rx="3"/></svg>
+            <b>Bathroom</b><small>Full renovations, tiled and plumbed</small></button>
+          <button class="tile" data-v="Home office"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="8" y="4" width="44" height="88" rx="1"/><path d="M8 26h44M8 48h44M8 70h44"/><rect class="book" x="14" y="10" width="5" height="16"/><rect class="book" style="animation-delay:.15s" x="20" y="13" width="5" height="13"/><rect class="book" style="animation-delay:.3s" x="26" y="11" width="5" height="15"/><path d="M60 58h72M66 58v34M126 58v34"/><rect x="80" y="30" width="34" height="22" rx="2" class="glow"/><path d="M97 52v6"/></svg>
+            <b>Home office</b><small>Desks, bookcases and libraries</small></button>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="tiles">
+          <button class="tile" data-v="Modern handleless"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="14" y="10" width="112" height="76" rx="2"/><path d="M14 38h112M14 62h112"/><path class="shine" d="M18 36h104M18 60h104" style="stroke-width:3"/><path d="M70 10v76"/></svg>
+            <b>Modern handleless</b><small>Clean lines, J-pull or push</small></button>
+          <button class="tile" data-v="Classic shaker"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="20" y="8" width="46" height="80" rx="1"/><rect x="74" y="8" width="46" height="80" rx="1"/><rect class="pd" x="28" y="16" width="30" height="64"/><rect class="pd" style="animation-delay:.4s" x="82" y="16" width="30" height="64"/><circle cx="60" cy="50" r="2.5"/><circle cx="80" cy="50" r="2.5"/></svg>
+            <b>Classic shaker</b><small>Framed doors, timeless</small></button>
+          <button class="tile" data-v="Not sure on style"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><path d="M70 14 C54 14 46 26 46 38 C46 48 54 54 58 62 L82 62 C86 54 94 48 94 38 C94 26 86 14 70 14Z"/><path d="M60 70h20M63 78h14"/><path class="pulse" d="M70 2v5M38 18l4 3M102 18l-4 3M30 40h6M110 40h-6"/></svg>
+            <b>Help me decide</b><small>Mark will bring samples</small></button>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="tiles">
+          <button class="tile" data-v="As soon as possible"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><circle cx="70" cy="52" r="34"/><path d="M62 10h16M70 10v8"/><path class="spin" style="transform-origin:70px 52px" d="M70 52V26"/><path d="M70 52h16"/></svg>
+            <b>As soon as possible</b><small>We'll call you first</small></button>
+          <button class="tile" data-v="In 1 to 3 months"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="36" y="14" width="68" height="74" rx="4"/><path d="M36 32h68M52 6v14M88 6v14"/><rect class="flipc" x="42" y="36" width="56" height="46" rx="2" style="fill:rgba(230,200,150,.12)"/><path d="M56 60l9 9 18-20"/></svg>
+            <b>In 1 to 3 months</b><small>Planning ahead</small></button>
+          <button class="tile" data-v="Just planning"><span class="tick"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></span>
+            <svg viewBox="0 0 140 96"><rect x="24" y="14" width="92" height="68" rx="2"/><path class="pd" d="M34 70 L34 26 L74 26 L74 50 L106 50 L106 70 Z"/><path class="pd" style="animation-delay:.5s" d="M54 26v20M74 60h14"/><text x="86" y="44" style="fill:var(--brass2);stroke:none;font-family:Fragment Mono;font-size:7px">3600</text></svg>
+            <b>Just planning</b><small>Ideas and a rough price</small></button>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="fields">
+          <div class="fld"><label>Your name</label><input name="name" autocomplete="name" placeholder="e.g. Aoife"></div>
+          <div class="fld"><label>Phone</label><input name="phone" type="tel" autocomplete="tel" placeholder="08X XXX XXXX"></div>
+          <div class="fld"><label>Email (optional)</label><input name="email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+          <div class="fld"><label>Eircode or town</label><input name="town" placeholder="W23 XXXX"></div>
+          <div class="fld full"><label>Anything we should know? (optional)</label><textarea name="message" placeholder="Rough sizes, ideas, a Pinterest board…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="done"><div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg></div><h3 style="font-size:40px">Thank you. We'll be in touch.</h3><p class="mut" style="margin-top:12px">Mark will call you to arrange a design visit at your home.</p><div class="sum" id="sum"></div></div>
+      </div>
+
+      
+      <div class="wf" id="wf"><button class="back" id="back" style="visibility:hidden"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back</button><span class="mut" style="font-size:14px">Mark calls you back personally</span><button class="btn b-ink" id="send" style="display:none">Book my design visit</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<section class="band" aria-label="What we make">
+  <div class="fx-mq bmq" data-speed=".55"><div class="fx-mq-t"><a href="kitchens.html">Kitchens<img src="img/k2-s.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg><a href="fitted-wardrobes.html">Fitted wardrobes<img src="img/w1-s.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg><a href="media-walls.html">Media walls<img src="img/v2/p303.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg><a href="alcove-units.html">Alcove units<img src="img/a2-s.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg><a href="wall-panelling.html">Wall panelling<img src="img/p1-s.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg><a href="herringbone-flooring.html">Herringbone floors<img src="img/h1-s.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg><a href="home-offices.html">Home offices & libraries<img src="img/o1-s.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg><a href="bathrooms.html">Bathrooms<img src="img/g0-s.webp" alt="" loading="lazy"></a><svg class="st" viewBox="0 0 24 24"><path d="M12 2l1.8 7.2L21 12l-7.2 1.8L12 22l-1.8-8.2L3 12l7.2-2.8z"/></svg></div></div>
+  <div class="fx-mq tmq" data-dir="1" data-speed=".3"><div class="fx-mq-t"><span>★★★★★ 5.0 on Google <i>/</i> 725+ projects <i>/</i> Made in our Maynooth workshop <i>/</i> 20+ years <i>/</i> Design visits by Mark <i>/</i> Dublin & Kildare <i>/</i> Fitted by the people who made it <i>/</i> </span></div></div>
+</section>
+
+<!-- SERVICES -->
+<section class="svc" id="services">
+  <div class="wrap">
+    <div class="shead"><div><span class="lbl">01 · What we make</span><h2>Everything for the home, <b>made in our workshop.</b></h2></div><p>Eight things we design, make and fit. Pick one to see real work, then plan yours in a minute.</p></div>
+    <div class="sv" id="sv">
+      <div class="svl" id="svl"><button class="on" data-i="0"><span>01</span>Kitchens<em>View</em><i></i></button><button class="" data-i="1"><span>02</span>Fitted wardrobes<em>View</em><i></i></button><button class="" data-i="2"><span>03</span>Media walls<em>View</em><i></i></button><button class="" data-i="3"><span>04</span>Alcove units<em>View</em><i></i></button><button class="" data-i="4"><span>05</span>Wall panelling<em>View</em><i></i></button><button class="" data-i="5"><span>06</span>Herringbone floors<em>View</em><i></i></button><button class="" data-i="6"><span>07</span>Home offices & libraries<em>View</em><i></i></button><button class="" data-i="7"><span>08</span>Bathrooms<em>View</em><i></i></button></div>
+      <div class="svr">
+        <div class="svs" id="svs"><span class="svn" id="svn">01 / 08</span><div class="svt" id="svt"></div></div>
+        <div class="svcard" id="svcard"><div class="svtx"><h3 id="svh"></h3><p id="svd"></p><div class="svch" id="svch"></div></div><div class="svb"><button class="btn b-ink" id="svgo"></button><a href="#quote" class="svm" id="svm">Or book a design visit</a></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- DESIGN IT LIVE -->
+<section class="sec lvsec" id="live">
+  <div class="wrap">
+    <div class="shead"><div><span class="lbl">Design it live · takes a minute</span><h2>Pick it. See it. <b>Price it.</b></h2></div><p>Choose a room, try the finishes our customers ask for most and watch it change in front of you. Like it? Lock it in and Mark brings real samples to your house.</p></div>
+    <div class="lv rv" id="lv">
+      <div class="lv-stage" id="lvStage"><div class="lv-chips" id="lvChips"></div><span class="lv-tag">AI visualisation · your room is drawn for real</span></div>
+      <div class="lv-panel">
+        <div class="lv-tabs" id="lvTabs"><button data-t="kitchen" class=on>Kitchen</button><button data-t="wardrobe">Wardrobes</button><button data-t="bath">Bathroom</button><button data-t="panel">Panelling</button></div>
+        <div id="lvBody"></div>
+        <div class="lv-price"><div><span class="lbl" id="lvPl">Guide price</span><b id="lvP"></b></div><small id="lvPs" class="mut"></small></div>
+        <div class="lv-cta"><button class="btn b-ink" id="lvLock">Lock in my design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a class="btn b-line" id="lvOpen" href="kitchens.html#design">Open the full kitchen designer</a></div>
+      </div>
+    </div>
+    <div class="lv-tools"><a class="lv-tool rv" href="herringbone-flooring.html#design"><img src="img/h1-s.webp" alt="" loading="lazy"><div><span class="lbl">Try it</span><b>Floor visualiser</b><small>Herringbone, chevron or plank. Pick the timber and board width.</small><em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></em></div></a><a class="lv-tool rv" href="alcove-units.html#design"><img src="img/a2-s.webp" alt="" loading="lazy"><div><span class="lbl">Try it</span><b>Alcove planner</b><small>Drag in your sizes and watch the unit draw itself to scale.</small><em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></em></div></a><a class="lv-tool rv" href="home-offices.html#design"><img src="img/o1-s.webp" alt="" loading="lazy"><div><span class="lbl">Try it</span><b>Home office planner</b><small>Desk, shelves and storage, drawn to your wall.</small><em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></em></div></a></div>
+  </div>
+</section>
+
+<!-- COLOUR LIBRARY -->
+<section class="cl-sec" id="colours"><div class="wrap">
+  <div class="cl-head"><div><span class="cl-lbl">Painted finishes · the colour library</span><h2>Every colour, <b>hand-picked.</b></h2></div>
+    <p>Over 30 matt painted finishes, grouped by mood. Tap one to see it on a real room, then Mark brings the sample to your house so you can see it in your own light.</p></div>
+  <div class="cl-line" aria-hidden="true"><img src="img/os/lineup.webp" alt="" loading="lazy"></div>
+  <div class="cl" data-service="Kitchens" data-start="Moss Green">
+    <div class="cl-stage"><div class="cl-cap"></div><span class="cl-tag">Painted finish</span></div>
+    <div class="cl-panel"><div class="cl-now"></div><div class="cl-gs"></div>
+      <div class="cl-cta"><button class="btn b-ink btn-ink" data-cl-sample>Bring me a sample</button><small>Colours on screen are a guide. The real swatch comes to your design visit.</small></div></div>
+  </div>
+</div></section>
+
+<!-- BUILD -->
+<section class="build" id="build">
+  <div class="stick"><div class="grid">
+    <div class="bl">
+      <span class="lbl">02 · How we build</span>
+      <h2>From a bare wall to <b>this.</b></h2>
+      <p class="bsub">A media wall we fitted in Maynooth. Kitchens and wardrobes go in the same careful way.</p>
+      <ol class="steps" id="steps">
+        <li class="on"><span>01</span><div><b>Measured and set out</b><small>Surveyed to the millimetre, then laser-marked on the wall before a single board is cut.</small></div></li>
+        <li><span>02</span><div><b>Base units levelled</b><small>Seven handleless, soft-close drawers set dead level on adjustable legs.</small></div></li>
+        <li><span>03</span><div><b>Solid oak top</b><small>One continuous run of oak, wall to wall.</small></div></li>
+        <li><span>04</span><div><b>Towers scribed in</b><small>Built in the workshop, then scribed on site to the walls and ceiling.</small></div></li>
+        <li><span>05</span><div><b>Oak shelves</b><small>Floating solid oak shelves, fixed level into the towers.</small></div></li>
+        <li><span>06</span><div><b>Fluted oak panel</b><small>Solid oak flutes behind the TV, with cabling planned in behind.</small></div></li>
+        <li><span>07</span><div><b>TV and cabling</b><small>TV floated on the panel. Nothing hanging down.</small></div></li>
+        <li><span>08</span><div><b>Lit and handed over</b><small>Warm LED under every shelf, cleaned and finished. Scroll on to explore it.</small></div></li>
+      </ol>
+    </div>
+    <div>
+      <div class="stage" id="stage">
+        <div class="scene" id="scene">
+          <img class="bg" data-a="s0" alt="The bare wall before the build">
+          <img class="ly" id="L_d0" data-a="L_d0" alt="" style="left:0.0000%;top:74.3333%;width:12.1875%">
+          <img class="ly" id="L_d1" data-a="L_d1" alt="" style="left:11.6250%;top:74.1667%;width:14.7500%">
+          <img class="ly" id="L_d2" data-a="L_d2" alt="" style="left:25.8125%;top:74.0000%;width:15.7500%">
+          <img class="ly" id="L_d3" data-a="L_d3" alt="" style="left:41.0000%;top:73.8333%;width:15.3750%">
+          <img class="ly" id="L_d4" data-a="L_d4" alt="" style="left:55.8125%;top:73.6667%;width:15.1250%">
+          <img class="ly" id="L_d5" data-a="L_d5" alt="" style="left:70.3750%;top:73.5000%;width:13.6875%">
+          <img class="ly" id="L_d6" data-a="L_d6" alt="" style="left:83.5000%;top:73.3333%;width:13.8125%">
+          <img class="ly" id="L_top" data-a="L_top" alt="" style="left:0.0000%;top:71.0000%;width:97.5625%">
+          <img class="ly" id="L_tL" data-a="L_tL" alt="" style="left:0.0000%;top:13.5833%;width:28.1250%">
+          <img class="ly" id="L_tR" data-a="L_tR" alt="" style="left:68.5625%;top:14.6667%;width:25.3125%">
+          <img class="ly" id="L_tC" data-a="L_tC" alt="" style="left:27.6875%;top:14.0000%;width:41.3125%">
+          <img class="ly" id="L_sL1" data-a="L_sL1" alt="" style="left:1.3750%;top:28.0000%;width:26.5000%">
+          <img class="ly" id="L_sL2" data-a="L_sL2" alt="" style="left:1.5000%;top:42.4167%;width:26.3750%">
+          <img class="ly" id="L_sL3" data-a="L_sL3" alt="" style="left:1.6875%;top:56.5833%;width:26.2500%">
+          <img class="ly" id="L_sR1" data-a="L_sR1" alt="" style="left:68.5625%;top:28.5833%;width:24.2500%">
+          <img class="ly" id="L_sR2" data-a="L_sR2" alt="" style="left:68.5625%;top:42.4167%;width:24.3125%">
+          <img class="ly" id="L_sR3" data-a="L_sR3" alt="" style="left:68.6875%;top:55.9167%;width:24.2500%">
+          <img class="ly" id="L_pan" data-a="L_pan" alt="" style="left:27.9375%;top:30.6667%;width:40.6875%">
+          <img class="ly" id="L_cap" data-a="L_cap" alt="" style="left:27.9375%;top:28.6667%;width:40.6875%">
+          <img class="ly" id="L_tv" data-a="L_tv" alt="" style="left:31.1250%;top:34.2500%;width:34.6250%">
+          <img class="ly" id="L_bar" data-a="L_bar" alt="" style="left:33.1875%;top:69.6667%;width:30.9375%">
+          <img class="lit" id="L_lit" data-a="p303" alt="The finished media wall">
+          <svg class="so" id="setout" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice"></svg>
+        </div>
+        <div class="co" id="bco"><i></i><span id="bcoT"></span></div>
+        <span class="tag"><i></i><span id="stTag">Building</span></span>
+        <span class="fin">This is the finished job. Keep scrolling to explore it.</span>
+      </div>
+      <div class="bar" id="bbar"><i></i></div>
+      <div class="bmeta"><span class="lbl">Bare wall</span><span class="lbl" id="bpct">0%</span><span class="lbl">Handover</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- EXPLORE -->
+<section class="explore" id="explore">
+  <div class="wrap">
+    <div class="shead"><div><span class="lbl">03 · Explore</span><h2>Get up close. <b>Every detail.</b></h2></div><p>Zoom in, drag around, tap a point to read about it. Switch the lights, see the before, or show how it's measured.</p></div>
+    <div class="viewer" id="viewer">
+      <div class="world" id="world">
+        <img data-a="p303" alt="Finished media wall">
+        <img class="off" data-a="off" alt="">
+        <img class="emp" data-a="empty" alt="">
+        <div class="shade"></div>
+        <svg class="meas" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid meet" id="meas"></svg>
+        <div id="hsWrap"></div>
+      </div>
+      <div class="baH" id="baH"><i>⟷</i></div><span class="baL l">Before</span><span class="baL r">After</span>
+      <span class="mkey" id="mkey">mm · sizes approx.</span>
+      <span class="hint" id="hint">Scroll or pinch to zoom · drag to look around</span>
+      <span class="zl" id="zl">1.0×</span>
+      <div class="mini" id="mini"><img data-a="p303" alt=""><i id="miniR"></i></div>
+      <div class="tools">
+        <button id="tLight" class="on"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0012 3z"/></svg><em>Lights</em></button>
+        <button id="tMeas"><svg viewBox="0 0 24 24"><path d="M3 17l14-14 4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/></svg><em>Measure</em></button>
+        <button id="tBA"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7l-3 5 3 5M19 7l3 5-3 5"/></svg><em>Before</em></button>
+        <span class="sep"></span>
+        <button id="zOut" aria-label="Zoom out"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+        <button id="zIn" aria-label="Zoom in"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+        <button id="zRe" aria-label="Reset"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1014-5.3M18 3v4h-4"/></svg></button>
+      </div>
+      <div class="panel" id="panel"><button class="x" id="px">×</button><div class="media" id="pm"></div><div class="bd"><span class="lbl" id="pl"></span><h3 id="pt"></h3><p id="pd"></p><ul id="ps"></ul><div class="nav2"><button id="pp">Previous</button><button id="pn">Next detail</button></div></div></div>
+    </div>
+    <div class="hsl" id="hsl"></div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section class="sec" id="details">
+  <div class="wrap">
+    <div class="shead"><div><span class="lbl">04 · The details</span><h2>The parts you <b>feel every day.</b></h2></div><p>The things that make bespoke joinery worth it are the ones you touch: the drawer that closes itself, the grain under your hand, the light at night.</p></div>
+    <div class="det">
+      <div class="dc rv" id="dcDrawer"><img data-a="drawer" alt="Soft-close drawer"><video muted loop playsinline data-a="drawerV" style="opacity:0;transition:opacity .6s"></video><span class="play">▶ Watch it close</span><div class="t"><span class="lbl">Soft close</span><h3>Push it. It finishes the job.</h3><p>Handleless push-to-open fronts on full-extension runners. The damper catches the drawer in the last few centimetres and closes it silently.</p></div></div>
+      <div class="dc rv"><img data-a="slats" alt="Fluted oak slats"><div class="t"><span class="lbl">Veneer & solid oak</span><h3>Grain you can follow.</h3><p>Solid oak flutes and oak veneered panels, matched so the grain runs true across the wall.</p></div></div>
+      <div class="dc rv"><img data-a="led" alt="LED lit oak shelf"><div class="t"><span class="lbl">Light, built in</span><h3>Glow, no glare.</h3><p>Warm LED set into the underside of each shelf, wired in during the build so no cable ever shows.</p></div></div>
+    </div>
+    <div class="studio">
+      <div class="s3d rv" id="s3d"><canvas id="c3"></canvas><span class="tip" id="tip">Drag the drawer open, then let go</span><span class="sc" id="scl">Soft close engaged</span><span class="dl3" id="d1"></span><span class="dl3" id="d2"></span><span class="dl3" id="d3"></span></div>
+      <div class="sp rv">
+        <div><span class="lbl" style="display:block;margin-bottom:12px">Try it</span><h3>Pick your veneer. <b>Feel the close.</b></h3></div>
+        <div class="grp"><span class="lbl">Veneer</span><div class="sw" id="swV"></div></div>
+        <div class="grp"><span class="lbl">Paint finish</span><div class="sw" id="swP"></div></div>
+        <div class="acts"><button class="pr" id="aOpen">Open drawer</button><button id="aPush">Push it shut</button></div>
+        <div class="graph"><div class="gl"><span>Drawer speed</span><span id="gSt">Closed</span></div><canvas id="gr" width="600" height="190"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL BUILD -->
+<section class="sec real">
+  <div class="wrap"><div class="shead"><div><span class="lbl">05 · On site</span><h2>How it <b>really</b> went in.</h2></div><div class="rnav"><button id="rl" aria-label="Previous">←</button><button id="rr" aria-label="Next">→</button></div></div></div>
+  <div class="rs" id="rs">
+    <div class="rc"><div class="im"><img data-a="p2e1" alt="Base units being levelled" loading="lazy"></div><span class="lbl">Stage 01</span><b>Base units levelled</b><p>Every unit set dead level on adjustable legs before anything goes on top.</p></div>
+    <div class="rc"><div class="im"><img data-a="p5f0" alt="Towers going up" loading="lazy"></div><span class="lbl">Stage 02</span><b>Towers go up</b><p>Made in the workshop, brought in ready to fix and scribe.</p></div>
+    <div class="rc"><div class="im"><img data-a="pf80" alt="Oak shelves fitted" loading="lazy"></div><span class="lbl">Stage 03</span><b>Oak shelves and top</b><p>Solid oak shelves and one continuous oak top along the base.</p></div>
+    <div class="rc"><div class="im"><img data-a="p03d" alt="Fluted oak panel fitted" loading="lazy"></div><span class="lbl">Stage 04</span><b>Fluted oak panel</b><p>The centre panel goes in with the TV fixings and cabling planned behind it.</p></div>
+    <div class="rc"><div class="im"><img data-a="pfd5" alt="Finished media wall" loading="lazy"></div><span class="lbl">Handover</span><b>Finished and cleaned</b><p>Room hoovered, everything wiped down, lights on.</p></div>
+  </div>
+</section>
+
+<!-- FILM -->
+<section class="sec film">
+  <div class="wrap">
+    <div class="shead"><div><span class="lbl">06 · Handover day</span><h2>Filmed the day <b>we finished.</b></h2></div><p>No staging, no editing. The customer's phone, the moment the lights came on.</p></div>
+    <div class="fg">
+      <div class="fv rv"><video muted loop playsinline data-a="lights" data-p="lightsP"></video><span>Lights on</span></div>
+      <div class="fv rv"><video muted loop playsinline data-a="walkin" data-p="walkinP"></video><span>Walking in</span></div>
+      <div class="fq rv"><q>"Very happy with the media unit recently installed by the team at Bespoke Interiors. Mark ensured the design was exactly what I wanted and made a few house visits to ensure we got it just right."</q><small>Lynda Metcalfe · Google review</small><a href="#quote" class="btn b-light" style="margin-top:34px">Book a design visit</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="shead"><div><span class="lbl">07 · How it works</span><h2>One person, <b>start to finish.</b></h2></div><p>When you call Bespoke Interiors you deal with Mark, the owner. He measures, designs, makes and fits it.</p></div>
+    <div class="pr3">
+      <div class="rv"><span class="n">01</span><h3>Design visit</h3><p>Mark comes to you, measures up, brings samples and talks through ideas.</p></div>
+      <div class="rv"><span class="n">02</span><h3>Drawings</h3><p>Detailed CAD drawings so you see exactly what's being made. Changes happen here, not on site.</p></div>
+      <div class="rv"><span class="n">03</span><h3>Made and fitted</h3><p>Built in our Maynooth workshop, fitted on time and left spotless.</p></div>
+    </div>
+    <div class="nums" id="nums">
+      <div><b data-c="725" data-s="+">0</b><span>Projects completed</span></div>
+      <div><b data-c="700" data-s="+">0</b><span>Happy clients</span></div>
+      <div><b data-c="20" data-s="+">0</b><span>Years of experience</span></div>
+      <div><b data-c="80" data-s="%">0</b><span>Repeat and referral work</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec" id="reviews" style="background:var(--white)">
+  <div class="wrap rvw">
+    <div><span class="lbl" style="display:block;margin-bottom:22px">08 · Reviews</span><div class="score"><b>5.0</b><div><i>★★★★★</i></div><p class="mut" style="margin-top:8px">Google · based on 14 reviews</p></div></div>
+    <div><div class="rq" id="rq"></div><div class="rctl"><button class="btn b-line" id="rqp" style="height:44px;width:44px;padding:0;justify-content:center">←</button><button class="btn b-line" id="rqn" style="height:44px;width:44px;padding:0;justify-content:center">→</button><span class="p" id="rqc">01 / 08</span></div></div>
+  </div>
+  <div class="rwall"><div class="fx-mq" data-speed=".4"><div class="fx-mq-t"><figure class="rcard"><i>★★★★★</i><blockquote>Very professional team, went above and beyond with drawings and multiple call outs. As Mark said, the last man to leave the job is Henry the hoover.</blockquote><figcaption><b>Colum O'Reilly</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>A dark and dated kitchen has been completely transformed. The room now radiates light and has a fresh modern feel to it.</blockquote><figcaption><b>Julian Rothera</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>Very happy with media unit recently installed by the team at Bespoke Interiors. Mark ensured the design was exactly what I wanted.</blockquote><figcaption><b>Lynda Metcalfe</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>From the very outset Mark was very hands on in relation to design, choosing materials and working with us in choosing colour schemes.</blockquote><figcaption><b>Paul & Gaye Murray</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>A cosy living room centrepiece beyond my expectations. The fitting was ahead of schedule with great precision.</blockquote><figcaption><b>Olive Gaynor</b>Google review</figcaption></figure></div></div><div class="fx-mq" data-dir="1" data-speed=".32"><div class="fx-mq-t"><figure class="rcard"><i>★★★★★</i><blockquote>A cosy living room centrepiece beyond my expectations. The fitting was ahead of schedule with great precision.</blockquote><figcaption><b>Olive Gaynor</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>We cannot praise Bespoke Interiors enough. Everyone has said it looks as if it had been part of the room all along.</blockquote><figcaption><b>Elaine Sherwin</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>They definitely brought the WOW factor into our sitting room with their expert advice and attention to detail.</blockquote><figcaption><b>Gillian O'Connell</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>The seamless experience, from initial email to project completion, was truly commendable.</blockquote><figcaption><b>Peader Wallace</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>From the initial consultation Mark really listened to us and our ideas for our home, and ensured it was 100% perfect before finishing.</blockquote><figcaption><b>Orla Mc Gowan</b>Google review</figcaption></figure><figure class="rcard"><i>★★★★★</i><blockquote>Very professional team, went above and beyond with drawings and multiple call outs. As Mark said, the last man to leave the job is Henry the hoover.</blockquote><figcaption><b>Colum O'Reilly</b>Google review</figcaption></figure></div></div></div>
+</section>
+
+<!-- WORK -->
+<section class="sec" id="work">
+  <div class="wrap">
+    <div class="shead"><div><span class="lbl">09 · Our work</span><h2>Every room, <b>made to measure.</b></h2></div><p>A few of the 725+ jobs we have designed, made and fitted. Tap any photo to see it larger.</p></div>
+    <div class="gf" id="gf"><button class="on" data-f="all">All</button><button class="" data-f="k">Kitchens</button><button class="" data-f="w">Wardrobes</button><button class="" data-f="m">Media walls</button><button class="" data-f="a">Alcoves</button><button class="" data-f="p">Panelling</button><button class="" data-f="h">Floors</button><button class="" data-f="o">Offices</button><button class="" data-f="b">Bathrooms</button></div>
+    <div class="gal2 lim" id="gal"><figure class="gi" data-f="k"><img src="img/k1-s.webp" data-full="img/k1.webp" alt="Handleless kitchen" loading="lazy"><span>Handleless kitchen</span></figure><figure class="gi" data-f="w"><img src="img/w1-s.webp" data-full="img/w1.webp" alt="Painted wardrobes" loading="lazy"><span>Painted wardrobes</span></figure><figure class="gi" data-f="m"><img src="img/v2/peb8.webp" data-full="img/v2/peb8.webp" alt="Media wall" loading="lazy"><span>Media wall</span></figure><figure class="gi" data-f="p"><img src="img/p1-s.webp" data-full="img/p1.webp" alt="Wall panelling" loading="lazy"><span>Wall panelling</span></figure><figure class="gi" data-f="a"><img src="img/a2-s.webp" data-full="img/a2.webp" alt="Alcove media unit" loading="lazy"><span>Alcove media unit</span></figure><figure class="gi" data-f="h"><img src="img/h1-s.webp" data-full="img/h1.webp" alt="Herringbone floor" loading="lazy"><span>Herringbone floor</span></figure><figure class="gi" data-f="b"><img src="img/g0-s.webp" data-full="img/g0.webp" alt="Stone basin en-suite" loading="lazy"><span>Stone basin en-suite</span></figure><figure class="gi" data-f="a"><img src="img/g8-s.webp" data-full="img/g8.webp" alt="Slate blue alcove wall" loading="lazy"><span>Slate blue alcove wall</span></figure><figure class="gi" data-f="b"><img src="img/g2-s.webp" data-full="img/g2.webp" alt="Herringbone shower room" loading="lazy"><span>Herringbone shower room</span></figure><figure class="gi" data-f="o"><img src="img/g7-s.webp" data-full="img/g7.webp" alt="Painted library" loading="lazy"><span>Painted library</span></figure><figure class="gi" data-f="b"><img src="img/b4-s.webp" data-full="img/b4.webp" alt="Modern bathroom" loading="lazy"><span>Modern bathroom</span></figure><figure class="gi" data-f="o"><img src="img/o1-s.webp" data-full="img/o1.webp" alt="Home office" loading="lazy"><span>Home office</span></figure><figure class="gi" data-f="k"><img src="img/k3-s.webp" data-full="img/k3.webp" alt="Painted shaker kitchen" loading="lazy"><span>Painted shaker kitchen</span></figure><figure class="gi" data-f="w"><img src="img/w2-s.webp" data-full="img/w2.webp" alt="Bedroom wardrobes" loading="lazy"><span>Bedroom wardrobes</span></figure><figure class="gi" data-f="m"><img src="img/v2/p4e4.webp" data-full="img/v2/p4e4.webp" alt="Fluted oak media wall" loading="lazy"><span>Fluted oak media wall</span></figure><figure class="gi" data-f="p"><img src="img/p2-s.webp" data-full="img/p2.webp" alt="Wainscoting" loading="lazy"><span>Wainscoting</span></figure><figure class="gi" data-f="a"><img src="img/a3-s.webp" data-full="img/a3.webp" alt="Painted bookcases" loading="lazy"><span>Painted bookcases</span></figure><figure class="gi" data-f="h"><img src="img/h2-s.webp" data-full="img/h2.webp" alt="Herringbone dining room" loading="lazy"><span>Herringbone dining room</span></figure><figure class="gi" data-f="b"><img src="img/b2-s.webp" data-full="img/b2.webp" alt="Renovated bathroom" loading="lazy"><span>Renovated bathroom</span></figure><figure class="gi" data-f="o"><img src="img/o2-s.webp" data-full="img/o2.webp" alt="Study with desk" loading="lazy"><span>Study with desk</span></figure><figure class="gi" data-f="k"><img src="img/k2-s.webp" data-full="img/k2.webp" alt="Navy island" loading="lazy"><span>Navy island</span></figure><figure class="gi" data-f="w"><img src="img/w4-s.webp" data-full="img/w4.webp" alt="Dressing room" loading="lazy"><span>Dressing room</span></figure><figure class="gi" data-f="m"><img src="img/m1-s.webp" data-full="img/m1.webp" alt="Lit media wall" loading="lazy"><span>Lit media wall</span></figure><figure class="gi" data-f="p"><img src="img/p5-s.webp" data-full="img/p5.webp" alt="Panel detail" loading="lazy"><span>Panel detail</span></figure><figure class="gi" data-f="a"><img src="img/a1-s.webp" data-full="img/a1.webp" alt="Fireplace alcoves" loading="lazy"><span>Fireplace alcoves</span></figure><figure class="gi" data-f="h"><img src="img/h4-s.webp" data-full="img/h4.webp" alt="Herringbone living room" loading="lazy"><span>Herringbone living room</span></figure><figure class="gi" data-f="b"><img src="img/b5-s.webp" data-full="img/b5.webp" alt="Bathroom renovation" loading="lazy"><span>Bathroom renovation</span></figure><figure class="gi" data-f="k"><img src="img/k10-s.webp" data-full="img/k10.webp" alt="Painted kitchen" loading="lazy"><span>Painted kitchen</span></figure><figure class="gi" data-f="w"><img src="img/w3-s.webp" data-full="img/w3.webp" alt="Full wall of wardrobes" loading="lazy"><span>Full wall of wardrobes</span></figure><figure class="gi" data-f="m"><img src="img/m2-s.webp" data-full="img/m2.webp" alt="Media wall with fire" loading="lazy"><span>Media wall with fire</span></figure><figure class="gi" data-f="k"><img src="img/k8-s.webp" data-full="img/k8.webp" alt="Painted island" loading="lazy"><span>Painted island</span></figure><figure class="gi" data-f="b"><img src="img/b3-s.webp" data-full="img/b3.webp" alt="Spa bathroom" loading="lazy"><span>Spa bathroom</span></figure><figure class="gi" data-f="w"><img src="img/w6-s.webp" data-full="img/w6.webp" alt="Wardrobe wall" loading="lazy"><span>Wardrobe wall</span></figure></div>
+  </div>
+</section>
+<div class="wrap gmore" id="gmore"><button class="btn b-ink" id="gmb">Show all 33 projects</button><a href="our-work.html" class="btn b-line">See the full portfolio</a></div>
+<div class="lbx" id="lbx"><button id="lbxx">×</button><img id="lbi" alt=""></div>
+
+<!-- CTA -->
+<section class="cta">
+  <img src="img/k1.webp" alt="" loading="lazy">
+  <div class="wrap">
+    <div><span class="lbl" style="color:rgba(255,255,255,.7);display:block;margin-bottom:20px">Your room is next</span><h2>Let's draw up <b>your room.</b></h2><div style="display:flex;gap:10px;margin-top:32px;flex-wrap:wrap"><a href="#quote" class="btn b-light">Book a design visit</a><a href="tel:0874000789" class="btn b-ghost">087 400 0789</a></div></div>
+    <div class="cd">
+      <div><span class="lbl">Workshop</span>Block B, Maynooth Business Campus, Straffan Rd, Maynooth, Co. Kildare, W23 W5X7</div>
+      <div><span class="lbl">Call Mark</span><a href="tel:0874000789">087 400 0789</a></div>
+      <div><span class="lbl">Email</span><a href="mailto:info@bespokeinteriors.ie">info@bespokeinteriors.ie</a></div>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap fgrid">
+  <div><a href="index.html" class="logo">Bespoke<b>Interiors</b></a><p>Designed with you, made in our own Maynooth workshop and fitted by the same team. 725+ projects across Dublin and Kildare.</p></div>
+  <div><span class="lbl">What we make</span><ul><li><a href="kitchens.html">Kitchens</a></li><li><a href="fitted-wardrobes.html">Fitted wardrobes</a></li><li><a href="media-walls.html">Media walls</a></li><li><a href="alcove-units.html">Alcove units</a></li><li><a href="wall-panelling.html">Wall panelling</a></li><li><a href="herringbone-flooring.html">Herringbone floors</a></li><li><a href="home-offices.html">Home offices & libraries</a></li><li><a href="bathrooms.html">Bathrooms</a></li></ul></div>
+  <div><span class="lbl">Company</span><ul><li><a href="our-work.html">Our work</a></li><li><a href="about.html">About Mark</a></li><li><a href="about.html#reviews">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div><span class="lbl">Workshop</span><ul><li>Block B, Maynooth Business Campus, Straffan Rd, Maynooth, Co. Kildare, W23 W5X7</li><li><a href="tel:0874000789">087 400 0789</a></li><li><a href="mailto:info@bespokeinteriors.ie">info@bespokeinteriors.ie</a></li></ul></div>
+</div><div class="wrap fbot"><span>© 2026 Bespoke Interiors · Maynooth, Co. Kildare</span><span><a href="https://www.instagram.com/bespokeinteriorsireland/">Instagram</a> · <a href="https://www.facebook.com/BespokeInteriorsIreland/">Facebook</a> · <a href="https://www.pinterest.ie/BespokeinteriorsIreland/">Pinterest</a></span></div></footer>
+<div class="mbar"><a href="tel:0874000789">Call Mark</a><a href="#quote">Design visit</a></div>
+
+<script>const ASSETS_URL={"empty": "img/v2/empty.webp", "p303": "img/v2/p303.webp", "off": "img/v2/off.webp", "drawer": "img/v2/drawer.webp", "drawerV": "media/v2/drawerV.mp4", "slats": "img/v2/slats.webp", "led": "img/v2/led.webp", "p2e1": "img/v2/p2e1.webp", "p5f0": "img/v2/p5f0.webp", "pf80": "img/v2/pf80.webp", "p03d": "img/v2/p03d.webp", "pdbf": "img/v2/pdbf.webp", "pfd5": "img/v2/pfd5.webp", "lights": "media/v2/lights.mp4", "walkin": "media/v2/walkin.mp4", "peb8": "img/v2/peb8.webp", "p4e4": "img/v2/p4e4.webp", "p4bb": "img/v2/p4bb.webp", "p2f1": "img/v2/p2f1.webp", "lightsP": "img/v2/lightsP.webp", "s0": "img/v2/s0.webp", "walkinP": "img/v2/walkinP.webp", "L_d0": "img/v2/L_d0.webp", "L_d1": "img/v2/L_d1.webp", "L_d2": "img/v2/L_d2.webp", "L_d3": "img/v2/L_d3.webp", "L_d4": "img/v2/L_d4.webp", "L_d5": "img/v2/L_d5.webp", "L_d6": "img/v2/L_d6.webp", "L_top": "img/v2/L_top.webp", "L_tL": "img/v2/L_tL.webp", "L_tR": "img/v2/L_tR.webp", "L_tC": "img/v2/L_tC.webp", "L_sL1": "img/v2/L_sL1.webp", "L_sL2": "img/v2/L_sL2.webp", "L_sL3": "img/v2/L_sL3.webp", "L_sR1": "img/v2/L_sR1.webp", "L_sR2": "img/v2/L_sR2.webp", "L_sR3": "img/v2/L_sR3.webp", "L_pan": "img/v2/L_pan.webp", "L_cap": "img/v2/L_cap.webp", "L_tv": "img/v2/L_tv.webp", "L_bar": "img/v2/L_bar.webp"};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+/* ---------- assets: base64 -> blob urls ---------- */
+const URLS={};
+function b64blob(b64,type){const bin=atob(b64);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return URL.createObjectURL(new Blob([u],{type}))}
+for(const k in ASSETS_URL)URLS[k]=ASSETS_URL[k];
+$$('[data-p]').forEach(el=>{const u=URLS[el.dataset.p];if(u)el.poster=u});
+$$('[data-a]').forEach(el=>{const u=URLS[el.dataset.a];if(u)el.src=u});
+
+
+/* ---------- hero: rotating through the services ---------- */
+(function(){const sl=$$('#hshow .hsl'),bt=$$('#hnav button');let i=0,tm;
+  function go(n){sl[i].classList.remove('on');bt[i].classList.remove('on');i=(n+sl.length)%sl.length;sl[i].classList.add('on');void bt[i].offsetWidth;bt[i].classList.add('on');clearTimeout(tm);tm=setTimeout(()=>go(i+1),6500)}
+  bt.forEach((b,k)=>b.onclick=()=>go(k));tm=setTimeout(()=>go(1),6500);
+  sl.forEach((s,k)=>{const im=s.querySelector('img');if(!im||k&&!im.getAttribute('src'))return;})})();
+
+/* ---------- services explorer ---------- */
+(function(){const SV=[{"n": "Kitchens", "v": "Kitchen", "cta": "Design your kitchen live", "d": "Painted shaker or modern handleless, designed around how you cook and live. Every kitchen is made in our own workshop, not bought in.", "c": ["Painted or handleless", "Made in-house", "Clever storage"], "im": ["img/k2.webp", "img/k1.webp", "img/k3.webp", "img/k10.webp", "img/k8.webp"], "u": "kitchens.html"}, {"n": "Fitted wardrobes", "v": "Fitted wardrobes", "cta": "Design your wardrobes live", "d": "Floor to ceiling, built around awkward alcoves, sloped ceilings and tight rooms. Hinged or sliding, with the inside planned around what you own.", "c": ["Floor to ceiling", "Hinged or sliding", "Lit interiors"], "im": ["img/w1.webp", "img/w2.webp", "img/w3.webp", "img/w4.webp", "img/w6.webp"], "u": "fitted-wardrobes.html"}, {"n": "Media walls", "v": "Media wall", "cta": "Watch a media wall built", "d": "TV, fire, storage and lighting in one built-in piece. Cabling planned in from the drawing, so nothing is ever on show.", "c": ["Fluted oak", "Hidden cabling", "LED lit"], "im": ["@p303", "@peb8", "@p4e4", "img/m1.webp"], "more": 1, "u": "media-walls.html"}, {"n": "Alcove units", "v": "Alcove units", "cta": "Plan your alcoves live", "d": "Either side of the chimney breast: cupboards below, shelves above, painted to match the room so they look like they were always there.", "c": ["Painted to match", "Cupboards and shelves", "Made to measure"], "im": ["img/a2.webp", "img/a3.webp", "img/a1.webp"], "u": "alcove-units.html"}, {"n": "Wall panelling", "v": "Wall panelling", "cta": "Paint your wall live", "d": "Raised-panel wainscoting, shaker and fluted panelling. The quickest way to give a new build the character it is missing.", "c": ["Wainscoting", "Shaker or fluted", "Supplied and fitted"], "im": ["img/p1.webp", "img/p2.webp", "img/p5.webp", "img/p3.webp"], "u": "wall-panelling.html"}, {"n": "Herringbone floors", "v": "Herringbone floor", "cta": "Try your floor live", "d": "Oak, walnut and engineered herringbone, supplied and fitted with tight, precise joints. Timeless in old houses and new ones.", "c": ["Oak or walnut", "Engineered options", "Precision fitted"], "im": ["img/h1.webp", "img/h2.webp", "img/h4.webp", "img/h3.webp"], "u": "herringbone-flooring.html"}, {"n": "Home offices & libraries", "v": "Home office", "cta": "Plan your office live", "d": "Desks, bookcases and storage built into the room, so work stays tidy and every book has a home.", "c": ["Built-in desks", "Bookcases", "Hidden storage"], "im": ["img/o1.webp", "img/o2.webp"], "u": "home-offices.html"}, {"n": "Bathrooms", "v": "Bathroom", "cta": "Design your bathroom live", "d": "Full bathroom renovations, from design and tiling to plumbing and fitted vanity units, handled by one team.", "c": ["Design to finish", "Tiling and plumbing", "Fitted vanities"], "im": ["img/g0.webp", "img/g2.webp", "img/g4.webp", "img/g5.webp", "img/b2.webp"], "u": "bathrooms.html"}];const sv=$('#sv'),bs=$$('#svl button'),stg=$('#svs'),th=$('#svt'),cache={};let cur=0,img=0,shown=null;
+  const src=u=>u[0]==='@'?URLS[u.slice(1)]:u;
+  function pic(u){if(!cache[u]){const m=new Image();m.alt='';m.decoding='async';m.src=src(u);m.onerror=()=>m.remove();stg.insertBefore(m,th);cache[u]=m}return cache[u]}
+  function show(u){const m=pic(u);if(shown&&shown!==m)shown.classList.remove('on');requestAnimationFrame(()=>m.classList.add('on'));shown=m}
+  function set(k,manual){cur=k;img=0;const s=SV[k];bs.forEach((b,j)=>b.classList.toggle('on',j===k));
+    if(manual)sv.classList.add('man');else{const b=bs[k].querySelector('i');b.style.animation='none';void b.offsetWidth;b.style.animation=''}
+    show(s.im[0]);s.im.slice(1).forEach(pic);if(SV[k+1])pic(SV[k+1].im[0]);
+    th.innerHTML=s.im.map((u,j)=>`<button class="${j?'':'on'}" data-j="${j}" style="background-image:url('${src(u)}')" aria-label="Photo ${j+1}"></button>`).join('');
+    $('#svn').textContent=String(k+1).padStart(2,'0')+' / '+String(SV.length).padStart(2,'0');
+    const tx=$('.svtx');tx.classList.remove('swin');void tx.offsetWidth;tx.classList.add('swin');
+    $('#svh').textContent=s.n;$('#svd').textContent=s.d;$('#svch').innerHTML=s.c.map(c=>`<span>${c}</span>`).join('');
+    $('#svgo').textContent=s.cta+' →';
+    const L=$('#svl');if(L.scrollWidth>L.clientWidth+4)L.scrollTo({left:bs[k].offsetLeft-L.clientWidth/2+bs[k].offsetWidth/2,behavior:'smooth'})}
+  bs.forEach((b,k)=>{b.onclick=()=>set(k,true);b.querySelector('i').addEventListener('animationend',()=>{if(!sv.classList.contains('man'))set((cur+1)%SV.length)})});
+  th.onclick=e=>{const b=e.target.closest('button');if(!b)return;img=+b.dataset.j;show(SV[cur].im[img]);$$('#svt button').forEach(x=>x.classList.toggle('on',x===b));sv.classList.add('man')};
+  stg.onclick=e=>{if(e.target.closest('button'))return;const s=SV[cur];img=(img+1)%s.im.length;show(s.im[img]);$$('#svt button').forEach((x,j)=>x.classList.toggle('on',j===img))};
+  sv.addEventListener('mouseenter',()=>sv.classList.add('hold'));sv.addEventListener('mouseleave',()=>sv.classList.remove('hold'));
+  new IntersectionObserver(es=>sv.classList.toggle('run',es[0].isIntersecting),{threshold:.35}).observe(sv);
+  $('#svgo').onclick=()=>{location.href=SV[cur].u+(SV[cur].u==='media-walls.html'?'#build':'#design')};
+  $('#svm').onclick=e=>{e.preventDefault();$('#quote').scrollIntoView({behavior:'smooth'});if(window.wzPick)setTimeout(()=>wzPick(SV[cur].v),650)};
+  set(0)})();
+
+/* ---------- work gallery filters ---------- */
+$('#gf').onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('#gf button').forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;$$('#gal .gi').forEach(g=>{const on=f==='all'||g.dataset.f===f;g.classList.toggle('out',!on)})};
+
+/* ---------- preloader ---------- */
+(function(){let n=0;const l=$('#preln');const iv=setInterval(()=>{n=Math.min(100,n+9+Math.random()*12);l.style.width=n+'%';if(n>=100){clearInterval(iv);setTimeout(()=>{$('#pre').classList.add('done');document.body.classList.add('loaded')},250)}},60)})();
+
+/* ---------- mobile menu ---------- */
+(function(){const b=$('.burger'),mm=$('#mm');const set=o=>{document.body.classList.toggle('mmo',o);mm.setAttribute('aria-hidden',!o);b.setAttribute('aria-expanded',o)};
+  b.onclick=()=>set(!document.body.classList.contains('mmo'));mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});addEventListener('resize',()=>{if(innerWidth>1100)set(false)})})();
+
+/* ---------- nav + reveals ---------- */
+const nav=$('#nav');
+addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>innerHeight*.8),{passive:true});
+function countUp(el){const to=+el.dataset.c,s=el.dataset.s||'',t0=performance.now();(function st(){const p=Math.min(1,(performance.now()-t0)/1700),e=1-Math.pow(1-p,4);el.textContent=Math.round(to*e)+s;if(p<1)requestAnimationFrame(st)})()}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='nums')e.target.querySelectorAll('[data-c]').forEach(countUp);io.unobserve(e.target)}}),{threshold:.15});
+$$('.rv,#nums').forEach(el=>io.observe(el));
+/* autoplay videos in view */
+const vio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting)v.play().catch(()=>{});else v.pause()}),{threshold:.25});
+$$('.fv video').forEach(v=>vio.observe(v));
+
+/* ---------- herringbone tile ---------- */
+(function(){const g=$('#hbg');if(!g)return;let h='';let d=0;for(let k=-4;k<4;k++){for(let m=-2;m<=2;m++){const ox=-m*16,oy=m*16;h+=`<rect class="hb" style="animation-delay:${(d%12)*.08}s" x="${k*4+ox}" y="${k*4+oy}" width="16" height="4"/>`;h+=`<rect class="hb" style="animation-delay:${(d%12)*.08+.04}s" x="${k*4+ox}" y="${k*4+4+oy}" width="4" height="16"/>`;d++}}g.innerHTML=h})();
+
+/* ---------- quote wizard ---------- */
+(function(){const steps=$$('.step'),dots=$$('#dots i'),T=$('#wt');const titles=['What are your requirements?','What style are you drawn to?','When would you like it?','Where should Mark come to?','Thank you.'];
+  const back=$('#back'),send=$('#send'),F=$('#wf');let cur=0;const ans=[];
+  function go(i){steps[cur].classList.remove('on');cur=i;steps[cur].classList.add('on');T.textContent=titles[i];dots.forEach((d,k)=>d.classList.toggle('on',k<=Math.min(i,3)));back.style.visibility=i>0&&i<4?'visible':'hidden';send.style.display=i===3?'inline-flex':'none';F.style.display=i===4?'none':'flex'}
+  steps.forEach((s,i)=>s.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>{s.querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));t.classList.add('sel');ans[i]=t.dataset.v;setTimeout(()=>go(i+1),420)})));
+  back.onclick=()=>go(cur-1);
+  window.wzPick=v=>{if(cur===4)return;go(0);const t=[...steps[0].querySelectorAll('.tile')].find(x=>x.dataset.v===v);if(t){steps[0].querySelectorAll('.tile').forEach(x=>x.classList.remove('sel'));t.classList.add('sel');ans[0]=v;setTimeout(()=>go(1),520)}};
+  send.onclick=async()=>{const S=steps[3],q=n=>S.querySelector('[name='+n+']'),nm=q('name'),ph=q('phone');let bad=null;
+    [ph,nm].forEach(i=>{const e=!i.value.trim();i.closest('.fld').classList.toggle('err',e);if(e)bad=i});if(bad){bad.focus();return}
+    const em=q('email').value.trim(),msg=q('message').value.trim();
+    const body=new URLSearchParams({'form-name':'design-visit',bot:'',page:'Home',service:ans[0]||'',
+      design:[window.LVSUM||'',ans[1]?'Style: '+ans[1]:'',ans[2]?'When: '+ans[2]:''].filter(Boolean).join(' · '),
+      name:nm.value.trim(),phone:ph.value.trim(),town:q('town').value.trim(),message:[msg,em?'Email: '+em:''].filter(Boolean).join('\n')}).toString();
+    send.disabled=true;send.style.opacity=.6;try{await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body})}catch(e){}
+    send.disabled=false;send.style.opacity=1;if(window.gtag)gtag('event','generate_lead');
+    $('#sum').innerHTML=[...ans.filter(Boolean),window.LVSUM||''].filter(Boolean).map(a=>`<span>${a}</span>`).join('');go(4)}})();
+
+/* ---------- BUILD: every piece of the real job glides into place (GPU transforms only) ---------- */
+(function(){const sec=$('#build'),st=$('#stage'),scene=$('#scene'),lis=$$('#steps li'),bar=$('#bbar i'),pct=$('#bpct'),tag=$('#stTag'),co=$('#bco'),coT=$('#bcoT'),so=$('#setout');
+  const c01=v=>v<0?0:v>1?1:v,eo=t=>1-Math.pow(1-t,3),eo5=t=>1-Math.pow(1-t,5),ez=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  const W=(a,b)=>v=>c01((v-a)/(b-a));
+  const el=k=>$('#L_'+k);
+  new IntersectionObserver(es=>st.classList.toggle('live',es[0].isIntersecting),{rootMargin:'50% 0px'}).observe(sec);
+  // [layer, window, style] — styles: rise, drop, up (soft sweep upward), side (-1/1), sweep (soft sweep right), pop
+  const A=[];
+  for(let j=0;j<7;j++)A.push(['d'+j,W(.085+j*.026,.2+j*.026),'rise']);
+  A.push(['top',W(.28,.38),'drop']);
+  A.push(['tL',W(.37,.5),'up'],['tR',W(.405,.535),'up'],['tC',W(.44,.57),'up']);
+  [['sL1',-1],['sR1',1],['sL2',-1],['sR2',1],['sL3',-1],['sR3',1]].forEach((s,j)=>A.push([s[0],W(.55+j*.022,.63+j*.022),'side',s[1]]));
+  A.push(['pan',W(.69,.8),'sweep'],['cap',W(.77,.83),'drop'],['tv',W(.82,.895),'pop'],['bar',W(.86,.91),'rise']);
+  A.forEach(a=>a.push(el(a[0])));
+  const lit=el('lit');
+  const B=[0,.085,.28,.37,.55,.69,.82,.905];
+  const bb=$('#bbar');B.forEach(t=>{const e=document.createElement('em');e.style.left=(t*100)+'%';bb.appendChild(e)});
+  const CO=[[66,50,'Laser set-out, before anything is cut'],[57,84,'Seven handleless, soft-close drawers'],[78,71.5,'One run of solid oak'],[60,22,'Scribed tight to the ceiling'],[22,45,'Floating solid oak shelves'],[66,35,'Fluted solid oak, grain matched'],[57,46,'TV floated, cables hidden'],[9,57,'Warm LED under every shelf']];
+  function style(a,v){const e=a[1](v),n=a[a.length-1],k=a[2];if(e<=0){if(n._v!==0){n.style.opacity=0;n._v=0}return}if(e>=1&&n._v===1)return;n._v=e>=1?1:.5;
+    const f=eo(e),bl=(1-eo5(e))*7,o=c01(e*1.6);let tr='',m='';
+    if(k==='rise')tr=`translate3d(0,${(1-f)*38}px,0) scale(${1+(1-f)*.025})`;
+    else if(k==='drop')tr=`translate3d(0,${-(1-f)*70}px,0)`;
+    else if(k==='up'){const p=ez(e)*118;m=`linear-gradient(to top,#000 ${p-18}%,transparent ${p}%)`;tr=`translate3d(0,${-(1-f)*26}px,0)`}
+    else if(k==='side')tr=`translate3d(${a[3]*(1-f)*-60}px,0,0)`;
+    else if(k==='sweep'){const p=ez(e)*122;m=`linear-gradient(90deg,#000 ${p-22}%,transparent ${p}%)`}
+    else if(k==='pop')tr=`scale(${.93+.07*f})`;
+    n.style.opacity=k==='up'||k==='sweep'?c01(e*3):o;n.style.transform=tr;n.style.filter=bl>.05&&k!=='up'&&k!=='sweep'?`blur(${bl.toFixed(2)}px) drop-shadow(0 ${(1-f)*26}px ${(1-f)*22}px rgba(0,0,0,${(1-f)*.22}))`:'none';
+    if(m||n._m){n.style.webkitMaskImage=n.style.maskImage=e>=1?'none':m;n._m=!!m&&e<1}}
+  // laser set-out + survey on the bare wall
+  const lb=(x,y,txt,rot)=>`<g class="lb" transform="translate(${x} ${y})${rot?' rotate(-90)':''}"><rect/><text text-anchor="middle" y="7.5">${txt}</text></g>`;
+  const tk=(x,y)=>`M${x-7} ${y+7}L${x+7} ${y-7}`;
+  const LZ=[[10,870,1490,870],[445,176,445,1062],[1100,190,1100,1062],[20,352,1480,352]];
+  so.innerHTML=`<g id="soL">${LZ.map((l,i)=>`<path class="lz${i>1?' x':''}" pathLength="1" style="stroke-dasharray:1 1;stroke-dashoffset:1" d="M${l[0]} ${l[1]}L${l[2]} ${l[3]}"/>`).join('')}</g>
+   <g id="soD" style="opacity:0"><path class="ex" d="M18 176V108M1490 193V108M1490 176H1580M1538 1062H1580"/><path class="dm" pathLength="1" style="stroke-dasharray:1 1" d="M18 126H1490"/><path class="dm" pathLength="1" style="stroke-dasharray:1 1" d="M1560 176V1062"/>
+   <path class="dm" d="${tk(18,126)}${tk(1490,126)}${tk(1560,176)}${tk(1560,1062)}"/>${lb(754,126,'≈ 4 020')}${lb(1560,620,'≈ 2 400',1)}</g>`;
+  const soL=$$('#soL path'),soD=$('#soD'),dms=$$('#soD path[pathLength]');
+  function fitSo(){const k=1600/Math.max(1,st.clientWidth);so.style.setProperty('--fs',(11.5*k).toFixed(1)+'px');$$('#setout .lb').forEach(g=>{const tx=g.querySelector('text'),b=tx.getBBox(),r=g.querySelector('rect'),p=b.height*.5;r.setAttribute('x',b.x-p*1.3);r.setAttribute('y',b.y-p*.5);r.setAttribute('width',b.width+p*2.6);r.setAttribute('height',b.height+p);r.setAttribute('rx',(b.height+p)/2)})}
+  addEventListener('resize',()=>{try{fitSo()}catch(e){}});setTimeout(()=>{try{fitSo()}catch(e){}},300);
+  function overlay(v){const a=c01(v/.075);soL.forEach((p,i)=>p.style.strokeDashoffset=1-ez(c01(a*1.45-i*.15)));const b=ez(c01((v-.015)/.06));dms.forEach(p=>p.style.strokeDashoffset=1-b);soD.style.opacity=c01(b*2);so.style.opacity=1-ez(c01((v-.15)/.14))}
+  function prog(){const r=sec.getBoundingClientRect();return c01(-r.top/(r.height-innerHeight))}
+  let target=0,cur=-1,lastI=-1,shownCo=-1;
+  addEventListener('scroll',()=>{target=c01(prog()/.95)},{passive:true});target=c01(prog()/.95);
+  function render(v){A.forEach(a=>style(a,v));
+    lit.style.opacity=ez(c01((v-.905)/.075));
+    const cam=ez(v),sc=1.085-.085*cam,tx=(1-cam)*-1.2,ty=(1-cam)*-1.5;scene.style.transform=`scale(${sc.toFixed(4)}) translate3d(${tx.toFixed(3)}%,${ty.toFixed(3)}%,0)`;
+    overlay(v);
+    let i=0;for(let k=1;k<8;k++)if(v>=B[k])i=k;const nx=i<7?B[i+1]:1,t=c01((v-B[i])/(nx-B[i]));
+    if(i!==lastI){lastI=i;lis.forEach((l,k)=>{l.classList.toggle('on',k===i);l.classList.toggle('past',k<i)})}
+    bar.style.transform=`scaleX(${v.toFixed(4)})`;const pt=Math.round(v*100)+'%';if(pct._t!==pt)pct.textContent=pct._t=pt;
+    const end=v>=.985;st.classList.toggle('end',end);const tg=end?'Finished · real photo':'Building · '+String(i+1).padStart(2,'0')+' of 08';if(tag._t!==tg)tag.textContent=tag._t=tg;
+    const c=CO[i],show=!end&&t>.3&&t<.97;co.style.left=(52+(c[0]-52)*sc+tx*sc).toFixed(2)+'%';co.style.top=(62+(c[1]-62)*sc+ty*sc).toFixed(2)+'%';if(shownCo!==i){shownCo=i;coT.textContent=c[2];co.classList.remove('l');const sw=st.clientWidth;co.classList.toggle('m',sw<600);st.classList.toggle('sm',sw<600);if(sw>=600&&c[0]/100*sw+co.offsetWidth>sw-14)co.classList.add('l')}co.classList.toggle('on',show)}
+  (function loop(){requestAnimationFrame(loop);if(cur<0)cur=target;const d=target-cur;if(Math.abs(d)<.00025){if(cur===target)return;cur=target}else cur+=d*.085;render(cur)})();
+  render(target);
+})();
+
+/* ---------- EXPLORE viewer ---------- */
+const HS=[
+ {id:'drawers',x:49,y:81,l:'Base units',t:'Handleless, soft-close drawers',d:'Seven deep drawers on full-extension runners. No handles, just push to open. A damper catches each one and closes it silently.',s:[['Fronts','Spray painted, handleless'],['Runners','Full extension, soft close'],['Inside','Oak-effect drawer boxes']],m:'drawerV',z:2.4},
+ {id:'top',x:80,y:72.5,l:'Worktop',t:'One run of solid oak',d:'A single continuous oak top runs the full width of the wall, tying the towers and base together.',s:[['Material','Solid oak'],['Finish','Hard-wax oil, wipeable'],['Run','Wall to wall']],m:'p03d',z:2.4},
+ {id:'panel',x:37.5,y:66,l:'Centre panel',t:'Fluted solid oak',d:'Vertical oak flutes behind the TV give the wall its depth. The bracket and cabling are planned in behind, so nothing shows.',s:[['Material','Solid oak flutes'],['Behind','TV bracket and cabling'],['Look','Grain matched across the panel']],m:'slats',z:2.6},
+ {id:'tv',x:49,y:46,l:'Media',t:'No cables, anywhere',d:'Sockets, HDMI and power were planned into the drawing so the TV floats on the panel with nothing hanging down.',s:[['Cabling','Hidden behind the panel'],['Bracket','Fixed through to the wall'],['Soundbar','Sits on the oak top']],m:'p303',z:2.2},
+ {id:'shelves',x:14,y:44,l:'Shelving',t:'Oak shelves, lit from below',d:'Floating solid oak shelves with warm LED set into the underside of each one. Switch the lights below to see the difference.',s:[['Shelves','Solid oak, floating'],['Light','Warm white LED'],['Wiring','Hidden in the build']],m:'led',z:2.6},
+ {id:'scribe',x:90,y:17,l:'Fit',t:'Scribed to the ceiling',d:'Walls and ceilings are never perfectly straight. Every tower is scribed on site so it meets the ceiling with no gap.',s:[['Towers','Sprayed MDF'],['Fit','Scribed on site'],['Finish','Caulked and painted']],m:'p5f0',z:2.6}];
+(function(){const vw=$('#viewer'),w=$('#world'),hw=$('#hsWrap'),panel=$('#panel'),zl=$('#zl'),hint=$('#hint'),miniR=$('#miniR');
+  let s=1,tx=0,ty=0,S=1,TX=0,TY=0,raf=0,cur=-1;
+  hw.innerHTML=HS.map((h,i)=>`<button class="hs" data-i="${i}" style="left:${h.x}%;top:${h.y}%"><span>${h.t}</span></button>`).join('');
+  $('#hsl').innerHTML=HS.map((h,i)=>`<button data-i="${i}">${h.t}</button>`).join('');
+  function W(){return vw.clientWidth}function H(){return vw.clientHeight}
+  function bound(){const mw=W()*(S-1),mh=H()*(S-1);TX=clamp(TX,-mw,0);TY=clamp(TY,-mh,0)}
+  function anim(){cancelAnimationFrame(raf);(function f(){s+=(S-s)*.14;tx+=(TX-tx)*.14;ty+=(TY-ty)*.14;w.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;zl.textContent=s.toFixed(1)+'×';vw.classList.toggle('z',s>1.05);
+      miniR.style.left=(-tx/(W()*s)*100)+'%';miniR.style.top=(-ty/(H()*s)*100)+'%';miniR.style.width=(100/s)+'%';miniR.style.height=(100/s)+'%';
+      $$('.hs').forEach(h=>h.style.transform=`scale(${1/s})`);
+      if(Math.abs(S-s)>.001||Math.abs(TX-tx)>.3||Math.abs(TY-ty)>.3)raf=requestAnimationFrame(f)})()}
+  function zoomAt(ns,cx,cy){ns=clamp(ns,1,5);const wx=(cx-TX)/S,wy=(cy-TY)/S;S=ns;TX=cx-wx*S;TY=cy-wy*S;bound();anim()}
+  function focus(px,py,z){S=z;const W0=W(),H0=H();const panelW=W0>700&&panel.classList.contains('on')?Math.min(380,W0-32)+16:0;const cx=(W0-panelW)/2,cy=W0>700?H0/2:H0*.22;TX=cx-px/100*W0*S;TY=cy-py/100*H0*S;bound();anim()}
+  vw.addEventListener('touchstart',e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
+  vw.addEventListener('wheel',e=>{e.preventDefault();hint.style.opacity=0;const r=vw.getBoundingClientRect();zoomAt(S*Math.exp(-e.deltaY*.0018),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+  const pts=new Map();let lastD=0,moved=false;
+  vw.addEventListener('pointerdown',e=>{if(e.target.closest('.tools,.panel,.hs,.baH'))return;vw.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY});moved=false;vw.classList.add('drag');if(pts.size===2){const [a,b]=[...pts.values()];lastD=Math.hypot(a.x-b.x,a.y-b.y)}});
+  vw.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;const p=pts.get(e.pointerId);const dx=e.clientX-p.x,dy=e.clientY-p.y;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(pts.size===1){if(Math.abs(dx)+Math.abs(dy)>1)moved=true;TX+=dx;TY+=dy;bound();tx=TX;ty=TY;w.style.transform=`translate(${tx}px,${ty}px) scale(${s})`;miniR.style.left=(-tx/(W()*s)*100)+'%';miniR.style.top=(-ty/(H()*s)*100)+'%';hint.style.opacity=0}
+    else if(pts.size===2){const [a,b]=[...pts.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);const r=vw.getBoundingClientRect();if(lastD)zoomAt(S*d/lastD,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top);lastD=d;moved=true}});
+  const up=e=>{pts.delete(e.pointerId);if(pts.size<2)lastD=0;if(!pts.size)vw.classList.remove('drag')};
+  vw.addEventListener('pointerup',up);vw.addEventListener('pointercancel',up);
+  vw.addEventListener('dblclick',e=>{if(e.target.closest('.tools,.panel'))return;const r=vw.getBoundingClientRect();zoomAt(S>1.5?1:2.4,e.clientX-r.left,e.clientY-r.top)});
+  $('#zIn').onclick=()=>zoomAt(S*1.5,W()/2,H()/2);$('#zOut').onclick=()=>zoomAt(S/1.5,W()/2,H()/2);
+  $('#zRe').onclick=()=>{close();S=1;TX=TY=0;anim()};
+  function media(k){if(!k)return'';if(k==='drawerV')return`<video src="${URLS.drawerV}" muted autoplay loop playsinline></video>`;return`<img src="${URLS[k]}" alt="">`}
+  function open(i){cur=i;const h=HS[i];$('#pl').textContent=String(i+1).padStart(2,'0')+' / '+String(HS.length).padStart(2,'0')+' · '+h.l;$('#pt').textContent=h.t;$('#pd').textContent=h.d;$('#ps').innerHTML=h.s.map(x=>`<li><span>${x[0]}</span>${x[1]}</li>`).join('');$('#pm').innerHTML=media(h.m);
+    panel.classList.add('on');$$('.hs').forEach((b,k)=>b.classList.toggle('on',k===i));$$('#hsl button').forEach((b,k)=>b.classList.toggle('on',k===i));hint.style.opacity=0;
+    setBA(false);setMeas(false);if(h.id==='shelves')setLight(true);focus(h.x,h.y,h.z)}
+  function close(){panel.classList.remove('on');$$('.hs,#hsl button').forEach(b=>b.classList.remove('on'));cur=-1}
+  hw.addEventListener('click',e=>{const b=e.target.closest('.hs');if(b&&!moved)open(+b.dataset.i)});
+  $('#hsl').addEventListener('click',e=>{const b=e.target.closest('button');if(b){open(+b.dataset.i);vw.scrollIntoView({behavior:'smooth',block:'center'})}});
+  $('#px').onclick=()=>{close();S=1;TX=TY=0;anim()};$('#pn').onclick=()=>open((cur+1)%HS.length);$('#pp').onclick=()=>open((cur-1+HS.length)%HS.length);
+  // lights
+  let lightsOn=true;function setLight(on){lightsOn=on;vw.classList.toggle('dark',!on);$('#tLight').classList.toggle('on',on)}
+  $('#tLight').onclick=()=>setLight(!lightsOn);
+  // measure: traced elevation drawing + dimension chains (approximate, scaled from the photo)
+  const yT=x=>907-.011*x,yB=x=>1042-.0194*x;
+  const LN=[ // [points, class]
+    [[[2,176],[1490,193]],''],[[[22,194],[437,198],[437,846],[22,846],[22,194]],''],[[[452,199],[1092,201],[1092,350],[452,350],[452,199]],''],[[[1105,201],[1476,203],[1476,834],[1105,834],[1105,201]],''],
+    [[[1490,193],[1490,834]],''],[[[95,228],[95,846]],'f'],[[[22,194],[95,228],[435,228]],'f'],[[[1418,232],[1418,834]],'f'],[[[1476,203],[1418,232],[1107,232]],'f'],[[[452,199],[475,235],[1065,235],[1092,201]],'f'],
+    ...[[30,344,437,385],[32,518,437,541],[35,688,438,712],[1105,352,1475,387],[1105,518,1476,540],[1107,680,1477,700],[450,350,1092,370],[453,370,1080,855]].map(r=>[[[r[0],r[1]],[r[2],r[1]],[r[2],r[3]],[r[0],r[3]],[r[0],r[1]]],'']),
+    [[[0,846],[437,846]],'f'],[[[1108,832],[1422,830],[1552,868]],'f'],[[[0,880],[1552,868],[1552,886],[0,900]],''],
+    ...[0,190,417,660,897,1130,1340].map((x,j,A)=>{const x1=[190,417,660,897,1130,1340,1550][j],a=x+(j?3:0),b=x1-3;return[[[a,yT(a)],[b,yT(b)],[b,yB(b)],[a,yB(a)],[a,yT(a)]],'']}),
+    [[[0,1080],[1537,1062],[1537,1021]],'']];
+  const fl=[];for(let x=466;x<1076;x+=13.7)fl.push(`M${x.toFixed(1)} 372V853`);
+  const tick=(x,y)=>`M${x-8} ${y+8}L${x+8} ${y-8}`;
+  const hz=(x0,x1,y)=>`M${x0} ${y}H${x1}`,vt=(y0,y1,x)=>`M${x} ${y0}V${y1}`;
+  // [path, ticks, label x, label y, text, vertical]
+  const DM=[
+    [hz(18,1490,92),[[18,92],[1490,92]],754,92,'≈ 4 020'],
+    [hz(18,1490,140),[[18,140],[446,140],[1100,140],[1490,140]],232,140,'1 100'],[null,[],773,140,'1 820'],[null,[],1295,140,'1 100'],
+    [vt(176,1062,1572),[[1572,176],[1572,1062]],1572,560,'≈ 2 400',1],
+    [vt(193,868,1528),[[1528,193],[1528,868],[1528,1062]],1528,520,'1 880',1],[vt(868,1062,1528),[],1528,965,'520',1],
+    [vt(228,846,300),[[300,228],[300,344],[300,518],[300,688],[300,846]],300,286,'320',1],[null,[],300,431,'465',1],[null,[],300,603,'465',1],[null,[],300,767,'430',1],
+    [hz(453,1080,318),[[453,318],[1080,318]],766,318,'1 720'],
+    [hz(196,412,968),[[196,968],[412,968]],304,968,'575']];
+  const EX=`M18 172V80M1490 189V80M1490 176H1590M1537 1062H1590M1476 193H1540M1552 868H1540M453 346V306M1080 346V306`;
+  function drawMeas(){let s='',d=0;
+    s+=LN.map(l=>`<path class="ln ${l[1]}" pathLength="1" style="transition-delay:${(d+=.025).toFixed(3)}s" d="M${l[0].map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')}"/>`).join('');
+    s+=`<path class="ln f d" style="transition-delay:.5s" d="${fl.join('')}"/><rect class="ln d" x="505" y="420" width="538" height="307" style="stroke-dasharray:6 6;transition-delay:.6s"/>`;
+    s+=`<path class="ex" pathLength="1" style="transition-delay:.7s" d="${EX}"/>`;
+    const MN=[1,2,3,5,6,7,8,9,10,12];DM.forEach((m,i)=>{const dl=(.8+i*.06).toFixed(2),mn=MN.includes(i)?' mn':'';if(m[0])s+=`<path class="dm${mn}" pathLength="1" style="transition-delay:${dl}s" d="${m[0]}"/>`;if(m[1].length)s+=`<path class="dm${mn}" style="stroke-dasharray:none" d="${m[1].map(p=>tick(p[0],p[1])).join('')}"/>`;
+      s+=`<g class="lb${mn}" style="transition-delay:${(+dl+.4).toFixed(2)}s" transform="translate(${m[2]} ${m[3]})${m[5]?' rotate(-90)':''}"><rect/><text text-anchor="middle" y="5.5">${m[4]}</text></g>`});
+    $('#meas').innerHTML=s;fitLabels()}
+  function fitLabels(){vw.classList.toggle('sm',vw.clientWidth<600);$('#meas').style.setProperty('--fs',((vw.clientWidth<600?10:11.5)*1600/Math.max(1,vw.clientWidth)).toFixed(1)+'px');$$('#meas .lb').forEach(g=>{const t=g.querySelector('text'),b=t.getBBox(),r=g.querySelector('rect');const px=b.height*.55;r.setAttribute('x',b.x-px);r.setAttribute('y',b.y-px*.45);r.setAttribute('width',b.width+px*2);r.setAttribute('height',b.height+px*.9);r.setAttribute('rx',(b.height+px*.9)/2)})}
+  drawMeas();addEventListener('resize',()=>{clearTimeout(fitLabels.t);fitLabels.t=setTimeout(fitLabels,200)});
+  function setMeas(on){vw.classList.toggle('ms',on);if(on){hint.style.opacity=0;requestAnimationFrame(fitLabels)}$('#tMeas').classList.toggle('on',on)}
+  $('#tMeas').onclick=()=>{const on=!vw.classList.contains('ms');if(on){close();setBA(false);S=1;TX=TY=0;anim()}setMeas(on)};
+  // before/after
+  const baH=$('#baH');let ba=50;function setBA(on){vw.classList.toggle('ba',on);$('#tBA').classList.toggle('on',on);if(on){close();setMeas(false);S=1;TX=TY=0;anim();ba=50;applyBA()}}
+  function applyBA(){w.style.setProperty('--ba',(100-ba)+'%');baH.style.left=ba+'%'}
+  $('#tBA').onclick=()=>setBA(!vw.classList.contains('ba'));
+  let bd=false;baH.addEventListener('pointerdown',e=>{bd=true;baH.setPointerCapture(e.pointerId)});baH.addEventListener('pointermove',e=>{if(!bd)return;const r=vw.getBoundingClientRect();ba=clamp((e.clientX-r.left)/r.width*100,2,98);applyBA()});baH.addEventListener('pointerup',()=>bd=false);
+  addEventListener('resize',()=>{bound();anim()});
+})();
+
+/* ---------- details: drawer card plays the soft-close clip ---------- */
+(function(){const c=$('#dcDrawer'),v=c.querySelector('video');const on=()=>{v.style.opacity=1;v.currentTime=0;v.play().catch(()=>{})},off=()=>{v.pause();v.style.opacity=0};
+  c.addEventListener('mouseenter',on);c.addEventListener('mouseleave',off);c.addEventListener('click',()=>v.paused?on():off())})();
+
+/* ---------- 3D studio: veneer + soft close drawer ---------- */
+(function(){const cv=$('#c3'),box=$('#s3d');if(!window.THREE){box.insertAdjacentHTML('beforeend','<div style="position:absolute;inset:0;display:grid;place-items:center;color:var(--mut)">3D preview needs an internet connection</div>');return}
+  // Built in idle steps before it scrolls into view, then redrawn only when something moves, so scrolling past it never stalls.
+  const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:500}):setTimeout(f,50);
+  const near=new IntersectionObserver(es=>{if(es[0].isIntersecting){near.disconnect();idle(init)}},{rootMargin:'150% 0px'});near.observe(box);
+  function init(){
+  const r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});r.setPixelRatio(Math.min(devicePixelRatio||1,2));r.shadowMap.enabled=true;r.shadowMap.autoUpdate=false;r.shadowMap.needsUpdate=true;r.shadowMap.type=THREE.PCFSoftShadowMap;r.outputEncoding=THREE.sRGBEncoding;r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.05;
+  const sc=new THREE.Scene();const cam=new THREE.PerspectiveCamera(30,1,.05,40);const lc=h=>new THREE.Color(h).convertSRGBToLinear();
+  sc.add(new THREE.HemisphereLight(0xfffaf2,0xcbbfae,.7));
+  const key=new THREE.DirectionalLight(0xfff1de,1.25);key.position.set(-2.5,3.2,2.6);key.castShadow=true;key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-2,right:2,top:2,bottom:-1,near:.5,far:10});key.shadow.bias=-.0003;sc.add(key);
+  const rim=new THREE.DirectionalLight(0xe8eeff,.35);rim.position.set(3,2,1);sc.add(rim);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(12,12),new THREE.ShadowMaterial({opacity:.16}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;sc.add(floor);
+  const wallM=new THREE.MeshStandardMaterial({color:lc(0xefeae2),roughness:.95});const wall=new THREE.Mesh(new THREE.PlaneGeometry(8,4),wallM);wall.position.set(0,2,-.32);wall.receiveShadow=true;sc.add(wall);
+  // veneer textures
+  const VEN=[['Natural oak','#c39a6b','70,44,20',1],['Smoked oak','#7a5a3e','40,24,12',1],['American walnut','#6a4632','30,16,8',.6],['Pale ash','#d9c3a2','120,96,66',.8]];
+  const PAINT=[['Chalk white',0xf1eee8],['Cashmere',0xcdbfac],['Cannon Black',0x2e2d2b],['Sage',0x8d9a86]];
+  function wood(base,dark,ray,vert){const c=document.createElement('canvas');c.width=c.height=1024;const x=c.getContext('2d');x.fillStyle=base;x.fillRect(0,0,1024,1024);
+    for(let i=0;i<220;i++){const p=Math.random()*1024;x.strokeStyle=`rgba(${dark},${.03+Math.random()*.11})`;x.lineWidth=.5+Math.random()*2.4;x.beginPath();for(let t=0;t<=1024;t+=10){const o=Math.sin(t*.008+i*.7)*7+Math.sin(t*.03+i)*2;vert?(t?x.lineTo(p+o,t):x.moveTo(p+o,t)):(t?x.lineTo(t,p+o):x.moveTo(t,p+o))}x.stroke()}
+    if(ray>.7)for(let i=0;i<70;i++){x.fillStyle=`rgba(255,240,215,${.05+Math.random()*.08})`;const px=Math.random()*1024,py=Math.random()*1024;vert?x.fillRect(px,py,2+Math.random()*3,10+Math.random()*30):x.fillRect(px,py,10+Math.random()*30,2+Math.random()*3)}
+    const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;t.wrapS=t.wrapT=THREE.RepeatWrapping;return t}
+  const TEX=[],tex=i=>TEX[i]||(TEX[i]={v:wood(VEN[i][1],VEN[i][2],VEN[i][3],true),h:wood(VEN[i][1],VEN[i][2],VEN[i][3],false)});tex(0);
+  const mVen=new THREE.MeshStandardMaterial({map:TEX[0].h,roughness:.55});const mVenV=new THREE.MeshStandardMaterial({map:TEX[0].v,roughness:.5});
+  const mPaint=new THREE.MeshStandardMaterial({color:lc(PAINT[0][1]),roughness:.45});const mGroove=new THREE.MeshStandardMaterial({color:lc(0x2a2724),roughness:.6});
+  const mMetal=new THREE.MeshStandardMaterial({color:lc(0x9a9894),metalness:.8,roughness:.35});const mLed=new THREE.MeshStandardMaterial({color:0x222222,emissive:0xffc985,emissiveIntensity:2.4});
+  const geo=new THREE.BoxGeometry(1,1,1);
+  const box3=(w,h,d,x,y,z,m,par)=>{const o=new THREE.Mesh(geo,m);o.scale.set(w,h,d);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;(par||sc).add(o);return o};
+  // base carcass 1.8 x .56 x .5
+  const W=1.8,BH=.52,D=.5,PL=.06;
+  box3(W,PL,D-.04,0,PL/2,-.02,mGroove);
+  box3(W,BH,.018,0,PL+BH/2,-D/2+.009,mPaint);
+  for(const x of [-W/2+.009,-W/6,W/6,W/2-.009])box3(.018,BH,D,x,PL+BH/2,0,mPaint);
+  box3(W,.018,D,0,PL+.009,0,mPaint);
+  const top=box3(W+.04,.04,D+.05,0,PL+BH+.02,.015,mVen);
+  // fixed drawers left/right
+  const dW=W/3-.008,dH=BH-.03;
+  for(const x of [-W/3,W/3]){box3(dW,dH,.02,x,PL+dH/2+.005,D/2+.01,mPaint);box3(dW,.012,.012,x,PL+dH+.006,D/2-.004,mGroove)}
+  // moving middle drawer
+  const dr=new THREE.Group();sc.add(dr);
+  const front=box3(dW,dH,.02,0,PL+dH/2+.005,D/2+.01,mPaint,dr);
+  box3(dW,.012,.012,0,PL+dH+.006,D/2-.004,mGroove,dr);
+  const bw=dW-.06,bd=D-.06,bh=dH-.1;
+  box3(.014,bh,bd,-bw/2,PL+.05+bh/2,0,mVen,dr);box3(.014,bh,bd,bw/2,PL+.05+bh/2,0,mVen,dr);box3(bw,bh,.014,0,PL+.05+bh/2,-bd/2,mVen,dr);box3(bw,.01,bd,0,PL+.05,0,mVen,dr);
+  box3(.012,.03,bd,-bw/2-.012,PL+.07,0,mMetal,dr);box3(.012,.03,bd,bw/2+.012,PL+.07,0,mMetal,dr);
+  // fluted panel above
+  const panel=new THREE.Group();sc.add(panel);const FW=1.1,FH=.95,y0=PL+BH+.04;
+  box3(FW+.04,FH,.03,0,y0+FH/2,-.21,mVen,panel);
+  const fg=new THREE.CylinderGeometry(.013,.013,FH,18,1,false,0,Math.PI);
+  for(let i=0;i<34;i++){const f=new THREE.Mesh(fg,mVenV);f.rotation.y=-Math.PI/2;f.position.set(-FW/2+.016+i*(FW-.032)/33,y0+FH/2,-.195);f.castShadow=f.receiveShadow=true;panel.add(f)}
+  // floating shelf with LED to the right
+  const sh=box3(.6,.045,.24,W/2-.32,y0+.62,-.2,mVen);box3(.52,.006,.01,W/2-.32,y0+.62-.025,-.14,mLed);
+  const pl=new THREE.PointLight(0xffc985,.9,1.2,2);pl.position.set(W/2-.32,y0+.55,-.12);sc.add(pl);
+  // dimension lines
+  const lm=new THREE.LineBasicMaterial({color:0x181614,transparent:true,opacity:.55});
+  function dim(a,b,tick){const g=new THREE.BufferGeometry().setFromPoints([a,b,a.clone().add(tick),a.clone().sub(tick),b.clone().add(tick),b.clone().sub(tick)]);g.setIndex([0,1,2,3,4,5]);const l=new THREE.LineSegments(g,lm);sc.add(l);return l}
+  const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+  dim(V(-W/6+.004,PL+BH+.11,D/2+.05),V(W/6-.004,PL+BH+.11,D/2+.05),V(0,.02,0));
+  dim(V(W/2+.08,PL,D/2),V(W/2+.08,PL+BH,D/2),V(.02,0,0));
+  dim(V(-FW/2,y0+FH+.06,-.19),V(FW/2,y0+FH+.06,-.19),V(0,.02,0));
+  const DL=[[V(0,PL+BH+.11,D/2+.05),'Drawer 600 mm'],[V(W/2+.08,PL+BH/2,D/2),'Base 580 mm'],[V(0,y0+FH+.06,-.19),'Fluted panel']];
+  // camera + orbit
+  let th=.55,ph=.3,dist=4.15,tth=th,tph=ph;
+  let dirty=true,running=false,cw=1,ch=1;
+  // the box keeps growing after load, so follow its real size (setSize clears the canvas, so redraw straight away)
+  function rs(){const w=cw=box.clientWidth,h=ch=box.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.fov=w<600?42:30;dist=w<600?3.5:4.15;cam.updateProjectionMatrix();dirty=true;if(running){place();r.render(sc,cam)}}rs();
+  window.ResizeObserver?new ResizeObserver(()=>rs()).observe(box):addEventListener('resize',rs);
+  // drawer physics
+  let open=0,vel=0,dragging=false,auto=0,hist=[];const MAX=.42,DAMP=.06;
+  const ray=new THREE.Raycaster(),mp=new THREE.Vector2();let lx=0,ly=0,orbit=false;
+  cv.addEventListener('touchstart',e=>{const tc=e.touches[0],rc=cv.getBoundingClientRect();mp.set((tc.clientX-rc.left)/rc.width*2-1,-(tc.clientY-rc.top)/rc.height*2+1);ray.setFromCamera(mp,cam);if(ray.intersectObjects(dr.children,false).length)e.preventDefault()},{passive:false});
+  cv.addEventListener('pointerdown',e=>{const rc=cv.getBoundingClientRect();mp.set((e.clientX-rc.left)/rc.width*2-1,-(e.clientY-rc.top)/rc.height*2+1);ray.setFromCamera(mp,cam);const hit=ray.intersectObjects(dr.children,false);cv.setPointerCapture(e.pointerId);lx=e.clientX;ly=e.clientY;if(hit.length){dragging=true;auto=0}else orbit=true;$('#tip').style.opacity=0});
+  cv.addEventListener('pointermove',e=>{const dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;if(dragging){const d=(dy*.9+dx*.35)*.0016*(dist/3.3);const no=clamp(open+d,0,MAX);vel=(no-open)*60;open=no}else if(orbit){tth=clamp(tth-dx*.006,-.9,1.3);tph=clamp(tph+dy*.004,.08,.75)}});
+  const rel=()=>{if(dragging){dragging=false;if(vel>.15)auto=0;else if(open>0){vel=Math.min(vel,-.9)}}orbit=false};
+  cv.addEventListener('pointerup',rel);cv.addEventListener('pointercancel',rel);
+  $('#aOpen').onclick=()=>{auto=1;vel=0};$('#aPush').onclick=()=>{auto=0;if(open<.02){auto=1;return}vel=-1.15};
+  // swatches
+  $('#swV').innerHTML=VEN.map((v,i)=>`<button data-i="${i}" class="${i?'':'on'}"><i style="background:linear-gradient(135deg,${v[1]},${v[1]}cc)"></i>${v[0]}</button>`).join('');
+  $('#swP').innerHTML=PAINT.map((p,i)=>`<button data-i="${i}" class="${i?'':'on'}"><i style="background:#${p[1].toString(16).padStart(6,'0')}"></i>${p[0]}</button>`).join('');
+  $('#swV').onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('#swV button').forEach(x=>x.classList.toggle('on',x===b));const t=tex(+b.dataset.i);mVen.map=t.h;mVenV.map=t.v;mVen.needsUpdate=mVenV.needsUpdate=dirty=true};
+  $('#swP').onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('#swP button').forEach(x=>x.classList.toggle('on',x===b));mPaint.color.copy(lc(PAINT[+b.dataset.i][1]));dirty=true};
+  const gc=$('#gr').getContext('2d');const pv=new THREE.Vector3(),tgt=V(0,.74,0);
+  const scl=$('#scl'),gSt=$('#gSt'),dls=['#d1','#d2','#d3'].map(id=>$(id)),dw=[];
+  function labels(){dls.forEach((el,i)=>{el.textContent=DL[i][1];dw[i]=el.offsetWidth});dirty=true}labels();if(document.fonts)document.fonts.ready.then(labels);
+  const place=()=>{cam.position.set(Math.sin(th)*Math.cos(ph)*dist,tgt.y+Math.sin(ph)*dist,Math.cos(th)*Math.cos(ph)*dist);cam.lookAt(tgt)};
+  let vis=false;new IntersectionObserver(es=>vis=es[0].isIntersecting).observe(box);
+  let last=performance.now(),lastEng=null,lastSt='',flat=false;hist=Array(150).fill(0);
+  function loop(){requestAnimationFrame(loop);const now=performance.now();const dt=Math.min(.05,(now-last)/1000);last=now;if(!vis)return;
+    const dth=tth-th,dph=tph-ph;if(Math.abs(dth)>1e-4||Math.abs(dph)>1e-4){th+=dth*.08;ph+=dph*.08;dirty=true}
+    // physics
+    if(!dragging){
+      if(auto===1){const t=MAX;vel=(t-open)*4.2;open+=vel*dt;if(Math.abs(t-open)<.001){open=t;vel=0;auto=0}}
+      else if(vel<0){ // moving closed
+        if(open>DAMP){vel*=Math.pow(.55,dt);vel=Math.min(vel,-.25)} // coast with friction, keep a minimum push
+        else{const tv=-open*5.5;vel+=(tv-vel)*Math.min(1,dt*14)} // damper: speed proportional to distance left
+        open+=vel*dt;if(open<=.0006){open=0;vel=0}}
+      else if(vel>0){vel*=Math.pow(.02,dt);open=clamp(open+vel*dt,0,MAX);if(vel<.01)vel=0}
+    }
+    if(dr.position.z!==open){dr.position.z=open;r.shadowMap.needsUpdate=dirty=true}
+    const engaged=!dragging&&vel<0&&open<=DAMP&&open>0;if(engaged!==lastEng){lastEng=engaged;scl.classList.toggle('on',engaged)}
+    const s=open<.001?'Closed':engaged?'Damper engaged':vel<0?'Closing':dragging?'Pulling':'Open';if(s!==lastSt){lastSt=s;gSt.textContent=s}
+    const sp=Math.abs(vel);if(sp||!flat){hist.push(sp);hist.shift();flat=!sp&&hist.every(v=>!v);
+      gc.clearRect(0,0,600,190);gc.strokeStyle='rgba(24,22,20,.1)';gc.lineWidth=1;for(let i=1;i<4;i++){gc.beginPath();gc.moveTo(0,i*47);gc.lineTo(600,i*47);gc.stroke()}
+      gc.beginPath();hist.forEach((v,i)=>{const x=i/149*600,y=180-Math.min(1,v/1.3)*165;i?gc.lineTo(x,y):gc.moveTo(x,y)});gc.strokeStyle='#181614';gc.lineWidth=3;gc.stroke()}
+    if(!dirty)return;dirty=false;
+    place();r.render(sc,cam);
+    dls.forEach((el,i)=>{pv.copy(DL[i][0]).project(cam);el.style.transform=`translate(${(pv.x*.5+.5)*cw-dw[i]/2}px,${(-pv.y*.5+.5)*ch-12}px)`;el.style.opacity=pv.z<1?1:0});
+  }
+  // compile shaders and draw once off screen, start the loop, then make the other veneers in spare moments
+  idle(()=>{place();r.compile(sc,cam);idle(()=>{r.render(sc,cam);running=true;loop();let k=1;(function more(){if(k>=VEN.length)return;const t=tex(k++);if(r.initTexture){r.initTexture(t.h);r.initTexture(t.v)}idle(more)})()})});
+  }
+})();
+
+/* ---------- real build strip ---------- */
+(function(){const rs=$('#rs');$('#rl').onclick=()=>rs.scrollBy({left:-380,behavior:'smooth'});$('#rr').onclick=()=>rs.scrollBy({left:380,behavior:'smooth'})})();
+
+/* ---------- reviews ---------- */
+(function(){const R=[
+ ['Lynda Metcalfe','Very happy with media unit recently installed by the team at Bespoke Interiors. Mark ensured the design was exactly what I wanted and made a few house visits to ensure we got it just right.'],
+ ['Paul & Gaye Murray','From the very outset Mark was very hands on in relation to design, choosing materials and working with us in choosing colour schemes. The crew left the site clean and safe after each day.'],
+ ['Olive Gaynor','A cosy living room centrepiece beyond my expectations. Mark\'s experience and attention to detail was crucial. The fitting was ahead of schedule with great precision.'],
+ ['Elaine Sherwin','We cannot praise Bespoke Interiors enough. Everyone has said it looks as if it had been part of the room all along.'],
+ ['Julian Rothera','A dark and dated kitchen has been completely transformed. The room now radiates light and has a fresh modern feel to it.'],
+ ['Gillian O\'Connell','They definitely brought the WOW factor into our sitting room with their expert advice and attention to detail.'],
+ ['Peader Wallace','The seamless experience, from initial email to project completion, was truly commendable.'],
+ ['Orla Mc Gowan','From the initial consultation Mark really listened to us and our ideas for our home, and ensured it was 100% perfect before finishing.']];
+ const q=$('#rq');q.innerHTML=R.map((r,i)=>`<blockquote class="${i?'':'on'}"><q>"${r[1]}"</q><cite>${r[0]} · Google review</cite></blockquote>`).join('');
+ let i=0,tm;const bs=$$('#rq blockquote');function go(k){bs[i].classList.remove('on');i=(k+bs.length)%bs.length;bs[i].classList.add('on');$('#rqc').textContent=String(i+1).padStart(2,'0')+' / '+String(bs.length).padStart(2,'0');clearTimeout(tm);tm=setTimeout(()=>go(i+1),7000)}
+ $('#rqn').onclick=()=>go(i+1);$('#rqp').onclick=()=>go(i-1);tm=setTimeout(()=>go(1),7000)})();
+
+/* ---------- gallery lightbox ---------- */
+$('#gal').addEventListener('click',e=>{const g=e.target.closest('.gi');if(!g)return;const im=g.querySelector('img');$('#lbi').src=im.dataset.full||im.src;$('#lbx').classList.add('on')});
+$('#lbxx').onclick=()=>$('#lbx').classList.remove('on');$('#lbx').onclick=e=>{if(e.target.id==='lbx')$('#lbx').classList.remove('on')};
+addEventListener('keydown',e=>{if(e.key==='Escape')$('#lbx').classList.remove('on')});
+</script>
+<form name="design-visit" method="POST" data-netlify="true" netlify-honeypot="bot" hidden><input type="hidden" name="form-name" value="design-visit"><input name="design"><input name="page"><input name="bot"><input name="name"><input name="phone"><input name="town"><select name="service"><option>Kitchen</option></select><textarea name="message"></textarea></form>
+<script>
+/* ---------- design it live ---------- */
+(function(){const LV={"kitchen": {"n": "Kitchen", "page": "kitchens.html", "tile": "Kitchen", "base": 14500, "img": "k-{c}-{w}", "groups": [{"id": "c", "l": "Cabinets", "t": "sw", "o": [{"v": "sage", "l": "Sage green", "c": "#8a9a82"}, {"v": "navy", "l": "Midnight navy", "c": "#26324a"}, {"v": "cash", "l": "Cashmere", "c": "#d8cdbd"}, {"v": "black", "l": "Soft black", "c": "#2f2e2c"}]}, {"id": "w", "l": "Worktop", "t": "op", "o": [{"v": "quartz", "l": "White quartz", "s": "+\u20ac2,400", "add": 2400}, {"v": "oak", "l": "Solid oak", "s": "+\u20ac1,250", "add": 1250}, {"v": "marble", "l": "Black marble", "s": "+\u20ac3,900", "add": 3900}]}]}, "wardrobe": {"n": "Wardrobes", "page": "fitted-wardrobes.html", "tile": "Fitted wardrobes", "img": "w-{c}", "groups": [{"id": "c", "l": "Door colour", "t": "sw", "o": [{"v": "white", "l": "Chalk white", "c": "#eeeae3"}, {"v": "sage", "l": "Sage green", "c": "#8a9a82"}, {"v": "navy", "l": "Midnight navy", "c": "#26324a"}, {"v": "cash", "l": "Cashmere", "c": "#d8cdbd"}]}, {"id": "d", "l": "Doors", "t": "op", "o": [{"v": "Hinged", "l": "Hinged", "s": "shaker", "add": 0}, {"v": "Sliding", "l": "Sliding", "s": "space saving", "add": 0}, {"v": "Handleless", "l": "Handleless", "s": "push to open", "add": 0}]}]}, "bath": {"n": "Bathroom", "page": "bathrooms.html", "tile": "Bathroom", "img": "b-{c}", "groups": [{"id": "c", "l": "Look", "t": "sw", "o": [{"v": "marble", "l": "Calacatta & oak", "c": "#e8e4de"}, {"v": "green", "l": "Green zellige & walnut", "c": "#2f5241"}, {"v": "stone", "l": "Limestone & black", "c": "#cbbfae"}, {"v": "clay", "l": "Clay plaster & chrome", "c": "#d9b4a4"}]}, {"id": "d", "l": "Layout", "t": "op", "o": [{"v": "Walk-in shower", "l": "Walk-in", "s": "shower", "add": 0}, {"v": "Bath and shower", "l": "Bath +", "s": "shower", "add": 0}, {"v": "Wet room", "l": "Wet room", "s": "level floor", "add": 0}]}]}, "panel": {"n": "Panelling", "page": "wall-panelling.html", "tile": "Wall panelling", "img": "p-{c}", "groups": [{"id": "c", "l": "Colour", "t": "sw", "o": [{"v": "stone", "l": "Warm stone", "c": "#bdb3a5"}, {"v": "sage", "l": "Deep sage", "c": "#6f7f69"}, {"v": "navy", "l": "Midnight navy", "c": "#26324a"}, {"v": "white", "l": "Chalk white", "c": "#eeeae3"}]}, {"id": "d", "l": "Panel style", "t": "op", "o": [{"v": "Raised wainscoting", "l": "Raised", "s": "wainscoting", "add": 0}, {"v": "Shaker panels", "l": "Shaker", "s": "panels", "add": 0}, {"v": "Fluted", "l": "Fluted", "s": "vertical", "add": 0}]}]}};const root=$('#lv');if(!root)return;
+  const stage=$('#lvStage'),body=$('#lvBody'),chips=$('#lvChips'),cache={};let tab='kitchen',st={},cur=null,want=null,touched=false;
+  const img=k=>{if(!cache[k]){const m=new Image();m.alt='';m.decoding='async';m.src='img/cfg/'+k+'.webp';stage.insertBefore(m,stage.firstChild);cache[k]=m}return cache[k]};
+  const key=()=>LV[tab].img.replace('{c}',st.c).replace('{w}',st.w||'');
+  const opt=(g,v)=>g.o.find(o=>o.v===v);
+  function build(){const T=LV[tab];st={};T.groups.forEach(g=>st[g.id]=g.o[0].v);if(tab==='kitchen')st.w='oak';
+    body.innerHTML=T.groups.map(g=>`<div class="lv-g"><h5><span class="lbl">${g.l}</span><em data-h="${g.id}"></em></h5><div class="${g.t==='sw'?'lv-sw':'lv-op'}" data-g="${g.id}">${g.o.map(o=>g.t==='sw'?`<button data-v="${o.v}" style="background:${o.c}" aria-label="${o.l}"></button>`:`<button data-v="${o.v}">${o.l}<small>${o.s}</small></button>`).join('')}</div></div>`).join('');
+    $('#lvOpen').href=T.page+'#design';$('#lvOpen').textContent='Open the full '+T.n.toLowerCase()+' designer';
+    // warm the other looks for this room
+    setTimeout(()=>T.groups[0].o.forEach(o=>{const s=Object.assign({},st,{c:o.v});img(T.img.replace('{c}',s.c).replace('{w}',s.w||''))}),400);
+    render()}
+  let shown=0,raf;
+  function price(to){const el=$('#lvP');cancelAnimationFrame(raf);const from=shown||to*.9,t0=performance.now();(function f(){const p=Math.min(1,(performance.now()-t0)/700),v=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));shown=v;el.innerHTML='<small>from </small>€'+v.toLocaleString('en-IE');if(p<1)raf=requestAnimationFrame(f)})()}
+  function render(){const T=LV[tab],m=want=img(key());if(cur!==m){const show=()=>{if(want!==m)return;if(cur)cur.classList.remove('on');m.classList.add('on');cur=m};m.complete?show():m.onload=show}
+    T.groups.forEach(g=>{$(`[data-h="${g.id}"]`,root)&&($(`[data-h="${g.id}"]`).textContent=opt(g,st[g.id]).l);root.querySelectorAll(`[data-g="${g.id}"] button`).forEach(b=>b.classList.toggle('on',b.dataset.v===st[g.id]))});
+    chips.innerHTML=T.groups.map(g=>{const o=opt(g,st[g.id]);return `<span>${o.c?`<i style="background:${o.c}"></i>`:''}${o.l}</span>`}).join('');
+    if(T.base){let p=T.base;T.groups.forEach(g=>p+=opt(g,st[g.id]).add||0);$('#lvPl').textContent='Guide price';price(p);$('#lvPs').textContent='Fixed price after your design visit'}
+    else{$('#lvPl').textContent='Your price';$('#lvP').innerHTML='Fixed, <small>not guessed</small>';$('#lvPs').textContent='Mark measures up and prices it at your house'}
+    const a=opt(T.groups[0],st.c).l,b=opt(T.groups[1],st[T.groups[1].id]).l;
+    window.LVSUM=T.n+': '+a+(tab==='kitchen'?' cabinets, '+b.toLowerCase()+' worktop':', '+b.toLowerCase()+(tab==='panel'?' panels':tab==='wardrobe'?' doors':''))}
+  root.addEventListener('click',e=>{const b=e.target.closest('[data-g] button');if(b){touched=true;st[b.closest('[data-g]').dataset.g]=b.dataset.v;render();return}});
+  $('#lvTabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;touched=true;tab=b.dataset.t;$('#lvTabs').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));build()});
+  $('#lvLock').onclick=()=>{const w=$('#wdes');if(w){w.innerHTML='<b>Your design:</b> '+window.LVSUM;w.classList.add('on')}$('#quote').scrollIntoView({behavior:'smooth'});if(window.wzPick)setTimeout(()=>wzPick(LV[tab].tile),650)};
+  build();window.LVSUM='';
+  // first time it comes into view, flick through the colours once
+  new IntersectionObserver((es,o)=>{if(!es[0].isIntersecting)return;o.disconnect();const g=LV.kitchen.groups[0].o;let n=1;const iv=setInterval(()=>{if(touched||tab!=='kitchen'||n>g.length){clearInterval(iv);if(!touched&&tab==='kitchen'){st.c=g[0].v;render()}return}st.c=g[n%g.length].v;n++;render()},1600)},{threshold:.45}).observe(root);
+  addEventListener('pointerdown',e=>{if(e.target.closest('#lv'))touched=true},{passive:true});
+})();
+/* ---------- nav dropdown (tap on touch screens) ---------- */
+(function(){const d=document.querySelector('.ddn');if(!d)return;d.querySelector('button').addEventListener('click',e=>{e.stopPropagation();d.classList.toggle('open')});document.addEventListener('click',()=>d.classList.remove('open'))})();
+</script>
+
+<script>
+/* ===== round 3: hero motion ===== */
+(function(){const hero=document.querySelector('.hero');if(!hero)return;const show=hero.querySelector('.hshow'),c=hero.querySelector('.c');
+  const shade=document.createElement('div');shade.className='hshade';hero.insertBefore(shade,c);
+  // rotating word, synced with the slides
+  const rw=document.getElementById('rw'),us=rw?[...rw.querySelectorAll('u')]:[];let wi=0;
+  const fit=()=>{if(rw)rw.style.width=us[wi].offsetWidth+'px'};
+  function word(n){if(!rw||n===wi)return;const o=us[wi];o.classList.remove('on');o.classList.add('out');setTimeout(()=>o.classList.remove('out'),1000);wi=n;us[wi].classList.add('on');fit()}
+  fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);
+  const figs=[...hero.querySelectorAll('.hsl')];
+  const sync=()=>{const k=figs.findIndex(f=>f.classList.contains('on'));if(k>-1&&us.length)word(k%us.length);
+    figs.forEach(f=>{const v=f.querySelector('video');if(v){if(f.classList.contains('on'))v.play().catch(()=>{});else v.pause()}})};
+  figs.forEach(f=>new MutationObserver(sync).observe(f,{attributes:true,attributeFilter:['class']}));sync();
+  // pointer parallax + scroll-out
+  let mx=0,my=0,tx=0,ty=0,sy=-1;
+  if(matchMedia('(pointer:fine)').matches)hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-.5;ty=(e.clientY-r.top)/r.height-.5},{passive:true});
+  (function f(){mx+=(tx-mx)*.06;my+=(ty-my)*.06;const p=Math.min(1,Math.max(0,scrollY/innerHeight));
+    if(p<1||sy!==p){show.style.transform=`translate3d(${(-mx*18).toFixed(2)}px,${(-my*12+p*innerHeight*.18).toFixed(2)}px,0) scale(${(1.04+p*.08).toFixed(4)})`;
+      c.style.transform=`translate3d(${(mx*8).toFixed(2)}px,${(-p*60).toFixed(2)}px,0)`;c.style.opacity=Math.max(0,1-p*1.7).toFixed(3);shade.style.opacity=(p*.55).toFixed(3);sy=p}
+    requestAnimationFrame(f)})();
+})();
+/* ===== round 3: hero design-it-live card ===== */
+(function(){const a=document.querySelector('.hlive');if(!a)return;const im=[...a.querySelectorAll('.hl-im img')],sw=[...a.querySelectorAll('.hl-sw i')];let k=0;
+  setInterval(()=>{im[k].classList.remove('on');sw[k].classList.remove('on');k=(k+1)%im.length;im[k].classList.add('on');sw[k].classList.add('on')},1900)})();
+/* ===== round 3: gallery show more ===== */
+(function(){const g=document.getElementById('gal'),m=document.getElementById('gmore');if(!g||!m)return;const all=()=>{g.classList.remove('lim');m.classList.add('all')};
+  document.getElementById('gmb').onclick=all;document.getElementById('gf').addEventListener('click',e=>{if(e.target.closest('button'))all()})})();
+</script>
+<script>window.FX={split:'.shead h2,.build .bl h2,.cta h2,.cl-head h2',clip:'.dc,.rc .im,.fv,.gal2 .gi,.lv-tool',cur:[['.gal2 .gi','View'],['.lv-stage','Your design'],['.svs','Next photo'],['.bmq a','Open'],['.cl-stage','Colour']]};</script>
+<script src="assets/fx.js" defer></script>
+<script src="assets/colours.js" defer></script>
+</body>
+</html>
