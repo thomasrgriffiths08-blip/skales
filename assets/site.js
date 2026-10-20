@@ -19,7 +19,37 @@
     if (/^mailto:/.test(h)) skTrack('email_click', { page: location.pathname });
     else if (/wa\.me\//.test(h)) skTrack('whatsapp_click', { page: location.pathname });
   });
+  /* the viewer: a tap on any build opens it full screen, the rest a tap away (assets/viewer.js, fetched on
+     first use and warmed once the page is idle, so it never competes with the page's own first paint) */
+  var vq = [], vState = 0;
+  function viewer(cb){
+    if (window.SKV) return cb && cb();
+    if (cb) vq.push(cb);
+    if (vState) return; vState = 1;
+    var base = S.base || '', left = 2, done = function(){ if (--left) return; vState = 2; var q = vq; vq = []; q.forEach(function(f){ f(); }); };
+    var css = d.createElement('link'); css.rel = 'stylesheet'; css.href = base + 'assets/viewer.css'; css.onload = done; css.onerror = done; d.head.appendChild(css);
+    var fail = function(){ left = 1; done(); };
+    var add = function(src, next){ var s = d.createElement('script'); s.src = base + 'assets/' + src; s.onload = next; s.onerror = fail; d.body.appendChild(s); };
+    var go = function(){ add('viewer.js', done); };
+    if (window.BUILDS) go(); else add('builds.js', go);
+  }
+  var slugOf = function(a){ var m = /(?:^|\/)(?:demos|work)\/([a-z0-9-]+)\/(?:index\.html)?(?:#s=1)?$/.exec(a.getAttribute('href') || ''); return m && !/^(websites|tools)$/.test(m[1]) ? m[1] : null; };
+  d.addEventListener('click', function(e){
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a.tile, a[href*="demos/"], [data-view]'); if (!a) return;
+    var slug = a.getAttribute('data-view') || slugOf(a); if (!slug) return;
+    e.preventDefault();
+    viewer(function(){ if (!window.SKV || !SKV.open(slug, a)) location.href = a.href || (S.base || '') + 'demos/' + slug + '/#s=1'; });
+  });
+  window.skViewer = viewer;
+  window.addEventListener('load', function(){
+    if (!d.querySelector('a.tile, a[href*="demos/"], [data-view]')) return;
+    var warm = function(){ viewer(); };
+    ('requestIdleCallback' in window) ? requestIdleCallback(warm, { timeout: 4000 }) : setTimeout(warm, 2500);
+  });
   d.addEventListener('DOMContentLoaded', function(){
+    var vm = /#view=([a-z0-9-]+)/.exec(location.hash);
+    if (vm) viewer(function(){ if (window.SKV) SKV.open(vm[1]); });
     var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, '');
     d.querySelectorAll('[data-wa]').forEach(function(el){
       if (!wa){ el.hidden = true; return; }

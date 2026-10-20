@@ -83,7 +83,12 @@
     function select(n, user){
       var x = byN(n); if (!x || (current && current.n === n)) return; current = x;
       dev.classList.remove('is-live');
-      if (!frame){
+      /* on a phone a build inside the page fights the page for the scroll, so it is a still that opens the viewer */
+      if (window.matchMedia && matchMedia('(max-width: 760px)').matches){
+        screen.innerHTML = '<img class="dev-still" src="' + phone(x) + '" width="585" height="1266" alt="' + esc(x.name) + ' on a phone">'
+          + '<button type="button" class="dev-play" data-view="' + x.slug + '"><span>Use it full screen</span></button>';
+        dev.classList.add('is-live');
+      } else if (!frame){
         frame = d.createElement('iframe'); frame.src = demo(x); frame.setAttribute('title', x.name + ' — live build');
         frame.addEventListener('load', function(){ dev.classList.add('is-live'); screen.classList.remove('fade'); });
         screen.appendChild(frame);

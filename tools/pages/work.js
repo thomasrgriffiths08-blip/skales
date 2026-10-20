@@ -2,6 +2,7 @@ const L = require('../lib.js');
 const { site, builds, esc, pad, LANES, SITE_LANES, TOOL_LANES, laneOf, kindWord, Words } = L;
 
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
+const FIRST = [...SITE_LANES, ...TOOL_LANES].map(k => builds.filter(x => x.lane === k).sort((a, z) => a.n - z.n)[0]).find(Boolean);
 const inLane = k => builds.filter(x => x.lane === k);
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const crumbs = (b, items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map((it, i) => i === items.length - 1 ? `<span aria-current="page">${esc(it[0])}</span>` : `<a href="${b}${it[1]}">${esc(it[0])}</a><span>/</span>`).join('')}</nav>`;
@@ -14,7 +15,7 @@ const laneSection = (b, k, { question = false } = {}) => {
       <h2 id="h-${k}">${question ? esc(l.question) : `${esc(l.kindWord)} &middot; ${esc(l.name)}`}</h2>
       <p class="lead">${question ? esc(l.answer) : `<strong>${esc(l.line)}</strong> ${esc(l.who)}`}</p>
     </div>
-    ${list.length ? L.wall(b, list) : '<p class="f-note">Nothing here yet.</p>'}
+    ${list.length ? L.wall(b, list, list.length === 3 ? 'wall-3' : '') : '<p class="f-note">Nothing here yet.</p>'}
   </div>
 </section>`;
 };
@@ -45,6 +46,7 @@ ${L.header(b, 'work')}
 <section class="hero-w wrap">
   <h1>${Words(builds.length)} builds.<br>All of them running.</h1>
   <p class="lead">${SITES.length} full websites and ${TOOLS.length} business tools for service businesses, each made for an invented business so no client is on show. Open any of them and use it like a customer would. Every one has its own page.</p>
+  <div class="cta-row" style="margin-top:28px;align-items:center"><button type="button" class="btn btn-dark" data-view="${FIRST.slug}">Flick through all ${builds.length}</button><span class="hint-inline">Full screen, one at a time. Arrow keys work.</span></div>
 </section>
 <div class="wrap">${filters('all')}</div>
 ${[...SITE_LANES, ...TOOL_LANES].map(k => laneSection(b, k)).join('')}
@@ -173,7 +175,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
         <div class="copy">
           <p class="lead">${esc(x.long)}</p>
           <div class="meta"><span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span></div>
-          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Open it full size</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
+          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Use it full screen</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
           <p class="hint">This is the build itself, not a recording. Use it like a customer would. State is kept in your browser; there is a reset inside.</p>
         </div>
         <div class="side">${L.device(b, x)}</div>
@@ -205,7 +207,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
       <div class="body">
         <dl class="nameplate">
           <div><dt>Written</dt><dd>By hand, as a single self-contained page. No page-builder, no theme, no framework.</dd></div>
-          <div><dt>Dependencies</dt><dd>No frameworks. Fonts load from Google Fonts with system fallbacks, and the drawings, charts and interactions are written into the page.</dd></div>
+          <div><dt>Dependencies</dt><dd>No frameworks. Fonts are served from this site with system fallbacks, and the drawings, charts and interactions are written into the page.</dd></div>
           <div><dt>Imagery</dt><dd>No stock. Every visual is drawn in code, SVG or canvas.</dd></div>
           <div><dt>The business</dt><dd>${esc(x.biz)} &mdash; invented. Every person, number and review inside is fictional so nothing here exposes a real client.</dd></div>
           <div><dt>Runs on</dt><dd>Any modern browser, on a phone as much as a desktop. State stays in your browser; there is a reset control inside.</dd></div>

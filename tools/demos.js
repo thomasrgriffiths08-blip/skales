@@ -53,4 +53,6 @@ function guard(b){
     console.log(`${String(b.n).padStart(2,'0')} ${b.slug.padEnd(24)} ${(before/1024).toFixed(0).padStart(4)}K -> ${(html.length/1024).toFixed(0).padStart(4)}K`);
   }
   console.log(`total ${(total/1024).toFixed(0)}K -> ${(totalOut/1024).toFixed(0)}K, comments stripped, ${builds.length} demos locked to: ${hosts.join(', ')}`);
+  // fonts: swap each demo's Google Fonts link for self-hosted files (tools/demo-fonts.js)
+  require('child_process').execFileSync('node', [path.join(__dirname, 'demo-fonts.js')], { stdio: 'inherit' });
 })().catch(e => { console.error(e); process.exit(1); });
