@@ -477,7 +477,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "33 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "40 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -528,6 +528,12 @@
     "sub": "The tickets, the insurance and the tree, on one page."
   },
   {
+    "key": "for-handyman-services",
+    "title": "Handyman services",
+    "kicker": "For your trade",
+    "sub": "All the small jobs, priced from a photo."
+  },
+  {
     "key": "for-cleaners",
     "title": "Cleaning companies",
     "kicker": "For your trade",
@@ -538,6 +544,12 @@
     "title": "Window cleaners",
     "kicker": "For your trade",
     "sub": "Fill the gaps in your round, street by street."
+  },
+  {
+    "key": "for-chimney-sweeps",
+    "title": "Chimney sweeps",
+    "kicker": "For your trade",
+    "sub": "Booked before the first cold night, and reminded the year after."
   },
   {
     "key": "for-pest-control",
@@ -588,10 +600,22 @@
     "sub": "Consultation, treatment, top-up: each one booked at the right time."
   },
   {
+    "key": "for-nail-technicians",
+    "title": "Nail technicians and nail salons",
+    "kicker": "For your trade",
+    "sub": "A full book of appointments, without answering messages all evening."
+  },
+  {
     "key": "for-physios",
     "title": "Physiotherapists and clinics",
     "kicker": "For your trade",
     "sub": "From the first assessment to the last follow-up, booked."
+  },
+  {
+    "key": "for-massage-therapists",
+    "title": "Massage therapists",
+    "kicker": "For your trade",
+    "sub": "Booked while your hands are busy."
   },
   {
     "key": "for-dentists",
@@ -618,10 +642,28 @@
     "sub": "Every dog booked in, and booked back."
   },
   {
+    "key": "for-dog-walkers",
+    "title": "Dog walkers and pet sitters",
+    "kicker": "For your trade",
+    "sub": "Walks booked, keys trusted, owners kept in the loop."
+  },
+  {
+    "key": "for-dog-trainers",
+    "title": "Dog trainers",
+    "kicker": "For your trade",
+    "sub": "Puppy classes full before the first lesson."
+  },
+  {
     "key": "for-personal-trainers",
     "title": "Personal trainers",
     "kicker": "For your trade",
     "sub": "From first message to a booked block of sessions."
+  },
+  {
+    "key": "for-tutors",
+    "title": "Private tutors",
+    "kicker": "For your trade",
+    "sub": "Lessons booked by parents, not by text at ten at night."
   },
   {
     "key": "for-restaurants",
