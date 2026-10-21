@@ -34,24 +34,24 @@ Site address: until skales.studio points here, every link below uses the github.
 | First name / Last name | Tom / Griffiths. LinkedIn's rules: real name only, no titles or emoji in the name field. |
 | Additional name | Thomas (optional; helps searches for "Thomas Griffiths" find you, matching the site schema) |
 | Pronouns | Your call |
-| Current position | Founder, web designer & developer at Skales Studio (tick "show current company in my intro") |
-| Industry | IT Services and IT Consulting |
+| Current position | Founder · Ads, landing pages & web design at Skales Studio (tick "show current company in my intro") |
+| Industry | Marketing Services |
 | Location | United Kingdom, plus your town or nearest city. This matters more than it looks: local owners filter search by location, and Services-page requests are matched by it. |
 
 ### Headline (limit 220; the first ~60 characters are all many views show, so they say what you do)
 
-LinkedIn people-search matches on the headline and the current job title, so both carry the words clients and recruiters actually type: "web designer" and "web developer".
+LinkedIn people-search matches on the headline and the current job title, so both carry the words owners actually type: "Facebook ads", "Google ads", "landing pages". The job title keeps "web design" for recruiter searches.
 
 Recommended:
 
 ```text
-Web designer for UK trades and service businesses | Websites, online booking and follow-up automation | Founder, Skales Studio
+Facebook & Google ads, landing pages and follow-up for UK trades and service businesses | The whole funnel, built by one person | Founder, Skales Studio
 ```
 
-Alternative, if you want the ads in:
+Alternative, more local:
 
 ```text
-Web designer & developer | Websites, booking and follow-up automation for UK service businesses, plus the Meta and Google ads that point at them | Founder, Skales Studio
+Ads, landing pages and lead follow-up for West London trades | Meta & Google ads, websites, booking and CRM | Founder, Skales Studio
 ```
 
 ### Custom URL
@@ -70,21 +70,21 @@ Try in this order: `linkedin.com/in/tomgriffiths-skales`, `linkedin.com/in/tom-g
 ### About (limit 2,600; the first two or three lines show before "see more")
 
 ```text
-I build websites, online booking and follow-up automation for UK service businesses: plumbers, heating engineers, electricians, roofers, kitchen fitters, landscapers, cleaners, salons, and anyone whose work comes in by phone.
+I build the whole marketing funnel for UK service businesses: the Facebook, Instagram and Google ads, the landing page they click through to, and the booking and follow-up that turn an enquiry into a job. Plumbers, electricians, roofers, builders, salons, and anyone whose work comes in by phone.
 
-Work leaks out of a service business in small, quiet ways: a call nobody answers, a quote nobody chases, a happy customer nobody asks for a review. I build the system that catches each one.
+An ad that points at a page built to take no enquiry wastes the click. An enquiry nobody follows up wastes the ad. Each step only pays if the next one works, so I build every step as one system.
 
-What I build
-• Websites that turn a visit into a name and a number. Hand-coded, with no page builder and no theme.
-• Online booking with deposits, a CRM with every enquiry in it, and quotes that chase themselves.
-• Follow-up that runs on its own: missed-call text-back, review requests, service reminders, on-my-way texts.
-• Facebook, Instagram and Google ads that point at all of it, with the ad accounts set up in your name.
+The funnel
+• Ads: Facebook, Instagram and Google search ads, and Local Services Ads where the trade qualifies. The ad accounts are set up in your name.
+• Landing pages: one page per offer, built to turn a click into a name and a number. Hand-coded and fast, with no page builder and no theme.
+• Booking and CRM: slots customers take themselves, deposits that hold them, and every enquiry in one place with what happened to it.
+• Follow-up that runs on its own: missed-call text-back, quote chasing, review requests, service reminders.
 
 How it works
-1. Free teardown. I look at your website, your Google listing and what happens when someone tries to reach you, then send you three things: what is leaking, what to fix first, and what it is worth in jobs.
+1. Free teardown. I look at your ads, your website, your Google listing and what happens when someone tries to reach you, then send you three things: what is leaking, what to fix first, and what it is worth in jobs.
 2. A flat quote after a short call, agreed before anything starts.
 3. Built in public. A website on its own takes days; a full system with booking and follow-up usually takes one to two weeks.
-4. Handover. Your domain, code and accounts are in your name from day one. Nothing is rented back to you monthly.
+4. Handover. The ad accounts, domain, code and every other account are in your name from day one. Nothing is rented back to you monthly.
 
 Skales Studio is one person. The person you message is the person who builds it.
 
@@ -95,7 +95,7 @@ Run a service business? Book a call or ask for the free teardown. The links are 
 
 The build count goes up every week; update "Thirty-six" here, in Experience and on the Company Page when the site's number changes.
 
-**Top skills** (the five pinned under About): Web Design · Web Development · Marketing Automation · Google Ads · Social Media Advertising.
+**Top skills** (the five pinned under About): Facebook Ads · Google Ads · Landing Page Optimization · Web Design · Marketing Automation.
 
 ### Featured (in this order; each pulls the page's own OG card as its picture)
 
@@ -109,23 +109,24 @@ The build count goes up every week; update "Thirty-six" here, in Experience and 
 
 | Field | Value |
 |---|---|
-| Title | Founder, web designer & developer (not just "Founder & builder": the title is what search matches) |
+| Title | Founder · Ads, landing pages & web design (not just "Founder & builder": the title is what search matches) |
 | Employment type | Self-employed |
 | Company | Skales Studio (pick the Company Page once it exists) |
 | Dates | [month] 2026 to present |
 | Location | United Kingdom · Remote |
-| Skills | Web Design, Web Development, Marketing Automation, Google Ads, Social Media Advertising |
+| Skills | Facebook Ads, Google Ads, Landing Page Optimization, Web Design, Marketing Automation |
 | Media | Links to /work/ and /try/ |
 
 Description (limit 2,000):
 
 ```text
-One-person studio. I build websites, online booking with a CRM, and follow-up automation for UK service businesses, and run the Meta and Google ads that point at them.
+One-person studio. I build the whole marketing funnel for UK service businesses: Meta and Google ads, the landing pages they point at, and the online booking, CRM and follow-up automation behind them.
 
+• Ads run in the client's own ad accounts and point at landing pages built for one job: turning a click into an enquiry.
 • Every build is hand-coded in HTML, CSS and plain JavaScript: no framework, no page builder, no theme.
 • Thirty-six working demonstration builds run live on the site: quote engines, dispatch boards, booking with deposits, missed-call text-back, review requests, boiler-service and MOT reminders. Every business in them is fictional.
 • One new system a week, built in public on Instagram.
-• Clients own their domain, code and accounts from day one. Ad accounts are set up in the client's name.
+• Clients own their ad accounts, domain, code and every other account from day one.
 • Every job is quoted flat after a short call and agreed before anything starts.
 ```
 
@@ -133,7 +134,7 @@ Add any earlier jobs and your education as they really were. A short honest hist
 
 ### Services page ("Open to" → "Providing services")
 
-- **Services** (pick the closest from LinkedIn's list, up to 10): Web Design, Web Development, Custom Software Development, Search Engine Optimization (SEO), Digital Marketing, Advertising, Social Media Marketing, Search Engine Marketing (SEM).
+- **Services** (pick the closest from LinkedIn's list, up to 10): Advertising, Digital Marketing, Search Engine Marketing (SEM), Social Media Marketing, Lead Generation, Web Design, Web Development, Search Engine Optimization (SEO).
 - **Location:** tick "available to work remotely", plus your area.
 - **Pricing:** leave blank. No prices, same as the site.
 - **Reviews:** this is where the first real client reviews can live. Only ever ask real clients.
@@ -141,12 +142,12 @@ Add any earlier jobs and your education as they really were. A short honest hist
 Description (keep under 500):
 
 ```text
-Websites, online booking and follow-up automation for UK service businesses, plus the Meta and Google ads that point at them. Hand-coded, with no page builder and no theme. You own the domain, code and accounts from day one. A website on its own takes days; a full system with booking and follow-up usually takes one to two weeks. Every job is quoted flat after a short call. Start with the free teardown: three findings on your website and Google listing, sent by message.
+The whole marketing funnel for UK service businesses: Facebook, Instagram and Google ads, landing pages built to turn a click into an enquiry, and the booking and follow-up that turn an enquiry into a job. The ad accounts, domain and code are yours from day one. Hand-coded, with no page builder. Every job is quoted flat after a short call. Start with the free teardown: three findings on your ads, website and Google listing, sent by message.
 ```
 
 ### Skills (add these; skip any LinkedIn's autocomplete does not offer)
 
-Web Design · Web Development · Front-End Development · JavaScript · HTML5 · Cascading Style Sheets (CSS) · Responsive Web Design · Marketing Automation · Customer Relationship Management (CRM) · Google Ads · Facebook Ads · Social Media Advertising · Search Engine Optimization (SEO) · Local SEO · Conversion Rate Optimization · Lead Generation · Small Business Marketing
+Facebook Ads · Google Ads · Pay Per Click (PPC) · Social Media Advertising · Landing Page Optimization · Conversion Rate Optimization · Lead Generation · Marketing Automation · Customer Relationship Management (CRM) · Small Business Marketing · Web Design · Web Development · Front-End Development · JavaScript · HTML5 · Cascading Style Sheets (CSS) · Responsive Web Design · Search Engine Optimization (SEO) · Local SEO
 
 ### Photo
 
@@ -173,7 +174,7 @@ Upload `og/linkedin-banner.png`. The left side is left empty on purpose: your ph
 | Name | Skales Studio (the full name, so search engines don't confuse it with the SKALE crypto network) |
 | LinkedIn URL | `linkedin.com/company/skales-studio` (fallback `skalesstudio`) |
 | Website | https://thomasrgriffiths08-blip.github.io/skales/ |
-| Industry | IT Services and IT Consulting |
+| Industry | Marketing Services |
 | Organisation size | 0–1 employees |
 | Organisation type | Sole proprietorship if you trade as a sole trader; Privately held if Skales Studio is a limited company |
 | Logo | `og/icon.png` |
@@ -185,27 +186,27 @@ Upload `og/linkedin-banner.png`. The left side is left empty on purpose: your ph
 Tagline (limit 120):
 
 ```text
-Websites, booking and follow-up automation for UK service businesses. Hand-built, owned by you.
+Ads, landing pages and follow-up for UK service businesses. The whole funnel, owned by you.
 ```
 
 Overview (limit 2,000):
 
 ```text
-Skales Studio builds websites, online booking with a CRM, and follow-up automation for UK service businesses, and runs the Facebook, Instagram and Google ads that point at them. Mostly trades and local operators: plumbers, heating engineers, electricians, roofers, kitchen fitters, landscapers, cleaners and salons.
+Skales Studio builds the whole marketing funnel for UK service businesses: the Facebook, Instagram and Google ads, the landing pages they point at, and the online booking and follow-up that turn an enquiry into a job. Mostly trades and local operators: plumbers, heating engineers, electricians, roofers, kitchen fitters, landscapers, cleaners and salons.
 
 It is one person, Tom Griffiths. The person you message is the person who builds it.
 
-• Websites that turn a visit into a name and a number. Hand-coded, with no page builder and no theme.
-• Online booking with deposits, a CRM with every enquiry in it, and quotes that chase themselves.
-• Follow-up that runs on its own: missed-call text-back, review requests, service reminders, on-my-way texts.
-• Meta and Google ads, with the ad accounts set up in the client's name.
+• Ads: Facebook, Instagram and Google search ads, and Local Services Ads where the trade qualifies, in the client's own ad accounts.
+• Landing pages: one page per offer, built to turn a click into a name and a number. Hand-coded, with no page builder and no theme.
+• Booking and CRM: slots customers take themselves, deposits that hold them, and every enquiry in one place.
+• Follow-up that runs on its own: missed-call text-back, quote chasing, review requests, service reminders.
 
-Clients own their domain, code and accounts from day one; nothing is rented back to them monthly. Every job is quoted flat after a short call and agreed before anything starts.
+Clients own their ad accounts, domain, code and every other account from day one; nothing is rented back to them monthly. Every job is quoted flat after a short call and agreed before anything starts.
 
 Thirty-six working demonstration builds run live on the website, every one for an invented business, and one new system a week is built in public on Instagram (@tomxsystems).
 ```
 
-Specialties: Websites for service businesses · Online booking systems · CRM for trades · Follow-up automation · Missed-call text-back · Review request automation · Service reminders · Facebook and Instagram ads · Google Ads · Local SEO · Hand-coded websites
+Specialties: Facebook and Instagram ads · Google Ads · Local Services Ads · Landing pages · Lead generation for trades · Online booking systems · CRM for trades · Follow-up automation · Missed-call text-back · Review request automation · Hand-coded websites
 
 ---
 
@@ -214,17 +215,19 @@ Specialties: Websites for service businesses · Online booking systems · CRM fo
 ### The first post
 
 ```text
-I run Skales Studio. I build websites, online booking and follow-up automation for UK service businesses: the plumbers, electricians, roofers, salons and clinics whose work comes in by phone.
+I run Skales Studio in West London. I build the whole marketing funnel for service businesses: the Facebook and Google ads, the landing page they click through to, and the booking and follow-up behind it.
+
+Why the whole funnel: an ad that points at a page built to take no enquiry wastes the click, and an enquiry nobody follows up wastes the ad. Each step only pays if the next one works.
 
 Three rules I build to:
 
-1. You own it. The domain, the code and every account sit in your name from day one. Nothing is rented back to you monthly.
+1. You own it. The ad accounts, the domain, the code: all in your name from day one. Nothing is rented back to you monthly.
 2. One person. The person you message is the person who builds it.
 3. Proof, not promises. Thirty-six working builds run live on my site, each for an invented business so no client's numbers are on show. Open any of them and use it.
 
 I build one new system a week in public, and I'll post each one here.
 
-If you run a service business, or know someone who does, I'll look at the website, the Google listing and what happens when someone tries to get in touch, and send back three things: what is leaking, what to fix first, and what it is worth in jobs. Free.
+If you run a service business round West London, or know someone who does, I'll look at the ads, the website and what happens when someone tries to get in touch, and send back three things: what is leaking, what to fix first, and what it is worth in jobs. Free.
 
 https://thomasrgriffiths08-blip.github.io/skales/teardown.html
 ```
@@ -267,19 +270,19 @@ Find them with people search: keywords like `owner plumbing`, `director electric
 Invite note to a referral partner (under 200):
 
 ```text
-Hi [name], I build websites and booking systems for UK trades and service businesses. Plenty of your clients will be the people I work with, so it seemed worth connecting. Tom
+Hi [name], I build ads, landing pages and follow-up for UK trades and service businesses. Plenty of your clients will be the people I work with, so it seemed worth connecting. Tom
 ```
 
 After a business owner accepts (no pitch until they say yes):
 
 ```text
-Thanks for connecting, [name]. I build websites, online booking and follow-up for businesses like yours. If it's useful, I'll look at your website and Google listing and send back three things: what's leaking, what to fix first, and what it's worth in jobs. Free, no call needed. Want me to?
+Thanks for connecting, [name]. I build the whole funnel for businesses like yours: the ads, the landing page and the follow-up. If it's useful, I'll look at your website, your Google listing and any ads you're running, and send back three things: what's leaking, what to fix first, and what it's worth in jobs. Free, no call needed. Want me to?
 ```
 
 To people you know:
 
 ```text
-I've started Skales Studio: I build websites, online booking and follow-up automation for service businesses. If you know a tradesperson or small business owner whose website is letting them down, I'd be grateful for an introduction.
+I've started Skales Studio: I build ads, landing pages and follow-up for service businesses. If you know a tradesperson or small business owner who wants more enquiries, I'd be grateful for an introduction.
 ```
 
 One follow-up a week later if there's no reply, then leave it. When someone says yes to the teardown, do it properly; it is the best thing you have to show them.
@@ -304,7 +307,7 @@ One follow-up a week later if there's no reply, then leave it. When someone says
 Clients come first, so the public profile stays entirely about them. Nothing visible says you are looking: a client who reads "open to new roles" wonders whether you will be around to finish their build. The job side runs quietly underneath:
 
 - **Open to → Finding a new job**, visibility **Recruiters only**. Only people using LinkedIn's recruiter tools see it, and the green frame never appears on your photo. Job titles: Web Developer, Front-End Developer, Web Designer, JavaScript Developer. Location: your area, plus remote.
-- **Keep the client headline.** Recruiters search job titles and skills, and the profile already carries both: "web designer" and "web developer" in the headline and title, HTML, CSS and JavaScript in Experience and Skills.
+- **Keep the client headline.** Recruiters search job titles and skills, and the profile already carries both: "web design" in the title, HTML, CSS and JavaScript in Experience and Skills.
 - **Leave Featured in the client order.** All the builds is already in it, and it is the first thing a recruiter clicks.
 - When you apply, message the hiring manager or someone on the team with one line on why, and a link to the build closest to their work. That message is where you say you are looking, not the profile.
 
