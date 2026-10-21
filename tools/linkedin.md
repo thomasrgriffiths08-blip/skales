@@ -20,7 +20,7 @@ Site address: until skales.studio points here, every link below uses the github.
 6. Create the Skales Studio Company Page, then edit your Experience entry and pick it from the dropdown so the logo shows instead of a grey square. LinkedIn sometimes blocks Page creation on a brand-new account; if so, finish the profile, connect with people you know and try again a few days later.
 7. Put both URLs in `data/site.js` (`linkedin`, `linkedinPage`) and run `node tools/build.js`. They then appear in the footer, in `llms.txt` and in the schema `sameAs`, which tells search engines the profile, the Page and the site are the same person and business.
 8. Post the first post (below), then one a week alongside the Instagram build.
-9. Start connecting, fifteen minutes a weekday (see "Getting work from it").
+9. Start connecting, twenty minutes a weekday (see "The fast-growth plan").
 10. Turn on Open to work for recruiters only (see "Open to a job as well").
 
 ---
@@ -246,6 +246,42 @@ A second post each week can come straight from `/notes/` or the topics list in `
 
 ---
 
+## The fast-growth plan (first 90 days)
+
+LinkedIn grows fastest when the profile is finished before anyone sees it, the first connections are people who already know you, and every weekday has the same short routine. In this order:
+
+### Week 1: finish the profile, then switch on
+
+1. Finish everything before you invite anyone: photo, banner, Experience, About, Featured, custom URL, Services page. Invites from a profile with no photo mostly get ignored.
+2. Verify your identity (the badge next to your name). It is free, takes minutes, and makes strangers more likely to accept.
+3. Connect with everyone you already know. My Network → import your Gmail contacts, and tick people one by one rather than inviting the whole address book. Then old colleagues, school, college, friends and family.
+4. Ask two or three people who have seen your marketing work for a recommendation. Real people only.
+5. Post the introduction once you have 50 or more connections, so it has people to reach.
+
+### Weeks 2 to 4: twenty minutes a weekday
+
+- **15 targeted invites** from the tracker and referral partners (75 a week, under the limit a new account gets). If fewer than half are accepted, drop to 10 and tighten the targeting.
+- **10 useful comments** on posts by West London business owners, trade suppliers, accountants and local business networks. While your own audience is small, your comments on other people's posts are how most people will first see you.
+- **Message everyone who accepts**, from the tracker. One follow-up a week later, then stop.
+- **Post twice a week** (the Monday task writes them) and reply to every comment on the day.
+
+### Months 2 and 3: turn attention into calls
+
+- Once a fortnight, post the offer straight: free funnel teardowns for five West London service businesses this week, comment or message to claim one. Every comment is a warm lead and pushes the post further. Deliver every one you promise.
+- Post short phone videos of builds working. A real thing working on screen is the clearest proof you have.
+- Join local business groups on LinkedIn, and go in person to the local chamber of commerce and business networking breakfasts. Connect with everyone you meet the same day.
+- End every teardown that lands well with the offer of a short call, booked on your Calendly link.
+
+### What to count each month
+
+Connections, how many invites are accepted, replies to your after-accept message, teardowns sent, calls booked, clients won. The tracker counts most of these for you.
+
+### What gets accounts restricted
+
+Automation tools, bought followers or engagement pods, much more than 100 invites a week, and the same pitch pasted to people who never connected with you.
+
+---
+
 ## Getting work from it
 
 The profile gets you found. The work comes from who you connect with and what you say to them after.
@@ -262,7 +298,7 @@ Find them with people search: keywords like `owner plumbing`, `director electric
 ### The numbers that keep the account safe
 
 - A free account gets about **five personalised invite notes a month**, each **up to 200 characters**. Spend them on referral partners and anyone you have a reason to know. Everyone else: send the invite without a note, then message after they accept (messaging a connection is free).
-- Keep to about **10 targeted invites a weekday**. A new account is restricted somewhere around 80 to 100 a week, and lots of ignored invites count against you. Withdraw any still pending after three weeks.
+- Keep to **10 to 15 targeted invites a weekday**. A new account is restricted somewhere around 80 to 100 a week, and lots of ignored invites count against you. Withdraw any still pending after three weeks.
 - Never use connection or messaging automation tools, engagement pods or bought followers. They break LinkedIn's terms and get accounts restricted.
 
 ### What to say
@@ -287,11 +323,11 @@ I've started Skales Studio: I build ads, landing pages and follow-up for service
 
 One follow-up a week later if there's no reply, then leave it. When someone says yes to the teardown, do it properly; it is the best thing you have to show them.
 
-### Fifteen minutes a weekday
+### Twenty minutes a weekday
 
 1. Reply to every message and comment first.
 2. Comment on three to five posts from referral partners and target businesses. A useful sentence, not "great post".
-3. Send about ten targeted invites.
+3. Send 10 to 15 targeted invites.
 4. Monday: post the week's build. Thursday: one short post from the notes.
 
 ### Proof
