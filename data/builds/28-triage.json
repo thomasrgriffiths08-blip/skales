@@ -23,7 +23,7 @@
     "A live wait on every unanswered enquiry — amber past 30 minutes, red past an hour",
     "j and k to move, r to reply, b to book, l to mark lost, without touching the mouse",
     "Reply with one of four templates, send a quote, or book a slot off the real calendar",
-    "The same enquiries as a five-lane board, dragged between lanes with pointer events so it works under a thumb",
+    "The same enquiries as a five-lane board, dragged between lanes with a mouse, with a one-tap Move to on phones",
     "Numbers: unanswered right now as the hero figure, median first reply, enquiries per channel, booked against lost",
     "A new enquiry lands about every 40 seconds while the tab is in front, and the median moves as you clear them"
   ],
