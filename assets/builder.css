@@ -145,7 +145,7 @@
   #try .try-card.has-pic{padding:0}
   #try .try-card h3{font-size:1.35rem}
 }
-@media (max-width:640px){.wall-home .tile:nth-child(n+5){display:none}}
+
 @media (max-width:520px){
   .b-two{grid-template-columns:1fr}
   .b-trades button{height:42px}

@@ -28,6 +28,9 @@ html.vw-open,html.vw-open body{overflow:hidden}
 .vw-modes button[aria-pressed="true"]{background:var(--vs2);color:var(--vt)}
 .vw-link{display:inline-flex;align-items:center;height:44px;padding:0 14px;border-radius:12px;font-size:.9375rem;font-weight:500;color:var(--vt);background:var(--vs);white-space:nowrap}
 .vw-link:hover{background:var(--vs2)}
+.vw-show{gap:8px}
+.vw-show svg{width:16px;height:16px;fill:currentColor;stroke:none}
+.vw.is-showing .vw-show{background:var(--vt);color:var(--vbg)}
 .vw-book{display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:12px;font-size:.9375rem;font-weight:600;background:var(--vt);color:var(--vbg);white-space:nowrap}
 .vw-book:hover{background:#FFF}
 
@@ -64,6 +67,13 @@ html.vw-open,html.vw-open body{overflow:hidden}
 .vw-cover::after{content:"";position:absolute;left:0;top:0;height:3px;width:30%;background:var(--vc);animation:vw-load 1.1s var(--ease) infinite}
 @keyframes vw-load{from{transform:translateX(-100%)}to{transform:translateX(340%)}}
 
+/* the Show me caption, like a subtitle under the build */
+.vw-cap{position:absolute;left:50%;bottom:26px;z-index:3;display:flex;align-items:baseline;gap:10px;max-width:min(560px,calc(100% - 180px));padding:11px 16px;border-radius:12px;
+  background:rgba(14,14,16,.94);color:var(--vt);font-size:.9375rem;line-height:1.35;box-shadow:0 10px 30px -10px rgba(0,0,0,.7);
+  opacity:0;transform:translate(-50%,6px);transition:opacity .2s,transform .2s var(--ease);pointer-events:none}
+.vw-cap.is-in{opacity:1;transform:translate(-50%,0)}
+.vw-cap i{flex:none;font-style:normal;font-size:.75rem;font-weight:600;color:var(--vt2);font-variant-numeric:tabular-nums;white-space:nowrap}
+
 /* the strip: every build, grouped by lane */
 .vw-strip{display:flex;gap:18px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
   padding:12px max(16px,env(safe-area-inset-right,0px)) max(14px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--vl)}
@@ -91,7 +101,7 @@ html.vw-open,html.vw-open body{overflow:hidden}
   .vw[data-mode] .vw-screen{border-radius:0}
   .vw[data-mode] .vw-cover img{display:block}
   .vw[data-mode] .vw-cover b{display:none}
-  .vw-dock{display:grid;grid-template-columns:48px 48px minmax(0,1fr) 48px;align-items:center;gap:6px;
+  .vw-dock{display:grid;grid-template-columns:48px 48px minmax(0,1fr) 48px 48px;align-items:center;gap:6px;
     padding:8px max(10px,env(safe-area-inset-right,0px)) max(8px,env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));background:var(--vbg);border-top:1px solid var(--vl)}
   .vw-dock>button:not(.vw-which){display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:var(--vs)}
   .vw-dock>button:active{transform:scale(.95)}
@@ -102,6 +112,10 @@ html.vw-open,html.vw-open body{overflow:hidden}
   .vw-hint{position:absolute;left:12px;right:12px;bottom:calc(100% + 10px);display:block;padding:12px 14px;border-radius:12px;background:rgba(14,14,16,.92);color:var(--vt);font-size:.875rem;line-height:1.4;
     box-shadow:0 10px 30px -10px rgba(0,0,0,.6);opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s var(--ease);pointer-events:none}
   .vw-hint.is-in{opacity:1;transform:none}
+  .vw-dock>button.vw-show{background:var(--vt);color:var(--vbg)}
+  .vw.is-showing .vw-dock>button.vw-show{background:var(--vs);color:var(--vt)}
+  .vw-cap{left:12px;right:12px;bottom:12px;max-width:none;transform:translateY(6px)}
+  .vw-cap.is-in{transform:none}
   .vw-dock{position:relative}
   .vw-sheet{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;background:var(--vbg);transform:translateY(100%);transition:transform .3s var(--ease);visibility:hidden}
   .vw-sheet.is-in{transform:none;visibility:visible}

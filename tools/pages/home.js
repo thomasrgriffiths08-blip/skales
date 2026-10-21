@@ -6,7 +6,8 @@ const TRY = require('./try.js').DEMOS.filter(x => x.live), tryCard = require('./
 /* the same slug rule as assets/builder.js, so the example pages match what the builder writes */
 const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
-const FEATURED = [14, 19, 27, 17, 25, 2, 33, 10].map(B).filter(Boolean);
+/* four websites fill a row of phones, three tools a row of screens */
+const FEATURED = [19, 17, 10, 24, 25, 27, 14].map(B).filter(Boolean);
 /* the opening film: Your town. One continuous take over a white model of a British town at night: the lit windows go
    out one by one until a single house is still lit, then the camera glides down to that house until its open, glowing
    back door fills the screen. Two generated parts, the second starting on the first one's last frame, so there is no

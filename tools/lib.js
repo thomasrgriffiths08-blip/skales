@@ -58,12 +58,39 @@ const words = n => n < 20 ? WORDS[n] : TENS[Math.floor(n / 10)] + (n % 10 ? '-' 
 const Words = n => { const w = words(n); return w[0].toUpperCase() + w.slice(1); };
 const wordmark = (b) => `<a class="wordmark" href="${b || './'}" aria-label="${esc(site.name)} — home">${esc(site.wordmark.a)}<i>${esc(site.wordmark.x)}</i>${esc(site.wordmark.b)}</a>`;
 
-/* ---------- the phone tile: a build as it looks in a hand ---------- */
+/* ---------- the tile: a build as it looks in use ----------
+   A website is a phone, a tool is a screen. The still is the frame before its Show me moment starts
+   (assets/clips/NN.webp); the clip (NN.mp4) plays once when the tile is in view (assets/site.js). */
 const phoneSrc = (b, x) => `${b}assets/phones/${pad(x.n)}.webp`;
-const tile = (b, x, { dir = '', eager = false } = {}) => `<a class="tile" href="${b}work/${x.slug}/" data-n="${x.n}" data-kind="${x.kind}" data-lane="${x.lane}">
-  <span class="shell"><img src="${phoneSrc(b, x)}" width="585" height="1266" alt="${esc(x.name)} on a phone — ${esc(x.short)}"${eager ? '' : ' loading="lazy"'} decoding="async"></span>
-  <span class="cap">${dir ? `<span class="dir">${esc(dir)}</span>` : ''}<b>${esc(x.name)}</b><span>${esc(kindWord(x))} &middot; ${esc(laneOf(x).name)} &middot; ${esc(x.trade || x.biz)}</span></span></a>`;
-const wall = (b, list, cls = '') => `<div class="wall${cls ? ' ' + cls : ''}">${list.map(x => tile(b, x)).join('')}</div>`;
+const clipSrc = (b, x, ext) => `${b}assets/clips/${pad(x.n)}.${ext}`;
+const tile = (b, x, { dir = '', eager = false } = {}) => {
+  const wide = x.kind === 'tool', w = wide ? 1280 : 600, h = wide ? 800 : 1077;
+  return `<a class="tile${wide ? ' is-wide' : ''}" href="${b}work/${x.slug}/" data-n="${x.n}" data-kind="${x.kind}" data-lane="${x.lane}" data-trade="${esc(tradeKey(x))}">
+  <span class="shell"><img src="${clipSrc(b, x, 'webp')}" width="${w}" height="${h}" alt="${esc(x.name)} ${wide ? 'on a laptop' : 'on a phone'}: ${esc(x.short)}"${eager ? '' : ' loading="lazy"'} decoding="async"><video muted playsinline preload="none" data-src="${clipSrc(b, x, 'mp4')}" aria-hidden="true"></video></span>
+  <span class="cap">${dir ? `<span class="dir">${esc(dir)}</span>` : ''}<b>${esc(x.name)}</b><span>${esc(x.short)}</span><span class="for">${esc(kindWord(x))} &middot; ${esc(x.trade || x.biz)}</span></span></a>`;
+};
+/* a mixed list goes out as two walls, the phones together and the screens together */
+const wall = (b, list, cls = '') => {
+  const sites = list.filter(x => x.kind === 'site'), tools = list.filter(x => x.kind === 'tool');
+  const one = (l, c) => `<div class="wall${c}${cls ? ' ' + cls : ''}">${l.map(x => tile(b, x)).join('')}</div>`;
+  if (sites.length && tools.length) return `<div class="walls">${one(sites, '')}${one(tools, ' wall-wide')}</div>`;
+  return one(list, tools.length ? ' wall-wide' : '');
+};
+/* trades for the "your trade" filter: a build is for one trade, or for any (it then shows under all of them) */
+const TRADES = [
+  ['heating', 'Heating & plumbing', /heating|plumb|boiler/i], ['electrician', 'Electrician', /electric/i], ['roofer', 'Roofer', /roof/i],
+  ['builder', 'Builder & kitchens', /kitchen|building/i], ['garage', 'Garage', /garage|mot|mechanic/i], ['salon', 'Hair & beauty', /salon|hair/i],
+  ['cleaner', 'Cleaner', /clean/i], ['locksmith', 'Locksmith', /lock/i], ['tree', 'Gardens & trees', /tree|garden/i],
+  ['restaurant', 'Restaurant', /restaurant|café|cafe/i], ['gym', 'Gym & coaching', /boxing|gym/i], ['tattoo', 'Tattoo studio', /tattoo/i],
+  ['clinic', 'Clinic & physio', /physio|clinic/i], ['accountant', 'Accountant & broker', /accountant|mortgage|broker/i],
+  ['creative', 'Studio, film & events', /architect|film|drone|festival|fragrance|design/i], ['software', 'Software', /software/i],
+];
+const tradeKey = x => {
+  const t = x.trade || '';
+  if (/^any/i.test(t)) return 'any';
+  const hit = TRADES.find(([, , re]) => re.test(t) || re.test(x.biz || ''));
+  return hit ? hit[0] : 'other';
+};
 /* the device: one live build in a phone. data-start boots it; thumbs are optional */
 const device = (b, x, { thumbs = false } = {}) => `<div class="hero-device">
   <div class="device" id="device" data-start="${x.n}"><div class="screen"><div class="loading">Loading ${esc(x.name)}</div></div></div>
@@ -222,4 +249,4 @@ const keepHyphens = html => html.replace(/<(h[1-3])\b([^>]*)>([\s\S]*?)<\/\1>/g,
 const page = (h, body, s) => `${h}\n<body>\n${keepHyphens(body)}\n${s}\n</body>\n</html>\n`;
 
 site.facts = site.facts.map(f => f.replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
-module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc, heroPhone };
+module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc, clipSrc, heroPhone, TRADES, tradeKey };
