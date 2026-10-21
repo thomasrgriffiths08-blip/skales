@@ -123,10 +123,10 @@ const CORE = [
   { n:10, slug:'signal', file:'10-kinetic-type.html', kind:'site', lane:'loud', trade:'Festival', mobile:true, group:'Websites',
     name:'SIGNAL 2027', biz:'Music & light festival', c:'#3B18E0', pg:'#FFFFFF',
     short:'Type that reacts to how hard you scroll.',
-    long:'Three days of sound, code and light. Marquees whose speed and skew answer your scrolling, headlines that scramble into place, an RGB fringe on the display type because the identity is light being split, and a live countdown in enormous tabular numerals.',
+    long:'Three days of sound, code and light. Marquees whose speed and skew answer your scrolling, headlines that rise into place, an RGB fringe on the display type because the identity is light being split, and a live countdown in enormous tabular numerals.',
     proves:'Loud, and still not a template.',
     tags:['Scroll-velocity type','RGB fringe','Live countdown'],
-    features:['Marquees that answer scroll velocity','Headlines that scramble into place','RGB fringe on display type','Live countdown, schedule grid, ticket maths'],
+    features:['Marquees that answer scroll velocity','Headlines that rise into place','RGB fringe on display type','Live countdown, schedule grid, ticket maths'],
     story:'The loud one. Every effect on it is tied to the subject — light being split — rather than bolted on.' },
 ];
 
