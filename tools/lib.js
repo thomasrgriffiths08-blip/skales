@@ -95,12 +95,12 @@ function baseGraph(){
       founder: { '@id': PERSON_ID }, foundingDate: site.founded,
       areaServed: { '@type': 'Country', name: site.areaServed },
       knowsAbout: ['Web design for service businesses','Online booking systems','CRM for trades','Missed-call text-back automation','Customer follow-up automation','Trades websites','Review request automation','Facebook and Instagram advertising','Google Ads','Local SEO'],
-      sameAs: [site.instagram],
+      sameAs: [site.instagram, site.linkedinPage].filter(Boolean),
       contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: site.email, availableLanguage: 'en-GB', areaServed: 'GB' },
       logo: { '@type': 'ImageObject', url: abs('/og/home.png') },
       hasOfferCatalog: { '@type': 'OfferCatalog', name: site.legalName + ' services', itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(`/services/${s.slug}/`) + '#service', name: s.name, url: abs(`/services/${s.slug}/`) } })) } },
     { '@type': 'Person', '@id': PERSON_ID, name: site.founder.name, alternateName: site.founder.alternateName,
-      jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram], nationality: 'GB' },
+      jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram, site.linkedin].filter(Boolean), nationality: 'GB' },
     { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.legalName, alternateName: site.name, description: site.tagline,
       publisher: { '@id': ORG_ID }, inLanguage: site.locale },
   ];
@@ -186,7 +186,7 @@ function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
   const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['Tools', 'work/tools/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ...TOOL_LANES.map(k => [`${LANES[k].name} tools`, `work/tools/#${k}`])];
   const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
-  const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
+  const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram], ...(site.linkedin ? [['LinkedIn', site.linkedin]] : [])];
   return `${o.mbar === false ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
 <footer class="site-foot">
   <div class="wrap">

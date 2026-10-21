@@ -17,5 +17,8 @@ cat > /tmp/_icon.html <<'H'
 <!doctype html><body style="margin:0;width:512px;height:512px;background:#FFFFFF;display:grid;place-items:center"><svg width="400" height="400" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#141416"/><path d="M22 16v32M43 17L25 33l18 15" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></body>
 H
 cp /tmp/_icon.html tools/_icon.html; shot "http://localhost:8746/tools/_icon.html" "og/icon.png" 512 512; rm -f tools/_icon.html; echo "icon $( [[ -f og/icon.png ]] && echo ok || echo FAIL )"
+# LinkedIn: the personal profile banner and the Company Page cover (og/icon.png is the Page logo)
+shot "http://localhost:8746/tools/linkedin.html?f=profile&wm=$WM" "og/linkedin-banner.png" 1584 396; echo "linkedin-banner $( [[ -f og/linkedin-banner.png ]] && echo ok || echo FAIL )"
+shot "http://localhost:8746/tools/linkedin.html?f=page&wm=$WM" "og/linkedin-cover.png" 1512 256; echo "linkedin-cover $( [[ -f og/linkedin-cover.png ]] && echo ok || echo FAIL )"
 # compress: PNG → keep as PNG but strip to 8-bit palette via sips is lossy; keep PNG, they are ~200KB each
 echo "done: $(ls og | wc -l | tr -d ' ') images"

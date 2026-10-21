@@ -54,7 +54,7 @@ const short = `# ${site.name}
 
 Key facts:
 ${site.facts.map(f => `- ${f}`).join('\n')}
-- Contact: ${site.email} · Instagram ${site.instagramHandle} (${site.instagram})
+- Contact: ${site.email} · Instagram ${site.instagramHandle} (${site.instagram})${site.linkedin ? ` · LinkedIn (${site.linkedin})` : ''}
 - Book a call: ${L.abs('/book/')}
 
 ## Pages

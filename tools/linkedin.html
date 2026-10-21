@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- LinkedIn banners, rendered by og.sh: ?f=profile (1584×396 personal banner) or ?f=page (1512×256 Company Page cover).
+     The profile photo / Page logo sits over the bottom-left, so nothing goes there. -->
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFFFFF;color:#141416;overflow:hidden;position:relative;font-family:"Schibsted Grotesk",-apple-system,sans-serif}
+.profile{width:1584px;height:396px}.page{width:1512px;height:256px}
+.txt{position:absolute;display:flex;flex-direction:column}
+.top{display:flex;align-items:baseline;gap:18px}
+.wm{font-weight:700;letter-spacing:-.04em}.wm i{font-style:normal;color:#E8A84B}
+.kick{font-weight:500;color:#6B6B70}
+h1{font-weight:600;line-height:1;letter-spacing:-.04em;text-wrap:balance}
+.sub{color:#6B6B70;font-weight:500;line-height:1.4}
+.phones{position:absolute;display:flex;align-items:flex-start}
+.ph{background:#0E0E10;padding:7px;box-shadow:0 24px 48px -24px rgba(0,0,0,.45)}
+.ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;background:#fff}
+/* personal banner */
+.profile .txt{left:500px;top:72px;width:560px;gap:24px}
+.profile .wm{font-size:32px}.profile .kick{font-size:18px}
+.profile h1{font-size:50px}
+.profile .sub{font-size:20px;text-wrap:balance}
+.profile .phones{right:56px;top:52px;gap:18px}
+.profile .ph{width:140px;height:303px;border-radius:28px}.profile .ph img{border-radius:22px}
+.profile .ph:nth-child(2){margin-top:34px}.profile .ph:nth-child(3){margin-top:12px}
+/* Company Page cover */
+.page .txt{left:340px;top:44px;width:780px;gap:18px}
+.page .wm{font-size:26px}.page .kick{font-size:16px}
+.page h1{font-size:44px}
+.page .sub{font-size:18px}
+.page .phones{right:56px;top:36px;gap:16px}
+.page .ph{width:112px;height:242px;border-radius:24px;padding:6px}.page .ph img{border-radius:19px}
+.page .ph:nth-child(2){margin-top:24px}
+</style></head><body>
+<div class="txt">
+  <div class="top"><span class="wm" id="wm"></span><span class="kick">Skales Studio · websites · booking · follow-up · UK</span></div>
+  <h1>Websites &amp; systems for service businesses.</h1>
+  <p class="sub">Hand-built, owned by you. One system a week, built in public.</p>
+</div>
+<div class="phones" id="ph"></div>
+<script>
+var q=new URLSearchParams(location.search), f=q.get('f')==='page'?'page':'profile', wm=q.get('wm')||'s|k|ales';
+document.body.className=f;
+document.getElementById('wm').innerHTML=wm.split('|').map(function(x,i){return i===1?'<i>'+x+'</i>':x}).join('');
+(f==='page'?['01','25']:['01','25','19']).forEach(function(n){
+  var d=document.createElement('div');d.className='ph';d.innerHTML='<img src="/assets/phones/'+n+'.webp" alt="">';
+  document.getElementById('ph').appendChild(d);
+});
+</script></body></html>
