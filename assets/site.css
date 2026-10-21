@@ -325,6 +325,14 @@ a.try-card:hover{background:var(--alu-2);transform:translateY(-2px)}
 .try-card p{color:var(--tx-2);line-height:1.5}
 .try-n{font:500 .8125rem/1 var(--sans);color:var(--tx-2)}
 .try-go{margin-top:auto;font-weight:600}
+.try-card.has-pic{padding:0;gap:0;overflow:hidden}
+.try-pic{position:relative;display:block;height:clamp(210px,22vw,270px);overflow:hidden;background:var(--alu-2);border-bottom:1px solid var(--line)}
+.try-pic img{position:absolute;left:50%;top:24px;width:min(54%,230px);height:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 18px 28px rgba(0,0,0,.22));transition:transform .4s var(--ease)}
+.try-pic.is-crm-board img{left:22px;top:22px;width:max(130%,520px);transform:none;filter:drop-shadow(0 14px 24px rgba(0,0,0,.14))}
+a.try-card.has-pic:hover .try-pic img{transform:translateX(-50%) translateY(-4px)}
+a.try-card.has-pic:hover .try-pic.is-crm-board img{transform:translateY(-4px)}
+.try-tx{display:flex;flex-direction:column;gap:10px;flex:1;padding:20px 22px 22px}
+.try-p{color:var(--tx-2);line-height:1.5}
 .try-card.is-soon{background:none;border:1px dashed var(--line-2)}
 .try-card.is-soon .try-go{color:var(--tx-3);font-weight:500}
 

@@ -2,7 +2,8 @@
    Reads the readable, commented originals from ../showcase (soon a private repo),
    strips every comment, minifies + mangles every script and stylesheet, and prepends
    a lock so the file only renders when it has been reached from this site.
-   Output: demos/<slug>/index.html   Run: NODE_PATH=<tools> node tools/demos.js */
+   Output: demos/<slug>/index.html   Run: NODE_PATH=<tools> node tools/demos.js [slug ...]
+   Builds whose original is not in ../showcase are left as they are (fix those in place). */
 const fs = require('fs'), path = require('path');
 const { minify } = require('terser');
 const CleanCSS = require('clean-css');
@@ -21,7 +22,10 @@ function guard(b){
 
 (async function(){
   let total = 0, totalOut = 0;
+  const only = process.argv.slice(2);
   for (const b of builds){
+    if (only.length && !only.includes(b.slug)) continue;
+    if (!b.file || !fs.existsSync(path.join(SRC, b.file))){ console.log(`${String(b.n).padStart(2,'0')} ${b.slug.padEnd(24)} no original, left as is`); continue; }
     let html = fs.readFileSync(path.join(SRC, b.file), 'utf8');
     const before = html.length;
     html = html.replace(/<!--[\s\S]*?-->/g, '');                       // every HTML comment (the "how this works" notes go)
@@ -52,7 +56,7 @@ function guard(b){
     total += before; totalOut += html.length;
     console.log(`${String(b.n).padStart(2,'0')} ${b.slug.padEnd(24)} ${(before/1024).toFixed(0).padStart(4)}K -> ${(html.length/1024).toFixed(0).padStart(4)}K`);
   }
-  console.log(`total ${(total/1024).toFixed(0)}K -> ${(totalOut/1024).toFixed(0)}K, comments stripped, ${builds.length} demos locked to: ${hosts.join(', ')}`);
+  console.log(`total ${(total/1024).toFixed(0)}K -> ${(totalOut/1024).toFixed(0)}K, comments stripped, demos locked to: ${hosts.join(', ')}`);
   // fonts: swap each demo's Google Fonts link for self-hosted files (tools/demo-fonts.js)
   require('child_process').execFileSync('node', [path.join(__dirname, 'demo-fonts.js')], { stdio: 'inherit' });
 })().catch(e => { console.error(e); process.exit(1); });

@@ -52,7 +52,7 @@ ${P.panel('Your customers', 'How the work comes in', `<h2>How do customers choos
 <section class="sec" id="try" aria-labelledby="h-try">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-try">Try it as ${article(s.word)} ${esc(s.word)}</h2><p class="lead">The live demos, set up for ${esc(lc(s.label))} with a made-up business. You play the customer, then see what you would see.</p></div>
-    <div class="try-list${s.demos.length === 2 ? ' is-2' : ''}">${s.demos.map(P.demo).map(x => `<a class="try-card" href="${tryHref(x.slug)}"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
+    <div class="try-list${s.demos.length === 2 ? ' is-2' : ''}">${s.demos.map(P.demo).map((x, i) => require('./try.js').card(b, x, i, { href: tryHref(x.slug), first: false })).join('')}</div>
   </div>
 </section>
 ${P.buildWall(b, s.builds, 'Builds that fit', 'Working builds for made-up businesses. Open any of them on your phone and use it.')}

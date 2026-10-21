@@ -8,7 +8,7 @@ const SV = require('../../data/services.js');
 const AU = require('../../data/automations.js');
 const CP = require('../../data/compare.js');
 const GQ = require('../../data/faq.js');
-const DEMOS = require('./try.js').DEMOS;
+const DEMOS = require('./try.js').DEMOS, tryCard = require('./try.js').card;
 
 const B = n => builds.find(x => x.n === n);
 const svc = s => SV.find(x => x.slug === s);
@@ -72,7 +72,7 @@ const faqPanel = (qs, h2) => `<section class="panel faq" id="faq">
 const tryCards = (b, slugs, h = 'Try it on your phone') => !slugs.length ? '' : `<section class="sec" id="try" aria-labelledby="h-try">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-try">${esc(h)}</h2><p class="lead">Live demos with a made-up business. You play the customer, then see what the business sees. About a minute each.</p></div>
-    <div class="try-list${slugs.length === 2 ? ' is-2' : ''}">${slugs.map(demo).filter(Boolean).map(x => `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
+    <div class="try-list${slugs.length === 2 ? ' is-2' : ''}">${slugs.map(demo).filter(Boolean).map((x, i) => tryCard(b, x, i, { first: false })).join('')}</div>
   </div>
 </section>`;
 const buildWall = (b, ns, h, p) => !ns.length ? '' : `<section class="sec sec-alu" id="builds" aria-labelledby="h-builds">

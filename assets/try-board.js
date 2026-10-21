@@ -6,20 +6,20 @@
 (function(){
   var COLS = ['e', 'q', 'b', 'd'], NAMES = { e: 'Enquiry', q: 'Quoted', b: 'Booked', d: 'Done' };
   var K = window.TryKit && TryKit({
-    demo: 'crm-board', empty: 'Nothing yet.',
+    demo: 'crm-board', empty: 'Nothing yet.', maxScale: innerWidth >= 1000 ? .84 : 1,
     stamp: function(t){ return K.DAYS[t.getDay()].slice(0, 3) + ' ' + K.hm(t); },
     start: function(K, A){
       var J = A.J, d0 = new Date(); d0.setHours(21, 3, 0, 0);
       A.d0 = d0; A.at = 'e'; A.sent = 0; A.q = J.quote;
       K.$('run').classList.add('is-owner');
-      K.$('thread').innerHTML = '';
+      K.$('thread').innerHTML = ''; lastDay = '';
       board();
       K.show('thread');
       K.clockAt(d0);
       K.step(0);
-      send(d0, 'Thanks Priya, got your message about the ' + A.q[0].toLowerCase() + '. I’m on a job right now, so I’ll price it up and send it over tomorrow. ' + A.biz,
-        '<b>Instant reply</b> sent to Priya', 'Instant reply sent');
-      K.narrate('21:03. A new enquiry from Priya. She’s had a reply before you’ve even seen it.', 'Price it up, then move Priya to Quoted.');
+      send(d0, 'Thanks Priya, got your message about the ' + J.qs + '. I’m ' + J.text + ' right now, so I’ll price it up and send it over tomorrow. ' + A.biz,
+        '<b>Instant reply</b> sent to Priya', 'Instant reply');
+      K.narrate('21:03. A new enquiry from Priya. She’s had a reply before you’ve even seen it.', (innerWidth >= 1000 ? 'Drag Priya to Quoted, or tap the button on her card,' : 'Tap the button on Priya’s card') + ' to send her the quote.');
     },
     acts: {},
     finish: function(K, A){
@@ -50,18 +50,13 @@
   }
   function showCol(c){ var col = $('col-' + c).parentNode, bd = $('board'); if (bd.scrollWidth > bd.clientWidth) bd.scrollTo({ left: col.offsetLeft - 12, behavior: K.reduce ? 'auto' : 'smooth' }); }
 
-  /* ---------- Priya's phone ---------- */
-  var tt;
+  /* ---------- Priya's phone (on a phone, each text also lands as a banner, since the board is up) ---------- */
   function send(t, text, log, short){
     var A = K.A; A.sent++;
     K.clockAt(t);
     bubble('in', text, t);
     K.feed('msg', 'blu', log, t);
-    if (innerWidth < 1000){
-      var x = $('toast'); clearTimeout(tt); x.hidden = false; x.classList.remove('is-out'); x.classList.add('is-msg');
-      x.innerHTML = '<span><b>Sent to Priya</b> · ' + K.esc(short) + '</span>';
-      tt = setTimeout(function(){ x.classList.add('is-out'); tt = setTimeout(function(){ x.hidden = true; }, 320); }, 2600);
-    }
+    K.banner('Priya’s phone · ' + short, text, 'is-msg');
   }
   var lastDay = '';
   function bubble(dir, text, t){
@@ -93,7 +88,7 @@
     q: function(){
       var A = K.A, t = days(1, 8, 40);
       K.tag('amb', 'card', 'Quote ' + A.q[1]);
-      send(t, 'Hi Priya, here’s your quote for the ' + A.q[0].toLowerCase() + ': ' + A.q[1] + '. See the details and accept it here: ' + A.domain + '/q/4821', '<b>Quote sent</b> to Priya', 'Your quote');
+      send(t, 'Hi Priya, here’s your quote for the ' + A.J.qs + ': ' + A.q[1] + '. See the details and accept it here: ' + A.domain + '/q/4821', '<b>Quote sent</b> to Priya', 'Your quote');
       K.narrate('Quote sent. Now Priya goes quiet. This is where most quotes die.', '');
       skip('Skip two days', chase);
     },
@@ -102,7 +97,7 @@
       while (job.getDay() === 0 || job.getDay() === 6) job.setDate(job.getDate() + 1);
       A.job = job;
       K.tag('grn', 'diary', K.DAYS[job.getDay()].slice(0, 3) + ' ' + job.getDate() + ' ' + K.MON[job.getMonth()].slice(0, 3));
-      send(t, 'Booked: ' + A.q[0].toLowerCase() + ', ' + K.DAYS[job.getDay()] + ' ' + job.getDate() + ' ' + K.MON[job.getMonth()] + ' at 8:00. We’ll remind you the day before. ' + A.biz, '<b>Confirmation sent</b>, reminder set for the day before', 'Booking confirmed');
+      send(t, 'Booked: your ' + A.J.qs + ', ' + K.DAYS[job.getDay()] + ' ' + job.getDate() + ' ' + K.MON[job.getMonth()] + ' at ' + A.J.at + '. We’ll remind you the day before. ' + A.biz, '<b>Confirmation sent</b>, reminder set for the day before', 'Booking confirmed');
       K.narrate('Booked. The confirmation went on its own, and the reminder is set.', '');
       skip('Skip to the night before', remind);
     },
@@ -136,7 +131,7 @@
   }
   function remind(){
     var A = K.A, t = new Date(A.job); t.setDate(t.getDate() - 1); t.setHours(18, 0, 0, 0);
-    send(t, 'Reminder: we’re with you tomorrow at 8:00 for your ' + A.q[0].toLowerCase() + '. Reply R if you need to rearrange.', '<b>Reminder sent</b>, the night before', 'Reminder');
+    send(t, 'Reminder: ' + (A.J.away ? 'see you' : 'we’re with you') + ' tomorrow at ' + A.J.at + ' for your ' + A.J.qs + '. Reply R if you need to rearrange.', '<b>Reminder sent</b>, the night before', 'Reminder');
     A.wait = false; label();
     K.narrate('The night before, the reminder goes out. Nobody forgets.', 'When the job’s done, move Priya to Done.');
   }
@@ -148,14 +143,19 @@
   /* buttons on the card, and dragging it on a computer */
   $('board').addEventListener('click', function(e){
     var b = e.target.closest('[data-move]'); if (!b || !K.A) return;
-    move(COLS[COLS.indexOf(K.A.at) + 1]);
+    K.go(); move(COLS[COLS.indexOf(K.A.at) + 1]);
   });
   var drag = null;
   $('board').addEventListener('pointerdown', function(e){
     var p = e.target.closest('#pcard');
     if (!p || e.pointerType === 'touch' || e.target.closest('button') || K.A.wait) return;
+    e.preventDefault(); K.go();
     drag = { p: p, x: e.clientX, y: e.clientY }; p.setPointerCapture(e.pointerId); p.classList.add('is-drag');
   });
+  function drop(){ if (!drag) return; drag.p.classList.remove('is-drag'); drag.p.style.transform = ''; drag = null; [].forEach.call(d.querySelectorAll('.bd-col'), function(c){ c.classList.remove('is-over'); }); }
+  $('board').addEventListener('pointercancel', drop);
+  $('board').addEventListener('lostpointercapture', function(){ if (drag) drop(); });
+  $('board').addEventListener('dragstart', function(e){ e.preventDefault(); });
   $('board').addEventListener('pointermove', function(e){
     if (!drag) return;
     drag.p.style.transform = 'translate(' + (e.clientX - drag.x) + 'px,' + (e.clientY - drag.y) + 'px) rotate(1.5deg)';
@@ -163,9 +163,7 @@
   });
   $('board').addEventListener('pointerup', function(e){
     if (!drag) return;
-    var p = drag.p, over = col(e); drag = null;
-    p.classList.remove('is-drag'); p.style.transform = '';
-    [].forEach.call(d.querySelectorAll('.bd-col'), function(c){ c.classList.remove('is-over'); });
+    var over = col(e); drop();
     if (over && !move(over.getAttribute('data-col')) && over.getAttribute('data-col') !== K.A.at) K.narrate('Move her one step at a time: ' + NAMES[COLS[COLS.indexOf(K.A.at) + 1]] + ' is next.', $('hint').textContent);
   });
   function col(e){ var p = $('pcard'); p.style.pointerEvents = 'none'; var el = d.elementFromPoint(e.clientX, e.clientY); p.style.pointerEvents = ''; return el && el.closest('.bd-col'); }

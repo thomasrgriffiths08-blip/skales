@@ -1,24 +1,29 @@
-/* /try/missed-call/ — be your own customer. The visitor names their business, calls it on a pretend
-   phone, lets it ring out, gets the text-back, books and (where the trade takes one) pays a deposit,
-   then sees the same minute from the business's side in the Skales CRM. Every time printed is the
-   visitor's real clock, so "missed at 21:47, booked 70 seconds later" is what actually happened on
-   their screen. The shared parts live in try-kit.js. */
+/* /try/missed-call/ — be your own customer. The visitor calls the business (theirs, if they typed its
+   name) on a pretend phone, lets it ring out, gets the text-back, books and (where the trade takes one)
+   pays a deposit, then sees the same minute from the business's side in the Skales CRM. Every time
+   printed is the visitor's real clock, so "missed at 21:47, booked 70 seconds later" is what actually
+   happened on their screen. The shared parts live in try-kit.js. */
 (function(){
+  /* after hours the text says so, rather than "out on a job" at midnight */
+  function closed(A){ var h = new Date().getHours(); return A.kind === 'hospitality' ? (h >= 23 || h < 10) : (h >= 20 || h < 7); }
   var K = window.TryKit && TryKit({
     demo: 'missed-call', empty: 'Nothing yet. Make the call.', waiting: 'Waiting for a call',
     start: function(K, A){
-      A.sms = "Hi, it's " + A.biz + ". Sorry we missed your call, we're " + A.J.text + " right now. Book a time that suits you here and it's confirmed straight away: " + A.site;
+      var off = closed(A);
+      A.sms = "Hi, it's " + A.biz + ". Sorry we missed your call, " + (off ? "we've finished for the day" : "we're " + A.J.text + " right now") + ". Book a time that suits you here and it's confirmed straight away: " + A.site;
       K.bind('[data-sms]', A.sms);
       K.show('contact'); K.step(0);
-      K.narrate('You’re the customer. You need a ' + A.J.jobs[0][0].toLowerCase() + '. Call ' + A.biz + '.', 'Tap the green call button.');
+      K.narrate('You’re the customer. You need ' + A.J.need + '. Call ' + A.biz + '.', 'Tap the green call button.');
     },
     acts: {
       call: function(){
         var A = K.A; A.t.call = new Date(); K.show('call', true); K.step(1);
         var st = K.layer('call').querySelector('[data-callst]'); st.textContent = 'calling…';
-        K.narrate('It’s ringing. ' + A.biz + ' is ' + A.J.text + ', so nobody picks up.', 'Let it ring out, or hang up.');
-        K.later(function(){ st.textContent = 'No answer'; }, 6800);
-        K.later(function(){ missed(false); }, 7700);
+        K.lead(A.custNo, 'Ringing now'); K.stage('ringing', 'Ringing'); K.tag('gry', 'phone', 'Incoming call');
+        K.narrate('It’s ringing. ' + (closed(A) ? 'It’s ' + K.hm(new Date()) + ', so nobody picks up.' : A.biz + ' is ' + A.J.text + ', so nobody picks up.'), 'Let it ring out, or hang up.');
+        K.later(function(){ st.textContent = 'ringing…'; }, 1300);
+        K.later(function(){ st.textContent = 'No answer'; }, 3900);
+        K.later(function(){ missed(false); }, 4600);
       },
       hangup: function(){ missed(true); },
       open: function(){ K.show('msgs'); K.narrate('A text from ' + K.A.biz + ', with a link to book.', 'Tap the link.'); },
@@ -47,17 +52,18 @@
     var A = K.A; if (A.t.missed) return;
     K.clear(); A.t.missed = new Date();
     K.show('lock', true); K.$('ntf').hidden = true;
+    K.$('tags').innerHTML = '';
     K.lead(A.custNo, 'Called at ' + K.hm(A.t.missed));
     K.stage('missed', 'Missed call'); K.tag('red', 'phone', 'Missed call');
-    K.feed('phone', 'red', '<b>Missed call</b> from ' + A.custNo, A.t.missed, 'Missed call logged');
+    K.feed('phone', 'red', '<b>Missed call</b> from ' + A.custNo, A.t.missed, 'Missed call from ' + A.custNo);
     K.step(2);
     K.narrate((hungUp ? 'You hung up.' : 'No answer.') + ' Most people ring the next business at this point.', 'Wait a moment.');
-    K.later(textBack, 2600);
+    K.later(textBack, 1500);
   }
   function textBack(){
     var A = K.A; A.t.text = new Date();
     K.stage('texted', 'Texted back'); K.tag('blu', 'zap', 'Texted back');
-    K.feed('zap', 'blu', '<b>Text sent automatically</b>, ' + K.secs(A.t.missed, A.t.text) + ' after the call', A.t.text, 'Text-back sent');
+    K.feed('zap', 'blu', '<b>Text sent automatically</b>, ' + K.secs(A.t.missed, A.t.text) + ' after the call', A.t.text, 'Texted them back automatically');
     K.bind('[data-smstime]', K.hm(A.t.text));
     K.$('ntf').hidden = false;
     K.narrate('Before you’ve rung anyone else, this arrives.', 'Tap the message.');

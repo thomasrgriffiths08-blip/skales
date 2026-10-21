@@ -2,7 +2,7 @@ const L = require('../lib.js');
 const { site, builds, esc, Words } = L;
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
 const B = n => builds.find(x => x.n === n);
-const TRY = require('./try.js').DEMOS.filter(x => x.live);
+const TRY = require('./try.js').DEMOS.filter(x => x.live), tryCard = require('./try.js').card;
 /* the same slug rule as assets/builder.js, so the example pages match what the builder writes */
 const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
@@ -176,7 +176,7 @@ ${L.header(b, 'home')}
       <h2 id="h-try">Don't take my word for it. Try it.</h2>
       <p class="lead">Three live demos that run on your phone. You play the customer, then see what the business sees. About a minute each.</p>
     </div>
-    <div class="try-list">${TRY.map(x => `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
+    <div class="try-list">${TRY.map((x, i) => tryCard(b, x, i)).join('')}</div>
   </div>
 </section>
 

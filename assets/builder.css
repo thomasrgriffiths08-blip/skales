@@ -142,6 +142,7 @@
   .dx-grid,.dx-call{grid-template-columns:1fr}
   /* on a phone the home page keeps to four builds and compact demo cards; the rest are one tap away */
   #try .try-card{min-height:0;padding:20px}
+  #try .try-card.has-pic{padding:0}
   #try .try-card h3{font-size:1.35rem}
 }
 @media (max-width:640px){.wall-home .tile:nth-child(n+5){display:none}}
