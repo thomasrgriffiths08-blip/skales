@@ -20,6 +20,7 @@ Site address: until skales.studio points here, every link below uses the github.
 6. Create the Skales Studio Company Page, then edit your Experience entry and pick it from the dropdown so the logo shows instead of a grey square. LinkedIn sometimes blocks Page creation on a brand-new account; if so, finish the profile, connect with people you know and try again a few days later.
 7. Put both URLs in `data/site.js` (`linkedin`, `linkedinPage`) and run `node tools/build.js`. They then appear in the footer, in `llms.txt` and in the schema `sameAs`, which tells search engines the profile, the Page and the site are the same person and business.
 8. Post the first post (below), then one a week alongside the Instagram build.
+9. Start connecting, fifteen minutes a weekday (see "Getting work from it").
 
 ---
 
@@ -32,22 +33,24 @@ Site address: until skales.studio points here, every link below uses the github.
 | First name / Last name | Tom / Griffiths. LinkedIn's rules: real name only, no titles or emoji in the name field. |
 | Additional name | Thomas (optional; helps searches for "Thomas Griffiths" find you, matching the site schema) |
 | Pronouns | Your call |
-| Current position | Founder & builder, Skales Studio (tick "show current company in my intro") |
+| Current position | Founder, web designer & developer at Skales Studio (tick "show current company in my intro") |
 | Industry | IT Services and IT Consulting |
-| Location | United Kingdom, plus your town or nearest city |
+| Location | United Kingdom, plus your town or nearest city. This matters more than it looks: local owners filter search by location, and Services-page requests are matched by it. |
 
 ### Headline (limit 220; the first ~60 characters are all many views show, so they say what you do)
+
+LinkedIn people-search matches on the headline and the current job title, so both carry the words clients and recruiters actually type: "web designer" and "web developer".
 
 Recommended:
 
 ```text
-I build websites, online booking and follow-up automation for UK service businesses | Founder, Skales Studio | Hand-built, owned by you
+Web designer for UK trades and service businesses | Websites, online booking and follow-up automation | Founder, Skales Studio
 ```
 
-Alternative, if you want the ads and the build-in-public line in:
+Alternative, if you want the ads in:
 
 ```text
-Founder, Skales Studio | Websites, booking and follow-up automation for UK service businesses, plus the Meta and Google ads that point at them | Built in public
+Web designer & developer | Websites, booking and follow-up automation for UK service businesses, plus the Meta and Google ads that point at them | Founder, Skales Studio
 ```
 
 ### Custom URL
@@ -105,7 +108,7 @@ The build count goes up every week; update "Thirty-six" here, in Experience and 
 
 | Field | Value |
 |---|---|
-| Title | Founder & builder |
+| Title | Founder, web designer & developer (not just "Founder & builder": the title is what search matches) |
 | Employment type | Self-employed |
 | Company | Skales Studio (pick the Company Page once it exists) |
 | Dates | [month] 2026 to present |
@@ -235,6 +238,76 @@ This week's build: [name]. [The one-line hook from its /work/ page.]
 Fictional business, illustrative numbers, real software. Try it: [link to its /work/<slug>/ page]
 ```
 
-### Connecting
+A second post each week can come straight from `/notes/` or the topics list in `PLAN.md` (what a missed call costs, how to ask for a review without begging, what a tradesperson's website actually needs). Write it as the answer, not a link to the answer; put the link at the end.
 
-Start with people you actually know, then local business owners and people in the trades you build for. Add a line to the invite saying why. Never use connection or messaging automation tools: they break LinkedIn's terms and get accounts restricted.
+---
+
+## Getting work from it
+
+The profile gets you found. The work comes from who you connect with and what you say to them after.
+
+### Who to connect with, in order
+
+1. **People you already know.** Friends, family, old colleagues, school and college. They are the warmest source of introductions, and a profile with a few hundred real connections looks established to everyone else.
+2. **Referral partners: people who already serve the businesses you build for.** Accountants and bookkeepers with trade clients, trade-merchant branch managers, business coaches for trades, sign writers and van-wrap firms, local photographers, chamber of commerce and business-network organisers, and other web designers and agencies who turn down small jobs. They are on LinkedIn far more than tradespeople are, and one of them can send you several clients.
+3. **The businesses that live on LinkedIn.** Accountants, solicitors, architects, mortgage brokers, estate and letting agents, clinics, dental practices. The site already has a page for each (`/for/<trade>/`), so link the right one when you talk to them.
+4. **Trade firms big enough to have an office.** Owners, directors, and office or operations managers at firms with a few vans. The one-van tradesperson is rarely on LinkedIn; the person running the office often is.
+
+Find them with people search: keywords like `owner plumbing`, `director electrical`, `practice manager`, `bookkeeper`, then filter Locations to your area. Local first: a business twenty minutes away is far more likely to say yes.
+
+### The numbers that keep the account safe
+
+- A free account gets about **five personalised invite notes a month**, each **up to 200 characters**. Spend them on referral partners and anyone you have a reason to know. Everyone else: send the invite without a note, then message after they accept (messaging a connection is free).
+- Keep to about **10 targeted invites a weekday**. A new account is restricted somewhere around 80 to 100 a week, and lots of ignored invites count against you. Withdraw any still pending after three weeks.
+- Never use connection or messaging automation tools, engagement pods or bought followers. They break LinkedIn's terms and get accounts restricted.
+
+### What to say
+
+Invite note to a referral partner (under 200):
+
+```text
+Hi [name], I build websites and booking systems for UK trades and service businesses. Plenty of your clients will be the people I work with, so it seemed worth connecting. Tom
+```
+
+After a business owner accepts (no pitch until they say yes):
+
+```text
+Thanks for connecting, [name]. I build websites, online booking and follow-up for businesses like yours. If it's useful, I'll look at your website and Google listing and send back three things: what's leaking, what to fix first, and what it's worth in jobs. Free, no call needed. Want me to?
+```
+
+To people you know:
+
+```text
+I've started Skales Studio: I build websites, online booking and follow-up automation for service businesses. If you know a tradesperson or small business owner whose website is letting them down, I'd be grateful for an introduction.
+```
+
+One follow-up a week later if there's no reply, then leave it. When someone says yes to the teardown, do it properly; it is the best thing you have to show them.
+
+### Fifteen minutes a weekday
+
+1. Reply to every message and comment first.
+2. Comment on three to five posts from referral partners and target businesses. A useful sentence, not "great post".
+3. Send about ten targeted invites.
+4. Monday: post the week's build. Thursday: one short post from the notes.
+
+### Proof
+
+- Ask two or three people who have seen your work for a LinkedIn recommendation. Real people only.
+- When the first real clients exist, ask them for a review on your Services page. That is where clients compare providers.
+- Once a month, check Profile views and Search appearances (it shows the keywords people found you by) and adjust the headline if the right words are missing.
+
+---
+
+## If you also want an employed role
+
+Everything above is set up for winning clients. If you also want a job, LinkedIn handles both:
+
+- **Open to → Finding a new job.** Job titles: Web Developer, Front-End Developer, Web Designer, JavaScript Developer. Location: your area plus remote. Set visibility to **Recruiters only**, so the green "Open to work" frame doesn't appear to the clients you are also pitching.
+- **Headline while job-hunting** (recruiters search by job title and skills):
+
+```text
+Web Developer | JavaScript, HTML, CSS | Websites, booking systems and automation for service businesses | Founder, Skales Studio
+```
+
+- Move **All the builds** (/work/) to the top of Featured. Thirty-six working, hand-coded builds is a stronger portfolio than most applicants bring.
+- Make sure the skills on your profile match the words in the ads you apply for. After applying, message the hiring manager or someone on the team with one line on why, and a link to the build closest to their work.
