@@ -21,6 +21,7 @@ Site address: until skales.studio points here, every link below uses the github.
 7. Put both URLs in `data/site.js` (`linkedin`, `linkedinPage`) and run `node tools/build.js`. They then appear in the footer, in `llms.txt` and in the schema `sameAs`, which tells search engines the profile, the Page and the site are the same person and business.
 8. Post the first post (below), then one a week alongside the Instagram build.
 9. Start connecting, fifteen minutes a weekday (see "Getting work from it").
+10. Turn on Open to work for recruiters only (see "Open to a job as well").
 
 ---
 
@@ -121,7 +122,7 @@ Description (limit 2,000):
 ```text
 One-person studio. I build websites, online booking with a CRM, and follow-up automation for UK service businesses, and run the Meta and Google ads that point at them.
 
-• Every build is hand-coded: no page builder, no theme.
+• Every build is hand-coded in HTML, CSS and plain JavaScript: no framework, no page builder, no theme.
 • Thirty-six working demonstration builds run live on the site: quote engines, dispatch boards, booking with deposits, missed-call text-back, review requests, boiler-service and MOT reminders. Every business in them is fictional.
 • One new system a week, built in public on Instagram.
 • Clients own their domain, code and accounts from day one. Ad accounts are set up in the client's name.
@@ -298,16 +299,17 @@ One follow-up a week later if there's no reply, then leave it. When someone says
 
 ---
 
-## If you also want an employed role
+## Open to a job as well (clients first)
 
-Everything above is set up for winning clients. If you also want a job, LinkedIn handles both:
+Clients come first, so the public profile stays entirely about them. Nothing visible says you are looking: a client who reads "open to new roles" wonders whether you will be around to finish their build. The job side runs quietly underneath:
 
-- **Open to → Finding a new job.** Job titles: Web Developer, Front-End Developer, Web Designer, JavaScript Developer. Location: your area plus remote. Set visibility to **Recruiters only**, so the green "Open to work" frame doesn't appear to the clients you are also pitching.
-- **Headline while job-hunting** (recruiters search by job title and skills):
+- **Open to → Finding a new job**, visibility **Recruiters only**. Only people using LinkedIn's recruiter tools see it, and the green frame never appears on your photo. Job titles: Web Developer, Front-End Developer, Web Designer, JavaScript Developer. Location: your area, plus remote.
+- **Keep the client headline.** Recruiters search job titles and skills, and the profile already carries both: "web designer" and "web developer" in the headline and title, HTML, CSS and JavaScript in Experience and Skills.
+- **Leave Featured in the client order.** All the builds is already in it, and it is the first thing a recruiter clicks.
+- When you apply, message the hiring manager or someone on the team with one line on why, and a link to the build closest to their work. That message is where you say you are looking, not the profile.
+
+If a job ever becomes the priority, swap to this headline and move All the builds to the top of Featured:
 
 ```text
 Web Developer | JavaScript, HTML, CSS | Websites, booking systems and automation for service businesses | Founder, Skales Studio
 ```
-
-- Move **All the builds** (/work/) to the top of Featured. Thirty-six working, hand-coded builds is a stronger portfolio than most applicants bring.
-- Make sure the skills on your profile match the words in the ads you apply for. After applying, message the hiring manager or someone on the team with one line on why, and a link to the build closest to their work.
