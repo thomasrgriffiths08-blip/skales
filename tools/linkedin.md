@@ -272,6 +272,16 @@ LinkedIn grows fastest when the profile is finished before anyone sees it, the f
 - Join local business groups on LinkedIn, and go in person to the local chamber of commerce and business networking breakfasts. Connect with everyone you meet the same day.
 - End every teardown that lands well with the offer of a short call, booked on your Calendly link.
 
+### Going after the big contracts
+
+A full funnel (ads, landing pages, booking and follow-up) is a bigger job than a website, and the businesses that can fund it look different from a one-van sole trader. They are also the ones whose decision makers are on LinkedIn.
+
+- **Who:** trade firms with a few vans and an office (heating, electrical, roofing, building, extensions, kitchens and bathrooms, windows, solar and heat pumps), plus estate agents, dental practices, private clinics, solicitors, accountants and commercial cleaners. Signs they can pay: a limited company trading a few years, a team, plenty of reviews, ad tracking already on the site, high-ticket or commercial work.
+- **The tracker ranks them:** A-list means the biggest contract potential and a clear need. The Monday run writes an A-lister's teardown in advance, so your first message can say it is already done.
+- **The A-list routine:** follow their Company Page and the director, comment usefully on something they posted, then connect. After they accept, offer the teardown. Send it, then offer a 20-minute call to walk through it.
+- **The call:** go through the teardown on screen, ask what a job is worth to them and how many they could take on, then send a written proposal within a day.
+- **Later, not now:** LinkedIn Sales Navigator (paid) adds filters for company size and job title, and messages to people you are not connected with. It is worth a look once the first contract is signed.
+
 ### What to count each month
 
 Connections, how many invites are accepted, replies to your after-accept message, teardowns sent, calls booked, clients won. The tracker counts most of these for you.
