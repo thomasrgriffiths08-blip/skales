@@ -36,8 +36,7 @@
 
   var root, frame, screen, cover, coverImg, coverName, nameEl, metaEl, aboutEl, addrEl, popEl, prevB, nextB, side, sheet, whichName, whichCount, hint, modes, capEl, showBs, nowName, nowShort, tryList, idxEl, tabs;
   var flt = 'all';
-  var clip = function(x){ return b + 'assets/clips/' + pad(x.n) + '.webp'; };
-  var thumb = function(x){ return x.kind === 'tool' ? clip(x) : still(x); };
+  var thumb = function(x){ return b + 'assets/thumbs/' + pad(x.n) + '.webp'; };
   var KW = { site: 'Websites', tool: 'Tools' };
   var showing = null, autoT = 0, autoDone = {};
   var cur = -1, live = null, opener = null, pushed = false, isOpen = false, mode = store.get('skv-mode') || 'desk', tStamp = 0;
