@@ -8,7 +8,7 @@ const SV = require('../../data/services.js');
 const AU = require('../../data/automations.js');
 const CP = require('../../data/compare.js');
 const GQ = require('../../data/faq.js');
-const DEMOS = require('./try.js').DEMOS;
+const DEMOS = require('./try.js').DEMOS, tryCard = require('./try.js').card;
 
 const B = n => builds.find(x => x.n === n);
 const svc = s => SV.find(x => x.slug === s);
@@ -72,7 +72,7 @@ const faqPanel = (qs, h2) => `<section class="panel faq" id="faq">
 const tryCards = (b, slugs, h = 'Try it on your phone') => !slugs.length ? '' : `<section class="sec" id="try" aria-labelledby="h-try">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-try">${esc(h)}</h2><p class="lead">Live demos with a made-up business. You play the customer, then see what the business sees. About a minute each.</p></div>
-    <div class="try-list${slugs.length === 2 ? ' is-2' : ''}">${slugs.map(demo).filter(Boolean).map(x => `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
+    <div class="try-list${slugs.length === 2 ? ' is-2' : ''}">${slugs.map(demo).filter(Boolean).map((x, i) => tryCard(b, x, i, { first: false })).join('')}</div>
   </div>
 </section>`;
 const buildWall = (b, ns, h, p) => !ns.length ? '' : `<section class="sec sec-alu" id="builds" aria-labelledby="h-builds">
@@ -96,7 +96,7 @@ const metaAd = b => `<figure class="adp">
   <div class="adp-meta" role="img" aria-label="A Facebook feed ad for Larchfield Heating, a fictional heating engineer, offering a free boiler service slot tomorrow">
     <div class="am-hd"><span class="am-av" aria-hidden="true">L</span><div><b>Larchfield Heating</b><span>Sponsored · <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 8h13M8 1.5c2 2 2 11 0 13M8 1.5c-2 2-2 11 0 13" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></div><span class="am-dots" aria-hidden="true">···</span></div>
     <p class="am-tx">Boiler due a service? We’ve got free slots in Ealing this week. Pick one tonight and it’s yours, no phone tag. Gas Safe engineers, and the certificate emailed the same day.</p>
-    <div class="am-img"><img src="${b}assets/plates/heating.webp" width="900" height="506" alt="" loading="lazy" decoding="async"><span class="am-chip"><i></i>Next free slot · Tomorrow, 10:30</span></div>
+    <div class="am-img"><img src="${b}assets/photos/heating-sm.webp" width="820" height="546" alt="" loading="lazy" decoding="async"><span class="am-chip"><i></i>Next free slot · Tomorrow, 10:30</span></div>
     <div class="am-link"><div><span>larchfield.co.uk</span><b>Boiler service in Ealing, book online</b></div><span class="am-btn">Book now</span></div>
     <div class="am-act" aria-hidden="true"><span>Like</span><span>Comment</span><span>Share</span></div>
   </div>
@@ -185,14 +185,18 @@ const servicePage = s => ({
     ];
     const qa = s.sections.map(x => `<div class="qa"><h2>${esc(x.h2)}</h2>${x.p.map(p => `<p>${esc(p)}</p>`).join('')}</div>`).join('');
     const others = SV.filter(x => x !== s);
+    const hx = s.builds.length ? B(s.builds[0]) : null;
     const body = `
 ${L.header(b, 'services')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap${hx ? ' hero-split' : ''}">
+  <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(s.h1)}</h1>
   <p class="lead answer">${esc(s.answer)}</p>
   ${ctaRow(b, s.demos, 'services', s.slug)}
+  </div>
+  ${hx ? L.heroPhone(b, hx) : ''}
 </section>
 ${s.film ? `<section class="sec sec-alu" id="film" aria-labelledby="h-film">
   <div class="wrap">
@@ -217,8 +221,8 @@ ${fill(faqPanel(s.faq, `${s.name}: questions people ask`), b)}
 ${band(b, 'services', s.slug)}
 ${L.footer(b)}`;
     const live = s.slug === 'websites' || s.slug === 'follow-up-automation';
-    const css = ['pages.css', ...(s.builds.length || live ? ['device.css'] : []), ...(live ? ['systems.css'] : [])];
-    const js = [...(s.film ? ['films.js'] : []), ...(live ? ['builds.js', 'device.js', 'systems.js'] : [])];
+    const css = ['pages.css', ...(s.builds.length || live ? ['device.css'] : []), ...(live ? ['systems.css'] : []), ...(hx ? ['hero-phone.css'] : [])];
+    const js = [...(s.film ? ['films.js'] : []), ...(live ? ['builds.js', 'device.js', 'systems.js'] : []), ...(hx ? ['hero-phone.js'] : [])];
     return L.page(L.head({ b, path, title, description: s.description, og: `services-${s.slug}`, css, nodes }), fill(body, b), L.scripts(b, js));
   },
 });
@@ -280,14 +284,18 @@ const autoPage = a => ({
       faqNode(a.faq, path),
     ];
     const others = AU.filter(x => x !== a);
+    const hx = a.builds.length ? B(a.builds[0]) : null;
     const body = `
 ${L.header(b, 'services')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap${hx ? ' hero-split' : ''}">
+  <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(a.h1)}</h1>
   <p class="lead answer">${esc(a.answer)}</p>
   ${ctaRow(b, a.demos, 'automations', a.slug)}
+  </div>
+  ${hx ? L.heroPhone(b, hx) : ''}
 </section>
 ${panel('Why it matters', esc(a.name), `<h2>Why does it matter?</h2><p class="lead">${esc(a.why)}</p>`)}
 ${panel('How it works', 'Step by step', `<h2>How does ${esc(a.name.toLowerCase())} work?</h2><ol class="steps">${a.steps.map(([n, t]) => `<li><b>${esc(n)}.</b> ${esc(t)}</li>`).join('')}</ol>`, ' id="how"')}
@@ -302,7 +310,7 @@ ${fill(faqPanel(a.faq, `${a.name}: questions people ask`), b)}
 </main>
 ${band(b, 'automations', a.slug)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css'], nodes }), body, L.scripts(b));
+    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css', ...(hx ? ['hero-phone.css'] : [])], nodes }), body, L.scripts(b, hx ? ['hero-phone.js'] : []));
   },
 });
 

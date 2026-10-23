@@ -5,37 +5,47 @@ const L = require('../lib.js');
 const { site, esc } = L;
 const { KINDS } = require('./case.js');
 
-/* what a customer of each kind of business would book. `quote` = a bigger job they would want priced
-   first (demo 3). `dep` = deposit taken to hold the slot
-   (0 = a quote visit or a table, booked without paying). `sat` = works Saturdays. All fictional. */
+/* what a customer of each kind of business would book. `name` = the pretend business when the visitor
+   types none. `need` finishes "You need …". `quote` = a bigger job they would want priced first (demo 3),
+   `qs` its short name in a text. `dep` = deposit taken to hold the slot (0 = a quote visit or a table,
+   booked without paying). `sat` = works Saturdays. `at` = when a booked job starts. `away` = the
+   customer goes to them, not the other way round. All fictional. */
 const JOBS = {
-  heating: { quote: ['New combi boiler', '£2,850'], dep: 30, sat: false, jobs: [['Boiler service', '1 hour'], ['Boiler not working', 'Repair visit'], ['Leak or radiator problem', 'Repair visit']], text: 'out on a job' },
-  electrical: { quote: ['Consumer unit upgrade', '£650'], dep: 30, sat: false, jobs: [['Fault finding', 'Up to 2 hours'], ['Extra sockets or lights', 'Half day'], ['Electrical safety certificate', '2 to 3 hours']], text: 'out on a job' },
-  roofing: { quote: ['Re-roof, terraced house', '£6,400'], dep: 0, sat: true, jobs: [['Roof leak inspection', 'Free visit'], ['Gutters and fascias', 'Free quote visit'], ['New roof quote', 'Free quote visit']], text: 'up on a roof' },
-  building: { quote: ['Kitchen extension', '£38,000'], dep: 0, sat: true, jobs: [['Extension quote', 'Free quote visit'], ['Joinery repair', 'Free quote visit'], ['Small works', 'Free quote visit']], text: 'on site' },
-  kitchens: { quote: ['Kitchen supply and fit', '£9,200'], dep: 0, sat: true, jobs: [['Kitchen design visit', 'Free, about an hour'], ['Bathroom quote', 'Free quote visit'], ['Small repair', 'Free quote visit']], text: 'on a fit' },
-  garden: { quote: ['New fence, 12 panels', '£1,450'], dep: 0, sat: true, jobs: [['Fence repair', 'Free quote visit'], ['Garden design quote', 'Free quote visit'], ['Hedge and tree work', 'Free quote visit']], text: 'out on a job' },
-  cleaning: { quote: ['Weekly clean, 3 hours', '£60 a visit'], dep: 30, sat: true, jobs: [['Regular home clean', '2 hours'], ['End of tenancy clean', 'Full day'], ['Oven clean', '2 hours']], text: 'out cleaning' },
-  salon: { quote: ['Wedding hair and a trial', '£280'], dep: 20, sat: true, jobs: [['Cut and finish', '45 minutes'], ['Colour', '2 hours'], ['Nails', '1 hour']], text: 'with a client' },
-  garage: { quote: ['Clutch replacement', '£540'], dep: 0, sat: true, jobs: [['MOT', '1 hour'], ['Full service', 'Half day'], ['Warning light check', '1 hour']], text: 'under a car' },
-  clinic: { quote: ['Block of six sessions', '£270'], dep: 30, sat: true, jobs: [['First assessment', '45 minutes'], ['Follow-up session', '30 minutes'], ['Sports massage', '1 hour']], text: 'with a patient' },
-  professional: { quote: ['Year-end accounts', '£950'], dep: 0, sat: false, jobs: [['Free intro call', '20 minutes'], ['Tax return meeting', '1 hour'], ['Bookkeeping review', '1 hour']], text: 'with a client' },
-  hospitality: { quote: ['Private hire, 20 guests', '£1,200'], dep: 0, sat: true, jobs: [['Table for 2', 'Tonight or later'], ['Table for 4', 'Tonight or later'], ['Private hire enquiry', 'We call you back']], text: 'mid-service' },
-  other: { quote: ['Standard job', '£400'], dep: 0, sat: false, jobs: [['Free consultation', '30 minutes'], ['Standard visit', '1 hour'], ['Quote visit', 'Free']], text: 'out on a job' },
+  heating: { name: 'Larchfield Heating', need: 'your boiler looked at', quote: ['New combi boiler', '£2,850'], qs: 'new boiler', dep: 30, sat: false, at: '8:00', jobs: [['Boiler service', '1 hour'], ['Boiler not working', 'Repair visit'], ['Leak or radiator problem', 'Repair visit']], text: 'out on a job' },
+  electrical: { name: 'Larchfield Electrical', need: 'an electrician', quote: ['Consumer unit upgrade', '£650'], qs: 'consumer unit', dep: 30, sat: false, at: '8:00', jobs: [['Fault finding', 'Up to 2 hours'], ['Extra sockets or lights', 'Half day'], ['Electrical safety certificate', '2 to 3 hours']], text: 'out on a job' },
+  roofing: { name: 'Larchfield Roofing', need: 'someone to look at a leak', quote: ['Re-roof, terraced house', '£6,400'], qs: 're-roof', dep: 0, sat: true, at: '8:00', jobs: [['Roof leak inspection', 'Free visit'], ['Gutters and fascias', 'Free quote visit'], ['New roof quote', 'Free quote visit']], text: 'up on a roof' },
+  building: { name: 'Larchfield Builders', need: 'a price for an extension', quote: ['Kitchen extension', '£38,000'], qs: 'extension', dep: 0, sat: true, at: '8:00', jobs: [['Extension quote', 'Free quote visit'], ['Joinery repair', 'Free quote visit'], ['Small works', 'Free quote visit']], text: 'on site' },
+  kitchens: { name: 'Larchfield Kitchens', need: 'a new kitchen', quote: ['Kitchen supply and fit', '£9,200'], qs: 'new kitchen', dep: 0, sat: true, at: '8:00', jobs: [['Kitchen design visit', 'Free, about an hour'], ['Bathroom quote', 'Free quote visit'], ['Small repair', 'Free quote visit']], text: 'on a fit' },
+  garden: { name: 'Larchfield Gardens', need: 'a fence sorted', quote: ['New fence, 12 panels', '£1,450'], qs: 'new fence', dep: 0, sat: true, at: '8:00', jobs: [['Fence repair', 'Free quote visit'], ['Garden design quote', 'Free quote visit'], ['Hedge and tree work', 'Free quote visit']], text: 'out on a job' },
+  cleaning: { name: 'Larchfield Cleaning', need: 'a cleaner', quote: ['Weekly clean, 3 hours', '£60 a visit'], qs: 'weekly clean', dep: 30, sat: true, at: '9:00', jobs: [['Regular home clean', '2 hours'], ['End of tenancy clean', 'Full day'], ['Oven clean', '2 hours']], text: 'out cleaning' },
+  salon: { name: 'Larchfield Hair', need: 'a haircut', quote: ['Wedding hair and a trial', '£280'], qs: 'wedding hair', dep: 20, sat: true, at: '10:00', away: true, jobs: [['Cut and finish', '45 minutes'], ['Colour', '2 hours'], ['Nails', '1 hour']], text: 'with a client' },
+  garage: { name: 'Larchfield Motors', need: 'an MOT', quote: ['Clutch replacement', '£540'], qs: 'clutch', dep: 0, sat: true, at: '8:30', away: true, jobs: [['MOT', '1 hour'], ['Full service', 'Half day'], ['Warning light check', '1 hour']], text: 'under a car' },
+  handyman: { name: 'Larchfield Handyman', need: 'a few jobs done around the house', quote: ['Doors hung and skirting fitted', '£360'], qs: 'doors and skirting', dep: 0, sat: true, at: '8:00', jobs: [['Odd jobs, half day', 'Up to 4 hours'], ['Flat-pack assembly', '2 hours'], ['Painting a room', 'Free quote visit']], text: 'out on a job' },
+  clinic: { name: 'Larchfield Physio', need: 'a physio appointment', quote: ['Block of six sessions', '£270'], qs: 'six sessions', dep: 30, sat: true, at: '9:30', away: true, jobs: [['First assessment', '45 minutes'], ['Follow-up session', '30 minutes'], ['Sports massage', '1 hour']], text: 'with a patient' },
+  professional: { name: 'Larchfield Accounts', need: 'an accountant', quote: ['Year-end accounts', '£950'], qs: 'year-end accounts', dep: 0, sat: false, at: '10:00', away: true, jobs: [['Free intro call', '20 minutes'], ['Tax return meeting', '1 hour'], ['Bookkeeping review', '1 hour']], text: 'with a client' },
+  hospitality: { name: 'The Larchfield', need: 'a table', quote: ['Private hire, 20 guests', '£1,200'], qs: 'private hire', dep: 0, sat: true, at: '19:00', away: true, jobs: [['Table for 2', 'Dinner'], ['Table for 4', 'Dinner'], ['Private hire enquiry', 'We call you back']], text: 'mid-service' },
+  other: { name: 'Larchfield Services', need: 'some help', quote: ['Standard job', '£400'], qs: 'job', dep: 0, sat: false, at: '9:00', jobs: [['Free consultation', '30 minutes'], ['Standard visit', '1 hour'], ['Quote visit', 'Free']], text: 'out on a job' },
 };
 const kinds = KINDS.map(k => ({ key: k.key, label: k.label }));
 
 const DEMOS = [
   { slug: 'missed-call', name: 'Missed call, booked', live: true,
     line: 'Call your own business, let it ring out, and watch the text turn into a booking with a deposit.',
-    proves: 'Missed calls stop being lost jobs.' },
+    proves: 'Missed calls stop being lost jobs.', alt: 'The pretend phone’s lock screen with the text-back: sorry we missed your call, book here.' },
   { slug: 'booking', name: 'Book and pay a deposit', live: true,
     line: 'Book a job on your own website at 10pm, pay the deposit, then find it in your diary the next morning.',
-    proves: 'Customers book without you.' },
+    proves: 'Customers book without you.', alt: 'The owner’s phone at 07:30: today’s diary with a new job booked at 22:14 last night, deposit paid.' },
   { slug: 'crm-board', name: 'The CRM board', live: true,
-    line: 'Drag a lead from enquiry to done and watch the follow-up texts and review request send themselves.',
-    proves: 'Nothing slips through when you are busy.' },
+    line: 'Move a lead from enquiry to done and watch the follow-up texts and review request send themselves.',
+    proves: 'Nothing slips through when you are busy.', alt: 'The Skales CRM board: leads in Enquiry, Quoted, Booked and Done, with the texts that sent themselves.' },
 ];
+/* one demo card, with a still of the demo's best moment (assets/try/<slug>.webp, captured from the demo
+   itself). Used on /try/, the home page, the services pages and the trade pages. */
+const PIC = { 'missed-call': [480, 1002], booking: [480, 1002], 'crm-board': [900, 872] };
+const card = (b, x, i, { h = 'h3', href = `${b}try/${x.slug}/`, first = true } = {}) => `<a class="try-card has-pic" href="${href}">
+  <span class="try-pic is-${x.slug}" aria-hidden="true"><img src="${b}assets/try/${x.slug}.webp" alt="" width="${PIC[x.slug][0]}" height="${PIC[x.slug][1]}" loading="lazy" decoding="async"></span>
+  <span class="try-tx"><span class="try-n">${i === 0 && first ? 'Start here · ' : ''}About a minute · works on your phone</span><${h}>${esc(x.name)}</${h}><span class="try-p">${esc(x.line)}</span><span class="try-go">Try it <span aria-hidden="true">→</span></span></span>
+</a>`;
 
 const ic = (n, s = 16) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true">${({
   phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
@@ -60,6 +70,7 @@ const SITES = Object.fromEntries([
   ...trades.map(t => [t.key, { word: t.word, c: t.c, creds: t.creds, services: t.services.slice(0, 3).map(x => x[0]) }]),
   ['clinic', { word: 'physio clinic', c: '#2C5D73', creds: ['HCPC registered', 'Evening appointments', 'Book online any hour'], services: ['Back and neck pain', 'Sports injuries', 'Massage'] }],
   ['professional', { word: 'accountant', c: '#28344A', creds: ['Fixed monthly fees', 'Replies the same day', 'Making Tax Digital ready'], services: ['Self assessment', 'Bookkeeping', 'Limited company accounts'] }],
+  ['other', { word: 'local service business', c: '#2E4053', creds: ['Fully insured', 'Fixed prices, agreed first', 'Book online any hour'], services: ['Free consultations', 'Standard visits', 'Quote visits'] }],
   ['hospitality', { word: 'restaurant', c: '#6E2F2A', creds: ['Open late Friday and Saturday', 'Private room for 20', 'Book online any hour'], services: ['Dinner', 'Sunday lunch', 'Private hire'] }],
 ]);
 
@@ -157,8 +168,8 @@ const LY = {
           <button type="button" class="wb-back" data-act="detback">${ic('back', 14)}Change time</button>
           <h3>Your details</h3>
           <p class="wb-sub"><b data-jobname></b> · <span data-when></span></p>
-          <div class="wb-f"><label>Name</label><span class="wb-in" id="fName"></span></div>
-          <div class="wb-f"><label>Mobile</label><span class="wb-in" id="fMob"></span></div>
+          <div class="wb-f"><label>Name</label><span class="wb-in" id="fName" data-act="fill"></span></div>
+          <div class="wb-f"><label>Mobile</label><span class="wb-in" id="fMob" data-act="fill"></span></div>
           <div class="wb-f"><label>Anything we should know?</label><div class="wb-notes" id="notes"></div></div>
           <button type="button" class="wb-cta" data-act="confirm" disabled>Fill in your details</button>
           <p class="wb-fine">We only use your number for this booking.</p>
@@ -245,50 +256,51 @@ const crmBoard = `
 const app = x => ({ '@type': 'WebApplication', '@id': L.abs(`/try/${x.slug}/#app`), name: x.name, url: L.abs(`/try/${x.slug}/`), description: x.line,
   applicationCategory: 'BusinessApplication', operatingSystem: 'Any, in the browser', isAccessibleForFree: true, provider: { '@id': L.ORG_ID } });
 
-const chip = k => `<button type="button" class="tm-k" data-kind="${k.key}" aria-pressed="false">${esc(k.label)}</button>`;
-/* one demo page: set-up, the running demo (narration, phone, CRM), the end */
+const opt = k => `<option value="${k.key}">${esc(k.label)}</option>`;
+/* one demo page. It is ready to play the moment it loads: the phone is already on the first screen, a
+   pretend business is filled in, and typing your own name (or picking your trade) makes it yours.
+   The end card lands in the narration, so the phone and the CRM stay in view. */
 function demoPage(b, x, { n, lead, steps, layers, side = crm, runClass = '' }){
   const camp = `utm_source=site&amp;utm_medium=try&amp;utm_campaign=${x.slug}`;
+  const next = DEMOS[n % DEMOS.length];
   return `
 ${L.header(b, 'try')}
 <main id="main" class="tm">
-<section class="tm-setup wrap" id="setup">
-  <p class="spec"><a class="lnk" href="${b}try/">Try it</a> · Demo ${n} of ${DEMOS.length}</p>
-  <h1>${esc(x.name)}.</h1>
-  <p class="lead">${esc(lead)}</p>
-  <form class="tm-form" id="setupForm" novalidate>
-    <label class="tm-l" for="bizName">Your business name <span class="opt">optional</span></label>
-    <input id="bizName" name="biz" maxlength="32" autocomplete="organization" placeholder="Larchfield Heating" enterkeyhint="go">
-    <p class="tm-l" id="kindL">What do you do?</p>
-    <div class="tm-kinds" role="group" aria-labelledby="kindL">${kinds.map(chip).join('')}</div>
-    <button class="btn btn-live tm-go" type="submit">Start the demo</button>
-    <p class="tm-fine">A pretend phone on this page. Nothing is sent, nobody is called, and your answers stay in your browser.</p>
-  </form>
-</section>
-
-<section class="tm-run${runClass ? ' ' + runClass : ''}" id="run" hidden>
+<section class="tm-run${runClass ? ' ' + runClass : ''}" id="run">
   <div class="tm-narr">
-    <ol class="tm-steps" aria-label="Steps">${steps.map((s, i) => `<li data-step="${i}"><span>${esc(s)}</span></li>`).join('')}</ol>
+    <p class="spec tm-crumb"><a class="lnk" href="${b}try/">Try it</a> · Demo ${n} of ${DEMOS.length} · about a minute</p>
+    <h1 class="tm-h1">${esc(x.name)}.</h1>
+    <form class="tm-you" id="you" novalidate>
+      <label class="tm-yl" for="bizName">Make it your business <span class="opt">optional</span></label>
+      <div class="tm-yr">
+        <input id="bizName" name="biz" maxlength="32" autocomplete="organization" placeholder="Larchfield Heating" enterkeyhint="done" spellcheck="false">
+        <select id="bizKind" name="kind" aria-label="What you do">${kinds.map(opt).join('')}</select>
+      </div>
+    </form>
+    <ol class="tm-steps" id="steps" aria-label="Steps">${steps.map((s, i) => `<li data-step="${i}"><span>${esc(s)}</span></li>`).join('')}</ol>
     <p class="tm-say" id="say" aria-live="polite"></p>
     <p class="tm-hint" id="hint"></p>
+    <div class="tm-end" id="end" hidden>
+      <p class="spec">What just happened</p>
+      <h2 tabindex="-1" id="endH"></h2>
+      <p id="endP"></p>
+      <div class="tm-acts">
+        <a class="btn btn-live" data-cta="check" href="${b}start/?${camp}">See what I’m missing <small>60 seconds</small></a>
+        <a class="btn btn-ghost" data-cta="call" href="${b}start/?${camp}#book">Book a call</a>
+      </div>
+      <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/${next.slug}/">Next: ${esc(next.name)} <span aria-hidden="true">→</span></a></p>
+    </div>
     <p class="tm-lab">Demo · pretend business · nothing is sent</p>
   </div>
   <div class="tm-stage">
     ${phone(layers)}
-    <div class="tm-toast" id="toast" role="status" hidden></div>
   </div>
   <div class="tm-side">${side}</div>
+  <div class="tm-toast" id="toast" role="status" hidden></div>
 </section>
-
-<section class="tm-end wrap" id="end" hidden aria-live="polite">
-  <p class="spec">What just happened</p>
-  <h2 tabindex="-1" id="endH"></h2>
-  <p class="lead" id="endP"></p>
-  <div class="tm-acts">
-    <a class="btn btn-live" data-cta="check" href="${b}start/?${camp}">See what I’m missing <small>60 seconds</small></a>
-    <a class="btn btn-ghost" data-cta="call" href="${b}start/?${camp}#book">Book a call</a>
-  </div>
-  <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/">The other demos</a></p>
+<section class="tm-more wrap">
+  <p>${esc(lead)}</p>
+  <p class="tm-fine">A pretend phone on this page. Nothing is sent, nobody is called, and what you type stays in your browser. <a class="lnk" href="${b}try/">All three demos</a></p>
 </section>
 <noscript><section class="wrap tm-nos"><p>This demo needs JavaScript. You can <a class="lnk" href="${b}services/">read how it works</a> or <a class="lnk" href="${b}book/">book a call</a>.</p></section></noscript>
 </main>
@@ -296,7 +308,7 @@ ${L.footer(b)}
 <script>window.TRYKINDS=${JSON.stringify(kinds)};window.TRYJOBS=${JSON.stringify(JOBS)};window.TRYSITES=${JSON.stringify(SITES)};</script>`;
 }
 
-module.exports = { JOBS, DEMOS, pages: [
+module.exports = { JOBS, DEMOS, card, pages: [
   {
     url: '/try/', og: 'try', priority: 0.8, changefreq: 'monthly',
     meta: { key: 'try', title: 'Try it: the systems, running.', kicker: 'Live demos · about a minute each', sub: 'Be your own customer. Call, book, pay a deposit, and see what the business sees.' },
@@ -309,9 +321,6 @@ module.exports = { JOBS, DEMOS, pages: [
         L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Try it', path: '/try/' }]),
         { '@type': 'ItemList', name: 'Live demos', itemListElement: live.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: L.abs(`/try/${x.slug}/`), name: x.name })) },
       ];
-      const card = x => x.live
-        ? `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h2>${esc(x.name)}</h2><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`
-        : `<div class="try-card is-soon" aria-disabled="true"><span class="try-n">Next</span><h2>${esc(x.name)}</h2><p>${esc(x.line)}</p><span class="try-go">Being built</span></div>`;
       const body = `
 ${L.header(b, 'try')}
 <main id="main">
@@ -320,7 +329,7 @@ ${L.header(b, 'try')}
   <h1>Don’t take my word for it. Try it.</h1>
   <p class="lead">Each demo runs right here on your phone. You play the customer, then see what the business sees. Every business in them is pretend, and nothing is sent.</p>
 </section>
-<section class="wrap try-list">${DEMOS.map(card).join('')}</section>
+<section class="wrap try-list">${live.map((x, i) => card(b, x, i, { h: 'h2' })).join('')}</section>
 ${L.ctaBand(b, 'Want this running for your business?', 'Sixty seconds of taps shows what missed calls are likely costing you and what I would build first.', `<a class="btn btn-ghost" href="${b}start/?utm_source=site&amp;utm_medium=try">See what I’m missing</a>`)}
 </main>
 ${L.footer(b)}`;

@@ -19,9 +19,10 @@
       K.$('svcs').innerHTML = W.services.map(function(c){ return '<li>' + K.esc(c) + '</li>'; }).join('');
       K.$('wbPick').hidden = false; K.$('wbDet').hidden = true; K.$('af').hidden = true;
       K.$('fName').textContent = ''; K.$('fMob').textContent = '';
-      var away = { salon: 1, garage: 1, clinic: 1, professional: 1, hospitality: 1 }[A.kind];
+      var away = A.J.away;
       K.$('notes').innerHTML = (away ? ['First visit', 'Need parking', 'Nothing else'] : ['Call before you come', 'Parking outside', 'Nothing else']).map(function(n){ return '<button type="button" class="wb-note" aria-pressed="false">' + n + '</button>'; }).join('');
       var c = K.$('wbDet').querySelector('[data-act=confirm]'); c.disabled = true; c.textContent = 'Fill in your details';
+      K.$('run').classList.add('is-night');
       K.show('site'); K.step(0);
       K.narrate('It’s 22:14. Your customer has just got in and found your website.', 'Tap Book online.');
     },
@@ -74,7 +75,7 @@
 
   function morning(){
     var A = K.A, m = new Date(); m.setDate(m.getDate() + 1); m.setHours(7, 30, 0, 0);
-    K.clockAt(m); K.step(4);
+    K.clockAt(m); K.step(4); K.$('run').classList.remove('is-night');
     K.show('olock', true); K.$('ontf').hidden = true;
     K.bind('[data-otext]', 'New booking overnight: ' + K.jobName() + ', ' + K.when() + '.' + (A.dep ? ' £' + A.dep + ' deposit paid.' : '') + ' Sam Carter, booked online at ' + K.hm(A.t.booked) + '.');
     K.narrate('Next morning, 07:30. This is on your phone.', 'Wait a moment.');

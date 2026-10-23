@@ -22,17 +22,21 @@
     d.documentElement.setAttribute('data-ch', x.n); }
   window.TINT = tint;
 
-  /* ---------- a phone tile ---------- */
+  /* ---------- a tile: a website is a phone, a tool is a screen; the still turns into a short clip as it scrolls in ---------- */
+  var clip = function(x, ext){ return b + 'assets/clips/' + pad(x.n) + '.' + ext; };
   function tileHTML(x, opts){
     opts = opts || {};
-    return '<a class="tile" href="' + page(x) + '" data-n="' + x.n + '" data-kind="' + x.kind + '" data-lane="' + x.lane + '">'
-      + '<span class="shell"><img src="' + phone(x) + '" width="585" height="1266" alt="' + esc(x.name) + ' on a phone — ' + esc(x.short) + '" loading="lazy" decoding="async"></span>'
-      + '<span class="cap">' + (opts.dir ? '<span class="dir">' + opts.dir + '</span>' : '') + '<b>' + esc(x.name) + '</b><span>' + esc(kindWord(x) + (laneName(x) ? ' · ' + laneName(x) : '') + ' · ' + (x.trade || x.biz)) + '</span></span></a>';
+    var wide = x.kind === 'tool';
+    return '<a class="tile' + (wide ? ' is-wide' : '') + '" href="' + page(x) + '" data-n="' + x.n + '" data-kind="' + x.kind + '" data-lane="' + x.lane + '" data-trade="' + esc(x.tk || '') + '">'
+      + '<span class="shell"><img src="' + clip(x, 'webp') + '" width="' + (wide ? 1280 : 600) + '" height="' + (wide ? 800 : 1077) + '" alt="' + esc(x.name) + (wide ? ' on a laptop: ' : ' on a phone: ') + esc(x.short) + '" loading="lazy" decoding="async">'
+      + '<video muted playsinline preload="none" data-src="' + clip(x, 'mp4') + '" aria-hidden="true"></video></span>'
+      + '<span class="cap">' + (opts.dir ? '<span class="dir">' + opts.dir + '</span>' : '') + '<b>' + esc(x.name) + '</b><span>' + esc(x.short) + '</span><span class="for">' + esc(kindWord(x) + ' · ' + (x.trade || x.biz)) + '</span></span></a>';
   }
   window.tileHTML = tileHTML;
   window.renderWall = function(sel, list){
     var el = typeof sel === 'string' ? d.querySelector(sel) : sel; if (!el) return;
     el.innerHTML = (list || B).map(function(x){ return tileHTML(x); }).join('');
+    if (window.skClips) skClips(el);
   };
   d.querySelectorAll('[data-wall]').forEach(function(el){
     var spec = el.getAttribute('data-wall'), list;
@@ -43,22 +47,36 @@
     window.renderWall(el, list);
   });
 
-  /* ---------- filters on the wall ---------- */
-  var filters = d.querySelector('.filters');
-  if (filters){
-    var btns = filters.querySelectorAll('button');
-    var apply = function(f){
-      btns.forEach(function(o){ o.setAttribute('aria-pressed', String(o.getAttribute('data-f') === f)); });
-      d.querySelectorAll('.tile').forEach(function(t){
-        var show = f === 'all' || t.getAttribute('data-kind') === f || t.getAttribute('data-lane') === f;
-        t.hidden = !show;
+  /* ---------- filtering the wall: websites or tools, and your trade (builds made for any trade always stay) ---------- */
+  var bar = d.querySelector('.wbar');
+  if (bar){
+    var kinds = bar.querySelectorAll('button[data-f]'), sel = bar.querySelector('select'), root = d.getElementById('wall') || d;
+    var state = { kind: 'all', trade: '' };
+    var apply = function(){
+      kinds.forEach(function(o){ o.setAttribute('aria-pressed', String(o.getAttribute('data-f') === state.kind)); });
+      if (sel) sel.value = state.trade;
+      root.querySelectorAll('.tile').forEach(function(t){
+        var k = t.getAttribute('data-kind'), tr = t.getAttribute('data-trade');
+        t.hidden = !((state.kind === 'all' || k === state.kind) && (!state.trade || tr === state.trade || tr === 'any'));
       });
-      d.querySelectorAll('[data-lanehead]').forEach(function(h){ var k = h.getAttribute('data-lanehead'); h.hidden = !(f === 'all' || f === k || (LN[k] && LN[k].kind === f)); });
-      var c = d.getElementById('wallCount'); if (c) c.textContent = d.querySelectorAll('.tile:not([hidden])').length;
+      root.querySelectorAll('[data-lanehead], [data-kindsec]').forEach(function(sec){ sec.hidden = !sec.querySelector('.tile:not([hidden])'); });
+      var c = d.getElementById('wallCount'); if (c) c.textContent = root.querySelectorAll('.tile:not([hidden])').length;
+      var note = d.getElementById('tradeNote');
+      if (note){
+        var seen = root.querySelectorAll('.tile:not([hidden])').length;
+        var own = state.trade ? root.querySelectorAll('.tile:not([hidden]):not([data-trade="any"])').length : 0;
+        var label = (sel && sel.selectedIndex > 0 ? sel.options[sel.selectedIndex].text : '').toLowerCase();
+        note.hidden = !state.trade;
+        note.textContent = !state.trade ? '' : !seen ? 'No ' + (state.kind === 'site' ? 'websites' : 'tools') + ' made for ' + label + ' yet. Press All to see the tools that fit any trade.'
+          : own ? own + ' made for ' + label + (seen > own ? ', plus the tools that fit any trade.' : '.') : 'Nothing made for ' + label + ' yet. These tools fit any trade.';
+      }
+      if (history.replaceState) history.replaceState(null, '', location.pathname + (state.trade ? '#' + state.trade : state.kind !== 'all' ? '#' + state.kind : ''));
     };
-    btns.forEach(function(btn){ btn.addEventListener('click', function(){ apply(btn.getAttribute('data-f')); if (history.replaceState) history.replaceState(null, '', btn.getAttribute('data-f') === 'all' ? location.pathname : '#' + btn.getAttribute('data-f')); }); });
-    var m = /^#(site|tool|loud|motion|quiet|direct|broad|specific)$/.exec(location.hash);
-    if (m) apply(m[1]);
+    kinds.forEach(function(btn){ btn.addEventListener('click', function(){ state.kind = btn.getAttribute('data-f'); apply(); }); });
+    if (sel) sel.addEventListener('change', function(){ state.trade = sel.value; apply(); });
+    var h = (location.hash || '').slice(1);
+    if (h === 'site' || h === 'tool'){ state.kind = h; apply(); }
+    else if (h && sel && sel.querySelector('option[value="' + h + '"]')){ state.trade = h; apply(); }
   }
 
   /* ---------- the device ---------- */
@@ -83,7 +101,12 @@
     function select(n, user){
       var x = byN(n); if (!x || (current && current.n === n)) return; current = x;
       dev.classList.remove('is-live');
-      if (!frame){
+      /* on a phone a build inside the page fights the page for the scroll, so it is a still that opens the viewer */
+      if (window.matchMedia && matchMedia('(max-width: 760px)').matches){
+        screen.innerHTML = '<img class="dev-still" src="' + phone(x) + '" width="585" height="1266" alt="' + esc(x.name) + ' on a phone">'
+          + '<button type="button" class="dev-play" data-view="' + x.slug + '"><span>Use it full screen</span></button>';
+        dev.classList.add('is-live');
+      } else if (!frame){
         frame = d.createElement('iframe'); frame.src = demo(x); frame.setAttribute('title', x.name + ' — live build');
         frame.addEventListener('load', function(){ dev.classList.add('is-live'); screen.classList.remove('fade'); });
         screen.appendChild(frame);
@@ -109,7 +132,16 @@
   /* ---------- solo browser frames (what I do): mount when they scroll into view ---------- */
   var solos = d.querySelectorAll('[data-solo]');
   if (solos.length){
-    var mount = function(vp){ var x = bySlug(vp.getAttribute('data-solo')); if (!x || vp.querySelector('iframe')) return; vp.innerHTML = ''; var f = d.createElement('iframe'); f.src = demo(x); f.setAttribute('title', x.name + ' — live build'); vp.appendChild(f); };
+    var mount = function(vp){
+      var x = bySlug(vp.getAttribute('data-solo')); if (!x || vp.querySelector('iframe')) return;
+      /* a build page's laptop frame: on a phone it stays a still that opens the build full screen (no scroll trap) */
+      if (vp.hasAttribute('data-solo-still') && window.matchMedia && matchMedia('(max-width: 760px)').matches){
+        vp.innerHTML = '<img class="dev-still" src="' + phone(x) + '" width="585" height="1266" alt="' + esc(x.name) + ' on a phone">'
+          + '<button type="button" class="dev-play" data-view="' + x.slug + '"><span>Use it full screen</span></button>';
+        return;
+      }
+      vp.innerHTML = ''; var f = d.createElement('iframe'); f.src = demo(x); f.setAttribute('title', x.name + ' — live build'); vp.appendChild(f);
+    };
     if ('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ mount(e.target); io.unobserve(e.target); } }); }, { rootMargin: '200px 0px' });
       solos.forEach(function(v){ io.observe(v); });

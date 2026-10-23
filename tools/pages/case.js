@@ -11,7 +11,7 @@ const trades = require('../../data/trades.js');
    builds already cover. `bookable`: customers would happily pick a slot themselves. */
 /* noun: the kind as it reads mid-sentence, article included ("is an electrical business", "see it working for a garage or MOT centre") */
 const NOUN = { heating: 'a plumbing and heating business', electrical: 'an electrical business', roofing: 'a roofing business', building: 'a building and joinery business',
-  kitchens: 'a kitchens and bathrooms business', garden: 'a landscaping and fencing business', cleaning: 'a cleaning business', salon: 'a salon or beauty business', garage: 'a garage or MOT centre' };
+  kitchens: 'a kitchens and bathrooms business', garden: 'a landscaping and fencing business', cleaning: 'a cleaning business', salon: 'a salon or beauty business', garage: 'a garage or MOT centre', handyman: 'a handyman or property maintenance business' };
 const KINDS = [
   ...trades.filter(t => t.key !== 'other').map(t => ({ key: t.key, label: t.label, noun: NOUN[t.key] || 'a ' + t.label.toLowerCase() + ' business', demo: t.demo, bookable: ['heating', 'cleaning', 'salon', 'garage'].includes(t.key), recurs: ['heating', 'cleaning', 'salon', 'garage', 'garden'].includes(t.key) })),
   { key: 'clinic', label: 'Clinic or physio', noun: 'a clinic or physio practice', demo: 22, bookable: true, recurs: true },

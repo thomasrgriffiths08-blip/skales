@@ -18,9 +18,15 @@
 /* the phone: the device is the page */
 @media (max-width:760px){
   .device{width:100%;padding:0;background:none;border-radius:0;box-shadow:none}
-  .device .screen{width:100%;height:var(--ph-m,72vh);min-height:480px;max-height:820px;border-radius:24px;border:1px solid var(--line-2)}
+  .device .screen{width:100%;height:var(--ph-m,62vh);min-height:440px;max-height:700px;border-radius:24px;border:1px solid var(--line-2)}
   .device .screen iframe{width:100%}
 }
+
+/* a phone: the build is a still that opens the viewer, so the page keeps the scroll */
+.device .dev-still,.rig .dev-still{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.device .dev-play,.rig .dev-play{position:absolute;inset:0;display:grid;place-items:center;padding:0;border:0;background:rgba(14,14,16,.18);cursor:pointer}
+.device .dev-play span,.rig .dev-play span{display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 22px;border-radius:999px;background:#FFF;color:var(--tx);font-weight:600;font-size:1rem;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.device .dev-play span::before,.rig .dev-play span::before{content:"";width:0;height:0;border-left:10px solid currentColor;border-top:6px solid transparent;border-bottom:6px solid transparent}
 
 /* under the device: which build this is, and the ways in */
 .device-cap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-top:20px;width:100%;max-width:414px}
@@ -46,29 +52,46 @@
 .thumbs button:active .shell{transform:scale(.97)}
 
 /* the wall: every build as a phone */
-.wall{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.5vw,32px) clamp(14px,2vw,24px)}
-.wall.wall-3{grid-template-columns:repeat(3,1fr)}
-@media (max-width:1000px){.wall{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:640px){.wall,.wall.wall-3{grid-template-columns:repeat(2,1fr)}}
-.tile{display:grid;gap:12px;min-width:0}
-.tile .shell{position:relative;aspect-ratio:390/500;border-radius:26px;padding:6px;background:var(--hand);overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
-.tile .shell img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:21px;background:#FFF}
+.walls{display:grid;gap:clamp(28px,4vw,48px)}
+.wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.5vw,32px) clamp(14px,2vw,24px);align-items:start}
+.wall.wall-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.wall.wall-wide{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){.wall{grid-template-columns:repeat(3,minmax(0,1fr))}.wall.wall-wide{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* on a phone every wall is a row you swipe, the next build peeking in from the edge */
+@media (max-width:640px){
+  .wall,.wall.wall-3,.wall.wall-wide{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;
+    margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad)}
+  .wall::-webkit-scrollbar{display:none}
+  .wall>.tile{flex:0 0 44%;scroll-snap-align:start}
+  .wall>.tile.is-wide{flex-basis:80%}
+}
+/* a tile: a website is a phone, a tool is a screen. The still sits under the clip, which plays once in view. */
+.tile{display:grid;gap:12px;align-content:start;min-width:0}
+.tile .shell{position:relative;display:block;aspect-ratio:600/1077;border-radius:28px;background:var(--hand);overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.tile.is-wide .shell{aspect-ratio:1280/800;border-radius:14px}
+.tile .shell img,.tile .shell video{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);max-width:none;object-fit:cover;object-position:top;border-radius:22px;background:#FFF}
+.tile.is-wide .shell img,.tile.is-wide .shell video{inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);border-radius:9px}
+.tile .shell video{opacity:0;transition:opacity .25s}
+.tile .shell video.is-on{opacity:1}
 .tile:hover .shell{transform:translateY(-4px);box-shadow:0 24px 40px -24px rgba(0,0,0,.35)}
 .tile:active .shell{transform:scale(.985)}
-.tile .cap{display:grid;gap:2px;min-width:0;padding:0 2px}
+.tile .cap{display:grid;gap:3px;min-width:0;padding:0 2px}
 .tile .cap b{font-size:1rem;letter-spacing:-.01em;line-height:1.25}
-.tile .cap span{font-size:.875rem;color:var(--tx-2);line-height:1.3}
-@media (max-width:640px){.tile .shell{border-radius:20px;padding:4px}.tile .shell img{border-radius:17px}.tile .cap b{font-size:.9375rem}.tile .cap span{font-size:.8125rem}}
+.tile .cap span{font-size:.875rem;color:var(--tx-2);line-height:1.4}
+.tile .cap .for{font-size:.8125rem;color:var(--tx-3)}
+@media (max-width:640px){.tile .shell{border-radius:20px}.tile .shell img,.tile .shell video{inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);border-radius:17px}
+  .tile.is-wide .shell img,.tile.is-wide .shell video{inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);border-radius:8px}
+  .tile .cap b{font-size:.9375rem}.tile .cap span{font-size:.8125rem}}
 .tile.is-dim{opacity:.35}
+.tile[hidden]{display:none}
+
+/* the way in: a tile opens the build full screen (assets/viewer.js) */
+.tile .shell::after{content:"Use it";position:absolute;z-index:2;left:50%;bottom:14px;transform:translate(-50%,6px);display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;
+  background:rgba(255,255,255,.96);color:var(--tx);font-size:.8125rem;font-weight:600;box-shadow:0 8px 20px -8px rgba(0,0,0,.45);opacity:0;transition:opacity .2s var(--ease),transform .2s var(--ease);pointer-events:none}
+.tile:hover .shell::after,.tile:focus-visible .shell::after{opacity:1;transform:translate(-50%,0)}
+.hint-inline{font-size:.9375rem;color:var(--tx-2)}
 
 /* filters */
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(20px,3vw,32px)}
-.filters button{height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:500;font-size:.9375rem;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}
-.filters button:hover{border-color:var(--tx)}
-.filters button[aria-pressed="true"]{background:var(--tx);color:var(--pg);border-color:var(--tx)}
-.filters .sep{width:1px;background:var(--line-2);margin:8px 4px}
-@media (max-width:600px){.filters .sep{display:none}}
-
 /* hero: headline beside the device */
 .hero{padding:clamp(28px,5vw,72px) 0 clamp(40px,6vw,80px)}
 .hero .grid{display:grid;grid-template-columns:1fr 480px;gap:clamp(32px,6vw,96px);align-items:center}
@@ -101,9 +124,12 @@
 .case-hero .meta a{color:var(--tx);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2)}
 @media (max-width:900px){.case-hero .grid{grid-template-columns:1fr;gap:28px}.case-hero .copy{position:static}.case-hero .side{order:-1}}
 .case-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,56px)}
+.case-grid>div{display:grid;gap:16px;align-content:start}
+.case-grid .feat,.case-grid .tags{margin-top:0 !important}
 @media (max-width:900px){.case-grid{grid-template-columns:1fr}}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,32px)}
 .pair .tile .shell{aspect-ratio:390/300}
+.pair .tile.is-wide .shell{aspect-ratio:1280/800}
 .pair .tile .dir{font-size:.875rem;color:var(--tx-2)}
 @media (max-width:520px){.pair{grid-template-columns:1fr 1fr}}
 
@@ -147,3 +173,94 @@
 .svc-demo.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .svc-demo.two>div,.panel .body,.panel .inner>*{min-width:0}
 @media (max-width:900px){.svc-demo.two{grid-template-columns:1fr}}
+
+/* ---------- the demos page ---------- */
+.work-hero{padding-bottom:clamp(28px,4vw,48px)}
+/* four picks, shown big: a tool on a screen beside a website on a phone, then the other way round */
+.picks{display:grid;gap:clamp(28px,4vw,48px);padding-bottom:clamp(48px,7vw,96px)}
+.picks-head{display:grid;gap:10px;max-width:640px}
+.picks-head p{color:var(--tx-2);line-height:1.5}
+.picks-row{display:grid;grid-template-columns:1.85fr 1fr;gap:clamp(20px,3vw,40px);align-items:start}
+.picks-row.flip{grid-template-columns:1fr 1.85fr}
+.pick{display:grid;gap:18px;align-content:start;min-width:0}
+.pick-stage{position:relative;display:block;aspect-ratio:1280/800;border-radius:16px;background:var(--hand);overflow:hidden}
+.pick:not(.is-wide) .pick-stage{background:var(--pc,var(--hand));display:grid;place-items:center;padding:6% 0;aspect-ratio:160/185}
+.pick-stage .shell{position:relative;display:block;width:100%;height:100%;overflow:hidden}
+.pick.is-wide .pick-stage .shell{position:absolute;inset:6px;width:auto;height:auto;border-radius:11px}
+.pick:not(.is-wide) .pick-stage .shell{height:100%;width:auto;aspect-ratio:600/1077;border-radius:24px;padding:5px;background:var(--hand);box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
+.pick-stage img,.pick-stage video{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top;background:#FFF}
+.pick:not(.is-wide) .pick-stage img,.pick:not(.is-wide) .pick-stage video{inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);border-radius:19px}
+.pick-stage video{opacity:0;transition:opacity .25s}
+.pick-stage video.is-on{opacity:1}
+.pick:hover .pick-stage{box-shadow:0 28px 50px -30px rgba(0,0,0,.4)}
+.pick-cap{display:grid;gap:6px;min-width:0;max-width:60ch}
+.pick-for{font-size:.875rem;color:var(--tx-3)}
+.pick-cap b{font-size:1.375rem;letter-spacing:-.02em;line-height:1.2}
+.pick-short{color:var(--tx-2);line-height:1.45}
+.try{list-style:none;counter-reset:t;display:grid;gap:6px;margin:8px 0 0;padding:0}
+.try li{counter-increment:t;display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:baseline;font-size:.9375rem;line-height:1.4}
+.try li::before{content:counter(t);display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--line-2);font-size:.75rem;font-weight:600;color:var(--tx-2)}
+.pick-go{margin-top:8px;font-weight:600}
+.pick:hover .pick-go{text-decoration:underline;text-underline-offset:4px}
+.picks-rows{display:grid;gap:clamp(36px,5vw,64px)}
+@media (max-width:900px){.picks-row,.picks-row.flip{grid-template-columns:minmax(0,1fr);gap:36px}.picks-row.flip .pick.is-wide{order:-1}}
+/* on a phone the four are one row you swipe */
+@media (max-width:640px){
+  .picks{gap:20px}
+  .picks-rows{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad);align-items:start}
+  .picks-rows::-webkit-scrollbar{display:none}
+  .picks-row,.picks-row.flip{display:contents}
+  .pick{flex:0 0 80%;scroll-snap-align:start}
+  .pick:not(.is-wide) .pick-stage{aspect-ratio:600/760;padding:6% 0}
+  .picks-row.flip .pick.is-wide{order:0}
+  .pick-cap b{font-size:1.1875rem}.try li{font-size:.875rem}
+}
+
+/* the filter: websites or tools, and your trade */
+.wbar-wrap{position:sticky;top:var(--head-h);z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
+.wbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding:12px 0}
+.wkinds{display:flex;gap:6px;flex-wrap:wrap}
+.wkinds button{height:40px;padding:0 15px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:500;font-size:.9375rem;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}
+.wkinds button:hover{border-color:var(--tx)}
+.wkinds button[aria-pressed="true"]{background:var(--tx);color:var(--pg);border-color:var(--tx)}
+.wtrade{display:flex;align-items:center;gap:10px;font-size:.9375rem;color:var(--tx-2)}
+.wtrade select{height:40px;padding:0 36px 0 14px;border-radius:10px;border:1px solid var(--line-2);background:var(--pg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2318181b' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 13px center;-webkit-appearance:none;appearance:none;font:inherit;font-weight:500;color:var(--tx);cursor:pointer;max-width:100%}
+.trade-note{margin:0;padding:0 0 12px;font-size:.9375rem;color:var(--tx-2)}
+@media (max-width:640px){.wbar{padding:10px 0;gap:8px;flex-wrap:nowrap}.wkinds{gap:4px;flex-wrap:nowrap}.wkinds button{height:38px;padding:0 11px;font-size:.875rem}.wkinds .n{display:none}.wtrade{flex:1;min-width:0}.wtrade span{display:none}.wtrade select{width:100%;height:38px;padding:0 30px 0 10px;font-size:.875rem;background-position:right 10px center}}
+
+/* websites, then tools; each lane is a row */
+.kindsec{padding:clamp(40px,6vw,80px) 0 0}
+.kindsec:last-child{padding-bottom:clamp(56px,8vw,112px)}
+.kindsec[hidden],.lrow[hidden]{display:none}
+.khead{display:grid;gap:10px;max-width:720px;margin-bottom:clamp(24px,3vw,40px)}
+.khead p{color:var(--tx-2);line-height:1.5}
+.khead .lnk{color:var(--tx);white-space:nowrap}
+/* websites: two lanes side by side, three phones each; tools: one lane a row, four screens across */
+.lrows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(24px,3.5vw,48px)}
+.lrow{display:grid;grid-template-columns:minmax(0,1fr);align-content:start;gap:16px;padding:clamp(22px,2.5vw,32px) 0 clamp(28px,3vw,40px);border-top:1px solid var(--line)}
+.lhead{display:grid;gap:8px;align-content:start}
+.lhead{grid-template-columns:auto minmax(0,1fr);column-gap:16px;align-items:baseline}
+.lhead small{grid-column:2}
+.lrow-top .lhead{grid-template-columns:minmax(0,120px) minmax(0,1fr) minmax(0,1fr);gap:8px 24px}
+.lrow-top .lhead small{grid-column:auto}
+.lrow .wall{gap:20px 14px}
+.lrow .wall.wall-wide{grid-template-columns:repeat(4,minmax(0,1fr))}
+.lhead h3{font-size:1.25rem;letter-spacing:-.02em}
+.lhead p{font-size:.9375rem;line-height:1.45}
+.lhead small{font-size:.875rem;color:var(--tx-3);line-height:1.45}
+.lrow .wall.wall-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){.lrows{grid-template-columns:minmax(0,1fr)}.lrow .wall.wall-wide{grid-template-columns:repeat(3,minmax(0,1fr))}.lrow-top .lhead{grid-template-columns:auto minmax(0,1fr)}.lrow-top .lhead small{grid-column:2}}
+@media (max-width:760px){.lrow .wall.wall-wide{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.lrow{padding:22px 0 26px;gap:16px}.lhead{gap:4px}.lhead small{display:none}}
+
+/* a tool's own page: the tool full width on a laptop, in a browser frame */
+.case-rig{margin-top:clamp(24px,3.5vw,40px)}
+.case-rig .rig .viewport{height:min(800px,calc(100vh - 150px));min-height:560px}
+.case-rig .rig .url{font-family:var(--mono);font-size:.8125rem}
+.case-rig .rig .pop{height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--line-2);background:var(--pg);font:inherit;font-size:.875rem;font-weight:500;cursor:pointer}
+.case-rig .rig .pop:hover{border-color:var(--tx)}
+.case-rig .rig .boot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.case-words{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,4vw,64px);align-items:start;margin-top:clamp(24px,3.5vw,40px)}
+.case-words .copy{display:grid;gap:20px;position:static}
+@media (max-width:900px){.case-words{grid-template-columns:1fr}}
+@media (max-width:760px){.case-rig .rig .viewport{height:auto;min-height:0;aspect-ratio:585/1266;max-height:72vh}.case-rig .rig .chrome .url{display:none}}

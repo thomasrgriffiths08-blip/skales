@@ -1,7 +1,10 @@
+const fs = require('fs'), path = require('path');
 const L = require('../lib.js');
+const CREDITS = require('../../data/photo-credits.js');
 const { site, builds, esc, pad, LANES, SITE_LANES, TOOL_LANES, laneOf, kindWord, Words } = L;
 
 const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
+const FIRST = [...SITE_LANES, ...TOOL_LANES].map(k => builds.filter(x => x.lane === k).sort((a, z) => a.n - z.n)[0]).find(Boolean);
 const inLane = k => builds.filter(x => x.lane === k);
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const crumbs = (b, items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map((it, i) => i === items.length - 1 ? `<span aria-current="page">${esc(it[0])}</span>` : `<a href="${b}${it[1]}">${esc(it[0])}</a><span>/</span>`).join('')}</nav>`;
@@ -14,18 +17,37 @@ const laneSection = (b, k, { question = false } = {}) => {
       <h2 id="h-${k}">${question ? esc(l.question) : `${esc(l.kindWord)} &middot; ${esc(l.name)}`}</h2>
       <p class="lead">${question ? esc(l.answer) : `<strong>${esc(l.line)}</strong> ${esc(l.who)}`}</p>
     </div>
-    ${list.length ? L.wall(b, list) : '<p class="f-note">Nothing here yet.</p>'}
+    ${list.length ? L.wall(b, list, list.length === 3 ? 'wall-3' : '') : '<p class="f-note">Nothing here yet.</p>'}
   </div>
 </section>`;
 };
-function filters(scope){
-  const chips = [];
-  if (scope === 'all') chips.push(['all', `All ${builds.length}`], ['site', `Websites ${SITES.length}`], ['tool', `Tools ${TOOLS.length}`], ['sep']);
-  const lanes = scope === 'site' ? SITE_LANES : scope === 'tool' ? TOOL_LANES : [...SITE_LANES, ...TOOL_LANES];
-  if (scope !== 'all') chips.push(['all', `All ${lanes.reduce((n, k) => n + inLane(k).length, 0)}`]);
-  lanes.forEach(k => chips.push([k, `${LANES[k].name} ${inLane(k).length}`]));
-  return `<div class="filters" role="group" aria-label="Filter builds">${chips.map(([f, t], i) => f === 'sep' ? '<span class="sep" aria-hidden="true"></span>' : `<button type="button" data-f="${f}" aria-pressed="${i === 0}">${t}</button>`).join('')}</div>`;
-}
+/* the demos page opens on four builds shown big: two tools on a laptop-shaped screen, two websites on a phone */
+const PICKS = ['ringsback', 'kerb-and-camber', 'southpaw', 'slate'].map(s => builds.find(x => x.slug === s)).filter(Boolean);
+const pick = (b, x) => {
+  const wide = x.kind === 'tool', steps = (x.show || []).map(s => s.say).filter(Boolean).slice(0, 3);
+  return `<a class="pick${wide ? ' is-wide' : ''}" href="${b}work/${x.slug}/" data-view="${x.slug}" style="--pc:${x.c}">
+    <span class="pick-stage"><span class="shell"><img src="${L.clipSrc(b, x, 'webp')}" width="${wide ? 1280 : 600}" height="${wide ? 800 : 1077}" alt="${esc(x.name)} ${wide ? 'on a laptop' : 'on a phone'}: ${esc(x.short)}" loading="lazy" decoding="async"><video muted playsinline preload="none" data-src="${L.clipSrc(b, x, 'mp4')}" aria-hidden="true"></video></span></span>
+    <span class="pick-cap">
+      <span class="pick-for">${esc(kindWord(x))} for a made-up ${esc((x.trade || x.biz).replace(/^Any /, 'any ').toLowerCase())}</span>
+      <b>${esc(x.name)}</b>
+      <span class="pick-short">${esc(x.short)}</span>
+      ${steps.length ? `<ol class="try">${steps.map(t => `<li>${esc(t)}</li>`).join('')}</ol>` : ''}
+      <span class="pick-go">Try it <span aria-hidden="true">&rarr;</span></span>
+    </span>
+  </a>`;
+};
+/* a lane: its name and who it is for beside (websites) or above (tools) its builds */
+const laneRow = (b, k) => {
+  const l = LANES[k], list = inLane(k).sort((a, z) => a.n - z.n);
+  return `<div class="lrow${l.kind === 'tool' ? ' lrow-top' : ''}" id="${k}" data-lanehead="${k}">
+      <div class="lhead"><h3>${esc(l.name)}</h3><p>${esc(l.line)}</p><small>${esc(l.who)}</small></div>
+      ${L.wall(b, list, l.kind === 'site' ? 'wall-3' : '')}
+    </div>`;
+};
+const tradeOptions = () => {
+  const have = new Set(builds.map(L.tradeKey));
+  return L.TRADES.filter(([k]) => have.has(k)).map(([k, name]) => `<option value="${k}">${esc(name)}</option>`).join('');
+};
 
 /* ---------- /work/ : everything ---------- */
 const gallery = {
@@ -42,12 +64,39 @@ const gallery = {
     const body = `
 ${L.header(b, 'work')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap work-hero">
   <h1>${Words(builds.length)} builds.<br>All of them running.</h1>
-  <p class="lead">${SITES.length} full websites and ${TOOLS.length} business tools for service businesses, each made for an invented business so no client is on show. Open any of them and use it like a customer would. Every one has its own page.</p>
+  <p class="lead">${SITES.length} full websites and ${TOOLS.length} business tools for service businesses, each made for an invented business so no client is on show. Tap any of them to use it full screen. Not sure what to press? It shows you.</p>
+  <div class="cta-row" style="margin-top:28px;align-items:center"><button type="button" class="btn btn-dark" data-view="${FIRST.slug}">Flick through all ${builds.length}</button><span class="hint-inline">Full screen, one at a time. Arrow keys work.</span></div>
 </section>
-<div class="wrap">${filters('all')}</div>
-${[...SITE_LANES, ...TOOL_LANES].map(k => laneSection(b, k)).join('')}
+<section class="picks wrap" aria-labelledby="h-picks">
+  <div class="picks-head"><h2 id="h-picks">Start with these four</h2><p>Two tools and two websites that show the range. Each card plays what the build does; tap it to try it yourself.</p></div>
+  <div class="picks-rows">
+    <div class="picks-row">${pick(b, PICKS[0])}${pick(b, PICKS[1])}</div>
+    <div class="picks-row flip">${pick(b, PICKS[2])}${pick(b, PICKS[3])}</div>
+  </div>
+</section>
+<div class="wrap wbar-wrap" id="all">
+  <div class="wbar" role="group" aria-label="Filter builds">
+    <div class="wkinds"><button type="button" data-f="all" aria-pressed="true">All <span class="n">${builds.length}</span></button><button type="button" data-f="site" aria-pressed="false">Websites <span class="n">${SITES.length}</span></button><button type="button" data-f="tool" aria-pressed="false">Tools <span class="n">${TOOLS.length}</span></button></div>
+    <label class="wtrade"><span>Your trade</span><select id="tradeSel"><option value="">Any trade</option>${tradeOptions()}</select></label>
+  </div>
+  <p class="trade-note" id="tradeNote" aria-live="polite" hidden></p>
+</div>
+<div id="wall">
+<section class="kindsec" id="websites" data-kindsec="site" aria-labelledby="h-websites">
+  <div class="wrap">
+    <div class="khead"><h2 id="h-websites">Websites</h2><p>${Words(SITES.length)} full websites in four lanes. A boxing club and an accountant should not get the same site, so the lane comes first: how loud it is, how much moves, how fast it gets to the phone number. <a class="lnk" href="${b}work/websites/">How the lanes work</a></p></div>
+    <div class="lrows">${SITE_LANES.map(k => laneRow(b, k)).join('\n    ')}</div>
+  </div>
+</section>
+<section class="kindsec" id="tools" data-kindsec="tool" aria-labelledby="h-tools">
+  <div class="wrap">
+    <div class="khead"><h2 id="h-tools">Tools</h2><p>Software that sits between the customer and the diary. Broad tools fit any business that takes enquiries; specific ones are built around one trade&rsquo;s day. <a class="lnk" href="${b}work/tools/">More on the tools</a></p></div>
+    ${TOOL_LANES.map(k => laneRow(b, k)).join('\n    ')}
+  </div>
+</section>
+</div>
 </main>
 ${L.forgeInvite(b, 'Pick your trade on the home page, put your business name in, and a working website for your business builds itself in a couple of seconds. Nothing to fill in but a name and a town.')}
 ${L.ctaBand(b, 'These are demos. Yours would have your name on it.', 'Same approach, your business: a site that captures the enquiry, a system that answers it in seconds, and a place where every job lives. Hand-built, owned by you.')}
@@ -132,10 +181,26 @@ ${L.footer(b)}`;
   }
 };
 
+/* the real photographs a build uses (from assets/photos), each with its credit */
+const photosIn = slug => {
+  let h = ''; try { h = fs.readFileSync(path.join(__dirname, '..', '..', 'demos', slug, 'index.html'), 'utf8'); } catch (e){}
+  const out = [];
+  for (const m of h.matchAll(/assets\/photos\/([a-z]+)(-2|-sm)?\.(?:webp|jpg)/g)){
+    const c = CREDITS[m[1]], p = c && (m[2] === '-2' ? c.second : c.hero);
+    if (p && p.by && !out.includes(p)) out.push(p);
+  }
+  return out;
+};
+const domain = site.origin.replace(/^https?:\/\//, '');
+
+const caseCopy = (b, x, lane) => `<div class="meta"><span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span></div>
+          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Use it full screen</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
+          <p class="hint">This is the build itself, not a recording. Use it like a customer would, or press Show me in full screen and watch it work. State is kept in your browser; there is a reset inside.</p>`;
 /* ---------- one page per build ---------- */
 const cases = builds.map(x => {
   const lane = laneOf(x), peers = inLane(x.lane), i = peers.findIndex(y => y.slug === x.slug);
   const prev = peers[(i + peers.length - 1) % peers.length], next = peers[(i + 1) % peers.length];
+  const photos = photosIn(x.slug);
   const related = builds.filter(y => y.slug !== x.slug && y.trade === x.trade && !/^any /i.test(x.trade)).slice(0, 3);
   return {
     url: `/work/${x.slug}/`, og: `work-${x.slug}`, priority: 0.8, changefreq: 'monthly',
@@ -164,20 +229,25 @@ const cases = builds.map(x => {
 ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
 <main id="main">
 <article class="case">
-  <section class="case-hero">
+  <section class="case-hero${x.kind === 'tool' ? ' is-tool' : ''}">
     <div class="wrap">
       ${crumbs(b, [['Home', ''], ['Work', 'work/'], [lane.kindWord, lane.path], [x.name, `work/${x.slug}/`]])}
       <h1>${esc(x.name)}</h1>
       <p class="lead short">${esc(x.short)}</p>
-      <div class="grid">
+      ${x.kind === 'tool' ? `<div class="case-rig">
+        <div class="rig"><div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">${esc(domain)}/demos/<b>${esc(x.slug)}</b>/</span><button type="button" class="pop" data-view="${x.slug}">Full screen</button></div>
+          <div class="viewport" data-solo="${x.slug}" data-solo-still><div class="boot"><img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800" alt="${esc(x.name)} on a laptop" fetchpriority="high" decoding="async"></div></div></div>
+      </div>
+      <div class="case-words">
+        <p class="lead">${esc(x.long)}</p>
+        <div class="copy">${caseCopy(b, x, lane)}</div>
+      </div>` : `<div class="grid">
         <div class="copy">
           <p class="lead">${esc(x.long)}</p>
-          <div class="meta"><span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span></div>
-          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Open it full size</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
-          <p class="hint">This is the build itself, not a recording. Use it like a customer would. State is kept in your browser; there is a reset inside.</p>
+          ${caseCopy(b, x, lane)}
         </div>
         <div class="side">${L.device(b, x)}</div>
-      </div>
+      </div>`}
     </div>
   </section>
 
@@ -205,8 +275,8 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
       <div class="body">
         <dl class="nameplate">
           <div><dt>Written</dt><dd>By hand, as a single self-contained page. No page-builder, no theme, no framework.</dd></div>
-          <div><dt>Dependencies</dt><dd>No frameworks. Fonts load from Google Fonts with system fallbacks, and the drawings, charts and interactions are written into the page.</dd></div>
-          <div><dt>Imagery</dt><dd>No stock. Every visual is drawn in code, SVG or canvas.</dd></div>
+          <div><dt>Dependencies</dt><dd>No frameworks. Fonts are served from this site with system fallbacks, and the drawings, charts and interactions are written into the page.</dd></div>
+          <div><dt>Imagery</dt><dd>${photos.length ? `Real photographs by ${photos.map(p => p.url ? `<a class="lnk" href="${p.url}" rel="noopener">${esc(p.by)}</a>` : esc(p.by)).join(' and ')} on Pexels, free for commercial use. Everything else is drawn in code, SVG or canvas.` : 'No stock. Every visual is drawn in code, SVG or canvas.'}</dd></div>
           <div><dt>The business</dt><dd>${esc(x.biz)} &mdash; invented. Every person, number and review inside is fictional so nothing here exposes a real client.</dd></div>
           <div><dt>Runs on</dt><dd>Any modern browser, on a phone as much as a desktop. State stays in your browser; there is a reset control inside.</dd></div>
           <div><dt>Yours would</dt><dd>Carry your name, your numbers and your diary, and be owned by you from day one.</dd></div>

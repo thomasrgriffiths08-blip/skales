@@ -1,5 +1,9 @@
 const L = require('../lib.js');
 const { site, esc } = L;
+/* a draft from the home-page builder arrives as ?d=SK-XXXX&t=<trade>&n=<name>&w=<town>.
+   Each trade maps to its label (for Tom's note) and the closest kind chip on step one. */
+const KIND = { heating: 'Plumbing & heating', electrical: 'Electrical', roofing: 'Roofing', building: 'Building & joinery', kitchens: 'Kitchens & bathrooms', garden: 'Landscaping & fencing', cleaning: 'Cleaning', salon: 'Salon & beauty' };
+const DRAFT_TRADES = Object.fromEntries(require('../../data/trades.js').filter(t => t.builder !== false).map(t => [t.key, [t.label, KIND[t.key] || 'Another service business']]));
 module.exports = { pages: [{
   url: '/book/', og: 'book', priority: 0.9, changefreq: 'monthly',
   meta: { key: 'book', title: 'Book a call', kicker: 'A few questions first · then a slot', sub: 'Tell me what is leaking. Pick a time. No pitch, no proposal deck.' },
@@ -20,7 +24,11 @@ ${L.header(b, 'book')}
 </section>
 
 <section class="wrap book-wrap">
-  <form class="book" id="book" novalidate>
+  <form class="book" id="book" novalidate data-trades="${esc(JSON.stringify(DRAFT_TRADES))}">
+    <div class="draft-card" id="draftCard" hidden>
+      <div><span class="dc-l">Booking about your draft website</span><span class="dc-n" id="dcRef"></span><span class="dc-m" id="dcMeta"></span></div>
+      <div class="dc-a"><a class="lnk" id="dcOpen" href="${b}">Open it</a><button type="button" class="lnk dc-x" id="dcDrop">Not about this draft</button></div>
+    </div>
     <ol class="book-steps" id="steps" aria-label="Progress"><li aria-current="step">Business</li><li>Problem</li><li>Today</li><li>Size</li><li>You</li><li>Time</li></ol>
 
     <fieldset class="bstep" data-step="1">
@@ -88,6 +96,6 @@ ${L.header(b, 'book')}
 </section>
 </main>
 ${L.footer(b, { mbar: false })}`;   // the sticky "Book a call" bar would point at this page and cover its Next button
-    return L.page(L.head({ b, path: '/book/', title, description, og: 'book', nodes }), body, L.scripts(b, ['book.js']));
+    return L.page(L.head({ b, path: '/book/', title, description, og: 'book', nodes, preconnect: /calendly\.com/.test(site.calendly || '') ? ['https://assets.calendly.com', 'https://calendly.com'] : [] }), body, L.scripts(b, ['book.js']));
   }
 }]};

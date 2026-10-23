@@ -3,5 +3,5 @@ Tom Griffiths — Founder & builder
 https://www.instagram.com/tomxsystems/
 
 /* SITE */
-Last update: 2026-10-12
+Last update: 2026-10-20
 Standards: HTML5, CSS, vanilla JS. No frameworks, no page builders.
