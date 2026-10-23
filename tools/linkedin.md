@@ -8,7 +8,7 @@ Files:
 - `og/icon.png`: Company Page logo, 512 × 512.
 - Re-render the banners with `./tools/og.sh` (source: `tools/linkedin.html`).
 
-Site address: until skales.studio points here, every link below uses the github.io address. On launch day, swap them on LinkedIn too (contact info, Featured, the Company Page website).
+Site address: every link below uses https://skales.studio. They work once the domain's DNS points at GitHub Pages (four A records to 185.199.108–111.153 and a CNAME for www to thomasrgriffiths08-blip.github.io), so do that before adding links on LinkedIn.
 
 ## The order of work (only Tom can do these)
 
@@ -62,8 +62,8 @@ Try in this order: `linkedin.com/in/tomgriffiths-skales`, `linkedin.com/in/tom-g
 
 | Field | Value |
 |---|---|
-| Website (Company) | https://thomasrgriffiths08-blip.github.io/skales/ |
-| Website (Portfolio) | https://thomasrgriffiths08-blip.github.io/skales/work/ |
+| Website (Company) | https://skales.studio/ |
+| Website (Portfolio) | https://skales.studio/work/ |
 | Website (Other) | https://www.instagram.com/tomxsystems/ |
 | Email | thomasrgriffiths08@gmail.com (or hello@skales.studio once it forwards) |
 
@@ -99,10 +99,10 @@ The build count goes up every week; update "Thirty-six" here, in Experience and 
 
 ### Featured (in this order; each pulls the page's own OG card as its picture)
 
-1. Book a call: https://thomasrgriffiths08-blip.github.io/skales/book/
-2. Free teardown: https://thomasrgriffiths08-blip.github.io/skales/teardown.html
-3. Try it live: https://thomasrgriffiths08-blip.github.io/skales/try/
-4. All the builds: https://thomasrgriffiths08-blip.github.io/skales/work/
+1. Book a call: https://skales.studio/book/
+2. Free teardown: https://skales.studio/teardown.html
+3. Try it live: https://skales.studio/try/
+4. All the builds: https://skales.studio/work/
 5. Later, swap in your best-performing post.
 
 ### Experience
@@ -173,7 +173,7 @@ Upload `og/linkedin-banner.png`. The left side is left empty on purpose: your ph
 | Page type | Company |
 | Name | Skales Studio (the full name, so search engines don't confuse it with the SKALE crypto network) |
 | LinkedIn URL | `linkedin.com/company/skales-studio` (fallback `skalesstudio`) |
-| Website | https://thomasrgriffiths08-blip.github.io/skales/ |
+| Website | https://skales.studio/ |
 | Industry | Marketing Services |
 | Organisation size | 0–1 employees |
 | Organisation type | Sole proprietorship if you trade as a sole trader; Privately held if Skales Studio is a limited company |
@@ -181,7 +181,7 @@ Upload `og/linkedin-banner.png`. The left side is left empty on purpose: your ph
 | Cover | `og/linkedin-cover.png` |
 | Location | Your town |
 | Founded | 2026 |
-| Button | Contact us → https://thomasrgriffiths08-blip.github.io/skales/book/ |
+| Button | Contact us → https://skales.studio/book/ |
 
 Tagline (limit 120):
 
@@ -229,7 +229,7 @@ I build one new system a week in public, and I'll post each one here.
 
 If you run a service business round West London, or know someone who does, I'll look at the ads, the website and what happens when someone tries to get in touch, and send back three things: what is leaking, what to fix first, and what it is worth in jobs. Free.
 
-https://thomasrgriffiths08-blip.github.io/skales/teardown.html
+https://skales.studio/teardown.html
 ```
 
 ### Every week: the build
