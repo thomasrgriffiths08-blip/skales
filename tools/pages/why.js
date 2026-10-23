@@ -14,7 +14,7 @@ module.exports = { FAQ, pages: [{
   url: '/why/', og: 'why', priority: 0.8, changefreq: 'monthly',
   meta: { key: 'why', title: 'Own it. Don’t rent it.', kicker: 'Why · one person · built in public', sub: 'Why the domain, the code and the accounts sit in your name from day one.' },
   render(b){
-    const title = `Why — one person, built in public, you own it | ${site.name}`;
+    const title = `Why: one person, built in public, you own it | ${site.legalName}`;
     const description = `One person building websites and systems for UK service businesses. You own the domain, code and accounts from day one; nothing is rented back.`;
     const nodes = [
       L.webPage({ path: '/why/', title, description, type: 'AboutPage' }),

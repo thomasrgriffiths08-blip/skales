@@ -32,7 +32,7 @@ const gallery = {
   url: '/work/', og: 'work', priority: 0.9, changefreq: 'weekly',
   meta: { key: 'work', title: `${Words(builds.length)} builds. All of them running.`, kicker: `Work · ${builds.length} live examples`, sub: `${SITES.length} websites and ${TOOLS.length} tools, every one open to use.` },
   render(b){
-    const title = `Work — ${builds.length} live websites & business tools | ${site.name}`;
+    const title = `Work — ${builds.length} live websites & business tools | ${site.legalName}`;
     const description = `${Words(builds.length)} example websites and tools for service businesses, running live: ${SITES.length} full websites in four lanes and ${TOOLS.length} tools, from booking and quotes to a window cleaner's round.`.slice(0, 158);
     const nodes = [
       L.webPage({ path: '/work/', title, description, type: 'CollectionPage' }),
@@ -61,7 +61,7 @@ const websites = {
   url: '/work/websites/', og: 'websites', priority: 0.9, changefreq: 'weekly',
   meta: { key: 'websites', title: 'Four kinds of website.', kicker: `Websites · ${SITES.length} live examples`, sub: 'Loud, motion, quiet, direct. Pick the lane that matches how your customers decide.' },
   render(b){
-    const title = `Website design for service businesses: ${SITES.length} live examples | ${site.name}`.length <= 60 ? `Website design for service businesses: ${SITES.length} live examples | ${site.name}` : `Website examples for service businesses | ${site.name}`;
+    const title = `Website design for service businesses: ${SITES.length} live examples | ${site.legalName}`.length <= 60 ? `Website design for service businesses: ${SITES.length} live examples | ${site.legalName}` : `Website examples for service businesses | ${site.legalName}`;
     const description = `${Words(SITES.length)} full websites for invented businesses, running live, in four lanes: loud and animated, motion-led, quiet and plain, or direct and built to get the phone ringing.`.slice(0, 158);
     const nodes = [
       L.webPage({ path: '/work/websites/', title, description, type: 'CollectionPage' }),
@@ -94,7 +94,7 @@ const tools = {
   meta: { key: 'tools', title: 'The tools that run a service business.', kicker: `Tools · ${TOOLS.length} live examples`, sub: 'Booking, quotes, the pipeline, follow-up — and the ones built for one trade’s day.' },
   render(b){
     const trades = [...new Set(TOOLS.map(x => x.trade))].sort((a, z) => a.localeCompare(z));
-    const title = `Business tools for trades: ${TOOLS.length} live examples | ${site.name}`;
+    const title = `Business tools for trades: ${TOOLS.length} live examples | ${site.legalName}`;
     const description = `${Words(TOOLS.length)} working tools for service businesses, running live: booking, quotes, missed-call text-back, reviews, the pipeline, plus tools built for heating engineers, garages, salons, restaurants, roofers and rounds.`.slice(0, 158);
     const nodes = [
       L.webPage({ path: '/work/tools/', title, description, type: 'CollectionPage' }),
@@ -144,7 +144,7 @@ const cases = builds.map(x => {
       const kw = kindWord(x).toLowerCase();
       const title = (() => {
         for (const t of [`${x.name} — ${x.trade}`, `${x.name} — ${x.biz}`, x.name]){
-          if (t.length <= 44) return `${t} | ${site.name}`;
+          if (t.length <= 44) return `${t} | ${site.legalName}`;
           if (t.length <= 60) return t;
         }
         return x.name.slice(0, 57) + '…';

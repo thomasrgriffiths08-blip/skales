@@ -28,7 +28,7 @@ module.exports = { QS, pages: [{
   url: '/start/', og: 'start', noindex: true, sitemap: false,
   meta: { key: 'start', title: 'See what missed calls are costing you.', kicker: 'Skales Studio · 60 seconds, all taps', sub: 'Six questions. Your own case file. The call booked on the same page.' },
   render(b){
-    const title = `See what missed calls are costing you | ${site.name}`;
+    const title = `See what missed calls are costing you | ${site.legalName}`;
     const description = `Six taps, sixty seconds: what missed calls and an old website are likely costing your business, what to build first, and a call booked on the same page.`;
     const nodes = [L.webPage({ path: '/start/', title, description })];
     const wa = String(site.whatsapp || '').replace(/\D/g, '');

@@ -6,7 +6,7 @@ const index = {
   url: '/notes/', og: 'notes', priority: 0.7, changefreq: 'weekly',
   meta: { key: 'notes', title: 'Notes', kicker: 'Short, straight, added to', sub: 'What a missed call costs, why you should own your site, and why every demo is fictional.' },
   render(b){
-    const title = `Notes — websites & systems for trades | ${site.name}`;
+    const title = `Notes — websites & systems for trades | ${site.legalName}`;
     const description = `Short notes: what a missed call actually costs, why you should own your website rather than rent it, and why every demo is for a business that does not exist.`;
     const nodes = [ L.webPage({ path: '/notes/', title, description, type: 'CollectionPage' }), L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Notes', path: '/notes/' }]),
       { '@type': 'ItemList', itemListElement: notes.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: L.abs(`/notes/${n.slug}/`), name: n.title })) } ];
@@ -32,7 +32,7 @@ const posts = notes.map(n => ({
   url: `/notes/${n.slug}/`, og: `notes-${n.slug}`, priority: 0.6, changefreq: 'yearly',
   meta: { key: `notes-${n.slug}`, title: n.title, kicker: 'Notes · ' + fmt(n.date), sub: n.summary },
   render(b){
-    const t0 = n.seo || n.title, title = t0.length > 46 ? t0 : `${t0} | ${site.name}`;
+    const t0 = n.seo || n.title, title = t0.length > 60 - (" | " + site.legalName).length ? t0 : `${t0} | ${site.legalName}`;
     const description = n.summary;
     const nodes = [ L.webPage({ path: `/notes/${n.slug}/`, title, description }),
       L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Notes', path: '/notes/' }, { name: n.title, path: `/notes/${n.slug}/` }]),

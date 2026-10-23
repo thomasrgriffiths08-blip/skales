@@ -44,7 +44,7 @@ module.exports = [
   },
   {
     slug: 'booking-and-crm', legacy: 'booking-and-pipeline', n: '02', name: 'Booking and CRM', serviceType: 'Online booking system and CRM',
-    title: 'Online booking and CRM for service businesses',
+    title: 'Online booking and CRM for small businesses',
     description: 'Online booking with deposits, and a CRM that confirms, chases and reminds for you. For UK trades and service businesses. Try the live demos.',
     card: 'Customers book a free slot and pay a deposit at any hour. Every enquiry sits on one board.',
     h1: 'Booking and a CRM that run the admin for you.',

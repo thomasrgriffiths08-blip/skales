@@ -26,6 +26,8 @@ module.exports = {
   introVideo: '',                     // e.g. 'assets/film/tom-intro.mp4' (+ a .jpg poster beside it): Tom's 30-second phone clip on /start. Empty = hidden.
   instagram: 'https://www.instagram.com/tomxsystems/',
   instagramHandle: '@tomxsystems',
+  linkedin: '',                       // Tom's profile, e.g. 'https://www.linkedin.com/in/<handle>/'. Empty = left out of the footer and schema.
+  linkedinPage: '',                   // the Skales Studio Company Page, e.g. 'https://www.linkedin.com/company/<handle>/'. Empty = left out.
   founded: '2026',
   // honest, verifiable claims only — these feed schema, llms.txt and page copy
   facts: [

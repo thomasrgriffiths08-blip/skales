@@ -32,7 +32,7 @@ module.exports = [
   },
   {
     slug: 'electricians', group: 'Trades', label: 'Electricians', word: 'electrician', kind: 'electrical',
-    title: 'Websites for electricians and electrical firms',
+    title: 'Websites for electricians & electrical firms',
     description: 'Websites for UK electricians: scheme registration on show, a page for every job from EICRs to EV chargers, and quotes for rewires followed up automatically.',
     h1: 'Small jobs answered, big jobs quoted, EICRs remembered.',
     answer: 'An electrician’s website needs your competent person scheme registration where customers can check it, and a page for each job people search for: fault finding, consumer units, rewires, EV chargers and EICRs. It should turn the bigger enquiries into quotes that get followed up, and bring landlords back when their next electrical report is due.',
@@ -599,7 +599,7 @@ module.exports = [
   },
   {
     slug: 'dog-groomers', group: 'Personal', label: 'Dog groomers', word: 'dog groomer', kind: 'other',
-    title: 'Websites for dog groomers and grooming salons',
+    title: 'Websites for dog groomers & grooming salons',
     description: 'Websites for UK dog groomers: grooms booked online by breed, size and coat, the next appointment offered before the dog goes home, and reminders when it is due.',
     h1: 'Every dog booked in, and booked back.',
     answer: 'A dog grooming website needs online booking that asks for the breed, size and coat, so each groom gets the right length of slot, and a first-visit form for health and behaviour notes. It should then offer the next groom before the dog goes home and remind owners who did not book, because a groomer’s diary is mostly regulars.',
@@ -707,7 +707,7 @@ module.exports = [
   },
   {
     slug: 'accountants', group: 'Professional', label: 'Accountants', word: 'accountant', kind: 'professional',
-    title: 'Websites for accountants and accountancy firms',
+    title: 'Websites for accountants & accountancy firms',
     description: 'Websites for UK accountants: a page for each service clients search for, discovery calls booked into your diary, and fee proposals and records chased for you.',
     h1: 'Answer the first question before the first call.',
     answer: 'An accountant’s website needs a page for each service people search for, such as self assessment, limited company accounts, VAT, payroll and Making Tax Digital, and a clear statement of who you work with. It should let prospects book a discovery call straight into your diary, follow up fee proposals that go quiet, and chase clients for their records before each deadline.',

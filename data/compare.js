@@ -91,7 +91,7 @@ module.exports = [
   },
   {
     slug: 'google-business-profile', them: 'a Google Business Profile alone', short: 'Google Business Profile',
-    title: 'Do I need a website with a Google Business Profile?',
+    title: 'Google Business Profile or a website?',
     description: 'Is a free Google Business Profile enough, or do you need a website too? An honest answer for UK service businesses, and when the profile alone will do.',
     card: 'Your free Google profile on its own, against a profile with a website behind it.',
     h1: 'Do you need a website if you have a Google Business Profile?',
@@ -113,7 +113,7 @@ module.exports = [
   },
   {
     slug: 'facebook-page', them: 'a Facebook page', short: 'Facebook pages',
-    title: 'Do I need a website if I have a Facebook page?',
+    title: 'Facebook page or website: do you need both?',
     description: 'A Facebook or Instagram page, or a website of your own? An honest comparison for UK service businesses, and when a social page is all you need for now.',
     card: 'A Facebook or Instagram page on its own, against a website you own.',
     h1: 'Do you need a website if you have a Facebook page?',

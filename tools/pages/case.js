@@ -24,7 +24,7 @@ module.exports = { KINDS, pages: [{
   url: '/your-case/', og: 'your-case', priority: 0.6, changefreq: 'monthly',
   meta: { key: 'your-case', title: 'Your business, written up as a case study.', kicker: 'For owners · about four minutes', sub: 'What is leaking, in pounds from your own numbers. What to build first. The proof.' },
   render(b){
-    const title = `Your case study — what Skales would build for you | ${site.name}`;
+    const title = `Your case study: what we’d build for you | ${site.legalName}`;
     const description = `For owners of UK service businesses. Answer questions about how work comes in; get a case file: what is leaking, what to build first, and the proof.`;
     const nodes = [
       L.webPage({ path: '/your-case/', title, description }),

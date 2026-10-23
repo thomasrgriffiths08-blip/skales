@@ -169,7 +169,7 @@ const servicePage = s => ({
   url: `/services/${s.slug}/`, og: `services-${s.slug}`, priority: 0.9, changefreq: 'monthly',
   meta: { key: `services-${s.slug}`, title: s.name, kicker: 'Services', sub: s.card },
   render(b){
-    const path = `/services/${s.slug}/`, title = `${s.title} | ${site.name}`;
+    const path = `/services/${s.slug}/`, title = `${s.title} | ${site.legalName}`;
     const cr = [['Home', ''], ['Services', 'services/'], [s.name, `services/${s.slug}/`]];
     const autos = s.showAllAutomations ? AU.map(a => a.slug) : s.automations;
     const nodes = [
@@ -228,7 +228,7 @@ const servicesIndex = {
   url: '/services/', og: 'services', priority: 0.9, changefreq: 'monthly',
   meta: { key: 'services', title: 'Websites, booking, follow-up and ads', kicker: 'Services', sub: 'Five services, one system: a search, a tap or a missed call, turned into a booked job.' },
   render(b){
-    const path = '/services/', title = `Websites, booking, follow-up and ads | ${site.name}`;
+    const path = '/services/', title = `Websites, booking, follow-up and ads | ${site.legalName}`;
     const description = `Websites, online booking and CRM, follow-up automation, and Meta and Google ads for UK trades and service businesses, built as one system you own.`;
     const nodes = [
       L.webPage({ path, title, description, type: 'CollectionPage' }),
@@ -266,7 +266,7 @@ const autoPage = a => ({
   url: `/automations/${a.slug}/`, og: `automations-${a.slug}`, priority: 0.8, changefreq: 'monthly',
   meta: { key: `automations-${a.slug}`, title: a.name, kicker: 'Automations', sub: a.card },
   render(b){
-    const path = `/automations/${a.slug}/`, title = `${a.title} | ${site.name}`;
+    const path = `/automations/${a.slug}/`, title = `${a.title} | ${site.legalName}`;
     const cr = [['Home', ''], ['Automations', 'automations/'], [a.name, `automations/${a.slug}/`]];
     const nodes = [
       L.webPage({ path, title, description: a.description, extra: { mainEntity: { '@id': autoId(a.slug) } } }),
@@ -310,7 +310,7 @@ const autoIndex = {
   url: '/automations/', og: 'automations', priority: 0.8, changefreq: 'monthly',
   meta: { key: 'automations', title: 'Six texts that send themselves', kicker: 'Automations', sub: 'Missed-call text-back, review requests, reminders, quote chasing, deposits and on-my-way texts.' },
   render(b){
-    const path = '/automations/', title = `Automations for service businesses | ${site.name}`;
+    const path = '/automations/', title = `Automations for service businesses | ${site.legalName}`;
     const description = `Six automations for UK trades and service businesses: missed-call text-back, review requests, service reminders, quote chasing, deposits and on-my-way texts.`;
     const nodes = [
       L.webPage({ path, title, description, type: 'CollectionPage' }),
@@ -343,7 +343,7 @@ const comparePage = c => ({
   url: `/compare/${c.slug}/`, og: `compare-${c.slug}`, priority: 0.7, changefreq: 'monthly',
   meta: { key: `compare-${c.slug}`, title: `${site.name} vs ${c.them}`, kicker: 'Compare', sub: c.card },
   render(b){
-    const path = `/compare/${c.slug}/`, title = `${c.title} | ${site.name}`;
+    const path = `/compare/${c.slug}/`, title = `${c.title} | ${site.legalName}`;
     const cr = [['Home', ''], ['Compare', 'compare/'], [c.short, `compare/${c.slug}/`]];
     const nodes = [L.webPage({ path, title, description: c.description }), crumbNodes(cr), faqNode(c.faq, path)];
     const body = `
@@ -383,7 +383,7 @@ const compareIndex = {
   url: '/compare/', og: 'compare', priority: 0.6, changefreq: 'monthly',
   meta: { key: 'compare', title: 'Honest comparisons', kicker: 'Compare', sub: 'Page builders, pay-monthly trade sites, missed-call apps and directories, side by side.' },
   render(b){
-    const path = '/compare/', title = `Compare: page builders, apps and directories | ${site.name}`;
+    const path = '/compare/', title = `Compare: page builders, apps and directories | ${site.legalName}`;
     const description = `Honest comparisons for UK service businesses: Skales against page builders, pay-monthly trade websites, missed-call apps and directories like Checkatrade.`;
     const nodes = [L.webPage({ path, title, description, type: 'CollectionPage' }), crumbNodes([['Home', ''], ['Compare', 'compare/']]),
       { '@type': 'ItemList', '@id': L.abs(path) + '#list', name: 'Comparisons', itemListElement: CP.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: L.abs(`/compare/${c.slug}/`), name: c.title })) }];
@@ -410,7 +410,7 @@ const faqHub = {
   url: '/faq/', og: 'faq', priority: 0.8, changefreq: 'monthly',
   meta: { key: 'faq', title: 'Every question, answered', kicker: 'FAQ', sub: 'Short, straight answers about websites, booking, follow-up, ads and how a build works.' },
   render(b){
-    const path = '/faq/', title = `Questions about websites, booking and ads | ${site.name}`;
+    const path = '/faq/', title = `Questions about websites, booking and ads | ${site.legalName}`;
     const description = `Straight answers for UK service businesses: cost, timings, ownership, Google rankings, online booking, deposits, missed-call text-back, reviews and ads.`;
     const groups = [
       { h: 'The basics', id: 'basics', qs: GQ },
