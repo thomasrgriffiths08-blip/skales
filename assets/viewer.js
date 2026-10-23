@@ -2,6 +2,8 @@
    The viewer. Every build full screen, one at a time, the rest a tap away.
    Opened from any phone tile, any "Use it" / "Open full size" link, or a #view=<slug> link
    (assets/site.js loads this file on first use). Back closes it; arrows step through.
+   Beside the build (in a sheet on a phone): what you can do in it, with Show me, and every build by name with
+   what it does, filtered to websites or tools; the arrows then step through that filter only.
    Each build gets a fresh iframe, so stepping through never piles up history behind Back.
    ============================================================ */
 (function(){
@@ -32,13 +34,17 @@
     stop: '<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>'
   };
 
-  var root, frame, screen, cover, coverImg, coverName, nameEl, metaEl, aboutEl, addrEl, popEl, prevB, nextB, strip, sheet, whichName, whichCount, hint, modes, capEl, showBs;
+  var root, frame, screen, cover, coverImg, coverName, nameEl, metaEl, aboutEl, addrEl, popEl, prevB, nextB, side, sheet, whichName, whichCount, hint, modes, capEl, showBs, nowName, nowShort, tryList, idxEl, tabs;
+  var flt = 'all';
+  var clip = function(x){ return b + 'assets/clips/' + pad(x.n) + '.webp'; };
+  var thumb = function(x){ return x.kind === 'tool' ? clip(x) : still(x); };
+  var KW = { site: 'Websites', tool: 'Tools' };
   var showing = null, autoT = 0, autoDone = {};
   var cur = -1, live = null, opener = null, pushed = false, isOpen = false, mode = store.get('skv-mode') || 'desk', tStamp = 0;
 
   function groups(){
     var out = [];
-    ORDER.forEach(function(k){ var g = LIST.filter(function(x){ return x.lane === k; }); if (g.length) out.push({ k: k, name: (LN[k] ? LN[k].kindWord + ' · ' + LN[k].name : k), list: g }); });
+    ORDER.forEach(function(k){ var g = LIST.filter(function(x){ return x.lane === k; }); if (g.length) out.push({ k: k, kind: g[0].kind, name: (LN[k] ? LN[k].name + ' ' + LN[k].kindWord.toLowerCase() : k), list: g }); });
     return out;
   }
   function make(){
@@ -48,9 +54,9 @@
       '<header class="vw-top">'
       + '<button type="button" class="vw-close" data-act="close" aria-label="Close">' + I.x + '</button>'
       + '<div class="vw-id"><b id="vwName"></b><span class="vw-meta"></span></div>'
-      + '<div class="vw-tools"><button type="button" class="vw-link vw-show" data-act="show">' + I.play + '<span>Show me</span></button><div class="vw-modes" role="group" aria-label="Show it on">'
+      + '<div class="vw-tools"><div class="vw-modes" role="group" aria-label="Show it on">'
       + '<button type="button" data-m="desk" aria-pressed="false">' + I.desk + 'Desktop</button><button type="button" data-m="phone" aria-pressed="false">' + I.phone + 'Phone</button></div>'
-      + '<a class="vw-link vw-about" href="#">About this build</a><a class="vw-book" href="' + b + 'book/">Book a call</a></div>'
+      + '<a class="vw-book" href="' + b + 'book/">Book a call</a></div>'
       + '</header>'
       + '<div class="vw-stage">'
       + '<button type="button" class="vw-arrow vw-prev" data-act="prev" aria-label="Previous build">' + I.l + '<span class="vw-peek"></span></button>'
@@ -59,35 +65,38 @@
       + '<button type="button" class="vw-arrow vw-next" data-act="next" aria-label="Next build">' + I.r + '<span class="vw-peek"></span></button>'
       + '<div class="vw-cap" role="status" aria-live="polite"></div>'
       + '</div>'
-      + '<nav class="vw-strip" aria-label="Every build">' + groups().map(function(g){
-          return '<div class="vw-grp"><span>' + esc(g.name) + '</span><div>' + g.list.map(function(x){
-            return '<button type="button" class="vw-th" data-slug="' + x.slug + '" aria-label="' + esc(x.name) + ', ' + esc(x.trade || x.biz) + '" title="' + esc(x.name) + '"><img src="' + still(x) + '" alt="" loading="lazy" decoding="async"></button>';
-          }).join('') + '</div></div>';
-        }).join('') + '</nav>'
+      + '<aside class="vw-side" aria-label="What you can do, and every build"><div class="vw-sh-head"><b>All ' + LIST.length + ' builds</b><button type="button" data-act="unlist" aria-label="Back to the build">' + I.x + '</button></div>'
+      + '<div class="vw-side-body">'
+      + '<section class="vw-now" aria-label="What you can do here"><b class="vw-now-name"></b><span class="vw-lab">What you can do here</span><p class="vw-now-short"></p><ol class="vw-try"></ol>'
+      + '<button type="button" class="vw-show vw-show-big" data-act="show">' + I.play + '<span>Show me what it does</span></button>'
+      + '<div class="vw-now-links"><a class="vw-about" href="#">About this build</a><a class="go" href="' + b + 'book/">Book a call</a></div></section>'
+      + '<div class="vw-tabs" role="group" aria-label="Show">' + [['all', 'All', LIST.length], ['site', 'Websites', LIST.filter(function(x){ return x.kind === 'site'; }).length], ['tool', 'Tools', LIST.filter(function(x){ return x.kind === 'tool'; }).length]].map(function(t){
+          return '<button type="button" data-f="' + t[0] + '" aria-pressed="' + (t[0] === 'all') + '">' + t[1] + ' <span>' + t[2] + '</span></button>';
+        }).join('') + '</div>'
+      + '<nav class="vw-idx" aria-label="Every build">' + groups().map(function(g){
+          return '<section class="vw-grp" data-kind="' + g.kind + '"><h3>' + esc(g.name) + '</h3>' + g.list.map(function(x){
+            return '<button type="button" class="vw-it' + (x.kind === 'tool' ? ' is-wide' : '') + '" data-slug="' + x.slug + '" data-kind="' + x.kind + '"><span class="th"><img src="' + thumb(x) + '" alt="" loading="lazy" decoding="async"></span><span class="tx"><b>' + esc(x.name) + '</b><small>' + esc(x.short) + '</small></span></button>';
+          }).join('') + '</section>';
+        }).join('') + '</nav></div></aside>'
       + '<div class="vw-dock"><div class="vw-hint" role="status"></div>'
       + '<button type="button" data-act="close" aria-label="Close">' + I.x + '</button>'
       + '<button type="button" data-act="prev" aria-label="Previous build">' + I.l + '</button>'
-      + '<button type="button" class="vw-which" data-act="list" aria-label="See every build"><b></b><span></span></button>'
+      + '<button type="button" class="vw-which" data-act="list" aria-label="What it does, and every build"><b></b><span></span></button>'
       + '<button type="button" data-act="next" aria-label="Next build">' + I.r + '</button>'
-      + '<button type="button" class="vw-show" data-act="show" aria-label="Show me what it does">' + I.play + '</button></div>'
-      + '<div class="vw-sheet" role="dialog" aria-label="Every build"><div class="vw-sh-head"><b>All ' + LIST.length + ' builds</b><button type="button" data-act="unlist" aria-label="Back to the build">' + I.x + '</button></div>'
-      + '<div class="vw-sh-body"><div class="vw-sh-now"><a class="vw-about" href="#">About this build</a><a class="go" href="' + b + 'book/">Book a call</a></div>'
-      + groups().map(function(g){
-          return '<section class="vw-sh-grp"><h3>' + esc(g.name) + '</h3><div class="vw-sh-grid">' + g.list.map(function(x){
-            return '<button type="button" data-slug="' + x.slug + '"><span class="ph"><img src="' + still(x) + '" alt="" loading="lazy" decoding="async"></span><span><b>' + esc(x.name) + '</b><small>' + esc(x.trade || x.biz) + '</small></span></button>';
-          }).join('') + '</div></section>';
-        }).join('') + '</div></div>';
+      + '<button type="button" class="vw-show" data-act="show" aria-label="Show me what it does">' + I.play + '</button></div>';
     d.body.appendChild(root);
     frame = root.querySelector('.vw-frame'); screen = root.querySelector('.vw-screen'); cover = root.querySelector('.vw-cover');
     coverImg = cover.querySelector('img'); coverName = cover.querySelector('b');
     nameEl = root.querySelector('#vwName'); metaEl = root.querySelector('.vw-meta'); addrEl = root.querySelector('.vw-addr span'); popEl = root.querySelector('.vw-pop');
-    prevB = root.querySelector('.vw-prev'); nextB = root.querySelector('.vw-next'); strip = root.querySelector('.vw-strip'); sheet = root.querySelector('.vw-sheet');
+    prevB = root.querySelector('.vw-prev'); nextB = root.querySelector('.vw-next'); side = sheet = root.querySelector('.vw-side');
+    nowName = root.querySelector('.vw-now-name'); nowShort = root.querySelector('.vw-now-short'); tryList = root.querySelector('.vw-try'); idxEl = root.querySelector('.vw-idx'); tabs = root.querySelectorAll('.vw-tabs button');
     whichName = root.querySelector('.vw-which b'); whichCount = root.querySelector('.vw-which span'); hint = root.querySelector('.vw-hint'); modes = root.querySelectorAll('.vw-modes button');
     capEl = root.querySelector('.vw-cap'); showBs = root.querySelectorAll('.vw-show');
     if (!w.SkShow){ var sc = d.createElement('script'); sc.src = b + 'assets/show.js'; d.body.appendChild(sc); }
 
     root.addEventListener('click', function(e){
-      var t = e.target.closest('[data-act],[data-slug],[data-m],.vw-about'); if (!t) return;
+      var t = e.target.closest('[data-act],[data-slug],[data-m],[data-f],.vw-about'); if (!t) return;
+      if (t.hasAttribute('data-f')){ filter(t.getAttribute('data-f')); return; }
       if (t.classList.contains('vw-about')){
         if (isHere(LIST[cur])){ e.preventDefault(); close(); }
         return;
@@ -97,7 +106,7 @@
       var a = t.getAttribute('data-act');
       if (a === 'close') close(); else if (a === 'prev') step(-1); else if (a === 'next') step(1);
       else if (a === 'list') list(true); else if (a === 'unlist') list(false);
-      else if (a === 'show'){ if (showing) stopShow(); else play(); }
+      else if (a === 'show'){ if (sheet.classList.contains('is-in')) list(false, true); if (showing) stopShow(); else play(); }
     });
     root.addEventListener('keydown', function(e){
       if (e.key === 'Escape'){ e.preventDefault(); if (sheet.classList.contains('is-in')) list(false); else close(); return; }
@@ -111,7 +120,7 @@
   }
   function isHere(x){ return x && location.pathname.replace(/\/index\.html$/, '/').slice(-('work/' + x.slug + '/').length) === 'work/' + x.slug + '/'; }
   function trap(e){
-    var f = [].filter.call(root.querySelectorAll('button,a[href],iframe'), function(el){ return el.offsetParent !== null && !el.closest('[hidden]') && !(el.closest('.vw-sheet') && !sheet.classList.contains('is-in')); });
+    var f = [].filter.call(root.querySelectorAll('button,a[href],iframe'), function(el){ return el.offsetParent !== null && !el.closest('[hidden]') && !(small.matches && el.closest('.vw-side') && !sheet.classList.contains('is-in')); });
     if (!f.length) return;
     var first = f[0], last = f[f.length - 1];
     if (e.shiftKey && d.activeElement === first){ e.preventDefault(); last.focus(); }
@@ -123,13 +132,12 @@
     var x = LIST[cur]; if (!x) return;
     root.setAttribute('data-mode', mode);
     modes.forEach(function(m){ m.setAttribute('aria-pressed', String(m.getAttribute('data-m') === mode)); });
-    strip.classList.toggle('is-hid', w.innerHeight < 640);
     var f = live, sw, sh, vw, vh, s;
     if (small.matches){
       frame.style.width = frame.style.height = '';
       sw = screen.clientWidth; sh = screen.clientHeight; s = 1; vw = sw; vh = sh;
     } else {
-      var stage = root.querySelector('.vw-stage'), aw = stage.clientWidth - 144, ah = stage.clientHeight - 32;
+      var stage = root.querySelector('.vw-stage'), arw = parseFloat(w.getComputedStyle(stage).getPropertyValue('--arw')) || 72, aw = stage.clientWidth - 2 * arw, ah = stage.clientHeight - 32;
       if (mode === 'phone'){
         s = Math.min(1, (ah - 22) / 844); vw = 390; vh = 844;
         frame.style.width = Math.round(390 * s + 22) + 'px'; frame.style.height = Math.round(844 * s + 22) + 'px';
@@ -153,7 +161,7 @@
   function showState(on){
     root.classList.toggle('is-showing', on);
     showBs.forEach(function(bt){
-      bt.innerHTML = (on ? I.stop : I.play) + (bt.closest('.vw-dock') ? '' : '<span>' + (on ? 'Stop' : 'Show me') + '</span>');
+      bt.innerHTML = (on ? I.stop : I.play) + (bt.closest('.vw-dock') ? '' : '<span>' + (on ? 'Stop' : 'Show me what it does') + '</span>');
       bt.setAttribute('aria-label', on ? 'Stop the demo' : 'Show me what it does');
     });
   }
@@ -165,14 +173,19 @@
     var steps = x.show, n = steps.length, last = '';
     showState(true);
     showing = w.SkShow.run(f.contentWindow, steps, {
-      onStep: function(i, st){ if (st.say) last = st.say; cap('<i>' + (i + 1) + ' of ' + n + '</i>' + esc(last)); },
-      onEnd: function(done){ showing = null; showState(false); cap(done ? '<i>Your turn</i>Use it like a customer would.' : '', 3200); }
+      onStep: function(i, st){ if (st.say) last = st.say; cap('<i>' + (i + 1) + ' of ' + n + '</i>' + esc(last)); mark(i); },
+      onEnd: function(done){ showing = null; showState(false); mark(done ? 99 : -1); cap(done ? '<i>Your turn</i>Use it like a customer would.' : '', 3200); }
     });
+  }
+  /* the steps beside the build light up as Show me plays them, and stay ticked once it has finished */
+  function mark(i){
+    tryList.querySelectorAll('li').forEach(function(li){ var k = +li.getAttribute('data-i');
+      li.classList.toggle('is-now', i < 99 && k === i); li.classList.toggle('is-done', i === 99 || (i > -1 && k < i)); });
   }
   function stopShow(){ clearTimeout(autoT); if (showing){ var s0 = showing; showing = null; s0.stop(); } showState(false); cap(''); }
   function watch(f, x, stamp){
-    var touched = false, mark = function(e){ if (e.isTrusted){ touched = true; clearTimeout(autoT); } };
-    try { ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function(t){ f.contentWindow.document.addEventListener(t, mark, true); }); } catch (e){ return; }
+    var touched = false, touch = function(e){ if (e.isTrusted){ touched = true; clearTimeout(autoT); } };
+    try { ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function(t){ f.contentWindow.document.addEventListener(t, touch, true); }); } catch (e){ return; }
     if (!x.show || autoDone[x.slug]) return;
     autoT = setTimeout(function(){
       if (touched || stamp !== tStamp || !isOpen || sheet.classList.contains('is-in') || showing) return;
@@ -201,6 +214,7 @@
       watch(f, x, stamp);
     });
     f.src = demo(x);
+    [].forEach.call(screen.querySelectorAll('iframe'), function(el){ if (el !== old) el.parentNode.removeChild(el); });
     screen.insertBefore(f, cover);
     if (old && !reload){ old.classList.remove('is-on'); }
     if (old && reload){ old.parentNode && old.parentNode.removeChild(old); }
@@ -215,32 +229,58 @@
   function show(i, quiet){
     i = (i + LIST.length) % LIST.length;
     if (i === cur && live) return;
-    cur = i; var x = LIST[i], p = LIST[(i + LIST.length - 1) % LIST.length], n = LIST[(i + 1) % LIST.length];
+    cur = i; var x = LIST[i];
+    if (flt !== 'all' && x.kind !== flt) filter('all', true);
+    label();
     root.style.setProperty('--vc', x.c);
     nameEl.textContent = x.name;
-    metaEl.innerHTML = esc(kind(x) + ' · ' + lane(x) + ' · ' + (x.trade || x.biz) + ', invented') + ' &nbsp;<i>' + pad(i + 1) + ' / ' + LIST.length + '</i>';
-    whichName.textContent = x.name;
-    whichCount.innerHTML = esc((i + 1) + ' of ' + LIST.length + ' · all builds') + I.up;
+    nowName.textContent = x.name; nowShort.textContent = x.short;
+    tryList.innerHTML = (x.show || []).map(function(st, k){ return st.say ? '<li data-i="' + k + '">' + esc(st.say) + '</li>' : ''; }).join('')
+      || '<li data-i="0">Use it like a customer would.</li>';
     root.querySelectorAll('.vw-about').forEach(function(a){ a.href = page(x); });
     addrEl.textContent = (S.origin || '').replace(/^https?:\/\//, '') + '/demos/' + x.slug + '/';
     popEl.href = demo(x);
-    prevB.querySelector('.vw-peek').textContent = p.name; nextB.querySelector('.vw-peek').textContent = n.name;
     root.querySelectorAll('[data-slug]').forEach(function(t){ t.setAttribute('aria-current', String(t.getAttribute('data-slug') === x.slug)); });
-    var th = strip.querySelector('[data-slug="' + x.slug + '"]');
-    if (th && strip.scrollTo){ var r = th.getBoundingClientRect(), sr = strip.getBoundingClientRect(); strip.scrollTo({ left: strip.scrollLeft + r.left - sr.left - (sr.width - r.width) / 2, behavior: quiet ? 'auto' : 'smooth' }); }
+    keepInView(quiet);
     load(x);
     if (isOpen && history.replaceState) history.replaceState(history.state, '', '#view=' + x.slug);
     if (w.skTrack) skTrack('build_view', { build: x.slug });
   }
-  function step(dir){ show(cur + dir); }
-  function list(on){
+  /* where the current build sits in the filter, and what the arrows lead to */
+  function label(){
+    var x = LIST[cur], pl = pool(), at = pl.indexOf(cur) + 1, word = flt === 'all' ? 'builds' : KW[flt].toLowerCase();
+    var p = LIST[pl[(at - 2 + pl.length) % pl.length]], n = LIST[pl[at % pl.length]];
+    metaEl.innerHTML = esc(kind(x) + ' · ' + lane(x) + ' · ' + (x.trade || x.biz) + ', invented') + ' &nbsp;<i>' + at + ' of ' + pl.length + (flt === 'all' ? '' : ' ' + word) + '</i>';
+    whichName.textContent = x.name;
+    whichCount.innerHTML = esc(at + ' of ' + pl.length + ' ' + word + ' · what it does') + I.up;
+    prevB.querySelector('.vw-peek').textContent = p.name; nextB.querySelector('.vw-peek').textContent = n.name;
+  }
+  /* the builds the arrows step through: all of them, or only the websites or only the tools */
+  function pool(){ var out = []; LIST.forEach(function(x, i){ if (flt === 'all' || x.kind === flt) out.push(i); }); return out; }
+  function step(dir){ var pl = pool(), at = pl.indexOf(cur); show(at < 0 ? pl[0] : pl[(at + dir + pl.length) % pl.length]); }
+  function filter(f, quiet){
+    flt = f;
+    tabs.forEach(function(t){ t.setAttribute('aria-pressed', String(t.getAttribute('data-f') === f)); });
+    idxEl.querySelectorAll('.vw-grp').forEach(function(g){ g.hidden = f !== 'all' && g.getAttribute('data-kind') !== f; });
+    if (quiet) return;
+    var x = LIST[cur]; if (!x) return;
+    if (f !== 'all' && x.kind !== f) show(pool()[0]); else label();
+    if (!small.matches) idxEl.scrollTop = 0;
+  }
+  function keepInView(quiet){
+    var c = idxEl.querySelector('[aria-current="true"]'); if (!c) return;
+    var box = small.matches ? sheet.querySelector('.vw-side-body') : idxEl, r = c.getBoundingClientRect(), br = box.getBoundingClientRect();
+    if (r.top < br.top + 8 || r.bottom > br.bottom - 8) box.scrollTo({ top: box.scrollTop + r.top - br.top - (br.height - r.height) / 2, behavior: quiet ? 'auto' : 'smooth' });
+  }
+  function list(on, keep){
+    if (!small.matches) return;
     sheet.classList.toggle('is-in', on);
-    if (on){ var c = sheet.querySelector('[aria-current="true"]'); if (c) c.scrollIntoView({ block: 'center' }); sheet.querySelector('.vw-sh-head button').focus(); }
-    else root.querySelector('.vw-which').focus();
+    if (on){ sheet.querySelector('.vw-side-body').scrollTop = 0; sheet.querySelector('.vw-sh-head button').focus(); }
+    else if (!keep) root.querySelector('.vw-which').focus();
   }
   function tip(){
     if (!small.matches || store.get('skv-tip')) return; store.set('skv-tip', '1');
-    hint.textContent = 'Use it like a customer would, or tap the play button to see what it does. The arrows go to the next build.';
+    hint.textContent = 'Use it like a customer would, or tap play to see what it does. Tap the name for every build and what each one does.';
     setTimeout(function(){ hint.classList.add('is-in'); }, 600);
     setTimeout(function(){ hint.classList.remove('is-in'); }, 3300);
   }
