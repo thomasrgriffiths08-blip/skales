@@ -5,7 +5,7 @@ Everything for Tom's personal profile and the Skales Studio Company Page, ready 
 Files:
 - `og/linkedin-banner.png`: profile banner, 1584 × 396.
 - `og/linkedin-cover.png`: Company Page cover, 1512 × 256 (same ratio as the older 1128 × 191, so it fits either spec).
-- `og/icon.png`: Company Page logo, 512 × 512.
+- `og/linkedin-logo.png`: Company Page logo, 400 × 400 (the skales wordmark with "studio" beneath; rendered from `tools/logo.html?v=word`).
 - Re-render the banners with `./tools/og.sh` (source: `tools/linkedin.html`).
 
 Site address: every link below uses https://skales.studio. They work once the domain's DNS points at GitHub Pages (four A records to 185.199.108–111.153 and a CNAME for www to thomasrgriffiths08-blip.github.io), so do that before adding links on LinkedIn.
@@ -177,7 +177,7 @@ Upload `og/linkedin-banner.png`. The left side is left empty on purpose: your ph
 | Industry | Marketing Services |
 | Organisation size | 0–1 employees |
 | Organisation type | Sole proprietorship if you trade as a sole trader; Privately held if Skales Studio is a limited company |
-| Logo | `og/icon.png` |
+| Logo | `og/linkedin-logo.png` |
 | Cover | `og/linkedin-cover.png` |
 | Location | Your town |
 | Founded | 2026 |

@@ -80,7 +80,7 @@ ${why.FAQ.map(([q, a]) => `- **${q}** ${a}`).join('\n')}
 write('llms.txt', short);
 const ENT = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“', mdash: '—', ndash: '–', middot: '·', hellip: '…', pound: '£', times: '×', rarr: '→', larr: '←', copy: '©' };
 const decode = t => t.replace(/&([a-z]+);/gi, (m, n) => ENT[n.toLowerCase()] !== undefined ? ENT[n.toLowerCase()] : ' ').replace(/&#(\d+);/g, (m, n) => String.fromCodePoint(+n)).replace(/&#x([\da-f]+);/gi, (m, n) => String.fromCodePoint(parseInt(n, 16)));
-const strip = h => decode(h.replace(/<(script|style)[\s\S]*?<\/\1>/g, '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+const strip = h => decode(h.replace(/<(script|style|svg)[\s\S]*?<\/\1>/g, '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
 write('llms-full.txt', short + `\n\n---\n\n## Full page text\n\n` + pages.filter(p => p.sitemap !== false && !p.noindex).map(p => `### ${p.meta ? p.meta.title : p.url} — ${L.abs(p.url)}\n\n${strip(p.render(baseFor(p.url)))}\n`).join('\n'));
 
 /* Cloudflare Pages reads _redirects (real 301s); GitHub Pages ignores it and serves the meta-refresh pages instead */

@@ -10,7 +10,6 @@ const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'
 const pad = n => String(n).padStart(2, '0');
 const abs = p => site.origin.replace(/\/$/, '') + '/' + String(p).replace(/^\//, '');
 const FONTS = 'https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap';
-const FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Cpath d='M22 16v32M43 17L25 33l18 15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 const UPDATED = new Date();
 const monthYear = d => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
 const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;   // local, never toISOString
@@ -144,7 +143,7 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${abs('/og/' + og + '.png')}">
-<link rel="icon" href="${FAVICON}">
+<link rel="icon" type="image/png" href="${b}og/icon.png">
 <link rel="apple-touch-icon" href="${b}og/icon.png">
 <link rel="manifest" href="${b}manifest.webmanifest">
 <link rel="sitemap" type="application/xml" href="${b}sitemap.xml">

@@ -7,7 +7,7 @@ Static, hand-built, no dependencies. Every page is generated from a few data fil
 | Want to… | Edit | Then |
 |---|---|---|
 | Rename the brand, change the domain, add the WhatsApp number, the Calendly link or the LinkedIn links | `data/site.js` | `node tools/build.js` |
-| Set up or update LinkedIn | `tools/linkedin.md` (copy), `tools/linkedin.html` (banners) | `./tools/og.sh` re-renders the banners |
+| Set up or update LinkedIn | `tools/linkedin.md` (copy), `tools/linkedin.html` (banners), `tools/logo.html` (Page logo and site icon) | `./tools/og.sh` re-renders the logo, icon and banners |
 | Add a build | Build it against `../showcase/briefs/SPEC.md` (+ a per-build brief), then `node tools/ingest.js` — it validates the meta and copies it into `data/builds/` | `python3 tools/phones.py NN` (the phone still every tile uses) · `NODE_PATH=<terser+clean-css dir> node tools/demos.js` · `node tools/build.js && ./tools/og.sh` |
 | Edit one of the original sixteen | `data/builds.js` | same as above |
 | Add a note | `data/notes.js` — add an entry with `slug`, `date`, `title`, `summary`, `body` | `node tools/build.js && ./tools/og.sh` |

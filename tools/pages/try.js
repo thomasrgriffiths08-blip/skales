@@ -65,7 +65,7 @@ const SITES = Object.fromEntries([
 
 const SB = `<div class="ph-sb" id="sb" aria-hidden="true"><span data-clock></span><span class="ph-sbi"><svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".7" fill="currentColor"/><rect x="5" y="5" width="3" height="6" rx=".7" fill="currentColor"/><rect x="10" y="2.5" width="3" height="8.5" rx=".7" fill="currentColor"/><rect x="15" y="0" width="3" height="11" rx=".7" fill="currentColor"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="15" height="8" rx="2" fill="currentColor"/><rect x="24" y="4" width="1.6" height="4" rx=".8" fill="currentColor" opacity=".5"/></svg></span></div>`;
 const MSG_ICON = `<svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.3 3 11.4c0 2.3 1.3 4.4 3.3 5.8L5.6 20l3.5-1.8c.9.2 1.9.4 2.9.4 5 0 9-3.3 9-7.4S17 4 12 4z" fill="#fff"/></svg>`;
-const SK_ICON = `<svg width="20" height="20" viewBox="0 0 64 64"><path d="M22 16v32M43 17L25 33l18 15" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const SK_ICON = `<svg width="30" height="30" viewBox="0 0 64 64"><text x="27" y="45" text-anchor="middle" font-family="Schibsted Grotesk,-apple-system,sans-serif" font-weight="700" font-size="48" fill="#fff">s</text><circle cx="45" cy="40" r="5.5" fill="#E8A84B"/></svg>`;
 const urlBar = attr => `<div class="wb-url" aria-hidden="true">${ic('lock', 12)}<span ${attr}></span></div>`;
 
 /* the pretend phone's screens. Each demo picks the ones its story needs. */
