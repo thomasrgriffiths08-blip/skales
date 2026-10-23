@@ -17,7 +17,7 @@ const and = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and '
 const contact = `<a class="lnk" href="mailto:${esc(site.email)}">${esc(site.email)}</a>${site.whatsapp ? ', or message on WhatsApp' : ''}`;
 
 const shell = ({ b, path, key, label, h1, answer, description, body }) => {
-  const title = `${label} | ${site.name}`;
+  const title = `${label} | ${site.legalName}`;
   const cr = [['Home', ''], [label, path.slice(1)]];
   const nodes = [L.webPage({ path, title, description }), P.crumbNodes(cr)];
   return L.page(L.head({ b, path, title, description, og: key, css: ['pages.css'], nodes }), `

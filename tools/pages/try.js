@@ -301,7 +301,7 @@ module.exports = { JOBS, DEMOS, pages: [
     url: '/try/', og: 'try', priority: 0.8, changefreq: 'monthly',
     meta: { key: 'try', title: 'Try it: the systems, running.', kicker: 'Live demos · about a minute each', sub: 'Be your own customer. Call, book, pay a deposit, and see what the business sees.' },
     render(b){
-      const title = `Live demos: text-back, booking and CRM | ${site.name}`;
+      const title = `Live demos: text-back, booking and CRM | ${site.legalName}`;
       const description = `Live demos you can use on your phone: call a business and let it ring out, get the text-back, book and pay a deposit, and see the lead land in the CRM.`;
       const live = DEMOS.filter(x => x.live);
       const nodes = [
@@ -332,7 +332,7 @@ ${L.footer(b)}`;
     meta: { key: 'try-missed-call', title: 'Missed call, booked. Try it.', kicker: 'Live demo · about a minute', sub: 'Call your own business, let it ring out, and watch the text-back turn into a booking with a deposit.' },
     render(b){
       const x = DEMOS[0];
-      const title = `Missed call text-back demo: try it on your phone | ${site.name}`;
+      const title = `Missed call text-back: try it on your phone | ${site.legalName}`;
       const description = `A live demo of missed-call text-back for UK service businesses: call, let it ring out, get the text, book and pay a deposit, and see the lead land in the CRM.`;
       const nodes = [
         L.webPage({ path: '/try/missed-call/', title, description }),
@@ -357,7 +357,7 @@ ${L.footer(b)}`;
     meta: { key: 'try-booking', title: 'Book and pay a deposit. Try it.', kicker: 'Live demo · about a minute', sub: 'Book a job on your own website at 10pm, then see it waiting in your diary the next morning.' },
     render(b){
       const x = DEMOS[1];
-      const title = `Online booking with deposits: live demo | ${site.name}`;
+      const title = `Online booking with deposits: live demo | ${site.legalName}`;
       const description = `A live demo of online booking for UK service businesses: a customer books and pays a deposit on your website at night, and the job is in your diary by morning.`;
       const nodes = [
         L.webPage({ path: '/try/booking/', title, description }),
@@ -382,7 +382,7 @@ ${L.footer(b)}`;
     meta: { key: 'try-crm-board', title: 'The CRM board. Try it.', kicker: 'Live demo · about a minute', sub: 'Move a lead from enquiry to done and watch the replies, chasers, reminders and review request send themselves.' },
     render(b){
       const x = DEMOS[2];
-      const title = `CRM for trades: follow-ups that send themselves | ${site.name}`;
+      const title = `CRM for trades: follow-ups on autopilot | ${site.legalName}`;
       const description = `A live CRM demo for UK service businesses: move a lead to quoted, booked and done, and watch the reply, chaser, reminder and review request send themselves.`;
       const nodes = [
         L.webPage({ path: '/try/crm-board/', title, description }),

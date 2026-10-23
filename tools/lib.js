@@ -130,7 +130,7 @@ function head({ b, path, title, description, og, type = 'website', css = [], nod
 ${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
 <meta name="theme-color" content="#FFFFFF">
 <meta name="author" content="${esc(site.founder.name)}">
-<meta property="og:site_name" content="${esc(site.name)}">
+<meta property="og:site_name" content="${esc(site.legalName)}">
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="${type}">
 <meta property="og:url" content="${canon}">
@@ -197,7 +197,7 @@ function footer(b, o = {}){
       <div><h2>Contact</h2>${contact.map(link).join('')}${site.whatsapp ? `<a data-wa="Hi Tom — found you through your site." href="${waHref('Hi Tom — found you through your site.')}">WhatsApp</a>` : ''}</div>
     </div>
     <div class="f-row">
-      <span>&copy; <span data-year></span> ${esc(site.name)} &middot; ${esc(site.areaServed)}</span>
+      <span>&copy; <span data-year></span> ${esc(site.legalName)} &middot; ${esc(site.areaServed)}</span>
       <span>Updated ${monthYear(UPDATED)}</span>
     </div>
     <p class="f-note">Every business, person, review and phone number in the demonstration builds on this site is invented. No client is named or shown anywhere.</p>

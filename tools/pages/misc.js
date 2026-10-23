@@ -4,7 +4,7 @@ const teardown = {
   url: '/teardown.html', og: 'teardown', priority: 0.8, changefreq: 'monthly',
   meta: { key: 'teardown', title: 'Ten minutes on your setup. Three things back.', kicker: 'Free teardown · by message', sub: 'What is leaking, what to fix first, what it is worth in jobs.' },
   render(b){
-    const title = `Free teardown — three findings by message | ${site.name}`;
+    const title = `Free teardown — three findings by message | ${site.legalName}`;
     const description = `Send three details. ${site.founder.name} checks your website, Google listing and missed calls, then messages back what is leaking and what to fix first.`;
     const nodes = [ L.webPage({ path: '/teardown.html', title, description, type: 'ContactPage' }), L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Free teardown', path: '/teardown.html' }]) ];
     const body = `
@@ -54,7 +54,7 @@ const notfound = {
     /* GitHub Pages serves this file for ANY missing URL, at any depth (/work/nope/, /notes/x/y/),
        so relative paths break the moment the 404 is nested. Everything on it is absolute. */
     const b = L.abs('/');
-    const title = `Not found | ${site.name}`;
+    const title = `Not found | ${site.legalName}`;
     const body = `
 ${L.header(b, '')}
 <main id="main" class="wrap nf">
