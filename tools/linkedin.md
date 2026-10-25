@@ -44,7 +44,13 @@ Anything that shows a link preview (Featured links, a post with a link) waits un
 
 LinkedIn people-search matches on the headline and the current job title, so both carry the words owners actually type: "Facebook ads", "Google ads", "landing pages". The job title keeps "web design" for recruiter searches.
 
-Recommended:
+Recommended (it opens with what you do for people, in plain words, and still carries the words owners search for):
+
+```text
+I help trades and local businesses get more enquiries | Facebook & Google ads, landing pages and follow-up | Founder, Skales Studio, West London
+```
+
+The earlier, more keyword-led version:
 
 ```text
 Facebook & Google ads, landing pages and follow-up for UK trades and service businesses | The whole funnel, built by one person | Founder, Skales Studio
@@ -71,31 +77,26 @@ Try in this order: `linkedin.com/in/tomgriffiths-skales`, `linkedin.com/in/tom-g
 
 ### About (limit 2,600; the first two or three lines show before "see more")
 
+Written to sound like a person, not a brochure: it opens with your name and what you do for people, says where you are and why you do it, explains the work in plain English, and ends with an easy, free first step. Everything in it is true; keep it that way.
+
 ```text
-I build the whole marketing funnel for UK service businesses: the Facebook, Instagram and Google ads, the landing page they click through to, and the booking and follow-up that turn an enquiry into a job. Plumbers, electricians, roofers, builders, salons, and anyone whose work comes in by phone.
+Hi, I'm Tom. I help trades and local service businesses get more enquiries, and make sure none of them slip through the cracks.
 
-An ad that points at a page built to take no enquiry wastes the click. An enquiry nobody follows up wastes the ad. Each step only pays if the next one works, so I build every step as one system.
+I'm from London and I run Skales Studio on my own, from West London. I went to media school, and of everything I learned, building marketing for small businesses is the work I enjoy most: it's practical, and you can see whether it's working.
 
-The funnel
-• Ads: Facebook, Instagram and Google search ads, and Local Services Ads where the trade qualifies. The ad accounts are set up in your name.
-• Landing pages: one page per offer, built to turn a click into a name and a number. Hand-coded and fast, with no page builder and no theme.
-• Booking and CRM: slots customers take themselves, deposits that hold them, and every enquiry in one place with what happened to it.
-• Follow-up that runs on its own: missed-call text-back, quote chasing, review requests, service reminders.
+What I do, in plain English:
+• Facebook, Instagram and Google ads that put you in front of people nearby who need you
+• A simple page for those ads to land on, built to turn a click into a call or a booking
+• The follow-up behind it: missed calls texted back, quotes chased, reviews asked for, so you're not doing it all by hand at 9pm
 
-How it works
-1. Free teardown. I look at your ads, your website, your Google listing and what happens when someone tries to reach you, then send you three things: what is leaking, what to fix first, and what it is worth in jobs.
-2. A flat quote after a short call, agreed before anything starts.
-3. Built in public. A website on its own takes days; a full system with booking and follow-up usually takes one to two weeks.
-4. Handover. The ad accounts, domain, code and every other account are in your name from day one. Nothing is rented back to you monthly.
+Everything is set up in your name. If we ever stop working together, you keep the lot.
 
-Skales Studio is one person. The person you message is the person who builds it.
+Not sure where to start? Send me your website or Facebook page and I'll have a look for free. I'll tell you three things: what's losing you enquiries, what to fix first, and roughly what it's worth. No sales pitch and no obligation.
 
-Thirty-six working builds run live on the site, each for an invented business, so no client's numbers are ever on show. Open any of them and use it. I build one new system a week in public on Instagram (@tomxsystems).
-
-Run a service business? Book a call or ask for the free teardown. The links are in Featured, just below.
+You can also try the systems I've built on my website. They're all live, for made-up businesses, so you can click around. Or just message me here. I reply to everyone.
 ```
 
-The build count goes up every week; update "Thirty-six" here, in Experience and on the Company Page when the site's number changes.
+The build count goes up every week; update "Thirty-six" in Experience and on the Company Page when the site's number changes (the About deliberately has no number in it).
 
 **Top skills** (the five pinned under About): Facebook Ads · Google Ads · Landing Page Optimization · Web Design · Marketing Automation.
 
@@ -153,7 +154,7 @@ Facebook Ads · Google Ads · Pay Per Click (PPC) · Social Media Advertising ·
 
 ### Photo
 
-A real, recent photo of just you: face about 60% of the frame, head centred (LinkedIn crops it to a circle), plain background, daylight, looking at the camera. At least 400 × 400. Set its visibility to public. No logo in place of a face; the logo goes on the Company Page.
+A real, recent photo of just you, smiling and looking at the camera: it is the single biggest thing that makes a profile feel approachable. Face about 60% of the frame, head centred (LinkedIn crops it to a circle), plain light background, daylight from a window in front of you, no hat or sunglasses. A friend with a phone at eye level, in portrait mode, is plenty. At least 400 × 400. Set its visibility to public. No logo in place of a face; the logo goes on the Company Page.
 
 ### Banner
 
