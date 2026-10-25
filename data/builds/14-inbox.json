@@ -1,0 +1,28 @@
+{
+  "n": 14,
+  "slug": "inbox",
+  "file": "demos/inbox/index.html",
+  "kind": "tool",
+  "lane": "system",
+  "trade": "Any service business",
+  "name": "Inbox and missed calls",
+  "biz": "Six made-up service businesses",
+  "c": "#B04A24",
+  "pg": "#F6F6F4",
+  "short": "Every call, text and form in one list. Missed calls get a text back in seconds.",
+  "long": "Press “Simulate a missed call” and watch it happen: the phone rings out, a countdown runs, the text goes from the business’s own number, and the customer replies. One tap sends the booking link, and the booking lands in the diary with its deposit.",
+  "proves": "The customer gets a text before they ring the next name on Google.",
+  "tags": [
+    "Missed-call text-back",
+    "One inbox",
+    "Booking link"
+  ],
+  "features": [
+    "Calls, texts, web forms and Google messages in one list, newest first",
+    "A missed call answered by text in seconds, with the exact message and timing",
+    "Send the booking link, book them in yourself, or write a quote from the thread",
+    "What the customer sees, shown on their phone beside yours"
+  ],
+  "story": "Every trade loses work to a phone that rang while they were under a floor. This is the part that catches it.",
+  "start": "inbox"
+}

@@ -93,24 +93,51 @@
 .b-cap{display:none;font-size:.8125rem;color:rgba(255,255,255,.5)}
 
 /* ---------- the explainer under it ---------- */
-.dx-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px)}
-.dx-col h3{font-size:1.375rem;padding-bottom:16px;border-bottom:1px solid var(--tx)}
-.dx-list{list-style:none;margin:0;padding:0;counter-reset:dx}
-.dx-list>li{--dxp:20px;counter-increment:dx;display:grid;grid-template-columns:40px 1fr;border-bottom:1px solid var(--line)}
-.dx-list>li::before{content:counter(dx,decimal-leading-zero);padding-top:var(--dxp);font-weight:600;font-size:.9375rem;color:var(--tx-3);font-variant-numeric:tabular-nums;line-height:1.6}
-/* each point is a disclosure: open on wide screens, a tap to open on a phone so the page stays short */
-.dx-d summary{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:var(--dxp) 0;list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.dx-d summary::-webkit-details-marker{display:none}
-.dx-d summary b{font-size:1.0625rem;line-height:1.4}
-.dx-d summary::after{content:"+";flex:none;font-size:1.375rem;font-weight:400;line-height:1;color:var(--tx-3);transition:transform .2s var(--ease)}
-.dx-d[open] summary::after{transform:rotate(45deg)}
-.dx-d>span{display:block;margin-top:calc(4px - var(--dxp));padding-bottom:var(--dxp);color:var(--tx-2);line-height:1.55;max-width:56ch}
-.dx-d .dx-pages{margin-top:calc(-1 * var(--dxp) + 12px);margin-bottom:var(--dxp)}
-@media (min-width:981px){.dx-d summary{pointer-events:none;cursor:default}.dx-d summary::after{display:none}}
-@media (max-width:980px){.dx-list>li{--dxp:16px}}
-.dx-pages{list-style:none;margin:14px 0 2px;padding:12px 14px;border-radius:var(--r-s);background:var(--alu);display:grid;gap:6px;font:400 .8125rem/1.45 var(--mono);color:var(--tx-2);overflow-wrap:break-word}
-.dx-pages .dom{font-family:var(--sans);font-size:.8125rem;font-weight:500;color:var(--tx-3);margin-bottom:2px}
-.dx-pages b{color:var(--tx);font-weight:500}
+/* the chain: five links from a search to a booked job, each with a small piece of the real thing */
+.chain{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;position:relative}
+.chain::before{content:"";position:absolute;left:0;right:0;top:11px;height:1px;background:var(--line-2)}
+.ch{position:relative;display:flex;flex-direction:column;min-width:0}
+.ch-k{display:flex;align-items:center;gap:10px;align-self:flex-start;margin:0 0 14px;padding-right:12px;background:var(--pg);position:relative;font-weight:600;font-size:.875rem;color:var(--tx)}
+.ch-k span{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--tx);color:var(--pg);font:500 .6875rem/1 var(--mono);position:relative}
+.ch h3{font-size:1.125rem;line-height:1.25;letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance;min-height:2.5em}
+.ch-m{display:flex;flex-direction:column;gap:5px;padding:14px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--pg);font-size:.8125rem;line-height:1.35;color:var(--tx);min-height:150px}
+@media (min-width:1101px){.ch-m{min-height:212px}}
+.ch-m b{font-size:.9375rem;font-weight:600}
+.ch-q{display:block;padding:7px 10px;margin-bottom:6px;border:1px solid var(--line-2);border-radius:999px;color:var(--tx-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-l{color:var(--tx-3);font-size:.75rem;font-weight:500}
+.ch-big{font-size:1.125rem;font-weight:600;letter-spacing:-.02em}
+.ch-r{color:var(--tx-2)}
+.ch-r i{font-style:normal;font-weight:600;color:var(--tx);margin-right:2px}
+.ch-ok{color:#1F7A4D;font-weight:600}
+.ch-ok::before{content:"✓ "}
+.ch-sep{margin-top:6px;padding-top:8px;border-top:1px solid var(--line)}
+.ch-btn{align-self:flex-start;margin-top:auto;padding:8px 12px;border-radius:8px;background:var(--live);color:var(--live-ink);font-weight:600}
+.ch-sms{padding:9px 11px;border-radius:12px 12px 12px 4px;background:var(--alu);color:var(--tx)}
+.ch-pages{list-style:none;margin:6px 0 0;padding:8px 0 0;border-top:1px solid var(--line);display:grid;gap:3px;font:400 .75rem/1.35 var(--mono);color:var(--tx-3);overflow:hidden}
+.ch-pages li{font-size:.75rem;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-pages .dom{font-family:var(--sans);font-weight:500}
+.ch-pages b{color:var(--tx);font-weight:500}
+.ch-t{margin:12px 0 0;font-size:.9375rem;line-height:1.5;color:var(--tx-2)}
+.ch-go{margin-top:10px;align-self:flex-start;font-weight:600;font-size:.9375rem;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;padding:4px 0}
+.ch-go::after{content:" →"}
+@media (max-width:1100px){
+  .chain{grid-template-columns:1fr;gap:0}
+  .chain::before{left:11px;right:auto;top:12px;bottom:12px;width:1px;height:auto}
+  .ch{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,300px);column-gap:20px;padding-bottom:30px}
+  .ch-k{grid-column:1/-1;margin-bottom:6px}
+  .ch h3{grid-column:2;min-height:0;margin-bottom:0}
+  .ch-m{grid-column:3;grid-row:2/span 3;min-height:0}
+  .ch-t,.ch-go{grid-column:2}
+  .ch-t{margin-top:6px}
+}
+@media (max-width:640px){
+  .ch{grid-template-columns:36px minmax(0,1fr);column-gap:10px;padding-bottom:26px}
+  .ch-k{grid-column:1/-1}
+  .ch h3,.ch-t,.ch-go,.ch-m{grid-column:2}
+  .ch-m{grid-row:auto;margin-top:10px}
+  .ch-t{display:none}
+  .ch-m{padding:12px}
+}
 .dx-call{margin-top:clamp(40px,6vw,72px);display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(28px,4vw,56px);align-items:center;padding:clamp(28px,4vw,48px);border-radius:var(--r-l);background:var(--hand);color:#fff}
 .dx-call h3{font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.03em;margin-bottom:18px}
 .dx-steps{margin:0;padding:0;list-style:none;counter-reset:ds;display:grid;gap:12px}
@@ -139,7 +166,7 @@
   .b-log-l{max-height:90px}
   .b-cap{display:block;position:absolute;left:0;right:0;bottom:0;text-align:center}
   .b-done{margin-top:8px}
-  .dx-grid,.dx-call{grid-template-columns:1fr}
+  .dx-call{grid-template-columns:1fr}
   /* on a phone the home page keeps to four builds and compact demo cards; the rest are one tap away */
   #try .try-card{min-height:0;padding:20px}
   #try .try-card.has-pic{padding:0}

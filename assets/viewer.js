@@ -8,7 +8,7 @@
    ============================================================ */
 (function(){
   var d = document, w = window, S = w.SITE || {}, b = S.base || '', LN = w.LANES || {};
-  var ORDER = ['loud', 'motion', 'quiet', 'direct', 'broad', 'specific'];
+  var ORDER = ['loud', 'motion', 'quiet', 'direct', 'system'];
   var LIST = (w.BUILDS || []).slice().sort(function(a, c){ var la = ORDER.indexOf(a.lane), lc = ORDER.indexOf(c.lane); return la !== lc ? la - lc : a.n - c.n; });
   if (!LIST.length) return;
   var small = w.matchMedia('(max-width: 820px)');
@@ -17,7 +17,7 @@
   var still = function(x){ return b + 'assets/phones/' + pad(x.n) + '.webp'; };
   var demo = function(x){ return b + 'demos/' + x.slug + '/#s=1'; };
   var page = function(x){ return b + 'work/' + x.slug + '/'; };
-  var kind = function(x){ return x.kind === 'site' ? 'Website' : 'Tool'; };
+  var kind = function(x){ return x.kind === 'site' ? 'Website' : 'The system'; };
   var lane = function(x){ return LN[x.lane] ? LN[x.lane].name : ''; };
   var idx = function(slug){ for (var i = 0; i < LIST.length; i++) if (LIST[i].slug === slug) return i; return -1; };
   var store = { get: function(k){ try { return localStorage.getItem(k); } catch (e){ return null; } }, set: function(k, v){ try { localStorage.setItem(k, v); } catch (e){} } };
@@ -37,13 +37,13 @@
   var root, frame, screen, cover, coverImg, coverName, nameEl, metaEl, aboutEl, addrEl, popEl, prevB, nextB, side, sheet, whichName, whichCount, hint, modes, capEl, showBs, nowName, nowShort, tryList, idxEl, tabs;
   var flt = 'all';
   var thumb = function(x){ return b + 'assets/thumbs/' + pad(x.n) + '.webp'; };
-  var KW = { site: 'Websites', tool: 'Tools' };
+  var KW = { site: 'Websites', tool: 'The system' };
   var showing = null, autoT = 0, autoDone = {};
   var cur = -1, live = null, opener = null, pushed = false, isOpen = false, mode = store.get('skv-mode') || 'desk', tStamp = 0;
 
   function groups(){
     var out = [];
-    ORDER.forEach(function(k){ var g = LIST.filter(function(x){ return x.lane === k; }); if (g.length) out.push({ k: k, kind: g[0].kind, name: (LN[k] ? LN[k].name + ' ' + LN[k].kindWord.toLowerCase() : k), list: g }); });
+    ORDER.forEach(function(k){ var g = LIST.filter(function(x){ return x.lane === k; }); if (g.length) out.push({ k: k, kind: g[0].kind, name: (LN[k] ? (LN[k].name === LN[k].kindWord ? LN[k].name : LN[k].name + ' ' + LN[k].kindWord.toLowerCase()) : k), list: g }); });
     return out;
   }
   function make(){
@@ -69,7 +69,7 @@
       + '<section class="vw-now" aria-label="What you can do here"><b class="vw-now-name"></b><span class="vw-lab">What you can do here</span><p class="vw-now-short"></p><ol class="vw-try"></ol>'
       + '<button type="button" class="vw-show vw-show-big" data-act="show">' + I.play + '<span>Show me what it does</span></button>'
       + '<div class="vw-now-links"><a class="vw-about" href="#">About this build</a><a class="go" href="' + b + 'book/">Book a call</a></div></section>'
-      + '<div class="vw-tabs" role="group" aria-label="Show">' + [['all', 'All', LIST.length], ['site', 'Websites', LIST.filter(function(x){ return x.kind === 'site'; }).length], ['tool', 'Tools', LIST.filter(function(x){ return x.kind === 'tool'; }).length]].map(function(t){
+      + '<div class="vw-tabs" role="group" aria-label="Show">' + [['all', 'All', LIST.length], ['site', 'Websites', LIST.filter(function(x){ return x.kind === 'site'; }).length], ['tool', 'The system', LIST.filter(function(x){ return x.kind === 'tool'; }).length]].map(function(t){
           return '<button type="button" data-f="' + t[0] + '" aria-pressed="' + (t[0] === 'all') + '">' + t[1] + ' <span>' + t[2] + '</span></button>';
         }).join('') + '</div>'
       + '<nav class="vw-idx" aria-label="Every build">' + groups().map(function(g){
@@ -247,9 +247,9 @@
   }
   /* where the current build sits in the filter, and what the arrows lead to */
   function label(){
-    var x = LIST[cur], pl = pool(), at = pl.indexOf(cur) + 1, word = flt === 'all' ? 'builds' : KW[flt].toLowerCase();
+    var x = LIST[cur], pl = pool(), at = pl.indexOf(cur) + 1, word = flt === 'all' ? 'builds' : flt === 'tool' ? 'parts' : KW[flt].toLowerCase();
     var p = LIST[pl[(at - 2 + pl.length) % pl.length]], n = LIST[pl[at % pl.length]];
-    metaEl.innerHTML = esc(kind(x) + ' · ' + lane(x) + ' · ' + (x.trade || x.biz) + ', invented') + ' &nbsp;<i>' + at + ' of ' + pl.length + (flt === 'all' ? '' : ' ' + word) + '</i>';
+    metaEl.innerHTML = esc(x.kind === 'site' ? kind(x) + ' · ' + lane(x) + ' · ' + (x.trade || x.biz) + ', invented' : 'The system · six made-up businesses') + ' &nbsp;<i>' + at + ' of ' + pl.length + (flt === 'all' ? '' : ' ' + word) + '</i>';
     whichName.textContent = x.name;
     whichCount.innerHTML = esc(at + ' of ' + pl.length + ' ' + word + ' · what it does') + I.up;
     prevB.querySelector('.vw-peek').textContent = p.name; nextB.querySelector('.vw-peek').textContent = n.name;

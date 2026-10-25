@@ -22,7 +22,7 @@
   var SAVE = navigator.connection && navigator.connection.saveData;
   var cv = root.querySelector('.op-film'), ctx = cv && cv.getContext && cv.getContext('2d');
   var base = root.getAttribute('data-film') || '', N = +root.getAttribute('data-frames') || 0;
-  if (SAVE || !ctx || !base || !N) return;
+  if (SAVE || !ctx || !base || !N){ root.classList.remove('is-film'); return; }   /* the page is served tall for the film, so it never jumps when this runs */
 
   var FILM = .97;                               /* share of the scroll the film takes; the last frame holds for the rest, then the page moves on */
   var PAR = 6;                                  /* frames downloading at once */
@@ -32,7 +32,6 @@
   var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
   var span = function(p, a, b){ return clamp((p - a) / (b - a), 0, 1); };
 
-  root.classList.add('is-film');
   /* what happened, for anyone checking a device: frames in, frames drawn, failed downloads, scroll or time */
   var stat = root.opStat = { set: '', loaded: 0, drawn: 0, failed: 0, mode: 'scroll', moved: false };
 
@@ -49,9 +48,16 @@
     });
     return o;
   }
+  /* only the coarse frames (every 8th) load with the page; the rest follow once the reader starts to
+     scroll, so someone who skips the film never downloads it, and the frame they are on always jumps the queue */
+  var rest = [];
+  function more(){ if (rest.length){ queue = queue.concat(rest); rest = []; pump(gen); } }
   function load(){
-    var my = ++gen;
-    set = stat.set = pickSet(); frames = []; state = []; queue = order(); busy = 0; shown = -1; ready = false;
+    var my = ++gen, all = order();
+    set = stat.set = pickSet(); frames = []; state = []; busy = 0; shown = -1; ready = false;
+    queue = all.filter(function(i){ return i % 8 === 0 || i === N - 1; });
+    rest = all.filter(function(i){ return !(i % 8 === 0 || i === N - 1); });
+    if (stat.moved || timeAt) more();
     stat.loaded = stat.drawn = stat.failed = 0;
     root.classList.remove('is-ready');
     pump(my);
@@ -150,13 +156,13 @@
     return clamp((hh - r.top) / Math.max(1, root.offsetHeight - stick.offsetHeight), 0, 1);
   }
   function scrollable(){ var se = d.scrollingElement || d.documentElement; return se.scrollHeight - se.clientHeight > 8; }
-  function byTime(why){ if (timeAt || RM) return; timeAt = performance.now(); stat.mode = 'time:' + why; kick(); }
+  function byTime(why){ if (timeAt || RM) return; timeAt = performance.now(); stat.mode = 'time:' + why; more(); kick(); }
   function frame(now){
     raf = 0;
     var dt = Math.min(64, now - (last || now)); last = now;
     var top = root.getBoundingClientRect().top, moved = lastTop !== null && Math.abs(top - lastTop) > .5;
     lastTop = top;
-    if (moved) stat.moved = true;
+    if (moved){ stat.moved = true; more(); }
     intro = RM ? 1 : clamp((now - t0 - 500) / 1700, 0, 1);
     /* a reader swiping or wheeling forward while nothing moves means the page itself cannot scroll here */
     if (!timeAt && ready && !stat.moved && tries >= 3 && now - triedAt > 400) byTime('stuck');

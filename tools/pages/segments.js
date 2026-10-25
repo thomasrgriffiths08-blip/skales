@@ -36,17 +36,17 @@ ${L.header(b, 'services')}
   <div class="hs-copy">
   ${P.crumbs(b, cr)}
   <h1>${esc(s.h1)}</h1>
-  <p class="lead answer">${esc(s.answer)}</p>
+  ${L.fold(s.answer, 'lead answer')}
   <div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${tryHref(s.demos[0])}">Try it as ${article(s.word)} ${esc(s.word)}</a></div>
   </div>
   ${L.heroPhone(b, L.builds.find(x => x.n === s.builds[0]))}
 </section>
 ${P.panel('What it needs', esc(s.label), `<h2>What should a website for ${esc(lc(s.label))} do?</h2><ul class="feat cols">${s.needs.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`)}
-${P.panel('Your customers', 'How the work comes in', `<h2>How do customers choose ${article(s.word)} ${esc(s.word)}?</h2><p class="lead">${esc(s.journey)}</p>`)}
+${P.panel('Your customers', 'How the work comes in', `<h2>How do customers choose ${article(s.word)} ${esc(s.word)}?</h2>${L.fold(s.journey)}`)}
 <section class="sec" id="automations" aria-labelledby="h-auto">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-auto">The three automations that matter most</h2></div>
-    <div class="hub-list">${s.autos.map(([a, why]) => { const x = P.auto(a); return `<a class="hub-card" href="${b}automations/${x.slug}/"><h3>${esc(x.name)}</h3><p>${esc(why)}</p><span class="try-go">How it works <span aria-hidden="true">→</span></span></a>`; }).join('')}</div>
+    <div class="hub-list snap">${s.autos.map(([a, why]) => { const x = P.auto(a); return `<a class="hub-card" href="${b}automations/${x.slug}/"><h3>${esc(x.name)}</h3><p>${esc(why)}</p><span class="try-go">How it works <span aria-hidden="true">→</span></span></a>`; }).join('')}</div>
   </div>
 </section>
 <section class="sec" id="try" aria-labelledby="h-try">
@@ -59,7 +59,7 @@ ${P.buildWall(b, s.builds, 'Builds that fit', 'Working builds for made-up busine
 ${P.fill(P.faqPanel(s.faq, `${s.label}: questions people ask`), b)}
 <section class="sec rel" aria-labelledby="h-svc">
   <div class="wrap"><h2 id="h-svc" class="rel-h">What I build for ${esc(lc(s.label))}</h2><div class="rel-list">${SV.map(x => `<a href="${b}services/${x.slug}/"><b>${esc(x.name)}</b><span>${esc(x.card)}</span></a>`).join('')}</div>
-  ${peers.length ? `<h2 class="rel-h rel-h2">Other ${esc(lc(s.group))} businesses</h2><div class="rel-list">${peers.map(x => `<a href="${b}for/${x.slug}/"><b>${esc(x.label)}</b><span>${esc(x.h1)}</span></a>`).join('')}</div>` : ''}</div>
+  ${peers.length ? `<h2 class="rel-h rel-h2">Other ${esc(lc(s.group))} businesses</h2><div class="rel-list${peers.length > 4 ? ' rel-cut' : ''}">${peers.map(x => `<a href="${b}for/${x.slug}/"><b>${esc(x.label)}</b><span>${esc(x.h1)}</span></a>`).join('')}</div>${peers.length > 4 ? `<button class="rel-all" type="button">Show all ${peers.length}</button>` : ''}` : ''}</div>
 </section>
 </main>
 ${P.band(b, 'trades', s.slug)}

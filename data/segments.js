@@ -23,7 +23,7 @@ module.exports = [
       ['quote-chasing', 'A new boiler is a big quote that gets compared, and a polite follow-up keeps yours in the conversation while the customer makes up their mind.'],
     ],
     demos: ['missed-call', 'booking'],
-    builds: [14, 31, 2, 3],
+    builds: [15, 18, 14],
     faq: [
       ['Should my Gas Safe number be on my website?', 'Yes, on every page, with a link to the Gas Safe Register so a customer can check it in seconds. It is one of the first things people look for before they let someone work on their boiler.'],
       ['Can it remind landlords when their gas safety certificate is due?', 'Yes. The date of each check is saved against the property, and the landlord gets a text before the next one is due with a link to book. A landlord with several properties has a date for each.'],
@@ -50,7 +50,7 @@ module.exports = [
       ['on-my-way-texts', 'Customers need to be in, with the freezer and the home office ready for the power going off, so one tap telling them when you will arrive saves a wasted morning.'],
     ],
     demos: ['crm-board', 'missed-call'],
-    builds: [23, 2, 27, 15],
+    builds: [11, 14, 16, 13],
     faq: [
       ['Should my scheme logo go on my website?', 'Yes, with a link to where customers can check your registration. A logo on its own can be copied by anyone; a link to the register is proof.'],
       ['Can letting agents send me lots of EICRs at once?', 'Yes. The landlord page takes several addresses in one enquiry, each property lands on the CRM board, and when each report is done its next due date is saved so the reminder goes out on its own.'],
@@ -77,7 +77,7 @@ module.exports = [
       ['review-requests', 'Customers wary of cowboys read roofing reviews closely, and asking every customer when the scaffold comes down builds the record that reassures the next one.'],
     ],
     demos: ['missed-call', 'crm-board'],
-    builds: [35, 13, 27, 15],
+    builds: [16, 13],
     faq: [
       ['How do I show customers I’m not a cowboy?', 'Real photos of your own roofs, a business address, your guarantee in writing and reviews from real local customers. Stock photos of perfect roofs do the opposite.'],
       ['Should my website give prices?', 'It can give a range, if you want it to. A guide price tool works from your own rates and the customer’s roof, and makes clear that the final price follows a survey.'],
@@ -104,7 +104,7 @@ module.exports = [
       ['review-requests', 'Your work travels by word of mouth, and a Google review at handover puts that word of mouth where strangers can read it.'],
     ],
     demos: ['crm-board'],
-    builds: [27, 2, 30, 4],
+    builds: [16, 14, 13],
     faq: [
       ['My work comes from word of mouth. Do I need a website?', 'The person you were recommended to will still look you up before they ring. The website is where that recommendation turns into a call, with photos of the kind of job they heard about.'],
       ['How do I stop enquiries for jobs I don’t do?', 'Say plainly on the site what you take on and where, and ask the right questions on the form. You can then see at a glance which enquiries fit before you ring anyone back.'],
@@ -131,7 +131,7 @@ module.exports = [
       ['review-requests', 'A new kitchen is the room every visitor sees, and asking for a review the day it is finished puts that pride where the next customer will read it.'],
     ],
     demos: ['booking', 'crm-board'],
-    builds: [1, 27, 15, 2],
+    builds: [16, 13, 14],
     faq: [
       ['Can customers get a rough price before I visit?', 'Yes, if you want them to. A quote tool built on your own prices can show a guide figure as they choose units and worktops, and the design visit firms it up.'],
       ['Should kitchens and bathrooms have separate pages?', 'Yes. They are different searches and often different customers, and each page can answer its own questions: worktops and appliances on one, wet rooms and accessible bathrooms on the other.'],
@@ -158,7 +158,7 @@ module.exports = [
       ['review-requests', 'A finished garden looks its best the day you leave, which makes that the day to ask for the review.'],
     ],
     demos: ['crm-board'],
-    builds: [27, 15, 26, 2],
+    builds: [16, 13, 17, 14],
     faq: [
       ['How do I keep up with enquiries in spring?', 'Every enquiry lands on one board with its photos, so you can price the simple ones from the van and book visits for the rest. Quotes that go quiet are chased for you.'],
       ['Should fencing have its own page?', 'Yes. Fencing is a different search from landscaping and often urgent after a storm, so a page that says you do it, with photos and a quick enquiry form, is what gets found.'],
@@ -185,7 +185,7 @@ module.exports = [
       ['review-requests', 'People choosing a locksmith in a hurry lean on reviews, so asking every customer once the door is open builds the record that wins the next lockout.'],
     ],
     demos: ['missed-call'],
-    builds: [28, 25, 26, 12],
+    builds: [14, 17],
     faq: [
       ['How do I show I’m local and not a call centre?', 'Your own name, a photo of you and the van, a business address and the towns you cover, all on the page. Leave out stock photos and anything that reads like a national network.'],
       ['Is it worth a page for every town I cover?', 'Only for places you genuinely cover, and only if each page says something real about working there. Thin copies of the same page with the town name swapped can do more harm than good with Google.'],
@@ -212,7 +212,7 @@ module.exports = [
       ['review-requests', 'Customers want proof you work safely near houses, and reviews from neighbours who watched you do it are proof they trust.'],
     ],
     demos: ['missed-call', 'crm-board'],
-    builds: [26, 27, 25],
+    builds: [17, 16, 14],
     faq: [
       ['Should my website explain Tree Preservation Orders?', 'A short page on how you check whether a tree is protected, and how you handle the application, answers a worry plenty of customers have. Keep it to what you do and link to the council for the rules themselves.'],
       ['Can I send the quote straight after the site visit?', 'Yes. You price the job on your phone and send it from the CRM, and the customer gets a link to read and accept it. If it goes quiet, a follow-up goes out a couple of days later.'],
@@ -239,7 +239,7 @@ module.exports = [
       ['review-requests', 'Letting someone into your home for odd jobs takes trust, and reviews from customers nearby are what earn you the first booking.'],
     ],
     demos: ['missed-call', 'crm-board'],
-    builds: [27, 28, 15],
+    builds: [16, 14, 13],
     faq: [
       ['Can customers send photos of the job?', 'Yes. The enquiry form takes photos and a description, and they arrive together with the customer’s details, so you can price the job or ask the right question without going round first.'],
       ['Can people book a half day of jobs?', 'Yes. Customers book a half or full day and list the jobs they want done, so you know what to bring, and several small jobs in the same street can share one visit.'],
@@ -266,7 +266,7 @@ module.exports = [
       ['review-requests', 'Reviews that mention a cleaner by name are exactly what the next nervous customer is looking for.'],
     ],
     demos: ['booking'],
-    builds: [29, 14, 30],
+    builds: [15, 13],
     faq: [
       ['Should I take a deposit for end-of-tenancy cleans?', 'It suits them well, because the date is fixed around a move and a late cancellation leaves a gap you cannot fill. You choose which cleans take a deposit and how much, and the booking page shows your cancellation rules before anyone pays.'],
       ['How do I show customers they can trust my cleaners?', 'Say how you vet and insure your team, how keys are handled and whether customers get the same cleaner each time. Real photos of your team do more than any badge.'],
@@ -293,7 +293,7 @@ module.exports = [
       ['review-requests', 'Neighbours read the same local reviews, so one asked for after the first clean helps the house next door say yes.'],
     ],
     demos: ['booking'],
-    builds: [36, 29, 26],
+    builds: [18, 15, 17],
     faq: [
       ['Can new customers join my round from the website?', 'Yes. The sign-up form takes the address, access notes and how they want to pay, and lands on the CRM board, so you can slot them into the right round.'],
       ['Can it send invoices after each clean?', 'Yes. Marking a house done sends the invoice, so payment is not left to a note through the door or a knock on a Friday night.'],
@@ -320,7 +320,7 @@ module.exports = [
       ['review-requests', 'A sweep is let into the front room, and reviews from neighbours who did the same are what make the next household comfortable booking you.'],
     ],
     demos: ['booking', 'missed-call'],
-    builds: [31, 15, 32],
+    builds: [18, 13],
     faq: [
       ['Can customers book a chimney sweep online?', 'Yes. They pick the appliance and a time from the slots you open, answer a few questions about the fuel and access, and get a confirmation that says what to do before you arrive.'],
       ['Can the sweep certificate be sent automatically?', 'Yes. The certificate is filled in on your phone at the end of the job and emailed to the customer straight away, and a copy stays on their record for next year.'],
@@ -347,7 +347,7 @@ module.exports = [
       ['on-my-way-texts', 'The message says who is coming and when without mentioning the pest, which matters to customers who would rather the neighbours did not know.'],
     ],
     demos: ['missed-call', 'booking'],
-    builds: [25, 29, 28, 15],
+    builds: [14, 15, 13],
     faq: [
       ['Should each pest have its own page?', 'Yes. People search for the pest, often with the town, so a page about wasp nests is the one found by someone with a wasp nest. Each page should say how you treat it and what the visit involves.'],
       ['Can the texts be discreet?', 'Yes. Every message is written with you, so they can say who is coming and when without naming the pest or the problem.'],
@@ -374,7 +374,7 @@ module.exports = [
       ['review-requests', 'People handing over everything they own read reviews carefully, so asking every customer once they are in the new house is worth it.'],
     ],
     demos: ['crm-board', 'booking'],
-    builds: [27, 2, 29, 3],
+    builds: [16, 14, 15],
     faq: [
       ['What if the customer’s completion date changes?', 'You move the booking to the new date. Your rules decide what happens to the deposit if the date changes or the move falls through, and the booking page says so before they pay.'],
       ['Can people book a video survey online?', 'Yes. They choose the survey type and a free slot from your diary, and the survey lands in your diary with both addresses and their notes.'],
@@ -401,7 +401,7 @@ module.exports = [
       ['missed-call-text-back', 'With your hands under a car you cannot pick up, and a text back with the booking link turns the call into a slot on the ramp.'],
     ],
     demos: ['booking'],
-    builds: [24, 32, 4],
+    builds: [12, 18, 16],
     faq: [
       ['Can customers book an MOT online and pick a time?', 'Yes. They choose the MOT or service, then a free slot on your ramp, and give their registration. Taken slots disappear, so the ramp is never double booked.'],
       ['Will it remind customers when their MOT is due?', 'Yes. The due date is saved when the car comes in, and the customer gets a text before it with a link to book, plus a single nudge closer to the date. You can start from your existing customer list.'],
@@ -428,7 +428,7 @@ module.exports = [
       ['service-reminders', 'Once you have serviced a car you know when the next one is due, and a reminder brings the customer back to you rather than to a garage.'],
     ],
     demos: ['missed-call', 'booking'],
-    builds: [29, 24, 15, 32],
+    builds: [15, 12, 13, 18],
     faq: [
       ['Can customers book a mobile mechanic online?', 'Yes. They enter the registration, choose the job or describe the fault, and give the address where the car will be. Only the slots you open are offered, and postcodes outside your area are turned away politely before they reach you.'],
       ['Can a mobile mechanic do an MOT?', 'No. An MOT has to be carried out at an approved test centre. Many mobile mechanics collect the car, take it for its test and bring it back, and if you offer that, the website should say so.'],
@@ -455,7 +455,7 @@ module.exports = [
       ['review-requests', 'The car never looks better than the day it is handed back, and asking for a Google review then catches that moment.'],
     ],
     demos: ['booking', 'missed-call'],
-    builds: [14, 15, 26],
+    builds: [15, 13, 17],
     faq: [
       ['Should a car detailer take deposits?', 'For the long jobs, yes. A deposit at booking holds the day, your terms are shown before anyone pays, and it can come off the final price. Shorter valets can be booked without one if you prefer.'],
       ['How do customers book the right package for their car?', 'The booking asks for the size of the car first, then shows each package at the length and price you set for that size. The customer sees what they will pay before they pick a time.'],
@@ -482,7 +482,7 @@ module.exports = [
       ['on-my-way-texts', 'A text when you set off tells the pupil to be at the door, so the lesson does not start with you waiting outside.'],
     ],
     demos: ['missed-call', 'booking'],
-    builds: [14, 29, 25],
+    builds: [15, 14],
     faq: [
       ['Can pupils book and pay for driving lessons online?', 'Yes. They pick a slot from the times you open, pay for a single lesson or a block, and get a confirmation and a reminder. When a block is nearly used up, the pupil is reminded to book the next one.'],
       ['Should I show my ADI number on my website?', 'Yes. Learners and parents want to know they are paying a fully qualified instructor, and your ADI number and DVSA approval on the page answer that before they ask.'],
@@ -509,7 +509,7 @@ module.exports = [
       ['missed-call-text-back', 'With a client in the chair you cannot answer, so the caller gets your booking page by text and books instead of ringing the next salon.'],
     ],
     demos: ['booking'],
-    builds: [33, 16, 14],
+    builds: [15],
     faq: [
       ['Can clients choose their stylist when they book?', 'Yes. They pick the stylist first, then the service and a time that stylist has free. Each service takes the time you set, so a trim and a full colour are never squeezed into the same slot.'],
       ['What about walk-ins at a barbers?', 'The site says when you take walk-ins and when you take bookings, and the booking page only shows the times you want booked. Walk-in hours stay walk-in.'],
@@ -536,7 +536,7 @@ module.exports = [
       ['review-requests', 'Clients deciding who to trust with their face read reviews closely, so asking every client after their treatment matters more here than almost anywhere.'],
     ],
     demos: ['booking'],
-    builds: [33, 14, 26],
+    builds: [15, 17],
     faq: [
       ['Can you run Facebook ads for anti-wrinkle injections?', 'Not for the injections themselves. Botulinum toxin is a prescription-only medicine, and UK advertising rules do not allow it to be promoted to the public, including on social media. Ads can promote a consultation with you instead, and the landing page keeps to the same rules.'],
       ['Should consultations be booked separately from treatments?', 'Yes, for anything that needs one. New clients book a consultation first, and the treatment is booked once you have agreed it is right for them. Returning clients can book treatments directly.'],
@@ -563,7 +563,7 @@ module.exports = [
       ['missed-call-text-back', 'With a client’s hand in yours you cannot answer, so the caller gets a text with your booking link instead of a voicemail.'],
     ],
     demos: ['booking', 'missed-call'],
-    builds: [33, 14, 26],
+    builds: [15, 17],
     faq: [
       ['Can clients book from my Instagram?', 'Yes. Your booking link goes in your bio and in your replies, and it opens your own booking page with your treatments, your times and your deposit, so someone who finds you through a photo can book without waiting for you to reply.'],
       ['Should a nail technician take a deposit?', 'For the longer treatments it is worth it. The client pays when they book, sees your cancellation policy before they do, and a no-show is covered by the rules you set instead of costing you the slot.'],
@@ -590,7 +590,7 @@ module.exports = [
       ['service-reminders', 'Patients who manage a long-term problem with regular check-ins are texted when the next one comes round, so they book before it flares up again.'],
     ],
     demos: ['booking'],
-    builds: [22, 14, 28],
+    builds: [10, 15, 14],
     faq: [
       ['Should my website say patients can self-refer?', 'Yes, plainly and near the top. People who have never seen a physio often assume they need their GP first, and it is one of the first things they check.'],
       ['Can patients book a specific physio?', 'Yes. They choose the appointment type and the clinician, then a time that clinician has free. A first assessment can be set to take longer than a follow-up.'],
@@ -617,7 +617,7 @@ module.exports = [
       ['review-requests', 'People choose a therapist on trust, and a review request the day after a treatment catches clients while they can still feel the difference.'],
     ],
     demos: ['booking', 'missed-call'],
-    builds: [22, 14, 26],
+    builds: [10, 15, 17],
     faq: [
       ['Can clients fill in a health form before their massage?', 'Yes. The form goes out with the confirmation for a first appointment and the answers are saved against the client, so you read them before they arrive and they only update them when something changes.'],
       ['Can I offer home visits as well as a treatment room?', 'Yes. A home visit is its own kind of booking: it asks for the address, adds travel time either side, and only appears on the days you choose to go out.'],
@@ -644,7 +644,7 @@ module.exports = [
       ['missed-call-text-back', 'When every line is busy, the caller is texted a way to book their check-up online instead of being left to try again later.'],
     ],
     demos: ['booking'],
-    builds: [22, 33, 25],
+    builds: [10, 15, 14],
     faq: [
       ['Should the website say if we are not taking NHS patients?', 'Yes. It is the first thing people want to know, and saying it clearly spares your reception the same call all day. If you are taking private patients, say how to register.'],
       ['Can check-up recalls go by text?', 'Yes. Each patient’s next check-up date is saved when they are seen, and a recall text goes out before it so they can pick a time online. Anyone who does not book gets one reminder closer to the date.'],
@@ -671,7 +671,7 @@ module.exports = [
       ['review-requests', 'Asking after a trial or a first PT session catches people while that first good workout is still fresh.'],
     ],
     demos: ['booking'],
-    builds: [19, 16, 14],
+    builds: [7, 15],
     faq: [
       ['Can people book a free trial online?', 'Yes. They pick a trial or induction slot from the times you open, leave their details, and get a confirmation and a reminder. It lands in your diary like any other booking.'],
       ['Can the website take membership payments?', 'The booking system takes deposits on sessions such as personal training. Recurring memberships usually stay in the membership software you already use, and the site links to it clearly.'],
@@ -698,7 +698,7 @@ module.exports = [
       ['review-requests', 'Asking once the tattoo has healed, when the customer is showing it off, brings the review in while they are proudest of it.'],
     ],
     demos: ['booking', 'crm-board'],
-    builds: [20, 28, 33],
+    builds: [8, 14, 15],
     faq: [
       ['Should a tattoo studio take deposits online?', 'Yes, for anything booked in advance. The customer pays when they pick the date, your policy is shown before they pay, and the deposit can come off the price on the day. It stops dates being held by people who never turn up.'],
       ['Can enquiries from Instagram and the website land in one place?', 'Yes. The link in your bio and the website both open the same enquiry form, so every request arrives with the idea, size, placement and photos attached, and sits on the CRM board until it is booked or turned down.'],
@@ -725,7 +725,7 @@ module.exports = [
       ['missed-call-text-back', 'With a dog on the table and clippers in your hand you cannot answer, so the caller gets a text with the booking link instead of a voicemail.'],
     ],
     demos: ['booking', 'missed-call'],
-    builds: [33, 14, 26],
+    builds: [15, 17],
     faq: [
       ['Can owners book a dog groom online?', 'Yes. They choose the service and give the breed, size and coat, and the booking only offers slots long enough for that dog. New customers fill in the first-visit form at the same time, so you know the dog before it arrives.'],
       ['Can regulars be rebooked automatically?', 'Yes. When a groom is finished, the next one is offered at the interval you set for that dog, and if the owner has not booked, a reminder goes out with a link to the next free slot.'],
@@ -752,7 +752,7 @@ module.exports = [
       ['review-requests', 'Owners pick a walker on trust, and reviews from other owners nearby are what get you the first meet-and-greet.'],
     ],
     demos: ['booking', 'missed-call'],
-    builds: [36, 29, 14],
+    builds: [18, 15],
     faq: [
       ['Can owners book dog walks online?', 'Yes. New owners book a meet-and-greet first, and once you have taken a dog on, its owner books regular walks, extra walks and holiday cover from the same page, only into the times you have open.'],
       ['Do I need a website if I get dogs through an app?', 'An app lists you beside every other walker nearby. Your own website is where an owner who has heard of you can read about you, see the area you cover and book a meet-and-greet with you directly.'],
@@ -779,7 +779,7 @@ module.exports = [
       ['missed-call-text-back', 'You cannot answer in the middle of a class, so the caller gets a text with your courses and booking link while they are still deciding.'],
     ],
     demos: ['booking', 'crm-board'],
-    builds: [19, 14, 26],
+    builds: [7, 15, 17],
     faq: [
       ['Can owners book a place on a puppy course online?', 'Yes. Each course has its start date, number of weeks and number of places, owners pay when they book, and the course closes itself when it is full and opens a waiting list for the next one.'],
       ['Can I take enquiries about behaviour problems as well as bookings?', 'Yes. A one-to-one enquiry asks about the dog and the problem first, so you can read it before you reply and offer the right session, and each enquiry is tracked until it is booked or closed.'],
@@ -806,7 +806,7 @@ module.exports = [
       ['review-requests', 'Asking a few weeks into a block catches clients when they first notice the difference, and reviews from people like them are what convince the next one.'],
     ],
     demos: ['booking', 'missed-call'],
-    builds: [19, 22, 14],
+    builds: [7, 10, 15],
     faq: [
       ['Should a personal trainer take payment up front?', 'For blocks and regular sessions, yes. Clients pay when they book, your cancellation policy is shown before they do, and a session cancelled inside your notice period is covered by the rules you set rather than lost.'],
       ['Do I need a website if I find clients on Instagram?', 'Instagram shows your work, but a website is where someone ready to start can read about you, check your qualifications and book a consultation without waiting for a reply. It is also what turns up when people search for a trainer near them.'],
@@ -833,7 +833,7 @@ module.exports = [
       ['review-requests', 'Parents choose tutors on recommendation, and a review asked for after a good report or results day is the one the next parent trusts.'],
     ],
     demos: ['booking', 'crm-board'],
-    builds: [14, 29, 28],
+    builds: [15, 14],
     faq: [
       ['Can parents book tutoring lessons online?', 'Yes. Parents choose the subject and the kind of lesson, then pick from the times you have open, and a first lesson comes with a short form about the student so you know where to start.'],
       ['Can lessons be paid for in advance?', 'Yes. Parents pay when they book, for a single lesson or a block, and see your cancellation policy before they do, so a late cancellation follows the rules you set.'],
@@ -860,7 +860,7 @@ module.exports = [
       ['review-requests', 'Diners decide on reviews, and a request after a booked meal reaches the guest while the evening is still fresh.'],
     ],
     demos: ['booking'],
-    builds: [34, 14, 26],
+    builds: [15, 17],
     faq: [
       ['Do I need my own booking page if I already use a booking platform?', 'It is worth having. A booking on your own site comes straight to you with the guest’s details, and you set the deposit rules. Whether you keep the platform as well is up to you.'],
       ['Should the menu be a PDF?', 'No. A PDF is slow on a phone and hard for Google and AI assistants to read. A menu written as text loads fast, is easy to update and can show up when people search for a dish nearby.'],
@@ -887,7 +887,7 @@ module.exports = [
       ['review-requests', 'Walk-in customers leave no number, but booked teas and cake orders do, and those are the customers to ask.'],
     ],
     demos: ['booking'],
-    builds: [11, 26, 14],
+    builds: [17, 15],
     faq: [
       ['Does a café really need a website?', 'If people find you on Google Maps, the website is where they check the menu, whether you take dogs and whether you are open. It also gives Google and AI assistants the facts they need to answer those questions about you.'],
       ['Can customers order cakes online?', 'Yes. They choose the cake and a collection slot and pay a deposit, and the order lands in your diary with their notes. Larger or custom orders can come in as an enquiry for you to price.'],
@@ -914,7 +914,7 @@ module.exports = [
       ['review-requests', 'People choosing an accountant look for others in their position, so a review after the first year’s accounts, in the client’s own words, carries weight.'],
     ],
     demos: ['crm-board', 'booking'],
-    builds: [21, 6, 2, 4],
+    builds: [9, 14, 16],
     faq: [
       ['Can prospects book a discovery call straight into my diary?', 'Yes. They pick a free slot, say what they need help with, and get a confirmation and a reminder. The call lands in your diary and on the CRM board, ready for the proposal afterwards.'],
       ['Can it chase clients for their records before the deadline?', 'Yes. Each client’s next deadline is saved, and ahead of it they get a text listing what you need from them. If nothing arrives, a second text goes out closer to the date.'],
@@ -941,7 +941,7 @@ module.exports = [
       ['review-requests', 'Asking at the end of a matter, when the sale has completed or the estate is settled, brings reviews that speak to how well clients felt looked after.'],
     ],
     demos: ['crm-board', 'booking'],
-    builds: [28, 2],
+    builds: [14],
     faq: [
       ['Does our website need the SRA badge?', 'If you are regulated by the SRA, yes. The Transparency Rules require the SRA digital badge on your website, along with price and service information for certain services and details of how to complain, and your compliance officer signs off the wording before anything goes live.'],
       ['Is a missed-call text appropriate for a law firm?', 'Yes, if the wording is right. The message is written with you, says only that you missed their call and how to book or reply, and never mentions the matter.'],
@@ -968,7 +968,7 @@ module.exports = [
       ['review-requests', 'Projects take months, and a review at completion from a client who lived through it tells the next client what working with you is really like.'],
     ],
     demos: ['crm-board', 'booking'],
-    builds: [7, 2, 28],
+    builds: [1, 14],
     faq: [
       ['I’m not ARB registered. What should my site call me?', 'Not an architect: in the UK the title is protected, and only people on the ARB register can use it. Architectural designer or architectural technologist describe the work honestly, and the site can make the most of either.'],
       ['Should I show drawings or only finished photos?', 'Both. Finished photos show the result, but plans and sketches show how you think, which is what a client is really hiring. They also make your site look like nobody else’s.'],
@@ -995,7 +995,7 @@ module.exports = [
       ['review-requests', 'People choosing a broker want to hear from others in their position, and a review asked for at completion is written while the relief is fresh.'],
     ],
     demos: ['booking'],
-    builds: [5, 2, 14],
+    builds: [13, 14, 15],
     faq: [
       ['Can my network sign off the website before it goes live?', 'Yes. Every page and every ad can go to your network or compliance team first, and nothing is published until they approve it. I build the time for that into the plan.'],
       ['Can it remind clients before their fixed rate ends?', 'Yes. Each client’s product end date is saved, and they get a text ahead of it with a link to book a review. A client who does not book gets a single follow-up.'],
@@ -1022,7 +1022,7 @@ module.exports = [
       ['on-my-way-texts', 'A text before a valuation or a viewing, saying who is coming and when, is the first sign of how you will handle the sale.'],
     ],
     demos: ['booking', 'crm-board'],
-    builds: [28, 2, 26],
+    builds: [14, 17],
     faq: [
       ['Do I need a website when everything is on the portals?', 'Buyers find houses on the portals, but sellers and landlords choose an agent, and they check your website when they do. It is the page that wins instructions, so it is the one to build properly.'],
       ['What does a letting agent have to show on its website?', 'In England, letting agents must publish their fees, the redress scheme they belong to and, if they hold client money, their client money protection scheme. I build those in from the start, and your own compliance checks have the final say.'],
@@ -1049,7 +1049,7 @@ module.exports = [
       ['review-requests', 'Asking when the final film or gallery is delivered catches clients at the moment they are most pleased with it.'],
     ],
     demos: ['crm-board', 'booking'],
-    builds: [17, 18, 4],
+    builds: [5, 6, 16],
     faq: [
       ['Will a showreel slow my site down?', 'Not if it is built properly. The video loads only when someone presses play, with a still frame in its place until then, so the page is quick even on a weak signal.'],
       ['Can I take a booking fee to hold a date?', 'Yes. Once you have agreed the job, the client pays the booking fee online, the date is marked as theirs, and the fee comes off the final invoice.'],
@@ -1076,7 +1076,7 @@ module.exports = [
       ['service-reminders', 'The Christmas party, the summer social and the annual conference come round every year, and a reminder to last year’s client gets you asked first.'],
     ],
     demos: ['crm-board', 'booking'],
-    builds: [10, 27, 2],
+    builds: [4, 16, 14],
     faq: [
       ['Can the enquiry form ask for the date, venue and guest numbers?', 'Yes, and it should. Those are the details you need to price the job or say you are already booked, so asking for them up front saves a round of emails.'],
       ['Can it remind last year’s corporate clients?', 'Yes. When an annual event is done, next year’s date is saved, and the client gets a message well ahead of it asking whether they would like to book again.'],

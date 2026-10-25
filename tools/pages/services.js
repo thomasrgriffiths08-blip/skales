@@ -69,6 +69,16 @@ const faqPanel = (qs, h2) => `<section class="panel faq" id="faq">
     </div>
   </div>
 </section>`;
+/* the missed-call calculator: three sliders, the working printed under the answer, every assumption named */
+const calcPanel = () => panel('Your numbers', 'What missed calls cost', `<h2>What are missed calls costing you?</h2>
+<form class="calc" id="calc" novalidate>
+  <label class="cl-row"><span class="cl-l">Calls you miss in a week</span><output class="cl-v" for="clMiss" id="clMissV">5</output><input type="range" id="clMiss" min="0" max="30" step="1" value="5"></label>
+  <label class="cl-row"><span class="cl-l">What a typical job is worth</span><output class="cl-v" for="clJob" id="clJobV">£250</output><input type="range" id="clJob" min="0" max="40" step="1" value="8"></label>
+  <fieldset class="cl-row cl-seg"><legend class="cl-l">Of those callers, how many would have booked?</legend><div class="cl-opts"><label><input type="radio" name="clRate" value="0.25"><span>1 in 4</span></label><label><input type="radio" name="clRate" value="0.333" checked><span>1 in 3</span></label><label><input type="radio" name="clRate" value="0.5"><span>1 in 2</span></label></div></fieldset>
+  <div class="cl-out" aria-live="polite"><p class="cl-big"><span id="clMonth">£1,400</span> a month</p><p class="cl-sub">goes to whoever answers next. That is <b id="clYear">£16,800</b> a year.</p><p class="cl-work" id="clWork"></p></div>
+  <a class="btn btn-live" href="{{b}}start/?utm_source=site&amp;utm_medium=calculator">Book a call about it</a>
+</form>
+<noscript><p>The calculator needs JavaScript. The sum is simple: missed calls a week × 4.3 weeks × the share who would have booked × what a job is worth.</p></noscript>`, ' id="cost"');
 const tryCards = (b, slugs, h = 'Try it on your phone') => !slugs.length ? '' : `<section class="sec" id="try" aria-labelledby="h-try">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-try">${esc(h)}</h2><p class="lead">Live demos with a made-up business. You play the customer, then see what the business sees. About a minute each.</p></div>
@@ -88,7 +98,7 @@ const autoCards = (b, slugs, h) => !slugs.length ? '' : `<section class="sec" id
   </div>
 </section>`;
 const ctaRow = (b, demos, medium, slug) => `<div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a>${demos.length ? `<a class="btn btn-ghost" href="${b}try/${demos[0]}/">Try the demo</a>` : `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">See what you’re missing</a>`}</div>`;
-const band = (b, medium, slug) => L.ctaBand(b, 'Want this working for your business?', 'Book a call and I’ll look at your business with you, or take the 60-second check first and see what you’re missing.', `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">Take the 60-second check</a>`);
+const band = (b, medium, slug) => L.ctaBand(b, 'Want this working for your business?', 'A free 30-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.', `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">Book in three taps</a>`);
 const fill = (html, b) => html.replace(/\{\{b\}\}/g, b);
 
 /* ---------- the ad previews on the two ads pages (a made-up business, labelled) ---------- */
@@ -131,13 +141,14 @@ const adSection = (s) => {
 };
 
 /* the live widgets from the old /what-i-do/ page, kept on the pages they prove (assets/systems.js) */
-const turnoverRig = b => { const t = B(13); return `<section class="sec sec-alu" id="see" aria-labelledby="h-see">
+/* the before-and-after is not one of the builds any more, so it is framed by its address */
+const turnoverRig = b => { const t = { name: 'Turnover', slug: 'turnover', c: '#C77D2B' }; return `<section class="sec sec-alu" id="see" aria-labelledby="h-see">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-see">The same firm, before and after.</h2><p class="lead">A made-up roofing firm’s 2011 website on one side and its rebuild on the other. Drag the tape line across.</p></div>
     <div class="rig rig-solo" style="--chan:${t.c}">
       <div class="stage">
-        <div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><b>${esc(t.name)}</b> &middot; before and after a rebuild</span><a class="pop" href="${b}work/${t.slug}/">Its page</a></div>
-        <div class="viewport vp-short" data-solo="${t.slug}"><div class="boot">Loading</div></div>
+        <div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><b>${esc(t.name)}</b> &middot; before and after a rebuild</span><a class="pop" href="${b}demos/${t.slug}/#s=1" target="_blank" rel="noopener">Full screen</a></div>
+        <div class="viewport vp-short" data-solo="${t.slug}" data-src="demos/${t.slug}/#s=1" data-title="${esc(t.name)}"><div class="boot">Loading</div></div>
       </div>
     </div>
   </div>
@@ -193,7 +204,7 @@ ${L.header(b, 'services')}
   <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(s.h1)}</h1>
-  <p class="lead answer">${esc(s.answer)}</p>
+  ${L.fold(s.answer, 'lead answer')}
   ${ctaRow(b, s.demos, 'services', s.slug)}
   </div>
   ${hx ? L.heroPhone(b, hx) : ''}
@@ -292,12 +303,13 @@ ${L.header(b, 'services')}
   <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(a.h1)}</h1>
-  <p class="lead answer">${esc(a.answer)}</p>
+  ${L.fold(a.answer, 'lead answer')}
   ${ctaRow(b, a.demos, 'automations', a.slug)}
   </div>
   ${hx ? L.heroPhone(b, hx) : ''}
 </section>
-${panel('Why it matters', esc(a.name), `<h2>Why does it matter?</h2><p class="lead">${esc(a.why)}</p>`)}
+${panel('Why it matters', esc(a.name), `<h2>Why does it matter?</h2>${L.fold(a.why)}`)}
+${a.slug === 'missed-call-text-back' ? fill(calcPanel(), b) : ''}
 ${panel('How it works', 'Step by step', `<h2>How does ${esc(a.name.toLowerCase())} work?</h2><ol class="steps">${a.steps.map(([n, t]) => `<li><b>${esc(n)}.</b> ${esc(t)}</li>`).join('')}</ol>`, ' id="how"')}
 ${panel('The message', 'What the customer gets', `<h2>What does the text say?</h2><div class="msg"><p class="msg-b">${esc(a.message)}</p><span class="msg-n">An example for Larchfield Heating, a made-up business. Yours is written with you, in your words.</span></div>`)}
 ${panel('What it needs', 'From you', `<h2>What does it need from me?</h2><ul class="feat">${a.needs.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`)}
@@ -310,7 +322,7 @@ ${fill(faqPanel(a.faq, `${a.name}: questions people ask`), b)}
 </main>
 ${band(b, 'automations', a.slug)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css', ...(hx ? ['hero-phone.css'] : [])], nodes }), body, L.scripts(b, hx ? ['hero-phone.js'] : []));
+    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css', ...(hx ? ['hero-phone.css'] : [])], nodes }), body, L.scripts(b, [...(hx ? ['hero-phone.js'] : []), ...(a.slug === 'missed-call-text-back' ? ['calc.js'] : [])]));
   },
 });
 
@@ -360,7 +372,7 @@ ${L.header(b, 'services')}
 <section class="hero-w wrap">
   ${crumbs(b, cr)}
   <h1>${esc(c.h1)}</h1>
-  <p class="lead answer">${esc(c.answer)}</p>
+  ${L.fold(c.answer, 'lead answer')}
 </section>
 <section class="sec sec-alu" aria-labelledby="h-cmp">
   <div class="wrap">

@@ -1,5 +1,5 @@
 /* /try/ — the live demos. Each one runs in the browser, takes about a minute, is labelled as a demo
-   with a pretend phone, and ends in the same two places: the 60-second check on /start or the call.
+   with a pretend phone, and ends in the same place: the call, booked in three taps on /start.
    One page per demo so each can rank and be shared. The demo logic lives in assets/try-*.js. */
 const L = require('../lib.js');
 const { site, esc } = L;
@@ -285,8 +285,8 @@ ${L.header(b, 'try')}
       <h2 tabindex="-1" id="endH"></h2>
       <p id="endP"></p>
       <div class="tm-acts">
-        <a class="btn btn-live" data-cta="check" href="${b}start/?${camp}">See what I’m missing <small>60 seconds</small></a>
-        <a class="btn btn-ghost" data-cta="call" href="${b}start/?${camp}#book">Book a call</a>
+        <a class="btn btn-live" data-cta="call" href="${b}start/?${camp}">Book a free call</a>
+        <a class="btn btn-ghost" data-cta="work" href="${b}work/">See the builds</a>
       </div>
       <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/${next.slug}/">Next: ${esc(next.name)} <span aria-hidden="true">→</span></a></p>
     </div>

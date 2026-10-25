@@ -1,0 +1,28 @@
+{
+  "n": 18,
+  "slug": "reminders",
+  "file": "demos/reminders/index.html",
+  "kind": "tool",
+  "lane": "system",
+  "trade": "Any service business",
+  "name": "Reminders that rebook",
+  "biz": "Six made-up service businesses",
+  "c": "#B04A24",
+  "pg": "#F6F6F4",
+  "short": "Yearly services, MOTs and regular cuts remind the customer and book themselves.",
+  "long": "Repeat work comes round on its own: the boiler service, the MOT, the six-weekly cut. The customer gets a reminder before it is due and books from the link; the booking drops into the diary without a phone call.",
+  "proves": "Last year’s customers come back before they search.",
+  "tags": [
+    "Due dates",
+    "Reminder texts",
+    "Rebooked jobs"
+  ],
+  "features": [
+    "Everything due, sent and booked, in one list",
+    "Reminders sent two, three or four weeks ahead",
+    "Customers book from the reminder, straight into the diary",
+    "The repeat work booked this year, counted"
+  ],
+  "story": "Repeat work is the cheapest work there is, and most firms leave it to a leaflet. This sends the reminder for them.",
+  "start": "reminders"
+}

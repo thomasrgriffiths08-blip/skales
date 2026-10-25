@@ -3,7 +3,7 @@ const L = require('../lib.js');
 const CREDITS = require('../../data/photo-credits.js');
 const { site, builds, esc, pad, LANES, SITE_LANES, TOOL_LANES, laneOf, kindWord, Words } = L;
 
-const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
+const SITES = builds.filter(x => x.kind === 'site');
 const FIRST = [...SITE_LANES, ...TOOL_LANES].map(k => builds.filter(x => x.lane === k).sort((a, z) => a.n - z.n)[0]).find(Boolean);
 const inLane = k => builds.filter(x => x.lane === k);
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
@@ -21,20 +21,21 @@ const laneSection = (b, k, { question = false } = {}) => {
   </div>
 </section>`;
 };
-/* the demos page opens on four builds shown big: two tools on a laptop-shaped screen, two websites on a phone */
-const PICKS = ['ringsback', 'kerb-and-camber', 'southpaw', 'slate'].map(s => builds.find(x => x.slug === s)).filter(Boolean);
-const pick = (b, x) => {
-  const wide = x.kind === 'tool', steps = (x.show || []).map(s => s.say).filter(Boolean).slice(0, 3);
-  return `<a class="pick${wide ? ' is-wide' : ''}" href="${b}work/${x.slug}/" data-view="${x.slug}" style="--pc:${x.c}">
-    <span class="pick-stage"><span class="shell"><img src="${L.clipSrc(b, x, 'webp')}" width="${wide ? 1280 : 600}" height="${wide ? 800 : 1077}" alt="${esc(x.name)} ${wide ? 'on a laptop' : 'on a phone'}: ${esc(x.short)}" loading="lazy" decoding="async"><video muted playsinline preload="none" data-src="${L.clipSrc(b, x, 'mp4')}" aria-hidden="true"></video></span></span>
-    <span class="pick-cap">
-      <span class="pick-for">${esc(kindWord(x))} for a made-up ${esc((x.trade || x.biz).replace(/^Any /, 'any ').toLowerCase())}</span>
-      <b>${esc(x.name)}</b>
-      <span class="pick-short">${esc(x.short)}</span>
-      ${steps.length ? `<ol class="try">${steps.map(t => `<li>${esc(t)}</li>`).join('')}</ol>` : ''}
-      <span class="pick-go">Try it <span aria-hidden="true">&rarr;</span></span>
-    </span>
-  </a>`;
+/* the system: the live app on a laptop-shaped screen, its parts beside it, and the six businesses it is set up for */
+const PARTS = builds.filter(x => x.lane === 'system');
+const BIZ = [['heating', 'Larchfield Heating', 'Plumbing and heating'], ['electrical', 'Kestrel Electrical', 'Electrician'], ['garage', 'Kerb & Camber', 'Garage and MOT'], ['salon', 'Linden Rooms', 'Hair salon'], ['cleaning', 'Brightwell Cleaning', 'Cleaning'], ['clinic', 'Fern Physio', 'Physio clinic']];
+const sysBlock = b => {
+  const main = PARTS.find(x => x.slug === 'system'), rest = PARTS.filter(x => x !== main);
+  if (!main) return '';
+  return `<div class="sys-rig">
+      <a class="sys-main" href="${b}work/${main.slug}/" data-view="${main.slug}">
+        <span class="shell"><picture><source media="(max-width: 640px)" srcset="${L.phoneSrc(b, main)}" width="585" height="1266"><img src="${L.clipSrc(b, main, 'webp')}" width="1280" height="800" alt="${esc(main.name)}: ${esc(main.short)}" loading="lazy" decoding="async"></picture><video muted playsinline preload="none" data-src="${L.clipSrc(b, main, 'mp4')}" aria-hidden="true"></video></span>
+        <span class="sys-cap"><b>Open the system</b><span>${esc(main.short)}</span></span>
+      </a>
+      <div class="sys-biz"><p>Open it as one of six made-up businesses:</p><div>${BIZ.map(([k, n, t]) => `<a href="${b}demos/system/?t=${k}#s=1" target="_blank" rel="noopener"><b>${esc(n)}</b><span>${esc(t)}</span></a>`).join('')}</div></div>
+    </div>
+    <h3 class="sys-h">The six parts</h3>
+    ${L.wall(b, rest, 'wall-3')}`;
 };
 /* a lane: its name and who it is for beside (websites) or above (tools) its builds */
 const laneRow = (b, k) => {
@@ -44,18 +45,14 @@ const laneRow = (b, k) => {
       ${L.wall(b, list, l.kind === 'site' ? 'wall-3' : '')}
     </div>`;
 };
-const tradeOptions = () => {
-  const have = new Set(builds.map(L.tradeKey));
-  return L.TRADES.filter(([k]) => have.has(k)).map(([k, name]) => `<option value="${k}">${esc(name)}</option>`).join('');
-};
 
 /* ---------- /work/ : everything ---------- */
 const gallery = {
   url: '/work/', og: 'work', priority: 0.9, changefreq: 'weekly',
-  meta: { key: 'work', title: `${Words(builds.length)} builds. All of them running.`, kicker: `Work · ${builds.length} live examples`, sub: `${SITES.length} websites and ${TOOLS.length} tools, every one open to use.` },
+  meta: { key: 'work', title: `${Words(SITES.length)} websites. One system behind them.`, kicker: `Work · every one running live`, sub: `${SITES.length} full websites and the system that answers, books and follows up.` },
   render(b){
-    const title = `Work — ${builds.length} live websites & business tools | ${site.name}`;
-    const description = `${Words(builds.length)} example websites and tools for service businesses, running live: ${SITES.length} full websites in four lanes and ${TOOLS.length} tools, from booking and quotes to a window cleaner's round.`.slice(0, 158);
+    const title = `Work: ${SITES.length} live websites and the system behind them | ${site.name}`.length <= 60 ? `Work: ${SITES.length} live websites and the system behind them | ${site.name}` : `Work: ${SITES.length} websites and one system | ${site.name}`;
+    const description = `${Words(SITES.length)} full websites for made-up service businesses, running live, and the system behind them: missed-call text-back, booking with deposits, quotes, reviews and reminders.`.slice(0, 158);
     const nodes = [
       L.webPage({ path: '/work/', title, description, type: 'CollectionPage' }),
       L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }]),
@@ -65,35 +62,22 @@ const gallery = {
 ${L.header(b, 'work')}
 <main id="main">
 <section class="hero-w wrap work-hero">
-  <h1>${Words(builds.length)} builds.<br>All of them running.</h1>
-  <p class="lead">${SITES.length} full websites and ${TOOLS.length} business tools for service businesses, each made for an invented business so no client is on show. Tap any of them to use it full screen. Not sure what to press? It shows you.</p>
-  <div class="cta-row" style="margin-top:28px;align-items:center"><button type="button" class="btn btn-dark" data-view="${FIRST.slug}">Flick through all ${builds.length}</button><span class="hint-inline">Full screen, one at a time. Arrow keys work.</span></div>
+  <h1>${Words(SITES.length)} websites.<br>One system behind them.</h1>
+  <p class="lead">${Words(SITES.length)} full websites, each built differently for a different kind of business, and the one system that answers the phone, books the job and follows up. Every business is made up, so no client is on show. Tap any of them to use it.</p>
+  <div class="cta-row" style="margin-top:28px;align-items:center"><button type="button" class="btn btn-dark" data-view="${FIRST.slug}">Flick through them all</button><span class="hint-inline">Full screen, one at a time. Arrow keys work.</span></div>
+  <nav class="work-jump" aria-label="On this page"><a href="#websites"><b>The websites</b><span>${SITES.length} sites, four kinds</span></a><a href="#system"><b>The system</b><span>One app, six parts</span></a></nav>
 </section>
-<section class="picks wrap" aria-labelledby="h-picks">
-  <div class="picks-head"><h2 id="h-picks">Start with these four</h2><p>Two tools and two websites that show the range. Each card plays what the build does; tap it to try it yourself.</p></div>
-  <div class="picks-rows">
-    <div class="picks-row">${pick(b, PICKS[0])}${pick(b, PICKS[1])}</div>
-    <div class="picks-row flip">${pick(b, PICKS[2])}${pick(b, PICKS[3])}</div>
-  </div>
-</section>
-<div class="wrap wbar-wrap" id="all">
-  <div class="wbar" role="group" aria-label="Filter builds">
-    <div class="wkinds"><button type="button" data-f="all" aria-pressed="true">All <span class="n">${builds.length}</span></button><button type="button" data-f="site" aria-pressed="false">Websites <span class="n">${SITES.length}</span></button><button type="button" data-f="tool" aria-pressed="false">Tools <span class="n">${TOOLS.length}</span></button></div>
-    <label class="wtrade"><span>Your trade</span><select id="tradeSel"><option value="">Any trade</option>${tradeOptions()}</select></label>
-  </div>
-  <p class="trade-note" id="tradeNote" aria-live="polite" hidden></p>
-</div>
 <div id="wall">
 <section class="kindsec" id="websites" data-kindsec="site" aria-labelledby="h-websites">
   <div class="wrap">
-    <div class="khead"><h2 id="h-websites">Websites</h2><p>${Words(SITES.length)} full websites in four lanes. A boxing club and an accountant should not get the same site, so the lane comes first: how loud it is, how much moves, how fast it gets to the phone number. <a class="lnk" href="${b}work/websites/">How the lanes work</a></p></div>
+    <div class="khead"><h2 id="h-websites">The websites</h2><p>A boxing club and an accountant should not get the same site. Each of these is a complete website for one kind of business, with its own look, its own pages and its own way of getting the phone to ring. They are grouped by how loud they are. <a class="lnk" href="${b}work/websites/">How to pick yours</a>.</p></div>
     <div class="lrows">${SITE_LANES.map(k => laneRow(b, k)).join('\n    ')}</div>
   </div>
 </section>
-<section class="kindsec" id="tools" data-kindsec="tool" aria-labelledby="h-tools">
+<section class="kindsec" id="system" data-kindsec="tool" aria-labelledby="h-system">
   <div class="wrap">
-    <div class="khead"><h2 id="h-tools">Tools</h2><p>Software that sits between the customer and the diary. Broad tools fit any business that takes enquiries; specific ones are built around one trade&rsquo;s day. <a class="lnk" href="${b}work/tools/">More on the tools</a></p></div>
-    ${TOOL_LANES.map(k => laneRow(b, k)).join('\n    ')}
+    <div class="khead"><h2 id="h-system">The system</h2><p>Behind every website: one app for the whole business. A missed call gets a text back in seconds, the customer books and pays a deposit, quotes chase themselves, reviews and repeat work ask for themselves, and you can see which ad booked which job. It is the real thing, not a video, so press around.</p></div>
+    ${sysBlock(b)}
   </div>
 </section>
 </div>
@@ -131,53 +115,9 @@ ${L.header(b, 'websites')}
 </section>
 ${SITE_LANES.map(k => laneSection(b, k, { question: true })).join('')}
 </main>
-${L.ctaBand(b, 'Not sure which lane you are?', 'Book a short call. You will hear which kind of site your customers actually respond to, and whether you need one at all.', `<a class="btn btn-ghost" href="${b}work/tools/">See the tools instead</a>`)}
+${L.ctaBand(b, 'Not sure which lane you are?', 'Book a short call. You will hear which kind of site your customers actually respond to, and whether you need one at all.', `<a class="btn btn-ghost" href="${b}work/system/">See the system behind them</a>`)}
 ${L.footer(b)}`;
     return L.page(L.head({ b, path: '/work/websites/', title, description, og: 'websites', css: ['device.css'], nodes }), body, L.scripts(b, ['builds.js', 'device.js']));
-  }
-};
-
-/* ---------- /work/tools/ : broad and specific, and by trade ---------- */
-const tools = {
-  url: '/work/tools/', og: 'tools', priority: 0.9, changefreq: 'weekly',
-  meta: { key: 'tools', title: 'The tools that run a service business.', kicker: `Tools · ${TOOLS.length} live examples`, sub: 'Booking, quotes, the pipeline, follow-up — and the ones built for one trade’s day.' },
-  render(b){
-    const trades = [...new Set(TOOLS.map(x => x.trade))].sort((a, z) => a.localeCompare(z));
-    const title = `Business tools for trades: ${TOOLS.length} live examples | ${site.name}`;
-    const description = `${Words(TOOLS.length)} working tools for service businesses, running live: booking, quotes, missed-call text-back, reviews, the pipeline, plus tools built for heating engineers, garages, salons, restaurants, roofers and rounds.`.slice(0, 158);
-    const nodes = [
-      L.webPage({ path: '/work/tools/', title, description, type: 'CollectionPage' }),
-      L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Tools', path: '/work/tools/' }]),
-      itemList('Business tools by ' + site.name, TOOLS),
-      { '@type': 'FAQPage', mainEntity: TOOL_LANES.map(k => ({ '@type': 'Question', name: LANES[k].question, acceptedAnswer: { '@type': 'Answer', text: LANES[k].answer } })) },
-    ];
-    const body = `
-${L.header(b, 'tools')}
-<main id="main">
-<section class="hero-w wrap">
-  ${crumbs(b, [['Home', ''], ['Work', 'work/'], ['Tools', 'work/tools/']])}
-  <h1>The tools that run a service business.</h1>
-  <p class="lead">Software that sits between the customer and the diary. <strong>Broad</strong> tools fit any business that takes enquiries and books jobs. <strong>Specific</strong> tools are built around one trade&rsquo;s actual day. Every one runs live with invented data and has a reset inside.</p>
-  <div class="lanes" style="margin-top:36px">
-    ${TOOL_LANES.map(k => `<a href="#${k}"><b>${esc(LANES[k].name)}</b><span>${esc(LANES[k].line)}</span><small>${plural(inLane(k).length, 'example')} &middot; ${esc(LANES[k].who)}</small></a>`).join('')}
-  </div>
-</section>
-${TOOL_LANES.map(k => laneSection(b, k, { question: true })).join('')}
-<section class="panel" id="by-trade">
-  <div class="wrap inner">
-    <div class="lab"><span class="sheet">By trade</span><span class="name">Find the tool built for your day</span></div>
-    <div class="body">
-      <h2>Which tools are built for my trade?</h2>
-      <dl class="nameplate">
-        ${trades.map(t => `<div><dt>${esc(t)}</dt><dd>${TOOLS.filter(x => x.trade === t).map(x => `<a class="lnk" href="${b}work/${x.slug}/">${esc(x.name)}</a>`).join(' &middot; ')}</dd></div>`).join('')}
-      </dl>
-    </div>
-  </div>
-</section>
-</main>
-${L.ctaBand(b, 'Which of these would earn its keep for you?', 'A short call to find out what is leaking in your business and which of these would stop it. No pitch, no proposal deck.', `<a class="btn btn-ghost" href="${b}work/websites/">See the websites instead</a>`)}
-${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/work/tools/', title, description, og: 'tools', css: ['device.css'], nodes }), body, L.scripts(b, ['builds.js', 'device.js']));
   }
 };
 
@@ -193,9 +133,12 @@ const photosIn = slug => {
 };
 const domain = site.origin.replace(/^https?:\/\//, '');
 
-const caseCopy = (b, x, lane) => `<div class="meta"><span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span></div>
+const caseCopy = (b, x, lane) => `<div class="meta">${x.lane === 'system' ? `<span>${x.slug === 'system' ? 'One app, six parts' : `Part of <a href="${b}work/system/">the system</a>`}</span><span>Shown for six made-up businesses</span>` : `<span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span>`}</div>
           <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Use it full screen</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
-          <p class="hint">This is the build itself, not a recording. Use it like a customer would, or press Show me in full screen and watch it work. State is kept in your browser; there is a reset inside.</p>`;
+          <p class="hint">This is the build itself, not a recording. Use it like a customer would, or press Show me in full screen and watch it work.</p>`;
+/* the system's parts, the current one marked, and the six businesses it opens as */
+const partsNav = (b, x) => `<ol class="sys-parts">${PARTS.map(y => `<li><a href="${b}work/${y.slug}/"${y.slug === x.slug ? ' aria-current="page"' : ''}><b>${y.slug === 'system' ? 'Today' : esc(y.name)}</b><span>${esc(y.proves)}</span></a></li>`).join('')}</ol>
+        <div class="sys-biz sys-biz-row"><p>Open ${x.slug === 'system' ? 'it' : 'this part'} as one of the six businesses:</p><div>${BIZ.map(([k, n, t]) => `<a href="${b}demos/${x.slug}/?t=${k}#s=1" target="_blank" rel="noopener"><b>${esc(n)}</b><span>${esc(t)}</span></a>`).join('')}</div></div>`;
 /* ---------- one page per build ---------- */
 const cases = builds.map(x => {
   const lane = laneOf(x), peers = inLane(x.lane), i = peers.findIndex(y => y.slug === x.slug);
@@ -217,7 +160,7 @@ const cases = builds.map(x => {
       const description = `${x.short} ${x.long}`.slice(0, 158);
       const nodes = [
         L.webPage({ path: `/work/${x.slug}/`, title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs(`/assets/phones/${pad(x.n)}.webp`) } } }),
-        L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: lane.kindWord, path: '/' + lane.path }, { name: x.name, path: `/work/${x.slug}/` }]),
+        L.breadcrumb(x.slug === 'system' ? [{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'The system', path: '/work/system/' }] : [{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: lane.kindWord, path: '/' + lane.path }, { name: x.name, path: `/work/${x.slug}/` }]),
         { '@type': x.kind === 'site' ? 'CreativeWork' : 'SoftwareApplication', name: x.name, url: L.abs(`/work/${x.slug}/`),
           description: x.long, creator: { '@id': L.ORG_ID }, author: { '@id': L.PERSON_ID },
           image: L.abs(`/assets/phones/${pad(x.n)}.webp`), genre: x.kind === 'site' ? `Website design · ${lane.name}` : `Business software · ${lane.name}`,
@@ -226,12 +169,12 @@ const cases = builds.map(x => {
           about: `A demonstration ${kw} ${L.builtFor(x)}.` },
       ];
       const body = `
-${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
+${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
 <main id="main">
 <article class="case">
   <section class="case-hero${x.kind === 'tool' ? ' is-tool' : ''}">
     <div class="wrap">
-      ${crumbs(b, [['Home', ''], ['Work', 'work/'], [lane.kindWord, lane.path], [x.name, `work/${x.slug}/`]])}
+      ${crumbs(b, x.slug === 'system' ? [['Home', ''], ['Work', 'work/'], ['The system', 'work/system/']] : [['Home', ''], ['Work', 'work/'], [lane.kindWord, lane.path], [x.name, `work/${x.slug}/`]])}
       <h1>${esc(x.name)}</h1>
       <p class="lead short">${esc(x.short)}</p>
       ${x.kind === 'tool' ? `<div class="case-rig">
@@ -256,9 +199,10 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
       <div class="lab"><span class="sheet">What it proves</span><span class="name">${esc(x.proves)}</span></div>
       <div class="body case-grid">
         <div>
-          <h2>What does ${esc(x.name)} do?</h2>
-          <p class="lead">${esc(x.name)} is a working ${kw} ${esc(L.builtFor(x))}. ${esc(x.story)}</p>
-          <p class="lead">It sits in the <a class="lnk" href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a> lane: ${esc(lane.line.toLowerCase())}</p>
+          ${x.lane === 'system' ? `<h2>${x.slug === 'system' ? 'What is the system for?' : 'What is this part for?'}</h2>
+          <p class="lead">${esc(x.story)}</p>` : `<h2>What does ${esc(x.name)} do?</h2>
+          <p class="lead">${esc(x.name)} is a working ${kw} ${esc(L.builtFor(x))}. ${esc(x.story)}</p>`}
+          ${x.lane === 'system' ? '' : `<p class="lead">It sits in the <a class="lnk" href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a> lane: ${esc(lane.line.toLowerCase())}</p>`}
         </div>
         <div>
           <h3>What is in it</h3>
@@ -269,7 +213,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
     </div>
   </section>
 
-  <section class="panel">
+  ${x.lane === 'system' && x.slug !== 'system' ? '' : `<section class="panel">
     <div class="wrap inner">
       <div class="lab"><span class="sheet">How it was built</span><span class="name">By hand, with nothing bought in</span></div>
       <div class="body">
@@ -277,15 +221,24 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
           <div><dt>Written</dt><dd>By hand, as a single self-contained page. No page-builder, no theme, no framework.</dd></div>
           <div><dt>Dependencies</dt><dd>No frameworks. Fonts are served from this site with system fallbacks, and the drawings, charts and interactions are written into the page.</dd></div>
           <div><dt>Imagery</dt><dd>${photos.length ? `Real photographs by ${photos.map(p => p.url ? `<a class="lnk" href="${p.url}" rel="noopener">${esc(p.by)}</a>` : esc(p.by)).join(' and ')} on Pexels, free for commercial use. Everything else is drawn in code, SVG or canvas.` : 'No stock. Every visual is drawn in code, SVG or canvas.'}</dd></div>
-          <div><dt>The business</dt><dd>${esc(x.biz)} &mdash; invented. Every person, number and review inside is fictional so nothing here exposes a real client.</dd></div>
-          <div><dt>Runs on</dt><dd>Any modern browser, on a phone as much as a desktop. State stays in your browser; there is a reset control inside.</dd></div>
+          <div><dt>The business</dt><dd>${x.lane === 'system' ? 'Six made-up service businesses.' : `${esc(x.biz)} is invented.`} Every person, number and review inside is fictional so nothing here exposes a real client.</dd></div>
+          <div><dt>Runs on</dt><dd>Any modern browser, on a phone as much as a desktop.</dd></div>
           <div><dt>Yours would</dt><dd>Carry your name, your numbers and your diary, and be owned by you from day one.</dd></div>
         </dl>
       </div>
     </div>
-  </section>
+  </section>`}
 
-  <nav class="panel" aria-label="More builds">
+  ${x.lane === 'system' ? `<nav class="panel" aria-label="The parts of the system">
+    <div class="wrap inner">
+      <div class="lab"><span class="sheet">The system</span><span class="name">One app, six parts</span></div>
+      <div class="body">
+        <h2>${x.slug === 'system' ? 'What is in the system?' : 'What else is in the system?'}</h2>
+        <p class="lead">Every part shares the same customers, diary and messages, so a missed call becomes a booking, the booking becomes a review ask, and the review shows up in the monthly results without anyone typing it twice.</p>
+        ${partsNav(b, x)}
+      </div>
+    </div>
+  </nav>` : `<nav class="panel" aria-label="More builds">
     <div class="wrap inner">
       <div class="lab"><span class="sheet">More &middot; ${esc(lane.name)}</span><span class="name">${peers.length > 1 ? `The next ${esc(lane.name.toLowerCase())} ${lane.kind === 'site' ? 'websites' : 'tools'}` : 'Every build has its own page'}</span></div>
       <div class="body">
@@ -293,14 +246,14 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'tools')}
         <p class="f-note" style="margin-top:20px">${related.length ? `Same trade: ${related.map(y => `<a class="lnk" href="${b}work/${y.slug}/">${esc(y.name)}</a>`).join(', ')}. ` : ''}<a class="lnk" href="${b}${lane.path}#${x.lane}">Every ${esc(lane.name.toLowerCase())} ${lane.kind === 'site' ? 'website' : 'tool'}</a> &middot; <a class="lnk" href="${b}work/">all ${builds.length} builds</a>. Or <a class="lnk" href="${b}">build one for your own business</a> in a couple of seconds.</p>
       </div>
     </div>
-  </nav>
+  </nav>`}
 </article>
 </main>
-${L.ctaBand(b, 'Want one like this, with your name on it?', `A short call to find out what is leaking in your business and whether a build like ${esc(x.name)} is the right fix.`, `<a class="btn btn-ghost" href="${b}${lane.path}">More ${esc(lane.kindWord.toLowerCase())}</a>`)}
+${x.lane === 'system' ? L.ctaBand(b, 'Want this running for your business?', 'A free 30-minute call: which part would earn its keep first, what it would cost, and when it could be live.', `<a class="btn btn-ghost" href="${b}work/#websites">See the websites</a>`) : L.ctaBand(b, 'Want one like this, with your name on it?', `A short call to find out what is leaking in your business and whether a build like ${esc(x.name)} is the right fix.`, `<a class="btn btn-ghost" href="${b}${lane.path}">More ${esc(lane.kindWord.toLowerCase())}</a>`)}
 ${L.footer(b)}`;
       return L.page(L.head({ b, path: `/work/${x.slug}/`, title, description, og: `work-${x.slug}`, css: ['device.css'], nodes, palette: x }), body, L.scripts(b, ['builds.js', 'device.js']));
     }
   };
 });
 
-module.exports = { pages: [gallery, websites, tools, ...cases] };
+module.exports = { pages: [gallery, websites, ...cases] };

@@ -438,7 +438,15 @@
     d.querySelectorAll('.mbar .go').forEach(function(a){ a.href = bookUrl(o); });
     d.querySelectorAll('[data-dx="town"]').forEach(function(el){ el.textContent = o.town; });
     var pg = d.getElementById('dxPages');
-    if (pg) pg.innerHTML = '<li class="dom">' + esc(o.domain) + '</li>' + o.t.kw.map(function(k){ return '<li>/<b>' + esc(slug(k + ' ' + o.town)) + '</b></li>'; }).join('');
+    if (pg) pg.innerHTML = '<li class="dom">' + esc(o.domain) + '</li>' + o.t.kw.slice(0, 3).map(function(k){ return '<li>/<b>' + esc(slug(k + ' ' + o.town)) + '</b></li>'; }).join('');
+    d.querySelectorAll('[data-dx="biz"]').forEach(function(el){ el.textContent = o.biz; });
+    d.querySelectorAll('[data-dx="dom"]').forEach(function(el){ el.textContent = o.domain; });
+    var kw = o.t.kw || [];
+    if (kw.length){
+      d.querySelectorAll('[data-dx="kw"]').forEach(function(el){ el.textContent = kw[0].toLowerCase(); });
+      d.querySelectorAll('[data-dx="svc"]').forEach(function(el){ el.textContent = kw[1] || kw[0]; });
+      if (o.t.key !== 'heating') d.querySelectorAll('[data-dx="price"]').forEach(function(el){ el.textContent = 'Price shown up front'; });
+    }
     var b = d.getElementById('dxBook'); if (b){ b.href = bookUrl(o); b.textContent = 'Book a call about ' + o.ref; }
     var rl = d.getElementById('dxRefline'); if (rl) rl.textContent = 'Thirty minutes, free. Your draft comes with you.';
   }

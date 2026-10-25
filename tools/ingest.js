@@ -4,12 +4,15 @@
      tools/stills.sh          (or tools/stills.sh NN NN …)
      NODE_PATH=<terser+clean-css> node tools/demos.js
      node tools/build.js && ./tools/og.sh
-   Usage: node tools/ingest.js [NN …]   (no args = everything with a meta file) */
+   Usage: node tools/ingest.js NN [NN …] */
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..'), SHOW = path.resolve(ROOT, '../showcase'), OUT = path.join(ROOT, 'data/builds');
-const LANES = ['loud', 'motion', 'quiet', 'direct', 'broad', 'specific'];
+const LANES = ['loud', 'motion', 'quiet', 'direct', 'system'];
 const REQ = ['n', 'slug', 'file', 'kind', 'lane', 'trade', 'name', 'biz', 'c', 'pg', 'short', 'long', 'proves', 'tags', 'features', 'story'];
 const only = process.argv.slice(2);
+/* data/builds was renumbered on 25 Oct 2026 (websites 1-12, the system 13-19), so the showcase numbers no longer
+   match: pulling everything would bring the old builds back. Name the ones to pull. */
+if (!only.length){ console.log('name the builds to pull, e.g. node tools/ingest.js 07 — the showcase numbering no longer matches data/builds'); process.exit(1); }
 fs.mkdirSync(OUT, { recursive: true });
 const metas = fs.readdirSync(SHOW).filter(f => f.endsWith('.meta.json'))
   .filter(f => !only.length || only.includes(f.slice(0, 2))).sort();
@@ -24,7 +27,7 @@ for (const f of metas){
   if (m.kind && !['site', 'tool'].includes(m.kind)) errs.push(`kind must be site or tool, got "${m.kind}"`);
   if (m.lane && !LANES.includes(m.lane)) errs.push(`lane must be one of ${LANES.join('/')}, got "${m.lane}"`);
   if (m.kind === 'site' && !['loud','motion','quiet','direct'].includes(m.lane)) errs.push('a website needs a website lane');
-  if (m.kind === 'tool' && !['broad','specific'].includes(m.lane)) errs.push('a tool needs broad or specific');
+  if (m.kind === 'tool' && m.lane !== 'system') errs.push('a tool is a part of the system (lane: system)');
   if (m.file && !fs.existsSync(path.join(SHOW, m.file))) errs.push(`demo file ${m.file} not found`);
   if (m.short && m.short.length > 80) errs.push(`short is ${m.short.length} chars (keep it under 80)`);
   /* short and long are printed as one paragraph, so short must close its own sentence */

@@ -13,6 +13,12 @@
     try { if (window.gtag){ gtag('event', name, props); var l = T.ads && T.labels && T.labels[CONV[name]]; if (l) gtag('event', 'conversion', { send_to: T.ads + '/' + l }); } } catch (e){}
     try { if (window.plausible) plausible(name, { props: props }); } catch (e){}
   };
+  /* "Read more" and "Show all" on phone-first pages (pages.css) */
+  d.addEventListener('click', function(e){
+    var m = e.target.closest && e.target.closest('.more-b,.rel-all'); if (!m) return;
+    var box = m.classList.contains('more-b') ? m.closest('.fold') : m.previousElementSibling;
+    if (box) box.classList.add('open'); m.remove();
+  });
   d.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href]'); if (!a || a.hasAttribute('data-track')) return;
     var h = a.getAttribute('href');

@@ -60,7 +60,7 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 
 ## Pages
 - [Home](${L.abs('/')}): what ${site.name} builds, with a live demonstration build on the page.
-- [Work — ${L.words(builds.length)} builds](${L.abs('/work/')}): every demonstration build, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [Tools](${L.abs('/work/tools/')}): the broad tools for any service business and the ones built for a single trade.
+- [Work: ${L.workLine().toLowerCase()}](${L.abs('/work/')}): every demonstration website and every part of the system, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [The system](${L.abs('/work/system/')}): the one app behind the websites, in seven parts (inbox and missed calls, booking, quotes, reviews, reminders, results), shown for six made-up businesses.
 - [Services](${L.abs('/services/')}): the five services, built as one system — ${SVC.SV.map(x => `[${x.name}](${L.abs('/services/' + x.slug + '/')})`).join(', ')}.
 - [Automations](${L.abs('/automations/')}): ${SVC.AU.map(x => `[${x.name.toLowerCase()}](${L.abs('/automations/' + x.slug + '/')})`).join(', ')}.
 - [Try it](${L.abs('/try/')}): live demos that run in the browser — a missed call texted back and booked, online booking with a deposit, and a CRM board whose follow-up texts send themselves.
@@ -72,8 +72,8 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 - [Free teardown](${L.abs('/teardown.html')}): three details in, three findings back by message.
 - [Notes](${L.abs('/notes/')}): short pieces — ${notes.map(n => n.title.toLowerCase()).join('; ')}.
 
-## The ${L.words(builds.length)} builds
-${builds.map(x => `- [${x.name}](${L.abs('/work/' + x.slug + '/')}): ${x.kind === 'site' ? 'website' : 'business tool'} for an invented ${x.biz.toLowerCase()} — ${x.short}`).join('\n')}
+## The builds
+${builds.map(x => `- [${x.name}](${L.abs('/work/' + x.slug + '/')}): ${x.kind === 'site' ? `website for an invented ${x.biz.toLowerCase()}` : 'part of the system, shown for six invented businesses'}: ${x.short}`).join('\n')}
 
 ## Frequently asked
 ${why.FAQ.map(([q, a]) => `- **${q}** ${a}`).join('\n')}

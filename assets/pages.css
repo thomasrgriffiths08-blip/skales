@@ -135,3 +135,47 @@ a.hub-card:hover{background:var(--alu-2);transform:translateY(-2px)}
   .lg-t th,.lg-t td{display:block;padding:2px 0;border:0}
   .lg-t td::before{content:attr(data-label) ": ";color:var(--tx-3)}
 }
+
+/* phone first: a long paragraph shows its first sentence and "Read more"; long lists show a few and
+   "Show all"; the three automation cards scroll sideways. Everything stays in the page for search,
+   and everything shows in full without JavaScript or on a wider screen. */
+.more-b,.rel-all{display:none}
+@media (max-width:640px){
+  .js .fold:not(.open) .more-t{display:none}
+  .js .fold:not(.open) .more-b{display:inline;padding:0;border:0;background:none;font:inherit;font-weight:600;color:var(--tx);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;cursor:pointer}
+  .js .rel-cut:not(.open)>a:nth-child(n+4){display:none}
+  .js .rel-cut:not(.open)+.rel-all{display:inline-flex;align-items:center;min-height:48px;margin-top:6px;padding:0;border:0;background:none;font:inherit;font-weight:600;color:var(--tx);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+}
+@media (max-width:699px){
+  .hub-list.snap{grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad);scrollbar-width:none}
+  .hub-list.snap::-webkit-scrollbar{display:none}
+  .hub-list.snap>*{scroll-snap-align:start;min-height:0}
+}
+
+/* the missed-call calculator */
+.calc{display:grid;gap:22px;margin-top:22px;padding:clamp(18px,3vw,28px);border:1px solid var(--line);border-radius:var(--r-m);max-width:640px}
+.cl-row{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:10px 16px;border:0;margin:0;padding:0;min-width:0}
+.cl-l{font-weight:600;font-size:1rem;padding:0}
+.cl-v{font-weight:600;font-size:1.25rem;letter-spacing:-.02em}
+.cl-row input[type=range]{grid-column:1/-1;-webkit-appearance:none;appearance:none;width:100%;height:32px;margin:0;background:transparent;cursor:pointer;--p:20%}
+.cl-row input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--tx) var(--p),var(--alu-2) var(--p))}
+.cl-row input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--alu-2)}
+.cl-row input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--tx)}
+.cl-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-11px;border-radius:50%;background:var(--pg);border:2px solid var(--tx);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.cl-row input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--pg);border:2px solid var(--tx)}
+.cl-row input[type=range]:focus-visible{outline:2px solid var(--live);outline-offset:4px;border-radius:4px}
+.cl-seg legend{margin-bottom:10px}
+.cl-opts{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cl-opts label{position:relative}
+.cl-opts input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.cl-opts span{display:flex;align-items:center;justify-content:center;height:48px;border-radius:var(--r-s);border:1px solid var(--line-2);font-weight:600;font-size:.9375rem}
+.cl-opts input:checked+span{background:var(--tx);border-color:var(--tx);color:var(--pg)}
+.cl-opts input:focus-visible+span{outline:2px solid var(--live);outline-offset:2px}
+.cl-out{padding-top:18px;border-top:1px solid var(--line)}
+.cl-big{margin:0;font-size:clamp(1.75rem,6vw,2.5rem);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+
+.cl-sub{margin:6px 0 0;color:var(--tx-2)}
+.cl-sub b{color:var(--tx)}
+.cl-work{margin:12px 0 0;padding:10px 12px;border-radius:var(--r-s);background:var(--alu);font:400 .8125rem/1.55 var(--mono);color:var(--tx-2)}
+.calc .btn{justify-self:start}
+@media (max-width:520px){.calc .btn{width:100%}}

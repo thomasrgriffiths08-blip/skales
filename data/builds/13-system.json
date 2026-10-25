@@ -1,0 +1,28 @@
+{
+  "n": 13,
+  "slug": "system",
+  "file": "demos/system/index.html",
+  "kind": "tool",
+  "lane": "system",
+  "trade": "Any service business",
+  "name": "The system",
+  "biz": "Six made-up service businesses",
+  "c": "#B04A24",
+  "pg": "#F6F6F4",
+  "short": "One screen: every call caught, every job booked, and what still needs you.",
+  "long": "The app a service business runs on, shown for six made-up businesses. Today shows every missed call caught, every booking made and every quote chased since the morning, the next jobs, and the three things that still need a person. Switch business from the menu and it all reloads for that trade.",
+  "proves": "The admin happens while you are on the tools.",
+  "tags": [
+    "Six businesses",
+    "Live from the clock",
+    "Every part connected"
+  ],
+  "features": [
+    "A day’s feed built from every part: calls, bookings, quotes, reviews and reminders",
+    "Next jobs and what still needs you, one tap from each",
+    "Six made-up businesses from heating to physio, switched from the menu",
+    "The same screens on a phone, with a bar along the bottom"
+  ],
+  "story": "Most small firms run on a phone, a diary and memory. This is the one screen that replaces all three, built so a plumber can read it at a glance between jobs.",
+  "start": "today"
+}

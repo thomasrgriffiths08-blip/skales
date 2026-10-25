@@ -5,7 +5,7 @@
    ============================================================ */
 (function(){
   var d = document, S = window.SITE || {}, b = S.base || '', B = window.BUILDS || [], LN = window.LANES || {};
-  var ORDER = ['loud', 'motion', 'quiet', 'direct', 'broad', 'specific'];
+  var ORDER = ['loud', 'motion', 'quiet', 'direct', 'system'];
   var pad = function(n){ return (n < 10 ? '0' : '') + n; };
   var demo = function(x){ return b + 'demos/' + x.slug + '/#s=1'; };
   var page = function(x){ return b + 'work/' + x.slug + '/'; };
@@ -46,38 +46,6 @@
     else list = B.filter(function(x){ return x.lane === spec; });
     window.renderWall(el, list);
   });
-
-  /* ---------- filtering the wall: websites or tools, and your trade (builds made for any trade always stay) ---------- */
-  var bar = d.querySelector('.wbar');
-  if (bar){
-    var kinds = bar.querySelectorAll('button[data-f]'), sel = bar.querySelector('select'), root = d.getElementById('wall') || d;
-    var state = { kind: 'all', trade: '' };
-    var apply = function(){
-      kinds.forEach(function(o){ o.setAttribute('aria-pressed', String(o.getAttribute('data-f') === state.kind)); });
-      if (sel) sel.value = state.trade;
-      root.querySelectorAll('.tile').forEach(function(t){
-        var k = t.getAttribute('data-kind'), tr = t.getAttribute('data-trade');
-        t.hidden = !((state.kind === 'all' || k === state.kind) && (!state.trade || tr === state.trade || tr === 'any'));
-      });
-      root.querySelectorAll('[data-lanehead], [data-kindsec]').forEach(function(sec){ sec.hidden = !sec.querySelector('.tile:not([hidden])'); });
-      var c = d.getElementById('wallCount'); if (c) c.textContent = root.querySelectorAll('.tile:not([hidden])').length;
-      var note = d.getElementById('tradeNote');
-      if (note){
-        var seen = root.querySelectorAll('.tile:not([hidden])').length;
-        var own = state.trade ? root.querySelectorAll('.tile:not([hidden]):not([data-trade="any"])').length : 0;
-        var label = (sel && sel.selectedIndex > 0 ? sel.options[sel.selectedIndex].text : '').toLowerCase();
-        note.hidden = !state.trade;
-        note.textContent = !state.trade ? '' : !seen ? 'No ' + (state.kind === 'site' ? 'websites' : 'tools') + ' made for ' + label + ' yet. Press All to see the tools that fit any trade.'
-          : own ? own + ' made for ' + label + (seen > own ? ', plus the tools that fit any trade.' : '.') : 'Nothing made for ' + label + ' yet. These tools fit any trade.';
-      }
-      if (history.replaceState) history.replaceState(null, '', location.pathname + (state.trade ? '#' + state.trade : state.kind !== 'all' ? '#' + state.kind : ''));
-    };
-    kinds.forEach(function(btn){ btn.addEventListener('click', function(){ state.kind = btn.getAttribute('data-f'); apply(); }); });
-    if (sel) sel.addEventListener('change', function(){ state.trade = sel.value; apply(); });
-    var h = (location.hash || '').slice(1);
-    if (h === 'site' || h === 'tool'){ state.kind = h; apply(); }
-    else if (h && sel && sel.querySelector('option[value="' + h + '"]')){ state.trade = h; apply(); }
-  }
 
   /* ---------- the device ---------- */
   window.initDevice = function(startN, opts){
@@ -133,14 +101,16 @@
   var solos = d.querySelectorAll('[data-solo]');
   if (solos.length){
     var mount = function(vp){
-      var x = bySlug(vp.getAttribute('data-solo')); if (!x || vp.querySelector('iframe')) return;
+      /* data-src: a demo that is not one of the builds (the before-and-after on the websites service page) */
+      var src = vp.getAttribute('data-src'), x = src ? null : bySlug(vp.getAttribute('data-solo'));
+      if ((!x && !src) || vp.querySelector('iframe')) return;
       /* a build page's laptop frame: on a phone it stays a still that opens the build full screen (no scroll trap) */
-      if (vp.hasAttribute('data-solo-still') && window.matchMedia && matchMedia('(max-width: 760px)').matches){
+      if (x && vp.hasAttribute('data-solo-still') && window.matchMedia && matchMedia('(max-width: 760px)').matches){
         vp.innerHTML = '<img class="dev-still" src="' + phone(x) + '" width="585" height="1266" alt="' + esc(x.name) + ' on a phone">'
           + '<button type="button" class="dev-play" data-view="' + x.slug + '"><span>Use it full screen</span></button>';
         return;
       }
-      vp.innerHTML = ''; var f = d.createElement('iframe'); f.src = demo(x); f.setAttribute('title', x.name + ' — live build'); vp.appendChild(f);
+      vp.innerHTML = ''; var f = d.createElement('iframe'); f.src = src ? b + src : demo(x); f.setAttribute('title', (x ? x.name : vp.getAttribute('data-title')) + ' — live build'); vp.appendChild(f);
     };
     if ('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ mount(e.target); io.unobserve(e.target); } }); }, { rootMargin: '200px 0px' });

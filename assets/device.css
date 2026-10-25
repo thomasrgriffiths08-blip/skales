@@ -176,59 +176,7 @@
 
 /* ---------- the demos page ---------- */
 .work-hero{padding-bottom:clamp(28px,4vw,48px)}
-/* four picks, shown big: a tool on a screen beside a website on a phone, then the other way round */
-.picks{display:grid;gap:clamp(28px,4vw,48px);padding-bottom:clamp(48px,7vw,96px)}
-.picks-head{display:grid;gap:10px;max-width:640px}
-.picks-head p{color:var(--tx-2);line-height:1.5}
-.picks-row{display:grid;grid-template-columns:1.85fr 1fr;gap:clamp(20px,3vw,40px);align-items:start}
-.picks-row.flip{grid-template-columns:1fr 1.85fr}
-.pick{display:grid;gap:18px;align-content:start;min-width:0}
-.pick-stage{position:relative;display:block;aspect-ratio:1280/800;border-radius:16px;background:var(--hand);overflow:hidden}
-.pick:not(.is-wide) .pick-stage{background:var(--pc,var(--hand));display:grid;place-items:center;padding:6% 0;aspect-ratio:160/185}
-.pick-stage .shell{position:relative;display:block;width:100%;height:100%;overflow:hidden}
-.pick.is-wide .pick-stage .shell{position:absolute;inset:6px;width:auto;height:auto;border-radius:11px}
-.pick:not(.is-wide) .pick-stage .shell{height:100%;width:auto;aspect-ratio:600/1077;border-radius:24px;padding:5px;background:var(--hand);box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
-.pick-stage img,.pick-stage video{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top;background:#FFF}
-.pick:not(.is-wide) .pick-stage img,.pick:not(.is-wide) .pick-stage video{inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);border-radius:19px}
-.pick-stage video{opacity:0;transition:opacity .25s}
-.pick-stage video.is-on{opacity:1}
-.pick:hover .pick-stage{box-shadow:0 28px 50px -30px rgba(0,0,0,.4)}
-.pick-cap{display:grid;gap:6px;min-width:0;max-width:60ch}
-.pick-for{font-size:.875rem;color:var(--tx-3)}
-.pick-cap b{font-size:1.375rem;letter-spacing:-.02em;line-height:1.2}
-.pick-short{color:var(--tx-2);line-height:1.45}
-.try{list-style:none;counter-reset:t;display:grid;gap:6px;margin:8px 0 0;padding:0}
-.try li{counter-increment:t;display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:baseline;font-size:.9375rem;line-height:1.4}
-.try li::before{content:counter(t);display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--line-2);font-size:.75rem;font-weight:600;color:var(--tx-2)}
-.pick-go{margin-top:8px;font-weight:600}
-.pick:hover .pick-go{text-decoration:underline;text-underline-offset:4px}
-.picks-rows{display:grid;gap:clamp(36px,5vw,64px)}
-@media (max-width:900px){.picks-row,.picks-row.flip{grid-template-columns:minmax(0,1fr);gap:36px}.picks-row.flip .pick.is-wide{order:-1}}
-/* on a phone the four are one row you swipe */
-@media (max-width:640px){
-  .picks{gap:20px}
-  .picks-rows{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad);align-items:start}
-  .picks-rows::-webkit-scrollbar{display:none}
-  .picks-row,.picks-row.flip{display:contents}
-  .pick{flex:0 0 80%;scroll-snap-align:start}
-  .pick:not(.is-wide) .pick-stage{aspect-ratio:600/760;padding:6% 0}
-  .picks-row.flip .pick.is-wide{order:0}
-  .pick-cap b{font-size:1.1875rem}.try li{font-size:.875rem}
-}
-
-/* the filter: websites or tools, and your trade */
-.wbar-wrap{position:sticky;top:var(--head-h);z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
-.wbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;padding:12px 0}
-.wkinds{display:flex;gap:6px;flex-wrap:wrap}
-.wkinds button{height:40px;padding:0 15px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:500;font-size:.9375rem;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}
-.wkinds button:hover{border-color:var(--tx)}
-.wkinds button[aria-pressed="true"]{background:var(--tx);color:var(--pg);border-color:var(--tx)}
-.wtrade{display:flex;align-items:center;gap:10px;font-size:.9375rem;color:var(--tx-2)}
-.wtrade select{height:40px;padding:0 36px 0 14px;border-radius:10px;border:1px solid var(--line-2);background:var(--pg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2318181b' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 13px center;-webkit-appearance:none;appearance:none;font:inherit;font-weight:500;color:var(--tx);cursor:pointer;max-width:100%}
-.trade-note{margin:0;padding:0 0 12px;font-size:.9375rem;color:var(--tx-2)}
-@media (max-width:640px){.wbar{padding:10px 0;gap:8px;flex-wrap:nowrap}.wkinds{gap:4px;flex-wrap:nowrap}.wkinds button{height:38px;padding:0 11px;font-size:.875rem}.wkinds .n{display:none}.wtrade{flex:1;min-width:0}.wtrade span{display:none}.wtrade select{width:100%;height:38px;padding:0 30px 0 10px;font-size:.875rem;background-position:right 10px center}}
-
-/* websites, then tools; each lane is a row */
+/* websites, then the system; each website lane is a row */
 .kindsec{padding:clamp(40px,6vw,80px) 0 0}
 .kindsec:last-child{padding-bottom:clamp(56px,8vw,112px)}
 .kindsec[hidden],.lrow[hidden]{display:none}
@@ -263,4 +211,44 @@
 .case-words{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,4vw,64px);align-items:start;margin-top:clamp(24px,3.5vw,40px)}
 .case-words .copy{display:grid;gap:20px;position:static}
 @media (max-width:900px){.case-words{grid-template-columns:1fr}}
-@media (max-width:760px){.case-rig .rig .viewport{height:auto;min-height:0;aspect-ratio:585/1266;max-height:72vh}.case-rig .rig .chrome .url{display:none}}
+@media (max-width:760px){.case-rig .rig .viewport{width:100%;height:min(72vh,640px);min-height:0}.case-rig .rig .chrome .url{display:none}}
+
+/* the two halves of the work page, as two big links under the heading */
+.work-jump{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:clamp(24px,3vw,36px);max-width:760px}
+.work-jump a{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line-2);border-radius:var(--r-s)}
+.work-jump b{font-size:1.0625rem;letter-spacing:-.01em}
+.work-jump span{font-size:.875rem;color:var(--tx-2)}
+@media (hover:hover){.work-jump a:hover{border-color:var(--tx)}}
+
+/* the system: the app on a screen, the six businesses beside it, then its parts */
+.sys-rig{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+.sys-main{display:grid;gap:14px;min-width:0}
+.sys-main .shell{position:relative;display:block;aspect-ratio:1280/800;border-radius:14px;padding:6px;background:var(--hand);overflow:hidden}
+.sys-main img,.sys-main video{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);max-width:none;object-fit:cover;object-position:top;border-radius:9px;background:#FFF}
+.sys-main video{opacity:0;transition:opacity .25s}
+.sys-main video.is-on{opacity:1}
+.sys-cap{display:grid;gap:4px}
+.sys-cap b{font-size:1.25rem;letter-spacing:-.02em}
+.sys-cap span{color:var(--tx-2);line-height:1.45;max-width:60ch}
+@media (hover:hover){.sys-main:hover .sys-cap b{text-decoration:underline;text-underline-offset:4px}}
+.sys-biz p{margin:0 0 8px;font-size:.875rem;color:var(--tx-2)}
+.sys-biz>div{display:grid;border-top:1px solid var(--line)}
+.sys-biz a{display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-height:52px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.sys-biz a b{font-weight:600;font-size:.9688rem}
+.sys-biz a span{font-size:.875rem;color:var(--tx-3);text-align:right}
+@media (hover:hover){.sys-biz a:hover b{text-decoration:underline;text-underline-offset:3px}}
+.sys-h{margin:clamp(36px,5vw,56px) 0 16px;font-size:1.25rem;letter-spacing:-.02em}
+.sys-biz-row{margin-top:28px}
+.sys-biz-row>div{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+@media (max-width:900px){.sys-rig{grid-template-columns:minmax(0,1fr)}.sys-biz-row>div{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* on a phone the system is shown as it looks on a phone, the top of its first screen */
+@media (max-width:640px){.sys-main .shell{aspect-ratio:585/860;width:min(100%,320px);border-radius:30px;padding:6px}.sys-main img{border-radius:24px}.sys-main video{display:none}}
+@media (max-width:640px){.work-jump{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.work-jump a{padding:12px 14px}.work-jump b{font-size:.9688rem}.work-jump span{font-size:.8125rem}.sys-biz-row>div{grid-template-columns:minmax(0,1fr)}}
+
+/* a part's own page: every part, this one marked */
+.sys-parts{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.sys-parts a{display:grid;gap:6px;height:100%;padding:14px 16px;border:1px solid var(--line-2);border-radius:var(--r-s)}
+.sys-parts a[aria-current]{border-color:var(--tx);box-shadow:inset 0 0 0 1px var(--tx)}
+.sys-parts b{font-size:.9688rem}
+.sys-parts span{font-size:.875rem;line-height:1.4;color:var(--tx-2)}
+@media (hover:hover){.sys-parts a:hover{border-color:var(--tx)}}

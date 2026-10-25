@@ -1,13 +1,13 @@
 const L = require('../lib.js');
 const { site, builds, esc, Words } = L;
-const SITES = builds.filter(x => x.kind === 'site'), TOOLS = builds.filter(x => x.kind === 'tool');
+const SITES = builds.filter(x => x.kind === 'site');
 const B = n => builds.find(x => x.n === n);
 const TRY = require('./try.js').DEMOS.filter(x => x.live), tryCard = require('./try.js').card;
 /* the same slug rule as assets/builder.js, so the example pages match what the builder writes */
 const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
-/* four websites fill a row of phones, three tools a row of screens */
-const FEATURED = [19, 17, 10, 24, 25, 27, 14].map(B).filter(Boolean);
+/* four websites fill a row of phones, three parts of the system a row of screens */
+const FEATURED = [7, 5, 4, 12, 13, 14, 15].map(B).filter(Boolean);
 /* the opening film: Your town. One continuous take over a white model of a British town at night: the lit windows go
    out one by one until a single house is still lit, then the camera glides down to that house until its open, glowing
    back door fills the screen. Two generated parts, the second starting on the first one's last frame, so there is no
@@ -35,7 +35,7 @@ ${L.header(b, 'home')}
 <main id="main">
 
 <script>document.documentElement.classList.add('js')</script>
-<section class="op" id="top" aria-label="Opening film" style="--op-screens:${OPENING.screens}" data-film="${b}assets/film/town-" data-frames="${OPENING.frames}" data-seconds="${OPENING.seconds}">
+<section class="op is-film" id="top" aria-label="Opening film" style="--op-screens:${OPENING.screens}" data-film="${b}assets/film/town-" data-frames="${OPENING.frames}" data-seconds="${OPENING.seconds}">
   <div class="op-stick">
     <picture class="op-poster"><source media="(max-aspect-ratio: 17/20)" srcset="${b}assets/film/town-m.webp" width="810" height="1440"><img src="${b}assets/film/town-d.webp" alt="A white architect's model of a British town at night, windows lit warm along the terraces" width="1440" height="810" fetchpriority="high"></picture>
     <canvas class="op-film" aria-hidden="true"></canvas>
@@ -118,31 +118,43 @@ ${L.header(b, 'home')}
   <div class="wrap">
     <div class="sec-head">
       <h2 id="h-draft">A website is only worth the jobs it brings in.</h2>
-      <p class="lead">The draft is the easy part. This is how the real one gets found in <span data-dx="town">your town</span>, and what happens when someone lands on it.</p>
+      <p class="lead">The draft is the easy part. This is the whole chain, from a search in <span data-dx="town">your town</span> to the job in your diary. I build all five links, so nothing drops between them.</p>
     </div>
-    <div class="dx-grid">
-      <div class="dx-col">
-        <h3>How you get found</h3>
-        <ol class="dx-list">
-          <li><details class="dx-d"><summary><b>A page for every service, in your town.</b></summary><span>People search for the job and the place, not your name. Each service gets its own page, written for where you work.</span>
-            <ul class="dx-pages" id="dxPages"><li class="dom">hartleyheating.co.uk</li>${HEAT_KW.map(k => `<li>/<b>${esc(slug(k + ' leeds'))}</b></li>`).join('')}</ul></details></li>
-          <li><details class="dx-d"><summary><b>Your Google Business Profile, matched to the site.</b></summary><span>The same name, number, hours and services in both places, so Google trusts them. That is what gets you into the map results.</span></details></li>
-          <li><details class="dx-d"><summary><b>Reviews that ask for themselves.</b></summary><span>After every job the customer gets a text with a link to review you. More reviews, and recent ones, keep you near the top of the map.</span></details></li>
-          <li><details class="dx-d"><summary><b>Written so AI answers can quote it.</b></summary><span>Plain answers to what your customers ask, with the structured data search engines read, so ChatGPT and Google&rsquo;s AI answers can name you.</span></details></li>
-          <li><details class="dx-d"><summary><b>Ads for when you want work this week.</b></summary><span>Google and Meta ads pointed at the booking page, and tracked to the booked job, not to clicks.</span></details></li>
-        </ol>
-      </div>
-      <div class="dx-col">
-        <h3>How visits turn into booked jobs</h3>
-        <ol class="dx-list">
-          <li><details class="dx-d"><summary><b>Booking with a deposit.</b></summary><span>Real slots from your diary, any hour. A deposit holds the slot, so nobody books and vanishes.</span></details></li>
-          <li><details class="dx-d"><summary><b>Missed calls get a text back.</b></summary><span>On a job when they ring? They get a text within a minute with a link to book, before they ring the next name on Google.</span></details></li>
-          <li><details class="dx-d"><summary><b>Quotes chase themselves.</b></summary><span>A polite nudge goes out if a quote has not been answered, so fewer of them go cold.</span></details></li>
-          <li><details class="dx-d"><summary><b>One place for every enquiry.</b></summary><span>Calls, texts, forms and bookings in one list on your phone, each with where it came from.</span></details></li>
-        </ol>
-      </div>
-    </div>
-    <script>if(matchMedia('(min-width:981px)').matches)document.querySelectorAll('.dx-d').forEach(function(e){e.open=true})</script>
+    <ol class="chain">
+      <li class="ch">
+        <p class="ch-k"><span>01</span>Found</p>
+        <h3>They search for the job and the town.</h3>
+        <div class="ch-m ch-g" aria-hidden="true"><span class="ch-q"><span data-dx="kw">boiler repair</span> <span data-dx="town">leeds</span></span><b data-dx="biz">Hartley Heating</b><span class="ch-r"><i>4.9</i> ★★★★★ (58) · Open now</span><ul class="ch-pages" id="dxPages"><li class="dom">hartleyheating.co.uk</li>${HEAT_KW.slice(0, 3).map(k => `<li>/<b>${esc(slug(k + ' leeds'))}</b></li>`).join('')}</ul></div>
+        <p class="ch-t">A page for every service in your town, your Google profile matched to it, and reviews that keep coming.</p>
+      </li>
+      <li class="ch">
+        <p class="ch-k"><span>02</span>Chosen</p>
+        <h3>The site makes you the easy pick.</h3>
+        <div class="ch-m" aria-hidden="true"><span class="ch-l" data-dx="svc">Boiler service</span><span class="ch-big" data-dx="price">from £85</span><span class="ch-r"><i>4.9</i> from 58 Google reviews</span><span class="ch-btn">Book online</span></div>
+        <p class="ch-t">Quick on a phone, prices and reviews up front, and a Book button on every screen.</p>
+      </li>
+      <li class="ch">
+        <p class="ch-k"><span>03</span>Answered</p>
+        <h3>Miss the call, not the job.</h3>
+        <div class="ch-m" aria-hidden="true"><span class="ch-l">Missed call · 07700 900412</span><span class="ch-sms">Sorry I missed you, I’m on a job. Book a time here: <span data-dx="dom">hartleyheating.co.uk</span>/book</span><span class="ch-r">Sent 9 seconds after the call</span></div>
+        <p class="ch-t">Every missed call gets a text back in seconds. Calls, texts and forms land in one inbox.</p>
+        <a class="ch-go" href="${b}work/inbox/">See it work</a>
+      </li>
+      <li class="ch">
+        <p class="ch-k"><span>04</span>Booked</p>
+        <h3>They pick a time and pay a deposit.</h3>
+        <div class="ch-m" aria-hidden="true"><span class="ch-l">Thu 23 Oct · 14:00</span><span class="ch-big" data-dx="svc">Boiler service</span><span class="ch-r ch-ok">£20 deposit paid</span><span class="ch-r">Added to your diary</span></div>
+        <p class="ch-t">Real free times from your diary, any hour. Quotes chase themselves until they get an answer.</p>
+        <a class="ch-go" href="${b}work/booking/">See it work</a>
+      </li>
+      <li class="ch">
+        <p class="ch-k"><span>05</span>Back again</p>
+        <h3>Then they come back, and bring friends.</h3>
+        <div class="ch-m" aria-hidden="true"><span class="ch-l">After the job</span><span class="ch-r"><i>5.0</i> ★★★★★ review left</span><span class="ch-l ch-sep">Next October</span><span class="ch-r ch-ok">Service reminder sent · booked</span></div>
+        <p class="ch-t">A review ask after every job, and a reminder the week next year’s service is due.</p>
+        <a class="ch-go" href="${b}work/reviews/">See it work</a>
+      </li>
+    </ol>
     <div class="dx-call">
       <div>
         <h3>On the call, I have your draft open.</h3>
@@ -164,10 +176,10 @@ ${L.header(b, 'home')}
   <div class="wrap">
     <div class="sec-head">
       <h2 id="h-work">That was a draft. These are finished.</h2>
-      <p class="lead">${Words(builds.length)} builds: ${SITES.length} full websites and ${TOOLS.length} business tools, each made for an invented business so no client is ever on show. Every one opens and works like the real thing.</p>
+      <p class="lead">${Words(SITES.length)} full websites, each built differently for a different kind of business, and the one system that runs behind them. Every business is made up so no client is ever on show, and every one opens and works like the real thing.</p>
     </div>
     ${L.wall(b, FEATURED, 'wall-home')}
-    <div class="sec-foot"><a class="btn btn-dark" href="${b}work/">See all ${builds.length}</a><a class="btn btn-ghost" href="${b}work/websites/">Websites</a><a class="btn btn-ghost" href="${b}work/tools/">Tools</a></div>
+    <div class="sec-foot"><a class="btn btn-dark" href="${b}work/">See all the work</a><a class="btn btn-ghost" href="${b}work/#websites">The websites</a><a class="btn btn-ghost" href="${b}work/system/">The system</a></div>
   </div>
 </section>
 
@@ -187,7 +199,7 @@ ${L.header(b, 'home')}
     <div class="why3">
       <div><h3>You own it</h3><p>The domain, the code and every account sit in your name from the first day. Nothing is rented back to you monthly, and there is no platform your site cannot leave.</p></div>
       <div><h3>One person</h3><p>${esc(site.founder.name)} builds every site and system personally. No sales call handed to a junior, nothing lost in a handover, because there is not one.</p></div>
-      <div><h3>Proof, not promises</h3><p>${esc(Words(builds.length))} working builds on this site, one new system a week made in public on <a class="lnk" href="${site.instagram}" target="_blank" rel="noopener">Instagram</a>. Open any of them and use it.</p></div>
+      <div><h3>Proof, not promises</h3><p>${esc(L.workLine())} on this site, and new builds made in public on <a class="lnk" href="${site.instagram}" target="_blank" rel="noopener">Instagram</a>. Open any of them and use it.</p></div>
     </div>
     <div class="sec-foot"><a class="btn btn-ghost" href="${b}why/">More about the studio</a></div>
   </div>

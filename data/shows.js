@@ -4,117 +4,6 @@
    Step kinds: tap, type (+ text), set (+ to, for a range or select), scroll (bring into view),
    scrollBy (+ dur), wait. `say` is the caption shown while the step plays; `pause` is the wait after it. */
 module.exports = {
-  'northgate-quote-engine': [
-    { tap: '#btnExample', say: 'Load an example kitchen' },
-    { tap: '#btnNext', say: 'Step through it: the price moves with every answer' },
-    { tap: '#btnNext', say: 'Pick the units' },
-    { tap: '#btnBreak', say: 'See the itemised breakdown' },
-  ],
-  'redgate-job-system': [
-    { tap: '#slippingToggle', say: 'Show the jobs that are slipping' },
-    { tap: 'div[data-id]', say: 'Open one: the whole history in one place' },
-  ],
-  'halcyon-dispatch': [
-    { tap: '#viewDayBtn', say: 'Switch to today, engineer by engineer' },
-    { tap: 'button.queue-card.emergency', say: 'Open the emergency waiting in the queue' },
-  ],
-  'ledgerline': [
-    { type: '#f-client-name', text: 'Fairbrook Café', say: 'Type a client: the invoice changes as you type' },
-    { tap: 'button[data-template=modern]', say: 'Swap the template' },
-    { tap: 'button[data-accent="#0f7a4c"]', say: 'Change the colour' },
-  ],
-  'mortgage-lab': [
-    { set: '#monthlyOverpayRange', to: 600, say: 'Overpay £600 a month' },
-    { tap: '#tab-stresstest', say: 'Stress-test it against a rate rise' },
-  ],
-  'payslip-lab': [
-    { tap: 'button[data-salary="112000"]', say: 'Try a £112,000 salary' },
-    { tap: '#tabbtn-trap', say: 'See the 60% tax trap' },
-  ],
-  'kerbside-scorecard': [
-    { set: '#f-revCount', to: 60, say: 'Add reviews: the score re-marks live' },
-    { tap: '#tabbtn-action', say: 'Get the action plan' },
-  ],
-  'stopcock': [
-    { set: '#in-missPct', to: 35, say: 'Miss more calls and watch the leak grow' },
-    { tap: 'button[data-v=years]', say: 'See what it costs over three years' },
-  ],
-  'turnover': [
-    { set: '#reveal', to: 88, say: 'Drag the line: the old site and the rebuild' },
-    { set: '#reveal', to: 12, say: '' },
-    { tap: '#segMob', say: 'Now see both on a phone' },
-  ],
-  'fenwick-booking': [
-    { tap: 'input[name=svc][value=rad]', say: 'Pick what needs doing' },
-    { tap: '#next', say: 'Choose a time' },
-    { tap: '.day:not(.off)', say: 'Pick a day' },
-    { tap: 'button.slot:not(:disabled):not(.off):not(.taken)', say: 'Pick a slot: the deposit holds it' },
-  ],
-  'jobsheet': [
-    { tap: '#addItem', say: 'Add a line to the job' },
-    { type: 'input[data-i="5"]', text: 'Bled the radiators upstairs', say: 'Type it once: the customer’s report fills itself in' },
-  ],
-  'shiftbook': [
-    { tap: 'button[data-add="amara:0"]', say: 'Tap a gap to add a shift' },
-    { tap: '#d-save', say: 'Save it: the hours and the wage bill update' },
-  ],
-  'ringsback': [
-    { wait: 7000, say: 'Watch: the call rings out and the text goes' },
-    { tap: 'button[data-tab=convo]', say: 'Read the conversation' },
-  ],
-  'starboard': [
-    { tap: 'button[data-act=ask]', say: 'Ask a customer for a review' },
-    { tap: '#askSend', say: 'Send it' },
-    { wait: 15000, say: 'Watch: she opens it, then the review lands' },
-  ],
-  'slate': [
-    { type: 'input[placeholder^="Add a line"]', text: 'plaster', say: 'Start typing: the price book finds it' },
-    { tap: '.cbxopt[data-add]', say: 'Pick it: cost and markup come with it' },
-    { tap: 'button[data-v=doc]', say: 'Preview the quote the customer gets' },
-  ],
-  'triage': [
-    { tap: 'button[data-id=e42]', say: 'Open the urgent one' },
-    { tap: 'button[data-tpl="0"]', say: 'Pick a reply' },
-    { tap: '#sendReply', say: 'Send it' },
-  ],
-  'doorstep': [
-    { tap: 'button[data-step="3"]', say: 'Mark the engineer on site' },
-    { tap: 'button[data-step="4"]', say: 'Then done: the customer sees it straight away' },
-  ],
-  'clockcard': [
-    { tap: '#swBtn', say: 'Switch to the next job' },
-    { tap: 'button[data-pick=j3]', say: 'Pick it: the clock moves with you' },
-    { tap: '#brkBtn', say: 'Take a break' },
-    { tap: 'button[data-p=owner]', say: 'See it from the owner’s side' },
-  ],
-  'boiler-book': [
-    { tap: '#selWaiting', say: 'Tick everyone who is waiting' },
-    { tap: '#sendBtn', say: 'Send the whole batch' },
-  ],
-  'mot-minder': [
-    { tap: 'button[data-filter=over]', say: 'Show the overdue ones' },
-    { tap: 'tr button[data-open], [data-open]', say: 'Open one' },
-    { tap: 'button[data-act=send]', say: 'Send the rebook link' },
-    { wait: 6000, say: 'Watch the customer take a slot' },
-  ],
-  'chairside': [
-    { tap: 'button[data-slot]', say: 'Tap an open gap' },
-    { tap: 'button[data-v=checkout]', say: 'Check a client out on the counter tablet' },
-    { tap: 'button.slot[data-sl="0"]', say: 'She rebooks before she leaves' },
-  ],
-  'turntable': [
-    { tap: 'g[data-tbl="5"]', say: 'Tap a table' },
-    { tap: 'button[data-act^="clear"]', say: 'Clear it when they leave' },
-    { tap: 'button[data-wl^="ready"]', say: 'Text the next party: table ready' },
-  ],
-  'roofline': [
-    { tap: 'button[data-k=roof][data-v=hip]', say: 'Change the roof to a hip' },
-    { tap: 'button[data-k=house][data-v=detached]', say: 'Make it detached: the plan and price redraw' },
-  ],
-  'roundsheet': [
-    { tap: 'button[data-act=done]', say: 'Mark the next door done' },
-    { tap: 'button[data-act=cash]', say: 'Paid in cash' },
-  ],
   'atelier-voss': [
     { scrollBy: 2600, dur: 5200, say: 'Scroll: the drawings draw themselves' },
   ],
@@ -160,5 +49,48 @@ module.exports = {
   'kerb-and-camber': [
     { type: '#reg', text: 'KX19 LBD', say: 'Put your reg in' },
     { tap: '#checkBtn', say: 'It tells you when the MOT is due' },
+  ],
+  /* the system: one app, so each part's walkthrough starts on that part */
+  'system': [
+    { tap: '#todaySim', say: 'A call rings out while you are on a job', pause: 400 },
+    { wait: 7000, say: 'The system texts them back in seconds' },
+    { wait: 5000, say: 'They reply, and it is all in the inbox' },
+  ],
+  'inbox': [
+    { tap: '#simCall', say: 'Simulate a missed call', pause: 400 },
+    { wait: 7000, say: 'A text goes back in seconds, from the business’s own number' },
+    { wait: 4500, say: 'They reply' },
+    { tap: '#inLink', say: 'One tap sends the booking link', pause: 400 },
+    { wait: 5500, say: 'They book and pay the deposit' },
+  ],
+  'booking': [
+    { tap: '#bkTry', say: 'Book online, as a customer would' },
+    { tap: '.bk-po', say: 'Pick the job', pause: 600 },
+    { tap: '#bkT-0', say: 'Pick a free time', pause: 600 },
+    { tap: '#bkPay', say: 'Pay the deposit', pause: 1200 },
+    { tap: '#bkDone', say: 'It is in the diary, marked new' },
+  ],
+  'quotes': [
+    { tap: '#qNew', say: 'Start a quote from your own template' },
+    { tap: '#qSend', say: 'Send it: the customer gets a link', pause: 400 },
+    { wait: 4500, say: 'Opened, and the chasing is booked in' },
+    { tap: '#qPhone', say: 'What the customer sees' },
+    { tap: '#qAccept', say: 'They accept and pay the deposit. The chasing stops.' },
+  ],
+  'reviews': [
+    { tap: '#rvSend', say: 'Every finished job gets a review text', pause: 400 },
+    { wait: 6500, say: 'A new five-star review lands' },
+    { tap: '#rvList [data-act=reply]', say: 'The reply is drafted with their name and the job' },
+    { tap: '#rvPost', say: 'Post it' },
+  ],
+  'reminders': [
+    { tap: '#rmSend', say: 'Reminders go out before the work is due', pause: 400 },
+    { wait: 5500, say: 'Customers book themselves in from the text' },
+    { tap: '#rmList .rm-row', say: 'Each one: the text, its history and the free times' },
+  ],
+  'results': [
+    { tap: '#rsMonth [data-i="4"]', say: 'Pick a month' },
+    { scroll: '#rsChain', say: 'From enquiry to booked work' },
+    { tap: '#rsReport', say: 'The monthly report, in plain English' },
   ],
 };

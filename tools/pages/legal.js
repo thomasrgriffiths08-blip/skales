@@ -41,9 +41,6 @@ const privacy = {
   url: '/privacy/', og: 'privacy', priority: 0.3, changefreq: 'yearly',
   meta: { key: 'privacy', title: 'Privacy notice', kicker: 'Skales Studio', sub: 'What is collected, why, who sees it and how long it is kept.' },
   render(b){
-    const sendCase = site.leadEndpoint
-      ? 'If you choose to send your case file, your mobile number and answers come to me by text, through the small service that forwards them, so I can reply.'
-      : 'If you choose to send your case file, it goes from your own phone, by WhatsApp, email or the share sheet, and I receive what you send.';
     const bookLine = booking
       ? `They go to ${booking}, which runs the booking calendar, and I use them to prepare for the call.`
       : 'They are put into a message you send from your own WhatsApp or email, and I use them to prepare for the call.';
@@ -57,7 +54,7 @@ const privacy = {
       <p>Tom Griffiths, trading as Skales Studio, in the United Kingdom. For anything on this page, email ${contact}.</p>
 
       <h2>What is collected, and why?</h2>
-      <p><b>The 60-second check on /start.</b> Your answers stay in your browser. ${sendCase}</p>
+      <p><b>The three questions on /start.</b> Your answers stay in your browser until you book a call; then they go into the booking with where you arrived from, so I can prepare.</p>
       <p><b>Booking a call.</b> The booking page asks for your name, business, town, phone, email and what you would like help with. ${bookLine}</p>
       <p><b>The free teardown.</b> Your name, number and a line about your business, sent from your own WhatsApp or email.</p>
       <p><b>Messages.</b> Whatever you send me by email, WhatsApp or Instagram, so I can reply.</p>
@@ -92,8 +89,8 @@ const cookies = {
   meta: { key: 'cookies', title: 'Cookies', kicker: 'Skales Studio', sub: tags.length ? 'Ad and analytics cookies only if you accept them.' : 'No ad or analytics cookies.' },
   render(b){
     const own = [
-      ['Your answers on /start and your place in the demos', 'Session storage', 'Until you close the tab', 'So the check and the demos keep your answers as you move between screens.'],
-      ['Where you arrived from, such as the Instagram link', 'Session storage', 'Until you close the tab', 'So it can go with your case file, if you choose to send one.'],
+      ['Your answers on /start and your place in the demos', 'Session storage', 'Until you close the tab', 'So the questions and the demos keep your answers as you move between screens.'],
+      ['Where you arrived from, such as the Instagram link', 'Session storage', 'Until you close the tab', 'So it can go with your booking, if you book a call.'],
       ...(tags.length ? [['Your cookie choice', 'Local storage', 'Until you clear it', 'So the banner does not ask you again on every page.']] : []),
     ];
     const opt = [

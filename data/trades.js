@@ -12,7 +12,7 @@
    job / dep / times — what the booking card books, the deposit (0 = free visit) and the day's slots.
    faq    — the questions this trade's customers actually ask before ringing. No invented reviews. */
 module.exports = [
-  { key: 'heating', label: 'Plumbing & heating', plate: 'heating', c: '#B04A24', demo: 14,
+  { key: 'heating', label: 'Plumbing & heating', plate: 'heating', c: '#B04A24', demo: 15,
     word: 'heating engineer', plural: 'heating engineers',
     photo: 'heating', pos: '50% 40%', pos2: '60% 50%', font: 'Manrope',
     head: `Boiler gone off in {town}?`,
@@ -34,7 +34,7 @@ module.exports = [
     ],
     cta: 'Get a price' },
 
-  { key: 'electrical', label: 'Electrical', plate: 'electrical', c: '#1B4D8F', demo: 23,
+  { key: 'electrical', label: 'Electrical', plate: 'electrical', c: '#1B4D8F', demo: 11,
     word: 'electrician', plural: 'electricians',
     photo: 'electrical', pos: '45% 40%', pos2: '0% 50%', font: 'Inter Tight',
     head: `{town} electricians who turn up.`,
@@ -56,7 +56,7 @@ module.exports = [
     ],
     cta: 'Get a price' },
 
-  { key: 'roofing', label: 'Roofing', plate: 'roofing', c: '#465059', demo: 35,
+  { key: 'roofing', label: 'Roofing', plate: 'roofing', c: '#465059', demo: 16,
     word: 'roofer', plural: 'roofers',
     photo: 'roofing', pos: '60% 40%', pos2: '50% 30%', font: 'Archivo',
     head: `Roof leaking in {town}?`,
@@ -78,7 +78,7 @@ module.exports = [
     ],
     cta: 'Get a price' },
 
-  { key: 'building', label: 'Building & joinery', plate: 'building', c: '#7A5230', demo: 15,
+  { key: 'building', label: 'Building & joinery', plate: 'building', c: '#7A5230', demo: 13,
     word: 'builder', plural: 'builders',
     photo: 'building', pos: '50% 55%', pos2: '50% 40%', font: 'Archivo',
     head: `Builders in {town} who finish.`,
@@ -100,7 +100,7 @@ module.exports = [
     ],
     cta: 'Get a quote' },
 
-  { key: 'kitchens', label: 'Kitchens & bathrooms', plate: 'kitchens', c: '#2F4F43', demo: 1,
+  { key: 'kitchens', label: 'Kitchens & bathrooms', plate: 'kitchens', c: '#2F4F43', demo: 16,
     word: 'fitter', plural: 'fitters',
     photo: 'kitchens', pos: '50% 50%', pos2: '50% 50%', font: 'Fraunces',
     head: `Kitchens fitted properly in {town}.`,
@@ -122,7 +122,7 @@ module.exports = [
     ],
     cta: 'Get a quote' },
 
-  { key: 'garden', label: 'Landscaping & fencing', plate: 'garden', c: '#3E6B3A', demo: 36,
+  { key: 'garden', label: 'Landscaping & fencing', plate: 'garden', c: '#3E6B3A', demo: 18,
     word: 'landscaper', plural: 'landscapers',
     photo: 'garden', pos: '50% 60%', pos2: '50% 75%', font: 'Fraunces',
     head: `Gardens and fencing in {town}.`,
@@ -144,7 +144,7 @@ module.exports = [
     ],
     cta: 'Get a price' },
 
-  { key: 'cleaning', label: 'Cleaning', plate: 'cleaning', c: '#1C7A80', demo: 30,
+  { key: 'cleaning', label: 'Cleaning', plate: 'cleaning', c: '#1C7A80', demo: 13,
     word: 'cleaner', plural: 'cleaners',
     photo: 'cleaning', pos: '55% 35%', pos2: '70% 50%', font: 'Plus Jakarta Sans',
     head: `Cleaners in {town} who show up.`,
@@ -166,7 +166,7 @@ module.exports = [
     ],
     cta: 'Get a price' },
 
-  { key: 'salon', label: 'Salon & beauty', plate: 'salon', c: '#8A3A5B', demo: 33,
+  { key: 'salon', label: 'Salon & beauty', plate: 'salon', c: '#8A3A5B', demo: 15,
     word: 'salon', plural: 'salons',
     photo: 'salon', pos: '35% 40%', pos2: '50% 50%', font: 'Fraunces',
     head: `Book a chair in {town}.`,
@@ -188,7 +188,7 @@ module.exports = [
     ],
     cta: 'Book online' },
 
-  { key: 'garage', label: 'Garage & MOT', plate: 'garage', c: '#B3271E', demo: 32,
+  { key: 'garage', label: 'Garage & MOT', plate: 'garage', c: '#B3271E', demo: 18,
     word: 'garage', plural: 'garages',
     photo: 'garage', pos: '60% 45%', pos2: '50% 50%', font: 'Barlow',
     head: `MOTs and servicing in {town}.`,
@@ -210,7 +210,7 @@ module.exports = [
     ],
     cta: 'Book a slot' },
 
-  { key: 'handyman', label: 'Handyman & repairs', plate: 'other', c: '#2D4A5C', demo: 25,
+  { key: 'handyman', label: 'Handyman & repairs', plate: 'other', c: '#2D4A5C', demo: 14,
     word: 'handyman', plural: 'handymen',
     photo: 'handyman', pos: '40% 45%', pos2: '50% 55%', font: 'Manrope',
     head: `The odd jobs, done properly in {town}.`,
@@ -233,7 +233,7 @@ module.exports = [
     cta: 'Get a price' },
 
   /* kept for the case-study and try pages' "another service business"; the builder does not offer it */
-  { key: 'other', label: 'Something else', plate: 'other', c: '#1F2A37', demo: 25, builder: false,
+  { key: 'other', label: 'Something else', plate: 'other', c: '#1F2A37', demo: 14, builder: false,
     word: 'business', plural: 'businesses',
     head: `Work coming in from {town}.`,
     sub: `{biz} serve customers across {town}. This is the shape every service business needs: what you do, why you can be trusted, the area you cover, and a way to reach you that works at nine at night.`,

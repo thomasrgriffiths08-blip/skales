@@ -1,0 +1,28 @@
+{
+  "n": 17,
+  "slug": "reviews",
+  "file": "demos/reviews/index.html",
+  "kind": "tool",
+  "lane": "system",
+  "trade": "Any service business",
+  "name": "Google reviews",
+  "biz": "Six made-up service businesses",
+  "c": "#B04A24",
+  "pg": "#F6F6F4",
+  "short": "Every finished job asks for a review. Replies take one tap.",
+  "long": "After each job the customer gets a short text with a link to leave a Google review. Every customer is asked, not only the happy ones, because Google’s rules ban picking. New reviews land here with a reply already written to edit and post.",
+  "proves": "More reviews, and recent ones, keep you near the top of the map.",
+  "tags": [
+    "Review asks",
+    "One-tap replies",
+    "Rating over time"
+  ],
+  "features": [
+    "A review ask after every finished job",
+    "The rating and review count, month by month",
+    "Suggested replies that use the customer’s name and the job",
+    "What the customer receives, shown on their phone"
+  ],
+  "story": "The firms at the top of the map are rarely the best; they are the ones who ask. This asks every time.",
+  "start": "reviews"
+}
