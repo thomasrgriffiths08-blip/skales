@@ -47,7 +47,7 @@ LinkedIn people-search matches on the headline and the current job title, so bot
 Recommended (it opens with what you do for people, in plain words, and still carries the words owners search for). It names no single industry: the offer suits any business that wins work through enquiries or bookings, and LinkedIn's owners are mostly professional and B2B service firms, not one-van trades.
 
 ```text
-I help service businesses get more enquiries and book more of them | Facebook & Google ads, landing pages, booking and follow-up | Founder, Skales Studio, West London
+I help service businesses get more customers and spend less time chasing them | Facebook & Google ads, websites, CRMs and automation | Founder, Skales Studio, West London
 ```
 
 If you later decide to specialise in trades:
@@ -86,25 +86,28 @@ Try in this order: `linkedin.com/in/tomgriffiths-skales`, `linkedin.com/in/tom-g
 Written to sound like a person, not a brochure: it opens with your name and what you do for people, says where you are and why you do it, explains the work in plain English, and ends with an easy, free first step. Everything in it is true; keep it that way.
 
 ```text
-Hi, I'm Tom. I help service businesses get more enquiries and turn more of them into booked work: clinics, accountants, estate agents, salons, builders, and anyone whose customers enquire or book before they buy.
+Hi, I'm Tom. I help service businesses get more customers and spend less time chasing them. I build the ads and websites that bring enquiries in, and the CRMs and automations that make sure every one is answered, booked and followed up.
 
-I'm from London and I run Skales Studio on my own, from West London. I went to media school, and of everything I learned, building marketing for small businesses is the work I enjoy most: it's practical, and you can see whether it's working.
+I'm from London and I run Skales Studio on my own, from West London. I went to media school, and of everything I learned, building marketing and systems for small businesses is the work I enjoy most: it's practical, and you can see whether it's working.
 
-What I do, in plain English:
-• Facebook, Instagram and Google ads that put you in front of people nearby who need you
-• A simple page for those ads to land on, built to turn a click into a call or a booking
-• The follow-up behind it: missed calls texted back, quotes chased, reviews asked for, so you're not doing it all by hand at 9pm
+What I build, in plain English:
+• Ads: Facebook, Instagram and Google ads that put you in front of the people who need you
+• Websites and landing pages: built to turn a visit into a call or a booking
+• CRMs: every enquiry and customer in one place, so nothing slips and you can see what's working
+• Automations: missed calls texted back, quotes chased, reminders and review requests sent on their own, so you're not doing it all by hand at 9pm
+
+You can have all of it, or just the part you need, such as a CRM on its own or a single automation.
 
 Everything is set up in your name. If we ever stop working together, you keep the lot.
 
-Not sure where to start? Send me your website or Facebook page and I'll have a look for free. I'll tell you three things: what's losing you enquiries, what to fix first, and roughly what it's worth. No sales pitch and no obligation.
+I work with clinics, accountants, estate agents, salons, builders and any business whose customers enquire or book before they buy. Not sure where to start? Send me your website or Facebook page and I'll have a look for free. I'll tell you three things: what's costing you customers or time, what to fix first, and roughly what it's worth. No sales pitch and no obligation.
 
 You can also try the systems I've built on my website. They're all live, for made-up businesses, so you can click around. Or just message me here. I reply to everyone.
 ```
 
 The build count goes up every week; update "Thirty-six" in Experience and on the Company Page when the site's number changes (the About deliberately has no number in it).
 
-**Top skills** (the five pinned under About): Facebook Ads · Google Ads · Landing Page Optimization · Web Design · Marketing Automation.
+**Top skills** (the five pinned under About): Facebook Ads · Google Ads · Web Design · Customer Relationship Management (CRM) · Marketing Automation.
 
 ### Featured (in this order; each pulls the page's own OG card as its picture)
 
@@ -118,20 +121,21 @@ The build count goes up every week; update "Thirty-six" in Experience and on the
 
 | Field | Value |
 |---|---|
-| Title | Founder · Ads, landing pages & web design (not just "Founder & builder": the title is what search matches) |
+| Title | Founder · Ads, websites, CRM & automation (not just "Founder & builder": the title is what search matches) |
 | Employment type | Self-employed |
 | Company | Skales Studio (pick the Company Page once it exists) |
 | Dates | [month] 2026 to present |
 | Location | United Kingdom · Remote |
-| Skills | Facebook Ads, Google Ads, Landing Page Optimization, Web Design, Marketing Automation |
+| Skills | Facebook Ads, Google Ads, Web Design, Customer Relationship Management (CRM), Marketing Automation |
 | Media | Links to /work/ and /try/ |
 
 Description (limit 2,000):
 
 ```text
-One-person studio. I build the whole marketing funnel for UK service businesses: Meta and Google ads, the landing pages they point at, and the online booking, CRM and follow-up automation behind them.
+One-person studio. I build the systems UK service businesses run on: Meta and Google ads, websites and landing pages, CRMs and online booking, and the automations that connect them.
 
 • Ads run in the client's own ad accounts and point at landing pages built for one job: turning a click into an enquiry.
+• CRMs and automations are set up around how the business already works: every enquiry tracked, with follow-ups, reminders and review requests sent on their own.
 • Every build is hand-coded in HTML, CSS and plain JavaScript: no framework, no page builder, no theme.
 • Thirty-six working demonstration builds run live on the site: quote engines, dispatch boards, booking with deposits, missed-call text-back, review requests, boiler-service and MOT reminders. Every business in them is fictional.
 • One new system a week, built in public on Instagram.
@@ -143,7 +147,7 @@ Add any earlier jobs and your education as they really were. A short honest hist
 
 ### Services page ("Open to" → "Providing services")
 
-- **Services** (pick the closest from LinkedIn's list, up to 10): Advertising, Digital Marketing, Search Engine Marketing (SEM), Social Media Marketing, Lead Generation, Web Design, Web Development, Search Engine Optimization (SEO).
+- **Services** (pick the closest from LinkedIn's list, up to 10): Advertising, Digital Marketing, Social Media Marketing, Lead Generation, Web Design, Web Development, Marketing Automation, Customer Relationship Management (CRM), Business Process Automation, Search Engine Optimization (SEO).
 - **Location:** tick "available to work remotely", plus your area.
 - **Pricing:** leave blank. No prices, same as the site.
 - **Reviews:** this is where the first real client reviews can live. Only ever ask real clients.
@@ -151,12 +155,12 @@ Add any earlier jobs and your education as they really were. A short honest hist
 Description (keep under 500):
 
 ```text
-The whole marketing funnel for UK service businesses: Facebook, Instagram and Google ads, landing pages built to turn a click into an enquiry, and the booking and follow-up that turn an enquiry into a job. The ad accounts, domain and code are yours from day one. Hand-coded, with no page builder. Every job is quoted flat after a short call. Start with the free teardown: three findings on your ads, website and Google listing, sent by message.
+Ads, websites, CRMs and automations for UK service businesses. Ads that bring enquiries in, websites built to turn a visit into a call or booking, and CRMs and automations that answer, book and follow up every enquiry. Take all of it or just the part you need. Everything is in your name from day one, and every job is quoted flat after a short call. Start with a free look-over: three findings, sent by message.
 ```
 
 ### Skills (add these; skip any LinkedIn's autocomplete does not offer)
 
-Facebook Ads · Google Ads · Pay Per Click (PPC) · Social Media Advertising · Landing Page Optimization · Conversion Rate Optimization · Lead Generation · Marketing Automation · Customer Relationship Management (CRM) · Small Business Marketing · Web Design · Web Development · Front-End Development · JavaScript · HTML5 · Cascading Style Sheets (CSS) · Responsive Web Design · Search Engine Optimization (SEO) · Local SEO
+Facebook Ads · Google Ads · Pay Per Click (PPC) · Social Media Advertising · Landing Page Optimization · Conversion Rate Optimization · Lead Generation · Marketing Automation · Customer Relationship Management (CRM) · Business Process Automation · Workflow Automation · Small Business Marketing · Web Design · Web Development · Front-End Development · JavaScript · HTML5 · Cascading Style Sheets (CSS) · Responsive Web Design · Search Engine Optimization (SEO) · Local SEO
 
 ### Photo
 
@@ -195,27 +199,27 @@ Upload `og/linkedin-banner.png`. The left side is left empty on purpose: your ph
 Tagline (limit 120):
 
 ```text
-Ads, landing pages and follow-up for UK service businesses. The whole funnel, owned by you.
+Ads, websites, CRMs and automations for UK service businesses. Built by one person, owned by you.
 ```
 
 Overview (limit 2,000):
 
 ```text
-Skales Studio builds the whole marketing funnel for UK service businesses: the Facebook, Instagram and Google ads, the landing pages they point at, and the online booking and follow-up that turn an enquiry into booked work. Clinics and dental practices, accountants and solicitors, estate and letting agents, salons, builders and trades: any business whose customers enquire or book before they buy.
+Skales Studio builds the systems UK service businesses run on: the ads that bring enquiries in, the websites and landing pages they land on, and the CRMs, booking and automations that make sure every enquiry is answered, booked and followed up. Clinics and dental practices, accountants and solicitors, estate and letting agents, salons, builders and trades: any business whose customers enquire or book before they buy.
 
 It is one person, Tom Griffiths. The person you message is the person who builds it.
 
 • Ads: Facebook, Instagram and Google search ads, and Local Services Ads where the business qualifies, in the client's own ad accounts.
 • Landing pages: one page per offer, built to turn a click into a name and a number. Hand-coded, with no page builder and no theme.
-• Booking and CRM: slots customers take themselves, deposits that hold them, and every enquiry in one place.
-• Follow-up that runs on its own: missed-call text-back, quote chasing, review requests, service reminders.
+• CRM and booking: every enquiry in one place with what happened to it, plus slots customers take themselves and deposits that hold them.
+• Automations: missed-call text-back, quote chasing, review requests, service reminders, and tools like quote engines and job boards built around how the business already works.
 
 Clients own their ad accounts, domain, code and every other account from day one; nothing is rented back to them monthly. Every job is quoted flat after a short call and agreed before anything starts.
 
 Thirty-six working demonstration builds run live on the website, every one for an invented business, and one new system a week is built in public on Instagram (@tomxsystems).
 ```
 
-Specialties: Facebook and Instagram ads · Google Ads · Local Services Ads · Landing pages · Lead generation for service businesses · Online booking systems · CRM and enquiry tracking · Follow-up automation · Missed-call text-back · Review request automation · Hand-coded websites
+Specialties: Facebook and Instagram ads · Google Ads · Local Services Ads · Landing pages · Lead generation for service businesses · Online booking systems · CRM setup · Business process automation · Follow-up automation · Missed-call text-back · Review request automation · Hand-coded websites
 
 ---
 
@@ -226,9 +230,9 @@ Specialties: Facebook and Instagram ads · Google Ads · Local Services Ads · L
 No link in the post itself: in the largest recent study (687,000 posts, 2025 to 2026), a link cut reach by 16% to 21% even when it went in the comments. The free teardown sits in Featured instead, one tap from the profile.
 
 ```text
-I run Skales Studio in West London. I build the whole marketing funnel for service businesses: the Facebook and Google ads, the landing page they click through to, and the booking and follow-up behind it.
+I run Skales Studio in West London. I build the systems service businesses run on: the ads that bring enquiries in, the website they land on, and the CRM and automations that make sure every one is answered, booked and followed up.
 
-Why the whole funnel: an ad that points at a page built to take no enquiry wastes the click, and an enquiry nobody follows up wastes the ad. Each step only pays if the next one works.
+Why all of it together: an ad that points at a page built to take no enquiry wastes the click, and an enquiry nobody follows up wastes the ad. Each step only pays if the next one works.
 
 Three rules I build to:
 
@@ -325,19 +329,19 @@ Find them with people search: keywords like `owner plumbing`, `director electric
 Invite note to a referral partner (under 200):
 
 ```text
-Hi [name], I build ads, landing pages and follow-up for UK service businesses. Plenty of your clients will be the people I work with, so it seemed worth connecting. Tom
+Hi [name], I build ads, websites, CRMs and automations for UK service businesses. Plenty of your clients will be the people I work with, so it seemed worth connecting. Tom
 ```
 
 After a business owner accepts (no pitch until they say yes):
 
 ```text
-Thanks for connecting, [name]. I build the whole funnel for businesses like yours: the ads, the landing page and the follow-up. If it's useful, I'll look at your website, your Google listing and any ads you're running, and send back three things: what's leaking, what to fix first, and what it's worth in jobs. Free, no call needed. Want me to?
+Thanks for connecting, [name]. I build ads, websites, CRMs and automations for businesses like yours. If it's useful, I'll look at your website, your Google listing and any ads you're running, and send back three things: what's leaking, what to fix first, and what it's worth in jobs. Free, no call needed. Want me to?
 ```
 
 To people you know:
 
 ```text
-I've started Skales Studio: I build ads, landing pages and follow-up for service businesses. If you know a business owner who wants more enquiries, I'd be grateful for an introduction.
+I've started Skales Studio: I build ads, websites, CRMs and automations for service businesses. If you know a business owner who wants more customers or less admin, I'd be grateful for an introduction.
 ```
 
 One follow-up a week later if there's no reply, then leave it. When someone says yes to the teardown, do it properly; it is the best thing you have to show them.
