@@ -71,7 +71,10 @@ svg:not([width]){width:16px;height:16px;flex:none}
 .card-h .meta{font-size:12px;color:var(--ink3)}
 .card-b{padding:14px}
 .lbl-s{font-size:11.5px;font-weight:550;color:var(--ink3);letter-spacing:.02em}
-.stat{padding:13px 14px}
+.stat{position:relative;padding:13px 14px}
+.spark{position:absolute;top:14px;right:14px;display:flex;align-items:flex-end;gap:2px;height:22px}
+.spark i{width:4px;border-radius:1px;background:color-mix(in srgb,var(--ink3) 40%,#fff)}
+.spark i:last-child{background:var(--ac)}
 .stat .k{display:block;font-size:12px;color:var(--ink3);font-weight:500}
 .stat .v{display:block;margin-top:4px;font-size:24px;font-weight:620;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
 .stat .d{display:block;margin-top:4px;font-size:12px;color:var(--ink2)}
@@ -173,14 +176,41 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
 @keyframes typ{0%,60%,100%{opacity:.25}30%{opacity:1}}
 
 /* the customer's phone, drawn plainly */
-.phone{width:100%;max-width:290px;margin:0 auto;border:1px solid var(--line);border-radius:22px;background:var(--panel);overflow:hidden}
-.phone-sb{display:flex;justify-content:space-between;padding:9px 18px 4px;font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums}
-.phone-h{display:flex;align-items:center;gap:9px;padding:8px 14px 10px;border-bottom:1px solid var(--line2)}
-.phone-h b{display:block;font-size:13px;font-weight:600;line-height:1.2}
-.phone-h small{display:block;font-size:11.5px;color:var(--ink3)}
-.phone-b{padding:12px;display:flex;flex-direction:column;gap:7px;min-height:260px;background:var(--panel)}
-.phone .msg{max-width:86%;font-size:13px}
-.phone-cap{margin-top:8px;text-align:center;font-size:12px;color:var(--ink3)}
+/* the customer's phone: a real handset's frame, status bar and thread, so "what they see" reads as their phone */
+.phone{width:100%;max-width:292px;margin:0 auto;padding:7px;border-radius:42px;background:#0E0E10;box-shadow:0 18px 36px -26px rgba(0,0,0,.5)}
+.phone-scr{position:relative;display:flex;flex-direction:column;min-height:540px;border-radius:35px;overflow:hidden;background:#fff;color:#111;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Geist,"Segoe UI",Roboto,sans-serif}
+.phone-sb{flex:none;position:relative;display:flex;justify-content:space-between;align-items:center;height:38px;padding:8px 22px 0 26px;font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.phone-isl{position:absolute;left:50%;top:9px;width:78px;height:22px;margin-left:-39px;border-radius:12px;background:#000}
+.phone-ic{display:flex;align-items:center;gap:4px}
+.phone-ic svg{width:14px;height:9px;fill:currentColor}
+.phone-ic b{font-size:11px;font-weight:600}
+.phone-bat{position:relative;width:20px;height:10px;border:1.2px solid currentColor;border-radius:3px;opacity:.9}
+.phone-bat::before{content:"";position:absolute;inset:1px;right:4px;border-radius:1px;background:currentColor}
+.phone-bat::after{content:"";position:absolute;right:-3px;top:2.5px;width:1.5px;height:3px;border-radius:0 1px 1px 0;background:currentColor}
+.phone-h{flex:none;position:relative}
+.phone-h.is-sms{display:flex;justify-content:center;padding:4px 12px 9px;background:#F6F6F7;border-bottom:1px solid rgba(60,60,67,.14)}
+.phone-back{position:absolute;left:10px;top:14px;width:18px;height:18px;color:#0A7AFF;transform:scaleX(-1)}
+.phone-who{display:grid;justify-items:center;gap:3px}
+.phone-who b{font-size:11px;font-weight:500;line-height:1.2;color:#111}
+.phone-who .phone-mk{width:34px;height:34px;border-radius:50%;font-size:15px}
+.phone-mk{display:grid;place-items:center;flex:none;width:20px;height:20px;border-radius:5px;background:var(--ac);color:var(--ac-ink);font-weight:650;font-size:11px}
+.phone-h.is-web{padding:2px 10px 8px;background:#F6F6F7;border-bottom:1px solid rgba(60,60,67,.14)}
+.phone-url{display:flex;align-items:center;justify-content:center;gap:5px;height:30px;padding:0 12px;border-radius:9px;background:rgba(118,118,128,.12);font-size:12.5px;color:#111;min-width:0}
+.phone-url span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.phone-url svg{flex:none;width:9px;height:11px;fill:rgba(60,60,67,.6);color:rgba(60,60,67,.6)}
+.phone-site{flex:none;display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line2)}
+.phone-site b{font-size:12.5px;font-weight:600}
+.phone-b{flex:1;padding:10px 12px 14px;display:flex;flex-direction:column;gap:6px;min-height:260px;background:#fff}
+.phone.is-web .phone-b{padding:14px}
+.phone-stamp{align-self:center;margin:2px 0 4px;font-size:10.5px;color:rgba(60,60,67,.6)}
+.phone .msg{max-width:84%;padding:7px 11px;border:0;border-radius:17px;background:#E9E9EB;color:#111;font-size:13px;line-height:1.35;align-self:flex-start}
+.phone .msg.us,.phone .msg.auto{align-self:flex-end;background:#30B94D;color:#fff}
+.phone .sys{font-size:10.5px;color:rgba(60,60,67,.6)}
+.phone-in{flex:none;display:flex;align-items:center;gap:8px;padding:7px 10px 4px}
+.phone-plus{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(118,118,128,.12);color:rgba(60,60,67,.6);font-size:17px;line-height:1}
+.phone-fld{flex:1;height:28px;padding:0 12px;border:1px solid rgba(60,60,67,.22);border-radius:14px;font-size:12.5px;line-height:26px;color:rgba(60,60,67,.45)}
+.phone-home{flex:none;display:block;width:34%;height:4px;margin:8px auto 7px;border-radius:3px;background:#111}
+.phone-cap{margin-top:10px;text-align:center;font-size:12px;color:var(--ink3)}
 
 /* drawer: right panel on laptop, sheet on phone */
 .scrim{position:fixed;inset:0;background:rgba(24,24,27,.28);z-index:40;opacity:0;transition:opacity .2s}
@@ -232,6 +262,7 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
   .split.side-first>:last-child{order:-1}
   .grid.g4{grid-template-columns:repeat(2,minmax(0,1fr))}
   .stat .v{font-size:22px}
+  .spark{top:38px;height:20px}
   .btn{height:40px;font-size:14px}
   .x{width:40px;height:40px}
   .btn.sm{height:34px;font-size:13.5px}

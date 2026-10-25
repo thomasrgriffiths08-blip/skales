@@ -22,10 +22,10 @@
       var accVal = x.acc.reduce(function(a, q){ return a + SYS.quoteTotal(q).total; }, 0);
       var rv = S.rating, rCount = rv.count[rv.count.length - 1] + S.reviews.filter(function(r){ return r.at > SYS.sod(n) - 30 * SYS.DAY; }).length;
       var stats = '<div class="grid g4">'
-        + stat('Missed calls caught', x.missed.length, x.missed.length ? 'All texted back within ' + Math.max(fastest, 8) + ' seconds' : 'None missed yet today', 'inbox', 'stCalls')
-        + stat('Booked today', x.made.length, f.money(madeVal) + ' of work' + (depVal ? ', ' + f.money(depVal) + ' in deposits' : ''), 'booking', 'stBooked')
-        + stat('Quotes accepted', x.acc.length ? f.money(accVal) : '0', x.chased ? x.chased + ' chased for you this morning' : 'Chasing runs at 9am', 'quotes', 'stQuotes')
-        + stat('Google rating', rv.hist[rv.hist.length - 1].toFixed(1), 'From ' + rCount + ' reviews, up from ' + rv.hist[0].toFixed(1), 'reviews', 'stRating')
+        + stat('Missed calls caught', x.missed.length, x.missed.length ? 'All texted back within ' + Math.max(fastest, 8) + ' seconds' : 'None missed yet today', 'inbox', 'stCalls', week('calls', 1, 5, x.missed.length), 'The last seven days')
+        + stat('Booked today', x.made.length, f.money(madeVal) + ' of work' + (depVal ? ', ' + f.money(depVal) + ' in deposits' : ''), 'booking', 'stBooked', week('booked', 3, 9, x.made.length), 'The last seven days')
+        + stat('Quotes accepted', x.acc.length ? f.money(accVal) : '0', x.chased ? x.chased + ' chased for you this morning' : 'Chasing runs at 9am', 'quotes', 'stQuotes', week('quotes', 0, 3, x.acc.length), 'The last seven days')
+        + stat('Google rating', rv.hist[rv.hist.length - 1].toFixed(1), 'From ' + rCount + ' reviews, up from ' + rv.hist[0].toFixed(1), 'reviews', 'stRating', rv.hist.map(function(h){ return h - 3.6; }), 'The last six months')
         + '</div>';
       var ev = SYS.events().slice(0, 14);
       var feed = '<div class="card"><div class="card-h"><h2>What happened today</h2><span class="meta">' + ev.length + ' things, none of them by hand</span></div>'
@@ -50,6 +50,17 @@
     },
     tick: function(v){ /* the feed re-reads the clock when something new lands; nothing to do each second */ }
   });
-  function stat(k, val, d, go, id){ return '<button class="card stat" type="button" data-go="' + go + '" id="' + id + '" style="text-align:left"><span class="k">' + esc(k) + '</span><span class="v">' + val + '</span><span class="d">' + esc(d) + '</span></button>'; }
+  /* a small trend in the corner of each figure: earlier days drawn from the business's own seed, today last and in its colour */
+  function week(k, lo, hi, today){
+    var h = 2166136261, key = SYS.T.key + k, out = [];
+    for (var i = 0; i < key.length; i++){ h ^= key.charCodeAt(i); h = Math.imul(h, 16777619); }
+    for (var j = 0; j < 6; j++){ h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0; out.push(lo + (h % (hi - lo + 1))); }
+    out.push(today); return out;
+  }
+  function spark(list, title){
+    var mx = Math.max.apply(null, list.concat([1]));
+    return '<span class="spark" title="' + esc(title) + '" aria-hidden="true">' + list.map(function(x){ return '<i style="height:' + Math.max(12, Math.round(x / mx * 100)) + '%"></i>'; }).join('') + '</span>';
+  }
+  function stat(k, val, d, go, id, trend, title){ return '<button class="card stat" type="button" data-go="' + go + '" id="' + id + '" style="text-align:left">' + (trend ? spark(trend, title) : '') + '<span class="k">' + esc(k) + '</span><span class="v">' + val + '</span><span class="d">' + esc(d) + '</span></button>'; }
   function needRow(go, t1, t2, n, ref){ return '<button class="row click" type="button" data-go="' + go + '"' + (ref ? ' data-ref="' + ref + '"' : '') + ' style="width:100%;text-align:left"><span class="dot ' + (n ? 'ac' : 'good') + '"></span><span class="main-t"><span class="t1"><span class="n">' + t1 + '</span></span><span class="t2">' + t2 + '</span></span>' + SYS.icon('right', 'ch') + '</button>'; }
 })();

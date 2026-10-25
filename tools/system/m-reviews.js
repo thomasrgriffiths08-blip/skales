@@ -130,7 +130,7 @@
     } else {
       var big = ''; for (var i = 0; i < 5; i++) big += '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">' + STAR + '</svg>';
       body = '<div class="rv-gp"><b>' + esc(t.biz) + '</b><small>Posting publicly on Google</small><div class="rv-gs">' + big + '</div><div class="rv-gbox">Share details of your own experience</div><span class="rv-gpost">Post</span></div>';
-      o = { title: 'Google', sub: 'Rate and review', body: body, cap: 'The link opens Google’s own review box. Whatever they pick goes straight to Google.' };
+      o = { title: 'Google', web: 'search.google.com', site: false, body: body, cap: 'The link opens Google’s own review box. Whatever they pick goes straight to Google.' };
     }
     return SYS.phone(o);
   }

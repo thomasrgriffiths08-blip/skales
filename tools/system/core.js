@@ -314,12 +314,21 @@
   SYS.drawerEl = function(){ return dr; };
   doc.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ SYS.closeDrawer(); closeMenu(); } });
 
-  /* the customer's phone, for the parts where what they see matters */
+  /* the customer's phone, for the parts where what they see matters: drawn like the real thing, a text thread
+     (o.web absent) or the business's page in the browser (o.web = the address). Same proportions as the desk phone. */
+  var SIG = '<svg viewBox="0 0 17 11" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx=".7"/><rect x="4.5" y="5" width="3" height="6" rx=".7"/><rect x="9" y="2.5" width="3" height="8.5" rx=".7"/><rect x="13.5" y="0" width="3" height="11" rx=".7"/></svg>';
+  var LOCK = '<svg viewBox="0 0 10 12" aria-hidden="true"><rect x="1" y="5" width="8" height="6.5" rx="1.4"/><path d="M3 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>';
   SYS.phone = function(o){
-    var n = now();
-    return '<div class="phone" aria-label="What the customer sees"><div class="phone-sb"><span>' + f.time(n) + '</span><span>5G</span></div>'
-      + '<div class="phone-h">' + (o.av ? SYS.av(o.av, 'sm') : '') + '<div><b>' + esc(o.title) + '</b>' + (o.sub ? '<small>' + esc(o.sub) + '</small>' : '') + '</div></div>'
-      + '<div class="phone-b" ' + (o.id ? 'id="' + o.id + '"' : '') + '>' + (o.body || '') + '</div></div>' + (o.cap ? '<p class="phone-cap">' + esc(o.cap) + '</p>' : '');
+    var n = now(), t = SYS.T, web = o.web;
+    var sb = '<div class="phone-sb"><span>' + f.time(n) + '</span><i class="phone-isl"></i><span class="phone-ic">' + SIG + '<b>5G</b><i class="phone-bat"></i></span></div>';
+    var head = web
+      ? '<div class="phone-h is-web"><span class="phone-url">' + LOCK + '<span>' + esc(web) + '</span></span></div>'
+        + (o.site === false ? '' : '<div class="phone-site">' + (o.site ? '<b>' + esc(o.site) + '</b>' : '<span class="phone-mk">' + esc(t.mark) + '</span><b>' + esc(t.biz) + '</b>') + '</div>')
+      : '<div class="phone-h is-sms">' + SYS.icon('right', 'phone-back') + '<span class="phone-who"><span class="phone-mk">' + esc(t.mark) + '</span><b>' + esc(o.title || t.biz) + '</b></span></div>';
+    var foot = web ? '' : '<div class="phone-in" aria-hidden="true"><span class="phone-plus">+</span><span class="phone-fld">Text Message</span></div>';
+    return '<div class="phone' + (web ? ' is-web' : ' is-sms') + '" aria-label="What the customer sees"><div class="phone-scr">' + sb + head
+      + '<div class="phone-b" ' + (o.id ? 'id="' + o.id + '"' : '') + '>' + (web || /class="sys"/.test(o.body || '') ? '' : '<div class="phone-stamp">Text Message · Today ' + f.time(n) + '</div>') + (o.body || '') + '</div>' + foot + '<i class="phone-home"></i></div></div>'
+      + (o.cap ? '<p class="phone-cap">' + esc(o.cap) + '</p>' : '');
   };
 
   /* ---------- shell ---------- */

@@ -310,7 +310,7 @@
         + '<p class="bk-pn">' + (s.dep ? money(s.dep) + ' deposit paid. ' : '') + 'A confirmation text is on its way to ' + esc(p.phone) + ', and you’ll get a reminder the day before.</p>';
     }
     return '<p class="note bk-tn">What a customer sees at <b class="ink2">' + esc(t.domain) + '/book</b>. The link sits on your Google profile, your website and the missed-call text.</p>'
-      + SYS.phone({ title: t.biz, sub: t.domain + '/book', av: t.biz, id: 'bkPhone', body: b });
+      + SYS.phone({ title: t.biz, web: t.domain + '/book', id: 'bkPhone', body: b });
   }
   function tryFoot(){
     if (tr.step === 'done') return '<div class="bk-acts"><span class="note bk-fn">It’s in the diary now.</span><button type="button" class="btn pri" data-act="tDone" id="bkDone">See it in the diary</button></div>';

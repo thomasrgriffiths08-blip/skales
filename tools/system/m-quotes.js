@@ -78,7 +78,7 @@
         + '<button type="button" class="btn ink wide qt-acc" data-act="accept" id="qAccept"' + (q.st === 'draft' ? ' disabled' : '') + '>Accept and pay ' + money(d) + ' deposit</button>'
         + '<p class="qt-pn qt-c">Questions? Just reply to the text.</p>';
     }
-    return SYS.phone({ title: t.biz, sub: 'Quote ' + q.no, av: t.biz, id: 'qPhoneB', body: body, cap: q.st === 'draft' ? 'A preview. They can’t see it until you send it.' : 'Their phone. The link came by text and email.' });
+    return SYS.phone({ title: t.biz, web: t.domain + '/quote/' + q.no.toLowerCase(), id: 'qPhoneB', body: body, cap: q.st === 'draft' ? 'A preview. They can’t see it until you send it.' : 'Their phone. The link came by text and email.' });
   }
   function li(at, text, sub, k, due){
     var n = SYS.now(), d = at && !(+SYS.sod(at) === +SYS.sod(n)) ? f.day(at) : '', small = [d, sub].filter(Boolean).join(' · ');
