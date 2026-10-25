@@ -87,20 +87,24 @@
   }
   function say(c, k, text, extra){ var m = { k: k, text: text, at: SYS.now() }; if (extra) for (var x in extra) m[x] = extra[x]; c.msgs.push(m); return m; }
 
-  /* the whole thing, on a button: rings out, counts down, texts, the customer replies */
+  /* the whole thing, on a button: rings out, counts down, texts, the customer replies.
+     On the desk (SYS.desk) the customer is a real phone beside the laptop: it rings longer, and the replies and
+     the booking come from that phone instead of being made up here. */
   function simulate(){
     if (sim && (sim.ring || sim.countdown != null)) return;
-    var S = SYS.S, t = SYS.T, used = S.convos.map(function(c){ return c.pid; });
+    var S = SYS.S, t = SYS.T, used = S.convos.map(function(c){ return c.pid; }), desk = SYS.desk;
     var p = S.people.filter(function(x){ return used.indexOf(x.id) < 0; })[0] || S.people[0];
-    var svcs = t.services.filter(function(s){ return s.price; }), s = svcs[S.convos.length % svcs.length];
-    var c = { id: SYS.uid('c'), pid: p.id, ch: 'call', svc: s.id, missed: true, at: SYS.now(), st: 'new', msgs: [], src: 'Phone', ring: true, fresh: true };
+    var svcs = t.services.filter(function(s){ return s.price; }), s = desk ? t.svc[desk.svc()] : svcs[S.convos.length % svcs.length];
+    var c = { id: SYS.uid('c'), pid: p.id, ch: 'call', svc: s.id, missed: true, at: SYS.now(), st: 'new', msgs: [], src: 'Phone', ring: true, fresh: true, desk: !!desk };
     S.convos.push(c); sim = c; sel = c.id; filter = 'need'; phoneView = false;
-    repaint();
-    SYS.later(1500, function(){
+    repaint(); if (desk) desk.emit('ring', { name: p.name });
+    SYS.later(desk ? 3600 : 1500, function(){
       c.ring = false; c.countdown = 4; say(c, 'sys', 'Missed call'); c.at = c.msgs[0].at; repaint();
+      if (desk) desk.emit('missed', { at: +c.at });
       SYS.later(4000, function(){
-        c.countdown = null; say(c, 'auto', SYS.autoText(t)); c.fresh = false; repaint();
+        c.countdown = null; var m = say(c, 'auto', SYS.autoText(t)); c.fresh = false; repaint();
         SYS.toast('Text sent 4 seconds after the missed call');
+        if (desk){ desk.emit('sms', { text: m.text, auto: true }); return; }
         SYS.later(2500, function(){ typing[c.id] = true; repaint(); });
         SYS.later(6000, function(){ typing[c.id] = false; say(c, 'them', REPLIES[S.convos.length % 2](t, s)); repaint(); });
       });
@@ -108,8 +112,9 @@
   }
   function sendLink(c){
     var t = SYS.T, s = SYS.svc(c.svc), p = SYS.person(c.pid);
-    say(c, 'us', 'Hi ' + SYS.first(p.name) + ', thanks. Pick any free time here and it’s confirmed straight away: ' + t.domain + '/book', { who: t.owner });
+    var m = say(c, 'us', 'Hi ' + SYS.first(p.name) + ', thanks. Pick any free time here and it’s confirmed straight away: ' + t.domain + '/book', { who: t.owner });
     c.st = 'replied'; repaint();
+    if (c.desk && SYS.desk){ SYS.desk.emit('sms', { text: m.text, link: t.domain + '/book', svc: c.svc }); return; }
     SYS.later(2200, function(){ typing[c.id] = true; repaint(); });
     SYS.later(5200, function(){
       var slot = SYS.freeSlots(c.svc, 1)[0]; typing[c.id] = false;
@@ -120,6 +125,22 @@
       repaint(); SYS.toast('Booked: ' + s.name + ', ' + f.when(slot.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : ''));
     });
   }
+  /* for the desk: the phone beside the laptop replies, and books from the link */
+  SYS.inbox = {
+    simulate: simulate,
+    convo: function(){ return sim; },
+    reply: function(text){
+      var c = sim; if (!c) return; say(c, 'them', text); c.st = 'new'; sel = c.id; repaint();
+      if (SYS.cur === 'inbox' && isPhone() && !SYS.drawerEl()) openPhoneThread();
+    },
+    link: function(){ var c = sim; if (c && c.st !== 'booked') sendLink(c); },
+    booked: function(b, text){
+      var c = sim; if (!c) return; var s = SYS.svc(b.svc);
+      say(c, 'sys', 'Booked: ' + s.name + ', ' + f.when(b.start)); c.bid = b.id; c.st = 'booked';
+      if (text) say(c, 'auto', text);
+      repaint();
+    }
+  };
   function bookDrawer(c){
     var s = SYS.svc(c.svc), slots = SYS.freeSlots(c.svc, 8), p = SYS.person(c.pid);
     SYS.drawer({ title: 'Book ' + p.name + ' in', body: '<div class="field" style="margin-bottom:14px"><label for="bkSvc">Service</label><select class="inp" id="bkSvc">' + SYS.T.services.map(function(x){ return '<option value="' + x.id + '"' + (x.id === c.svc ? ' selected' : '') + '>' + esc(x.name) + ' · ' + esc(f.price(x)) + '</option>'; }).join('') + '</select></div><p class="lbl-s" style="margin-bottom:8px">Next free times</p><div class="rows card">' + slots.map(function(sl, i){ return '<button class="row click" type="button" data-act="pick" data-i="' + i + '" style="width:100%;text-align:left"><span class="main-t"><span class="t1">' + esc(f.when(sl.start)) + '</span><span class="t2">' + esc(sl.who) + ' · ' + f.mins(s.mins) + '</span></span>' + SYS.icon('right') + '</button>'; }).join('') + '</div><p class="note" style="margin-top:10px">They get a confirmation text with the time, the price and a link to move it.</p>' });

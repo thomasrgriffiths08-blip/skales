@@ -79,7 +79,7 @@
     var R = rng(hash(t.key + '/v3')), n = now(), today = sod(n);
     var pick = function(a){ return a[Math.floor(R() * a.length)]; };
     var svc = {}; t.services.forEach(function(s){ svc[s.id] = s; });
-    t.svc = svc; t.domain = t.biz.toLowerCase().replace(/&/g, 'and').replace(/[^a-z]/g, '') + '.co.uk';
+    t.svc = svc;
     // people
     var used = {}, people = [];
     var PLATES = 'ABDEFGHJKLMNOPRSTVWXY';
@@ -287,6 +287,16 @@
 
   /* ---------- toast, drawer, menu ---------- */
   var toastEl, toastT;
+  /* bring something into view within the app only: scrollIntoView would also scroll any page the app is framed in */
+  SYS.reveal = function(el){
+    if (!el) return;
+    var r = el.getBoundingClientRect();
+    for (var p = el.parentElement; p && p !== document.body; p = p.parentElement){
+      var o = getComputedStyle(p).overflowY;
+      if ((o === 'auto' || o === 'scroll') && p.scrollHeight > p.clientHeight){ p.scrollTop += r.top - p.getBoundingClientRect().top - (p.clientHeight - r.height) / 2; return; }
+    }
+    window.scrollBy(0, r.top - (innerHeight - r.height) / 2);
+  };
   SYS.toast = function(msg){ if (!toastEl){ toastEl = doc.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('role', 'status'); doc.body.appendChild(toastEl); } toastEl.innerHTML = '<span class="dot"></span>' + esc(msg); toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove('on'); }, 2600); };
   var dr, scrim;
   SYS.drawer = function(o){

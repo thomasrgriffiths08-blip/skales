@@ -3,7 +3,6 @@
 (function(){
   var f = SYS.fmt, esc = SYS.esc;
   var sel = null, mode = 'view', bd = null, phoneView = false, inDrawer = false;
-  var TEL = { Leeds: '0113 496 0418', Nottingham: '0115 496 0732', Reading: '0118 496 0251', York: '01632 960 377', Bristol: '0117 496 0864', Sheffield: '0114 496 0190' };
   var ST = { draft: 'Draft', sent: 'Sent', opened: 'Opened', accepted: 'Accepted', paid: 'Paid' };
   var EVK = { send: '', open: '', chase: 'ac', ok: 'good', paid: 'good' };
 
@@ -55,7 +54,7 @@
       return '<tr><td>' + esc(x.name) + (x.qty !== 1 && x.rate ? '<small class="only-m">' + esc(String(x.qty)) + ' × ' + money(x.rate) + '</small>' : '') + '</td><td class="r hide-m">' + esc(String(x.qty)) + '</td><td class="r hide-m">' + (x.rate ? money(x.rate) : '') + '</td><td class="r">' + (x.rate ? money(amt) : 'Included') + '</td></tr>';
     }).join('');
     return '<div class="qt-doc" id="qPaper">'
-      + '<div class="qt-hd"><div class="qt-biz"><span class="biz-mark">' + esc(t.mark) + '</span><div><b>' + esc(t.biz) + '</b><small>' + esc(t.town) + ' · ' + esc(t.domain) + ' · ' + esc(TEL[t.town] || '') + '</small></div></div>'
+      + '<div class="qt-hd"><div class="qt-biz"><span class="biz-mark">' + esc(t.mark) + '</span><div><b>' + esc(t.biz) + '</b><small>' + esc(t.town) + ' · ' + esc(t.domain) + ' · ' + esc(t.tel || '') + '</small></div></div>'
       + '<div class="qt-k"><b>Quote</b><span>' + esc(q.no) + '</span></div></div>'
       + '<div class="qt-meta"><div><span class="lbl-s">For</span><b>' + esc(p.name) + '</b><span>' + esc(where(p)) + '</span></div>'
       + '<div><span class="lbl-s">' + (q.sentAt ? 'Sent' : 'Date') + '</span><span>' + esc(f.date(sent)) + '</span></div>'

@@ -37,6 +37,27 @@ const sysBlock = b => {
     <h3 class="sys-h">The six parts</h3>
     ${L.wall(b, rest, 'wall-3')}`;
 };
+/* the desk: the system on a laptop and the customer's phone beside it, live and talking to each other
+   (tools/system/desk.js, tools/system/phone.js, assets/desk.js). On a phone, one screen at a time. */
+const DESK_STEPS = [
+  ['Ring the business', 'You’re the customer. Tap call on the phone.'],
+  ['Nobody can answer', 'They’re on a job. Watch the system catch the call.'],
+  ['A text comes straight back', 'Seconds after the call. Reply to it as the customer.'],
+  ['Send the booking link', 'Back at the business, one tap in the inbox.'],
+  ['Pick a time and pay', 'The customer books a real free slot and pays the deposit.'],
+  ['It’s in the diary', 'Booked and paid, without anyone picking up the phone.']
+];
+const deskHTML = (b, trade) => `<div class="desk" data-desk data-trade="${trade || 'heating'}">
+        <div class="desk-seg" role="group" aria-label="Show"><button type="button" data-side="phone" aria-pressed="true">Customer’s phone</button><button type="button" data-side="biz" aria-pressed="false">Your system</button></div>
+        <div class="desk-stage" data-side="phone">
+          <div class="desk-laptop"><div class="lid"><div class="scrn"><iframe title="The system, live" loading="lazy" data-src="${b}demos/inbox/?t=${trade || 'heating'}&amp;desk={id}#s=1"></iframe></div></div><div class="base" aria-hidden="true"></div></div>
+          <div class="desk-phone"><div class="bezel"><span class="island" aria-hidden="true"></span><div class="scrn"><iframe title="The customer’s phone, live" loading="lazy" data-src="${b}demos/system/phone.html?t=${trade || 'heating'}&amp;desk={id}#s=1"></iframe></div></div></div>
+        </div>
+        <div class="desk-guide">
+          <ol class="desk-steps">${DESK_STEPS.map(([h, t], i) => `<li data-s="${i + 1}"${i ? '' : ' aria-current="step"'}><b>${esc(h)}</b><span>${esc(t)}</span></li>`).join('')}</ol>
+          <div class="desk-end"><div class="desk-clock"><small>Missed call to booked</small><b data-clock>0:00</b></div><div class="desk-btns"><button type="button" class="btn btn-dark" data-play>Play it for me</button><button type="button" class="btn btn-ghost" data-reset>Start again</button></div></div>
+        </div>
+      </div>`;
 /* a lane: its name and who it is for beside (websites) or above (tools) its builds */
 const laneRow = (b, k) => {
   const l = LANES[k], list = inLane(k).sort((a, z) => a.n - z.n);
@@ -177,7 +198,11 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
       ${crumbs(b, x.slug === 'system' ? [['Home', ''], ['Work', 'work/'], ['The system', 'work/system/']] : [['Home', ''], ['Work', 'work/'], [lane.kindWord, lane.path], [x.name, `work/${x.slug}/`]])}
       <h1>${esc(x.name)}</h1>
       <p class="lead short">${esc(x.short)}</p>
-      ${x.kind === 'tool' ? `<div class="case-rig">
+      ${x.slug === 'system' ? `${deskHTML(b)}
+      <div class="case-words">
+        <p class="lead">${esc(x.long)}</p>
+        <div class="copy">${caseCopy(b, x, lane)}</div>
+      </div>` : x.kind === 'tool' ? `<div class="case-rig">
         <div class="rig"><div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">${esc(domain)}/demos/<b>${esc(x.slug)}</b>/</span><button type="button" class="pop" data-view="${x.slug}">Full screen</button></div>
           <div class="viewport" data-solo="${x.slug}" data-solo-still><div class="boot"><img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800" alt="${esc(x.name)} on a laptop" fetchpriority="high" decoding="async"></div></div></div>
       </div>
@@ -251,7 +276,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
 </main>
 ${x.lane === 'system' ? L.ctaBand(b, 'Want this running for your business?', 'A free 30-minute call: which part would earn its keep first, what it would cost, and when it could be live.', `<a class="btn btn-ghost" href="${b}work/#websites">See the websites</a>`) : L.ctaBand(b, 'Want one like this, with your name on it?', `A short call to find out what is leaking in your business and whether a build like ${esc(x.name)} is the right fix.`, `<a class="btn btn-ghost" href="${b}${lane.path}">More ${esc(lane.kindWord.toLowerCase())}</a>`)}
 ${L.footer(b)}`;
-      return L.page(L.head({ b, path: `/work/${x.slug}/`, title, description, og: `work-${x.slug}`, css: ['device.css'], nodes, palette: x }), body, L.scripts(b, ['builds.js', 'device.js']));
+      return L.page(L.head({ b, path: `/work/${x.slug}/`, title, description, og: `work-${x.slug}`, css: ['device.css'], nodes, palette: x }), body, L.scripts(b, x.slug === 'system' ? ['builds.js', 'device.js', 'desk.js'] : ['builds.js', 'device.js']));
     }
   };
 });

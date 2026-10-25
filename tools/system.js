@@ -13,7 +13,9 @@ const guard = require('./demo-lock.js');
 
 const SRC = process.env.SYSTEM_SRC || path.join(__dirname, 'system');
 const OUT = path.resolve(__dirname, '../demos');
-const ORDER = ['data.js', 'core.js', 'm-today.js', 'm-inbox.js', 'm-booking.js', 'm-quotes.js', 'm-reviews.js', 'm-reminders.js', 'm-results.js'];
+const ORDER = ['data.js', 'core.js', 'm-today.js', 'm-inbox.js', 'm-booking.js', 'm-quotes.js', 'm-reviews.js', 'm-reminders.js', 'm-results.js', 'desk.js'];
+/* the customer's phone that sits beside the laptop on the desk (see desk.js) */
+const PHONE = ['data.js', 'phone.js'];
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 
 (async function(){
@@ -28,7 +30,27 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
   fs.writeFileSync(path.join(dir, 'sys.css'), css);
   const font = (/url\((\.\.\/\.\.\/assets\/fonts\/[^)]+\.woff2)\)/.exec(css) || [])[1];
 
+  const pr = await minify(PHONE.map(f => fs.readFileSync(path.join(SRC, f), 'utf8')).join(';\n'), { compress: { passes: 2 }, mangle: true, format: { comments: false } });
+  if (pr.error) throw pr.error;
+  const pcss = new CleanCSS({ level: 1 }).minify(fs.readFileSync(path.join(SRC, 'phone.css'), 'utf8')).styles.replace(/:NaNs/g, ':.01ms');
+  const pv = crypto.createHash('sha1').update(pr.code + pcss).digest('hex').slice(0, 8);
+  fs.writeFileSync(path.join(dir, 'phone.js'), pr.code);
+  fs.writeFileSync(path.join(dir, 'phone.css'), pcss);
+
   const parts = builds.filter(b => b.lane === 'system');
+  const sys = parts.find(b => b.slug === 'system');
+  fs.writeFileSync(path.join(dir, 'phone.html'), `<!doctype html>
+<html lang="en-GB">
+<head>${guard(sys)}<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The customer’s phone · ${esc(site.name)}</title>
+<link rel="stylesheet" href="phone.css?v=${pv}">
+</head>
+<body>
+<script src="phone.js?v=${pv}"></script>
+</body>
+</html>
+`);
   for (const b of parts){
     const html = `<!doctype html>
 <html lang="en-GB">
@@ -45,5 +67,5 @@ ${font ? `<link rel="preload" href="${font}" as="font" type="font/woff2" crossor
     fs.mkdirSync(path.join(OUT, b.slug), { recursive: true });
     fs.writeFileSync(path.join(OUT, b.slug, 'index.html'), html);
   }
-  console.log(`system: ${parts.length} parts, sys.js ${(r.code.length / 1024).toFixed(0)}K (from ${(js.length / 1024).toFixed(0)}K), sys.css ${(css.length / 1024).toFixed(0)}K, v=${v}`);
+  console.log(`system: ${parts.length} parts + the desk phone (${(pr.code.length / 1024).toFixed(0)}K), sys.js ${(r.code.length / 1024).toFixed(0)}K (from ${(js.length / 1024).toFixed(0)}K), sys.css ${(css.length / 1024).toFixed(0)}K, v=${v}`);
 })().catch(e => { console.error(e); process.exit(1); });

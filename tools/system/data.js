@@ -212,5 +212,9 @@
       spend: { 'Google Ads': 300, 'Meta ads': 140 } }
   ];
 
+  /* the business's own number, by town (Ofcom drama ranges, so none of them ring anyone) */
+  var TEL = { Leeds: '0113 496 0418', Nottingham: '0115 496 0732', Reading: '0118 496 0251', York: '01632 960 377', Bristol: '0117 496 0864', Sheffield: '0114 496 0190' };
+  T.forEach(function(t){ t.tel = TEL[t.town]; t.domain = t.biz.toLowerCase().replace(/&/g, 'and').replace(/[^a-z]/g, '') + '.co.uk'; });
+
   window.SYS_DATA = { trades: T, first: FIRST, last: LAST };
 })();

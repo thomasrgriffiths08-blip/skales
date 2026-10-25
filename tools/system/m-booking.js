@@ -341,7 +341,7 @@
   }
   function scrollToBooking(id){
     var el = document.getElementById('bk-' + id) || document.getElementById('bkw-' + id);
-    if (el && el.scrollIntoView) el.scrollIntoView({ block: 'center' });
+    SYS.reveal(el);
   }
 
   SYS.module('booking', {

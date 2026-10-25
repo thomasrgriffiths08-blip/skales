@@ -191,7 +191,7 @@
       if (isAsk) sel = ref; if (isRev) selRev = ref;
       paint(v);
       if (ref && (isAsk || isRev)){
-        var el = document.getElementById('rv-' + ref); if (el) el.scrollIntoView({ block: 'center' });
+        var el = document.getElementById('rv-' + ref); SYS.reveal(el);
         if (isAsk && isPhone()) openAsk();
       }
     },

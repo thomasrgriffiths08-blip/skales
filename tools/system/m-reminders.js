@@ -166,7 +166,7 @@
     actions: function(){ var w = SYS.S.due.filter(function(r){ return r.st === 'waiting'; }).length; return '<button class="btn pri rm-act" type="button" data-act="send" id="rmSend"' + (w ? '' : ' disabled') + '>' + SYS.icon('send') + 'Send due reminders' + (w ? ' · ' + w : '') + '</button>'; },
     render: function(v, opt){
       paint(v);
-      var ref = opt && opt.ref; if (ref && rec(ref)){ var el = document.getElementById('rm-' + ref); if (el) el.scrollIntoView({ block: 'center' }); openDrawer(ref); }
+      var ref = opt && opt.ref; if (ref && rec(ref)){ var el = document.getElementById('rm-' + ref); SYS.reveal(el); openDrawer(ref); }
     },
     update: function(v){ paint(v); },
     act: function(a, el){

@@ -55,9 +55,16 @@
       <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a><span>/</span><a href="../../work/">Work</a><span>/</span><span aria-current="page">The system</span></nav>
       <h1>The system</h1>
       <p class="lead short">One screen: every call caught, every job booked, and what still needs you.</p>
-      <div class="case-rig">
-        <div class="rig"><div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">thomasrgriffiths08-blip.github.io/skales/demos/<b>system</b>/</span><button type="button" class="pop" data-view="system">Full screen</button></div>
-          <div class="viewport" data-solo="system" data-solo-still><div class="boot"><img src="../../assets/clips/13.webp" width="1280" height="800" alt="The system on a laptop" fetchpriority="high" decoding="async"></div></div></div>
+      <div class="desk" data-desk data-trade="heating">
+        <div class="desk-seg" role="group" aria-label="Show"><button type="button" data-side="phone" aria-pressed="true">Customer’s phone</button><button type="button" data-side="biz" aria-pressed="false">Your system</button></div>
+        <div class="desk-stage" data-side="phone">
+          <div class="desk-laptop"><div class="lid"><div class="scrn"><iframe title="The system, live" loading="lazy" data-src="../../demos/inbox/?t=heating&amp;desk={id}#s=1"></iframe></div></div><div class="base" aria-hidden="true"></div></div>
+          <div class="desk-phone"><div class="bezel"><span class="island" aria-hidden="true"></span><div class="scrn"><iframe title="The customer’s phone, live" loading="lazy" data-src="../../demos/system/phone.html?t=heating&amp;desk={id}#s=1"></iframe></div></div></div>
+        </div>
+        <div class="desk-guide">
+          <ol class="desk-steps"><li data-s="1" aria-current="step"><b>Ring the business</b><span>You’re the customer. Tap call on the phone.</span></li><li data-s="2"><b>Nobody can answer</b><span>They’re on a job. Watch the system catch the call.</span></li><li data-s="3"><b>A text comes straight back</b><span>Seconds after the call. Reply to it as the customer.</span></li><li data-s="4"><b>Send the booking link</b><span>Back at the business, one tap in the inbox.</span></li><li data-s="5"><b>Pick a time and pay</b><span>The customer books a real free slot and pays the deposit.</span></li><li data-s="6"><b>It’s in the diary</b><span>Booked and paid, without anyone picking up the phone.</span></li></ol>
+          <div class="desk-end"><div class="desk-clock"><small>Missed call to booked</small><b data-clock>0:00</b></div><div class="desk-btns"><button type="button" class="btn btn-dark" data-play>Play it for me</button><button type="button" class="btn btn-ghost" data-reset>Start again</button></div></div>
+        </div>
       </div>
       <div class="case-words">
         <p class="lead">The app a service business runs on, shown for six made-up businesses. Today shows every missed call caught, every booking made and every quote chased since the morning, the next jobs, and the three things that still need a person. Switch business from the menu and it all reloads for that trade.</p>
@@ -142,5 +149,6 @@
 <script src="../../assets/site.js"></script>
 <script src="../../assets/builds.js"></script>
 <script src="../../assets/device.js"></script>
+<script src="../../assets/desk.js"></script>
 </body>
 </html>
