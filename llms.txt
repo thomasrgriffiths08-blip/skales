@@ -1,4 +1,4 @@
-# Skales
+# Skales Studio
 
 > Websites & systems for service businesses. Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators). Run by Tom Griffiths, one person, in the United Kingdom.
 

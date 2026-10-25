@@ -101,7 +101,7 @@ module.exports = [
   },
   {
     slug: 'booking-deposits', name: 'Booking deposits', short: 'Deposits',
-    title: 'Online booking deposits for service businesses',
+    title: 'Online booking deposits for small businesses',
     description: 'A deposit taken when a customer books online holds the slot and comes off the final bill. How booking deposits work, with a live demo you can try.',
     card: 'A deposit taken at booking holds the slot and comes off the bill.',
     h1: 'Booking deposits: a booked slot that turns into a job.',
@@ -125,7 +125,7 @@ module.exports = [
   },
   {
     slug: 'on-my-way-texts', name: 'On-my-way texts', short: 'On my way',
-    title: 'On my way texts for trades and mobile services',
+    title: 'On my way texts for trades and mobile firms',
     description: 'On-my-way texts tell customers you have set off, with a rough arrival time and who is coming. One tap from the job sheet. How it works, for UK trades.',
     card: 'One tap tells the customer you have set off, when you will arrive and who is coming.',
     h1: 'On-my-way texts: the customer knows you are coming.',

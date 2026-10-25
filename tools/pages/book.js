@@ -4,7 +4,7 @@ module.exports = { pages: [{
   url: '/book/', og: 'book', priority: 0.9, changefreq: 'monthly',
   meta: { key: 'book', title: 'Book a call', kicker: 'A few questions first · then a slot', sub: 'Tell me what is leaking. Pick a time. No pitch, no proposal deck.' },
   render(b){
-    const title = `Book a call — a few questions, then a time | ${site.name}`;
+    const title = `Book a call — a few questions, then a time | ${site.legalName}`;
     const description = `Book a short call. Four quick questions so it is about your business, then pick a slot straight into the diary. For UK service businesses. No pitch.`;
     const nodes = [
       L.webPage({ path: '/book/', title, description, type: 'ContactPage', extra: { potentialAction: { '@type': 'ReserveAction', name: 'Book a call', target: L.abs('/book/') } } }),

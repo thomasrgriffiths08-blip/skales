@@ -4,6 +4,7 @@ This is the file every SEO, GEO and page-engine agent trains on. It holds who th
 
 ## Identity
 - **Full name:** Skales Studio. **Short form:** Skales. Use "Skales Studio" in schema, profiles and anywhere a search engine has to tell it apart from the SKALE crypto network.
+- **Where each form goes:** every page title ends "| Skales Studio" (`site.legalName`), as do og:site_name, the footer, the web manifest and llms.txt. Body copy and the wordmark can say Skales. Off the site, list the business as Skales Studio everywhere (Google Business Profile, LinkedIn Company Page, directories, email signature), so a search for the name finds one consistent business.
 - **Person:** Tom Griffiths (also Thomas Griffiths), founder and the only builder. Instagram @tomxsystems.
 - **What it is:** a one-person UK studio that builds websites, online booking with a CRM and follow-up automation for UK service businesses, and runs Meta and Google ads that point at them.
 - **Area:** United Kingdom. The town for the single location page is still to come from Tom. No other location pages, ever.

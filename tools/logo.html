@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Square logos, sized to whatever square window renders them (LinkedIn and iOS round the corners themselves, so the tile is full-bleed).
+     ?v=word  the wordmark on graphite, "studio" beneath: the LinkedIn Company Page logo (og/linkedin-logo.png, 400×400)
+     ?v=light the same on alu, for anywhere a dark square is too heavy
+     ?v=mono  the lowercase s with the accent dot: the favicon, home-screen and manifest icon (og/icon.png, 512×512) -->
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100vw;height:100vh;overflow:hidden}
+body{display:grid;place-items:center;font-family:"Schibsted Grotesk",-apple-system,sans-serif;background:#141416;color:#FFFFFF}
+.light{background:#F3F3F2;color:#141416}
+.lk{display:flex;flex-direction:column;align-items:center;gap:2.5vmin;margin-top:-1.5vmin}
+.wm{font-weight:700;font-size:28vmin;letter-spacing:-.045em;line-height:1}.wm i{font-style:normal;color:#E8A84B}
+.st{font-weight:500;font-size:9.5vmin;letter-spacing:.02em;line-height:1;color:#9A9A9F}
+.light .st{color:#6B6B70}
+.mono{font-weight:700;font-size:75vmin;letter-spacing:-.04em;line-height:1;margin-top:-14.5vmin}.mono i{font-style:normal;color:#E8A84B}
+</style></head><body>
+<script>
+var q=new URLSearchParams(location.search), v=q.get('v')||'word', wm=(q.get('wm')||'s|k|ales').split('|');
+if(v==='light') document.body.className='light';
+document.body.innerHTML=v==='mono'
+  ? '<div class="mono">'+wm[0]+'<i>.</i></div>'
+  : '<div class="lk"><div class="wm">'+wm[0]+'<i>'+wm[1]+'</i>'+wm[2]+'</div><div class="st">studio</div></div>';
+</script></body></html>

@@ -12,10 +12,11 @@ node -e '
 const jobs=require("./tools/og-jobs.json");const enc=encodeURIComponent;
 for(const j of jobs) console.log(j.key+"\t"+"http://localhost:8746/tools/og.html?wm="+enc(process.argv[1])+"&t="+enc(j.title)+"&k="+enc(j.kicker||"")+"&s="+enc(j.sub||"")+(j.colour?"&c="+enc(j.colour):"")+(j.phone?"&p="+enc(j.phone):""));
 ' "$WM" | while IFS=$'\t' read -r key url; do shot "$url" "og/$key.png"; [[ -f "og/$key.png" ]] && echo "ok $key" || echo "FAIL $key"; done
-# icon: 512×512 from the favicon mark
-cat > /tmp/_icon.html <<'H'
-<!doctype html><body style="margin:0;width:512px;height:512px;background:#FFFFFF;display:grid;place-items:center"><svg width="400" height="400" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#141416"/><path d="M22 16v32M43 17L25 33l18 15" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></body>
-H
-cp /tmp/_icon.html tools/_icon.html; shot "http://localhost:8746/tools/_icon.html" "og/icon.png" 512 512; rm -f tools/_icon.html; echo "icon $( [[ -f og/icon.png ]] && echo ok || echo FAIL )"
+# icon: 512×512, the s-monogram (favicon, home-screen and manifest icon)
+shot "http://localhost:8746/tools/logo.html?v=mono&wm=$WM" "og/icon.png" 512 512; echo "icon $( [[ -f og/icon.png ]] && echo ok || echo FAIL )"
+# LinkedIn: the Company Page logo, the personal profile banner and the Company Page cover
+shot "http://localhost:8746/tools/logo.html?v=word&wm=$WM" "og/linkedin-logo.png" 400 400; echo "linkedin-logo $( [[ -f og/linkedin-logo.png ]] && echo ok || echo FAIL )"
+shot "http://localhost:8746/tools/linkedin.html?f=profile&wm=$WM" "og/linkedin-banner.png" 1584 396; echo "linkedin-banner $( [[ -f og/linkedin-banner.png ]] && echo ok || echo FAIL )"
+shot "http://localhost:8746/tools/linkedin.html?f=page&wm=$WM" "og/linkedin-cover.png" 1512 256; echo "linkedin-cover $( [[ -f og/linkedin-cover.png ]] && echo ok || echo FAIL )"
 # compress: PNG → keep as PNG but strip to 8-bit palette via sips is lossy; keep PNG, they are ~200KB each
 echo "done: $(ls og | wc -l | tr -d ' ') images"

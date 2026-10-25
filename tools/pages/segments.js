@@ -15,7 +15,7 @@ const segPage = s => ({
   url: `/for/${s.slug}/`, og: `for-${s.slug}`, priority: 0.8, changefreq: 'monthly',
   meta: { key: `for-${s.slug}`, title: s.label, kicker: 'For your trade', sub: s.h1 },
   render(b){
-    const path = `/for/${s.slug}/`, title = `${s.title} | ${site.name}`;
+    const path = `/for/${s.slug}/`, title = `${s.title} | ${site.legalName}`;
     const cr = [['Home', ''], ['By trade', 'for/'], [s.label, `for/${s.slug}/`]];
     const tryHref = d => `${b}try/${d}/?kind=${s.kind}`;
     const nodes = [
@@ -69,7 +69,7 @@ const segIndex = {
   url: '/for/', og: 'for', priority: 0.8, changefreq: 'monthly',
   meta: { key: 'for', title: 'Websites and booking for your trade', kicker: 'By trade', sub: `${SG.length} kinds of business, each with what its website needs and the demos set up for it.` },
   render(b){
-    const path = '/for/', title = `Websites and booking by trade | ${site.name}`;
+    const path = '/for/', title = `Websites and booking by trade | ${site.legalName}`;
     const description = `Websites, online booking and follow-up for UK trades and service businesses, trade by trade: plumbers, electricians, salons, garages, clinics and more.`;
     const nodes = [L.webPage({ path, title, description, type: 'CollectionPage' }), P.crumbNodes([['Home', ''], ['By trade', 'for/']]),
       { '@type': 'ItemList', '@id': L.abs(path) + '#list', name: 'Trades', itemListElement: SG.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: L.abs(`/for/${s.slug}/`), name: s.label })) }];

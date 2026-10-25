@@ -10,7 +10,6 @@ const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'
 const pad = n => String(n).padStart(2, '0');
 const abs = p => site.origin.replace(/\/$/, '') + '/' + String(p).replace(/^\//, '');
 const FONTS = 'https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap';
-const FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Cpath d='M22 16v32M43 17L25 33l18 15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 const UPDATED = new Date();
 const monthYear = d => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
 const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;   // local, never toISOString
@@ -95,12 +94,12 @@ function baseGraph(){
       founder: { '@id': PERSON_ID }, foundingDate: site.founded,
       areaServed: { '@type': 'Country', name: site.areaServed },
       knowsAbout: ['Web design for service businesses','Online booking systems','CRM for trades','Missed-call text-back automation','Customer follow-up automation','Trades websites','Review request automation','Facebook and Instagram advertising','Google Ads','Local SEO'],
-      sameAs: [site.instagram],
+      sameAs: [site.instagram, site.linkedinPage].filter(Boolean),
       contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: site.email, availableLanguage: 'en-GB', areaServed: 'GB' },
       logo: { '@type': 'ImageObject', url: abs('/og/home.png') },
       hasOfferCatalog: { '@type': 'OfferCatalog', name: site.legalName + ' services', itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(`/services/${s.slug}/`) + '#service', name: s.name, url: abs(`/services/${s.slug}/`) } })) } },
     { '@type': 'Person', '@id': PERSON_ID, name: site.founder.name, alternateName: site.founder.alternateName,
-      jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram], nationality: 'GB' },
+      jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram, site.linkedin].filter(Boolean), nationality: 'GB' },
     { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.legalName, alternateName: site.name, description: site.tagline,
       publisher: { '@id': ORG_ID }, inLanguage: site.locale },
   ];
@@ -130,7 +129,7 @@ function head({ b, path, title, description, og, type = 'website', css = [], nod
 ${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
 <meta name="theme-color" content="#FFFFFF">
 <meta name="author" content="${esc(site.founder.name)}">
-<meta property="og:site_name" content="${esc(site.name)}">
+<meta property="og:site_name" content="${esc(site.legalName)}">
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="${type}">
 <meta property="og:url" content="${canon}">
@@ -144,7 +143,7 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${abs('/og/' + og + '.png')}">
-<link rel="icon" href="${FAVICON}">
+<link rel="icon" type="image/png" href="${b}og/icon.png">
 <link rel="apple-touch-icon" href="${b}og/icon.png">
 <link rel="manifest" href="${b}manifest.webmanifest">
 <link rel="sitemap" type="application/xml" href="${b}sitemap.xml">
@@ -186,7 +185,7 @@ function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
   const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['Tools', 'work/tools/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ...TOOL_LANES.map(k => [`${LANES[k].name} tools`, `work/tools/#${k}`])];
   const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
-  const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
+  const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram], ...(site.linkedin ? [['LinkedIn', site.linkedin]] : [])];
   return `${o.mbar === false ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
 <footer class="site-foot">
   <div class="wrap">
@@ -197,7 +196,7 @@ function footer(b, o = {}){
       <div><h2>Contact</h2>${contact.map(link).join('')}${site.whatsapp ? `<a data-wa="Hi Tom — found you through your site." href="${waHref('Hi Tom — found you through your site.')}">WhatsApp</a>` : ''}</div>
     </div>
     <div class="f-row">
-      <span>&copy; <span data-year></span> ${esc(site.name)} &middot; ${esc(site.areaServed)}</span>
+      <span>&copy; <span data-year></span> ${esc(site.legalName)} &middot; ${esc(site.areaServed)}</span>
       <span>Updated ${monthYear(UPDATED)}</span>
     </div>
     <p class="f-note">Every business, person, review and phone number in the demonstration builds on this site is invented. No client is named or shown anywhere.</p>

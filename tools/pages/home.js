@@ -44,7 +44,7 @@ module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
   meta: { key: 'home', title: 'Watch your website build itself.', kicker: `${site.name} · websites · booking · follow-up · UK`, sub: `Pick your trade and a working site for your business appears in a couple of seconds. ${Words(builds.length)} finished ones are on the page too.` },
   render(b){
-    const title = `Websites & booking systems for UK trades | ${site.name}`;
+    const title = `Websites & booking systems for UK trades | ${site.legalName}`;
     const description = 'Pick your trade and watch a working website for your business build itself on the page. Websites, booking and missed-call text-back for UK trades, owned by you.';
     const nodes = [
       L.webPage({ path: '/', title, description, extra: { primaryImageOfPage: { '@type': 'ImageObject', url: L.abs('/og/home.png') } } }),
