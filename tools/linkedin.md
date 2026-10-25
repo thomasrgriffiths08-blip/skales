@@ -23,6 +23,8 @@ Site address: every link below uses https://skales.studio. They work once the do
 9. Start connecting, twenty minutes a weekday (see "The fast-growth plan").
 10. Turn on Open to work for recruiters only (see "Open to a job as well").
 
+Anything that shows a link preview (Featured links, a post with a link) waits until skales.studio serves the site. LinkedIn takes the preview picture the first time it sees a link and keeps it, so adding one while the domain still shows a holding page saves that page as the picture. If one slips through, paste the link into linkedin.com/post-inspector to refresh it. Plain link fields (contact info, the Company Page website and button) are fine to fill in early.
+
 ---
 
 ## Personal profile
