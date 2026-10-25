@@ -212,6 +212,41 @@
       spend: { 'Google Ads': 300, 'Meta ads': 140 } }
   ];
 
+  /* new enquiries that arrive while Today is open, so the live feed brings in messages the inbox has not shown yet */
+  var LIVE = {
+    heating: [
+      { ch: 'web', svc: 'service', text: 'Can I get my boiler serviced before the cold sets in? Fridays are best for me.' },
+      { ch: 'call', svc: 'breakdown', text: 'Boiler keeps cutting out and the radiators are only lukewarm.' },
+      { ch: 'google', svc: 'radiator', text: 'The valve on the landing radiator is stuck. Can you swap it?' }
+    ],
+    electrical: [
+      { ch: 'web', svc: 'sockets', text: 'Two outdoor sockets for the garden, near the patio doors please.' },
+      { ch: 'call', svc: 'fault', text: 'Kitchen lights flicker every time the kettle goes on.' },
+      { ch: 'google', svc: 'eicr', text: 'Selling the house and the buyer wants an electrical report. How soon could you do it?' }
+    ],
+    garage: [
+      { ch: 'web', svc: 'interim', text: 'Interim service for a 2019 Yaris. Can I drop it off before work?' },
+      { ch: 'call', svc: 'diag', text: 'Clunking from the front left whenever I go over a speed bump.' },
+      { ch: 'google', svc: 'tyres', text: 'Slow puncture on a rear tyre. Could you look at it today?' }
+    ],
+    salon: [
+      { ch: 'ig', svc: 'colour', text: 'Have you got anything for a root touch-up and gloss this week?' },
+      { ch: 'call', svc: 'blowdry', text: 'Need a blow dry for a wedding on Saturday morning. Any chance?' },
+      { ch: 'web', svc: 'balayage', text: 'Thinking about balayage for the first time. Do I need a patch test first?' }
+    ],
+    cleaning: [
+      { ch: 'web', svc: 'deep', text: 'Deep clean before family come to stay. Three bed house, next week?' },
+      { ch: 'call', svc: 'eot', text: 'Moving out on the 30th and need the flat cleaned for the deposit.' },
+      { ch: 'google', svc: 'oven', text: 'How much for an oven clean? It’s a double oven and it’s bad.' }
+    ],
+    clinic: [
+      { ch: 'web', svc: 'initial', text: 'My lower back has been sore for three weeks. Can I be seen this week?' },
+      { ch: 'call', svc: 'massage', text: 'Tight hamstrings after a half marathon. Have you got a massage slot?' },
+      { ch: 'google', svc: 'running', text: 'Do you do gait analysis? Shin splints keep coming back.' }
+    ]
+  };
+  T.forEach(function(t){ t.live = LIVE[t.key] || []; });
+
   /* the business's own number, by town (Ofcom drama ranges, so none of them ring anyone) */
   var TEL = { Leeds: '0113 496 0418', Nottingham: '0115 496 0732', Reading: '0118 496 0251', York: '01632 960 377', Bristol: '0117 496 0864', Sheffield: '0114 496 0190' };
   T.forEach(function(t){ t.tel = TEL[t.town]; t.domain = t.biz.toLowerCase().replace(/&/g, 'and').replace(/[^a-z]/g, '') + '.co.uk'; });

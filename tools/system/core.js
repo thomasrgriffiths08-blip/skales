@@ -68,7 +68,8 @@
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     pin: '<path d="M12 21s-6.5-5.4-6.5-11A6.5 6.5 0 0 1 18.5 10c0 5.6-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
     eye: '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
-    bolt: '<path d="M13 2.5L5 13.5h6l-1 8 8-11h-6z"/>'
+    bolt: '<path d="M13 2.5L5 13.5h6l-1 8 8-11h-6z"/>',
+    play: '<path d="M8 5.5v13l10.5-6.5z"/>'
   };
   SYS.icon = function(k, cls){ return '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (I[k] || '') + '</svg>'; };
   var CH = SYS.CH = { call: ['Phone call', 'call'], missed: ['Missed call', 'missed'], text: ['Text', 'text'], web: ['Website form', 'web'], google: ['Google profile', 'google'], fb: ['Facebook', 'fb'], ig: ['Instagram', 'ig'] };
@@ -263,16 +264,16 @@
     from = from || sod(now());
     S.convos.forEach(function(c){ var p = P(c.pid); c.msgs.forEach(function(m){
       if (m.at < from || m.at > now()) return;
-      if (m.k === 'sys' && m.text === 'Missed call') out.push({ at: m.at, mod: 'inbox', ref: c.id, k: 'warn', text: 'Missed call from ' + p.name, sub: SYS.CH[c.ch] ? '' : '' });
-      else if (m.k === 'auto') out.push({ at: m.at, mod: 'inbox', ref: c.id, k: 'ac', text: 'Text sent ' + Math.round((m.at - c.at) / 1000) + ' seconds later', sub: 'Automatic, while the phone was in a pocket' });
-      else if (m.k === 'sys' && /^Booked/.test(m.text)) out.push({ at: m.at, mod: 'booking', ref: c.bid, k: 'good', text: p.name + ' booked', sub: m.text.replace('Booked: ', '') });
-      else if (m.k === 'them' && m === c.msgs[0]) out.push({ at: m.at, mod: 'inbox', ref: c.id, text: 'New enquiry from ' + p.name, sub: (SYS.CH[c.ch] || [''])[0] });
+      if (m.k === 'sys' && m.text === 'Missed call') out.push({ at: m.at, mod: 'inbox', ref: c.id, k: 'warn', ic: 'missed', text: 'Missed call from ' + p.name, sub: 'Nobody free to answer' });
+      else if (m.k === 'auto') out.push({ at: m.at, mod: 'inbox', ref: c.id, k: 'ac', ic: 'text', text: 'Text sent ' + Math.round((m.at - c.at) / 1000) + ' seconds later', sub: 'Automatic, while the phone was in a pocket' });
+      else if (m.k === 'sys' && /^Booked/.test(m.text)) out.push({ at: m.at, mod: 'booking', ref: c.bid, k: 'good', ic: 'booking', val: (S.bookings.filter(function(b){ return b.id === c.bid; })[0] || {}).price || 0, text: p.name + ' booked', sub: m.text.replace('Booked: ', '') });
+      else if (m.k === 'them' && m === c.msgs[0]) out.push({ at: m.at, mod: 'inbox', ref: c.id, ic: (SYS.CH[c.ch] || SYS.CH.text)[1], text: 'New enquiry from ' + p.name, sub: (SYS.CH[c.ch] || [''])[0] });
     }); });
-    S.bookings.forEach(function(b){ if (b.madeAt >= from && b.madeAt <= now() && b.src === 'Booked online') out.push({ at: b.madeAt, mod: 'booking', ref: b.id, k: 'good', text: 'Booked online: ' + SYS.svc(b.svc).name, sub: P(b.pid).name + ' · ' + f.when(b.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : '') }); });
-    S.quotes.forEach(function(q){ q.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'quotes', ref: q.id, k: e.k === 'ok' || e.k === 'paid' ? 'good' : (e.k === 'chase' ? 'ac' : ''), text: q.no + ' ' + e.text.charAt(0).toLowerCase() + e.text.slice(1), sub: P(q.pid).name + ' · ' + f.money(SYS.quoteTotal(q).total) }); }); });
-    S.asks.forEach(function(a){ a.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'reviews', ref: a.id, k: /stars/.test(e.text) ? 'good' : '', text: e.text, sub: P(a.pid).name }); }); });
-    S.reviews.forEach(function(r){ if (r.at >= from && r.at <= now()) out.push({ at: r.at, mod: 'reviews', ref: r.id, k: 'good', text: r.s + '-star review from ' + P(r.pid).name, sub: 'Google' }); });
-    S.due.forEach(function(r){ r.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'reminders', ref: r.id, k: /Booked/.test(e.text) ? 'good' : 'ac', text: e.text + ': ' + SYS.svc(r.svc).name, sub: P(r.pid).name }); }); });
+    S.bookings.forEach(function(b){ if (b.madeAt >= from && b.madeAt <= now() && b.src === 'Booked online') out.push({ at: b.madeAt, mod: 'booking', ref: b.id, k: 'good', ic: 'booking', val: b.price || 0, text: 'Booked online: ' + SYS.svc(b.svc).name, sub: P(b.pid).name + ' · ' + f.when(b.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : '') }); });
+    S.quotes.forEach(function(q){ q.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'quotes', ref: q.id, k: e.k === 'ok' || e.k === 'paid' ? 'good' : (e.k === 'chase' ? 'ac' : ''), ic: e.k === 'ok' || e.k === 'paid' ? 'pound' : 'quotes', won: e.k === 'ok', val: e.k === 'ok' ? SYS.quoteTotal(q).total : 0, text: q.no + ' ' + e.text.charAt(0).toLowerCase() + e.text.slice(1), sub: P(q.pid).name + ' · ' + f.money(SYS.quoteTotal(q).total) }); }); });
+    S.asks.forEach(function(a){ a.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'reviews', ref: a.id, k: /stars/.test(e.text) ? 'good' : '', ic: 'reviews', text: e.text, sub: P(a.pid).name }); }); });
+    S.reviews.forEach(function(r){ if (r.at >= from && r.at <= now()) out.push({ at: r.at, mod: 'reviews', ref: r.id, k: 'good', ic: 'reviews', text: r.s + '-star review from ' + P(r.pid).name, sub: 'Google' }); });
+    S.due.forEach(function(r){ r.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'reminders', ref: r.id, k: /Booked/.test(e.text) ? 'good' : 'ac', ic: 'reminders', text: e.text + ': ' + SYS.svc(r.svc).name, sub: P(r.pid).name }); }); });
     out.sort(function(a, b){ return b.at - a.at; });
     return out;
   };
@@ -366,6 +367,8 @@
     view.innerHTML = '';
     view.setAttribute('data-mod', id);
     m.render(view, SYS.opt);
+    /* each part arrives with a short rise, so moving between them reads as one app */
+    view.classList.remove('enter'); void view.offsetWidth; view.classList.add('enter');
     try { doc.title = m.label + ' · ' + SYS.T.biz; } catch (e){}
   };
   function renderTop(){

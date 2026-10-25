@@ -52,9 +52,11 @@ module.exports = {
   ],
   /* the system: one app, so each part's walkthrough starts on that part */
   'system': [
-    { tap: '#todaySim', say: 'A call rings out while you are on a job', pause: 400 },
-    { wait: 7000, say: 'The system texts them back in seconds' },
-    { wait: 5000, say: 'They reply, and it is all in the inbox' },
+    { tap: '#tdPlay', say: 'Replay the morning', pause: 300 },
+    { wait: 7500, say: 'Every call caught and every job booked, as it happened' },
+    { wait: 8500, say: 'New work keeps landing while you watch' },
+    { tap: '#todaySim', say: 'Try a missed call yourself', pause: 400 },
+    { wait: 6500, say: 'It texts them back in seconds' },
   ],
   'inbox': [
     { tap: '#simCall', say: 'Simulate a missed call', pause: 400 },
