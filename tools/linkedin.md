@@ -217,6 +217,8 @@ Specialties: Facebook and Instagram ads · Google Ads · Local Services Ads · L
 
 ### The first post
 
+No link in the post itself: in the largest recent study (687,000 posts, 2025 to 2026), a link cut reach by 16% to 21% even when it went in the comments. The free teardown sits in Featured instead, one tap from the profile.
+
 ```text
 I run Skales Studio in West London. I build the whole marketing funnel for service businesses: the Facebook and Google ads, the landing page they click through to, and the booking and follow-up behind it.
 
@@ -230,9 +232,7 @@ Three rules I build to:
 
 I build one new system a week in public, and I'll post each one here.
 
-If you run a service business round West London, or know someone who does, I'll look at the ads, the website and what happens when someone tries to get in touch, and send back three things: what is leaking, what to fix first, and what it is worth in jobs. Free.
-
-https://skales.studio/teardown.html
+If you run a service business round West London, or know someone who does, I'll look at the ads, the website and what happens when someone tries to get in touch, and send back three things: what is leaking, what to fix first, and what it is worth in jobs. Free. Just send me a message.
 ```
 
 ### Every week: the build
