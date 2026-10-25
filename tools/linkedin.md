@@ -44,7 +44,13 @@ Anything that shows a link preview (Featured links, a post with a link) waits un
 
 LinkedIn people-search matches on the headline and the current job title, so both carry the words owners actually type: "Facebook ads", "Google ads", "landing pages". The job title keeps "web design" for recruiter searches.
 
-Recommended (it opens with what you do for people, in plain words, and still carries the words owners search for):
+Recommended (it opens with what you do for people, in plain words, and still carries the words owners search for). It names no single industry: the offer suits any business that wins work through enquiries or bookings, and LinkedIn's owners are mostly professional and B2B service firms, not one-van trades.
+
+```text
+I help service businesses get more enquiries and book more of them | Facebook & Google ads, landing pages, booking and follow-up | Founder, Skales Studio, West London
+```
+
+If you later decide to specialise in trades:
 
 ```text
 I help trades and local businesses get more enquiries | Facebook & Google ads, landing pages and follow-up | Founder, Skales Studio, West London
@@ -80,7 +86,7 @@ Try in this order: `linkedin.com/in/tomgriffiths-skales`, `linkedin.com/in/tom-g
 Written to sound like a person, not a brochure: it opens with your name and what you do for people, says where you are and why you do it, explains the work in plain English, and ends with an easy, free first step. Everything in it is true; keep it that way.
 
 ```text
-Hi, I'm Tom. I help trades and local service businesses get more enquiries, and make sure none of them slip through the cracks.
+Hi, I'm Tom. I help service businesses get more enquiries and turn more of them into booked work: clinics, accountants, estate agents, salons, builders, and anyone whose customers enquire or book before they buy.
 
 I'm from London and I run Skales Studio on my own, from West London. I went to media school, and of everything I learned, building marketing for small businesses is the work I enjoy most: it's practical, and you can see whether it's working.
 
@@ -195,11 +201,11 @@ Ads, landing pages and follow-up for UK service businesses. The whole funnel, ow
 Overview (limit 2,000):
 
 ```text
-Skales Studio builds the whole marketing funnel for UK service businesses: the Facebook, Instagram and Google ads, the landing pages they point at, and the online booking and follow-up that turn an enquiry into a job. Mostly trades and local operators: plumbers, heating engineers, electricians, roofers, kitchen fitters, landscapers, cleaners and salons.
+Skales Studio builds the whole marketing funnel for UK service businesses: the Facebook, Instagram and Google ads, the landing pages they point at, and the online booking and follow-up that turn an enquiry into booked work. Clinics and dental practices, accountants and solicitors, estate and letting agents, salons, builders and trades: any business whose customers enquire or book before they buy.
 
 It is one person, Tom Griffiths. The person you message is the person who builds it.
 
-• Ads: Facebook, Instagram and Google search ads, and Local Services Ads where the trade qualifies, in the client's own ad accounts.
+• Ads: Facebook, Instagram and Google search ads, and Local Services Ads where the business qualifies, in the client's own ad accounts.
 • Landing pages: one page per offer, built to turn a click into a name and a number. Hand-coded, with no page builder and no theme.
 • Booking and CRM: slots customers take themselves, deposits that hold them, and every enquiry in one place.
 • Follow-up that runs on its own: missed-call text-back, quote chasing, review requests, service reminders.
@@ -209,7 +215,7 @@ Clients own their ad accounts, domain, code and every other account from day one
 Thirty-six working demonstration builds run live on the website, every one for an invented business, and one new system a week is built in public on Instagram (@tomxsystems).
 ```
 
-Specialties: Facebook and Instagram ads · Google Ads · Local Services Ads · Landing pages · Lead generation for trades · Online booking systems · CRM for trades · Follow-up automation · Missed-call text-back · Review request automation · Hand-coded websites
+Specialties: Facebook and Instagram ads · Google Ads · Local Services Ads · Landing pages · Lead generation for service businesses · Online booking systems · CRM and enquiry tracking · Follow-up automation · Missed-call text-back · Review request automation · Hand-coded websites
 
 ---
 
@@ -319,7 +325,7 @@ Find them with people search: keywords like `owner plumbing`, `director electric
 Invite note to a referral partner (under 200):
 
 ```text
-Hi [name], I build ads, landing pages and follow-up for UK trades and service businesses. Plenty of your clients will be the people I work with, so it seemed worth connecting. Tom
+Hi [name], I build ads, landing pages and follow-up for UK service businesses. Plenty of your clients will be the people I work with, so it seemed worth connecting. Tom
 ```
 
 After a business owner accepts (no pitch until they say yes):
@@ -331,7 +337,7 @@ Thanks for connecting, [name]. I build the whole funnel for businesses like your
 To people you know:
 
 ```text
-I've started Skales Studio: I build ads, landing pages and follow-up for service businesses. If you know a tradesperson or small business owner who wants more enquiries, I'd be grateful for an introduction.
+I've started Skales Studio: I build ads, landing pages and follow-up for service businesses. If you know a business owner who wants more enquiries, I'd be grateful for an introduction.
 ```
 
 One follow-up a week later if there's no reply, then leave it. When someone says yes to the teardown, do it properly; it is the best thing you have to show them.
