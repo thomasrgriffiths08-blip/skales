@@ -7,12 +7,12 @@
    sharpens to every frame as the rest arrive. Until a frame is in, the nearest one that is stands in for it, and the
    frame the reader is on jumps the queue.
 
-   The lines type in, each owning an equal share of the film; the last one stays. The film ends on the one house still
+   The lines come in whole, each owning an equal share of the film; the last one stays. The film ends on the one house still
    lit and the page simply carries on: the bottom of the picture darkens into the section below, so the film and the
    headline under it read as one piece, with no fade or card in between.
    Where the page cannot be scrolled at all (shown inside a fixed frame, say), the film plays through on its own once.
    Reduce Motion: the film still follows the reader's own scroll (it never moves unless they do), but it tracks the scroll
-   directly with no glide, nothing types or plays by itself, and the first line is simply there.
+   directly with no glide, nothing plays by itself, and the first line is simply there.
    Data Saver: nothing here runs and the still version stays, since the frames are a large download.
    ============================================================ */
 (function(){
@@ -28,7 +28,7 @@
   var PAR = 6;                                  /* frames downloading at once */
   var stick = root.querySelector('.op-stick'), head = d.querySelector('.site-head');
   var lines = [].slice.call(root.querySelectorAll('.op-line'));
-  var fade = root.querySelector('.op-fade'), after = d.querySelector('.op-after');
+  var fade = root.querySelector('.op-fade'), after = d.querySelector('.pk, .op-after');
   var clamp = function(v, a, b){ return v < a ? a : v > b ? b : v; };
   var span = function(p, a, b){ return clamp((p - a) / (b - a), 0, 1); };
 
@@ -117,34 +117,25 @@
   }
 
   /* ---------- the lines ---------- */
-  lines.forEach(function(el){
-    var text = el.textContent, html = '';
-    el._n = text.length; el._shown = -1;
-    text.split(/(\s+)/).forEach(function(w){
-      if (/^\s+$/.test(w)) { html += w.replace(/./g, '<span> </span>'); return; }
-      html += '<b style="white-space:nowrap;font-weight:inherit">' + w.replace(/./g, function(ch){ return '<span>' + ch.replace('&', '&amp;').replace('<', '&lt;') + '</span>'; }) + '</b>';
-    });
-    el.innerHTML = html; el._chars = el.querySelectorAll('span');
-  });
-  function type(el, n){
-    if (n === el._shown) return;
-    var c = el._chars;
-    for (var i = 0; i < c.length; i++){ c[i].className = i < n ? (i === n - 1 ? 'on tip' : 'on') : ''; }
-    el._shown = n;
-  }
-  /* each line owns an equal share of the film: types over the first half, holds, erases, then a breath of nothing.
-     The last line types and stays, so it is still there as the film hands over to the headline */
+  /* each line owns an equal share of the film: it rises in whole over the first part, holds, fades, then a breath of
+     nothing. The last line comes in and stays, so it is still there as the film hands over to the page */
   var intro = 0, t0 = performance.now();
+  function show(el, a){
+    if (Math.abs(a - (el._a == null ? -1 : el._a)) < .002) return;
+    el._a = a;
+    el.style.opacity = a.toFixed(3);
+    el.style.transform = 'translateY(' + ((1 - a) * 14).toFixed(1) + 'px)';
+  }
   function words(pf){
     lines.forEach(function(el, i){
-      var l = pf * lines.length - i, n;
-      if (i === 0 && l < .5) l = Math.max(l, intro * .5);
-      if (i === lines.length - 1 && l >= .5) n = el._n;
-      else if (l <= 0 || l >= .8) n = 0;
-      else if (l < .5) n = Math.ceil(el._n * l / .5);
-      else if (l < .6) n = el._n;
-      else n = Math.floor(el._n * (1 - (l - .6) / .2));
-      type(el, n);
+      var l = pf * lines.length - i, a;
+      if (i === 0 && l < .25) l = Math.max(l, intro * .25);
+      if (i === lines.length - 1 && l >= .25) a = 1;
+      else if (l <= 0 || l >= .8) a = 0;
+      else if (l < .25) a = l / .25;
+      else if (l < .6) a = 1;
+      else a = 1 - (l - .6) / .2;
+      show(el, a);
     });
   }
 

@@ -18,31 +18,18 @@
 .op-shade{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(11,12,14,.55) 0%,rgba(11,12,14,0) 30%,rgba(11,12,14,0) 62%,rgba(11,12,14,.6) 100%)}
 
-/* the lines: typed letter by letter, the newest letter in amber */
+/* the lines: each comes in whole, rising a little, and goes again; the script sets each one's opacity */
 .op-lines{position:absolute;left:0;right:0;bottom:clamp(88px,15svh,170px);width:min(var(--shell),100% - 2*var(--pad));margin-inline:auto;pointer-events:none}
 .op-line{position:absolute;left:0;bottom:0;max-width:17ch;font-size:clamp(2.1rem,5.2vw,4.75rem);line-height:1.02;letter-spacing:-.04em;font-weight:600;text-wrap:balance;color:#fff;
-  text-shadow:0 2px 30px rgba(0,0,0,.35)}
-.op-line span{visibility:hidden}
-.op-line span.on{visibility:visible}
-.op-line span.tip{color:var(--c)}
+  text-shadow:0 2px 30px rgba(0,0,0,.35);opacity:0;will-change:opacity,transform}
 
 /* the hand-over: as the film ends, its bottom darkens to the colour of the section under it, so when the page moves on
    the picture runs straight into the headline */
 .op-fade{position:absolute;left:0;right:0;bottom:0;height:45%;pointer-events:none;opacity:0;
   background:linear-gradient(180deg,rgba(11,12,14,0) 0%,rgba(11,12,14,.55) 55%,var(--ink) 100%)}
 
-/* the headline: the first thing under the film, on the same dark ground */
-.op-after{--ink:#0B0C0E;background:var(--ink);color:#fff;padding:clamp(4px,1.5vw,20px) 0 clamp(56px,8vw,112px)}
-.op-after .wrap{display:grid;gap:22px;justify-items:start}
-.op-kick{font-size:.875rem;color:rgba(255,255,255,.62);display:flex;align-items:center;gap:10px}
-.op-kick i{width:8px;height:8px;border-radius:50%;background:var(--live)}
-.op-after h1{font-size:clamp(3.2rem,9vw,8.75rem);line-height:.92;letter-spacing:-.055em;max-width:12ch;color:#fff}
-.op-after h1 em{font-style:normal;color:var(--live)}
-.op-after .lead{max-width:52ch;color:rgba(255,255,255,.72)}
-.op-ctas{display:flex;flex-wrap:wrap;gap:10px}
-.op-after .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
-.op-after .btn-ghost:hover{border-color:#fff}
-.op-after + .builder{border-top:0}
+/* the picker (picker.css) is the first thing under the film, on the same dark ground */
+.pk + .builder{border-top:0}
 
 /* the way out, for anyone who would rather not watch */
 .op-skip{position:absolute;z-index:3;right:var(--pad);bottom:22px;display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;
@@ -81,8 +68,6 @@
 @media (max-width:700px){
   .op-lines{bottom:clamp(96px,16svh,150px)}
   .op-line{font-size:clamp(2rem,9.6vw,2.9rem);max-width:13ch}
-  .op-after h1{font-size:clamp(3rem,15vw,4.6rem)}
-  .op-ctas .btn{flex:1 1 auto}
   .op:not(.is-film) .op-poster img{height:min(70svh,640px)}
 }
 @media (max-width:760px){

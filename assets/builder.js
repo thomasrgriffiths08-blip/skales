@@ -14,7 +14,8 @@
   var byKey = function(k){ for (var i = 0; i < T.length; i++) if (T[i].key === k) return T[i]; return null; };
   var abs = function(p){ var a = d.createElement('a'); a.href = base + (p || ''); return a.href; };
   var slug = function(s){ return String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); };
-  var tint = function(t){ var r = d.documentElement.style; r.setProperty('--c', t.c); r.setProperty('--c-ink', t.cInk || '#FFFFFF'); r.setProperty('--c-text', t.cText || t.c); };
+  /* the trade's colour tints the builder only; the rest of the page keeps the one Skales colour */
+  var tint = function(t){ var r = (d.getElementById('build') || d.documentElement).style; r.setProperty('--c', t.c); r.setProperty('--c-ink', t.cInk || '#FFFFFF'); r.setProperty('--c-text', t.cText || t.c); };
   var store = { get: function(){ try { return JSON.parse(localStorage.getItem('sk_draft') || 'null'); } catch(e){ return null; } },
                 set: function(v){ try { localStorage.setItem('sk_draft', JSON.stringify(v)); } catch(e){} } };
   var track = function(n, p){ if (window.skTrack) try { skTrack(n, p); } catch(e){} };
