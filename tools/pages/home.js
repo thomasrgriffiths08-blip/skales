@@ -214,7 +214,7 @@ ${picker(b)}
 </main>
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'picker.css', 'builder.css'], nodes, palette: AMBER }), body,
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'picker.css', 'builder.css'], nodes, palette: AMBER, theme: '#0B0C0E' }), body,
       L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'picker.js']));
   }
 }]};

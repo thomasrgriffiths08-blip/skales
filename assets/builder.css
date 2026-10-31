@@ -184,8 +184,11 @@
   .dx-call{border-radius:var(--r-m);margin-inline:calc(var(--pad) * -.5)}
   .dx-cta,.dx-cta .btn{width:100%}
 }
-@media (prefers-reduced-motion:reduce){
-  .b-log-l li{animation:none}
-  .b-log-l .sp{animation:none}
-}
+/* the build log is the demo: its lines, spinner and hint run on devices set to reduce motion too, where site.css would
+   otherwise cut them to nothing (a spinner that never turns reads as frozen). Small and short, nothing slides far */
+.builder .b-log-l li{animation:b-in .28s var(--ease) both !important}
+.builder .b-log-l .sp{animation:b-spin .7s linear infinite !important}
+.builder .b-log-l li.ok .sp{animation:none !important}
+.builder .b-log{transition:width .35s var(--ease),padding .35s var(--ease) !important}
+@media (max-width:980px){.builder .b-stage.is-done .b-phone .b-guard span{animation:b-hint 4.5s var(--ease) .4s both !important}}
 .b-stage.is-building .b-guard span{opacity:0 !important}

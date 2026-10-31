@@ -69,7 +69,8 @@
 .pk-screen{position:relative;display:block;aspect-ratio:600/1077;border-radius:25px;overflow:hidden;background:#16181C}
 .pk-screen img,.pk-screen video{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top}
 .pk-screen video{opacity:0}
-.pk .pk-screen video.is-on{opacity:1;transition:opacity .35s var(--ease) !important}
+.pk .pk-screen video{transition:opacity .35s var(--ease) !important}
+.pk .pk-screen video.is-on{opacity:1}
 
 /* the caption under the stage, and the two ways on. picker.js holds it at the height of the longest caption, so the
    stage never moves when the site changes */

@@ -315,7 +315,7 @@
   function loaded(f){ return new Promise(function(res){ var done = false, fin = function(){ if (!done){ done = true; res(); } }; f.addEventListener('load', fin, { once: true }); setTimeout(fin, 1500); }); }
   var wait = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
 
-  function build(o, mode){   /* mode: 'watch' (the log runs), 'instant' (no animation) */
+  function build(o, mode, gate){   /* mode: 'watch' (the log runs), 'instant' (no animation); gate: hold the build until it resolves */
     var my = ++run, staged = mode === 'watch';   /* plays with Reduce Motion on too: it is the demo, and nothing in it slides far */
     cur = o; lastDoc = buildDoc(o, false);
     tint(o.t);
@@ -344,7 +344,8 @@
       Promise.all(frames.map(loaded)).then(function(){ reveal(99, false); finish(''); });
       return;
     }
-    Promise.all(frames.map(loaded)).then(function(){
+    /* the site's own header goes on as soon as the frame is ready, so the screen is never an empty white box while it waits */
+    Promise.all(frames.map(loaded)).then(function(){ if (my === run) reveal(1, false); return gate; }).then(function(){
       if (my !== run) return;
       t0 = Date.now(); tick = setInterval(function(){ logT.textContent = ((Date.now() - t0) / 1000).toFixed(1) + 's'; }, 100);
       var chain = Promise.resolve();
@@ -352,7 +353,7 @@
         chain = chain.then(function(){
           if (my !== run) throw 0;
           var li = logLine(s[0], s[1]);
-          return wait(i === 0 ? 520 : 560).then(function(){ if (my !== run) throw 0; reveal(s[2], true); return wait(300); })
+          return wait(i === 0 ? 150 : i === 1 ? 350 : 560).then(function(){ if (my !== run) throw 0; reveal(s[2], true); return wait(300); })
             .then(function(){ if (my !== run) throw 0; li.classList.add('ok'); });
         });
       });
@@ -471,9 +472,13 @@
     var ex = make(byKey('heating') || T[0], 'Hartley Heating', 'Leeds', '', true);
     if (!window.IntersectionObserver) build(ex, 'instant');
     else {
-      build(ex, 'instant');   /* something real in the window straight away, then it builds itself once in view */
-      var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); if (cur && cur.example) setTimeout(function(){ if (cur && cur.example) build(ex, 'watch'); }, 500); } }, { threshold: .35 });
-      io.observe(stage);
+      /* the example stands ready and builds itself once, as soon as the stage comes up the screen. It is never shown finished
+         first: a finished site that blanks and starts again reads as a glitch */
+      var seen = new Promise(function(res){
+        var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); res(); } });
+        io.observe(stage);
+      });
+      build(ex, 'watch', seen);
     }
   }
 })();

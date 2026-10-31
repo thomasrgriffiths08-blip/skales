@@ -59,12 +59,19 @@
   }
 
   /* ---------- a swap ---------- */
+  /* the old clip fades off the phone, showing the new site's still underneath, before the new clip is loaded:
+     swapping the source at once would cut it to nothing */
+  var vt = 0;
   function play(t){
+    clearTimeout(vt); vid.onplaying = null;
     vid.classList.remove('is-on');
     if (SAVE){ vid.removeAttribute('src'); return; }
-    vid.onplaying = function(){ vid.classList.add('is-on'); };
-    vid.src = clip(t, 'mp4');
-    if (inView){ var p = vid.play(); if (p && p.catch) p.catch(function(){}); }
+    var go = function(){
+      vid.onplaying = function(){ vid.classList.add('is-on'); };
+      vid.src = clip(t, 'mp4');
+      if (inView){ var p = vid.play(); if (p && p.catch) p.catch(function(){}); }
+    };
+    if (vid.getAttribute('src')) vt = setTimeout(go, 380); else go();
   }
   function show(i, byHand){
     if (byHand) stopAuto();
@@ -147,10 +154,20 @@
     }, { threshold: .25 }).observe(root);
   } else { inView = true; play(tabs[cur]); wake(); }
 
-  /* the header stays dark while it is over the dark top of the page: the picker, and the builder under it when that is dark too */
+  /* the header stays dark while it is over the dark top of the page: the picker, and the builder under it when that is dark too.
+     The phone's own top bar (theme-color) and the space a phone shows when the page is pulled past its top follow it */
   if (head){
     var next = root.nextElementSibling, dark = next && next.id === 'build' ? next : root;
-    var hq = 0, darkHead = function(){ hq = 0; head.classList.toggle('on-dark', dark.getBoundingClientRect().bottom > head.offsetHeight); };
+    var tc = d.querySelector('meta[name="theme-color"]'), was = null;
+    var hq = 0, darkHead = function(){
+      hq = 0;
+      var on = dark.getBoundingClientRect().bottom > head.offsetHeight;
+      if (on === was) return;
+      was = on;
+      head.classList.toggle('on-dark', on);
+      if (tc) tc.setAttribute('content', on ? '#0B0C0E' : '#FFFFFF');
+      d.documentElement.style.backgroundColor = on ? '#0B0C0E' : '';
+    };
     addEventListener('scroll', function(){ if (!hq) hq = requestAnimationFrame(darkHead); }, { passive: true });
     darkHead();
   }
