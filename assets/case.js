@@ -70,7 +70,7 @@
   function analyse(a){
     var k = kindOf(a.kind), won = Math.min(a.won, a.enq), conv = a.enq > 0 ? won / a.enq : 0, pct = Math.round(conv * 100);
     var team = +a.team || 1, leaks = [];
-    var sectorTool = k.demo, sectorSite = { professional: 21, clinic: 22, garage: 24, electrical: 23 }[a.kind] || 13;
+    var sectorTool = k.demo, sectorSite = { professional: 9, clinic: 10, garage: 12, electrical: 11 }[a.kind] || 11;
 
     if (a.missed > 0 && conv > 0){
       var mv = a.missed * conv * a.job * WEEKS;
@@ -78,7 +78,7 @@
         working: plain(a.missed) + ' missed calls a week × ' + pct + '% (your own win rate) × ' + money(a.job) + ' × ' + WEEKS + ' weeks',
         why: 'Most people who reach voicemail do not leave a message; they ring the next name on Google. These are not lost jobs on paper, they are enquiries that never happened.',
         fix: { svc: 'follow-up-automation', name: 'Missed-call text-back', what: 'Every call you cannot take gets a text back inside a minute, from your number, asking what the job is. The reply lands in one list, so you ring back a warm lead instead of a stranger.' },
-        proof: [25, 12] });
+        proof: [14, 13] });
     }
     var lost = Math.max(0, a.enq - won);
     if (lost > 0 && a.chase !== 'always'){
@@ -87,16 +87,16 @@
         working: plain(lost) + ' enquiries a week not won × ' + money(a.job) + ' × ' + WEEKS + ' weeks of work asked about and not won',
         why: a.chase === 'rarely' ? 'Quotes are sent and then left. A customer who meant to say yes and got busy is the cheapest job you will ever win, and nobody is asking them.' : 'Quotes get chased when there is time, which is the week there is least of it. The ones that slip are usually the ones that just needed a nudge.',
         fix: { svc: 'booking-and-pipeline', name: 'Quotes that chase themselves', what: 'Every enquiry sits in one pipeline with what happened to it. A quote that goes quiet gets a polite follow-up a couple of days later without anyone remembering to send it.' },
-        proof: a.kind === 'kitchens' ? [1, 2] : a.kind === 'roofing' ? [35, 2] : [2, 27] });
+        proof: [16, 14] });
     }
     if (a.repeat !== 'no' && won > 0){
       var cust = won * WEEKS, rf = a.repeat === 'yes' ? 5 : 10, rv = cust * a.job / rf;
-      var rem = { heating: 31, garage: 32, salon: 33, hospitality: 34 }[a.kind] || 26;
+      var rem = 18;
       leaks.push({ key: 'repeat', title: 'Customers who should come back on their own', gross: null, back: rv, frac: 'one in ' + rf,
         working: plain(won) + ' jobs a week × ' + WEEKS + ' weeks = ' + Math.round(cust).toLocaleString('en-GB') + ' customers a year; one in ' + ({ 5: 'five', 10: 'ten' }[rf] || rf) + ' coming back (an assumption) × ' + money(a.job),
         why: 'The work comes round again, but the reminder lives in your head. The customer does not forget you on purpose; somebody else just got to them first.',
         fix: { svc: 'follow-up-automation', name: 'Service reminders and rebooks', what: 'Every customer is logged with when they are next due. The reminder goes out before they think to search, and the reply books straight into the diary.' },
-        proof: [rem, 29] });
+        proof: [rem, 15] });
     }
     if (a.admin > 0){
       var hrs = a.admin * WEEKS;
@@ -106,26 +106,26 @@
         fix: team >= 6
           ? { svc: 'booking-and-pipeline', name: 'One board for the whole team', what: 'Jobs, engineers and the week on one screen. Drag a job and the week re-plans; the office stops ringing round to find out who is where.' }
           : { svc: 'booking-and-pipeline', name: 'Paperwork that writes itself', what: 'The job sheet is filled in on site, the customer report and the invoice come out of it, and nothing is typed twice.' },
-        proof: team >= 6 ? [3, 30] : [15, 4] });
+        proof: team >= 6 ? [15, 13] : [13, 16] });
     }
     if (a.site !== 'good'){
       leaks.push({ key: 'site', title: { none: 'No website at all', diy: 'A page-builder website', agency: 'A website from a few years ago' }[a.site], gross: null, back: null,
         working: '',
         why: { none: 'Every recommendation you get is checked on Google before they ring. Right now there is nothing there to check, so a share of them never ring.', diy: 'A page-builder site looks like a thousand others and loads like one. It holds the details, but it is not built to turn a visit into a name and a number.', agency: 'It was built for how people searched then. On a phone today, the number, the area you cover and a reason to choose you should be one thumb away.' }[a.site],
         fix: { svc: 'capture-website', name: 'A website built to capture the enquiry', what: 'Hand-built, fast on a phone, a three-field form and a one-tap call, and every page written to answer what your customer typed into Google. Owned by you from day one.' },
-        proof: [sectorSite, 13 === sectorSite ? 23 : 13] });
+        proof: [sectorSite, 11 === sectorSite ? 12 : 11] });
     }
     if (a.booking === 'no' && k.bookable){
       leaks.push({ key: 'booking', title: 'Every booking is a phone call', gross: null, back: null, working: '',
         why: 'Customers who would happily pick a slot at eleven at night have to wait until you can answer. Some wait; some book whoever lets them.',
         fix: { svc: 'booking-and-pipeline', name: 'Online booking with a deposit', what: 'Slots generated from your real diary, a deposit that holds the slot, and the confirmation sent for you. No phone tag.' },
-        proof: [{ salon: 33, hospitality: 34 }[a.kind] || 14, 29] });
+        proof: [15, 13] });
     }
     if (a.reviews === 'few'){
       leaks.push({ key: 'reviews', title: 'Too few reviews to win the comparison', gross: null, back: null, working: '',
         why: 'Customers compare the top three on Google and read the reviews before they ring. With under twenty, you lose to firms who are not better than you, only better reviewed.',
         fix: { svc: 'follow-up-automation', name: 'Review requests at the right moment', what: 'A finished job gets a request the same day, while the customer is still pleased, with a link straight to the box. Replies are drafted for you to send.' },
-        proof: [26, 11] });
+        proof: [17, 13] });
     }
 
     /* order: money first, then what the owner said matters most */

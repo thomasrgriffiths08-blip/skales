@@ -39,7 +39,7 @@ const posts = notes.map(n => ({
       { '@type': 'Article', headline: n.title, description: n.summary, datePublished: n.date, dateModified: n.date,
         author: { '@id': L.PERSON_ID }, publisher: { '@id': L.ORG_ID }, mainEntityOfPage: L.abs(`/notes/${n.slug}/`), inLanguage: 'en-GB',
         image: L.abs(`/og/notes-${n.slug}.png`) } ];
-    const links = (n.links || []).map(([k, t]) => k === 'work' ? `<a class="btn btn-ghost" href="${b}work/">${esc(t)}</a>` : `<a class="btn btn-ghost" href="${b}work/${k}/">${esc(t)}</a>`).join('');
+    const links = (n.links || []).map(([k, t]) => k === 'work' ? `<a class="btn btn-ghost" href="${b}work/">${esc(t)}</a>` : k.includes('/') ? `<a class="btn btn-ghost" href="${b}${k}">${esc(t)}</a>` : `<a class="btn btn-ghost" href="${b}work/${k}/">${esc(t)}</a>`).join('');
     const body = `
 ${L.header(b, 'notes')}
 <main id="main">

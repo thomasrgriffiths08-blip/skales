@@ -34,7 +34,7 @@ module.exports = [
       'Hand-coded: no page builder, no theme, fast on a weak signal.',
       'Domain, code and accounts set up in your name.',
     ],
-    demos: [], builds: [13, 23, 24, 22], automations: ['missed-call-text-back', 'review-requests'],
+    demos: [], builds: [11, 12, 10], automations: ['missed-call-text-back', 'review-requests'],
     faq: [
       ['How long does a website take?', 'A website on its own takes days. A full system with booking and follow-up usually takes one to two weeks, and you can watch it being built.'],
       ['How much does a website cost?', 'Every job is quoted flat after a short call, because the price depends on how many pages you need, whether you take bookings or deposits, and which automations you want. There are no prices on this site and no monthly fee for a page builder.'],
@@ -70,7 +70,7 @@ module.exports = [
       'Where every enquiry came from, so you know which channel books work.',
       'No app for your customers to download. It all works in their phone browser.',
     ],
-    demos: ['booking', 'crm-board'], builds: [14, 2, 28, 33], automations: ['booking-deposits', 'quote-chasing', 'service-reminders', 'on-my-way-texts'],
+    demos: ['booking', 'crm-board'], builds: [15, 14], automations: ['booking-deposits', 'quote-chasing', 'service-reminders', 'on-my-way-texts'],
     faq: [
       ['Can customers book at night or at weekends?', 'Yes, that is the point. The booking page shows your free slots at any hour, so a customer who finds you at 10pm books then, instead of meaning to ring you in the morning.'],
       ['Can two people book the same slot?', 'No. A slot disappears the moment it is taken, on every device.'],
@@ -104,7 +104,7 @@ module.exports = [
       'Every message written with you, and easy to change or pause.',
       'Replies land on your phone and in your CRM.',
     ],
-    demos: ['missed-call', 'crm-board'], builds: [25, 26, 31, 32, 29], automations: ['missed-call-text-back', 'quote-chasing', 'booking-deposits', 'on-my-way-texts', 'review-requests', 'service-reminders'], showAllAutomations: true,
+    demos: ['missed-call', 'crm-board'], builds: [14, 17, 18, 15], automations: ['missed-call-text-back', 'quote-chasing', 'booking-deposits', 'on-my-way-texts', 'review-requests', 'service-reminders'], showAllAutomations: true,
     faq: [
       ['What does it cost to run?', 'The setup is quoted flat, like everything else. After that, the only running cost is the texts themselves, billed by the text provider.'],
       ['Can I change what the messages say?', 'Yes. Every message is written with you before it goes live, and any of them can be changed or paused with a message to me.'],

@@ -31,7 +31,7 @@ module.exports = {
   facts: [
     'Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).',
     'One person: the person you message is the person who builds it.',
-    '{{N}} working demonstration builds run live on the site; every business in them is fictional.',
+    '{{W}} run live on the site as working demonstrations; every business in them is fictional.',
     'One system a week is built in public on Instagram.',
     'Clients own their domain, code and accounts from day one; nothing is rented back to them monthly.',
     'Every build is hand-coded, with no page builder and no theme.',

@@ -8,7 +8,7 @@ const SV = require('../../data/services.js');
 const AU = require('../../data/automations.js');
 const CP = require('../../data/compare.js');
 const GQ = require('../../data/faq.js');
-const DEMOS = require('./try.js').DEMOS;
+const DEMOS = require('./try.js').DEMOS, tryCard = require('./try.js').card;
 
 const B = n => builds.find(x => x.n === n);
 const svc = s => SV.find(x => x.slug === s);
@@ -69,10 +69,20 @@ const faqPanel = (qs, h2) => `<section class="panel faq" id="faq">
     </div>
   </div>
 </section>`;
+/* the missed-call calculator: three sliders, the working printed under the answer, every assumption named */
+const calcPanel = () => panel('Your numbers', 'What missed calls cost', `<h2>What are missed calls costing you?</h2>
+<form class="calc" id="calc" novalidate>
+  <label class="cl-row"><span class="cl-l">Calls you miss in a week</span><output class="cl-v" for="clMiss" id="clMissV">5</output><input type="range" id="clMiss" min="0" max="30" step="1" value="5"></label>
+  <label class="cl-row"><span class="cl-l">What a typical job is worth</span><output class="cl-v" for="clJob" id="clJobV">£250</output><input type="range" id="clJob" min="0" max="40" step="1" value="8"></label>
+  <fieldset class="cl-row cl-seg"><legend class="cl-l">Of those callers, how many would have booked?</legend><div class="cl-opts"><label><input type="radio" name="clRate" value="0.25"><span>1 in 4</span></label><label><input type="radio" name="clRate" value="0.333" checked><span>1 in 3</span></label><label><input type="radio" name="clRate" value="0.5"><span>1 in 2</span></label></div></fieldset>
+  <div class="cl-out" aria-live="polite"><p class="cl-big"><span id="clMonth">£1,400</span> a month</p><p class="cl-sub">goes to whoever answers next. That is <b id="clYear">£16,800</b> a year.</p><p class="cl-work" id="clWork"></p></div>
+  <a class="btn btn-live" href="{{b}}start/?utm_source=site&amp;utm_medium=calculator">Book a call about it</a>
+</form>
+<noscript><p>The calculator needs JavaScript. The sum is simple: missed calls a week × 4.3 weeks × the share who would have booked × what a job is worth.</p></noscript>`, ' id="cost"');
 const tryCards = (b, slugs, h = 'Try it on your phone') => !slugs.length ? '' : `<section class="sec" id="try" aria-labelledby="h-try">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-try">${esc(h)}</h2><p class="lead">Live demos with a made-up business. You play the customer, then see what the business sees. About a minute each.</p></div>
-    <div class="try-list${slugs.length === 2 ? ' is-2' : ''}">${slugs.map(demo).filter(Boolean).map(x => `<a class="try-card" href="${b}try/${x.slug}/"><span class="try-n">Demo</span><h3>${esc(x.name)}</h3><p>${esc(x.line)}</p><span class="try-go">Try it <span aria-hidden="true">→</span></span></a>`).join('')}</div>
+    <div class="try-list${slugs.length === 2 ? ' is-2' : ''}">${slugs.map(demo).filter(Boolean).map((x, i) => tryCard(b, x, i, { first: false })).join('')}</div>
   </div>
 </section>`;
 const buildWall = (b, ns, h, p) => !ns.length ? '' : `<section class="sec sec-alu" id="builds" aria-labelledby="h-builds">
@@ -88,7 +98,7 @@ const autoCards = (b, slugs, h) => !slugs.length ? '' : `<section class="sec" id
   </div>
 </section>`;
 const ctaRow = (b, demos, medium, slug) => `<div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a>${demos.length ? `<a class="btn btn-ghost" href="${b}try/${demos[0]}/">Try the demo</a>` : `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">See what you’re missing</a>`}</div>`;
-const band = (b, medium, slug) => L.ctaBand(b, 'Want this working for your business?', 'Book a call and I’ll look at your business with you, or take the 60-second check first and see what you’re missing.', `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">Take the 60-second check</a>`);
+const band = (b, medium, slug) => L.ctaBand(b, 'Want this working for your business?', 'A free 30-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.', `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">Book in three taps</a>`);
 const fill = (html, b) => html.replace(/\{\{b\}\}/g, b);
 
 /* ---------- the ad previews on the two ads pages (a made-up business, labelled) ---------- */
@@ -96,7 +106,7 @@ const metaAd = b => `<figure class="adp">
   <div class="adp-meta" role="img" aria-label="A Facebook feed ad for Larchfield Heating, a fictional heating engineer, offering a free boiler service slot tomorrow">
     <div class="am-hd"><span class="am-av" aria-hidden="true">L</span><div><b>Larchfield Heating</b><span>Sponsored · <svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 8h13M8 1.5c2 2 2 11 0 13M8 1.5c-2 2-2 11 0 13" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></div><span class="am-dots" aria-hidden="true">···</span></div>
     <p class="am-tx">Boiler due a service? We’ve got free slots in Ealing this week. Pick one tonight and it’s yours, no phone tag. Gas Safe engineers, and the certificate emailed the same day.</p>
-    <div class="am-img"><img src="${b}assets/plates/heating.webp" width="900" height="506" alt="" loading="lazy" decoding="async"><span class="am-chip"><i></i>Next free slot · Tomorrow, 10:30</span></div>
+    <div class="am-img"><img src="${b}assets/photos/heating-sm.webp" width="820" height="546" alt="" loading="lazy" decoding="async"><span class="am-chip"><i></i>Next free slot · Tomorrow, 10:30</span></div>
     <div class="am-link"><div><span>larchfield.co.uk</span><b>Boiler service in Ealing, book online</b></div><span class="am-btn">Book now</span></div>
     <div class="am-act" aria-hidden="true"><span>Like</span><span>Comment</span><span>Share</span></div>
   </div>
@@ -131,13 +141,14 @@ const adSection = (s) => {
 };
 
 /* the live widgets from the old /what-i-do/ page, kept on the pages they prove (assets/systems.js) */
-const turnoverRig = b => { const t = B(13); return `<section class="sec sec-alu" id="see" aria-labelledby="h-see">
+/* the before-and-after is not one of the builds any more, so it is framed by its address */
+const turnoverRig = b => { const t = { name: 'Turnover', slug: 'turnover', c: '#C77D2B' }; return `<section class="sec sec-alu" id="see" aria-labelledby="h-see">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-see">The same firm, before and after.</h2><p class="lead">A made-up roofing firm’s 2011 website on one side and its rebuild on the other. Drag the tape line across.</p></div>
     <div class="rig rig-solo" style="--chan:${t.c}">
       <div class="stage">
-        <div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><b>${esc(t.name)}</b> &middot; before and after a rebuild</span><a class="pop" href="${b}work/${t.slug}/">Its page</a></div>
-        <div class="viewport vp-short" data-solo="${t.slug}"><div class="boot">Loading</div></div>
+        <div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><b>${esc(t.name)}</b> &middot; before and after a rebuild</span><a class="pop" href="${b}demos/${t.slug}/#s=1" target="_blank" rel="noopener">Full screen</a></div>
+        <div class="viewport vp-short" data-solo="${t.slug}" data-src="demos/${t.slug}/#s=1" data-title="${esc(t.name)}"><div class="boot">Loading</div></div>
       </div>
     </div>
   </div>
@@ -185,14 +196,18 @@ const servicePage = s => ({
     ];
     const qa = s.sections.map(x => `<div class="qa"><h2>${esc(x.h2)}</h2>${x.p.map(p => `<p>${esc(p)}</p>`).join('')}</div>`).join('');
     const others = SV.filter(x => x !== s);
+    const hx = s.builds.length ? B(s.builds[0]) : null;
     const body = `
 ${L.header(b, 'services')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap${hx ? ' hero-split' : ''}">
+  <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(s.h1)}</h1>
-  <p class="lead answer">${esc(s.answer)}</p>
+  ${L.fold(s.answer, 'lead answer')}
   ${ctaRow(b, s.demos, 'services', s.slug)}
+  </div>
+  ${hx ? L.heroPhone(b, hx) : ''}
 </section>
 ${s.film ? `<section class="sec sec-alu" id="film" aria-labelledby="h-film">
   <div class="wrap">
@@ -217,8 +232,8 @@ ${fill(faqPanel(s.faq, `${s.name}: questions people ask`), b)}
 ${band(b, 'services', s.slug)}
 ${L.footer(b)}`;
     const live = s.slug === 'websites' || s.slug === 'follow-up-automation';
-    const css = ['pages.css', ...(s.builds.length || live ? ['device.css'] : []), ...(live ? ['systems.css'] : [])];
-    const js = [...(s.film ? ['films.js'] : []), ...(live ? ['builds.js', 'device.js', 'systems.js'] : [])];
+    const css = ['pages.css', ...(s.builds.length || live ? ['device.css'] : []), ...(live ? ['systems.css'] : []), ...(hx ? ['hero-phone.css'] : [])];
+    const js = [...(s.film ? ['films.js'] : []), ...(live ? ['builds.js', 'device.js', 'systems.js'] : []), ...(hx ? ['hero-phone.js'] : [])];
     return L.page(L.head({ b, path, title, description: s.description, og: `services-${s.slug}`, css, nodes }), fill(body, b), L.scripts(b, js));
   },
 });
@@ -280,16 +295,21 @@ const autoPage = a => ({
       faqNode(a.faq, path),
     ];
     const others = AU.filter(x => x !== a);
+    const hx = a.builds.length ? B(a.builds[0]) : null;
     const body = `
 ${L.header(b, 'services')}
 <main id="main">
-<section class="hero-w wrap">
+<section class="hero-w wrap${hx ? ' hero-split' : ''}">
+  <div class="hs-copy">
   ${crumbs(b, cr)}
   <h1>${esc(a.h1)}</h1>
-  <p class="lead answer">${esc(a.answer)}</p>
+  ${L.fold(a.answer, 'lead answer')}
   ${ctaRow(b, a.demos, 'automations', a.slug)}
+  </div>
+  ${hx ? L.heroPhone(b, hx) : ''}
 </section>
-${panel('Why it matters', esc(a.name), `<h2>Why does it matter?</h2><p class="lead">${esc(a.why)}</p>`)}
+${panel('Why it matters', esc(a.name), `<h2>Why does it matter?</h2>${L.fold(a.why)}`)}
+${a.slug === 'missed-call-text-back' ? fill(calcPanel(), b) : ''}
 ${panel('How it works', 'Step by step', `<h2>How does ${esc(a.name.toLowerCase())} work?</h2><ol class="steps">${a.steps.map(([n, t]) => `<li><b>${esc(n)}.</b> ${esc(t)}</li>`).join('')}</ol>`, ' id="how"')}
 ${panel('The message', 'What the customer gets', `<h2>What does the text say?</h2><div class="msg"><p class="msg-b">${esc(a.message)}</p><span class="msg-n">An example for Larchfield Heating, a made-up business. Yours is written with you, in your words.</span></div>`)}
 ${panel('What it needs', 'From you', `<h2>What does it need from me?</h2><ul class="feat">${a.needs.map(n => `<li>${esc(n)}</li>`).join('')}</ul>`)}
@@ -302,7 +322,7 @@ ${fill(faqPanel(a.faq, `${a.name}: questions people ask`), b)}
 </main>
 ${band(b, 'automations', a.slug)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css'], nodes }), body, L.scripts(b));
+    return L.page(L.head({ b, path, title, description: a.description, og: `automations-${a.slug}`, css: ['pages.css', 'device.css', ...(hx ? ['hero-phone.css'] : [])], nodes }), body, L.scripts(b, [...(hx ? ['hero-phone.js'] : []), ...(a.slug === 'missed-call-text-back' ? ['calc.js'] : [])]));
   },
 });
 
@@ -352,7 +372,7 @@ ${L.header(b, 'services')}
 <section class="hero-w wrap">
   ${crumbs(b, cr)}
   <h1>${esc(c.h1)}</h1>
-  <p class="lead answer">${esc(c.answer)}</p>
+  ${L.fold(c.answer, 'lead answer')}
 </section>
 <section class="sec sec-alu" aria-labelledby="h-cmp">
   <div class="wrap">

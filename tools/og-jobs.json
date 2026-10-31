@@ -1,15 +1,15 @@
 [
   {
     "key": "home",
-    "title": "Watch your website build itself.",
+    "title": "Be the one they call.",
     "kicker": "Skales · websites · booking · follow-up · UK",
-    "sub": "Pick your trade and a working site for your business appears in a couple of seconds. Thirty-six finished ones are on the page too."
+    "sub": "Websites, booking and follow-up for UK trades. Real builds run live on the page, and you can build a draft of your own with a reference number for the call."
   },
   {
     "key": "work",
-    "title": "Thirty-six builds. All of them running.",
-    "kicker": "Work · 36 live examples",
-    "sub": "12 websites and 24 tools, every one open to use."
+    "title": "Twelve websites. One system behind them.",
+    "kicker": "Work · every one running live",
+    "sub": "12 full websites and the system that answers, books and follows up."
   },
   {
     "key": "websites",
@@ -18,73 +18,13 @@
     "sub": "Loud, motion, quiet, direct. Pick the lane that matches how your customers decide."
   },
   {
-    "key": "tools",
-    "title": "The tools that run a service business.",
-    "kicker": "Tools · 24 live examples",
-    "sub": "Booking, quotes, the pipeline, follow-up — and the ones built for one trade’s day."
-  },
-  {
-    "key": "work-northgate-quote-engine",
-    "title": "Northgate Quote Engine",
-    "kicker": "Kitchen fitter · Tool · Broad",
-    "sub": "A quote that assembles itself while the customer answers.",
-    "colour": "#245247",
-    "sheet": "#E0E7E5",
-    "phone": "assets/phones/01.webp"
-  },
-  {
-    "key": "work-redgate-job-system",
-    "title": "Redgate Job & Lead System",
-    "kicker": "Heating & plumbing · Tool · Broad",
-    "sub": "Every enquiry, where it came from, and what happened to it.",
-    "colour": "#3730a3",
-    "sheet": "#E3E2F2",
-    "phone": "assets/phones/02.webp"
-  },
-  {
-    "key": "work-halcyon-dispatch",
-    "title": "Halcyon Dispatch",
-    "kicker": "Heating dispatch team · Tool · Broad",
-    "sub": "Drag a job to another engineer and the week re-plans itself.",
-    "colour": "#2f5cdb",
-    "sheet": "#E2E8FA",
-    "phone": "assets/phones/03.webp"
-  },
-  {
-    "key": "work-ledgerline",
-    "title": "Ledgerline",
-    "kicker": "Invoice & proposal studio · Tool · Broad",
-    "sub": "A live A4 page that reflows as you type.",
-    "colour": "#1f4fd8",
-    "sheet": "#E0E6FA",
-    "phone": "assets/phones/04.webp"
-  },
-  {
-    "key": "work-mortgage-lab",
-    "title": "Mortgage Lab",
-    "kicker": "Broker lead magnet · Tool · Specific",
-    "sub": "What an overpayment really saves, month by month.",
-    "colour": "#0b6e4f",
-    "sheet": "#DDEBE6",
-    "phone": "assets/phones/05.webp"
-  },
-  {
-    "key": "work-payslip-lab",
-    "title": "Payslip Lab",
-    "kicker": "Accountant lead magnet · Tool · Specific",
-    "sub": "Gross to net, and the 60% trap nobody explains.",
-    "colour": "#2952cc",
-    "sheet": "#E1E7F8",
-    "phone": "assets/phones/06.webp"
-  },
-  {
     "key": "work-atelier-voss",
     "title": "Atelier Voss",
     "kicker": "Architecture practice · Website · Quiet",
     "sub": "A studio site with no photographs at all.",
     "colour": "#14508c",
     "sheet": "#DEE7EF",
-    "phone": "assets/phones/07.webp"
+    "phone": "assets/phones/01.webp"
   },
   {
     "key": "work-cadence",
@@ -93,7 +33,7 @@
     "sub": "The page is an operations board that never stops running.",
     "colour": "#FFB300",
     "sheet": "#FFF4DB",
-    "phone": "assets/phones/08.webp"
+    "phone": "assets/phones/02.webp"
   },
   {
     "key": "work-maree",
@@ -102,7 +42,7 @@
     "sub": "Ink through water, and a page that darkens as you descend.",
     "colour": "#A9CBBD",
     "sheet": "#F3F8F6",
-    "phone": "assets/phones/09.webp"
+    "phone": "assets/phones/03.webp"
   },
   {
     "key": "work-signal",
@@ -111,61 +51,7 @@
     "sub": "Type that reacts to how hard you scroll.",
     "colour": "#3B18E0",
     "sheet": "#E4DFFB",
-    "phone": "assets/phones/10.webp"
-  },
-  {
-    "key": "work-kerbside-scorecard",
-    "title": "Kerbside Scorecard",
-    "kicker": "Google profile report card · Tool · Broad",
-    "sub": "Marks a Google Business Profile like an exam.",
-    "colour": "#B42318",
-    "sheet": "#F5E0DF",
-    "phone": "assets/phones/11.webp"
-  },
-  {
-    "key": "work-stopcock",
-    "title": "Stopcock",
-    "kicker": "Missed-call leak meter · Tool · Broad",
-    "sub": "What unanswered calls cost you a year.",
-    "colour": "#14606E",
-    "sheet": "#DEE9EB",
-    "phone": "assets/phones/12.webp"
-  },
-  {
-    "key": "work-turnover",
-    "title": "Turnover",
-    "kicker": "Roofing firm rebuild · Tool · Specific",
-    "sub": "Drag the tape line across a 2011 site and its rebuild.",
-    "colour": "#C77D2B",
-    "sheet": "#F7EDE1",
-    "phone": "assets/phones/13.webp"
-  },
-  {
-    "key": "work-fenwick-booking",
-    "title": "Fenwick Booking",
-    "kicker": "Heating engineer · Tool · Broad",
-    "sub": "Service, slot, deposit, confirmed — no phone tag.",
-    "colour": "#B4451F",
-    "sheet": "#F5E5E0",
-    "phone": "assets/phones/14.webp"
-  },
-  {
-    "key": "work-jobsheet",
-    "title": "Jobsheet",
-    "kicker": "Van-side job report · Tool · Specific",
-    "sub": "Fill it in from the van, the customer report writes itself.",
-    "colour": "#275C3F",
-    "sheet": "#E1E8E4",
-    "phone": "assets/phones/15.webp"
-  },
-  {
-    "key": "work-shiftbook",
-    "title": "Shiftbook",
-    "kicker": "Salon staff rota · Tool · Specific",
-    "sub": "Click a cell to place a shift. Clashes flag as you go.",
-    "colour": "#6D3B52",
-    "sheet": "#EBE4E7",
-    "phone": "assets/phones/16.webp"
+    "phone": "assets/phones/04.webp"
   },
   {
     "key": "work-long-exposure",
@@ -174,16 +60,16 @@
     "sub": "A film company's site that plays like a film you can scrub.",
     "colour": "#E8A84B",
     "sheet": "#FCF3E6",
-    "phone": "assets/phones/17.webp"
+    "phone": "assets/phones/05.webp"
   },
   {
     "key": "work-overhead",
     "title": "Overhead",
     "kicker": "Overhead · Website · Motion",
-    "sub": "Scroll to climb — the valley draws itself in contours as you rise.",
+    "sub": "Scroll to climb, and the valley draws itself in contours as you rise.",
     "colour": "#B7791F",
     "sheet": "#F5ECE0",
-    "phone": "assets/phones/18.webp"
+    "phone": "assets/phones/06.webp"
   },
   {
     "key": "work-southpaw",
@@ -192,7 +78,7 @@
     "sub": "A boxing club site built as a fight card, run by a round timer.",
     "colour": "#C8281E",
     "sheet": "#F7E1E0",
-    "phone": "assets/phones/19.webp"
+    "phone": "assets/phones/07.webp"
   },
   {
     "key": "work-marrow-and-pin",
@@ -201,7 +87,7 @@
     "sub": "A flash wall that inks itself as you scroll past each sheet.",
     "colour": "#5B2A86",
     "sheet": "#E8E1EE",
-    "phone": "assets/phones/20.webp"
+    "phone": "assets/phones/08.webp"
   },
   {
     "key": "work-hale-and-partners",
@@ -210,7 +96,7 @@
     "sub": "A year-end that settles, and the deadlines counted from today.",
     "colour": "#A61E1E",
     "sheet": "#F3E0E0",
-    "phone": "assets/phones/21.webp"
+    "phone": "assets/phones/09.webp"
   },
   {
     "key": "work-fern-physio",
@@ -219,16 +105,16 @@
     "sub": "A drawn body with ten tappable points, and a booking flow behind it.",
     "colour": "#6F8F79",
     "sheet": "#EBEFEC",
-    "phone": "assets/phones/22.webp"
+    "phone": "assets/phones/10.webp"
   },
   {
     "key": "work-kestrel-electrical",
     "title": "Kestrel Electrical",
     "kicker": "Two-van electrical firm · Website · Direct",
-    "sub": "An electrician's page built as a fuse board — every job is a breaker.",
+    "sub": "An electrician's page built as a fuse board: every job is a breaker.",
     "colour": "#6B3A1E",
     "sheet": "#EAE3E0",
-    "phone": "assets/phones/23.webp"
+    "phone": "assets/phones/11.webp"
   },
   {
     "key": "work-kerb-and-camber",
@@ -237,115 +123,70 @@
     "sub": "A UK number plate you type into, and the MOT date that comes back.",
     "colour": "#1F4E9C",
     "sheet": "#E0E6F1",
-    "phone": "assets/phones/24.webp"
+    "phone": "assets/phones/12.webp"
   },
   {
-    "key": "work-ringsback",
-    "title": "Ringsback",
-    "kicker": "Heating firm, Leeds · Tool · Broad",
-    "sub": "Missed-call text-back console: the text goes out, the reply lands here.",
-    "colour": "#17784A",
-    "sheet": "#DFECE6",
-    "phone": "assets/phones/25.webp"
+    "key": "work-system",
+    "title": "The system",
+    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "sub": "One screen: every call caught, every job booked, and what still needs you.",
+    "colour": "#B04A24",
+    "sheet": "#F4E6E0",
+    "phone": "assets/phones/13.webp"
   },
   {
-    "key": "work-starboard",
-    "title": "Starboard",
-    "kicker": "Shown running for Aldercroft Tree Care · Tool · Broad",
-    "sub": "Asks for the review at the right moment, then helps you reply to it.",
-    "colour": "#B45309",
-    "sheet": "#F5E7DD",
-    "phone": "assets/phones/26.webp"
+    "key": "work-inbox",
+    "title": "Inbox and missed calls",
+    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "sub": "Every call, text and form in one list. Missed calls get a text back in seconds.",
+    "colour": "#B04A24",
+    "sheet": "#F4E6E0",
+    "phone": "assets/phones/14.webp"
   },
   {
-    "key": "work-slate",
-    "title": "Slate",
-    "kicker": "Ashgrove Building & Maintenance · Tool · Broad",
-    "sub": "Your own price book, and the estimate it builds in a minute.",
-    "colour": "#3A5A72",
-    "sheet": "#E3E8EB",
-    "phone": "assets/phones/27.webp"
+    "key": "work-booking",
+    "title": "Booking and the diary",
+    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "sub": "Customers book a real free time and pay a deposit. It lands in the right diary.",
+    "colour": "#B04A24",
+    "sheet": "#F4E6E0",
+    "phone": "assets/phones/15.webp"
   },
   {
-    "key": "work-triage",
-    "title": "Triage",
-    "kicker": "Latchford Locks & Security · Tool · Broad",
-    "sub": "Every enquiry, every channel, sorted by who has waited longest.",
-    "colour": "#2F5D50",
-    "sheet": "#E2E8E7",
-    "phone": "assets/phones/28.webp"
+    "key": "work-quotes",
+    "title": "Quotes that chase themselves",
+    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "sub": "Quotes from your price list that chase themselves until the customer answers.",
+    "colour": "#B04A24",
+    "sheet": "#F4E6E0",
+    "phone": "assets/phones/16.webp"
   },
   {
-    "key": "work-doorstep",
-    "title": "Doorstep",
-    "kicker": "Heating firm’s customer · Tool · Broad",
-    "sub": "The page the customer opens on their phone after they have booked.",
-    "colour": "#2B4FA2",
-    "sheet": "#E1E6F2",
-    "phone": "assets/phones/29.webp"
+    "key": "work-reviews",
+    "title": "Google reviews",
+    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "sub": "Every finished job asks for a review. Replies take one tap.",
+    "colour": "#B04A24",
+    "sheet": "#F4E6E0",
+    "phone": "assets/phones/17.webp"
   },
   {
-    "key": "work-clockcard",
-    "title": "Clockcard",
-    "kicker": "Redgate Works · Tool · Broad",
-    "sub": "Staff clock in from the van; the office watches the week fill up.",
-    "colour": "#2B4C7E",
-    "sheet": "#E1E6ED",
-    "phone": "assets/phones/30.webp"
+    "key": "work-reminders",
+    "title": "Reminders that rebook",
+    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "sub": "Yearly services, MOTs and regular cuts remind the customer and book themselves.",
+    "colour": "#B04A24",
+    "sheet": "#F4E6E0",
+    "phone": "assets/phones/18.webp"
   },
   {
-    "key": "work-boiler-book",
-    "title": "Boiler Book",
-    "kicker": "Ashgate Heating · Tool · Specific",
-    "sub": "Thirty boilers sorted by what's due, with the chasing done for you.",
-    "colour": "#B4500C",
-    "sheet": "#F5E7DD",
-    "phone": "assets/phones/31.webp"
-  },
-  {
-    "key": "work-mot-minder",
-    "title": "MOT Minder",
-    "kicker": "Kilnbrook Motors · Tool · Specific",
-    "sub": "Every car the garage has seen, and the texts that bring them back.",
-    "colour": "#1B4E7D",
-    "sheet": "#DFE6ED",
-    "phone": "assets/phones/32.webp"
-  },
-  {
-    "key": "work-chairside",
-    "title": "Chairside",
-    "kicker": "Four-chair salon · Tool · Specific",
-    "sub": "Rebooks the client at the counter and refills the slots that fall out.",
-    "colour": "#7A4A2E",
-    "sheet": "#ECE6E2",
-    "phone": "assets/phones/33.webp"
-  },
-  {
-    "key": "work-turntable",
-    "title": "Turntable",
-    "kicker": "Corncrake · Tool · Specific",
-    "sub": "The floor, the queue at the door and the deposit rule, on one screen.",
-    "colour": "#A9600F",
-    "sheet": "#F3E9DD",
-    "phone": "assets/phones/34.webp"
-  },
-  {
-    "key": "work-roofline",
-    "title": "Roofline",
-    "kicker": "Ackroyd Roofing · Tool · Specific",
-    "sub": "A postcode and seven taps draw the roof, then price it.",
-    "colour": "#A33B22",
-    "sheet": "#F2E4E0",
-    "phone": "assets/phones/35.webp"
-  },
-  {
-    "key": "work-roundsheet",
-    "title": "Roundsheet",
-    "kicker": "Nash Window Cleaning · Tool · Specific",
-    "sub": "The round in door order, with a DONE big enough for one thumb.",
-    "colour": "#0F6B93",
-    "sheet": "#DDEAF0",
-    "phone": "assets/phones/36.webp"
+    "key": "work-results",
+    "title": "Results and ads",
+    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "sub": "Where every job came from, what it was worth, and what the ads cost per job.",
+    "colour": "#B04A24",
+    "sheet": "#F4E6E0",
+    "phone": "assets/phones/19.webp"
   },
   {
     "key": "services",
@@ -477,7 +318,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "33 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "40 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -528,6 +369,12 @@
     "sub": "The tickets, the insurance and the tree, on one page."
   },
   {
+    "key": "for-handyman-services",
+    "title": "Handyman services",
+    "kicker": "For your trade",
+    "sub": "All the small jobs, priced from a photo."
+  },
+  {
     "key": "for-cleaners",
     "title": "Cleaning companies",
     "kicker": "For your trade",
@@ -538,6 +385,12 @@
     "title": "Window cleaners",
     "kicker": "For your trade",
     "sub": "Fill the gaps in your round, street by street."
+  },
+  {
+    "key": "for-chimney-sweeps",
+    "title": "Chimney sweeps",
+    "kicker": "For your trade",
+    "sub": "Booked before the first cold night, and reminded the year after."
   },
   {
     "key": "for-pest-control",
@@ -588,10 +441,22 @@
     "sub": "Consultation, treatment, top-up: each one booked at the right time."
   },
   {
+    "key": "for-nail-technicians",
+    "title": "Nail technicians and nail salons",
+    "kicker": "For your trade",
+    "sub": "A full book of appointments, without answering messages all evening."
+  },
+  {
     "key": "for-physios",
     "title": "Physiotherapists and clinics",
     "kicker": "For your trade",
     "sub": "From the first assessment to the last follow-up, booked."
+  },
+  {
+    "key": "for-massage-therapists",
+    "title": "Massage therapists",
+    "kicker": "For your trade",
+    "sub": "Booked while your hands are busy."
   },
   {
     "key": "for-dentists",
@@ -618,10 +483,28 @@
     "sub": "Every dog booked in, and booked back."
   },
   {
+    "key": "for-dog-walkers",
+    "title": "Dog walkers and pet sitters",
+    "kicker": "For your trade",
+    "sub": "Walks booked, keys trusted, owners kept in the loop."
+  },
+  {
+    "key": "for-dog-trainers",
+    "title": "Dog trainers",
+    "kicker": "For your trade",
+    "sub": "Puppy classes full before the first lesson."
+  },
+  {
     "key": "for-personal-trainers",
     "title": "Personal trainers",
     "kicker": "For your trade",
     "sub": "From first message to a booked block of sessions."
+  },
+  {
+    "key": "for-tutors",
+    "title": "Private tutors",
+    "kicker": "For your trade",
+    "sub": "Lessons booked by parents, not by text at ten at night."
   },
   {
     "key": "for-restaurants",
@@ -709,7 +592,7 @@
   },
   {
     "key": "notes-builds-for-businesses-that-dont-exist",
-    "title": "Thirty-six builds for businesses that don’t exist, on purpose",
+    "title": "Built for businesses that don’t exist, on purpose",
     "kicker": "Notes · 3 September 2026",
     "sub": "Why every demo on this site is for an invented company, and why that is better proof than a client logo wall."
   },
@@ -727,9 +610,9 @@
   },
   {
     "key": "start",
-    "title": "See what missed calls are costing you.",
-    "kicker": "Skales Studio · 60 seconds, all taps",
-    "sub": "Six questions. Your own case file. The call booked on the same page."
+    "title": "Book a free 30-minute call.",
+    "kicker": "Skales Studio · three taps, then pick a time",
+    "sub": "Tell me what you do, then book a call with Tom on the same page."
   },
   {
     "key": "try",

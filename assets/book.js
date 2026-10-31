@@ -6,6 +6,7 @@
   var steps = Array.prototype.slice.call(form.querySelectorAll('.bstep')), bar = d.getElementById('steps'), cur = 0;
   var checked = function(name){ return Array.prototype.map.call(form.querySelectorAll('[name="' + name + '"]:checked'), function(i){ return i.value; }); };
   var val = function(id){ return (d.getElementById(id).value || '').trim(); };
+  var enc = encodeURIComponent, esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   function show(i, move){
     cur = i; steps.forEach(function(s, k){ s.hidden = k !== i; });
     Array.prototype.forEach.call(bar.children, function(li, k){ li.classList.toggle('done', k < i); if (k === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
@@ -32,12 +33,33 @@
     return { kind: checked('kind')[0] || '', problem: checked('problem').join(', '), source: checked('source').join(', '), size: checked('size')[0] || '',
              name: val('bname'), business: val('bbiz'), phone: val('bphone'), email: val('bemail'), town: val('btown') };
   }
+  /* a draft from the home-page builder: its reference, trade, name and town ride along to the call */
+  var draft = (function(){
+    var map = {}; try { map = JSON.parse(form.getAttribute('data-trades') || '{}'); } catch(e){}
+    var q = new URLSearchParams(location.search), o = { ref: q.get('d') || '', t: q.get('t') || '', n: q.get('n') || '', w: q.get('w') || '' }, from = 'link';
+    if (!o.t){ try { var s = JSON.parse(localStorage.getItem('sk_draft') || 'null'); if (s && s.t && Date.now() - (s.at || 0) < 30 * 864e5){ o = { ref: s.ref, t: s.t, n: s.n, w: s.w }; from = 'saved'; } } catch(e){} }
+    if (!map[o.t] || !o.n || !o.w || !/^SK-[A-Z0-9]{4}$/.test(o.ref)) return null;
+    o.n = o.n.slice(0, 34); o.w = o.w.slice(0, 22); o.label = map[o.t][0]; o.kind = map[o.t][1]; o.from = from;
+    var a = d.createElement('a'); a.href = (S.base || '') + '?d=' + enc(o.ref) + '&t=' + enc(o.t) + '&n=' + enc(o.n) + '&w=' + enc(o.w) + '#build'; o.url = a.href;
+    return o;
+  })();
+  if (draft){
+    d.getElementById('draftCard').hidden = false;
+    d.getElementById('dcRef').textContent = draft.ref;
+    d.getElementById('dcMeta').textContent = draft.n + ' · ' + draft.label + ' · ' + draft.w;
+    d.getElementById('dcOpen').href = draft.url;
+    d.getElementById('dcDrop').addEventListener('click', function(){ draft = null; d.getElementById('draftCard').hidden = true; });
+    var chip = form.querySelector('[name="kind"][value="' + draft.kind.replace(/"/g, '') + '"]'); if (chip) chip.checked = true;
+    if (!d.getElementById('bbiz').value) d.getElementById('bbiz').value = draft.n;
+    if (!d.getElementById('btown').value) d.getElementById('btown').value = draft.w;
+    if (window.skTrack) skTrack('book_from_draft', { trade: draft.t, from: draft.from });
+  }
   function finish(){
     var a = answers();
-    d.getElementById('summary').innerHTML = [['Business', a.business + (a.town ? ' · ' + a.town : '')], ['Kind', a.kind], ['Problem', a.problem], ['Jobs come from', a.source], ['Team', a.size], ['You', a.name + ' · ' + a.phone + ' · ' + a.email]]
+    d.getElementById('summary').innerHTML = (draft ? [['Draft', draft.ref + ' · ' + draft.n + ', ' + draft.w]] : []).concat([['Business', a.business + (a.town ? ' · ' + a.town : '')], ['Kind', a.kind], ['Problem', a.problem], ['Jobs come from', a.source], ['Team', a.size], ['You', a.name + ' · ' + a.phone + ' · ' + a.email]])
       .map(function(p){ return '<div><dt>' + p[0] + '</dt><dd>' + esc(p[1]) + '</dd></div>'; }).join('');
     d.getElementById('notfit').hidden = a.kind !== 'Not a service business';
-    var text = 'Call request from the site\n' + ['Name: ' + a.name, 'Business: ' + a.business, 'Town: ' + a.town, 'Kind: ' + a.kind, 'Problem: ' + a.problem, 'Jobs come from: ' + a.source, 'Team: ' + a.size, 'Phone: ' + a.phone, 'Email: ' + a.email].join('\n');
+    var text = 'Call request from the site\n' + (draft ? 'Draft site: ' + draft.ref + ' (' + draft.n + ', ' + draft.label + ', ' + draft.w + ') ' + draft.url + '\n' : '') + ['Name: ' + a.name, 'Business: ' + a.business, 'Town: ' + a.town, 'Kind: ' + a.kind, 'Problem: ' + a.problem, 'Jobs come from: ' + a.source, 'Team: ' + a.size, 'Phone: ' + a.phone, 'Email: ' + a.email].join('\n');
     var cal = d.getElementById('calendly'), fb = d.getElementById('fallback');
     if (S.calendly && /cal\.com\//.test(S.calendly)){
       fb.hidden = true;   // Cal.com takes the details as plain query parameters
@@ -47,7 +69,7 @@
       var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&name=' + enc(a.name) + '&email=' + enc(a.email)
               + '&a1=' + enc(text.split('\n').slice(1).join('\n'));   // the event has one question ("anything that will help prepare"), so every detail goes into it
       var boot = function(){ if (!window.Calendly) return fallback(); cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
-      if (window.Calendly) boot(); else { var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true; s.onload = boot; s.onerror = fallback; d.head.appendChild(s); }
+      if (window.Calendly) boot(); else calScript(boot, fallback);
       setTimeout(function(){ if (!cal.querySelector('iframe')) fallback(); }, 6000);   // blocked by a privacy extension or a dead connection: never leave an empty box
     } else fallback();
     function fallback(){
@@ -57,12 +79,30 @@
       mail.href = 'mailto:' + S.email + '?subject=' + enc('Call request — ' + a.business) + '&body=' + enc(text);
     }
   }
-  var enc = encodeURIComponent, esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   form.addEventListener('click', function(e){
     var n = e.target.closest('[data-next]'), p = e.target.closest('[data-back]');
     if (n){ if (!valid(cur)) return; if (cur === 4) finish(); show(cur + 1, true); }
     if (p) show(cur - 1, true);
   });
+  /* a single-choice question moves on by itself once it is answered: one tap, not two */
+  form.addEventListener('change', function(e){
+    if (e.target.type !== 'radio' || (cur !== 0 && cur !== 3)) return;
+    var at = cur;
+    setTimeout(function(){ if (cur === at && valid(at)) show(at + 1, true); }, 260);
+  });
+  /* the diary's script starts loading while they type their details, so the calendar is there when they arrive */
+  var calTag = null, calWait = [];
+  function calScript(ok, bad){
+    if (calTag && calTag.done){ if (ok) ok(); return; }
+    if (ok) calWait.push([ok, bad]);
+    if (calTag) return;
+    calTag = d.createElement('script'); calTag.src = 'https://assets.calendly.com/assets/external/widget.js'; calTag.async = true;
+    calTag.onload = function(){ calTag.done = 1; calWait.splice(0).forEach(function(w){ w[0](); }); };
+    calTag.onerror = function(){ calWait.splice(0).forEach(function(w){ if (w[1]) w[1](); }); };
+    d.head.appendChild(calTag);
+  }
+  function warm(){ if (S.calendly && !/cal\.com\//.test(S.calendly) && !window.Calendly) calScript(); }
+  form.addEventListener('focusin', function(e){ if (cur === 4) warm(); });
   form.addEventListener('keydown', function(e){ if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox' && e.target.type !== 'radio'){ e.preventDefault(); var n = steps[cur].querySelector('[data-next]'); if (n) n.click(); } });
   form.addEventListener('submit', function(e){ e.preventDefault(); });
   /* the booking itself happens inside Calendly's frame; it tells the page when a time is taken */
@@ -71,5 +111,5 @@
     if (/calendly\.com$/.test(e.origin) && e.data && e.data.event === 'calendly.event_scheduled') skTrack('call_booked', { from: 'book', tool: 'calendly' });
     if (/cal\.com$/.test(e.origin) && e.data && /booking(Successful|_successful)/i.test(JSON.stringify(e.data))) skTrack('call_booked', { from: 'book', tool: 'cal.com' });
   });
-  show(0);
+  show(draft && form.querySelector('[name="kind"]:checked') ? 1 : 0);
 })();

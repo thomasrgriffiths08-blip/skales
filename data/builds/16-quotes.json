@@ -1,0 +1,28 @@
+{
+  "n": 16,
+  "slug": "quotes",
+  "file": "demos/quotes/index.html",
+  "kind": "tool",
+  "lane": "system",
+  "trade": "Any service business",
+  "name": "Quotes that chase themselves",
+  "biz": "Six made-up service businesses",
+  "c": "#B04A24",
+  "pg": "#F6F6F4",
+  "short": "Quotes from your price list that chase themselves until the customer answers.",
+  "long": "Quotes built from the business’s own price list with VAT and a deposit. Send one and watch it get opened; it chases at 9am on day two and day five until the customer answers, then stops the moment they accept and pay the deposit.",
+  "proves": "Fewer quotes go cold while you are busy.",
+  "tags": [
+    "Price list",
+    "Automatic chasing",
+    "Accept and pay"
+  ],
+  "features": [
+    "A quote builder from the business’s price list and templates",
+    "Sent, opened, chased and accepted, each with its time",
+    "The customer accepts and pays the deposit from their phone",
+    "Started from an enquiry in the inbox, with the details filled in"
+  ],
+  "story": "Most quotes are lost to silence, not to a cheaper price. This keeps a polite nudge going so the business does not have to.",
+  "start": "quotes"
+}

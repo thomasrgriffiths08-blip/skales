@@ -25,12 +25,13 @@ for (const p of pages){
   if (p.meta) ogJobs.push(p.meta);
 }
 
-/* the trades the forge can build for — colours resolved through the same contrast maths as the builds */
+/* the trades the builder can make a draft for — colours resolved through the same contrast maths as the builds */
 const trades = require('../data/trades.js').map(t => Object.assign({}, t, L.world(t.c)));
-write('assets/trades.js', `/* generated from data/trades.js — do not edit by hand */\nwindow.TRADES=${JSON.stringify(trades.map(t => ({ key: t.key, label: t.label, plate: t.plate, c: t.c, cInk: t.cInk, cText: t.cText, demo: t.demo, word: t.word, head: t.head, sub: t.sub, creds: t.creds, services: t.services, review: t.review, cta: t.cta })))};`);
+write('assets/trades.js', `/* generated from data/trades.js — do not edit by hand */\nwindow.TRADES=${JSON.stringify(trades.filter(t => t.builder !== false).map(t => ({ key: t.key, label: t.label, c: t.c, cInk: t.cInk, cText: t.cText, demo: t.demo, word: t.word, plural: t.plural, photo: t.photo, pos: t.pos, pos2: t.pos2, font: t.font, head: t.head, sub: t.sub, creds: t.creds, services: t.services, prices: t.prices, kw: t.kw, job: t.job, dep: t.dep, times: t.times, faq: t.faq, cta: t.cta })))};`);
 
 /* client-side data: only what the wall needs (no long copy) */
-write('assets/builds.js', `/* generated from data/builds.js — do not edit by hand */\nwindow.LANES=${JSON.stringify(Object.fromEntries(Object.entries(L.LANES).map(([k, v]) => [k, { name: v.name, kindWord: v.kindWord, kind: v.kind }])))};\nwindow.BUILDS=${JSON.stringify(builds.map(x => ({ n: x.n, slug: x.slug, kind: x.kind, lane: x.lane, trade: x.trade, mobile: !!x.mobile, group: x.group, name: x.name, biz: x.biz, c: x.c, sheet: x.sheet, cInk: x.cInk, cText: x.cText, short: x.short, long: x.long, proves: x.proves, tags: x.tags })))};`);
+const SHOWS = require('../data/shows.js');
+write('assets/builds.js', `/* generated from data/builds.js — do not edit by hand */\nwindow.LANES=${JSON.stringify(Object.fromEntries(Object.entries(L.LANES).map(([k, v]) => [k, { name: v.name, kindWord: v.kindWord, kind: v.kind }])))};\nwindow.BUILDS=${JSON.stringify(builds.map(x => ({ n: x.n, slug: x.slug, kind: x.kind, lane: x.lane, trade: x.trade, mobile: !!x.mobile, group: x.group, name: x.name, biz: x.biz, c: x.c, sheet: x.sheet, cInk: x.cInk, cText: x.cText, short: x.short, long: x.long, proves: x.proves, tags: x.tags, tk: L.tradeKey(x), show: SHOWS[x.slug] || [] })))};`);
 
 /* sitemap + robots (AI crawlers explicitly allowed) */
 const today = L.iso(L.UPDATED);
@@ -59,7 +60,7 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 
 ## Pages
 - [Home](${L.abs('/')}): what ${site.name} builds, with a live demonstration build on the page.
-- [Work — ${L.words(builds.length)} builds](${L.abs('/work/')}): every demonstration build, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [Tools](${L.abs('/work/tools/')}): the broad tools for any service business and the ones built for a single trade.
+- [Work: ${L.workLine().toLowerCase()}](${L.abs('/work/')}): every demonstration website and every part of the system, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [The system](${L.abs('/work/system/')}): the one app behind the websites, in seven parts (inbox and missed calls, booking, quotes, reviews, reminders, results), shown for six made-up businesses.
 - [Services](${L.abs('/services/')}): the five services, built as one system — ${SVC.SV.map(x => `[${x.name}](${L.abs('/services/' + x.slug + '/')})`).join(', ')}.
 - [Automations](${L.abs('/automations/')}): ${SVC.AU.map(x => `[${x.name.toLowerCase()}](${L.abs('/automations/' + x.slug + '/')})`).join(', ')}.
 - [Try it](${L.abs('/try/')}): live demos that run in the browser — a missed call texted back and booked, online booking with a deposit, and a CRM board whose follow-up texts send themselves.
@@ -71,8 +72,8 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 - [Free teardown](${L.abs('/teardown.html')}): three details in, three findings back by message.
 - [Notes](${L.abs('/notes/')}): short pieces — ${notes.map(n => n.title.toLowerCase()).join('; ')}.
 
-## The ${L.words(builds.length)} builds
-${builds.map(x => `- [${x.name}](${L.abs('/work/' + x.slug + '/')}): ${x.kind === 'site' ? 'website' : 'business tool'} for an invented ${x.biz.toLowerCase()} — ${x.short}`).join('\n')}
+## The builds
+${builds.map(x => `- [${x.name}](${L.abs('/work/' + x.slug + '/')}): ${x.kind === 'site' ? `website for an invented ${x.biz.toLowerCase()}` : 'part of the system, shown for six invented businesses'}: ${x.short}`).join('\n')}
 
 ## Frequently asked
 ${why.FAQ.map(([q, a]) => `- **${q}** ${a}`).join('\n')}

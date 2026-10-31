@@ -1,0 +1,27 @@
+{
+  "trade": "Fragrance house",
+  "tags": [
+    "Ink canvas",
+    "Tone-shifting scroll",
+    "SVG glass"
+  ],
+  "features": [
+    "Ink-in-water canvas hero",
+    "Page tone shifts through three phases as you scroll",
+    "A bottle rendered entirely in layered SVG",
+    "A working bag and product flow"
+  ],
+  "n": 3,
+  "slug": "maree",
+  "file": "demos/maree/index.html",
+  "kind": "site",
+  "lane": "motion",
+  "name": "MARÉE — Sel Obscur",
+  "biz": "Fragrance house",
+  "c": "#A9CBBD",
+  "pg": "#03080E",
+  "short": "Ink through water, and a page that darkens as you descend.",
+  "long": "Salt drawn from a black tide. The ground moves through three marine phases as the notes progress, the bottle is faked entirely in layered SVG, and the whole thing refuses the category’s gold for sea glass.",
+  "proves": "Luxury without a single gold gradient.",
+  "story": "A luxury site that refuses the category’s default gold. Built to show that restraint is a decision, not a budget."
+}

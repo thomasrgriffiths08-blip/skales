@@ -1,0 +1,27 @@
+{
+  "trade": "Software company",
+  "tags": [
+    "Self-playing board",
+    "Split-flap cells",
+    "Signal amber"
+  ],
+  "features": [
+    "The product runs as the hero, in real DOM",
+    "Split-flap ETA cells",
+    "A shift that plays out as you scroll",
+    "Pricing as a line-items table, not three cards"
+  ],
+  "n": 2,
+  "slug": "cadence",
+  "file": "demos/cadence/index.html",
+  "kind": "site",
+  "lane": "direct",
+  "name": "Cadence",
+  "biz": "Field-ops software",
+  "c": "#FFB300",
+  "pg": "#16140f",
+  "short": "The page is an operations board that never stops running.",
+  "long": "A departure board under tungsten light: the board is the hero, the headline is a card pinned inside it, ETAs flip like split-flap cells, and a whole shift plays out as you scroll. Pricing is a line-items table.",
+  "proves": "A product page where the product is the page.",
+  "story": "A software landing page where nothing is a screenshot: the board you are reading about is running behind the headline."
+}

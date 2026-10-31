@@ -19,7 +19,7 @@ module.exports = [
     ],
     message: 'Sorry I missed your call, I’m on a job. You can book a time here: larchfield.co.uk/book, or reply with what you need and I’ll ring you back. Larchfield Heating',
     needs: ['A business number that can forward unanswered calls. Most UK mobile and landline networks can.', 'Your booking link, if you take bookings. If not, the text asks what they need.', 'The numbers you do not want texted, such as suppliers and family.'],
-    demos: ['missed-call'], builds: [25, 12], services: ['follow-up-automation', 'booking-and-crm'],
+    demos: ['missed-call'], builds: [14], services: ['follow-up-automation', 'booking-and-crm'],
     faq: [
       ['Does it work with my mobile number?', 'Yes. Your phone forwards calls you do not answer, and the text goes out from there. You keep your number and answer calls exactly as you do now.'],
       ['Will it text suppliers, family or spam callers?', 'Numbers you know can be left out, so only new callers get the text.'],
@@ -43,7 +43,7 @@ module.exports = [
     ],
     message: 'Thanks again for having us round today, Priya. If you’re happy with the job, a quick Google review would really help a small business like ours: larchfield.co.uk/review',
     needs: ['A Google Business Profile, so there is somewhere for the reviews to go. If you do not have one, I set it up with you.', 'A way to mark a job done: the CRM, or an invoice being paid.'],
-    demos: ['crm-board'], builds: [26, 11], services: ['follow-up-automation', 'booking-and-crm'],
+    demos: ['crm-board'], builds: [17], services: ['follow-up-automation', 'booking-and-crm'],
     faq: [
       ['Can it only ask the happy customers?', 'No, and it should not. Google does not allow filtering out unhappy customers before asking for a review, so everyone gets asked. A business that does good work comes out of that well.'],
       ['When is the best time to ask?', 'The same day, a couple of hours after the job, while the work is fresh and they are still pleased. The timing can be changed for your trade.'],
@@ -67,7 +67,7 @@ module.exports = [
     ],
     message: 'Hi Sam, your boiler’s due its annual service next month. Book a time that suits you here: larchfield.co.uk/book. Larchfield Heating',
     needs: ['Your customer list with the date of their last job, or the CRM, which keeps it from now on.', 'How often each kind of job comes round, such as every year for a boiler service.'],
-    demos: ['booking'], builds: [31, 32, 33], services: ['follow-up-automation', 'booking-and-crm'],
+    demos: ['booking'], builds: [18, 15], services: ['follow-up-automation', 'booking-and-crm'],
     faq: [
       ['Which businesses is this for?', 'Any business where the work comes round: boiler services and landlord certificates, MOTs and car services, hair and beauty appointments, window and gutter cleaning, check-ups and maintenance contracts.'],
       ['Can it use my existing customer list?', 'Yes. A spreadsheet with names, numbers and the date of their last job is enough to start.'],
@@ -91,7 +91,7 @@ module.exports = [
     ],
     message: 'Hi Priya, just checking the quote came through OK. Happy to answer any questions, or you can book a date here: larchfield.co.uk/q/4821',
     needs: ['Quotes sent from the CRM, so the system knows when they go out and whether they are accepted.', 'When you want the chaser to go, and whether you want a second one.'],
-    demos: ['crm-board'], builds: [2, 1, 27], services: ['booking-and-crm', 'follow-up-automation'],
+    demos: ['crm-board'], builds: [14, 16], services: ['booking-and-crm', 'follow-up-automation'],
     faq: [
       ['Will customers find it pushy?', 'Not one polite message a couple of days later. It reads like a business that cares about the job, and customers often reply to say they had simply not got round to it.'],
       ['How many times does it chase?', 'Once by default, with a second follow-up if you want one. After that the quote is left alone.'],
@@ -115,7 +115,7 @@ module.exports = [
     ],
     message: 'You’re booked: boiler service, Thursday 8 October at 8:00. Your deposit is paid and comes off the final bill. We’ll remind you the day before. Larchfield Heating',
     needs: ['Which jobs take a deposit and how much.', 'Your cancellation rules, written plainly on the booking page.', 'An account with a card payment provider, set up in your name. I do it with you.'],
-    demos: ['booking'], builds: [14, 34, 33], services: ['booking-and-crm'],
+    demos: ['booking'], builds: [15], services: ['booking-and-crm'],
     faq: [
       ['Will a deposit put customers off?', 'A small deposit on the booking page is normal for salons, clinics, restaurants and more and more trades. Customers who are serious about the job pay it; the ones who were never going to turn up tend not to book.'],
       ['Where does the money go?', 'Straight to your own payment account, set up in your name.'],
@@ -139,7 +139,7 @@ module.exports = [
     ],
     message: 'Hi Sam, Dan from Larchfield Heating is on his way and should be with you around 9:40. Reply if anything’s changed.',
     needs: ['A job sheet on your phone, which the CRM gives you.', 'Who is on which job, if more than one of you goes out.'],
-    demos: ['booking'], builds: [29, 15, 3], services: ['booking-and-crm', 'follow-up-automation'],
+    demos: ['booking'], builds: [15, 13], services: ['booking-and-crm', 'follow-up-automation'],
     faq: [
       ['Does it track my location?', 'No. It sends the text when you tap the button, with the arrival time you choose. Nobody is followed on a map.'],
       ['Can my team use it?', 'Yes. Each person taps from their own job sheet, and the text says who is coming.'],

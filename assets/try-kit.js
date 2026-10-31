@@ -5,8 +5,8 @@
 window.TryKit = function(cfg){
   var d = document, JOBS = window.TRYJOBS || {};
   var $ = function(id){ return d.getElementById(id); };
-  var setup = $('setup'), run = $('run'), end = $('end'), form = $('setupForm');
-  if (!setup || !run || !form) return null;
+  var run = $('run'), end = $('end'), form = $('you');
+  if (!run || !form) return null;
   var ph = $('ph'), scr = ph.querySelector('.ph-scr'), sb = $('sb'), fit = $('fit');
   var say = $('say'), hint = $('hint'), toast = $('toast');
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -38,41 +38,49 @@ window.TryKit = function(cfg){
   K.later = function(fn, ms){ timers.push(setTimeout(fn, reduce ? Math.min(ms, 600) : ms)); };
   K.clear = function(){ timers.forEach(clearTimeout); timers = []; };
 
-  /* ---------- set-up: their business name and trade ---------- */
+  /* ---------- whose business: the name and trade, changeable at any point ---------- */
   var qk = null; try { qk = new URLSearchParams(location.search).get('kind'); } catch (e){}   /* /for/<trade>/ links preset the trade */
   var kind = (qk && JOBS[qk] ? qk : null) || (store.get('st-a') || {}).kind || store.get('try-kind') || 'heating';
   if (!JOBS[kind]) kind = 'other';
-  var chips = [].slice.call(form.querySelectorAll('.tm-k'));
-  function pick(k){ kind = k; chips.forEach(function(c){ c.setAttribute('aria-pressed', String(c.getAttribute('data-kind') === k)); }); }
-  pick(kind);
-  chips.forEach(function(c){ c.addEventListener('click', function(){ pick(c.getAttribute('data-kind')); }); });
-  var nameIn = $('bizName');
+  var nameIn = $('bizName'), kindIn = $('bizKind');
+  kindIn.value = kind;
   if (store.get('try-biz')) nameIn.value = store.get('try-biz');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var biz = nameIn.value.replace(/\s+/g, ' ').trim().slice(0, 32) || 'Larchfield Heating';
-    store.set('try-biz', nameIn.value.trim()); store.set('try-kind', kind);
-    start(biz);
-  });
+  function bizName(){ return nameIn.value.replace(/\s+/g, ' ').trim().slice(0, 32) || (JOBS[kind] || JOBS.other).name; }
+  function retype(){ nameIn.placeholder = (JOBS[kind] || JOBS.other).name; }
+  retype();
+  var typed;
+  nameIn.addEventListener('input', function(){ clearTimeout(typed); typed = setTimeout(function(){ store.set('try-biz', nameIn.value.trim()); start(bizName(), true); }, 450); });
+  kindIn.addEventListener('change', function(){ kind = kindIn.value; store.set('try-kind', kind); retype(); start(bizName(), true); K.track('demo_kind', { kind: kind }); });
+  form.addEventListener('submit', function(e){ e.preventDefault(); clearTimeout(typed); nameIn.blur(); start(bizName(), true); });
 
-  function start(biz){
-    K.clear(); scene = null;
+  /* the demo starts on load at its first screen; `quiet` = no scroll (a reset or a new name) */
+  var began = false;
+  function start(biz, quiet){
+    K.clear(); scene = null; clearTimeout(tt); toast.hidden = true;
     var J = JOBS[kind] || JOBS.other;
-    var slug = biz.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '').slice(0, 24) || 'yourbusiness';
+    var slug = biz.toLowerCase().replace(/&/g, 'and').replace(/^the\s+/, '').replace(/[^a-z0-9]+/g, '').slice(0, 24) || 'yourbusiness';
     var h = 0; for (var i = 0; i < biz.length; i++) h = (h * 31 + biz.charCodeAt(i)) >>> 0;
     var A = K.A = { biz: biz, kind: kind, J: J, dep: J.dep, domain: slug + '.co.uk', site: slug + '.co.uk/book', bizNo: '07700 900 ' + (100 + h % 900), custNo: '07700 900 418', t: {}, job: null, day: null, slot: null };
-    K.bind('[data-biz]', biz); K.bind('[data-initial]', biz.charAt(0).toUpperCase()); K.bind('[data-bizno]', A.bizNo);
+    K.bind('[data-biz]', biz); K.bind('[data-initial]', biz.replace(/^the\s+/i, '').charAt(0).toUpperCase()); K.bind('[data-bizno]', A.bizNo);
     K.bind('[data-site]', A.site); K.bind('[data-domain]', A.domain); K.bind('[data-custno]', 'New customer');
+    var W = (window.TRYSITES || {})[kind]; if (W) ph.style.setProperty('--bz', W.c);
     resetCrm(); if ($('wb')){ buildBooking(); K.diary(A.days[0], null); }
-    setup.hidden = true; end.hidden = true; run.hidden = false; run.classList.remove('is-owner');
+    end.hidden = true; say.hidden = false; hint.hidden = false;
+    run.classList.remove('is-owner', 'is-done'); run.classList.add('is-ready');
     d.body.classList.add('tm-on');
-    try { if (location.hash !== '#demo') history.pushState({ tm: 1 }, '', '#demo'); } catch (e){}
     cfg.start(K, A);
-    tick(); K.fit(); scrollTo(0, run.getBoundingClientRect().top + pageYOffset - 64);
-    K.track('demo_started', { kind: kind });
+    tick(); K.fit();
+    if (!quiet) K.track('demo_ready', { kind: kind });
   }
-  addEventListener('popstate', function(){ if (location.hash !== '#demo'){ K.clear(); run.hidden = true; end.hidden = true; setup.hidden = false; d.body.classList.remove('tm-on'); } });
-  $('again').addEventListener('click', function(){ end.hidden = true; setup.hidden = false; try { history.replaceState(null, '', location.pathname); } catch (e){} scrollTo(0, 0); nameIn.focus({ preventScroll: true }); });
+  /* the first tap on the phone (or the board) is the real start: bring the demo into view */
+  K.go = function(){
+    if (!run.classList.contains('is-ready')) return;
+    run.classList.remove('is-ready');
+    if (innerWidth < 1000){ var st = $('steps'); scrollTo({ top: st.getBoundingClientRect().top + pageYOffset - 72, behavior: reduce ? 'auto' : 'smooth' }); }
+    if (!began){ began = true; K.track('demo_started', { kind: kind }); }
+  };
+  $('again').addEventListener('click', function(){ start(bizName(), true); K.go(); });
+  addEventListener('load', function(){ K.fit(); });
 
   /* ---------- the phone ---------- */
   var layers = {}; [].forEach.call(ph.querySelectorAll('[data-ly]'), function(l){ layers[l.getAttribute('data-ly')] = l; });
@@ -85,14 +93,16 @@ window.TryKit = function(cfg){
   };
   K.fit = function(){
     var wide = innerWidth >= 1000, vh = (window.visualViewport ? visualViewport.height : innerHeight);
-    var avH = wide ? vh - 64 - 56 : vh - 64 - d.querySelector('.tm-narr').offsetHeight - 36;
+    var nb = d.querySelector('.tm-narr').getBoundingClientRect(), from = $('steps').getBoundingClientRect().top;
+    var avH = wide ? vh - 64 - 56 : vh - 72 - (end.hidden ? nb.bottom - from : 120) - 28;
     var avW = Math.min(run.clientWidth - 32, 373);
-    var s = Math.max(.62, Math.min(1, avW / 373, avH / 781)); if (s > .985) s = 1;
+    var s = Math.max(.62, Math.min(cfg.maxScale || 1, avW / 373, avH / 781)); if (s > .985) s = 1;
     fit.style.setProperty('--s', s.toFixed(3)); ph.style.setProperty('--s', s.toFixed(3));
   };
-  addEventListener('resize', function(){ if (!run.hidden) K.fit(); });
+  addEventListener('resize', function(){ K.fit(); });
   ph.addEventListener('click', function(e){
     var b = e.target.closest('[data-act]'); if (!b || !K.A) return;
+    K.go();
     var act = b.getAttribute('data-act'), fn = (cfg.acts || {})[act] || builtIn[act];
     if (fn) fn(b);
   });
@@ -123,13 +133,16 @@ window.TryKit = function(cfg){
   K.tag = function(cls, icon, text){ var s = d.createElement('span'); s.className = 'tg ' + cls; s.innerHTML = (icon ? K.ic(icon) : '') + K.esc(text); $('tags').appendChild(s); };
   K.stage = function(cls, text){ var s = $('stage'); s.className = 'crm-stage' + (cls ? ' s-' + cls : ''); s.textContent = text; };
   K.lead = function(who, sub){ if (who) K.bind('[data-custno]', who); if (sub != null) $('leadsub').textContent = sub; $('lead').classList.add('is-new'); };
+  /* on a phone the business's side is out of view while you play the customer, so each thing it does
+     arrives as a banner at the top of the screen: who it is for, then what happened */
   var tt;
-  K.ping = function(text){
+  K.banner = function(who, text, cls){
     if (innerWidth >= 1000) return;
-    clearTimeout(tt); toast.hidden = false; toast.classList.remove('is-out');
-    toast.innerHTML = '<span><b>Your CRM</b> · ' + K.esc(text) + '</span>';
-    tt = setTimeout(function(){ toast.classList.add('is-out'); tt = setTimeout(function(){ toast.hidden = true; }, 320); }, 2800);
+    clearTimeout(tt); toast.className = 'tm-toast' + (cls ? ' ' + cls : ''); toast.hidden = false;
+    toast.innerHTML = '<b>' + K.esc(who) + '<small>now</small></b><span>' + K.esc(text) + '</span>';
+    tt = setTimeout(function(){ toast.classList.add('is-out'); tt = setTimeout(function(){ toast.hidden = true; }, 320); }, cls ? 4200 : 3200);
   };
+  K.ping = function(text){ K.banner('Your side · Skales CRM', text); };
   function resetCrm(){
     $('feed').innerHTML = '<li class="crm-empty">' + K.esc(cfg.empty || 'Nothing yet.') + '</li>';
     if (!$('lead')) return;
@@ -147,11 +160,15 @@ window.TryKit = function(cfg){
   /* ---------- the booking page ---------- */
   function taken(day, i){ return (day.getDate() * 7 + day.getMonth() * 3 + i * 5) % 9 < 4; }
   K.taken = taken;
+  /* a slot starting within 45 minutes (or already gone) can't be booked today */
+  K.late = function(day, s){ var n = new Date(); if (day.toDateString() !== n.toDateString()) return false; var p = s.split(':'), x = new Date(day); x.setHours(+p[0], +p[1], 0, 0); return x - n < 45 * 60000; };
+  K.sameDay = function(){ var A = K.A; return A.days[A.day].toDateString() === new Date().toDateString(); };
   function buildBooking(){
     var A = K.A, J = A.J, eve = A.kind === 'hospitality';
-    A.days = []; var t = new Date(); t.setHours(12, 0, 0, 0); if (!eve || cfg.fromTomorrow) t.setDate(t.getDate() + 1);
-    while (A.days.length < 3){ var w = t.getDay(); if (w !== 0 && (J.sat || w !== 6)) A.days.push(new Date(t)); t.setDate(t.getDate() + 1); }
     A.slots = eve ? ['18:00', '18:30', '19:00', '19:30', '20:00', '20:30'] : ['08:00', '09:30', '11:00', '13:00', '14:30', '16:00'];
+    A.days = []; var t = new Date(); t.setHours(12, 0, 0, 0);
+    if (!eve || cfg.fromTomorrow || A.slots.every(function(s){ return K.late(t, s); })) t.setDate(t.getDate() + 1);
+    while (A.days.length < 3){ var w = t.getDay(); if ((w !== 0 || eve) && (J.sat || w !== 6)) A.days.push(new Date(t)); t.setDate(t.getDate() + 1); }
     $('jobs').innerHTML = J.jobs.map(function(j, i){ return '<button type="button" class="wb-job" data-job="' + i + '" aria-pressed="false"><span>' + K.esc(j[0]) + '<small>' + K.esc(j[1]) + '</small></span></button>'; }).join('');
     $('days').innerHTML = A.days.map(function(x, i){ return '<button type="button" class="wb-day" data-day="' + i + '" aria-pressed="' + (i === 0) + '">' + K.DAYS[x.getDay()].slice(0, 3) + '<b>' + x.getDate() + '</b></button>'; }).join('');
     A.day = 0; A.job = null; A.slot = null;
@@ -164,8 +181,8 @@ window.TryKit = function(cfg){
   function slots(){
     var A = K.A, day = A.days[A.day], free = 0;
     $('slots').innerHTML = A.slots.map(function(s, i){
-      var off = taken(day, i) && !(i === A.slots.length - 1 && free < 2); if (!off) free++;
-      return '<button type="button" class="wb-slot" data-slot="' + i + '"' + (off ? ' disabled aria-label="' + s + ', taken"' : '') + ' aria-pressed="false">' + s + '</button>';
+      var past = K.late(day, s), off = past || (taken(day, i) && !(i === A.slots.length - 1 && free < 2)); if (!off) free++;
+      return '<button type="button" class="wb-slot" data-slot="' + i + '"' + (off ? ' disabled aria-label="' + s + (past ? ', gone' : ', taken') + '"' : '') + ' aria-pressed="false">' + s + '</button>';
     }).join('');
   }
   function cta(){
@@ -190,7 +207,7 @@ window.TryKit = function(cfg){
     var over = (el.getBoundingClientRect().bottom - wb.getBoundingClientRect().bottom) / s + 16;
     if (over > 0) wb.scrollBy({ top: over, behavior: reduce ? 'auto' : 'smooth' });
   }
-  K.when = function(){ var A = K.A, x = A.days[A.day]; return K.DAYS[x.getDay()].slice(0, 3) + ' ' + x.getDate() + ' ' + K.MON[x.getMonth()].slice(0, 3) + ', ' + A.slots[A.slot]; };
+  K.when = function(){ var A = K.A, x = A.days[A.day]; if (K.sameDay()) return 'Tonight, ' + A.slots[A.slot]; return K.DAYS[x.getDay()].slice(0, 3) + ' ' + x.getDate() + ' ' + K.MON[x.getMonth()].slice(0, 3) + ', ' + A.slots[A.slot]; };
   K.jobName = function(){ return K.A.J.jobs[K.A.job][0]; };
 
   /* the deposit sheet: opens over the booking page; cfg.booked runs once it is paid (or straight away
@@ -219,11 +236,11 @@ window.TryKit = function(cfg){
 
   /* the confirmation screen, and the booking landing in the CRM */
   K.done = function(t){
-    var A = K.A, job = K.jobName();
+    var A = K.A, job = K.jobName(), today = K.sameDay();
     K.show('done');
-    K.bind('[data-donetx]', 'You’ll get a reminder the day before. Nobody had to pick up the phone.');
+    K.bind('[data-donetx]', (today ? 'See you at ' + A.slots[A.slot] + '.' : 'You’ll get a reminder the day before.') + ' Nobody had to pick up the phone.');
     var row = ph.querySelector('[data-deprow]'); row.hidden = !A.dep; K.bind('[data-dep-paid]', '£' + A.dep + ' paid');
-    K.bind('[data-confirm]', 'Confirmed: ' + job + ', ' + K.when() + '.' + (A.dep ? ' £' + A.dep + ' deposit received.' : '') + ' We’ll remind you the day before. Reply R to rearrange.');
+    K.bind('[data-confirm]', 'Confirmed: ' + job + ', ' + K.when() + '.' + (A.dep ? ' £' + A.dep + ' deposit received.' : '') + (today ? ' See you later.' : ' We’ll remind you the day before.') + ' Reply R to rearrange.');
     var n2 = $('ntf2'); n2.hidden = true; K.later(function(){ n2.hidden = false; }, 1200);
     K.stage('booked', 'Booked');
     $('leadsub').textContent = job + ' · ' + K.when();
@@ -231,23 +248,32 @@ window.TryKit = function(cfg){
     if (A.dep) K.tag('grn', 'card', '£' + A.dep + ' deposit');
     K.feed('diary', 'grn', '<b>Booked</b>: ' + K.esc(job) + ', ' + K.when(), t, A.dep ? 'Booked, £' + A.dep + ' deposit paid' : 'Booked into the diary');
     if (A.dep) K.feed('card', 'grn', '<b>£' + A.dep + ' deposit paid</b>, held against the job', t);
-    K.feed('bell', 'gry', '<b>Confirmation sent</b>, reminder set for the day before', t);
+    K.feed('bell', 'gry', '<b>Confirmation sent</b>' + (today ? '' : ', reminder set for the day before'), t);
     K.diary(A.days[A.day], A.slot, job);
   };
 
   /* ---------- the business's side, then the end ---------- */
+  K.replay = function(){
+    var lis = [].slice.call($('feed').children).reverse();
+    lis.forEach(function(li, i){ li.classList.remove('is-re'); void li.offsetWidth; K.later(function(){ li.classList.add('is-re'); }, 250 + i * 220); });
+  };
   K.owner = function(line, keepPhone){
     K.step(stepEls.length - 1); if (!keepPhone) run.classList.add('is-owner');
     K.narrate(line, '');
-    hint.innerHTML = '<button type="button" class="btn btn-dark btn-sm" id="fin">See what it means</button>';
+    hint.innerHTML = '<button type="button" class="btn btn-dark btn-sm" id="fin">What just happened <span aria-hidden="true">→</span></button>';
     $('fin').addEventListener('click', function(){ K.clear(); var r = cfg.finish(K, K.A); K.finish(r[0], r[1]); });
-    if (innerWidth < 1000 && !keepPhone) scrollTo(0, run.getBoundingClientRect().top + pageYOffset - 64);
+    if (!keepPhone) K.replay();
+    if (innerWidth < 1000) K.go(), scrollTo({ top: $('steps').getBoundingClientRect().top + pageYOffset - 72, behavior: reduce ? 'auto' : 'smooth' });
   };
+  /* the end card takes the narration's place; the phone and the CRM stay as they finished */
   K.finish = function(h, p){
     $('endH').textContent = h; $('endP').textContent = p;
-    run.hidden = true; end.hidden = false; d.body.classList.remove('tm-on');
-    scrollTo(0, 0); $('endH').focus({ preventScroll: true });
+    say.hidden = true; hint.hidden = true; end.hidden = false; run.classList.add('is-done');
+    if (innerWidth < 1000) scrollTo({ top: end.getBoundingClientRect().top + pageYOffset - 80, behavior: reduce ? 'auto' : 'smooth' });
+    $('endH').focus({ preventScroll: true });
+    K.track('demo_finished', { kind: K.A.kind });
   };
+  setTimeout(function(){ start(bizName(), true); }, 0);
   [].forEach.call(d.querySelectorAll('[data-cta]'), function(a){ a.addEventListener('click', function(){ K.track('demo_cta', { cta: a.getAttribute('data-cta') }); }); });
   return K;
 };

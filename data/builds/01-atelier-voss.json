@@ -1,0 +1,27 @@
+{
+  "trade": "Architecture practice",
+  "tags": [
+    "All-SVG drawings",
+    "Pinned sequence",
+    "Title block"
+  ],
+  "features": [
+    "Every image is a hand-authored SVG drawing",
+    "Elevations that draw themselves in on scroll",
+    "A real title block as the masthead",
+    "No photography, no stock, no templates"
+  ],
+  "n": 1,
+  "slug": "atelier-voss",
+  "file": "demos/atelier-voss/index.html",
+  "kind": "site",
+  "lane": "quiet",
+  "name": "Atelier Voss",
+  "biz": "Architecture practice",
+  "c": "#14508c",
+  "pg": "#f3f5f6",
+  "short": "A studio site with no photographs at all.",
+  "long": "The entire site is illustrated in hand-authored technical drawings: elevations that draw themselves in, hatched plans, dimension lines, poché section cuts. Cyanotype blue, and a real six-cell title block for a masthead.",
+  "proves": "What a site looks like when nothing on it came from a stock library.",
+  "story": "Proof that a site can be beautiful with nothing bought in: every line on it was drawn for it."
+}

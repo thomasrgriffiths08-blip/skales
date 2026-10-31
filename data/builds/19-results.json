@@ -1,0 +1,28 @@
+{
+  "n": 19,
+  "slug": "results",
+  "file": "demos/results/index.html",
+  "kind": "tool",
+  "lane": "system",
+  "trade": "Any service business",
+  "name": "Results and ads",
+  "biz": "Six made-up service businesses",
+  "c": "#B04A24",
+  "pg": "#F6F6F4",
+  "short": "Where every job came from, what it was worth, and what the ads cost per job.",
+  "long": "A month-by-month view of where the work came from: Google Ads, Meta ads, the map, the website, referrals and repeat customers, with enquiries, bookings, the money booked and the cost per job. The monthly report writes itself in plain English. Demo figures for a made-up business.",
+  "proves": "You can see which pound of ad spend booked which job.",
+  "tags": [
+    "By source",
+    "Cost per job",
+    "Monthly report"
+  ],
+  "features": [
+    "Enquiries, bookings and money booked by source",
+    "Ad spend and cost per booked job",
+    "Six months side by side",
+    "A plain-English monthly report"
+  ],
+  "story": "Most ad reports count clicks. This counts booked jobs, which is the only number a business owner cares about.",
+  "start": "results"
+}

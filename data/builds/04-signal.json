@@ -1,0 +1,27 @@
+{
+  "trade": "Festival",
+  "tags": [
+    "Scroll-velocity type",
+    "RGB fringe",
+    "Live countdown"
+  ],
+  "features": [
+    "Marquees that answer scroll velocity",
+    "Headlines that rise into place",
+    "RGB fringe on display type",
+    "Live countdown, schedule grid, ticket maths"
+  ],
+  "n": 4,
+  "slug": "signal",
+  "file": "demos/signal/index.html",
+  "kind": "site",
+  "lane": "loud",
+  "name": "SIGNAL 2027",
+  "biz": "Music & light festival",
+  "c": "#3B18E0",
+  "pg": "#FFFFFF",
+  "short": "Type that reacts to how hard you scroll.",
+  "long": "Three days of sound, code and light. Marquees whose speed and skew answer your scrolling, headlines that rise into place, an RGB fringe on the display type because the identity is light being split, and a live countdown in enormous tabular numerals.",
+  "proves": "Loud, and still not a template.",
+  "story": "The loud one. Every effect on it is tied to the subject (light being split) rather than bolted on."
+}

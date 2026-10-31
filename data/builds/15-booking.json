@@ -1,0 +1,28 @@
+{
+  "n": 15,
+  "slug": "booking",
+  "file": "demos/booking/index.html",
+  "kind": "tool",
+  "lane": "system",
+  "trade": "Any service business",
+  "name": "Booking and the diary",
+  "biz": "Six made-up service businesses",
+  "c": "#B04A24",
+  "pg": "#F6F6F4",
+  "short": "Customers book a real free time and pay a deposit. It lands in the right diary.",
+  "long": "A diary with a lane for each person, travel time between jobs, and the deposit on every online booking. Book as a customer from their phone and watch the slot appear; move a job, send an on-my-way text, or mark it done and the review ask queues itself.",
+  "proves": "Nobody books and vanishes, and nobody plays phone tag for a time.",
+  "tags": [
+    "Online booking",
+    "Deposits",
+    "Team diary"
+  ],
+  "features": [
+    "Day and week views with a lane for each person",
+    "Online booking from real free times, with a deposit",
+    "On-my-way texts, moving a job, and marking it done",
+    "A finished job queues its own review ask"
+  ],
+  "story": "The booking page and the diary are the same thing, so what a customer books at 10pm is in the right van’s diary by morning.",
+  "start": "booking"
+}

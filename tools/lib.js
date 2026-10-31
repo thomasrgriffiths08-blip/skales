@@ -2,14 +2,23 @@
    here, so metadata, canonicals and structured data are consistent by construction.
    Links are RELATIVE via `b` (the path back to root) so the site works at the github.io
    subpath today and at a root domain later without touching a template. */
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
 const site = require('../data/site.js');
 const builds = require('../data/builds.js');
 const SERVICES = require('../data/services.js');
 
+/* every stylesheet and script is linked with a short hash of its contents, so a browser that kept an old copy
+   always fetches the new one after a change */
+const VER = {};
+const ver = f => {
+  if (!(f in VER)){ try { VER[f] = crypto.createHash('md5').update(fs.readFileSync(path.join(__dirname, '..', 'assets', f))).digest('hex').slice(0, 8); } catch (e){ VER[f] = ''; } }
+  return VER[f] ? f + '?v=' + VER[f] : f;
+};
 const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const pad = n => String(n).padStart(2, '0');
 const abs = p => site.origin.replace(/\/$/, '') + '/' + String(p).replace(/^\//, '');
-const FONTS = 'https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap';
 const FAVICON = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Cpath d='M22 16v32M43 17L25 33l18 15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
 const UPDATED = new Date();
 const monthYear = d => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
@@ -43,36 +52,71 @@ const LANES = {
   motion:   { kind: 'site', kindWord: 'Websites', name: 'Motion',   path: 'work/websites/', line: 'The page is the film: scroll-driven sequences, letterboxes, timecodes, drawn frames.', who: 'Film, video, drone and photography businesses: anyone selling moving pictures.', question: 'What does a website for a film or video business look like?', answer: 'Like a film. The visitor scrubs through the work by scrolling, the page carries a timecode, and nothing in it is a stock video: the frames are drawn in code, so the page weighs nothing and plays on a phone. The story reads even if you never scroll.' },
   quiet:    { kind: 'site', kindWord: 'Websites', name: 'Quiet',    path: 'work/websites/', line: 'Plain, calm, expensive. Almost nothing moves; the typography does the work.', who: 'Accountants, clinics, architects, solicitors: businesses whose customers are buying reassurance.', question: 'Why would a business choose a plain website?', answer: 'Because its customers are buying trust, not excitement. A quiet page uses real typography, generous space and one accent, and moves exactly once. It is harder to make than a loud one, because nothing is hiding behind an animation.' },
   direct:   { kind: 'site', kindWord: 'Websites', name: 'Direct',   path: 'work/websites/', line: 'Conversion first. One-tap call, a three-field form, the service area, no fluff.', who: 'Trades and local services that live off the phone.', question: 'What does a tradesperson’s website actually need?', answer: 'The number, a form with three fields, proof you cover their street and a reason to ring you rather than the next result. These pages load in a blink, put a call bar under the thumb on a phone and answer the question the customer typed into Google. The only animation is the one that proves a point.' },
-  broad:    { kind: 'tool', kindWord: 'Tools',    name: 'Broad',    path: 'work/tools/',    line: 'Works for any service business: booking, quotes, the pipeline, follow-up, reviews.', who: 'Any business that takes enquiries and puts jobs in a diary.', question: 'Which tools work for any service business?', answer: 'The ones that sit between the customer and the diary: taking the booking, chasing the quote, texting back a missed call, asking for the review, keeping every enquiry in one list. They do not care what the trade is.' },
-  specific: { kind: 'tool', kindWord: 'Tools',    name: 'Specific', path: 'work/tools/',    line: 'Built around one trade’s actual day: its diary, its paperwork, its reminders.', who: 'One trade at a time: heating, garages, salons, restaurants, roofing, rounds.', question: 'What does a tool built for one trade look like?', answer: 'It knows the trade’s calendar and its paperwork. A heating engineer’s tool knows a boiler is due every twelve months; a salon’s knows a client rebooks at the till; a window cleaner’s knows the round runs in door order and shifts when it rains.' },
+  system:   { kind: 'tool', kindWord: 'The system', name: 'The system', path: 'work/system/', line: 'One app for the whole business: the inbox, the diary, quotes, reviews, reminders and results.', who: 'Any business that takes enquiries and puts jobs in a diary, set up here for six made-up firms.', question: 'What does a business system for a trade actually do?', answer: 'It sits between the customer and the diary. A missed call gets a text back in seconds, the customer books a free time and pays a deposit, quotes chase themselves, every finished job asks for a review, and repeat work reminds itself. One app, every part connected, owned by the business.' },
 };
-const SITE_LANES = ['loud', 'motion', 'quiet', 'direct'], TOOL_LANES = ['broad', 'specific'];
+const SITE_LANES = ['loud', 'motion', 'quiet', 'direct'], TOOL_LANES = ['system'];
 const builtFor = (x) => {
   const t = (x.trade || x.biz || '').trim();
   return /^any\b/i.test(t) ? `built to work for ${t.toLowerCase()}` : `built for an invented ${t.toLowerCase()}`;
 };
-const laneOf = x => LANES[x.lane] || LANES[x.kind === 'site' ? 'quiet' : 'broad'];
-const kindWord = x => x.kind === 'site' ? 'Website' : 'Tool';
+const laneOf = x => LANES[x.lane] || LANES[x.kind === 'site' ? 'quiet' : 'system'];
+const kindWord = x => x.kind === 'site' ? 'Website' : 'Part of the system';
+const forLine = x => x.lane === 'system' ? 'The system · six made-up businesses' : `${kindWord(x)} · ${x.trade || x.biz}`;
 const WORDS = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
 const TENS = ['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
 const words = n => n < 20 ? WORDS[n] : TENS[Math.floor(n / 10)] + (n % 10 ? '-' + WORDS[n % 10] : '');
 const Words = n => { const w = words(n); return w[0].toUpperCase() + w.slice(1); };
+/* what the work is, in words: "Twelve websites and one system" */
+const workLine = () => `${Words(builds.filter(x => x.kind === 'site').length)} websites and one system`;
 const wordmark = (b) => `<a class="wordmark" href="${b || './'}" aria-label="${esc(site.name)} — home">${esc(site.wordmark.a)}<i>${esc(site.wordmark.x)}</i>${esc(site.wordmark.b)}</a>`;
 
-/* ---------- the phone tile: a build as it looks in a hand ---------- */
+/* ---------- the tile: a build as it looks in use ----------
+   A website is a phone, a tool is a screen. The still is the frame before its Show me moment starts
+   (assets/clips/NN.webp); the clip (NN.mp4) plays once when the tile is in view (assets/site.js). */
 const phoneSrc = (b, x) => `${b}assets/phones/${pad(x.n)}.webp`;
-const tile = (b, x, { dir = '', eager = false } = {}) => `<a class="tile" href="${b}work/${x.slug}/" data-n="${x.n}" data-kind="${x.kind}" data-lane="${x.lane}">
-  <span class="shell"><img src="${phoneSrc(b, x)}" width="585" height="1266" alt="${esc(x.name)} on a phone — ${esc(x.short)}"${eager ? '' : ' loading="lazy"'} decoding="async"></span>
-  <span class="cap">${dir ? `<span class="dir">${esc(dir)}</span>` : ''}<b>${esc(x.name)}</b><span>${esc(kindWord(x))} &middot; ${esc(laneOf(x).name)} &middot; ${esc(x.trade || x.biz)}</span></span></a>`;
-const wall = (b, list, cls = '') => `<div class="wall${cls ? ' ' + cls : ''}">${list.map(x => tile(b, x)).join('')}</div>`;
+const clipSrc = (b, x, ext) => `${b}assets/clips/${pad(x.n)}.${ext}`;
+const tile = (b, x, { dir = '', eager = false } = {}) => {
+  const wide = x.kind === 'tool', w = wide ? 1280 : 600, h = wide ? 800 : 1077;
+  return `<a class="tile${wide ? ' is-wide' : ''}" href="${b}work/${x.slug}/" data-n="${x.n}" data-kind="${x.kind}" data-lane="${x.lane}" data-trade="${esc(tradeKey(x))}">
+  <span class="shell"><img src="${clipSrc(b, x, 'webp')}" width="${w}" height="${h}" alt="${esc(x.name)} ${wide ? 'on a laptop' : 'on a phone'}: ${esc(x.short)}"${eager ? '' : ' loading="lazy"'} decoding="async"><video muted playsinline preload="none" data-src="${clipSrc(b, x, 'mp4')}" aria-hidden="true"></video></span>
+  <span class="cap">${dir ? `<span class="dir">${esc(dir)}</span>` : ''}<b>${esc(x.name)}</b><span>${esc(x.short)}</span><span class="for">${esc(forLine(x))}</span></span></a>`;
+};
+/* a mixed list goes out as two walls, the phones together and the screens together */
+const wall = (b, list, cls = '') => {
+  const sites = list.filter(x => x.kind === 'site'), tools = list.filter(x => x.kind === 'tool');
+  const one = (l, c) => `<div class="wall${c}${cls ? ' ' + cls : ''}">${l.map(x => tile(b, x)).join('')}</div>`;
+  if (sites.length && tools.length) return `<div class="walls">${one(sites, '')}${one(tools, ' wall-wide')}</div>`;
+  return one(list, tools.length ? ' wall-wide' : '');
+};
+/* trades for the "your trade" filter: a build is for one trade, or for any (it then shows under all of them) */
+const TRADES = [
+  ['heating', 'Heating & plumbing', /heating|plumb|boiler/i], ['electrician', 'Electrician', /electric/i], ['roofer', 'Roofer', /roof/i],
+  ['builder', 'Builder & kitchens', /kitchen|building/i], ['garage', 'Garage', /garage|mot|mechanic/i], ['salon', 'Hair & beauty', /salon|hair/i],
+  ['cleaner', 'Cleaner', /clean/i], ['locksmith', 'Locksmith', /lock/i], ['tree', 'Gardens & trees', /tree|garden/i],
+  ['restaurant', 'Restaurant', /restaurant|café|cafe/i], ['gym', 'Gym & coaching', /boxing|gym/i], ['tattoo', 'Tattoo studio', /tattoo/i],
+  ['clinic', 'Clinic & physio', /physio|clinic/i], ['accountant', 'Accountant & broker', /accountant|mortgage|broker/i],
+  ['creative', 'Studio, film & events', /architect|film|drone|festival|fragrance|design/i], ['software', 'Software', /software/i],
+];
+const tradeKey = x => {
+  const t = x.trade || '';
+  if (/^any/i.test(t)) return 'any';
+  const hit = TRADES.find(([, , re]) => re.test(t) || re.test(x.biz || ''));
+  return hit ? hit[0] : 'other';
+};
 /* the device: one live build in a phone. data-start boots it; thumbs are optional */
 const device = (b, x, { thumbs = false } = {}) => `<div class="hero-device">
   <div class="device" id="device" data-start="${x.n}"><div class="screen"><div class="loading">Loading ${esc(x.name)}</div></div></div>
   <div class="device-cap">
-    <div class="who"><b id="devName">${esc(x.name)}</b><span id="devWho">${esc(kindWord(x))} &middot; ${esc(x.trade || x.biz)}</span></div>
-    <div class="ways"><a id="devOpen" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Open full size</a>${thumbs ? `<a id="devPage" href="${b}work/${x.slug}/">Its page</a>` : ''}</div>
+    <div class="who"><b id="devName">${esc(x.name)}</b><span id="devWho">${esc(forLine(x))}</span></div>
+    <div class="ways"><a id="devOpen" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Full screen</a>${thumbs ? `<a id="devPage" href="${b}work/${x.slug}/">Its page</a>` : ''}</div>
   </div>
 </div>${thumbs ? `<div class="thumbs" id="thumbs" role="tablist" aria-label="Choose a build"></div>` : ''}`;
+/* the hero's phone: the build that fits the page, as a sharp still that turns into the running build on a
+   wide screen (assets/hero-phone.js); on a phone it is a small card under the buttons, so the words come first */
+const heroPhone = (b, x) => `<figure class="hph" data-hp="${x.slug}">
+  <div class="hph-shell"><img src="${phoneSrc(b, x)}" width="585" height="1266" alt="${esc(x.name)} on a phone: ${esc(x.short)}" fetchpriority="high" decoding="async"></div>
+  <figcaption><span class="hph-who"><b>${esc(x.name)}</b><span>${x.lane === 'system' ? 'The system, set up for six made-up businesses' : `${esc(kindWord(x))} for a made-up ${esc((x.trade || x.biz).toLowerCase())}`}<span class="hph-live">Running live</span></span></span><a class="hph-go" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Use it <span aria-hidden="true">&rarr;</span></a></figcaption>
+</figure>`;
 const forgeInvite = (b, line) => `<section class="invite">
   <div class="wrap">
     <div><h2>Now see your own name on one.</h2><p>${line}</p></div>
@@ -117,18 +161,19 @@ function webPage({ path, title, description, type = 'WebPage', extra = {} }){
 const jsonld = nodes => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [...baseGraph(), ...nodes] }).replace(/</g,'\\u003c')}</script>`;
 
 /* ---------- head ---------- */
-function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette }){
+function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette, preconnect = [], theme = '#FFFFFF' }){
   const canon = abs(path);
   return `<!doctype html>
 <html lang="${site.locale}" style="${paletteStyle(palette || defaultBuild())}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.classList.add('js')</script>
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canon}">
-${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
-<meta name="theme-color" content="#FFFFFF">
+${preconnect.map(u => `<link rel="preconnect" href="${u}">`).join('\n')}${preconnect.length ? '\n' : ''}${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
+<meta name="theme-color" content="${theme}">
 <meta name="author" content="${esc(site.founder.name)}">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:locale" content="en_GB">
@@ -148,11 +193,9 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <link rel="apple-touch-icon" href="${b}og/icon.png">
 <link rel="manifest" href="${b}manifest.webmanifest">
 <link rel="sitemap" type="application/xml" href="${b}sitemap.xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="${FONTS}" rel="stylesheet">
-<link rel="stylesheet" href="${b}assets/site.css">
-${css.map(c => `<link rel="stylesheet" href="${b}assets/${c}">`).join('\n')}
+<link rel="preload" href="${b}assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${b}assets/${ver('site.css')}">
+${css.map(c => `<link rel="stylesheet" href="${b}assets/${ver(c)}">`).join('\n')}
 ${jsonld(nodes)}
 </head>`;
 }
@@ -164,7 +207,7 @@ const NAV = [
   { key: 'services', label: 'Services',    path: 'services/' },
   { key: 'why',     label: 'About',        path: 'why/' },
 ];
-const isWork = k => ['work', 'websites', 'tools'].includes(k);
+const isWork = k => ['work', 'websites', 'tools', 'system'].includes(k);
 function header(b, active){
   const cur = n => (active === n.key || (n.key === 'work' && isWork(active))) ? ' aria-current="page"' : '';
   const links = NAV.map(n => `<a href="${b}${n.path}"${cur(n)}>${n.label}</a>`).join('');
@@ -184,14 +227,14 @@ function header(b, active){
 }
 function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
-  const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['Tools', 'work/tools/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ...TOOL_LANES.map(k => [`${LANES[k].name} tools`, `work/tools/#${k}`])];
+  const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ['The system', 'work/system/'], ['Inbox and missed calls', 'work/inbox/'], ['Booking and the diary', 'work/booking/']];
   const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
   return `${o.mbar === false ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
 <footer class="site-foot">
   <div class="wrap">
     <div class="f-top">
-      <div class="f-brand">${wordmark(b)}<p>${esc(site.tagline)}. One person, ${esc(site.areaServed)}. ${esc(Words(builds.length))} working builds on this site, every one for an invented business.</p></div>
+      <div class="f-brand">${wordmark(b)}<p>${esc(site.tagline)}. One person, ${esc(site.areaServed)}. ${esc(workLine())} running live on this site, every business in them invented.</p></div>
       <div><h2>Work</h2>${work.map(link).join('')}</div>
       <div><h2>Studio</h2>${studio.map(link).join('')}</div>
       <div><h2>Contact</h2>${contact.map(link).join('')}${site.whatsapp ? `<a data-wa="Hi Tom — found you through your site." href="${waHref('Hi Tom — found you through your site.')}">WhatsApp</a>` : ''}</div>
@@ -210,7 +253,7 @@ const TRACK = { pixel: site.metaPixel || '', ga: site.googleTag || '', ads: site
 const tracking = !!(TRACK.pixel || TRACK.ga || TRACK.ads);
 function scripts(b, extra = []){
   return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, leadEndpoint: site.leadEndpoint || '', defaultCh: DEFAULT_CH, track: tracking ? TRACK : undefined })};</script>`,
-    `<script src="${b}assets/site.js"></script>`, ...(tracking ? ['consent.js'] : []).concat(extra).map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
+    `<script src="${b}assets/${ver('site.js')}"></script>`, ...(tracking ? ['consent.js'] : []).concat(extra).map(s => `<script src="${b}assets/${ver(s)}"></script>`)].join('\n');
 }
 const legal = b => `<a href="${b}privacy/">Privacy</a><a href="${b}cookies/">Cookies</a>${tracking ? '<button type="button" data-consent-open hidden>Cookie settings</button>' : ''}`;
 /* a heading never breaks at its own hyphen ("follow-/up", "text-/back"): hyphenated words in h1–h3 text are kept whole */
@@ -218,5 +261,11 @@ const keepHyphens = html => html.replace(/<(h[1-3])\b([^>]*)>([\s\S]*?)<\/\1>/g,
   `<${tag}${attrs}>${inner.split(/(<[^>]+>)/).map(part => part.startsWith('<') ? part : part.replace(/[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)+/gu, w => `<span class="nw">${w}</span>`)).join('')}</${tag}>`);
 const page = (h, body, s) => `${h}\n<body>\n${keepHyphens(body)}\n${s}\n</body>\n</html>\n`;
 
-site.facts = site.facts.map(f => f.replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
-module.exports = { tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc };
+site.facts = site.facts.map(f => f.replace('{{W}}', workLine()).replace('{{N}}', Words(builds.length)).replace('{{n}}', String(builds.length)));
+/* a long paragraph on a phone shows its first sentence and a "Read more"; the rest stays in the page
+   for search and is shown in full on wider screens (pages.css .fold) */
+const fold = (text, cls = 'lead') => {
+  const t = String(text), m = t.match(/^(.{60,}?[.?!])\s+(.{80,})$/s);
+  return m ? `<p class="${cls} fold"><span>${esc(m[1])}</span><span class="more-t"> ${esc(m[2])}</span> <button class="more-b" type="button">Read more</button></p>` : `<p class="${cls}">${esc(t)}</p>`;
+};
+module.exports = { workLine, forLine, fold, tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc, clipSrc, heroPhone, TRADES, tradeKey };

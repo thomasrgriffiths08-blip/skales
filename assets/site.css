@@ -16,6 +16,13 @@
    Motion:    things move the way a phone moves: one rise on load, a crossfade on switch,
               a press on tap. Nothing else.
    ============================================================ */
+/* the fonts, served from this site (no third-party request before first paint); Schibsted Grotesk is one variable file per script */
+@font-face{font-family:"Schibsted Grotesk";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/schibsted-grotesk-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Schibsted Grotesk";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/schibsted-grotesk-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+/* the serif for big headlines (Instrument Serif, SIL Open Font License), latin only: only pages that use it download it */
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Geist Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/geist-mono-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 :root{
   --c:#E8A84B;--c-ink:#101114;--c-text:#7A5A2A;
   --pg:#FFFFFF;--alu:#F3F3F2;--alu-2:#E9E9E7;--tx:#141416;--tx-2:#6B6B70;--tx-3:#9A9A9F;
@@ -24,6 +31,7 @@
   --r-s:12px;--r-m:20px;--r-l:28px;
   --shell:1200px;--pad:clamp(20px,4.5vw,48px);--head-h:64px;
   --sans:"Schibsted Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -188,7 +196,15 @@ strong,b{font-weight:600}
 .book-wrap{display:grid;grid-template-columns:1fr 320px;gap:clamp(28px,5vw,72px);padding-bottom:clamp(56px,8vw,104px)}
 .book-steps{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 28px;padding:0;list-style:none;font-size:.875rem;color:var(--tx-3)}
 .book-steps li[aria-current]{color:var(--tx);font-weight:600}
-.book-steps li.done{color:var(--tx-2)}
+.book-steps li.done{display:block;color:var(--tx-2)}   /* .done is also the teardown card's hidden state */
+.draft-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin:0 0 28px;padding:16px 18px;border-radius:var(--r-m);background:var(--alu)}
+.draft-card>div:first-child{display:grid;gap:2px}
+.draft-card .dc-l{font-size:.875rem;color:var(--tx-2)}
+.draft-card .dc-n{font-family:var(--mono);font-size:1.25rem;font-weight:500;letter-spacing:.02em}
+.draft-card .dc-m{font-size:.9375rem;font-weight:500}
+.draft-card .dc-a{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:.9375rem}
+.draft-card .dc-a .lnk{min-height:40px;display:inline-flex;align-items:center}
+.dc-x{border:0;background:none;padding:0;cursor:pointer;font:inherit;color:var(--tx-2)}
 .bstep{border:0;padding:0;margin:0}
 .bstep legend{padding:0;margin-bottom:20px}
 .bstep legend h2{font-size:clamp(1.5rem,2.6vw,2rem)}
@@ -313,6 +329,14 @@ a.try-card:hover{background:var(--alu-2);transform:translateY(-2px)}
 .try-card p{color:var(--tx-2);line-height:1.5}
 .try-n{font:500 .8125rem/1 var(--sans);color:var(--tx-2)}
 .try-go{margin-top:auto;font-weight:600}
+.try-card.has-pic{padding:0;gap:0;overflow:hidden}
+.try-pic{position:relative;display:block;height:clamp(210px,22vw,270px);overflow:hidden;background:var(--alu-2);border-bottom:1px solid var(--line)}
+.try-pic img{position:absolute;left:50%;top:24px;width:min(54%,230px);height:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 18px 28px rgba(0,0,0,.22));transition:transform .4s var(--ease)}
+.try-pic.is-crm-board img{left:22px;top:22px;width:max(130%,520px);transform:none;filter:drop-shadow(0 14px 24px rgba(0,0,0,.14))}
+a.try-card.has-pic:hover .try-pic img{transform:translateX(-50%) translateY(-4px)}
+a.try-card.has-pic:hover .try-pic.is-crm-board img{transform:translateY(-4px)}
+.try-tx{display:flex;flex-direction:column;gap:10px;flex:1;padding:20px 22px 22px}
+.try-p{color:var(--tx-2);line-height:1.5}
 .try-card.is-soon{background:none;border:1px dashed var(--line-2)}
 .try-card.is-soon .try-go{color:var(--tx-3);font-weight:500}
 
