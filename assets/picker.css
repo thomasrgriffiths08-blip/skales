@@ -1,16 +1,30 @@
 /* ============================================================
-   The picker: the first screen under the opening film.
+   The picker: the first screen of the home.
    The twelve websites are a plain list down the side; the chosen one fills the stage as a sharp laptop shot, with its
-   phone running in front. It moves on by itself (the amber line under the name is the timer) until the reader picks one,
-   and stops for good once they do. On a phone the list is a row of names you swipe, under the stage.
-   One colour: the lit-window amber from the film, on the button, the dot and the timer line only.
+   phone running in front. It moves on by itself (the amber line under the name is the timer, drawn by picker.js) until
+   the reader picks one, and stops for good once they do. On a phone the list is a row of names you swipe, under the stage.
+   One colour: amber, on the button, the dot and the timer line only.
+   The crossfades are declared !important so they still run where the visitor's device asks for reduced motion: site.css
+   cuts every transition to nothing there, and an instant swap between two sites reads as a glitch, not as calm.
    ============================================================ */
 .pk{--ink:#0B0C0E;--amber:#E8A84B;--dim:rgba(255,255,255,.56);--faint:rgba(255,255,255,.38);--rule:rgba(255,255,255,.09);
   position:relative;background:var(--ink);color:#fff;overflow:hidden}
+.pk + .builder{border-top:0}
 .pk-in{display:grid;grid-template-columns:minmax(290px,340px) minmax(0,1fr);grid-template-rows:auto auto auto auto 1fr;
   grid-template-areas:"kick right" "h right" "sub right" "list right" "ctas right";column-gap:clamp(44px,5vw,80px);
   min-height:calc(100svh - var(--head-h));padding-block:clamp(28px,5svh,60px) clamp(28px,4.5svh,48px);
   padding-inline:max(var(--pad),calc((100% - var(--shell)) / 2))}
+
+/* the header sits dark over the picker, and goes back to normal under it (picker.js) */
+.site-head.on-dark{background:rgba(11,12,14,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:rgba(255,255,255,.08)}
+.site-head.on-dark .wordmark{color:#fff}
+.site-head.on-dark .nav a{color:rgba(255,255,255,.72)}
+.site-head.on-dark .nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.site-head.on-dark .nav a.btn{color:var(--live-ink)}
+.site-head.on-dark .mtoggle{background:transparent;border-color:rgba(255,255,255,.25)}
+.site-head.on-dark .mtoggle span{background:#fff}
+.site-head.on-dark .mtoggle[aria-expanded="true"]{background:var(--pg)}
+.site-head.on-dark .mtoggle[aria-expanded="true"] span{background:var(--tx)}
 
 .pk-kick{grid-area:kick;display:flex;align-items:center;gap:10px;font-size:.8125rem;color:var(--dim)}
 .pk-kick i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--amber)}
@@ -22,7 +36,7 @@
 .pk-list li{border-top:1px solid var(--rule)}
 .pk-list li:last-child{border-bottom:1px solid var(--rule)}
 .pk-list button{position:relative;display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:baseline;gap:10px;width:100%;
-  padding:clamp(4px,.75svh,8px) 0;border:0;background:none;color:var(--faint);text-align:left;cursor:pointer;font-size:.9375rem;font-weight:500;transition:color .25s var(--ease)}
+  padding:clamp(4px,.75svh,8px) 0;border:0;background:none;color:var(--faint);text-align:left;cursor:pointer;font-size:.9375rem;font-weight:500}
 .pk-list button:hover{color:rgba(255,255,255,.86)}
 .pk-list button[aria-selected="true"]{color:#fff}
 .pk-num{font-size:.6875rem;font-variant-numeric:tabular-nums;color:var(--faint)}
@@ -30,10 +44,7 @@
 .pk-kind{font-size:.75rem;font-weight:400;color:var(--faint);white-space:nowrap}
 .pk-list button[aria-selected="true"] .pk-kind{color:var(--dim)}
 .pk-run{position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--amber);transform:scaleX(0);transform-origin:left;pointer-events:none}
-.pk-list button[aria-selected="true"] .pk-run{transform:scaleX(1)}
-.pk.is-auto .pk-list button[aria-selected="true"] .pk-run{animation:pk-run var(--pk-t,5.2s) linear both}
-.pk.is-paused .pk-run{animation-play-state:paused !important}
-@keyframes pk-run{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.pk.is-picked .pk-list button[aria-selected="true"] .pk-run{transform:scaleX(1)}
 .pk-list button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 
 /* the right side: the stage and its caption, reaching into the margin on wide screens so the site is shown big */
@@ -48,28 +59,28 @@
 .pk-chrome b{margin-left:10px;font-weight:500;color:var(--dim)}
 .pk-chrome em{font-style:normal}
 .pk-chrome em::before{content:"·";margin:0 7px}
-.pk-shots{position:relative;display:block;aspect-ratio:1440/900;background:#fff}
-.pk-shots img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top left;opacity:0;transform:scale(1.02);
-  transition:opacity .7s var(--ease),transform 1.4s var(--ease)}
-.pk-shots img.is-on{opacity:1;transform:none}
-.pk-win:hover .pk-shots img.is-on{transform:scale(1.008)}
-.pk-phone{position:absolute;right:clamp(16px,2.4vw,36px);bottom:calc(-1 * clamp(36px,5svh,56px));width:clamp(130px,12.5vw,196px);padding:5px;border-radius:30px;
+/* the new shot fades in over the old one, which stays put underneath until it is covered: never a gap between them */
+.pk-shots{position:relative;display:block;aspect-ratio:1440/900;background:#16181C}
+.pk-shots img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top left;opacity:0;z-index:0}
+.pk-shots img.is-prev{opacity:1;z-index:1}
+.pk .pk-shots img.is-on{opacity:1;z-index:2;transition:opacity .6s var(--ease) !important}
+.pk-phone{position:absolute;z-index:3;right:clamp(16px,2.4vw,36px);bottom:calc(-1 * clamp(36px,5svh,56px));width:clamp(130px,12.5vw,196px);padding:5px;border-radius:30px;
   background:#0E0E10;border:1px solid rgba(255,255,255,.16);box-shadow:0 30px 60px -24px rgba(0,0,0,.8)}
-.pk-screen{position:relative;display:block;aspect-ratio:600/1077;border-radius:25px;overflow:hidden;background:#fff}
+.pk-screen{position:relative;display:block;aspect-ratio:600/1077;border-radius:25px;overflow:hidden;background:#16181C}
 .pk-screen img,.pk-screen video{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:top}
-.pk-screen video{opacity:0;transition:opacity .35s var(--ease)}
-.pk-screen video.is-on{opacity:1}
-.pk-screen img{transition:opacity .35s var(--ease)}
-.pk-phone.is-swap .pk-screen img,.pk-phone.is-swap .pk-screen video{opacity:0}
+.pk-screen video{opacity:0}
+.pk .pk-screen video.is-on{opacity:1;transition:opacity .35s var(--ease) !important}
 
-/* the caption under the stage, and the two ways on */
-.pk-cap{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;min-width:0;width:min(100%,calc((100svh - var(--head-h) - 210px) * 1.6));align-self:flex-end}
-.pk-cname{font-family:var(--serif);font-size:clamp(1.9rem,2.4vw,2.5rem);line-height:1;color:#fff}
-.pk-cline{flex:1 1 260px;font-size:.9375rem;color:var(--dim);max-width:46ch}
-.pk-open{font-size:.875rem;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;white-space:nowrap}
+/* the caption under the stage, and the two ways on. picker.js holds it at the height of the longest caption, so the
+   stage never moves when the site changes */
+.pk-cap{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"name line" "name open";align-items:start;align-content:start;gap:6px 22px;min-width:0;
+  width:min(100%,calc((100svh - var(--head-h) - 210px) * 1.6));align-self:flex-end}
+.pk-cname{grid-area:name;font-family:var(--serif);font-size:clamp(1.9rem,2.4vw,2.5rem);line-height:1;color:#fff;white-space:nowrap}
+.pk-cline{grid-area:line;padding-top:.15em;font-size:.9375rem;line-height:1.5;color:var(--dim);max-width:58ch}
+.pk-open{grid-area:open;justify-self:start;font-size:.875rem;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;white-space:nowrap}
 .pk-open:hover{border-bottom-color:#fff}
-.pk-cap>*{transition:opacity .3s var(--ease)}
-.pk-cap.is-swap>*{opacity:0}
+.pk .pk-cname,.pk .pk-cline{transition:opacity .25s var(--ease) !important}
+.pk-cap.is-swap .pk-cname,.pk-cap.is-swap .pk-cline{opacity:0}
 .pk-ctas{grid-area:ctas;align-self:start;display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:clamp(20px,3svh,32px)}
 .pk-book{background:var(--amber);color:#101114}
 .pk-all{font-size:.9375rem;font-weight:600;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.22);padding-bottom:2px}
@@ -98,17 +109,19 @@
   .pk-phone{right:clamp(10px,4vw,40px);bottom:0;width:clamp(124px,36vw,220px);padding:4px;border-radius:24px}
   .pk-screen{border-radius:20px}
   .pk-list{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;margin:clamp(18px,5vw,28px) calc(-1 * var(--pad)) 0;padding:2px var(--pad) 6px;
-    scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    scroll-padding-inline:var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
   .pk-list::-webkit-scrollbar{display:none}
   .pk-list li,.pk-list li:last-child{flex:none;border:0;scroll-snap-align:start}
   .pk-list button{display:inline-flex;align-items:center;gap:8px;width:auto;height:42px;padding:0 15px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.875rem;overflow:hidden}
   .pk-list button[aria-selected="true"]{border-color:rgba(232,168,75,.75)}
   .pk-kind{display:none}
   .pk-run{left:15px;right:15px;bottom:7px}
-  .pk-cap{grid-area:cap;width:auto;margin-top:clamp(18px,5vw,26px)}
+  .pk-cap{grid-area:cap;width:auto;grid-template-columns:minmax(0,1fr);grid-template-areas:"name" "line" "open";margin-top:clamp(18px,5vw,26px)}
+  .pk-cname{white-space:normal}
+  .pk-cline{padding-top:4px}
+  .pk-open{margin-top:6px}
   .pk-ctas{margin-top:clamp(22px,6vw,32px)}
 }
 @media (max-width:560px){
   .pk-ctas .pk-book{flex:1 1 100%}
-  .pk-cline{flex-basis:100%}
 }
