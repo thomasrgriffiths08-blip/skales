@@ -318,7 +318,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "40 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "46 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -375,6 +375,24 @@
     "sub": "All the small jobs, priced from a photo."
   },
   {
+    "key": "for-painters-and-decorators",
+    "title": "Painters and decorators",
+    "kicker": "For your trade",
+    "sub": "The room priced from photos, and the quote chased for you."
+  },
+  {
+    "key": "for-window-fitters",
+    "title": "Window and door fitters",
+    "kicker": "For your trade",
+    "sub": "From first enquiry to fitted, without a quote going cold."
+  },
+  {
+    "key": "for-flooring-fitters",
+    "title": "Flooring and carpet fitters",
+    "kicker": "For your trade",
+    "sub": "Measured, quoted and fitted, with nobody left wondering when."
+  },
+  {
     "key": "for-cleaners",
     "title": "Cleaning companies",
     "kicker": "For your trade",
@@ -385,6 +403,18 @@
     "title": "Window cleaners",
     "kicker": "For your trade",
     "sub": "Fill the gaps in your round, street by street."
+  },
+  {
+    "key": "for-carpet-cleaners",
+    "title": "Carpet and upholstery cleaners",
+    "kicker": "For your trade",
+    "sub": "Booked by the room, and reminded when it is time again."
+  },
+  {
+    "key": "for-driveway-cleaning",
+    "title": "Driveway and patio cleaners",
+    "kicker": "For your trade",
+    "sub": "Priced from a photo, and booked before the spring rush."
   },
   {
     "key": "for-chimney-sweeps",
@@ -505,6 +535,12 @@
     "title": "Private tutors",
     "kicker": "For your trade",
     "sub": "Lessons booked by parents, not by text at ten at night."
+  },
+  {
+    "key": "for-dance-schools",
+    "title": "Dance schools",
+    "kicker": "For your trade",
+    "sub": "From trial class to the end-of-year show, without the paperwork."
   },
   {
     "key": "for-restaurants",
