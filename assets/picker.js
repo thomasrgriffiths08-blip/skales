@@ -147,9 +147,10 @@
     }, { threshold: .25 }).observe(root);
   } else { inView = true; play(tabs[cur]); wake(); }
 
-  /* the header stays dark while it is over the picker */
+  /* the header stays dark while it is over the dark top of the page: the picker, and the builder under it when that is dark too */
   if (head){
-    var hq = 0, darkHead = function(){ hq = 0; head.classList.toggle('on-dark', root.getBoundingClientRect().bottom > head.offsetHeight); };
+    var next = root.nextElementSibling, dark = next && next.id === 'build' ? next : root;
+    var hq = 0, darkHead = function(){ hq = 0; head.classList.toggle('on-dark', dark.getBoundingClientRect().bottom > head.offsetHeight); };
     addEventListener('scroll', function(){ if (!hq) hq = requestAnimationFrame(darkHead); }, { passive: true });
     darkHead();
   }
