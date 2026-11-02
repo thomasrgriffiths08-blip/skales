@@ -318,7 +318,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "46 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "54 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -595,6 +595,54 @@
     "title": "Event companies",
     "kicker": "For your trade",
     "sub": "Booked once, and asked back next year."
+  },
+  {
+    "key": "for-plasterers",
+    "title": "Plasterers",
+    "kicker": "For your trade",
+    "sub": "Skims, patches and render, priced from a photo and booked in."
+  },
+  {
+    "key": "for-drainage-engineers",
+    "title": "Drainage engineers",
+    "kicker": "For your trade",
+    "sub": "The blocked drain at ten at night still gets an answer."
+  },
+  {
+    "key": "for-security-installers",
+    "title": "Alarm and CCTV installers",
+    "kicker": "For your trade",
+    "sub": "The survey booked, the quote chased, the service remembered."
+  },
+  {
+    "key": "for-solar-installers",
+    "title": "Solar panel installers",
+    "kicker": "For your trade",
+    "sub": "From the first roof photo to the day the panels switch on."
+  },
+  {
+    "key": "for-blinds-and-shutters",
+    "title": "Blinds and shutters",
+    "kicker": "For your trade",
+    "sub": "The measuring visit booked online, and no quote left hanging."
+  },
+  {
+    "key": "for-vets",
+    "title": "Vets",
+    "kicker": "For your trade",
+    "sub": "Appointments booked online, and every booster remembered."
+  },
+  {
+    "key": "for-opticians",
+    "title": "Opticians",
+    "kicker": "For your trade",
+    "sub": "Eye tests booked online, and every recall sent on time."
+  },
+  {
+    "key": "for-wedding-venues",
+    "title": "Wedding venues",
+    "kicker": "For your trade",
+    "sub": "Show rounds booked online, and the date held with a deposit."
   },
   {
     "key": "why",
