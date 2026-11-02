@@ -14,7 +14,8 @@
   var byKey = function(k){ for (var i = 0; i < T.length; i++) if (T[i].key === k) return T[i]; return null; };
   var abs = function(p){ var a = d.createElement('a'); a.href = base + (p || ''); return a.href; };
   var slug = function(s){ return String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); };
-  var tint = function(t){ var r = d.documentElement.style; r.setProperty('--c', t.c); r.setProperty('--c-ink', t.cInk || '#FFFFFF'); r.setProperty('--c-text', t.cText || t.c); };
+  /* the trade's colour tints the builder only; the rest of the page keeps the one Skales colour */
+  var tint = function(t){ var r = (d.getElementById('build') || d.documentElement).style; r.setProperty('--c', t.c); r.setProperty('--c-ink', t.cInk || '#FFFFFF'); r.setProperty('--c-text', t.cText || t.c); };
   var store = { get: function(){ try { return JSON.parse(localStorage.getItem('sk_draft') || 'null'); } catch(e){ return null; } },
                 set: function(v){ try { localStorage.setItem('sk_draft', JSON.stringify(v)); } catch(e){} } };
   var track = function(n, p){ if (window.skTrack) try { skTrack(n, p); } catch(e){} };
@@ -89,8 +90,8 @@
       '.btn.g{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.45)}',
       '.btn.l{background:#fff;color:var(--ink);border:1px solid var(--line)}',
       /* hero */
-      '.hero{position:relative;overflow:hidden;color:#fff;background:#1a1b1f}',
-      '.hero .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:' + t.pos + '}',
+      '.hero{position:relative;overflow:hidden;color:#fff;background:#1a1b1f;isolation:isolate}',
+      '.hero .ph{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;object-position:' + t.pos + '}',   /* under the dark wash, so the words stay readable */
       '.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,10,13,.88) 0%,rgba(9,10,13,.74) 48%,rgba(9,10,13,.3) 100%)}',
       '.hero .w{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 384px;gap:56px;align-items:center;padding:84px 0 92px}',
       '.eye{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.9);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:7px 13px 7px 11px;border-radius:999px;margin-bottom:22px}',
@@ -314,8 +315,8 @@
   function loaded(f){ return new Promise(function(res){ var done = false, fin = function(){ if (!done){ done = true; res(); } }; f.addEventListener('load', fin, { once: true }); setTimeout(fin, 1500); }); }
   var wait = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
 
-  function build(o, mode){   /* mode: 'watch' (the log runs), 'instant' (no animation) */
-    var my = ++run, staged = mode === 'watch' && !rm;
+  function build(o, mode, gate){   /* mode: 'watch' (the log runs), 'instant' (no animation); gate: hold the build until it resolves */
+    var my = ++run, staged = mode === 'watch';   /* plays with Reduce Motion on too: it is the demo, and nothing in it slides far */
     cur = o; lastDoc = buildDoc(o, false);
     tint(o.t);
     if (urlEl) urlEl.textContent = o.domain;
@@ -343,7 +344,8 @@
       Promise.all(frames.map(loaded)).then(function(){ reveal(99, false); finish(''); });
       return;
     }
-    Promise.all(frames.map(loaded)).then(function(){
+    /* the site's own header goes on as soon as the frame is ready, so the screen is never an empty white box while it waits */
+    Promise.all(frames.map(loaded)).then(function(){ if (my === run) reveal(1, false); return gate; }).then(function(){
       if (my !== run) return;
       t0 = Date.now(); tick = setInterval(function(){ logT.textContent = ((Date.now() - t0) / 1000).toFixed(1) + 's'; }, 100);
       var chain = Promise.resolve();
@@ -351,7 +353,7 @@
         chain = chain.then(function(){
           if (my !== run) throw 0;
           var li = logLine(s[0], s[1]);
-          return wait(i === 0 ? 520 : 560).then(function(){ if (my !== run) throw 0; reveal(s[2], true); return wait(300); })
+          return wait(i === 0 ? 150 : i === 1 ? 350 : 560).then(function(){ if (my !== run) throw 0; reveal(s[2], true); return wait(300); })
             .then(function(){ if (my !== run) throw 0; li.classList.add('ok'); });
         });
       });
@@ -456,18 +458,27 @@
      exact site at once. A returning visitor gets their saved draft back. Everyone else sees an
      example build itself, once, when the stage comes into view. */
   var q = new URLSearchParams(location.search), qt = byKey(q.get('t') || ''), qn = (q.get('n') || '').slice(0, 34), qw = (q.get('w') || '').slice(0, 22), qd = q.get('d') || '';
-  var saved = store.get(), st = saved && byKey(saved.t);
+  /* a saved name that is a keyboard mash ("hrhhgir", "asdfgh") is not brought back on the next visit: the example builds instead */
+  function looksReal(n){
+    var l = String(n || '').toLowerCase().replace(/[^a-z]/g, ''), v = (l.match(/[aeiouy]/g) || []).length;
+    return l.length >= 2 && v / l.length >= .15 && !/(.)\1{3,}|asdf|sdfg|dfgh|fghj|ghjk|hjkl|qwer|rtyu|tyui|yuio|uiop|zxcv|xcvb|cvbn|vbnm/.test(l);
+  }
+  var saved = store.get(), st = saved && looksReal(saved.n) && byKey(saved.t);
   if (qt && qn && qw){
     var o = make(qt, qn, qw, /^SK-[A-Z0-9]{4}$/.test(qd) ? qd : ''); pick(qt); fBiz.value = qn; fTown.value = qw; build(o, 'instant');
   } else if (st && saved.n && saved.w){
     var o2 = make(st, saved.n, saved.w, saved.ref); pick(st); fBiz.value = saved.n; fTown.value = saved.w; build(o2, 'instant');
   } else {
     var ex = make(byKey('heating') || T[0], 'Hartley Heating', 'Leeds', '', true);
-    if (rm || !window.IntersectionObserver) build(ex, 'instant');
+    if (!window.IntersectionObserver) build(ex, 'instant');
     else {
-      build(ex, 'instant');   /* something real in the window straight away, then it builds itself once in view */
-      var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); if (cur && cur.example) setTimeout(function(){ if (cur && cur.example) build(ex, 'watch'); }, 500); } }, { threshold: .35 });
-      io.observe(stage);
+      /* the example stands ready and builds itself once, as soon as the stage comes up the screen. It is never shown finished
+         first: a finished site that blanks and starts again reads as a glitch */
+      var seen = new Promise(function(res){
+        var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); res(); } });
+        io.observe(stage);
+      });
+      build(ex, 'watch', seen);
     }
   }
 })();

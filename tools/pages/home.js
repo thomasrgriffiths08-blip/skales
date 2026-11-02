@@ -8,18 +8,46 @@ const slug = s => String(s).toLowerCase().replace(/&/g, ' and ').replace(/['’]
 const HEAT_KW = require('../../data/trades.js').find(t => t.key === 'heating').kw;
 /* four websites fill a row of phones, three parts of the system a row of screens */
 const FEATURED = [7, 5, 4, 12, 13, 14, 15].map(B).filter(Boolean);
-/* the opening film: Your town. One continuous take over a white model of a British town at night: the lit windows go
-   out one by one until a single house is still lit, then the camera glides down to that house until its open, glowing
-   back door fills the screen. Two generated parts, the second starting on the first one's last frame, so there is no
-   cut. 16 frames a second. Cut into a wide strip (town-d) and a tall strip (town-m), each with
-   its first frame as the poster. Each line owns an equal share of the film. The film runs straight on into the page:
-   the headline is the first thing under it, not a card laid over it. */
-const OPENING = {
-  frames: 323,
-  seconds: 20.2,                                /* the film's own length, for where it has to play by itself */
-  screens: 3,                                   /* screens of scroll the film takes; keep it short */
-  lines: ['Tonight, people near you need a tradesperson.', 'Most of their calls go nowhere.', 'One business answers every one.']
+/* the picker: the twelve websites as a list down the side. The chosen one fills the stage as a sharp laptop shot
+   (assets/screens/NN-1200|2160.webp, made by tools/screens.mjs) with its phone running in front (assets/clips/NN.mp4).
+   Trades first, since they are who the page is for */
+const PICK = [11, 12, 7, 10, 9, 8, 1, 5, 6, 4, 3, 2].map(B).filter(Boolean);
+const pickName = x => { const n = x.name.split(/\s+[—–-]\s+/)[0]; return n === n.toUpperCase() ? n.charAt(0) + n.slice(1).toLowerCase().replace(/\s(\w)/g, (m, c) => ' ' + c.toUpperCase()) : n; };
+const shot = (b, x, w) => `${b}assets/screens/${L.pad(x.n)}-${w}.webp`;
+const picker = b => {
+  const x0 = PICK[0];
+  return `<section class="pk" id="yours" aria-labelledby="h-top" data-pk>
+  <div class="pk-in">
+    <p class="pk-kick"><i></i>Websites, booking and follow-up for UK trades</p>
+    <h1 id="h-top" class="pk-h">Websites that get you booked.</h1>
+    <p class="pk-sub">Twelve made-up businesses, each built from scratch. Pick one to see it.</p>
+    <ol class="pk-list" role="tablist" aria-label="The twelve websites">
+      ${PICK.map((x, i) => `<li role="presentation"><button type="button" role="tab" id="pkt-${i}" aria-controls="pkStage" aria-selected="${i ? 'false' : 'true'}" tabindex="${i ? -1 : 0}" data-i="${i}" data-n="${L.pad(x.n)}" data-slug="${x.slug}" data-name="${esc(pickName(x))}" data-line="${esc(x.short)}"><span class="pk-num">${L.pad(i + 1)}</span><span class="pk-name">${esc(pickName(x))}</span><span class="pk-kind">${esc(x.trade || x.biz)}</span><i class="pk-run" aria-hidden="true"></i></button></li>`).join('\n      ')}
+    </ol>
+    <div class="pk-right">
+    <div class="pk-stage" id="pkStage" role="tabpanel" aria-labelledby="pkt-0">
+      <a class="pk-win" href="${b}work/${x0.slug}/" data-go>
+        <span class="pk-chrome" aria-hidden="true"><i></i><i></i><i></i><b data-pk-name>${esc(pickName(x0))}</b><em>Made-up business</em></span>
+        <span class="pk-shots">${PICK.map((x, i) => i
+          ? `<img data-srcset="${shot(b, x, 1200)} 1200w, ${shot(b, x, 2160)} 2160w" sizes="(min-width: 1000px) 66vw, 92vw" width="1200" height="750" alt="" decoding="async">`
+          : `<img class="is-on" fetchpriority="high" src="${shot(b, x, 1200)}" srcset="${shot(b, x, 1200)} 1200w, ${shot(b, x, 2160)} 2160w" sizes="(min-width: 1000px) 66vw, 92vw" width="1200" height="750" alt="${esc(pickName(x))} on a laptop: ${esc(x.short)}" decoding="async">`).join('')}</span>
+      </a>
+      <a class="pk-phone" href="${b}work/${x0.slug}/" data-go tabindex="-1" aria-hidden="true">
+        <span class="pk-screen"><img src="${L.clipSrc(b, x0, 'webp')}" width="600" height="1077" alt="" decoding="async"><video muted playsinline loop preload="none" aria-hidden="true"></video></span>
+      </a>
+    </div>
+    <div class="pk-cap" aria-live="polite">
+      <p class="pk-cname" data-pk-name>${esc(pickName(x0))}</p>
+      <p class="pk-cline" data-pk-line>${esc(x0.short)}</p>
+      <a class="pk-open" href="${b}work/${x0.slug}/" data-go>Open the site <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    </div>
+    <div class="pk-ctas"><a class="btn pk-book" href="${b}book/">Book a call</a><a class="pk-all" href="${b}work/">See all the work</a></div>
+  </div>
+</section>`;
 };
+/* the one Skales colour: a warm lit-window amber */
+const AMBER = Object.assign({ c: '#E8A84B' }, L.world('#E8A84B'));
 
 module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
@@ -32,32 +60,11 @@ module.exports = { pages: [{
     ];
     const body = `
 ${L.header(b, 'home')}
+<script>document.querySelector('.site-head').classList.add('on-dark')</script>
 <main id="main">
 
 <script>document.documentElement.classList.add('js')</script>
-<section class="op is-film" id="top" aria-label="Opening film" style="--op-screens:${OPENING.screens}" data-film="${b}assets/film/town-" data-frames="${OPENING.frames}" data-seconds="${OPENING.seconds}">
-  <div class="op-stick">
-    <picture class="op-poster"><source media="(max-aspect-ratio: 17/20)" srcset="${b}assets/film/town-m.webp" width="810" height="1440"><img src="${b}assets/film/town-d.webp" alt="A white architect's model of a British town at night, windows lit warm along the terraces" width="1440" height="810" fetchpriority="high"></picture>
-    <canvas class="op-film" aria-hidden="true"></canvas>
-    <div class="op-shade" aria-hidden="true"></div>
-    <div class="op-fade" aria-hidden="true"></div>
-    <div class="op-lines" aria-hidden="true">
-      ${OPENING.lines.map(l => `<p class="op-line">${esc(l)}</p>`).join('\n      ')}
-    </div>
-    <div class="op-still"><ol>${OPENING.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ol></div>
-    <a class="op-skip" href="#yours">Skip the film</a>
-    <span class="op-cue" aria-hidden="true">Scroll</span>
-  </div>
-</section>
-
-<section class="op-after" id="yours" aria-labelledby="h-top">
-  <div class="wrap">
-    <p class="op-kick"><i></i>${esc(site.name)} · Websites, booking and follow-up for UK trades</p>
-    <h1 id="h-top">We make that business yours<em>.</em></h1>
-    <p class="lead">People search, open a few websites and ring one. I build the one they ring: easy to find on Google, bookable while you are on the tools, and followed up by text.</p>
-    <div class="op-ctas"><a class="btn btn-live" href="${b}book/">Book a 30-minute call</a><a class="btn btn-ghost" href="#build">Build a draft of yours</a></div>
-  </div>
-</section>
+${picker(b)}
 
 <section class="builder" id="build" aria-labelledby="h-build">
   <div class="wrap b-grid">
@@ -207,7 +214,7 @@ ${L.header(b, 'home')}
 </main>
 ${L.ctaBand(b, 'Ready when you are.', 'A short call about what is leaking in your business and what would fix it. If ' + esc(site.name) + ' is the wrong fit, you will hear that on the call too.', `<a class="btn btn-ghost" href="${b}teardown.html">Free teardown by message</a>`)}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'opening.css', 'builder.css'], nodes }), body,
-      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'opening.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['device.css', 'picker.css', 'builder.css'], nodes, palette: AMBER, theme: '#0B0C0E' }), body,
+      L.scripts(b, ['builds.js', 'trades.js', 'device.js', 'builder.js', 'picker.js']));
   }
 }]};

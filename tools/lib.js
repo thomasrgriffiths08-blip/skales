@@ -2,10 +2,20 @@
    here, so metadata, canonicals and structured data are consistent by construction.
    Links are RELATIVE via `b` (the path back to root) so the site works at the github.io
    subpath today and at a root domain later without touching a template. */
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
 const site = require('../data/site.js');
 const builds = require('../data/builds.js');
 const SERVICES = require('../data/services.js');
 
+/* every stylesheet and script is linked with a short hash of its contents, so a browser that kept an old copy
+   always fetches the new one after a change */
+const VER = {};
+const ver = f => {
+  if (!(f in VER)){ try { VER[f] = crypto.createHash('md5').update(fs.readFileSync(path.join(__dirname, '..', 'assets', f))).digest('hex').slice(0, 8); } catch (e){ VER[f] = ''; } }
+  return VER[f] ? f + '?v=' + VER[f] : f;
+};
 const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const pad = n => String(n).padStart(2, '0');
 const abs = p => site.origin.replace(/\/$/, '') + '/' + String(p).replace(/^\//, '');
@@ -151,7 +161,7 @@ function webPage({ path, title, description, type = 'WebPage', extra = {} }){
 const jsonld = nodes => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [...baseGraph(), ...nodes] }).replace(/</g,'\\u003c')}</script>`;
 
 /* ---------- head ---------- */
-function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette, preconnect = [] }){
+function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette, preconnect = [], theme = '#FFFFFF' }){
   const canon = abs(path);
   return `<!doctype html>
 <html lang="${site.locale}" style="${paletteStyle(palette || defaultBuild())}">
@@ -163,7 +173,7 @@ function head({ b, path, title, description, og, type = 'website', css = [], nod
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canon}">
 ${preconnect.map(u => `<link rel="preconnect" href="${u}">`).join('\n')}${preconnect.length ? '\n' : ''}${noindex ? '<meta name="robots" content="noindex,follow">' : '<meta name="robots" content="index,follow,max-image-preview:large">'}
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="${theme}">
 <meta name="author" content="${esc(site.founder.name)}">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:locale" content="en_GB">
@@ -184,8 +194,8 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <link rel="manifest" href="${b}manifest.webmanifest">
 <link rel="sitemap" type="application/xml" href="${b}sitemap.xml">
 <link rel="preload" href="${b}assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${b}assets/site.css">
-${css.map(c => `<link rel="stylesheet" href="${b}assets/${c}">`).join('\n')}
+<link rel="stylesheet" href="${b}assets/${ver('site.css')}">
+${css.map(c => `<link rel="stylesheet" href="${b}assets/${ver(c)}">`).join('\n')}
 ${jsonld(nodes)}
 </head>`;
 }
@@ -243,7 +253,7 @@ const TRACK = { pixel: site.metaPixel || '', ga: site.googleTag || '', ads: site
 const tracking = !!(TRACK.pixel || TRACK.ga || TRACK.ads);
 function scripts(b, extra = []){
   return [`<script>window.SITE=${JSON.stringify({ base: b, name: site.name, origin: site.origin, whatsapp: site.whatsapp, email: site.email, instagram: site.instagram, calendly: site.calendly, leadEndpoint: site.leadEndpoint || '', defaultCh: DEFAULT_CH, track: tracking ? TRACK : undefined })};</script>`,
-    `<script src="${b}assets/site.js"></script>`, ...(tracking ? ['consent.js'] : []).concat(extra).map(s => `<script src="${b}assets/${s}"></script>`)].join('\n');
+    `<script src="${b}assets/${ver('site.js')}"></script>`, ...(tracking ? ['consent.js'] : []).concat(extra).map(s => `<script src="${b}assets/${ver(s)}"></script>`)].join('\n');
 }
 const legal = b => `<a href="${b}privacy/">Privacy</a><a href="${b}cookies/">Cookies</a>${tracking ? '<button type="button" data-consent-open hidden>Cookie settings</button>' : ''}`;
 /* a heading never breaks at its own hyphen ("follow-/up", "text-/back"): hyphenated words in h1–h3 text are kept whole */
