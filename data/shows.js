@@ -36,9 +36,10 @@ module.exports = {
     { tap: 'button[data-i="6"]', say: 'Open a design' },
   ],
   'hale-and-partners': [
+    { scroll: '.next', say: 'The next deadline, counted from today' },
     { tap: 'button[data-v=ltd]', say: 'Say what you run' },
     { tap: 'button[data-v=dead]', say: 'And what is worrying you' },
-    { tap: 'button[data-v=cloud]', say: 'They tell you where they would start' },
+    { tap: 'button[data-v=cloud]', say: 'The line to start with lights up' },
   ],
   'fern-physio': [
     { tap: 'button[data-r=shoulder]', say: 'Tap where it hurts' },
