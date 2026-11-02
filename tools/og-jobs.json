@@ -75,9 +75,9 @@
     "key": "work-southpaw",
     "title": "Southpaw",
     "kicker": "Boxing club, Leeds · Website · Loud",
-    "sub": "A boxing club site built as a fight card, run by a round timer.",
-    "colour": "#C8281E",
-    "sheet": "#F7E1E0",
+    "sub": "A boxing club site run by a live round timer, with the week straight under it.",
+    "colour": "#E5232E",
+    "sheet": "#FBE0E2",
     "phone": "assets/phones/07.webp"
   },
   {

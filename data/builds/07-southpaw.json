@@ -2,15 +2,14 @@
   "trade": "Boxing club",
   "tags": [
     "Working round timer",
-    "Fight-card classes",
     "Live timetable",
-    "Free-session flow"
+    "Photo-led booking"
   ],
   "features": [
-    "Three-minute round timer with rest rounds and a bell that flashes the page and twangs the ropes",
-    "Headline lines slam in on the ten-second beat; all four are in the DOM from the first frame, nothing waits on motion",
-    "Classes as bout pairings on a poster, with a real weekly grid and tonight's session computed from the clock",
-    "First-session flow: level, then a day this week, then two fields, with a sticky book bar and one-tap call on phones"
+    "A working round timer in the first screen: three-minute rounds, a minute's rest, twelve rounds, with the digits turning red for the last ten seconds",
+    "The week's timetable straight underneath, worked out from the visitor's clock: what's on now, the next bell, and what has already finished",
+    "First-session booking that starts with four photo tiles (never boxed, done a bit, competed, it's for my kid), then a day this week, then two fields",
+    "Real gym photography, membership with a monthly or annual switch, and a book and call bar that stays on screen on phones"
   ],
   "n": 7,
   "slug": "southpaw",
@@ -19,10 +18,10 @@
   "lane": "loud",
   "name": "Southpaw",
   "biz": "Boxing club, Leeds",
-  "c": "#C8281E",
-  "pg": "#EFE9DC",
-  "short": "A boxing club site built as a fight card, run by a round timer.",
-  "long": "The hero is a working three-minute round timer (start, pause, reset, twelve rounds with a minute's rest), and every ten seconds it lands another line of the headline like a jab. Classes are laid out as bouts on a fight poster, the timetable is a real weekly grid, and a \"what's on tonight\" row is worked out from the visitor's own clock.",
+  "c": "#E5232E",
+  "pg": "#0B0B0B",
+  "short": "A boxing club site run by a live round timer, with the week straight under it.",
+  "long": "Ring black, chalk white and one corner red. The first screen is a real ringside photo and a working round timer (start, pause, reset, twelve three-minute rounds with a minute's rest), with this week's timetable straight underneath and tonight's next bell worked out from the visitor's own clock. Booking a free first session starts with four photo tiles, so a beginner and a parent each see themselves before they pick a day.",
   "proves": "Somebody who has never boxed can pick a level, pick a night this week and be booked in about twenty seconds.",
   "story": "Gyms sell on atmosphere and then hide the timetable three clicks deep. This one puts the noise and the booking in the same place, so the page feels like the gym and still books the session."
 }

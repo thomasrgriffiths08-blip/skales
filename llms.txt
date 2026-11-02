@@ -35,7 +35,7 @@ Key facts:
 - [SIGNAL 2027](https://thomasrgriffiths08-blip.github.io/skales/work/signal/): website for an invented music & light festival: Type that reacts to how hard you scroll.
 - [Long Exposure](https://thomasrgriffiths08-blip.github.io/skales/work/long-exposure/): website for an invented long exposure: A film company's site that plays like a film you can scrub.
 - [Overhead](https://thomasrgriffiths08-blip.github.io/skales/work/overhead/): website for an invented overhead: Scroll to climb, and the valley draws itself in contours as you rise.
-- [Southpaw](https://thomasrgriffiths08-blip.github.io/skales/work/southpaw/): website for an invented boxing club, leeds: A boxing club site built as a fight card, run by a round timer.
+- [Southpaw](https://thomasrgriffiths08-blip.github.io/skales/work/southpaw/): website for an invented boxing club, leeds: A boxing club site run by a live round timer, with the week straight under it.
 - [Marrow & Pin](https://thomasrgriffiths08-blip.github.io/skales/work/marrow-and-pin/): website for an invented tattoo studio, bristol: A flash wall that inks itself as you scroll past each sheet.
 - [Hale & Partners](https://thomasrgriffiths08-blip.github.io/skales/work/hale-and-partners/): website for an invented chartered accountants, harrogate: A year-end that settles, and the deadlines counted from today.
 - [Fern Physio](https://thomasrgriffiths08-blip.github.io/skales/work/fern-physio/): website for an invented fern physio: A drawn body with ten tappable points, and a booking flow behind it.

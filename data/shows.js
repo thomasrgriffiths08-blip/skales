@@ -27,8 +27,9 @@ module.exports = {
     { scrollBy: 1300, dur: 5000, say: 'Scroll to climb: the map draws itself' },
   ],
   'southpaw': [
-    { wait: 2500, say: 'The round timer is live' },
-    { tap: 'button[data-level=new]', say: 'Book your first session' },
+    { wait: 2200, say: 'The round timer is already running' },
+    { scroll: '#levelOpts', say: 'Tell them where you are starting from' },
+    { tap: 'button[data-level=new]', say: 'Never boxed: this week\'s beginners\' sessions' },
   ],
   'marrow-and-pin': [
     { tap: 'button[data-f=joss]', say: 'Filter the flash by artist' },
