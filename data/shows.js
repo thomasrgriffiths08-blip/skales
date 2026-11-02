@@ -40,7 +40,9 @@ module.exports = {
     { tap: 'button[data-v=cloud]', say: 'They tell you where they would start' },
   ],
   'fern-physio': [
-    { tap: 'button[data-r=knee]', say: 'Tap where it hurts' },
+    { tap: 'button[data-r=shoulder]', say: 'Tap where it hurts' },
+    { scroll: '.pbook', say: 'The next free slots sit right beside it' },
+    { tap: '.pslot', say: 'One tap and it is booked in' },
   ],
   'kestrel-electrical': [
     { tap: 'button[data-c="2"]', say: 'Flip a breaker' },
