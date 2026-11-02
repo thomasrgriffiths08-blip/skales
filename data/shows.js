@@ -32,8 +32,10 @@ module.exports = {
     { tap: 'button[data-level=new]', say: 'Never boxed: this week\'s beginners\' sessions' },
   ],
   'marrow-and-pin': [
-    { tap: 'button[data-f=joss]', say: 'Filter the flash by artist' },
-    { tap: 'button[data-i="6"]', say: 'Open a design' },
+    { scroll: '#wall', say: 'Each sheet inks itself, stencil to black' },
+    { tap: 'button[data-f=joss]', say: 'Filter the wall by artist' },
+    { set: '#pair .frame input', to: 12, say: 'Lay the stencil back over the healed piece' },
+    { tap: 'button[data-i="6"]', say: 'Open a sheet for sizes' },
   ],
   'hale-and-partners': [
     { scroll: '.next', say: 'The next deadline, counted from today' },

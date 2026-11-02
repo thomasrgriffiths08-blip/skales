@@ -1,16 +1,16 @@
 {
   "trade": "Tattoo studio",
   "tags": [
-    "hand-drawn SVG",
-    "scroll-driven",
-    "booking form"
+    "Flash that inks itself",
+    "Stencil over the healed piece",
+    "Placement on a body outline"
   ],
   "features": [
-    "Every design drawn twice and inked on scroll, stencil purple to black",
-    "Flash wall filtered by artist, with a sheet view and size options",
-    "Consultation form with a placement picker on a body outline",
-    "Guest-spot dates and the next free chair computed from today's date",
-    "Fresh-versus-healed toggle showing what a fine line does in a year"
+    "A real studio photo in the first screen, with a flash sheet pinned over it that inks itself as the page opens",
+    "Nine flash sheets that draw themselves from purple stencil to black ink as they scroll into view, filtered by artist",
+    "Two healed pieces with their real stencils laid back over them: drag across to compare",
+    "A consultation form laid out like the studio's own paperwork, placement picked on a body outline",
+    "The next free chair and the guest artist's dates worked out from today's date"
   ],
   "n": 8,
   "slug": "marrow-and-pin",
@@ -19,10 +19,10 @@
   "lane": "loud",
   "name": "Marrow & Pin",
   "biz": "Tattoo studio, Bristol",
-  "c": "#5B2A86",
-  "pg": "#F5F2EC",
-  "short": "A flash wall that inks itself as you scroll past each sheet.",
-  "long": "Nine hand-drawn flash designs pinned up as paper sheets, each one drawn twice (a thin purple stencil and the finished black ink), with the ink filling in as the sheet crosses the middle of the screen. Filter the wall by artist, open a sheet for sizes, and the design carries through to a consultation form laid out like the studio's own paperwork, placement picked on a body outline instead of typed into a box.",
+  "c": "#F0386B",
+  "pg": "#050505",
+  "short": "A tattoo studio whose flash wall inks itself, stencil to black, as you scroll.",
+  "long": "A private studio site in black and bone with one pink for booking. The first screen is a real photo of a stencil going on skin, with a flash sheet pinned over it that inks itself as the page opens. Nine more sheets on the wall draw themselves from purple stencil to black as they come into view, two healed pieces have their real stencils laid back over them to drag across, and any sheet carries straight into a consultation form with the placement picked on a body outline.",
   "proves": "Your own drawings can be the website, and they can still take the booking.",
   "story": "Built for the trades that sell by showing the work: the drawings are the design, so the page had to be made of them rather than of photographs of them."
 }
