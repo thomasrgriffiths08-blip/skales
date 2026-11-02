@@ -7,7 +7,7 @@
   var LAST = ['Whitfield','Okafor','Raman','Khan','Moss','Clarke','Patel','Barnes','Kowalski','Price','Reid','Turner','O’Brien','Mensah','Davies','Ali','Fletcher','Hall','Shah','Grant','Asante','Lowe','Cole','Hussain','Brooks','Ross','Osman','Webb','Murray','Pryce','Adeyemi','Walsh','Nowak','Iqbal','Hart','Doyle'];
 
   var T = [
-    { key: 'heating', label: 'Plumbing & heating', biz: 'Larchfield Heating', mark: 'L', c: '#B04A24',
+    { key: 'heating', label: 'Plumbing & heating', biz: 'Larchfield Heating', mark: 'L', c: '#2563EB',
       town: 'Leeds', pc: ['LS6', 'LS8', 'LS16', 'LS17', 'LS12', 'LS7'], streets: ['Otley Road', 'Harehills Lane', 'Street Lane', 'Kirkstall Road', 'Cardigan Road', 'Moortown Drive', 'Becketts Park', 'Spen Lane'],
       owner: 'Dan', team: ['Dan', 'Kieran'], noun: 'job',
       services: [

@@ -44,7 +44,9 @@ function world(c){
 builds.forEach(x => Object.assign(x, world(x.c)));
 const DEFAULT_CH = 17;
 const defaultBuild = () => builds.find(x => x.n === DEFAULT_CH) || builds[0];
-const paletteStyle = x => `--c:${x.c};--c-ink:${x.cInk};--c-text:${x.cText}`;
+/* every Skales page wears the one brand colour; a build's own colours stay inside the build */
+const BRAND = { c: '#E8A84B', cInk: '#141416', cText: '#5B3FE0' };
+const paletteStyle = () => `--c:${BRAND.c};--c-ink:${BRAND.cInk};--c-text:${BRAND.cText}`;
 
 /* ---------- lanes: the four kinds of website and the two kinds of tool ---------- */
 const LANES = {
@@ -193,7 +195,7 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <link rel="apple-touch-icon" href="${b}og/icon.png">
 <link rel="manifest" href="${b}manifest.webmanifest">
 <link rel="sitemap" type="application/xml" href="${b}sitemap.xml">
-<link rel="preload" href="${b}assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="${b}assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${b}assets/${ver('site.css')}">
 ${css.map(c => `<link rel="stylesheet" href="${b}assets/${ver(c)}">`).join('\n')}
 ${jsonld(nodes)}
@@ -216,6 +218,7 @@ function header(b, active){
   <div class="bar">
     ${wordmark(b)}
     <nav class="nav" aria-label="Primary">${links}<a class="btn btn-live btn-sm" href="${b}book/">Book a call</a></nav>
+    <a class="btn btn-live btn-sm hbook" href="${b}book/">Book a call</a>
     <button class="mtoggle" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
   </div>
   <nav class="mnav" id="mnav" aria-label="Primary (mobile)" hidden>
@@ -231,7 +234,7 @@ function footer(b, o = {}){
   const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
   return `${o.mbar === false ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
-<footer class="site-foot">
+<footer class="site-foot${o.dark ? ' is-dark' : ''}">
   <div class="wrap">
     <div class="f-top">
       <div class="f-brand">${wordmark(b)}<p>${esc(site.tagline)}. One person, ${esc(site.areaServed)}. ${esc(workLine())} running live on this site, every business in them invented.</p></div>
@@ -268,4 +271,4 @@ const fold = (text, cls = 'lead') => {
   const t = String(text), m = t.match(/^(.{60,}?[.?!])\s+(.{80,})$/s);
   return m ? `<p class="${cls} fold"><span>${esc(m[1])}</span><span class="more-t"> ${esc(m[2])}</span> <button class="more-b" type="button">Read more</button></p>` : `<p class="${cls}">${esc(t)}</p>`;
 };
-module.exports = { workLine, forLine, fold, tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc, clipSrc, heroPhone, TRADES, tradeKey };
+module.exports = { BRAND, workLine, forLine, fold, tracking, TRACK, legal, LANES, builtFor, world, DEFAULT_CH, defaultBuild, paletteStyle, contrast, hex, SITE_LANES, TOOL_LANES, laneOf, kindWord, words, Words, waHref, site, builds, esc, pad, abs, head, header, footer, scripts, page, breadcrumb, webPage, ORG_ID, PERSON_ID, SITE_ID, UPDATED, monthYear, iso, tile, wall, device, ctaBand, forgeInvite, phoneSrc, clipSrc, heroPhone, TRADES, tradeKey };

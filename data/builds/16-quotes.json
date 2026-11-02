@@ -7,7 +7,7 @@
   "trade": "Any service business",
   "name": "Quotes that chase themselves",
   "biz": "Six made-up service businesses",
-  "c": "#B04A24",
+  "c": "#2563EB",
   "pg": "#F6F6F4",
   "short": "Quotes from your price list that chase themselves until the customer answers.",
   "long": "Quotes built from the business’s own price list with VAT and a deposit. Send one and watch it get opened; it chases at 9am on day two and day five until the customer answers, then stops the moment they accept and pay the deposit.",

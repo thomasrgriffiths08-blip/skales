@@ -1,9 +1,9 @@
 [
   {
     "key": "home",
-    "title": "Be the one they call.",
-    "kicker": "Skales · websites · booking · follow-up · UK",
-    "sub": "Websites, booking and follow-up for UK trades. Real builds run live on the page, and you can build a draft of your own with a reference number for the call."
+    "title": "Websites that get you booked.",
+    "kicker": "Skales · websites · booking · ads · UK",
+    "sub": "Websites, booking and follow-up for UK trades, built by one person. Real builds run live on the page."
   },
   {
     "key": "work",
@@ -130,8 +130,8 @@
     "title": "The system",
     "kicker": "Six made-up service businesses · Part of the system · The system",
     "sub": "One screen: every call caught, every job booked, and what still needs you.",
-    "colour": "#B04A24",
-    "sheet": "#F4E6E0",
+    "colour": "#2563EB",
+    "sheet": "#E0E9FC",
     "phone": "assets/phones/13.webp"
   },
   {
@@ -139,8 +139,8 @@
     "title": "Inbox and missed calls",
     "kicker": "Six made-up service businesses · Part of the system · The system",
     "sub": "Every call, text and form in one list. Missed calls get a text back in seconds.",
-    "colour": "#B04A24",
-    "sheet": "#F4E6E0",
+    "colour": "#2563EB",
+    "sheet": "#E0E9FC",
     "phone": "assets/phones/14.webp"
   },
   {
@@ -148,8 +148,8 @@
     "title": "Booking and the diary",
     "kicker": "Six made-up service businesses · Part of the system · The system",
     "sub": "Customers book a real free time and pay a deposit. It lands in the right diary.",
-    "colour": "#B04A24",
-    "sheet": "#F4E6E0",
+    "colour": "#2563EB",
+    "sheet": "#E0E9FC",
     "phone": "assets/phones/15.webp"
   },
   {
@@ -157,8 +157,8 @@
     "title": "Quotes that chase themselves",
     "kicker": "Six made-up service businesses · Part of the system · The system",
     "sub": "Quotes from your price list that chase themselves until the customer answers.",
-    "colour": "#B04A24",
-    "sheet": "#F4E6E0",
+    "colour": "#2563EB",
+    "sheet": "#E0E9FC",
     "phone": "assets/phones/16.webp"
   },
   {
@@ -166,8 +166,8 @@
     "title": "Google reviews",
     "kicker": "Six made-up service businesses · Part of the system · The system",
     "sub": "Every finished job asks for a review. Replies take one tap.",
-    "colour": "#B04A24",
-    "sheet": "#F4E6E0",
+    "colour": "#2563EB",
+    "sheet": "#E0E9FC",
     "phone": "assets/phones/17.webp"
   },
   {
@@ -175,8 +175,8 @@
     "title": "Reminders that rebook",
     "kicker": "Six made-up service businesses · Part of the system · The system",
     "sub": "Yearly services, MOTs and regular cuts remind the customer and book themselves.",
-    "colour": "#B04A24",
-    "sheet": "#F4E6E0",
+    "colour": "#2563EB",
+    "sheet": "#E0E9FC",
     "phone": "assets/phones/18.webp"
   },
   {
@@ -184,8 +184,8 @@
     "title": "Results and ads",
     "kicker": "Six made-up service businesses · Part of the system · The system",
     "sub": "Where every job came from, what it was worth, and what the ads cost per job.",
-    "colour": "#B04A24",
-    "sheet": "#F4E6E0",
+    "colour": "#2563EB",
+    "sheet": "#E0E9FC",
     "phone": "assets/phones/19.webp"
   },
   {

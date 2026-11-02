@@ -40,7 +40,7 @@
   function job(b, n, cls){
     var p = SYS.person(b.pid), s = SYS.svc(b.svc), st = +b.start, en = st + b.mins * MIN;
     var state = en <= n ? ' done' : (st <= n ? ' now' : '');
-    return '<button class="tdb-job' + state + (cls ? ' ' + cls : '') + '" type="button" data-go="booking" data-ref="' + b.id + '" data-s="' + st + '" data-e="' + en + '" data-m="' + (+b.madeAt) + '" style="left:' + pct(st).toFixed(2) + '%;width:' + (pct(en) - pct(st)).toFixed(2) + '%" aria-label="' + esc(f.time(b.start) + ' ' + s.name + ', ' + p.name) + '"><b>' + esc(s.name) + '</b><small>' + esc(f.time(b.start) + ' · ' + p.name) + '</small></button>';
+    return '<button class="tdb-job' + state + (cls ? ' ' + cls : '') + '" type="button" data-go="booking" data-ref="' + b.id + '" data-s="' + st + '" data-e="' + en + '" data-m="' + (+b.madeAt) + '" style="left:' + pct(st).toFixed(2) + '%;width:' + (pct(en) - pct(st)).toFixed(2) + '%" aria-label="' + esc(f.time(b.start) + ' ' + s.name + ', ' + p.name) + '"><b>' + esc(s.name) + '</b><small>' + esc(f.time(b.start) + ' · ' + p.name) + '</small><i aria-hidden="true">' + esc(p.name.split(/\s+/).map(function(w){ return w.charAt(0); }).join('').slice(0, 2)) + '</i></button>';
   }
   /* dots that would sit on top of each other drop to the second row */
   function rowFor(p){

@@ -12,7 +12,7 @@
    job / dep / times — what the booking card books, the deposit (0 = free visit) and the day's slots.
    faq    — the questions this trade's customers actually ask before ringing. No invented reviews. */
 module.exports = [
-  { key: 'heating', label: 'Plumbing & heating', plate: 'heating', c: '#B04A24', demo: 15,
+  { key: 'heating', label: 'Plumbing & heating', plate: 'heating', c: '#2563EB', demo: 15,
     word: 'heating engineer', plural: 'heating engineers',
     photo: 'heating', pos: '50% 40%', pos2: '60% 50%', font: 'Manrope',
     head: `Boiler gone off in {town}?`,

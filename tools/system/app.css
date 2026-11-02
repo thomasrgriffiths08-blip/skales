@@ -10,7 +10,7 @@
   --rail:#111215; --rail2:#1C1D21; --rail3:#27282D; --rail-ink:#F4F4F5; --rail-ink2:#9C9DA6; --rail-line:#25262B;
   --ac-hi:color-mix(in srgb,var(--ac) 62%,#fff);
   --good:#15803D; --warn:#B45309; --bad:#B91C1C;
-  --ac:#B04A24; --ac-ink:#FFFFFF;
+  --ac:#2563EB; --ac-ink:#FFFFFF;
   --ac-soft:color-mix(in srgb,var(--ac) 8%,#fff); --ac-line:color-mix(in srgb,var(--ac) 28%,#fff); --ac-text:color-mix(in srgb,var(--ac) 88%,#000);
   --r:6px; --side:232px;
   --f:Geist,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -299,7 +299,8 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
 .tdb-job{position:absolute;top:6px;bottom:6px;display:flex;flex-direction:column;justify-content:center;min-width:4px;padding:0 8px;border-radius:4px;background:#fff;color:var(--ink);text-align:left;overflow:hidden;white-space:nowrap;line-height:1.2;transition:background .45s,color .45s,box-shadow .3s}
 .tdb-job b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:11.5px;font-weight:600;line-height:1.25;white-space:normal;overflow:hidden}
 .tdb-job{container-type:inline-size}
-@container (max-width:46px){.tdb-job b,.tdb-job small{display:none}}
+.tdb-job i{display:none;font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.02em;text-align:center}
+@container (max-width:46px){.tdb-job{padding:0 2px}.tdb-job b,.tdb-job small{display:none}.tdb-job i{display:block}}
 .tdb-job small{margin-top:1px;font-size:10.5px;color:var(--ink3);overflow:hidden;text-overflow:ellipsis;transition:color .45s}
 .tdb-job.done{background:rgba(255,255,255,.17);color:rgba(255,255,255,.94)}
 .tdb-job.done small{color:rgba(255,255,255,.62)}
@@ -357,6 +358,7 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
   .tdb-names span{padding-left:10px;font-size:11px}
   .tdb-job{padding:0}
   .tdb-job b,.tdb-job small{display:none}
+  .tdb-job i{display:block;font-size:9px}
   .td-note{left:10px;right:10px;top:10px;width:auto}
 }
 
