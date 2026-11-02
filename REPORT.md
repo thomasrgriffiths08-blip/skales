@@ -1,27 +1,59 @@
-# Photo candidates for the Skales rebuild: run of 2026-11-02
+# Photo candidates for the Skales rebuild (2026-11-02, run 2)
 
-**Result: no photos or videos were downloaded. Pexels is blocked from this session's network as well.**
+**Pexels is reachable from this environment.** Checks: `api.pexels.com/v1/search` without a key returned 401 (expected; reachable), `images.pexels.com` returned 404 on the root and 200 on a real photo URL, `videos.pexels.com` 301. The helper's `key-status` found the API key and authenticated searches returned results.
 
-## What was checked (2026-11-02, ~21:20 UTC)
+## What is here
+- `<site>/<slot>/<pexelsId>.jpg`: top 6 Pexels photo results per slot, 1600px on the long side, JPEG q80.
+- Video slots: `<site>/<slot>/<pexelsId>.mp4` (top 4 under 25s, H.264, max 1280 wide, no audio, CRF 28, all under 12MB) plus `<pexelsId>-poster.jpg`.
+- `sheets/<site>--<slot>.jpg`: one 2x3 contact sheet per slot (600px tiles, Pexels ID in yellow top left).
+- `credits.json`: one entry per file (site, slot, id, type, photographer, photographer_url, pexels_url, alt, width, height; videos also duration and MB). Videos have no alt text on Pexels, so `alt` is the slug from the video URL.
 
-| URL | Result |
-|---|---|
-| `https://api.pexels.com/v1/search?query=test&per_page=1` | `curl: (56) CONNECT tunnel failed, response 403` (HTTP 000 to curl) |
-| `https://images.pexels.com/` | `CONNECT tunnel failed, response 403` (HTTP 000) |
-| `https://videos.pexels.com/` | `CONNECT tunnel failed, response 403` (HTTP 000) |
-
-The 403 comes from the session's outbound proxy refusing the CONNECT tunnel (a network-policy denial), not from Pexels. Many other non-allowlisted hosts were refused the same way in this session (e.g. mcp.canva.com, mcp.amplitude.com), so this routine ran in an environment whose network access does not include Pexels.
-
-Other checks:
-- Pexels helper script found (`pexels-media/scripts/pexels.py`), `key-status`: **API key found**. The key is fine; only the network is blocking.
-- ffmpeg, ImageMagick and Pillow are installed, so the rest of the pipeline would run once the network allows it.
+## Notes
+- Filter: results whose alt text mentioned AI-generated/render/3D/illustration/watermark would have been skipped; none were triggered.
+- Results are Pexels relevance order, unpicked. UK look was not enforced: some trade shots show non-UK kit (e.g. US breaker panels in kestrel-electrical/hero 32497160, hard-hat utility shots 17842832 and 7359566). Choose from the sheets.
+- long-exposure/reel clips are short and small (0.7-1.3MB); overhead/video 11401302 is the largest at 6.8MB.
 
 ## Slot by slot
-
-All 41 slots (kestrel-electrical x4, kerb-and-camber x2, fern-physio x3, southpaw x4, hale-and-partners x2, marrow-and-pin x4, overhead x4 incl. 1 video, long-exposure x4 incl. 1 video, atelier-voss x5, maree x3, signal x4, cadence x2): **not fetched**, same reason for every slot (API search unreachable, 403 at the proxy).
-
-No `credits.json` and no contact sheets, because there are no files.
-
-## What fixes it
-
-Run the routine in a cloud environment whose network access allows `api.pexels.com`, `images.pexels.com` and `videos.pexels.com` (Network access "Full", or a custom allowlist with those three hosts). Only sessions started after the environment change pick it up, and the routine must be set to use that environment.
+| site | slot | query | files | result |
+|---|---|---|---|---|
+| kestrel-electrical | hero | electrician installing consumer unit fuse box | 6 | OK |
+| kestrel-electrical | ev | electric car charger on house wall | 6 | OK |
+| kestrel-electrical | work | electrician testing socket with multimeter | 6 | OK |
+| kestrel-electrical | van | electrician work van | 6 | OK |
+| kerb-and-camber | workshop | mechanic car lift workshop | 6 | OK |
+| kerb-and-camber | bay | mechanic checking car brakes garage | 6 | OK |
+| fern-physio | hero | physiotherapist treating patient knee | 6 | OK |
+| fern-physio | room | physiotherapy treatment room | 6 | OK |
+| fern-physio | exercise | physiotherapy exercise session resistance band | 6 | OK |
+| southpaw | hero | boxing gym ring | 6 | OK |
+| southpaw | bag | boxer hitting heavy bag | 6 | OK |
+| southpaw | kids | kids boxing class | 6 | OK |
+| southpaw | pads | boxing coach holding pads | 6 | OK |
+| hale-and-partners | office | modern accountant office desk | 6 | OK |
+| hale-and-partners | desk | accountant paperwork calculator desk | 6 | OK |
+| marrow-and-pin | hero | tattoo artist tattooing close up hands | 6 | OK |
+| marrow-and-pin | studio | tattoo studio interior | 6 | OK |
+| marrow-and-pin | piece1 | fine line tattoo arm | 6 | OK |
+| marrow-and-pin | piece2 | blackwork tattoo | 6 | OK |
+| overhead | hero | aerial view house roof drone | 6 | OK |
+| overhead | site | construction site aerial view | 6 | OK |
+| overhead | land | aerial view green hills fields england | 6 | OK |
+| overhead | video | VIDEO drone aerial countryside fields | 4 | OK |
+| long-exposure | reel | VIDEO film crew camera on set | 4 | OK |
+| long-exposure | camera | cinema camera operator film set | 6 | OK |
+| long-exposure | set | film set lighting crew | 6 | OK |
+| long-exposure | edit | video editor editing suite screens | 6 | OK |
+| atelier-voss | hero | modern concrete house architecture | 6 | OK |
+| atelier-voss | p1 | minimalist concrete building exterior | 6 | OK |
+| atelier-voss | p2 | timber house architecture | 6 | OK |
+| atelier-voss | p3 | concrete interior natural light | 6 | OK |
+| atelier-voss | p4 | modern building facade detail | 6 | OK |
+| maree | hero | perfume bottle on dark stone | 6 | OK |
+| maree | coast | dark rocky coast waves | 6 | OK |
+| maree | notes | bergamot citrus dark background | 6 | OK |
+| signal | hero | concert crowd stage lights | 6 | OK |
+| signal | stage | festival stage lights night | 6 | OK |
+| signal | venue | warehouse concert venue | 6 | OK |
+| signal | hands | musician hands playing synthesizer | 6 | OK |
+| cadence | depot | logistics warehouse worker tablet | 6 | OK |
+| cadence | driver | delivery driver van | 6 | OK |
