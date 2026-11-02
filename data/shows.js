@@ -43,8 +43,8 @@ module.exports = {
     { tap: 'button[data-r=knee]', say: 'Tap where it hurts' },
   ],
   'kestrel-electrical': [
-    { tap: 'button[data-k=ev]', say: 'Flip a breaker' },
-    { tap: 'button[data-k=emergency]', say: 'The emergency one' },
+    { tap: 'button[data-c="2"]', say: 'Flip a breaker' },
+    { tap: 'button[data-c="6"]', say: 'The emergency one' },
   ],
   'kerb-and-camber': [
     { type: '#reg', text: 'KX19 LBD', say: 'Put your reg in' },
