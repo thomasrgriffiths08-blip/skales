@@ -1,0 +1,123 @@
+/* ============================================================
+   TRADE PAGES (/for/<trade>/) — the home's night ground, type and parts (home.css), plus the few
+   things only a trade page has: the live system in a laptop, the needs list, the automation cards,
+   the folded questions and the link chips. Amber is still the only thing you press.
+   ============================================================ */
+.tp .hs{padding:clamp(56px,6.5vw,96px) 0}
+.tp .crumbs{margin:0;color:var(--ink-tx2);font-size:.8125rem}
+.tp .crumbs a:hover,.tp .crumbs [aria-current]{color:var(--ink-tx)}
+
+/* first screen */
+.tp-hero{padding:clamp(28px,5vw,72px) 0 clamp(48px,6vw,88px)}
+.tp-in{display:grid;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:clamp(40px,5vw,72px);align-items:center}
+.tp-copy{display:grid;gap:20px;align-content:start}
+.tp-hero h1{font-size:clamp(2.5rem,4.4vw,4rem);font-weight:600;letter-spacing:-.05em;line-height:1;max-width:13ch;text-wrap:balance}
+.tp-stage{margin:0;display:grid;gap:14px;min-width:0}
+.tp-lap{position:relative;border-radius:14px;overflow:hidden;background:#111215;border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 50px 120px -30px rgba(0,0,0,.85),0 0 90px -20px rgba(var(--g),.45)}
+.tp-scr{position:relative;display:block;aspect-ratio:1600/1000;background:#0F1013;overflow:hidden}
+.tp-open{position:absolute;inset:0;display:block}
+.tp-open img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
+.tp-scr iframe{position:absolute;left:0;top:0;width:1280px;height:800px;max-width:none;border:0;background:#fff;transform:scale(var(--s,.5));transform-origin:0 0;opacity:0;transition:opacity .5s var(--ease)}
+.tp-lap.is-live iframe{opacity:1}
+.tp-lap.is-live .tp-open{visibility:hidden;transition:visibility 0s .5s}
+.tp-cap{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:.9375rem;line-height:1.45;color:var(--ink-tx2)}
+.tp-cap b{color:var(--ink-tx);font-weight:600}
+.tp-cap>span:nth-child(2){flex:1 1 260px;min-width:0}
+.tp-cap .tlink{min-height:36px}
+.tp-dot{display:inline-flex;align-items:center;gap:8px;font:500 .75rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-tx)}
+.tp-dot i{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 4px rgba(74,222,128,.16)}
+
+/* what it needs */
+.tp .answer{color:var(--ink-tx2);max-width:64ch}
+.tp-needs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(20px,3vw,40px)}
+.tp-needs li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-content:start;padding:18px 0;border-top:1px solid rgba(255,255,255,.14);color:var(--ink-tx);line-height:1.5;font-size:.9688rem}
+.tp-needs .n{font:500 .8125rem/1.9 var(--mono);color:var(--c)}
+
+/* websites: three, not six */
+.tp-sites .w:nth-child(n+4){display:none}
+
+/* the three automations */
+.tp-autos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.tp-auto{display:flex;flex-direction:column;gap:12px;padding:clamp(22px,2.4vw,30px);border-radius:16px;background:var(--ink-2);border:1px solid rgba(255,255,255,.1);transition:border-color .2s,transform .25s var(--ease)}
+.tp-auto:hover{border-color:rgba(255,255,255,.26);transform:translateY(-2px)}
+.tp-auto h3{font-size:1.25rem;letter-spacing:-.02em;color:var(--ink-tx)}
+.tp-auto p{color:var(--ink-tx2);line-height:1.55;font-size:.9688rem;flex:1}
+.tp-auto .tlink{min-height:32px}
+.tp-try{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;margin-top:clamp(24px,3vw,36px);color:var(--ink-tx2)}
+
+/* questions */
+.tp-faq-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,88px);align-items:start}
+.tp-faq .hs-head{margin:0;position:sticky;top:calc(var(--head-h) + 32px)}
+.tp-qs details{border-top:1px solid rgba(255,255,255,.14)}
+.tp-qs details:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
+.tp-qs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:60px;padding:14px 0}
+.tp-qs summary::-webkit-details-marker{display:none}
+.tp-qs summary h3{font-size:1.0625rem;font-weight:600;letter-spacing:-.01em;line-height:1.35;color:var(--ink-tx)}
+.tp-qs summary::after{content:"+";flex:none;font-size:1.5rem;line-height:1;color:var(--ink-tx2);transition:transform .2s var(--ease)}
+.tp-qs details[open] summary::after{transform:rotate(45deg)}
+.tp-qs details p{padding:0 0 20px;color:var(--ink-tx2);line-height:1.6;max-width:62ch}
+
+/* related: chips, so forty links take a few lines */
+.tp .tp-rel{padding:clamp(48px,5vw,72px) 0}
+.tp .tp-rel-h{font:500 .75rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-tx2);margin:0 0 14px}
+.tp .tp-rel-h+.tp-chips+.tp-rel-h{margin-top:32px}
+.tp-chips{display:flex;flex-wrap:wrap;gap:8px}
+.tp-chips a{display:inline-flex;align-items:center;min-height:40px;padding:0 15px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:var(--ink-tx2);font-size:.875rem;font-weight:500;transition:color .2s,border-color .2s,background-color .2s}
+.tp-chips a:hover{color:var(--ink-tx);border-color:rgba(255,255,255,.34);background:rgba(255,255,255,.04)}
+
+/* fold: a long answer shows its first sentence on a phone */
+.more-b{display:none}
+@media (max-width:640px){
+  .js .fold:not(.open) .more-t{display:none}
+  .js .fold:not(.open) .more-b{display:inline;padding:0;border:0;background:none;font:inherit;font-weight:600;color:var(--ink-tx);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;cursor:pointer}
+}
+
+@media (max-width:1000px){
+  .tp-in{grid-template-columns:minmax(0,1fr);gap:32px}
+  .tp-stage{max-width:760px}
+  .tp-needs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tp-faq-in{grid-template-columns:minmax(0,1fr);gap:24px}
+  .tp-faq .hs-head{position:static}
+}
+@media (max-width:760px){
+  .tp-autos{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad)}
+  .tp-autos::-webkit-scrollbar{display:none}
+  .tp-auto{scroll-snap-align:start}
+}
+/* a phone: headline, then the system, then the words and the buttons, so the build is on the first screen */
+@media (max-width:640px){
+  .tp .hs{padding:56px 0}
+  .tp-hero{padding:16px 0 48px}
+  .tp-in{gap:16px}
+  .tp-copy{display:contents}
+  .tp .crumbs{order:1;margin-bottom:-6px}
+  .tp .crumbs a{min-height:36px}
+  .tp-hero h1{order:2;font-size:2.375rem;max-width:none}
+  .tp-stage{order:3;margin-top:6px}
+  .tp-hero .hx-sub{order:4;font-size:1rem}
+  .tp-hero .hx-ctas{order:5;margin-top:0}
+  .tp .hx-ctas .btn{flex:1 1 auto;padding:0 18px}
+  .tp-cap{font-size:.875rem;gap:4px 12px}
+  .tp-needs{grid-template-columns:minmax(0,1fr)}
+  .tp-needs li{padding:14px 0;font-size:.9375rem}
+  .tp-qs summary{min-height:56px}
+  .tp-qs summary h3{font-size:1rem}
+  .tp-chips a{min-height:38px;padding:0 13px;font-size:.8125rem}
+}
+.tp-faq h2{font-size:clamp(1.75rem,3vw,2.5rem)}
+.tp-book .hs-head{margin-bottom:28px}
+@media (max-width:640px){
+  .tp-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--pad));padding:2px var(--pad)}
+  .tp-chips::-webkit-scrollbar{display:none}
+  .tp-chips a{flex:none}
+}
+/* the /for/ index: one list of every trade */
+.tp-idx .tp-copy{display:grid;gap:20px}
+.tp-idx h1{max-width:16ch}
+.tp-idx .hx-sub{max-width:60ch}
+.tp-rel .tp-chips.is-wrap+.tp-rel-h{margin-top:32px}
+@media (max-width:640px){
+  .tp-idx .tp-copy{display:grid}
+  .tp-chips.is-wrap{flex-wrap:wrap;overflow:visible;margin-inline:0;padding:0}
+}
