@@ -3,7 +3,7 @@
 module.exports = [
   { slug: 'what-a-missed-call-costs', date: '2026-09-03',
     title: 'What a missed call actually costs a service business',
-    summary: 'The sum behind the missed-call text-back, with every assumption on the table — and why the number survives a sceptic.',
+    summary: 'The sum behind the missed-call text-back, with every assumption on the table, and why the number survives a sceptic.',
     body: `
 <p>A missed call costs a service business more than the job on the other end of it, because the customer who rang is usually ringing the next firm on the list within the hour. The calculator on the missed-call text-back page meters that leak from three numbers you already know: how many calls a week ring out, what an average job is worth, and how many of those callers would have booked.</p>
 <h2>Why the model asks how many would have booked</h2>

@@ -36,19 +36,19 @@ write('assets/builds.js', `/* generated from data/builds.js — do not edit by h
 /* sitemap + robots (AI crawlers explicitly allowed) */
 const today = L.iso(L.UPDATED);
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemap.map(u => `  <url><loc>${u.loc}</loc><lastmod>${today}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority.toFixed(1)}</priority></url>`).join('\n')}\n</urlset>\n`);
-write('robots.txt', `# ${site.name} — everything public is crawlable, including by AI search engines.
+write('robots.txt', `# ${site.name}: everything public is crawlable, including by AI search engines.
 User-agent: *
 Allow: /
 Disallow: /demos/
 Disallow: /tools/
 Disallow: /data/
 
-${['GPTBot','OAI-SearchBot','ChatGPT-User','ClaudeBot','Claude-SearchBot','anthropic-ai','PerplexityBot','Google-Extended','Googlebot','Bingbot','CCBot','Applebot','Amazonbot','DuckDuckBot','YouBot'].map(u => `User-agent: ${u}\nAllow: /\nDisallow: /demos/`).join('\n\n')}
+${['GPTBot','OAI-SearchBot','ChatGPT-User','ClaudeBot','Claude-SearchBot','anthropic-ai','PerplexityBot','Google-Extended','Googlebot','Bingbot','CCBot','Applebot','Amazonbot','DuckDuckBot','YouBot'].map(u => `User-agent: ${u}\nAllow: /\nDisallow: /demos/\nDisallow: /tools/\nDisallow: /data/`).join('\n\n')}
 
 Sitemap: ${L.abs('/sitemap.xml')}
 `);
 
-/* llms.txt — the curated summary AI engines read first; llms-full.txt carries the page bodies */
+/* llms.txt: the curated summary AI engines read first; llms-full.txt carries the page bodies */
 const short = `# ${site.name}
 
 > ${site.tagline}. ${site.facts[0]} Run by ${site.founder.name}, one person, in the ${site.areaServed}.
@@ -60,20 +60,20 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 
 ## Pages
 - [Home](${L.abs('/')}): what ${site.name} builds, with a live demonstration build on the page.
-- [Work: ${L.workLine().toLowerCase()}](${L.abs('/work/')}): every demonstration website and every part of the system, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [The system](${L.abs('/work/system/')}): the one app behind the websites, in seven parts (inbox and missed calls, booking, quotes, reviews, reminders, results), shown for six made-up businesses.
-- [Services](${L.abs('/services/')}): the five services, built as one system — ${SVC.SV.map(x => `[${x.name}](${L.abs('/services/' + x.slug + '/')})`).join(', ')}.
+- [Work: ${L.workLine().toLowerCase()}](${L.abs('/work/')}): every demonstration website and every part of the system, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [The system](${L.abs('/work/system/')}): the one app behind the websites, as an overview screen plus six parts (inbox and missed calls, booking, quotes, reviews, reminders, results), shown for six made-up businesses.
+- [Services](${L.abs('/services/')}): the five services, built as one system: ${SVC.SV.map(x => `[${x.name}](${L.abs('/services/' + x.slug + '/')})`).join(', ')}.
 - [Automations](${L.abs('/automations/')}): ${SVC.AU.map(x => `[${x.name.toLowerCase()}](${L.abs('/automations/' + x.slug + '/')})`).join(', ')}.
-- [Try it](${L.abs('/try/')}): live demos that run in the browser — a missed call texted back and booked, online booking with a deposit, and a CRM board whose follow-up texts send themselves.
+- [Try it](${L.abs('/try/')}): live demos that run in the browser: a missed call texted back and booked, online booking with a deposit, and a CRM board whose follow-up texts send themselves.
 - [Compare](${L.abs('/compare/')}): honest comparisons against ${SVC.CP.map(x => `[${x.them}](${L.abs('/compare/' + x.slug + '/')})`).join(', ')}.
-- [By trade](${L.abs('/for/')}): what a website needs for each kind of business — ${SEG.SG.map(x => `[${x.label.toLowerCase()}](${L.abs('/for/' + x.slug + '/')})`).join(', ')}.
+- [By trade](${L.abs('/for/')}): what a website needs for each kind of business: ${SEG.SG.map(x => `[${x.label.toLowerCase()}](${L.abs('/for/' + x.slug + '/')})`).join(', ')}.
 - [FAQ](${L.abs('/faq/')}): every question in one place, with short answers.
 - [Why](${L.abs('/why/')}): ownership (clients own domain, code and accounts), one person, built in public, and the FAQ.
 - [Book a call](${L.abs('/book/')}): four qualifying questions, then a slot straight into the diary.
 - [Free teardown](${L.abs('/teardown.html')}): three details in, three findings back by message.
-- [Notes](${L.abs('/notes/')}): short pieces — ${notes.map(n => n.title.toLowerCase()).join('; ')}.
+- [Notes](${L.abs('/notes/')}): short pieces: ${notes.map(n => n.title.charAt(0).toLowerCase() + n.title.slice(1)).join('; ')}.
 
 ## The builds
-${builds.map(x => `- [${x.name}](${L.abs('/work/' + x.slug + '/')}): ${x.kind === 'site' ? `website for an invented ${x.biz.toLowerCase()}` : 'part of the system, shown for six invented businesses'}: ${x.short}`).join('\n')}
+${builds.map(x => `- [${x.name}](${L.abs('/work/' + x.slug + '/')}): ${x.kind === 'site' ? `website for an invented ${(x.trade || x.biz).toLowerCase()}` : 'part of the system, shown for six invented businesses'}: ${x.short}`).join('\n')}
 
 ## Frequently asked
 ${why.FAQ.map(([q, a]) => `- **${q}** ${a}`).join('\n')}
@@ -82,13 +82,13 @@ write('llms.txt', short);
 const ENT = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“', mdash: '—', ndash: '–', middot: '·', hellip: '…', pound: '£', times: '×', rarr: '→', larr: '←', copy: '©' };
 const decode = t => t.replace(/&([a-z]+);/gi, (m, n) => ENT[n.toLowerCase()] !== undefined ? ENT[n.toLowerCase()] : ' ').replace(/&#(\d+);/g, (m, n) => String.fromCodePoint(+n)).replace(/&#x([\da-f]+);/gi, (m, n) => String.fromCodePoint(parseInt(n, 16)));
 const strip = h => decode(h.replace(/<(script|style)[\s\S]*?<\/\1>/g, '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
-write('llms-full.txt', short + `\n\n---\n\n## Full page text\n\n` + pages.filter(p => p.sitemap !== false && !p.noindex).map(p => `### ${p.meta ? p.meta.title : p.url} — ${L.abs(p.url)}\n\n${strip(p.render(baseFor(p.url)))}\n`).join('\n'));
+write('llms-full.txt', short + `\n\n---\n\n## Full page text\n\n` + pages.filter(p => p.sitemap !== false && !p.noindex).map(p => `### ${p.meta ? p.meta.title : p.url} (${L.abs(p.url)})\n\n${strip(p.render(baseFor(p.url)))}\n`).join('\n'));
 
 /* Cloudflare Pages reads _redirects (real 301s); GitHub Pages ignores it and serves the meta-refresh pages instead */
 write('_redirects', `# generated by tools/build.js from the redirect pages in tools/pages/misc.js\n${pages.filter(p => p.to).map(p => `${p.url} ${p.to} 301`).join('\n')}\n`);
-write('manifest.webmanifest', JSON.stringify({ name: site.name, short_name: site.name, description: site.tagline, start_url: site.origin.replace(/^https?:\/\/[^/]+/, '') + '/', display: 'browser', background_color: '#FFFFFF', theme_color: '#FFFFFF', icons: [{ src: 'og/icon.png', sizes: '512x512', type: 'image/png' }] }, null, 2));
+write('manifest.webmanifest', JSON.stringify({ name: site.name, short_name: site.name, description: site.tagline, start_url: site.origin.replace(/^https?:\/\/[^/]+/, '') + '/', display: 'browser', background_color: '#0A0B0D', theme_color: '#0A0B0D', icons: [{ src: 'og/icon.png', sizes: '512x512', type: 'image/png' }] }, null, 2));
 write('tools/og-jobs.json', JSON.stringify(ogJobs, null, 2));
-write('humans.txt', `/* TEAM */\n${site.founder.name} — ${site.founder.jobTitle}\n${site.instagram}\n\n/* SITE */\nLast update: ${today}\nStandards: HTML5, CSS, vanilla JS. No frameworks, no page builders.\n`);
+write('humans.txt', `/* TEAM */\n${site.founder.name}, ${site.founder.jobTitle}\n${site.instagram}\n\n/* SITE */\nLast update: ${today}\nStandards: HTML5, CSS, vanilla JS. No frameworks, no page builders.\n`);
 console.log(`built ${pages.length} pages · sitemap ${sitemap.length} urls · ${ogJobs.length} OG jobs`);
 
 /* the lint: a page that breaks the metadata rules fails the build */

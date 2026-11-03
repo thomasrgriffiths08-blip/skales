@@ -1,4 +1,4 @@
-# Skales — everything public is crawlable, including by AI search engines.
+# Skales: everything public is crawlable, including by AI search engines.
 User-agent: *
 Allow: /
 Disallow: /demos/
@@ -8,61 +8,91 @@ Disallow: /data/
 User-agent: GPTBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: ChatGPT-User
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: ClaudeBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: Claude-SearchBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: anthropic-ai
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: PerplexityBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: Google-Extended
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: Googlebot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: Bingbot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: CCBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: Applebot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: Amazonbot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: DuckDuckBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 User-agent: YouBot
 Allow: /
 Disallow: /demos/
+Disallow: /tools/
+Disallow: /data/
 
 Sitemap: https://thomasrgriffiths08-blip.github.io/skales/sitemap.xml

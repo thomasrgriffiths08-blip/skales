@@ -120,7 +120,7 @@ ${L.header(b, 'work')}
       <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>The system · Today</span></span>
       <img src="${b}assets/home/system-today.webp" srcset="${b}assets/home/system-today-800.webp 800w, ${b}assets/home/system-today.webp 1600w" sizes="(min-width: 1260px) 1200px, 92vw" width="1600" height="1000" alt="The Skales system's Today screen: calls caught, jobs booked and what still needs the owner" loading="lazy" decoding="async">
     </a>
-    <div class="wk-parts">${PARTS.filter(x => x.slug !== 'system').map(x => `<a href="${b}work/${x.slug}/" data-view="${x.slug}"><span class="wk-pshot"><img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800" alt="" loading="lazy" decoding="async"></span><b>${esc(x.name)}</b><span>${esc(x.short)}</span></a>`).join('')}</div>
+    <div class="wk-parts">${PARTS.filter(x => x.slug !== 'system').map(x => `<a href="${b}work/${x.slug}/" data-view="${x.slug}"><span class="wk-pshot"><img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800" alt="${esc(x.name)} on a laptop: ${esc(x.short)}" loading="lazy" decoding="async"></span><b>${esc(x.name)}</b><span>${esc(x.short)}</span></a>`).join('')}</div>
     <p class="tp-rel-h wk-biz-h">Open it as one of six made-up businesses</p>
     <div class="tp-chips">${BIZ.map(([k, n, t]) => `<a href="${b}demos/system/?t=${k}#s=1" target="_blank" rel="noopener">${esc(n)} · ${esc(t)}</a>`).join('')}</div>
   </div>
@@ -205,8 +205,8 @@ const cases = builds.map(x => {
     render(b){
       const kw = kindWord(x).toLowerCase();
       const title = (() => {
-        for (const t of [`${x.name} — ${x.trade}`, `${x.name} — ${x.biz}`, x.name]){
-          if (t.length <= 44) return `${t} | ${site.name}`;
+        for (const t of x.slug === 'system' ? ['The Skales system: every call, job and review in one app'] : x.kind === 'tool' ? [`${x.name}: part of the Skales system`, x.name] : [`${x.name}: ${x.trade} website`, `${x.name}: ${x.trade}`, `${x.name}: ${x.biz}`, x.name]){
+          if (t.length <= 44 && !t.includes(site.name)) return `${t} | ${site.name}`;
           if (t.length <= 60) return t;
         }
         return x.name.slice(0, 57) + '…';

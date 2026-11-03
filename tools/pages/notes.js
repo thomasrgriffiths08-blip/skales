@@ -6,7 +6,7 @@ const index = {
   url: '/notes/', og: 'notes', priority: 0.7, changefreq: 'weekly',
   meta: { key: 'notes', title: 'Notes', kicker: 'Short, straight, added to', sub: 'What a missed call costs, why you should own your site, and why every demo is fictional.' },
   render(b){
-    const title = `Notes — websites & systems for trades | ${site.name}`;
+    const title = `Notes on websites & systems for trades | ${site.name}`;
     const description = `Short notes: what a missed call actually costs, why you should own your website rather than rent it, and why every demo is for a business that does not exist.`;
     const nodes = [ L.webPage({ path: '/notes/', title, description, type: 'CollectionPage' }), L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Notes', path: '/notes/' }]),
       { '@type': 'ItemList', itemListElement: notes.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: L.abs(`/notes/${n.slug}/`), name: n.title })) } ];

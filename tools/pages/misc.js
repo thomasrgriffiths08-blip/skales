@@ -4,7 +4,7 @@ const teardown = {
   url: '/teardown.html', og: 'teardown', priority: 0.8, changefreq: 'monthly',
   meta: { key: 'teardown', title: 'Ten minutes on your setup. Three things back.', kicker: 'Free teardown · by message', sub: 'What is leaking, what to fix first, what it is worth in jobs.' },
   render(b){
-    const title = `Free teardown — three findings by message | ${site.name}`;
+    const title = `Free teardown: three findings by message | ${site.name}`;
     const description = `Send three details. ${site.founder.name} checks your website, Google listing and missed calls, then messages back what is leaking and what to fix first.`;
     const nodes = [ L.webPage({ path: '/teardown.html', title, description, type: 'ContactPage' }), L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Free teardown', path: '/teardown.html' }]) ];
     const body = `

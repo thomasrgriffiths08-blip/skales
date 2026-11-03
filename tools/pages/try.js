@@ -43,7 +43,7 @@ const DEMOS = [
    itself). Used on /try/, the home page, the services pages and the trade pages. */
 const PIC = { 'missed-call': [480, 1002], booking: [480, 1002], 'crm-board': [900, 872] };
 const card = (b, x, i, { h = 'h3', href = `${b}try/${x.slug}/`, first = true } = {}) => `<a class="try-card has-pic" href="${href}">
-  <span class="try-pic is-${x.slug}" aria-hidden="true"><img src="${b}assets/try/${x.slug}.webp" alt="" width="${PIC[x.slug][0]}" height="${PIC[x.slug][1]}" loading="lazy" decoding="async"></span>
+  <span class="try-pic is-${x.slug}"><img src="${b}assets/try/${x.slug}.webp" alt="${esc(x.alt)}" width="${PIC[x.slug][0]}" height="${PIC[x.slug][1]}" loading="lazy" decoding="async"></span>
   <span class="try-tx"><span class="try-n">${i === 0 && first ? 'Start here · ' : ''}About a minute · works on your phone</span><${h}>${esc(x.name)}</${h}><span class="try-p">${esc(x.line)}</span><span class="try-go">Try it <span aria-hidden="true">→</span></span></span>
 </a>`;
 

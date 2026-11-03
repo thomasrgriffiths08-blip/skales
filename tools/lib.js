@@ -70,7 +70,7 @@ const words = n => n < 20 ? WORDS[n] : TENS[Math.floor(n / 10)] + (n % 10 ? '-' 
 const Words = n => { const w = words(n); return w[0].toUpperCase() + w.slice(1); };
 /* what the work is, in words: "Twelve websites and one system" */
 const workLine = () => `${Words(builds.filter(x => x.kind === 'site').length)} websites and one system`;
-const wordmark = (b) => `<a class="wordmark" href="${b || './'}" aria-label="${esc(site.name)} — home">${esc(site.wordmark.a)}<i>${esc(site.wordmark.x)}</i>${esc(site.wordmark.b)}</a>`;
+const wordmark = (b) => `<a class="wordmark" href="${b || './'}" aria-label="${esc(site.name)} home">${esc(site.wordmark.a)}<i>${esc(site.wordmark.x)}</i>${esc(site.wordmark.b)}</a>`;
 
 /* ---------- the tile: a build as it looks in use ----------
    A website is a phone, a tool is a screen. The still is the frame before its Show me moment starts
@@ -137,16 +137,18 @@ const ORG_ID = abs('/#organization'), SITE_ID = abs('/#website'), PERSON_ID = ab
 function baseGraph(){
   return [
     { '@type': 'Organization', '@id': ORG_ID, name: site.legalName, alternateName: site.name, legalName: site.legalName, url: abs('/'),
-      description: site.tagline + ' — ' + site.facts[0],
+      description: site.tagline + '. ' + site.facts[0],
       founder: { '@id': PERSON_ID }, foundingDate: site.founded,
       areaServed: { '@type': 'Country', name: site.areaServed },
       knowsAbout: ['Web design for service businesses','Online booking systems','CRM for trades','Missed-call text-back automation','Customer follow-up automation','Trades websites','Review request automation','Facebook and Instagram advertising','Google Ads','Local SEO'],
       sameAs: [site.instagram],
       contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: site.email, availableLanguage: 'en-GB', areaServed: 'GB' },
-      logo: { '@type': 'ImageObject', url: abs('/og/home.png') },
+      logo: { '@type': 'ImageObject', url: abs('/og/icon.png'), width: 512, height: 512 }, image: abs('/og/home.png'),
       hasOfferCatalog: { '@type': 'OfferCatalog', name: site.legalName + ' services', itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': abs(`/services/${s.slug}/`) + '#service', name: s.name, url: abs(`/services/${s.slug}/`) } })) } },
     { '@type': 'Person', '@id': PERSON_ID, name: site.founder.name, alternateName: site.founder.alternateName,
-      jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram], nationality: 'GB' },
+      jobTitle: site.founder.jobTitle, worksFor: { '@id': ORG_ID }, url: abs('/why/'), sameAs: [site.instagram], nationality: 'GB',
+      description: `Builds the websites, booking systems and follow-up automation at ${site.name}, by hand, for UK service businesses.`,
+      knowsAbout: ['Web design', 'Online booking systems', 'CRM for service businesses', 'Missed-call text-back', 'Follow-up automation', 'Facebook and Instagram ads', 'Google Ads', 'Local SEO'] },
     { '@type': 'WebSite', '@id': SITE_ID, url: abs('/'), name: site.legalName, alternateName: site.name, description: site.tagline,
       publisher: { '@id': ORG_ID }, inLanguage: site.locale },
   ];
@@ -240,7 +242,7 @@ function footer(b, o = {}){
       <div class="f-brand">${wordmark(b)}<p>${esc(site.tagline)}. One person, ${esc(site.areaServed)}. ${esc(workLine())} running live on this site, every business in them invented.</p></div>
       <div><h2>Work</h2>${work.map(link).join('')}</div>
       <div><h2>Studio</h2>${studio.map(link).join('')}</div>
-      <div><h2>Contact</h2>${contact.map(link).join('')}${site.whatsapp ? `<a data-wa="Hi Tom — found you through your site." href="${waHref('Hi Tom — found you through your site.')}">WhatsApp</a>` : ''}</div>
+      <div><h2>Contact</h2>${contact.map(link).join('')}${site.whatsapp ? `<a data-wa="Hi Tom, found you through your site." href="${waHref('Hi Tom, found you through your site.')}">WhatsApp</a>` : ''}</div>
     </div>
     <div class="f-row">
       <span>&copy; <span data-year></span> ${esc(site.name)} &middot; ${esc(site.areaServed)}</span>

@@ -16,8 +16,8 @@ const firms = [T.pixel && 'Meta', (T.ga || T.ads) && 'Google'].filter(Boolean);
 const and = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
 const contact = `<a class="lnk" href="mailto:${esc(site.email)}">${esc(site.email)}</a>${site.whatsapp ? ', or message on WhatsApp' : ''}`;
 
-const shell = ({ b, path, key, label, h1, answer, description, body }) => {
-  const title = `${label} | ${site.name}`;
+const shell = ({ b, path, key, label, h1, answer, description, body, long }) => {
+  const title = `${long || label} | ${site.name}`;
   const cr = [['Home', ''], [label, path.slice(1)]];
   const nodes = [L.webPage({ path, title, description }), P.crumbNodes(cr)];
   return L.page(L.head({ b, path, title, description, og: key, css: ['pages.css'], nodes }), `
@@ -78,7 +78,7 @@ const privacy = {
       <h2>What can you ask for?</h2>
       <p>You can ask to see what is held about you, have it corrected or deleted, restrict or object to how it is used, get a copy to take elsewhere${tags.length ? ', and take back your consent at any time' : ''}. Email ${contact}, and you will get an answer within one month.</p>
       <p>If you are unhappy with how your information has been handled, you can complain to the Information Commissioner’s Office at <a class="lnk" href="https://ico.org.uk/make-a-complaint/" rel="noopener" target="_blank">ico.org.uk</a> or on 0303 123 1113.</p>`;
-    return shell({ b, path: '/privacy/', key: 'privacy', label: 'Privacy notice', h1: 'Privacy notice',
+    return shell({ b, path: '/privacy/', key: 'privacy', label: 'Privacy notice', long: 'Privacy notice: your data and who sees it', h1: 'Privacy notice',
       answer: `Skales Studio is Tom Griffiths, one person in the United Kingdom. This page says what personal information the site and the studio collect, why, who else sees it, how long it is kept, and how to have it changed or deleted.`,
       description: 'What personal information Skales Studio collects through the site and enquiries, why, who sees it, how long it is kept, and your rights under UK law.', body });
   },
@@ -114,7 +114,7 @@ const cookies = {
       <p>The booking page loads ${booking}’s calendar so you can pick a time. ${booking} sets its own cookies to make the booking work, under its own privacy policy.</p>` : ''}
       <h2>How do you change your choice?</h2>
       <p>${tags.length ? '<button type="button" class="btn btn-ghost btn-sm" data-consent-open>Cookie settings</button></p><p>Or clear this site’s data in your browser settings.' : 'There is nothing to change at the moment. You can clear this site’s data in your browser settings at any time.'} The <a class="lnk" href="${b}privacy/">privacy notice</a> covers everything else.</p>`;
-    return shell({ b, path: '/cookies/', key: 'cookies', label: 'Cookies', h1: 'Cookies',
+    return shell({ b, path: '/cookies/', key: 'cookies', label: 'Cookies', long: 'Cookies: what this site stores and why', h1: 'Cookies',
       answer: tags.length
         ? 'This site sets advertising and analytics cookies only if you accept them on the banner. Everything else it stores is there because you are using it, like your place in a demo, and stays in your browser.'
         : 'This site sets no advertising or analytics cookies. The little it stores is there because you are using it, like your place in a demo, and it stays in your browser.',
