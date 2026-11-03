@@ -32,6 +32,6 @@ module.exports = [
 <h2>Why fictional beats a logo wall</h2>
 <p>A logo wall proves someone paid. A working build proves what was built. Each demo here runs live in the page: you can simulate a missed call and watch the text go back, book a slot and pay the deposit, or watch a quote chase itself. A screenshot of a client site cannot do that, and a client site should not be handed to strangers to click through.</p>
 <h2>What a real build shares with these</h2>
-<p>The approach is identical: hand-coded, no page-builder, no stock imagery, built to do one job for one kind of business, and owned outright by the client. The only difference is whose name is on it.</p>`,
+<p>The approach is identical: hand-coded, no page-builder, real photography chosen and graded for the page, built to do one job for one kind of business, and owned outright by the client. The only difference is whose name is on it.</p>`,
     links: [['work', 'See the work']] },
 ];

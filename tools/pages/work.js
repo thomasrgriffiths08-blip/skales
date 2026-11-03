@@ -152,6 +152,8 @@ const photosIn = slug => {
   }
   return out;
 };
+/* photographs a rebuilt demo carries in its own img folder (Pexels, graded and cropped for that page) */
+const ownPhotos = slug => { try { return fs.readdirSync(path.join(__dirname, '..', '..', 'demos', slug, 'img')).some(f => /\.(webp|jpe?g|avif)$/i.test(f)); } catch (e){ return false; } };
 const domain = site.origin.replace(/^https?:\/\//, '');
 
 const caseCopy = (b, x, lane) => `<div class="meta">${x.lane === 'system' ? `<span>${x.slug === 'system' ? 'One app, six parts' : `Part of <a href="${b}work/system/">the system</a>`}</span><span>Shown for six made-up businesses</span>` : `<span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span>`}</div>
@@ -245,7 +247,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
         <dl class="nameplate">
           <div><dt>Written</dt><dd>By hand, as a single self-contained page. No page-builder, no theme, no framework.</dd></div>
           <div><dt>Dependencies</dt><dd>No frameworks. Fonts are served from this site with system fallbacks, and the drawings, charts and interactions are written into the page.</dd></div>
-          <div><dt>Imagery</dt><dd>${photos.length ? `Real photographs by ${photos.map(p => p.url ? `<a class="lnk" href="${p.url}" rel="noopener">${esc(p.by)}</a>` : esc(p.by)).join(' and ')} on Pexels, free for commercial use. Everything else is drawn in code, SVG or canvas.` : 'No stock. Every visual is drawn in code, SVG or canvas.'}</dd></div>
+          <div><dt>Imagery</dt><dd>${photos.length ? `Real photographs by ${photos.map(p => p.url ? `<a class="lnk" href="${p.url}" rel="noopener">${esc(p.by)}</a>` : esc(p.by)).join(' and ')} on Pexels, free for commercial use. Everything else is drawn in code, SVG or canvas.` : ownPhotos(x.slug) ? 'Real photographs from Pexels, free for commercial use, graded and cropped for this page. Nobody pictured is presented as staff. Everything else is drawn in code.' : 'No stock. Every visual is drawn in code, SVG or canvas.'}</dd></div>
           <div><dt>The business</dt><dd>${x.lane === 'system' ? 'Six made-up service businesses.' : `${esc(x.biz)} is invented.`} Every person, number and review inside is fictional so nothing here exposes a real client.</dd></div>
           <div><dt>Runs on</dt><dd>Any modern browser, on a phone as much as a desktop.</dd></div>
           <div><dt>Yours would</dt><dd>Carry your name, your numbers and your diary, and be owned by you from day one.</dd></div>
