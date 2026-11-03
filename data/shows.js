@@ -24,7 +24,10 @@ module.exports = {
     { wait: 5000, say: 'Each reel is a real project' },
   ],
   'overhead': [
-    { scrollBy: 1300, dur: 5000, say: 'Scroll to climb: the map draws itself' },
+    { scroll: '#survey .viewer', say: 'The survey draws itself over the real photo' },
+    { tap: '.tab[data-t=roof]', say: 'A roof, measured, with every defect numbered' },
+    { tap: '.tab[data-t=site]', say: 'Cut and spoil on a building site, month by month' },
+    { scroll: '#log .log', say: 'The last six flying days, dated from today' },
   ],
   'southpaw': [
     { wait: 2200, say: 'The round timer is already running' },

@@ -1,18 +1,17 @@
 {
   "trade": "Drone survey & filming",
   "tags": [
-    "scroll-driven",
-    "mapping",
-    "before-after"
+    "Aerial film in the first screen",
+    "Survey lines that draw as you scroll",
+    "A flight log worked out from today"
   ],
   "features": [
-    "Scroll is altitude: the contour map draws itself in as the aircraft climbs",
-    "Telemetry pinned at the top: altitude, a moving heading tape, wind and battery",
-    "At the top the view tilts from oblique through to a full plan-view sheet",
-    "Services as a real flight log; hover a job and its contour band lights up on the keymap",
-    "A picker rewrites the log for a roof, a site, land or a property to sell",
-    "Before and after roof: the frame as flown against a measurable orthomosaic, with a draggable divider",
-    "Enquiry form takes a postcode and returns a draft flight plan"
+    "A real aerial film loops behind the first screen, cut to a phone-sized portrait version on phones",
+    "Three real aerial stills with the deliverable drawn over them: contours and a boundary, a measured roof with numbered defects, cut and spoil on a building site",
+    "The survey lines draw themselves across the photo as you scroll, and every layer switches on and off",
+    "Four fixed prices, each one carrying its job straight into the enquiry form",
+    "A flight log of the last six flying days, dated back from today with the wind on each",
+    "The enquiry checks the postcode and comes back with a job reference and who rings you when"
   ],
   "n": 6,
   "slug": "overhead",
@@ -20,11 +19,11 @@
   "kind": "site",
   "lane": "motion",
   "name": "Overhead",
-  "biz": "Overhead",
-  "c": "#B7791F",
-  "pg": "#EFEBDD",
-  "short": "Scroll to climb, and the valley draws itself in contours as you rise.",
-  "long": "The page is an ascent. Scrolling is altitude: the telemetry counts up, a fictional Peak District dale inks itself in from the valley floor to the tops, and by 120 m the whole view has tilted from an oblique into a flat survey sheet. The map is generated in the browser from one height field, so the contours, the dry-stone walls, the hedgerows and the brook all come out of the same arithmetic.",
-  "proves": "A survey outfit can show what it actually hands over instead of a gallery of aerial photos.",
-  "story": "Drone operators all show the same thing: a gallery of pretty aerial photographs. What they are actually paid for is measurement, so this page is built out of a map that measures itself, and the roof survey is shown twice: once as a picture, once as something you can put a tape to."
+  "biz": "Drone survey, Peak District",
+  "c": "#FF6A13",
+  "pg": "#0E1621",
+  "short": "A drone survey firm whose survey lines draw themselves over real aerial photos as you scroll.",
+  "long": "A two-person drone survey outfit in slate and cloud with one hi-vis orange for booking. The first screen is a real aerial film flown over Peak District fields. Below it, three real stills show what the client actually gets back: half-metre contours and a boundary on a field, a measured roof with six numbered defects, and cut and spoil on a building site, each drawing itself over the photo as you scroll. Four fixed prices carry straight into an enquiry that checks the postcode and says who rings back and when.",
+  "proves": "A survey firm can show what it hands over, not just a gallery of aerial photos.",
+  "story": "Drone operators all show the same thing: pretty aerial photographs. What they are paid for is measurement, so the page draws the survey over the photo, the way the client will see it."
 }
