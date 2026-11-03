@@ -5,7 +5,11 @@
    scrollBy (+ dur), wait. `say` is the caption shown while the step plays; `pause` is the wait after it. */
 module.exports = {
   'atelier-voss': [
-    { scrollBy: 2600, dur: 5200, say: 'Scroll: the drawings draw themselves' },
+    { wait: 2200, say: 'The name over a finished building' },
+    { scroll: '#halvard .dw', say: 'The plan draws itself as you scroll' },
+    { tap: '#halvard .keys button[data-n="3"]', say: 'Tap a number to find it in the photo' },
+    { scroll: '#cloister .dw', say: 'A section that decides where the sun lands' },
+    { tap: '#kinds .chip[data-k=conv]', say: 'Enquiries go in on a title block' },
   ],
   'cadence': [
     { tap: '#chipFilter', say: 'Show only the blocked jobs' },

@@ -29,7 +29,7 @@ Key facts:
 - [Notes](https://thomasrgriffiths08-blip.github.io/skales/notes/): short pieces — what a missed call actually costs a service business; why i don’t rent you your own website; built for businesses that don’t exist, on purpose.
 
 ## The builds
-- [Atelier Voss](https://thomasrgriffiths08-blip.github.io/skales/work/atelier-voss/): website for an invented architecture practice: A studio site with no photographs at all.
+- [Atelier Voss](https://thomasrgriffiths08-blip.github.io/skales/work/atelier-voss/): website for an invented architecture practice: An architecture practice whose four projects sit beside the drawings that made them.
 - [Cadence](https://thomasrgriffiths08-blip.github.io/skales/work/cadence/): website for an invented field-ops software: The page is an operations board that never stops running.
 - [MARÉE — Sel Obscur](https://thomasrgriffiths08-blip.github.io/skales/work/maree/): website for an invented fragrance house: Ink through water, and a page that darkens as you descend.
 - [SIGNAL 2027](https://thomasrgriffiths08-blip.github.io/skales/work/signal/): website for an invented music & light festival: Type that reacts to how hard you scroll.

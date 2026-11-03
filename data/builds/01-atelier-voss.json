@@ -1,15 +1,16 @@
 {
   "trade": "Architecture practice",
   "tags": [
-    "All-SVG drawings",
-    "Pinned sequence",
-    "Title block"
+    "Real buildings beside their drawings",
+    "Drawings that draw as you scroll",
+    "An enquiry on a title block"
   ],
   "features": [
-    "Every image is a hand-authored SVG drawing",
-    "Elevations that draw themselves in on scroll",
-    "A real title block as the masthead",
-    "No photography, no stock, no templates"
+    "The name huge over a full-screen photo of a finished building",
+    "Four projects, each a photo beside its drawing sheet",
+    "Plans, sections and elevations that draw themselves as you scroll",
+    "Numbered callouts linking each drawing to the same spot in the photo",
+    "An enquiry form laid out as the practice's own title block"
   ],
   "n": 1,
   "slug": "atelier-voss",
@@ -18,10 +19,10 @@
   "lane": "quiet",
   "name": "Atelier Voss",
   "biz": "Architecture practice",
-  "c": "#14508c",
-  "pg": "#f3f5f6",
-  "short": "A studio site with no photographs at all.",
-  "long": "The entire site is illustrated in hand-authored technical drawings: elevations that draw themselves in, hatched plans, dimension lines, poché section cuts. Cyanotype blue, and a real six-cell title block for a masthead.",
-  "proves": "What a site looks like when nothing on it came from a stock library.",
-  "story": "Proof that a site can be beautiful with nothing bought in: every line on it was drawn for it."
+  "c": "#2B59FF",
+  "pg": "#FFFFFF",
+  "short": "An architecture practice whose four projects sit beside the drawings that made them.",
+  "long": "The name runs huge across a photo of a finished house. Below it, four projects each get a full chapter: the real building on one side, and on the other the plan, section or elevation drawing itself in as you scroll. Tap a number on the drawing and the same spot lights up on the photo. Enquiries go in on the practice's own title block.",
+  "proves": "Real photography and technical drawing on the same page, so a visitor sees both the finished building and the thinking behind it.",
+  "story": "An architect sells the drawing and the building. This site shows both, side by side, and links them point by point."
 }
