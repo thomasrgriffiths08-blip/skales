@@ -1,18 +1,16 @@
 {
   "trade": "Film production company",
   "tags": [
-    "scroll-driven",
-    "canvas",
-    "showreel"
+    "A real showreel in the first screen",
+    "Timecode and a scrub bar on the footage",
+    "Jobs that play as you pass"
   ],
   "features": [
-    "Countdown leader, letterbox gate and a timecode that keeps running",
-    "Scroll position is the playhead, and it works with Reduce Motion on",
-    "Play, pause and a scrub bar with a tick per shot",
-    "Three reels that swap the entire shot list mid-scrub",
-    "Services set out as a real call sheet, dated to next Tuesday",
-    "Draggable dailies strip: pick a frame and the gate cuts to it",
-    "Enquiry form that prints back a formatted call sheet request"
+    "A ten second showreel cut from four real clips fills the first screen, with a phone-sized portrait cut for phones",
+    "A running timecode and a scrub bar sit on the footage, one segment per job: drag, tap a job or use the arrow keys",
+    "Four jobs that play on hover on a laptop and as they come into view on a phone, each one able to jump the reel to its shot",
+    "Services set out as a real call sheet, dated next Tuesday with Manchester's sunrise and sunset worked out for that day",
+    "Add a line from the sheet and it lands on the request, which comes back as a call sheet with who rings you and when"
   ],
   "n": 5,
   "slug": "long-exposure",
@@ -20,11 +18,11 @@
   "kind": "site",
   "lane": "motion",
   "name": "Long Exposure",
-  "biz": "Long Exposure",
-  "c": "#E8A84B",
-  "pg": "#0B0B0C",
-  "short": "A film company's site that plays like a film you can scrub.",
-  "long": "The page opens on a countdown leader and then runs inside a letterboxed gate with a timecode burned into the corner. Scrolling scrubs the cut; pressing play lets it run on its own; three reels swap the whole shot list. Every frame is drawn in code: no video, no images, nothing to buffer.",
-  "proves": "You can show a showreel moving without hosting a single video file.",
-  "story": "Film companies tend to put a video embed on a black page and call it a website. This one makes the page itself the film, so it opens instantly on a phone and the work is moving before anything has downloaded."
+  "biz": "Film production, Manchester",
+  "c": "#E8E8E8",
+  "pg": "#050505",
+  "short": "A film company whose first screen is its showreel, with the timecode and scrub bar on top.",
+  "long": "A four-person production company in black and white, with one red REC dot. The first screen is a showreel cut from four of this year's jobs, with a running timecode and a scrub bar laid over the footage, one segment per job. Below it the four jobs play on hover or as they scroll into view, a still from a night shoot runs edge to edge, and the services are set out as a real call sheet dated next Tuesday. Add a line and it goes straight onto a request that comes back as a call sheet of its own.",
+  "proves": "A film company's site can open on the film, and still take the enquiry.",
+  "story": "Film companies tend to bury the reel behind a play button on a black page. This one opens on it, keeps the timecode honest, and lets you scrub straight to the job you care about."
 }

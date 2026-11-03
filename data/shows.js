@@ -20,8 +20,10 @@ module.exports = {
     { tap: 'button[data-day="1"]', say: 'Filter the line-up by day' },
   ],
   'long-exposure': [
-    { tap: '#playBtn', say: 'Play the cut' },
-    { wait: 5000, say: 'Each reel is a real project' },
+    { wait: 2600, say: 'The showreel is the first screen' },
+    { tap: '#scrub', say: 'Scrub straight to a job' },
+    { scroll: '#works', say: 'Each job plays as you pass' },
+    { tap: '#shRows .add[data-k=brand]', say: 'Add a line from the call sheet' },
   ],
   'overhead': [
     { scroll: '#survey .viewer', say: 'The survey draws itself over the real photo' },

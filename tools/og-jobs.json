@@ -56,10 +56,10 @@
   {
     "key": "work-long-exposure",
     "title": "Long Exposure",
-    "kicker": "Long Exposure · Website · Motion",
-    "sub": "A film company's site that plays like a film you can scrub.",
-    "colour": "#E8A84B",
-    "sheet": "#FCF3E6",
+    "kicker": "Film production, Manchester · Website · Motion",
+    "sub": "A film company whose first screen is its showreel, with the timecode and scrub bar on top.",
+    "colour": "#E8E8E8",
+    "sheet": "#FCFCFC",
     "phone": "assets/phones/05.webp"
   },
   {
