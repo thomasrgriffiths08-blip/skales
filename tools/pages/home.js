@@ -181,7 +181,7 @@ ${who(b)}
 ${book(b)}
 </main>
 ${L.footer(b, { mbar: false, dark: true })}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['home.css'], nodes, palette: BRAND, theme: '#0A0B0D' }), body,
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['home.css'], nodes, palette: BRAND, theme: '#0A0B0D', dark: false }), body,
       L.scripts(b, ['home.js']));
   }
 }]};

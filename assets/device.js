@@ -16,9 +16,9 @@
   var laneName = function(x){ return LN[x.lane] ? LN[x.lane].name : ''; };
   var kindWord = function(x){ return x.kind === 'site' ? 'Website' : 'Tool'; };
 
-  /* the page borrows the running build's accent, its ink, and the shade of it that reads as text */
-  function tint(x){ if (!x) return; var r = d.documentElement.style;
-    r.setProperty('--c', x.c); if (x.cInk) r.setProperty('--c-ink', x.cInk); if (x.cText) r.setProperty('--c-text', x.cText);
+  /* the page keeps Skales amber everywhere; only --bc carries the running build's colour for anything that wants it */
+  function tint(x){ if (!x) return;
+    d.documentElement.style.setProperty('--bc', x.c);
     d.documentElement.setAttribute('data-ch', x.n); }
   window.TINT = tint;
 

@@ -133,7 +133,7 @@ ${L.header(b, 'services')}
 </section>
 </main>
 ${L.footer(b, { mbar: false, dark: true })}`;
-    return L.page(L.head({ b, path, title, description: s.description, og: `for-${s.slug}`, css: ['home.css', 'trade.css'], nodes, palette: L.BRAND, theme: '#0A0B0D' }), body, L.scripts(b, ['trade.js']));
+    return L.page(L.head({ b, path, title, description: s.description, og: `for-${s.slug}`, css: ['home.css', 'trade.css'], nodes, palette: L.BRAND, theme: '#0A0B0D', dark: false }), body, L.scripts(b, ['trade.js']));
   },
 });
 
@@ -175,7 +175,7 @@ ${GROUPS.map(g => `    <h2 class="tp-rel-h" id="g-${g.replace(/\W+/g, '-').toLow
 </section>
 </main>
 ${L.footer(b, { mbar: false, dark: true })}`;
-    return L.page(L.head({ b, path, title, description, og: 'for', css: ['home.css', 'trade.css'], nodes, palette: L.BRAND, theme: '#0A0B0D' }), body, L.scripts(b));
+    return L.page(L.head({ b, path, title, description, og: 'for', css: ['home.css', 'trade.css'], nodes, palette: L.BRAND, theme: '#0A0B0D', dark: false }), body, L.scripts(b));
   },
 };
 

@@ -50,7 +50,7 @@ const paletteStyle = () => `--c:${BRAND.c};--c-ink:${BRAND.cInk};--c-text:${BRAN
 
 /* ---------- lanes: the four kinds of website and the two kinds of tool ---------- */
 const LANES = {
-  loud:     { kind: 'site', kindWord: 'Websites', name: 'Loud',     path: 'work/websites/', line: 'Big, kinetic, confident. The type is the image and one moment does the talking.', who: 'Gyms, bars, studios, events: anyone who needs to be noticed before they are compared.', question: 'When does a business need a loud website?', answer: 'When being remembered matters more than being reassured. A boxing club or a tattoo studio is chosen on feel, so the site moves, the type hits and there is one thing the visitor will describe to a friend. Everything still works: the number, the booking and the address are one tap away.' },
+  loud:     { kind: 'site', kindWord: 'Websites', name: 'Loud',     path: 'work/websites/', line: 'Big, bold, confident. The type is the image and one moment does the talking.', who: 'Gyms, bars, studios, events: anyone who needs to be noticed before they are compared.', question: 'When does a business need a loud website?', answer: 'When being remembered matters more than being reassured. A boxing club or a tattoo studio is chosen on feel, so the site moves, the type hits and there is one thing the visitor will describe to a friend. Everything still works: the number, the booking and the address are one tap away.' },
   motion:   { kind: 'site', kindWord: 'Websites', name: 'Motion',   path: 'work/websites/', line: 'The page is the film: a showreel first screen, scroll-driven sequences, timecodes.', who: 'Film, video, drone and photography businesses: anyone selling moving pictures.', question: 'What does a website for a film or video business look like?', answer: 'Like a film. The work plays on the first screen, the visitor scrubs through it by scrolling, and the page carries a timecode. Footage is sized for phones so it starts fast, and the story reads even if you never scroll.' },
   quiet:    { kind: 'site', kindWord: 'Websites', name: 'Quiet',    path: 'work/websites/', line: 'Plain, calm, expensive. Almost nothing moves; the typography does the work.', who: 'Accountants, clinics, architects, solicitors: businesses whose customers are buying reassurance.', question: 'Why would a business choose a plain website?', answer: 'Because its customers are buying trust, not excitement. A quiet page uses real typography, generous space and one accent, and moves exactly once. It is harder to make than a loud one, because nothing is hiding behind an animation.' },
   direct:   { kind: 'site', kindWord: 'Websites', name: 'Direct',   path: 'work/websites/', line: 'Conversion first. One-tap call, a three-field form, the service area, no fluff.', who: 'Trades and local services that live off the phone.', question: 'What does a tradesperson’s website actually need?', answer: 'The number, a form with three fields, proof you cover their street and a reason to ring you rather than the next result. These pages load in a blink, put a call bar under the thumb on a phone and answer the question the customer typed into Google. The only animation is the one that proves a point.' },
@@ -163,7 +163,7 @@ function webPage({ path, title, description, type = 'WebPage', extra = {} }){
 const jsonld = nodes => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': [...baseGraph(), ...nodes] }).replace(/</g,'\\u003c')}</script>`;
 
 /* ---------- head ---------- */
-function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette, preconnect = [], theme = '#FFFFFF' }){
+function head({ b, path, title, description, og, type = 'website', css = [], nodes = [], noindex = false, article, palette, preconnect = [], theme = '#0A0B0D', dark = true }){
   const canon = abs(path);
   return `<!doctype html>
 <html lang="${site.locale}" style="${paletteStyle(palette || defaultBuild())}">
@@ -197,7 +197,7 @@ ${article ? `<meta property="article:published_time" content="${article.publishe
 <link rel="sitemap" type="application/xml" href="${b}sitemap.xml">
 <link rel="preload" href="${b}assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${b}assets/${ver('site.css')}">
-${css.map(c => `<link rel="stylesheet" href="${b}assets/${ver(c)}">`).join('\n')}
+${(dark ? [...css, 'dark.css'] : css).map(c => `<link rel="stylesheet" href="${b}assets/${ver(c)}">`).join('\n')}
 ${jsonld(nodes)}
 </head>`;
 }
@@ -233,8 +233,8 @@ function footer(b, o = {}){
   const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ['The system', 'work/system/'], ['Inbox and missed calls', 'work/inbox/'], ['Booking and the diary', 'work/booking/']];
   const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
-  return `${o.mbar === false ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
-<footer class="site-foot${o.dark ? ' is-dark' : ''}">
+  return `${o.mbar !== true ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
+<footer class="site-foot${o.dark === false ? '' : ' is-dark'}">
   <div class="wrap">
     <div class="f-top">
       <div class="f-brand">${wordmark(b)}<p>${esc(site.tagline)}. One person, ${esc(site.areaServed)}. ${esc(workLine())} running live on this site, every business in them invented.</p></div>

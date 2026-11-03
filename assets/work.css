@@ -1,0 +1,57 @@
+/* ============================================================
+   WORK — the /work/ index on the home's night ground: twelve websites in a grid you can filter by
+   trade, each opening full screen (phone view included) in the viewer, then the system behind them.
+   ============================================================ */
+.wk-hero .tp-copy{display:grid;gap:20px}
+.wk-hero h1{max-width:14ch}
+.wk-hero .hx-sub{max-width:56ch}
+.wk .hs-head h2{font-size:clamp(2rem,4.2vw,3.25rem)}
+
+.wk-filter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 clamp(24px,3vw,36px)}
+.wk-filter button{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--ink-tx2);font:inherit;font-size:.875rem;font-weight:500;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.wk-filter button span{font:500 .6875rem/1 var(--mono);color:inherit;opacity:.7}
+.wk-filter button:hover{color:var(--ink-tx);border-color:rgba(255,255,255,.32)}
+.wk-filter button[aria-pressed="true"]{background:var(--ink-tx);border-color:var(--ink-tx);color:var(--ink)}
+
+.wk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 24px}
+.wk-card{display:grid;gap:12px;align-content:start}
+.wk-card[hidden]{display:none}
+.wk-card .w-cap{flex-direction:column;align-items:flex-start;gap:3px}
+.wk-card .w-cap span{text-align:left}
+.wk-short{color:var(--ink-tx2);font-size:.9375rem;line-height:1.45;margin-top:-4px}
+.wk-card picture{display:block}
+
+.wk-sys .sys-shot{margin-bottom:clamp(24px,3vw,36px)}
+.wk-parts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 24px}
+.wk-parts a{display:grid;gap:8px;align-content:start}
+.wk-pshot{display:block;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#111215}
+.wk-pshot img{display:block;width:100%;height:auto;aspect-ratio:1280/800;object-fit:cover;object-position:top left;transition:transform .5s var(--ease)}
+.wk-parts a:hover .wk-pshot img{transform:scale(1.025)}
+.wk-parts b{color:var(--ink-tx);font-size:1.0625rem;letter-spacing:-.015em;margin-top:4px}
+.wk-parts a>span:last-child{color:var(--ink-tx2);font-size:.9375rem;line-height:1.45}
+.wk-biz-h{margin-top:clamp(36px,4vw,52px) !important}
+
+@media (max-width:1000px){
+  .wk-grid,.wk-parts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* a phone: two to a row, each as its phone view, so all twelve fit in a few screens */
+@media (max-width:640px){
+  .wk-filter{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--pad));padding:2px var(--pad)}
+  .wk-filter::-webkit-scrollbar{display:none}
+  .wk-filter button{flex:none}
+  .wk-grid{gap:24px 14px}
+  .wk-card .w-shot{border-radius:18px}
+  .wk-card .w-shot img{aspect-ratio:600/1077}
+  .wk-card .w-cap b{font-size:1rem}
+  .wk-card .w-cap span{font-size:.625rem}
+  .wk-short{display:none}
+  .wk-parts{grid-template-columns:minmax(0,1fr);gap:0}
+  .wk-parts a{grid-template-columns:120px minmax(0,1fr);column-gap:14px;row-gap:2px;padding:14px 0;border-top:1px solid rgba(255,255,255,.1)}
+  .wk-pshot{grid-row:1/3;align-self:start}
+  .wk-parts b{margin-top:0;font-size:1rem}
+  .wk-parts a>span:last-child{font-size:.875rem}
+}
+/* the grid starts right under the headline, so the work is on the first screen */
+.wk-hero{padding-bottom:clamp(28px,3vw,40px)}
+.wk .wk-sites{border-top:0;padding-top:0}
+.wk-bar .tp-rel-h{margin:0 0 14px}

@@ -84,6 +84,6 @@ module.exports = { QS, pages: [{
   <nav class="f-legal" aria-label="Legal">${L.legal(b)}</nav>
 </footer>
 <script>window.STARTQS=${JSON.stringify(QS)};</script>`;
-    return L.page(L.head({ b, path: '/start/', title, description, og: 'start', nodes, noindex: true, css: ['start.css'], preconnect: site.calendly ? ['https://assets.calendly.com', 'https://calendly.com'] : [] }), body, L.scripts(b, ['start.js']));
+    return L.page(L.head({ b, path: '/start/', title, description, og: 'start', nodes, noindex: true, css: ['start.css'], dark: false, preconnect: site.calendly ? ['https://assets.calendly.com', 'https://calendly.com'] : [] }), body, L.scripts(b, ['start.js']));
   }
 }]};

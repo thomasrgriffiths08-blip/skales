@@ -37,6 +37,12 @@ const sysBlock = b => {
     <h3 class="sys-h">The six parts</h3>
     ${L.wall(b, rest, 'wall-3')}`;
 };
+/* the work index: the twelve websites in trade order, and the trade filters above them */
+const WK_OF = { 'kerb-and-camber': 'trades', 'kestrel-electrical': 'trades', overhead: 'trades', 'fern-physio': 'health', southpaw: 'health',
+  'hale-and-partners': 'pro', 'atelier-voss': 'pro', cadence: 'pro', 'marrow-and-pin': 'creative', 'long-exposure': 'creative', signal: 'creative', maree: 'creative' };
+const WK = [12, 11, 6, 10, 7, 9, 1, 2, 8, 5, 4, 3].map(n => builds.find(x => x.n === n)).filter(x => x && WK_OF[x.slug]);
+const nameOf = x => { const n = x.name.split(/\s+[—–-]\s+/)[0]; return n === n.toUpperCase() ? n.charAt(0) + n.slice(1).toLowerCase().replace(/\s(\w)/g, (m, c) => ' ' + c.toUpperCase()) : n; };
+const WK_F = [['all', 'All'], ['trades', 'Trades'], ['health', 'Health & fitness'], ['pro', 'Professional'], ['creative', 'Creative & events']];
 /* the desk: the system on a laptop and the customer's phone beside it, live and talking to each other
    (tools/system/desk.js, tools/system/phone.js, assets/desk.js). On a phone, one screen at a time. */
 const DESK_STEPS = [
@@ -81,32 +87,57 @@ const gallery = {
     ];
     const body = `
 ${L.header(b, 'work')}
-<main id="main">
-<section class="hero-w wrap work-hero">
-  <h1>${Words(SITES.length)} websites.<br>One system behind them.</h1>
-  <p class="lead">${Words(SITES.length)} full websites, each built differently for a different kind of business, and the one system that answers the phone, books the job and follows up. Every business is made up, so no client is on show. Tap any of them to use it.</p>
-  <div class="cta-row" style="margin-top:28px;align-items:center"><button type="button" class="btn btn-dark" data-view="${FIRST.slug}">Flick through them all</button><span class="hint-inline">Full screen, one at a time. Arrow keys work.</span></div>
-  <nav class="work-jump" aria-label="On this page"><a href="#websites"><b>The websites</b><span>${SITES.length} sites, four kinds</span></a><a href="#system"><b>The system</b><span>One app, six parts</span></a></nav>
-</section>
-<div id="wall">
-<section class="kindsec" id="websites" data-kindsec="site" aria-labelledby="h-websites">
-  <div class="wrap">
-    <div class="khead"><h2 id="h-websites">The websites</h2><p>A boxing club and an accountant should not get the same site. Each of these is a complete website for one kind of business, with its own look, its own pages and its own way of getting the phone to ring. They are grouped by how loud they are. <a class="lnk" href="${b}work/websites/">How to pick yours</a>.</p></div>
-    <div class="lrows">${SITE_LANES.map(k => laneRow(b, k)).join('\n    ')}</div>
+<script>document.querySelector('.site-head').classList.add('on-dark')</script>
+<main id="main" class="home tp wk">
+<section class="hx tp-hero wk-hero" aria-labelledby="h-top">
+  <div class="hx-glow" aria-hidden="true"></div>
+  <div class="wrap tp-copy">
+    <p class="kick"><i></i>The work · every one running live</p>
+    <h1 id="h-top">${Words(SITES.length)} websites. One system behind them.</h1>
+    <p class="hx-sub">Each website is built from scratch for a different kind of business, and the system behind them answers the phone, books the job and follows up. The businesses are made up, so no client is on show.</p>
+    <div class="hx-ctas"><button type="button" class="btn btn-glass btn-lg" data-view="${WK[0].slug}">Flick through them all</button><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a></div>
   </div>
 </section>
-<section class="kindsec" id="system" data-kindsec="tool" aria-labelledby="h-system">
+<section class="hs wk-sites" id="websites" aria-labelledby="h-websites">
   <div class="wrap">
-    <div class="khead"><h2 id="h-system">The system</h2><p>Behind every website: one app for the whole business. A missed call gets a text back in seconds, the customer books and pays a deposit, quotes chase themselves, reviews and repeat work ask for themselves, and you can see which ad booked which job. It is the real thing, not a video, so press around.</p></div>
-    ${sysBlock(b)}
+    <div class="wk-bar"><h2 id="h-websites" class="tp-rel-h">The websites · tap one to open it full screen</h2></div>
+    <div class="wk-filter" role="group" aria-label="Show websites for">${WK_F.map(([k, label], i) => `<button type="button" data-f="${k}" aria-pressed="${i ? 'false' : 'true'}">${esc(label)}<span>${k === 'all' ? WK.length : WK.filter(x => WK_OF[x.slug] === k).length}</span></button>`).join('')}</div>
+    <div class="wk-grid">${WK.map((x, i) => `<a class="w wk-card" href="${b}work/${x.slug}/" data-view="${x.slug}" data-f="${WK_OF[x.slug]}">
+      <span class="w-shot"><picture><source media="(max-width: 640px)" srcset="${L.phoneSrc(b, x)}" width="600" height="1077"><img src="${b}assets/screens/${pad(x.n)}-1200.webp" srcset="${b}assets/screens/${pad(x.n)}-1200.webp 1200w, ${b}assets/screens/${pad(x.n)}-2160.webp 2160w" sizes="(min-width: 1100px) 380px, 46vw" width="1200" height="750" alt="${esc(nameOf(x))}: ${esc(x.short)}"${i < 3 ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"></picture></span>
+      <span class="w-cap"><b>${esc(nameOf(x))}</b><span>${esc(x.trade || x.biz)}</span></span>
+      <span class="wk-short">${esc(x.short)}</span>
+    </a>`).join('')}</div>
   </div>
 </section>
-</div>
+<section class="hs wk-sys" id="system" aria-labelledby="h-system">
+  <div class="wrap">
+    <div class="hs-head">
+      <p class="kick">Behind every website</p>
+      <h2 id="h-system">The system</h2>
+      <p class="lead">One app for the whole business. A missed call gets a text back in seconds, the customer books and pays a deposit, quotes chase themselves, and reviews and repeat work ask for themselves. Press around, it is the real thing.</p>
+    </div>
+    <a class="sys-shot" href="${b}work/system/" data-view="system">
+      <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>The system · Today</span></span>
+      <img src="${b}assets/home/system-today.webp" srcset="${b}assets/home/system-today-800.webp 800w, ${b}assets/home/system-today.webp 1600w" sizes="(min-width: 1260px) 1200px, 92vw" width="1600" height="1000" alt="The Skales system's Today screen: calls caught, jobs booked and what still needs the owner" loading="lazy" decoding="async">
+    </a>
+    <div class="wk-parts">${PARTS.filter(x => x.slug !== 'system').map(x => `<a href="${b}work/${x.slug}/" data-view="${x.slug}"><span class="wk-pshot"><img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800" alt="" loading="lazy" decoding="async"></span><b>${esc(x.name)}</b><span>${esc(x.short)}</span></a>`).join('')}</div>
+    <p class="tp-rel-h wk-biz-h">Open it as one of six made-up businesses</p>
+    <div class="tp-chips">${BIZ.map(([k, n, t]) => `<a href="${b}demos/system/?t=${k}#s=1" target="_blank" rel="noopener">${esc(n)} · ${esc(t)}</a>`).join('')}</div>
+  </div>
+</section>
+<section class="hs hs-book tp-book" id="book" aria-labelledby="h-book">
+  <div class="wrap">
+    <div class="hs-head">
+      <p class="kick">Book</p>
+      <h2 id="h-book">These are demos. Yours would have your name on it.</h2>
+      <p class="lead">A free 30-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.</p>
+    </div>
+    <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="btn btn-glass btn-lg" href="${b}try/">Try a live demo</a></div>
+  </div>
+</section>
 </main>
-${L.forgeInvite(b, 'Pick your trade on the home page, put your business name in, and a working website for your business builds itself in a couple of seconds. Nothing to fill in but a name and a town.')}
-${L.ctaBand(b, 'These are demos. Yours would have your name on it.', 'Same approach, your business: a site that captures the enquiry, a system that answers it in seconds, and a place where every job lives. Hand-built, owned by you.')}
 ${L.footer(b)}`;
-    return L.page(L.head({ b, path: '/work/', title, description, og: 'work', css: ['device.css'], nodes }), body, L.scripts(b, ['builds.js', 'device.js']));
+    return L.page(L.head({ b, path: '/work/', title, description, og: 'work', css: ['home.css', 'trade.css', 'work.css'], nodes, palette: L.BRAND, dark: false }), body, L.scripts(b, ['wk.js']));
   }
 };
 
@@ -195,11 +226,11 @@ const cases = builds.map(x => {
 ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
 <main id="main">
 <article class="case">
-  <section class="case-hero${x.kind === 'tool' ? ' is-tool' : ''}">
+  <section class="case-hero${x.kind === 'tool' ? ' is-tool' : x.kind === 'site' ? ' is-site' : ''}">
     <div class="wrap">
       ${crumbs(b, x.slug === 'system' ? [['Home', ''], ['Work', 'work/'], ['The system', 'work/system/']] : [['Home', ''], ['Work', 'work/'], [lane.kindWord, lane.path], [x.name, `work/${x.slug}/`]])}
-      <h1>${esc(x.name)}</h1>
-      <p class="lead short">${esc(x.short)}</p>
+      ${x.kind === 'site' ? '' : `<h1>${esc(x.name)}</h1>
+      <p class="lead short">${esc(x.short)}</p>`}
       ${x.slug === 'system' ? `${deskHTML(b)}
       <div class="case-words">
         <p class="lead">${esc(x.long)}</p>
@@ -213,6 +244,8 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
         <div class="copy">${caseCopy(b, x, lane)}</div>
       </div>` : `<div class="grid">
         <div class="copy">
+          <h1>${esc(x.name)}</h1>
+          <p class="lead short">${esc(x.short)}</p>
           <p class="lead">${esc(x.long)}</p>
           ${caseCopy(b, x, lane)}
         </div>

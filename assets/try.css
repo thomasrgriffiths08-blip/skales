@@ -31,7 +31,7 @@ body.tm-on .mbar{display:none!important}
 .tm-side{display:none}
 .tm-run.is-owner .tm-stage{display:none}
 .tm-run.is-owner .tm-side{display:block}
-.tm-toast{position:fixed;left:10px;right:10px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:70;display:grid;gap:2px;padding:11px 14px 12px;border-radius:18px;background:rgba(246,246,246,.97);color:#111;font:400 .875rem/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",var(--sans);box-shadow:0 12px 32px -12px rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.06);transition:opacity .3s var(--ease),transform .3s var(--ease);animation:tm-drop .35s var(--ease) both}
+.tm-toast{position:fixed;left:10px;right:10px;top:calc(env(safe-area-inset-top,0px) + var(--head-h,64px) + 8px);z-index:70;display:grid;gap:2px;padding:11px 14px 12px;border-radius:18px;background:rgba(246,246,246,.97);color:#111;font:400 .875rem/1.3 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",var(--sans);box-shadow:0 12px 32px -12px rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.06);transition:opacity .3s var(--ease),transform .3s var(--ease);animation:tm-drop .35s var(--ease) both}
 .tm-toast b{display:flex;justify-content:space-between;gap:10px;font-weight:600;font-size:.8125rem;color:#3c3c43}
 .tm-toast b small{font-weight:400;color:#8a8a8e}
 .tm-toast span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}

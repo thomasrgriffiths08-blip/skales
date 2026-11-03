@@ -1,0 +1,55 @@
+/* ============================================================
+   DARK — every page that is not the home or a trade page, on the same night ground.
+   The light tokens the older pages are built from are re-pointed at the dark palette, so panels,
+   cards, lists and questions all turn at once; the few parts that hard-code a light look are
+   fixed below. Amber is still the only thing you press, and violet only ever glows behind things.
+   Screens inside device frames stay white: they are pictures of real software.
+   ============================================================ */
+:root{
+  --pg:#0A0B0D;--alu:#131418;--alu-2:#1B1C21;--tx:#F4F4F5;--tx-2:rgba(244,244,245,.68);--tx-3:rgba(244,244,245,.46);
+  --line:rgba(255,255,255,.1);--line-2:rgba(255,255,255,.18);--hand:#131418;--c-text:#E8A84B;--live-text:#E8A84B;
+  color-scheme:dark;
+}
+html,body{background:var(--pg);color:var(--tx)}
+::selection{background:var(--c);color:var(--c-ink)}
+:focus-visible{outline-color:var(--tx)}
+main{position:relative;isolation:isolate}
+/* one soft violet glow behind the top of every page */
+main::before{content:"";position:absolute;left:0;right:0;top:-64px;height:720px;z-index:-1;pointer-events:none;
+  background:radial-gradient(40% 60% at 78% 30%,rgba(var(--g),.22),rgba(var(--g),0) 72%),radial-gradient(30% 40% at 4% 0%,rgba(var(--g),.12),rgba(var(--g),0) 70%)}
+
+/* header, menu and the phone book bar */
+.site-head{background:rgba(10,11,13,.82);-webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px);border-bottom-color:var(--ink-line)}
+.site-head .wordmark{color:#fff}
+.site-head .nav a{color:rgba(255,255,255,.7)}
+.site-head .nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.site-head .nav a[aria-current="page"]{color:#fff}
+.site-head .nav a.btn{color:var(--c-ink)}
+.site-head .nav a.btn:hover{background:var(--c)}
+.site-head .mtoggle{background:transparent;border-color:rgba(255,255,255,.22)}
+.site-head .mtoggle span{background:#fff}
+.mnav{background:var(--pg)}
+.mbar{background:rgba(10,11,13,.94) !important;border-top-color:var(--ink-line) !important}
+.mbar a{background:transparent}
+
+/* buttons: the dark button becomes glass, so amber stays the only solid colour */
+.btn-dark{background:rgba(255,255,255,.07);color:var(--tx);border:1px solid rgba(255,255,255,.18)}
+.btn-dark:hover{background:rgba(255,255,255,.12);filter:none}
+.btn-ghost{border-color:rgba(255,255,255,.2)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4)}
+
+/* the amber band becomes a dark one with the glow, so no page ends on a block of yellow */
+.cta-band{position:relative;isolation:isolate;background:var(--pg);color:var(--tx);border-top:1px solid var(--line)}
+.cta-band::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(40% 70% at 82% 50%,rgba(var(--g),.2),rgba(var(--g),0) 72%)}
+.cta-band .lead{color:var(--tx-2);opacity:1}
+.cta-band .btn-live{background:var(--c);color:var(--c-ink)}
+.cta-band .btn-ghost{color:var(--tx);border-color:rgba(255,255,255,.22)}
+.flood{background:var(--alu);color:var(--tx)}
+.invite{background:var(--alu);color:var(--tx);border-top:1px solid var(--line)}
+.invite p{color:var(--tx-2)}
+
+/* cards and surfaces get a hairline so they read on black */
+.hub-card,.try-card,.cmp-wrap,.lg-t{border:1px solid var(--line)}
+.msg-b{background:var(--alu-2)}
+.field input,.field textarea,.field select{background:var(--alu);border-color:var(--line-2);color:var(--tx)}
+.cnst{background:var(--alu)}
