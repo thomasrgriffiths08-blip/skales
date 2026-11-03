@@ -32,7 +32,7 @@ Key facts:
 - [Atelier Voss](https://thomasrgriffiths08-blip.github.io/skales/work/atelier-voss/): website for an invented architecture practice: An architecture practice whose four projects sit beside the drawings that made them.
 - [Cadence](https://thomasrgriffiths08-blip.github.io/skales/work/cadence/): website for an invented field-ops software: The page is an operations board that never stops running.
 - [Marée](https://thomasrgriffiths08-blip.github.io/skales/work/maree/): website for an invented fragrance house: A real bottle on a black stage, ink in the water, and a clock for the notes.
-- [SIGNAL 2027](https://thomasrgriffiths08-blip.github.io/skales/work/signal/): website for an invented music & light festival: Type that reacts to how hard you scroll.
+- [SIGNAL 2027](https://thomasrgriffiths08-blip.github.io/skales/work/signal/): website for an invented music & light festival: A real crowd, a poster you can tap, and tickets with the fee shown up front.
 - [Long Exposure](https://thomasrgriffiths08-blip.github.io/skales/work/long-exposure/): website for an invented film production, manchester: A film company whose first screen is its showreel, with the timecode and scrub bar on top.
 - [Overhead](https://thomasrgriffiths08-blip.github.io/skales/work/overhead/): website for an invented drone survey, peak district: A drone survey firm whose survey lines draw themselves over real aerial photos as you scroll.
 - [Southpaw](https://thomasrgriffiths08-blip.github.io/skales/work/southpaw/): website for an invented boxing club, leeds: A boxing club site run by a live round timer, with the week straight under it.

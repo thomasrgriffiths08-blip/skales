@@ -24,8 +24,13 @@ module.exports = {
     { tap: '#addBtn', say: 'The bag knows when it is filled and when it arrives' },
   ],
   'signal': [
-    { scrollBy: 2200, dur: 3800, say: 'Scroll through the festival' },
-    { tap: 'button[data-day="1"]', say: 'Filter the line-up by day' },
+    { wait: 2000, say: 'A real crowd and a live countdown to doors' },
+    { scroll: '#poster', say: 'The line-up, sized by billing' },
+    { tap: '.act[data-i="8"]', say: 'Tap a name for its room and time' },
+    { tap: '#addAct', say: 'Add it to your weekend' },
+    { tap: '.act[data-i="9"]', say: 'Pick another' },
+    { tap: '#addAct', say: 'Add that too' },
+    { scroll: '#planList', say: 'Clashes show up as you build it' },
   ],
   'long-exposure': [
     { wait: 2600, say: 'The showreel is the first screen' },

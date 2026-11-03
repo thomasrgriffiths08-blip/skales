@@ -1,15 +1,15 @@
 {
   "trade": "Festival",
   "tags": [
-    "Scroll-velocity type",
-    "RGB fringe",
-    "Live countdown"
+    "Real crowd and stage photos",
+    "A poster you can tap",
+    "Ticket maths, fee up front"
   ],
   "features": [
-    "Marquees that answer scroll velocity",
-    "Headlines that rise into place",
-    "RGB fringe on display type",
-    "Live countdown, schedule grid, ticket maths"
+    "Real crowd, stage and venue photography with a live countdown to doors",
+    "The line-up as a still poster sized by billing: tap a name for its day, room and time",
+    "Build your weekend from the poster, with clashes flagged as you go",
+    "Four ticket tiers with live totals, the booking fee shown up front and a 15 minute hold"
   ],
   "n": 4,
   "slug": "signal",
@@ -19,9 +19,9 @@
   "name": "SIGNAL 2027",
   "biz": "Music & light festival",
   "c": "#3B18E0",
-  "pg": "#FFFFFF",
-  "short": "Type that reacts to how hard you scroll.",
-  "long": "Three days of sound, code and light. Marquees whose speed and skew answer your scrolling, headlines that rise into place, an RGB fringe on the display type because the identity is light being split, and a live countdown in enormous tabular numerals.",
-  "proves": "Loud, and still not a template.",
-  "story": "The loud one. Every effect on it is tied to the subject (light being split) rather than bolted on."
+  "pg": "#0A0A0A",
+  "short": "A real crowd, a poster you can tap, and tickets with the fee shown up front.",
+  "long": "The first screen is a real crowd facing the stage, with a live countdown to doors. The line-up is a still poster sized by billing: tap any name for its day, room and time, and add it to your weekend, which flags clashes as you build it. Tickets are four tiers with live totals and the booking fee shown before you pay.",
+  "proves": "Loud, and still easy to use.",
+  "story": "The loud one, rebuilt around the crowd. Everything on it helps someone decide to go: who is on, when, where, and what it costs."
 }
