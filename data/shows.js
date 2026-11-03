@@ -12,9 +12,9 @@ module.exports = {
     { tap: '#kinds .chip[data-k=conv]', say: 'Enquiries go in on a title block' },
   ],
   'cadence': [
-    { tap: '#chipFilter', say: 'Show only the blocked jobs' },
-    { tap: '#chipAll', say: 'Back to the whole board' },
-    { scrollBy: 1600, dur: 3600, say: 'Scroll: the shift plays out' },
+    { wait: 1400, say: 'A real depot, and the product on the first screen' },
+    { tap: '#syncBtn', say: 'At 07:40 a van is held up and the job is priced', pause: 3400 },
+    { tap: '#takeSwap', say: 'Take the swap: £5,800 saved' },
   ],
   'maree': [
     { wait: 2200, say: 'Ink drifting over the bottle' },

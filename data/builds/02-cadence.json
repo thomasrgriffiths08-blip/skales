@@ -1,15 +1,15 @@
 {
   "trade": "Software company",
   "tags": [
-    "Self-playing board",
-    "Split-flap cells",
-    "Signal amber"
+    "Real depot photography",
+    "A live board that runs a shift",
+    "Pricing that does the maths"
   ],
   "features": [
-    "The product runs as the hero, in real DOM",
-    "Split-flap ETA cells",
-    "A shift that plays out as you scroll",
-    "Pricing as a line-items table, not three cards"
+    "The product is the hero, in real DOM, with a real depot photo behind the headline",
+    "At 07:40 a job slips, the board prices it and proposes a crew swap you can take or leave",
+    "A three-tap field app card that works with no signal",
+    "Pricing as one statement table that recalculates as you change regions and jobs"
   ],
   "n": 2,
   "slug": "cadence",
@@ -18,10 +18,10 @@
   "lane": "direct",
   "name": "Cadence",
   "biz": "Field-ops software",
-  "c": "#FFB300",
-  "pg": "#16140f",
-  "short": "The page is an operations board that never stops running.",
-  "long": "A departure board under tungsten light: the board is the hero, the headline is a card pinned inside it, ETAs flip like split-flap cells, and a whole shift plays out as you scroll. Pricing is a line-items table.",
-  "proves": "A product page where the product is the page.",
-  "story": "A software landing page where nothing is a screenshot: the board you are reading about is running behind the headline."
+  "c": "#22D3EE",
+  "pg": "#08090A",
+  "short": "A product page where the board runs a real shift while you watch.",
+  "long": "A near-black product page in the Linear manner: a short headline over a real depot photograph, then the live board, large and sharp, with a faint cyan glow. At 07:40 a job slips, the board prices it and offers a crew swap with the cost of both choices. Pricing is one statement table that does the maths.",
+  "proves": "Software can be sold by letting people use it on the first screen.",
+  "story": "A field-ops software page where the board is not a screenshot. Scroll and a shift plays out: a van is held on the A629, the job turns amber, and you decide whether to move the crew."
 }
