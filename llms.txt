@@ -31,7 +31,7 @@ Key facts:
 ## The builds
 - [Atelier Voss](https://thomasrgriffiths08-blip.github.io/skales/work/atelier-voss/): website for an invented architecture practice: An architecture practice whose four projects sit beside the drawings that made them.
 - [Cadence](https://thomasrgriffiths08-blip.github.io/skales/work/cadence/): website for an invented field-ops software: The page is an operations board that never stops running.
-- [MARÉE — Sel Obscur](https://thomasrgriffiths08-blip.github.io/skales/work/maree/): website for an invented fragrance house: Ink through water, and a page that darkens as you descend.
+- [Marée](https://thomasrgriffiths08-blip.github.io/skales/work/maree/): website for an invented fragrance house: A real bottle on a black stage, ink in the water, and a clock for the notes.
 - [SIGNAL 2027](https://thomasrgriffiths08-blip.github.io/skales/work/signal/): website for an invented music & light festival: Type that reacts to how hard you scroll.
 - [Long Exposure](https://thomasrgriffiths08-blip.github.io/skales/work/long-exposure/): website for an invented film production, manchester: A film company whose first screen is its showreel, with the timecode and scrub bar on top.
 - [Overhead](https://thomasrgriffiths08-blip.github.io/skales/work/overhead/): website for an invented drone survey, peak district: A drone survey firm whose survey lines draw themselves over real aerial photos as you scroll.

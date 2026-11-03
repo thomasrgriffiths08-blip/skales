@@ -1,27 +1,27 @@
 {
   "trade": "Fragrance house",
   "tags": [
-    "Ink canvas",
-    "Tone-shifting scroll",
-    "SVG glass"
+    "A real bottle on a black stage",
+    "Ink drifting through the water",
+    "A wear clock for the notes"
   ],
   "features": [
-    "Ink-in-water canvas hero",
-    "Page tone shifts through three phases as you scroll",
-    "A bottle rendered entirely in layered SVG",
-    "A working bag and product flow"
+    "One real bottle photograph with ink-in-water drifting over the stage",
+    "A wear clock: slide through eleven hours on skin and watch which notes lead",
+    "Three sizes, a working bag and a checkout that gives real fill and delivery dates",
+    "A 2 ml sample and delivery threshold handled in the bag"
   ],
   "n": 3,
   "slug": "maree",
   "file": "demos/maree/index.html",
   "kind": "site",
   "lane": "motion",
-  "name": "MARÉE — Sel Obscur",
+  "name": "Marée",
   "biz": "Fragrance house",
   "c": "#A9CBBD",
   "pg": "#03080E",
-  "short": "Ink through water, and a page that darkens as you descend.",
-  "long": "Salt drawn from a black tide. The ground moves through three marine phases as the notes progress, the bottle is faked entirely in layered SVG, and the whole thing refuses the category’s gold for sea glass.",
-  "proves": "Luxury without a single gold gradient.",
-  "story": "A luxury site that refuses the category’s default gold. Built to show that restraint is a decision, not a budget."
+  "short": "A real bottle on a black stage, ink in the water, and a clock for the notes.",
+  "long": "One photograph of the bottle on dark stone, with ink drifting slowly through the water around it. The notes are five short lines on a wear clock: slide through eleven hours on skin and the ones you would smell light up. Then straight to three sizes and a bag that knows when the bottle is filled and when it reaches you.",
+  "proves": "Luxury that sells, without a single gold gradient.",
+  "story": "A fragrance house that refuses the category's default gold. Built to show that a luxury site can be calm, photographic and still get the bottle into the bag in two taps."
 }

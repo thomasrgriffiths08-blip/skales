@@ -17,7 +17,11 @@ module.exports = {
     { scrollBy: 1600, dur: 3600, say: 'Scroll: the shift plays out' },
   ],
   'maree': [
-    { scrollBy: 3200, dur: 6000, say: 'Scroll: the page changes tone' },
+    { wait: 2200, say: 'Ink drifting over the bottle' },
+    { scroll: '#clock', say: 'Slide through a day on skin' },
+    { tap: '#jumps button[data-h="7"]', say: 'At seven hours, iris and birch smoke lead' },
+    { tap: '.size[data-s="100"]', say: 'Pick a size' },
+    { tap: '#addBtn', say: 'The bag knows when it is filled and when it arrives' },
   ],
   'signal': [
     { scrollBy: 2200, dur: 3800, say: 'Scroll through the festival' },
