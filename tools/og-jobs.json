@@ -318,7 +318,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "54 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "59 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -643,6 +643,36 @@
     "title": "Wedding venues",
     "kicker": "For your trade",
     "sub": "Show rounds booked online, and the date held with a deposit."
+  },
+  {
+    "key": "for-chiropractors-and-osteopaths",
+    "title": "Chiropractors and osteopaths",
+    "kicker": "For your trade",
+    "sub": "New patients booked online, regulars brought back on time."
+  },
+  {
+    "key": "for-counsellors-and-therapists",
+    "title": "Counsellors and therapists",
+    "kicker": "For your trade",
+    "sub": "A first call booked quietly, without the phone tag."
+  },
+  {
+    "key": "for-car-body-repair",
+    "title": "Car body repair and bodyshops",
+    "kicker": "For your trade",
+    "sub": "Send a photo, get a price, book the car in."
+  },
+  {
+    "key": "for-dog-day-care-and-kennels",
+    "title": "Dog day care and kennels",
+    "kicker": "For your trade",
+    "sub": "Days booked, records checked, holidays held."
+  },
+  {
+    "key": "for-rubbish-removal",
+    "title": "Rubbish removal and clearance",
+    "kicker": "For your trade",
+    "sub": "Photo in, price out, collection booked."
   },
   {
     "key": "why",
