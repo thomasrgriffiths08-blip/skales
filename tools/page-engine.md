@@ -8,6 +8,19 @@ Read `tools/search-profile.md` first. It holds the identity, the facts bank (the
 
 Gather what is available and say plainly in the PR which sources were missing.
 
+**Free tools only.** Tom's rule (9 November 2026): the page engine and the weekly report use free tools. Never use a paid connector or spend credits on one (Ahrefs, Similarweb, Semrush, Firecrawl and the like), even when it is connected. The free sources, once Tom has set each one up:
+
+| Source | What it gives the run |
+|---|---|
+| Google Search Console | Searches, impressions, clicks and position per page |
+| Bing Webmaster Tools | The same for Bing, plus its free keyword research for search volumes |
+| Google Analytics 4 | Visits by source, and each funnel step: check started, call clicked, call booked |
+| Calendly | Booked calls. A booking from /start/ carries "Came from:" with its source |
+| Google UK autocomplete and Google Trends | Demand for a trade or question when there is no volume data |
+| WebSearch | The AI-assistant and competitor checks below |
+
+Microsoft Clarity (free recordings and heatmaps) is for Tom to watch, not for the report: its export only covers the last few days.
+
 - **Search Console** (once Tom has given access). Collect the queries with impressions where the site sits below position 8. Group them by page.
 - **The /start check.** Collect the trades and problems people picked, from the lead home once it exists.
 - **AI assistants.**
@@ -74,7 +87,7 @@ Use UK English. Use no prices, no promised results, and no invented numbers, cli
   1. A line per page: its address, the search it answers, why it exists (the gap and its source), and the passage an AI engine would quote.
   2. The pages that were considered and dropped, and why.
   3. Questions for Tom: facts the bank lacks that would unlock a page.
-  4. The weekly report. Follow a visitor from reach to interest, intent, action and result, using whatever data exists. With no data yet, say which sources are still missing. Never invent a number.
+  4. The weekly report. Follow a visitor from reach to interest, intent, action and result, using whatever data exists, with one row per source: Instagram, LinkedIn, search, AI assistants and direct. With no data yet, say which sources are still missing. Never invent a number.
 - End the PR body with the attribution lines the session's instructions give.
 
 Never merge. Never touch the do-not-touch list. Never post anything outside the pull request.
