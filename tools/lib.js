@@ -45,7 +45,7 @@ builds.forEach(x => Object.assign(x, world(x.c)));
 const DEFAULT_CH = 17;
 const defaultBuild = () => builds.find(x => x.n === DEFAULT_CH) || builds[0];
 /* every Skales page wears the one brand colour; a build's own colours stay inside the build */
-const BRAND = { c: '#E8A84B', cInk: '#141416', cText: '#5B3FE0' };
+const BRAND = { c: '#FFE600', cInk: '#141416', cText: '#5B3FE0' };
 const paletteStyle = () => `--c:${BRAND.c};--c-ink:${BRAND.cInk};--c-text:${BRAND.cText}`;
 
 /* ---------- lanes: the four kinds of website and the two kinds of tool ---------- */

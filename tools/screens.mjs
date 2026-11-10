@@ -1,7 +1,8 @@
 // Shoots the laptop pictures the home page's picker shows: each website's first screen as a visitor sees it.
 //   node tools/screens.mjs           every website
 //   node tools/screens.mjs 7 signal  those websites, by number or slug
-// Writes assets/screens/NN-2160.webp (sharp laptops and big screens) and NN-1200.webp (everything else).
+// Writes assets/screens/NN-2160.webp (sharp laptops and big screens), NN-1200.webp (everything else)
+// and NN-ph.webp (780x1200, the same first screen on a phone).
 // 1440x900 at 1.5x, clock pinned to a weekday morning so open/closed lines read the same every time.
 // Serves the repo itself, so no preview server needed. Needs Python with Pillow.
 import http from 'node:http';
@@ -54,6 +55,20 @@ im = Image.open(sys.argv[1]).convert('RGB')
 for w, q in ((2160, 78), (1200, 82)):
     im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(sys.argv[2] + '-%d.webp' % w, 'WEBP', quality=q, method=6)
 `, png, path.join(OUT, pad(x.n))]);
+  /* the same first screen as a phone sees it, for the home page's first screen on phones: 390x600 at 2x */
+  const ph = await browser.newPage({ viewport: { width: 390, height: 600 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  await ph.clock.install({ time: new Date('2026-10-20T10:40:00+01:00') });
+  await ph.goto(`http://127.0.0.1:${port}/demos/${x.slug}/index.html#s=1`, { waitUntil: 'load' });
+  await ph.clock.runFor(3500);
+  await ph.waitForTimeout(400);
+  const phPng = path.join(raw, pad(x.n) + '-ph.png');
+  await ph.screenshot({ path: phPng });
+  await ph.close();
+  execFileSync('python3', ['-c', `
+import sys
+from PIL import Image
+Image.open(sys.argv[1]).convert('RGB').save(sys.argv[2] + '-ph.webp', 'WEBP', quality=80, method=6)
+`, phPng, path.join(OUT, pad(x.n))]);
   console.log(pad(x.n), x.slug);
 }
 await browser.close();

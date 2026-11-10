@@ -7,7 +7,7 @@
    ============================================================ */
 :root{
   --pg:#0A0B0D;--alu:#131418;--alu-2:#1B1C21;--tx:#F4F4F5;--tx-2:rgba(244,244,245,.68);--tx-3:rgba(244,244,245,.46);
-  --line:rgba(255,255,255,.1);--line-2:rgba(255,255,255,.18);--hand:#131418;--c-text:#E8A84B;--live-text:#E8A84B;
+  --line:rgba(255,255,255,.1);--line-2:rgba(255,255,255,.18);--hand:#131418;--c-text:#FFE600;--live-text:#FFE600;
   color-scheme:dark;
 }
 html,body{background:var(--pg);color:var(--tx)}

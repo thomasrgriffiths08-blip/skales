@@ -8,8 +8,9 @@ const TRY = require('./try.js').DEMOS.filter(x => x.live);
    work, what happens after the website, can he do my kind of business, how does it work and who is he. Then the
    calendar, so nobody leaves to book. People who already know Tom have Book a call in the header the whole way. */
 
-/* the hero shows one finished website at a time, chosen by trade. Trades first, because they are who the page is for */
-const HERO = [[12, 'Garage'], [11, 'Electrician'], [10, 'Physio'], [9, 'Accountant'], [7, 'Boxing gym'], [8, 'Tattoo studio']]
+/* the first screen shows one finished website at a time, full width, chosen by trade. It opens on one that is not
+   yellow, so the page's own yellow is the only one on screen when it loads */
+const HERO = [[7, 'Boxing gym'], [10, 'Physio'], [11, 'Electrician'], [12, 'Garage'], [9, 'Accountant'], [8, 'Tattoo studio']]
   .map(([n, label]) => Object.assign({ label }, B(n))).filter(x => x.slug);
 /* six of the twelve, large; the rest are one tap away on the Work page */
 const SIX = [12, 11, 10, 7, 8, 5].map(B).filter(Boolean);
@@ -19,31 +20,29 @@ const BRAND = Object.assign({}, L.BRAND);
 
 const hero = b => {
   const x0 = HERO[0];
-  return `<section class="hx" aria-labelledby="h-top">
-  <div class="hx-glow" aria-hidden="true"></div>
-  <div class="wrap hx-in">
-    <div class="hx-copy">
-      <p class="kick"><i></i>Websites, booking and ads for UK trades</p>
-      <h1 id="h-top">Websites that get you <em>booked.</em></h1>
-      <p class="hx-sub">I build your website, the booking and follow-up behind it, and run the ads that fill it. One flat price, agreed before anything starts.</p>
-      <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="btn btn-glass btn-lg" href="${b}try/missed-call/">Try a live demo</a></div>
-      <p class="hx-tom"><span class="av" aria-hidden="true">TG</span><span><b>${esc(site.founder.name)}</b> · the person you message is the person who builds it.</span></p>
+  const made = x => `${esc(nameOf(x))} · made-up ${esc((x.trade || x.biz).toLowerCase())}`;
+  return `<section class="hx hx-home" aria-labelledby="h-top">
+  <div class="wrap">
+    <div class="hx-top">
+      <h1 id="h-top">Websites that <br>get you <em>booked.</em></h1>
+      <div class="hx-side">
+        <p class="hx-sub"><strong>I build your website, the booking and follow-up behind it, and run the ads that fill it.</strong> One flat price, agreed before anything starts.</p>
+        <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="tlink" href="${b}try/missed-call/">Try a live demo</a></div>
+      </div>
     </div>
     <div class="hx-stage" data-hx>
-      <div class="hx-dev">
-      <a class="hx-lap" href="${b}work/${x0.slug}/" data-hx-go>
-        <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><span data-hx-name>${esc(nameOf(x0))} · made-up ${esc((x0.trade || x0.biz).toLowerCase())}</span></span>
-        <span class="hx-shots">${HERO.map((x, i) => `<img${i ? ' loading="lazy"' : ' class="is-on" fetchpriority="high"'} src="${shot(b, x, 1200)}" srcset="${shot(b, x, 1200)} 1200w, ${shot(b, x, 2160)} 2160w" sizes="(min-width: 1100px) 760px, 92vw" width="1200" height="750" alt="${esc(nameOf(x))}, a website for a made-up ${esc((x.trade || x.biz).toLowerCase())}, on a laptop" data-i="${i}" decoding="async">`).join('')}</span>
-      </a>
-      <a class="hx-ph" href="${b}work/${x0.slug}/" data-hx-go tabindex="-1" aria-hidden="true">
-        <span class="hx-phs">${HERO.map((x, i) => `<img${i ? ' loading="lazy"' : ' class="is-on"'} src="${L.clipSrc(b, x, 'webp')}" width="600" height="1077" alt="" data-i="${i}" decoding="async">`).join('')}</span>
-      </a>
+      <div class="hx-bar">
+        <div class="hx-tabs">
+          <div role="tablist" aria-label="See a website for your trade">
+            ${HERO.map((x, i) => `<button type="button" role="tab" class="chip" aria-selected="${i ? 'false' : 'true'}" data-i="${i}" data-slug="${x.slug}" data-name="${made(x)}">${esc(x.label)}</button>`).join('')}
+          </div>
+          <a class="chip chip-more" href="${b}work/">+${SITES.length - HERO.length} more</a>
+        </div>
+        <p class="hx-note" data-hx-name>${made(x0)}</p>
       </div>
-      <div class="hx-chips" role="tablist" aria-label="See a website for your trade">
-        <span class="hx-for">See it for</span>
-        ${HERO.map((x, i) => `<button type="button" role="tab" class="chip" aria-selected="${i ? 'false' : 'true'}" data-i="${i}" data-slug="${x.slug}" data-name="${esc(nameOf(x))} · made-up ${esc((x.trade || x.biz).toLowerCase())}">${esc(x.label)}</button>`).join('')}
-        <a class="chip chip-more" href="${b}work/">+${SITES.length - HERO.length} more</a>
-      </div>
+      <a class="hx-win" href="${b}work/${x0.slug}/" data-hx-go aria-label="Open this website and use it">
+        <span class="hx-shots">${HERO.map((x, i) => `<picture><source media="(max-width: 700px)" srcset="${b}assets/screens/${L.pad(x.n)}-ph.webp" width="780" height="1200"><img${i ? ' loading="lazy"' : ' class="is-on" fetchpriority="high"'} src="${shot(b, x, 1200)}" srcset="${shot(b, x, 1200)} 1200w, ${shot(b, x, 2160)} 2160w" sizes="(min-width: 1296px) 1200px, 94vw" width="1200" height="750" alt="${esc(nameOf(x))}, a website for a made-up ${esc((x.trade || x.biz).toLowerCase())}" data-i="${i}" decoding="async"></picture>`).join('')}</span>
+      </a>
     </div>
   </div>
 </section>`;

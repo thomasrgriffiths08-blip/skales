@@ -1,7 +1,7 @@
 /* ============================================================
-   HOME — night ground, one violet glow, one amber action colour.
-   Black #0A0B0D carries the page; violet only ever glows behind things (never text);
-   amber is the only thing you press. Geist for words, Geist Mono for the small labels.
+   HOME: plain black ground and one yellow.
+   Black #0A0B0D carries the page; yellow #FFE600 is the only colour, and it is the thing you press.
+   Geist for words. Each website shown brings its own colours, so the page around it stays quiet.
    ============================================================ */
 html,body{background:var(--ink);color:var(--ink-tx)}
 ::selection{background:var(--c);color:var(--c-ink)}
@@ -28,8 +28,7 @@ html,body{background:var(--ink);color:var(--ink-tx)}
 
 /* small parts used across the page */
 .kick{display:flex;align-items:center;gap:10px;font:500 .75rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-tx2)}
-.kick i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px rgba(232,168,75,.16);flex:none}
-.home .btn{border-radius:999px}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 0 4px rgba(255,230,0,.16);flex:none}
 .btn-lg{height:56px;padding:0 26px;font-size:1.0625rem}
 .btn-glass{background:rgba(255,255,255,.06);color:var(--ink-tx);border-color:rgba(255,255,255,.16)}
 .btn-glass:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);filter:none}
@@ -43,60 +42,68 @@ html,body{background:var(--ink);color:var(--ink-tx)}
 .chrome i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.16);flex:none}
 .chrome span{margin-inline:auto;padding-right:40px;overflow:hidden;text-overflow:ellipsis}
 
-/* ---------- first screen ---------- */
+/* ---------- first screens ---------- */
+/* shared with the trade pages and the Work page, which lay theirs out in trade.css and work.css */
 .hx{position:relative;isolation:isolate;padding:clamp(28px,6vw,88px) 0 clamp(56px,7vw,104px)}
 .hx-glow{position:absolute;inset:-64px 0 0;z-index:-1;pointer-events:none;
   background:
     radial-gradient(42% 52% at 74% 40%,rgba(var(--g),.34),rgba(var(--g),0) 72%),
     radial-gradient(30% 36% at 6% 4%,rgba(var(--g),.16),rgba(var(--g),0) 70%),
     radial-gradient(60% 30% at 50% 110%,rgba(var(--g),.14),rgba(var(--g),0) 70%)}
-.hx-in{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(40px,5vw,72px);align-items:center}
-.hx-copy{display:grid;gap:22px;align-content:start}
 .hx h1{font-size:clamp(2.75rem,5.9vw,5.25rem);font-weight:600;letter-spacing:-.05em;line-height:.98;max-width:11ch}
 .hx h1 em{font-style:normal;color:var(--c)}
 .hx-sub{font-size:clamp(1.0625rem,1.35vw,1.25rem);line-height:1.5;color:var(--ink-tx2);max-width:44ch;text-wrap:pretty}
 .hx-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
-.hx-tom{display:flex;align-items:center;gap:12px;font-size:.9375rem;color:var(--ink-tx2);line-height:1.4}
-.hx-tom b{color:var(--ink-tx);font-weight:600}
-.av{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;flex:none;background:#1B1C21;border:1px solid rgba(255,255,255,.14);font:500 .75rem/1 var(--mono);letter-spacing:.04em;color:var(--ink-tx)}
-
-.hx-stage{position:relative;min-width:0}
-.hx-dev{position:relative;margin-bottom:clamp(44px,5vw,64px)}
-.hx-lap{position:relative;display:block;border-radius:14px;overflow:hidden;background:#111215;border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 50px 120px -30px rgba(0,0,0,.85),0 0 90px -20px rgba(var(--g),.45);transition:transform .35s var(--ease)}
-.hx-lap:hover{transform:translateY(-2px)}
-.hx-shots{position:relative;display:block;aspect-ratio:1200/750;background:#0F1013}
-.hx-shots img,.hx-phs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:0;transition:opacity .6s var(--ease)}
-.hx-shots img.is-on,.hx-phs img.is-on{opacity:1}
-.hx-ph{position:absolute;right:-3%;bottom:-14%;width:24%;min-width:118px;border-radius:30px;padding:5px;background:#1A1B1F;border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 40px 80px -24px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.6);transition:transform .35s var(--ease)}
-.hx-ph:hover{transform:translateY(-3px)}
-.hx-phs{position:relative;display:block;aspect-ratio:600/1077;border-radius:25px;overflow:hidden;background:#0F1013}
-.hx-chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-right:22%}
-.hx-for{flex:none;white-space:nowrap;font:500 .75rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-tx2);margin-right:4px}
-.hx-chips .chip{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--ink-tx2);font-size:.875rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s,border-color .2s}
-.hx-chips .chip:hover{color:var(--ink-tx);border-color:rgba(255,255,255,.32)}
-.hx-chips .chip[aria-selected="true"]{background:var(--ink-tx);border-color:var(--ink-tx);color:var(--ink)}
-.hx-chips .chip-more{border-style:dashed}
-
 @media (max-width:1000px){
-  .hx-in{grid-template-columns:minmax(0,1fr);gap:40px}
   .hx h1{max-width:12ch}
-  .hx-stage{max-width:760px}
 }
 @media (max-width:640px){
   .hx{padding-top:24px}
-  .hx-copy{gap:18px}
   .hx-ctas .btn{flex:1 1 auto;padding:0 18px}
-  .hx-dev{margin-bottom:34px}
-  .hx-for{display:none}
-  .hx-ph{width:30%;right:-2%;bottom:-12%;border-radius:22px;padding:4px}
-  .hx-phs{border-radius:18px}
-  .hx-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * var(--pad));padding:2px var(--pad)}
-  .hx-chips::-webkit-scrollbar{display:none}
-  .chrome{height:28px;padding:0 10px;gap:5px}
-  .chrome i{width:7px;height:7px}
-  .chrome span{padding-right:20px;font-size:.6875rem}
+}
+
+/* the home's own first screen: one line, one button, one website shown big */
+.hx-home{padding:clamp(28px,4.2vw,56px) 0 0}
+.hx-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,372px);gap:clamp(32px,4.5vw,64px);align-items:end;margin-bottom:clamp(28px,3.6vw,48px)}
+.hx-home h1{font-size:clamp(4.25rem,7.2vw,6.5rem);letter-spacing:-.04em;line-height:1;max-width:none}
+.hx-side{display:grid;gap:24px;padding-bottom:6px}
+.hx-home .hx-sub{font-size:clamp(1.0625rem,1.3vw,1.1875rem);line-height:1.48;max-width:none}
+.hx-home .hx-sub strong{color:var(--ink-tx);font-weight:500}
+.hx-home .hx-ctas{align-items:center;gap:10px 26px;margin-top:0}
+
+/* the website on show: a browser window as wide as the page, and its tabs are the trades */
+.hx-stage{border:1px solid rgba(255,255,255,.13);border-bottom:0;border-radius:16px 16px 0 0;background:#131417;overflow:hidden}
+.hx-bar{display:flex;align-items:center;gap:16px;min-height:52px;padding:0 8px;border-bottom:1px solid var(--ink-line)}
+.hx-tabs{display:flex;align-items:center;gap:2px;min-width:0;overflow-x:auto;scrollbar-width:none;padding:8px 0}
+.hx-tabs::-webkit-scrollbar{display:none}
+.hx-tabs [role="tablist"]{display:contents}
+.hx-tabs .chip{flex:none;display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:8px;border:0;background:transparent;color:var(--ink-tx2);font:500 .9375rem/1 var(--sans);cursor:pointer;white-space:nowrap;text-decoration:none;transition:background-color .2s,color .2s}
+.hx-tabs .chip:hover{color:var(--ink-tx);background:rgba(255,255,255,.07)}
+.hx-tabs .chip[aria-selected="true"]{background:var(--ink-tx);color:var(--ink);font-weight:600}
+.hx-note{flex:none;margin:0 8px 0 auto;font-size:.875rem;line-height:1.2;color:rgba(244,244,245,.52);white-space:nowrap}
+.hx-win{display:block}
+.hx-shots{position:relative;display:block;aspect-ratio:1200/750;background:#0F1013}
+.hx-shots img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:0;transition:opacity .6s var(--ease)}
+.hx-shots img.is-on{opacity:1}
+
+@media (max-width:1100px){
+  .hx-top{grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}
+  .hx-home h1{font-size:clamp(2.6rem,12.4vw,5.5rem)}
+  .hx-side{gap:20px;padding-bottom:0}
+  .hx-home .hx-sub{max-width:52ch}
+  /* the name of the business on show drops to its own line under the tabs */
+  .hx-bar{flex-wrap:wrap;gap:0;padding:0}
+  .hx-tabs{flex:1 1 100%;padding:8px}
+  .hx-note{flex:1 1 100%;margin:0;padding:9px 16px 10px;border-top:1px solid var(--ink-line);font-size:.8125rem;overflow:hidden;text-overflow:ellipsis}
+}
+@media (max-width:700px){
+  .hx-home{padding-top:22px}
+  .hx-home .hx-ctas{flex-direction:column;align-items:stretch;gap:6px}
+  .hx-home .hx-ctas .btn{flex:none}
+  .hx-home .hx-ctas .tlink{align-self:center}
+  .hx-stage{border-radius:14px 14px 0 0}
+  .hx-tabs .chip{height:40px}
+  .hx-shots{aspect-ratio:780/1200}
 }
 
 /* ---------- the sections after it ---------- */
@@ -110,7 +117,7 @@ html,body{background:var(--ink);color:var(--ink-tx)}
 .ph-frame{position:relative;display:block;justify-self:center;width:min(290px,100%);border-radius:44px;padding:8px;background:#1A1B1F;border:1px solid rgba(255,255,255,.14);box-shadow:0 50px 100px -30px rgba(0,0,0,.9);transition:transform .35s var(--ease)}
 .ph-frame img{display:block;width:100%;height:auto;border-radius:36px}
 .ph-frame:hover{transform:translateY(-3px)}
-.ph-play{position:absolute;left:50%;top:70%;display:grid;place-items:center;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--c);color:var(--c-ink);box-shadow:0 0 0 10px rgba(232,168,75,.18),0 20px 40px -10px rgba(0,0,0,.6);transition:transform .2s var(--ease)}
+.ph-play{position:absolute;left:50%;top:70%;display:grid;place-items:center;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:var(--c);color:var(--c-ink);box-shadow:0 0 0 10px rgba(255,230,0,.18),0 20px 40px -10px rgba(0,0,0,.6);transition:transform .2s var(--ease)}
 .ph-frame:hover .ph-play{transform:scale(1.06)}
 .flow{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;max-width:560px}
 .flow li{display:flex;gap:14px;align-items:baseline;padding:14px 0;border-top:1px solid var(--ink-line);color:var(--ink-tx)}
@@ -197,5 +204,5 @@ html,body{background:var(--ink);color:var(--ink-tx)}
 
 /* Reduce Motion is on for many phones: the crossfade between builds stays (it only fades, nothing travels) */
 @media (prefers-reduced-motion:reduce){
-  .hx-shots img,.hx-phs img{transition-duration:.6s !important}
+  .hx-shots img{transition-duration:.6s !important}
 }

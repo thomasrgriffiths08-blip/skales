@@ -5,7 +5,7 @@
    Phone: the build fills the screen, a dock under the thumb steps through them, and the same panel opens as a sheet.
    ============================================================ */
 html.vw-open,html.vw-open body{overflow:hidden}
-.vw{--vc:#E8A84B;--vbg:#0E0E10;--vs:#18181B;--vs2:#222226;--vt:#F3F3F2;--vt2:#A1A1A6;--vl:rgba(255,255,255,.1);
+.vw{--vc:#FFE600;--vbg:#0E0E10;--vs:#18181B;--vs2:#222226;--vt:#F3F3F2;--vt2:#A1A1A6;--vl:rgba(255,255,255,.1);
   position:fixed;inset:0;z-index:1000;display:grid;grid-template-columns:340px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);background:var(--vbg);color:var(--vt);
   font-family:var(--sans);opacity:0;transition:opacity .22s var(--ease)}
 .vw.is-in{opacity:1}

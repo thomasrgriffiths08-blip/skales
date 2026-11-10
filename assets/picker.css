@@ -7,7 +7,7 @@
    The crossfades are declared !important so they still run where the visitor's device asks for reduced motion: site.css
    cuts every transition to nothing there, and an instant swap between two sites reads as a glitch, not as calm.
    ============================================================ */
-.pk{--ink:#0B0C0E;--amber:#E8A84B;--dim:rgba(255,255,255,.56);--faint:rgba(255,255,255,.38);--rule:rgba(255,255,255,.09);
+.pk{--ink:#0B0C0E;--amber:#FFE600;--dim:rgba(255,255,255,.56);--faint:rgba(255,255,255,.38);--rule:rgba(255,255,255,.09);
   position:relative;background:var(--ink);color:#fff;overflow:hidden}
 .pk + .builder{border-top:0}
 .pk-in{display:grid;grid-template-columns:minmax(290px,340px) minmax(0,1fr);grid-template-rows:auto auto auto auto 1fr;
@@ -114,7 +114,7 @@
   .pk-list::-webkit-scrollbar{display:none}
   .pk-list li,.pk-list li:last-child{flex:none;border:0;scroll-snap-align:start}
   .pk-list button{display:inline-flex;align-items:center;gap:8px;width:auto;height:42px;padding:0 15px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.875rem;overflow:hidden}
-  .pk-list button[aria-selected="true"]{border-color:rgba(232,168,75,.75)}
+  .pk-list button[aria-selected="true"]{border-color:rgba(255,230,0,.75)}
   .pk-kind{display:none}
   .pk-run{left:15px;right:15px;bottom:7px}
   .pk-cap{grid-area:cap;width:auto;grid-template-columns:minmax(0,1fr);grid-template-areas:"name" "line" "open";margin-top:clamp(18px,5vw,26px)}
