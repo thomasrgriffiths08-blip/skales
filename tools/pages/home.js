@@ -128,7 +128,6 @@ const how = b => `<section class="hs hs-how" id="how" aria-labelledby="h-how">
 
 const who = b => `<section class="hs hs-who" id="who" aria-labelledby="h-who">
   <div class="wrap who">
-    <span class="who-pic" aria-hidden="true">TG</span>
     <div>
       <p class="kick">Who builds it</p>
       <h2 id="h-who">${esc(site.founder.name)}. One person, start to finish.</h2>
@@ -139,7 +138,7 @@ const who = b => `<section class="hs hs-who" id="who" aria-labelledby="h-who">
 </section>`;
 
 const book = b => {
-  const cal = site.calendly ? `${site.calendly}${site.calendly.includes('?') ? '&' : '?'}hide_gdpr_banner=1&hide_landing_page_details=1&background_color=121317&text_color=f4f4f5&primary_color=e8a84b` : '';
+  const cal = site.calendly ? `${site.calendly}${site.calendly.includes('?') ? '&' : '?'}hide_gdpr_banner=1&hide_landing_page_details=1&background_color=121317&text_color=f4f4f5&primary_color=ffe600` : '';
   return `<section class="hs hs-book" id="book" aria-labelledby="h-book">
   <div class="wrap book2">
     <div>

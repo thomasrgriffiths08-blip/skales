@@ -232,7 +232,7 @@ function header(b, active){
 }
 function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
-  const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ...SITE_LANES.map(k => [`${LANES[k].name} websites`, `work/websites/#${k}`]), ['The system', 'work/system/'], ['Inbox and missed calls', 'work/inbox/'], ['Booking and the diary', 'work/booking/']];
+  const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['The system', 'work/system/'], ['Inbox and missed calls', 'work/inbox/'], ['Booking and the diary', 'work/booking/']];
   const studio = [['Try it: live demos', 'try/'], ['Services', 'services/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
   return `${o.mbar !== true ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}

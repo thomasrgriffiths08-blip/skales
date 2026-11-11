@@ -17,7 +17,7 @@
 .cf-in{opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .cf-in.on{opacity:1;transform:none}
 .cf-top{padding-bottom:clamp(28px,4vw,40px);border-bottom:2px solid var(--tx)}
-.cf-id{display:flex;flex-wrap:wrap;gap:6px 18px;font:400 .8125rem/1.4 var(--mono);color:var(--tx-2);text-transform:uppercase;letter-spacing:.06em}
+.cf-id{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 .9375rem/1.4 var(--sans);color:var(--tx-2)}
 .cf-id b{font-weight:400;color:var(--tx)}
 .cf-h{margin-top:20px;font-size:clamp(2.35rem,5.6vw,4.4rem);letter-spacing:-.035em;line-height:1.02;outline:0}
 .cf-h span{display:block;margin-top:12px;font-size:clamp(1.05rem,1.4vw,1.25rem);font-weight:500;letter-spacing:0;color:var(--tx-2)}
@@ -29,7 +29,7 @@
 @media (max-width:700px){.cf-facts{grid-template-columns:1fr 1fr}.cf-facts>div:nth-child(3){padding-left:0;border-left:0}.cf-facts>div:nth-child(n+3){border-top:1px solid var(--line);margin-top:16px}}
 
 .cf-sec{padding:clamp(32px,5vw,56px) 0;border-bottom:1px solid var(--line)}
-.cf-n{font:400 .8125rem/1.4 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--tx-2);margin:0 0 18px}
+.cf-n{font:500 .9375rem/1.4 var(--sans);color:var(--tx-2);margin:0 0 18px}
 .cf-lead{font-size:clamp(1.125rem,1.6vw,1.375rem);line-height:1.5;max-width:62ch;color:var(--tx);text-wrap:pretty}
 .cf-lead strong{font-weight:600}
 .cf-note{margin:22px 0 0;padding:4px 0 4px 18px;border-left:2px solid var(--live);color:var(--tx-2);font-size:1.0625rem;max-width:60ch}

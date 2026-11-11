@@ -142,17 +142,6 @@ const adSection = (s) => {
 
 /* the live widgets from the old /what-i-do/ page, kept on the pages they prove (assets/systems.js) */
 /* the before-and-after is not one of the builds any more, so it is framed by its address */
-const turnoverRig = b => { const t = { name: 'Turnover', slug: 'turnover', c: '#C77D2B' }; return `<section class="sec sec-alu" id="see" aria-labelledby="h-see">
-  <div class="wrap">
-    <div class="sec-head"><h2 id="h-see">The same firm, before and after.</h2><p class="lead">A made-up roofing firm’s 2011 website on one side and its rebuild on the other. Drag the tape line across.</p></div>
-    <div class="rig rig-solo" style="--chan:${t.c}">
-      <div class="stage">
-        <div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><b>${esc(t.name)}</b> &middot; before and after a rebuild</span><a class="pop" href="${b}demos/${t.slug}/#s=1" target="_blank" rel="noopener">Full screen</a></div>
-        <div class="viewport vp-short" data-solo="${t.slug}" data-src="demos/${t.slug}/#s=1" data-title="${esc(t.name)}"><div class="boot">Loading</div></div>
-      </div>
-    </div>
-  </div>
-</section>`; };
 const followWidgets = () => `<section class="sec sec-alu" id="see" aria-labelledby="h-see">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-see">Two of them, running.</h2><p class="lead">A made-up fencing firm. Simulate a missed call and watch it get caught; watch the reviews come in after each job.</p></div>
@@ -219,7 +208,6 @@ ${s.adPreview ? adSection(s) : ''}
 ${s.slug === 'follow-up-automation' ? followWidgets() : ''}
 ${panel('What you get', esc(s.name), `<h2>What is included?</h2><ul class="feat cols">${s.gets.map(g => `<li>${esc(g)}</li>`).join('')}</ul>`)}
 ${panel('The detail', 'Straight answers', qa, ' id="detail"')}
-${s.slug === 'websites' ? turnoverRig(b) : ''}
 ${tryCards(b, s.demos)}
 ${autoCards(b, autos, s.slug === 'follow-up-automation' ? 'The six automations' : 'The automations that go with it')}
 ${buildWall(b, s.builds, 'Running on this site', 'Working builds for made-up businesses. Open any of them on your phone and use it.')}

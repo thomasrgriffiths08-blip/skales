@@ -24,7 +24,7 @@
   --c:#FFE600;--c-ink:#101114;--c-text:#5B3FE0;
   /* black and one yellow. The glows behind things are switched off by giving them the ground's own colour;
      to bring one back, set --g to a colour (it was violet, 109,74,255) */
-  --g:10,11,13;--ink:#0A0B0D;--ink-2:#121317;--ink-line:rgba(255,255,255,.09);--ink-tx:#F4F4F5;--ink-tx2:rgba(244,244,245,.66);
+  --g:10,11,13;--ink:#0A0B0D;--ink-2:#121317;--ink-line:rgba(255,255,255,.09);--ink-tx:#F4F4F5;--ink-tx2:rgba(244,244,245,.76);
   --pg:#FFFFFF;--alu:#F3F3F2;--alu-2:#E9E9E7;--tx:#141416;--tx-2:#6B6B70;--tx-3:#9A9A9F;
   --line:#E6E6E4;--line-2:#D6D6D3;--hand:#0E0E10;
   --live:var(--c);--live-ink:var(--c-ink);--live-text:var(--c-text);

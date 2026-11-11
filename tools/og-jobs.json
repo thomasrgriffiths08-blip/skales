@@ -20,7 +20,7 @@
   {
     "key": "work-atelier-voss",
     "title": "Atelier Voss",
-    "kicker": "Architecture practice · Website · Quiet",
+    "kicker": "Architecture practice · Website",
     "sub": "An architecture practice whose four projects sit beside the drawings that made them.",
     "colour": "#2B59FF",
     "sheet": "#E1E8FF",
@@ -29,7 +29,7 @@
   {
     "key": "work-cadence",
     "title": "Cadence",
-    "kicker": "Field-ops software · Website · Direct",
+    "kicker": "Field-ops software · Website",
     "sub": "A product page where the board runs a real shift while you watch.",
     "colour": "#22D3EE",
     "sheet": "#E0F9FD",
@@ -38,7 +38,7 @@
   {
     "key": "work-maree",
     "title": "Marée",
-    "kicker": "Fragrance house · Website · Motion",
+    "kicker": "Fragrance house · Website",
     "sub": "A real bottle on a black stage, ink in the water, and a clock for the notes.",
     "colour": "#A9CBBD",
     "sheet": "#F3F8F6",
@@ -47,7 +47,7 @@
   {
     "key": "work-signal",
     "title": "SIGNAL 2027",
-    "kicker": "Music & light festival · Website · Loud",
+    "kicker": "Music & light festival · Website",
     "sub": "A real crowd, a poster you can tap, and tickets with the fee shown up front.",
     "colour": "#3B18E0",
     "sheet": "#E4DFFB",
@@ -56,7 +56,7 @@
   {
     "key": "work-long-exposure",
     "title": "Long Exposure",
-    "kicker": "Film production, Manchester · Website · Motion",
+    "kicker": "Film production, Manchester · Website",
     "sub": "A film company whose first screen is its showreel, with the timecode and scrub bar on top.",
     "colour": "#E8E8E8",
     "sheet": "#FCFCFC",
@@ -65,7 +65,7 @@
   {
     "key": "work-overhead",
     "title": "Overhead",
-    "kicker": "Drone survey, Peak District · Website · Motion",
+    "kicker": "Drone survey, Peak District · Website",
     "sub": "A drone survey firm whose survey lines draw themselves over real aerial photos as you scroll.",
     "colour": "#FF6A13",
     "sheet": "#FFEADE",
@@ -74,7 +74,7 @@
   {
     "key": "work-southpaw",
     "title": "Southpaw",
-    "kicker": "Boxing club, Leeds · Website · Loud",
+    "kicker": "Boxing club, Leeds · Website",
     "sub": "A boxing club site run by a live round timer, with the week straight under it.",
     "colour": "#E5232E",
     "sheet": "#FBE0E2",
@@ -83,7 +83,7 @@
   {
     "key": "work-marrow-and-pin",
     "title": "Marrow & Pin",
-    "kicker": "Tattoo studio, Bristol · Website · Loud",
+    "kicker": "Tattoo studio, Bristol · Website",
     "sub": "A tattoo studio whose flash wall inks itself, stencil to black, as you scroll.",
     "colour": "#F0386B",
     "sheet": "#FDE3EA",
@@ -92,7 +92,7 @@
   {
     "key": "work-hale-and-partners",
     "title": "Hale & Partners",
-    "kicker": "Chartered accountants, Harrogate · Website · Quiet",
+    "kicker": "Chartered accountants, Harrogate · Website",
     "sub": "An accountant's site that counts down to your next deadline from the first screen.",
     "colour": "#12B76A",
     "sheet": "#DEF5EA",
@@ -101,7 +101,7 @@
   {
     "key": "work-fern-physio",
     "title": "Fern Physio",
-    "kicker": "Fern Physio · Website · Quiet",
+    "kicker": "Fern Physio · Website",
     "sub": "A drawn body with ten tappable points, and a booking flow behind it.",
     "colour": "#14B8A6",
     "sheet": "#DEF5F3",
@@ -110,7 +110,7 @@
   {
     "key": "work-kestrel-electrical",
     "title": "Kestrel Electrical",
-    "kicker": "Two-van electrical firm · Website · Direct",
+    "kicker": "Two-van electrical firm · Website",
     "sub": "An electrician's page built as a fuse board: every job is a breaker.",
     "colour": "#C8F031",
     "sheet": "#F7FDE2",
@@ -119,7 +119,7 @@
   {
     "key": "work-kerb-and-camber",
     "title": "Kerb & Camber",
-    "kicker": "Kerb & Camber MOT Centre · Website · Direct",
+    "kicker": "Kerb & Camber MOT Centre · Website",
     "sub": "A UK number plate you type into, and the MOT date that comes back.",
     "colour": "#F6C700",
     "sheet": "#FEF7DB",
@@ -128,7 +128,7 @@
   {
     "key": "work-system",
     "title": "The system",
-    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "kicker": "Six made-up service businesses · Part of the system",
     "sub": "One screen: every call caught, every job booked, and what still needs you.",
     "colour": "#2563EB",
     "sheet": "#E0E9FC",
@@ -137,7 +137,7 @@
   {
     "key": "work-inbox",
     "title": "Inbox and missed calls",
-    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "kicker": "Six made-up service businesses · Part of the system",
     "sub": "Every call, text and form in one list. Missed calls get a text back in seconds.",
     "colour": "#2563EB",
     "sheet": "#E0E9FC",
@@ -146,7 +146,7 @@
   {
     "key": "work-booking",
     "title": "Booking and the diary",
-    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "kicker": "Six made-up service businesses · Part of the system",
     "sub": "Customers book a real free time and pay a deposit. It lands in the right diary.",
     "colour": "#2563EB",
     "sheet": "#E0E9FC",
@@ -155,7 +155,7 @@
   {
     "key": "work-quotes",
     "title": "Quotes that chase themselves",
-    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "kicker": "Six made-up service businesses · Part of the system",
     "sub": "Quotes from your price list that chase themselves until the customer answers.",
     "colour": "#2563EB",
     "sheet": "#E0E9FC",
@@ -164,7 +164,7 @@
   {
     "key": "work-reviews",
     "title": "Google reviews",
-    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "kicker": "Six made-up service businesses · Part of the system",
     "sub": "Every finished job asks for a review. Replies take one tap.",
     "colour": "#2563EB",
     "sheet": "#E0E9FC",
@@ -173,7 +173,7 @@
   {
     "key": "work-reminders",
     "title": "Reminders that rebook",
-    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "kicker": "Six made-up service businesses · Part of the system",
     "sub": "Yearly services, MOTs and regular cuts remind the customer and book themselves.",
     "colour": "#2563EB",
     "sheet": "#E0E9FC",
@@ -182,7 +182,7 @@
   {
     "key": "work-results",
     "title": "Results and ads",
-    "kicker": "Six made-up service businesses · Part of the system · The system",
+    "kicker": "Six made-up service businesses · Part of the system",
     "sub": "Where every job came from, what it was worth, and what the ads cost per job.",
     "colour": "#2563EB",
     "sheet": "#E0E9FC",

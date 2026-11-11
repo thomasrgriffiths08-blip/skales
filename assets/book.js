@@ -63,10 +63,10 @@
     var cal = d.getElementById('calendly'), fb = d.getElementById('fallback');
     if (S.calendly && /cal\.com\//.test(S.calendly)){
       fb.hidden = true;   // Cal.com takes the details as plain query parameters
-      cal.innerHTML = '<iframe title="Book a call" loading="lazy" src="' + S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'embed=true&theme=light&name=' + enc(a.name) + '&email=' + enc(a.email) + '&notes=' + enc(text) + '"></iframe>';
+      cal.innerHTML = '<iframe title="Book a call" loading="lazy" src="' + S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'embed=true&theme=dark&name=' + enc(a.name) + '&email=' + enc(a.email) + '&notes=' + enc(text) + '"></iframe>';
     } else if (S.calendly){
       fb.hidden = true;
-      var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&name=' + enc(a.name) + '&email=' + enc(a.email)
+      var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&background_color=121317&text_color=f4f4f5&primary_color=ffe600&name=' + enc(a.name) + '&email=' + enc(a.email)
               + '&a1=' + enc(text.split('\n').slice(1).join('\n'));   // the event has one question ("anything that will help prepare"), so every detail goes into it
       var boot = function(){ if (!window.Calendly) return fallback(); cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
       if (window.Calendly) boot(); else calScript(boot, fallback);

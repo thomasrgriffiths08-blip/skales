@@ -108,10 +108,10 @@
     if (!S.calendly) return fallback();
     none.hidden = true; cal.hidden = false;
     if (/cal\.com\//.test(S.calendly)){
-      cal.innerHTML = '<iframe title="Book a call" src="' + S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'embed=true&theme=light&notes=' + enc(note) + '"></iframe>';
+      cal.innerHTML = '<iframe title="Book a call" src="' + S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'embed=true&theme=dark&notes=' + enc(note) + '"></iframe>';
       return;
     }
-    var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&hide_event_type_details=1&a1=' + enc(note);
+    var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&hide_event_type_details=1&background_color=121317&text_color=f4f4f5&primary_color=ffe600&a1=' + enc(note);
     var boot = function(){ if (!window.Calendly) return fallback(); cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
     if (window.Calendly) boot();
     else {

@@ -6,7 +6,7 @@
    Screens inside device frames stay white: they are pictures of real software.
    ============================================================ */
 :root{
-  --pg:#0A0B0D;--alu:#131418;--alu-2:#1B1C21;--tx:#F4F4F5;--tx-2:rgba(244,244,245,.68);--tx-3:rgba(244,244,245,.46);
+  --pg:#0A0B0D;--alu:#131418;--alu-2:#1B1C21;--tx:#F4F4F5;--tx-2:rgba(244,244,245,.76);--tx-3:rgba(244,244,245,.56);
   --line:rgba(255,255,255,.1);--line-2:rgba(255,255,255,.18);--hand:#131418;--c-text:#FFE600;--live-text:#FFE600;
   color-scheme:dark;
 }
@@ -44,8 +44,8 @@ main::before{content:"";position:absolute;left:0;right:0;top:-64px;height:720px;
 .cta-band .lead{color:var(--tx-2);opacity:1}
 .cta-band .btn-live{background:var(--c);color:var(--c-ink)}
 .cta-band .btn-ghost{color:var(--tx);border-color:rgba(255,255,255,.22)}
-.flood{background:var(--alu);color:var(--tx)}
-.invite{background:var(--alu);color:var(--tx);border-top:1px solid var(--line)}
+.flood{background:var(--pg);color:var(--tx)}
+.invite{background:var(--pg);color:var(--tx);border-top:1px solid var(--line)}
 .invite p{color:var(--tx-2)}
 
 /* cards and surfaces get a hairline so they read on black */
@@ -53,3 +53,12 @@ main::before{content:"";position:absolute;left:0;right:0;top:-64px;height:720px;
 .msg-b{background:var(--alu-2)}
 .field input,.field textarea,.field select{background:var(--alu);border-color:var(--line-2);color:var(--tx)}
 .cnst{background:var(--alu)}
+
+/* one design with the home page: one black ground with no grey bands, sections parted by a hairline,
+   and section headlines at the home page's size */
+.sec-alu{background:transparent}
+.sec+.sec,.sec-alu,.panel,.cta-band{border-top:1px solid var(--line)}
+.sec-head h2,.panel .body>h2,.cta-band h2{font-size:clamp(2rem,4.2vw,3.25rem);letter-spacing:-.04em;line-height:1.02}
+.panel .lab .sheet{font-size:1rem}
+.case-hero h1+.lead.short{margin-top:14px}
+.hero-w h1,.case-hero h1{font-size:clamp(2.5rem,5.4vw,4.75rem);letter-spacing:-.045em;line-height:1}

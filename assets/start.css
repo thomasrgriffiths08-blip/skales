@@ -1,11 +1,15 @@
 /* /start/ — the bio landing page. Phone first: designed at 390px inside Instagram's browser and
-   widened. Light throughout so the calendar sits on the page instead of in a pasted box.
-   One accent (--live), tap targets at least 48px, nothing hover-only. */
-body{background:var(--pg)}
-.st-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px;padding:0 max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+   widened. On the same black ground as the rest of the site, and the calendar is set to match it.
+   One yellow (--live), tap targets at least 48px, nothing hover-only. */
+:root{
+  --pg:#0A0B0D;--alu:#131418;--alu-2:#24252B;--tx:#F4F4F5;--tx-2:rgba(244,244,245,.76);--tx-3:rgba(244,244,245,.56);
+  --line:rgba(255,255,255,.1);--line-2:rgba(255,255,255,.18);color-scheme:dark;
+}
+html,body{background:var(--pg);color:var(--tx)}
+::selection{background:var(--c);color:var(--c-ink)}
+.st-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px;padding:0 max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));background:rgba(10,11,13,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .st-bar .wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.03em}
-/* this page is still white, and yellow letters do not read on white: the mark stays ink here until the page moves to the black ground */
-.st-bar .wordmark i{font-style:normal;color:var(--tx)}
+.st-bar .wordmark i{font-style:normal;color:var(--c)}
 .st-bar-r{display:flex;align-items:center;gap:6px}
 .st-wa,.st-work{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:var(--r-s);font-weight:600;font-size:.875rem;color:var(--tx)}
 .st-wa{background:var(--alu)}
@@ -29,7 +33,7 @@ body{background:var(--pg)}
 .st-prog span.on{background:var(--tx)}
 .sq{border:0;margin:0;padding:0;min-width:0}
 .sq legend{padding:0;margin-bottom:16px;width:100%}
-.sq-n{display:block;font:500 .75rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--tx-3);margin-bottom:8px}
+.sq-n{display:block;font:500 .9375rem/1.2 var(--sans);color:var(--tx-3);margin-bottom:8px}
 .sq h2{font-size:clamp(1.5rem,6vw,2.1rem);line-height:1.1;letter-spacing:-.025em;margin:0;outline:0}
 .sq-sub{margin:6px 0 0;color:var(--tx-2);font-size:.9375rem}
 .sq-opts{display:grid;gap:8px}

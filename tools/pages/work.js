@@ -187,7 +187,7 @@ const photosIn = slug => {
 const ownPhotos = slug => { try { return fs.readdirSync(path.join(__dirname, '..', '..', 'demos', slug, 'img')).some(f => /\.(webp|jpe?g|avif)$/i.test(f)); } catch (e){ return false; } };
 const domain = site.origin.replace(/^https?:\/\//, '');
 
-const caseCopy = (b, x, lane) => `<div class="meta">${x.lane === 'system' ? `<span>${x.slug === 'system' ? 'One app, six parts' : `Part of <a href="${b}work/system/">the system</a>`}</span><span>Shown for six made-up businesses</span>` : `<span>${esc(kindWord(x))} &middot; <a href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a></span><span>${esc(x.biz)}, invented</span>`}</div>
+const caseCopy = (b, x, lane) => `<div class="meta">${x.lane === 'system' ? `<span>${x.slug === 'system' ? 'One app, six parts' : `Part of <a href="${b}work/system/">the system</a>`}</span><span>Shown for six made-up businesses</span>` : `<span>${esc(kindWord(x))} for a made-up ${esc((x.trade || x.biz).toLowerCase())}</span>`}</div>
           <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Use it full screen</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
           <p class="hint">This is the build itself, not a recording. Use it like a customer would, or press Show me in full screen and watch it work.</p>`;
 /* the system's parts, the current one marked, and the six businesses it opens as */
@@ -195,13 +195,13 @@ const partsNav = (b, x) => `<ol class="sys-parts">${PARTS.map(y => `<li><a href=
         <div class="sys-biz sys-biz-row"><p>Open ${x.slug === 'system' ? 'it' : 'this part'} as one of the six businesses:</p><div>${BIZ.map(([k, n, t]) => `<a href="${b}demos/${x.slug}/?t=${k}#s=1" target="_blank" rel="noopener"><b>${esc(n)}</b><span>${esc(t)}</span></a>`).join('')}</div></div>`;
 /* ---------- one page per build ---------- */
 const cases = builds.map(x => {
-  const lane = laneOf(x), peers = inLane(x.lane), i = peers.findIndex(y => y.slug === x.slug);
+  const lane = laneOf(x), peers = x.kind === 'site' ? builds.filter(y => y.kind === 'site') : inLane(x.lane), i = peers.findIndex(y => y.slug === x.slug);
   const prev = peers[(i + peers.length - 1) % peers.length], next = peers[(i + 1) % peers.length];
   const photos = photosIn(x.slug);
   const related = builds.filter(y => y.slug !== x.slug && y.trade === x.trade && !/^any /i.test(x.trade)).slice(0, 3);
   return {
     url: `/work/${x.slug}/`, og: `work-${x.slug}`, priority: 0.8, changefreq: 'monthly',
-    meta: { key: `work-${x.slug}`, title: x.name, kicker: `${x.biz} · ${kindWord(x)} · ${lane.name}`, sub: x.short, colour: x.c, sheet: x.sheet, phone: `assets/phones/${pad(x.n)}.webp` },
+    meta: { key: `work-${x.slug}`, title: x.name, kicker: `${x.biz} · ${kindWord(x)}`, sub: x.short, colour: x.c, sheet: x.sheet, phone: `assets/phones/${pad(x.n)}.webp` },
     render(b){
       const kw = kindWord(x).toLowerCase();
       const title = (() => {
@@ -229,27 +229,19 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
   <section class="case-hero${x.kind === 'tool' ? ' is-tool' : x.kind === 'site' ? ' is-site' : ''}">
     <div class="wrap">
       ${crumbs(b, x.slug === 'system' ? [['Home', ''], ['Work', 'work/'], ['The system', 'work/system/']] : [['Home', ''], ['Work', 'work/'], [lane.kindWord, lane.path], [x.name, `work/${x.slug}/`]])}
-      ${x.kind === 'site' ? '' : `<h1>${esc(x.name)}</h1>
-      <p class="lead short">${esc(x.short)}</p>`}
+      <h1>${esc(x.name)}</h1>
+      <p class="lead short">${esc(x.short)}</p>
       ${x.slug === 'system' ? `${deskHTML(b)}
       <div class="case-words">
         <p class="lead">${esc(x.long)}</p>
         <div class="copy">${caseCopy(b, x, lane)}</div>
-      </div>` : x.kind === 'tool' ? `<div class="case-rig">
+      </div>` : `<div class="case-rig">
         <div class="rig"><div class="chrome"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">${esc(domain)}/demos/<b>${esc(x.slug)}</b>/</span><button type="button" class="pop" data-view="${x.slug}">Full screen</button></div>
-          <div class="viewport" data-solo="${x.slug}" data-solo-still><div class="boot"><img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800" alt="${esc(x.name)} on a laptop" fetchpriority="high" decoding="async"></div></div></div>
+          <div class="viewport" data-solo="${x.slug}" data-solo-still><div class="boot">${x.kind === 'site' ? `<img src="${b}assets/screens/${pad(x.n)}-1200.webp" srcset="${b}assets/screens/${pad(x.n)}-1200.webp 1200w, ${b}assets/screens/${pad(x.n)}-2160.webp 2160w" sizes="(min-width: 1296px) 1200px, 94vw" width="1200" height="750"` : `<img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800"`} alt="${esc(x.name)} on a laptop" fetchpriority="high" decoding="async"></div></div></div>
       </div>
       <div class="case-words">
         <p class="lead">${esc(x.long)}</p>
         <div class="copy">${caseCopy(b, x, lane)}</div>
-      </div>` : `<div class="grid">
-        <div class="copy">
-          <h1>${esc(x.name)}</h1>
-          <p class="lead short">${esc(x.short)}</p>
-          <p class="lead">${esc(x.long)}</p>
-          ${caseCopy(b, x, lane)}
-        </div>
-        <div class="side">${L.device(b, x)}</div>
       </div>`}
     </div>
   </section>
@@ -262,7 +254,6 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
           ${x.lane === 'system' ? `<h2>${x.slug === 'system' ? 'What is the system for?' : 'What is this part for?'}</h2>
           <p class="lead">${esc(x.story)}</p>` : `<h2>What does ${esc(x.name)} do?</h2>
           <p class="lead">${esc(x.name)} is a working ${kw} ${esc(L.builtFor(x))}. ${esc(x.story)}</p>`}
-          ${x.lane === 'system' ? '' : `<p class="lead">It sits in the <a class="lnk" href="${b}${lane.path}#${x.lane}">${esc(lane.name)}</a> lane: ${esc(lane.line.toLowerCase())}</p>`}
         </div>
         <div>
           <h3>What is in it</h3>
@@ -300,10 +291,10 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
     </div>
   </nav>` : `<nav class="panel" aria-label="More builds">
     <div class="wrap inner">
-      <div class="lab"><span class="sheet">More &middot; ${esc(lane.name)}</span><span class="name">${peers.length > 1 ? `The next ${esc(lane.name.toLowerCase())} ${lane.kind === 'site' ? 'websites' : 'tools'}` : 'Every build has its own page'}</span></div>
+      <div class="lab"><span class="sheet">More websites</span><span class="name">The one before and the one after</span></div>
       <div class="body">
         <div class="pair">${L.tile(b, prev, { dir: 'Previous' })}${L.tile(b, next, { dir: 'Next' })}</div>
-        <p class="f-note" style="margin-top:20px">${related.length ? `Same trade: ${related.map(y => `<a class="lnk" href="${b}work/${y.slug}/">${esc(y.name)}</a>`).join(', ')}. ` : ''}<a class="lnk" href="${b}${lane.path}#${x.lane}">Every ${esc(lane.name.toLowerCase())} ${lane.kind === 'site' ? 'website' : 'tool'}</a> &middot; <a class="lnk" href="${b}work/">all ${builds.length} builds</a>. Or <a class="lnk" href="${b}">build one for your own business</a> in a couple of seconds.</p>
+        <p class="f-note" style="margin-top:20px">${related.length ? `Same trade: ${related.map(y => `<a class="lnk" href="${b}work/${y.slug}/">${esc(y.name)}</a>`).join(', ')}. ` : ''}<a class="lnk" href="${b}work/">All ${Words(peers.length).toLowerCase()} websites</a>.</p>
       </div>
     </div>
   </nav>`}
