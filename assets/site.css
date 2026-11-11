@@ -144,7 +144,7 @@ strong,b{font-weight:600}
 .feat.cols{grid-template-columns:repeat(2,1fr);column-gap:32px;margin-top:28px}
 @media (max-width:700px){.feat.cols{grid-template-columns:1fr}}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
-.tags span{font-size:.8125rem;font-weight:500;color:var(--tx-2);padding:6px 10px;border:1px solid var(--line-2);border-radius:999px}
+.tags span{font-size:.8125rem;font-weight:500;color:var(--tx-2);padding:6px 10px;border:1px solid var(--line-2);border-radius:8px}
 .nameplate{margin:0;display:grid;gap:0}
 .nameplate>div{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
 .nameplate>div:last-child{border-bottom:1px solid var(--line)}
@@ -355,7 +355,7 @@ a.try-card.has-pic:hover .try-pic.is-crm-board img{transform:translateY(-4px)}
 .film video{display:block;width:100%;aspect-ratio:16/9;border-radius:var(--r-m);background:var(--hand);object-fit:cover}
 .film.is-phone video{aspect-ratio:4/5}
 .film figcaption{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;font-size:.8125rem;color:var(--tx-2)}
-.film-tg{flex:none;white-space:nowrap;height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--pg);font-weight:600;font-size:.875rem;cursor:pointer}
+.film-tg{flex:none;white-space:nowrap;height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line-2);background:var(--pg);font-weight:600;font-size:.875rem;cursor:pointer}
 .film-tg:hover{border-color:var(--tx)}
 
 /* ---------- cookie choice (assets/consent.js; only on builds with a tag ID set) ---------- */

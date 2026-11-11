@@ -8,7 +8,7 @@
 .wk .hs-head h2{font-size:clamp(2rem,4.2vw,3.25rem)}
 
 .wk-filter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 clamp(24px,3vw,36px)}
-.wk-filter button{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--ink-tx2);font:inherit;font-size:.875rem;font-weight:500;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.wk-filter button{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:transparent;color:var(--ink-tx2);font:inherit;font-size:.875rem;font-weight:500;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
 .wk-filter button span{font:500 .6875rem/1 var(--mono);color:inherit;opacity:.7}
 .wk-filter button:hover{color:var(--ink-tx);border-color:rgba(255,255,255,.32)}
 .wk-filter button[aria-pressed="true"]{background:var(--ink-tx);border-color:var(--ink-tx);color:var(--ink)}

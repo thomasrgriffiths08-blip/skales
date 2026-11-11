@@ -180,10 +180,9 @@ const servicePage = s => ({
         audience: { '@type': 'BusinessAudience', name: 'UK trades and service businesses' },
         ...(autos.length ? { hasOfferCatalog: { '@type': 'OfferCatalog', name: `${s.name}: what is included`, itemListElement: autos.map(a => ({ '@type': 'Offer', itemOffered: { '@id': autoId(a) } })) } } : {}) },
       faqNode(s.faq, path),
-      howNode(path, `How a ${s.name.toLowerCase()} build with ${site.name} works`),
       ...(s.film ? [filmNode(s.film.wide, path)] : []),
     ];
-    const qa = s.sections.map(x => `<div class="qa"><h2>${esc(x.h2)}</h2>${x.p.map(p => `<p>${esc(p)}</p>`).join('')}</div>`).join('');
+    const qa = s.sections.map(x => `<div class="qa"><h2>${esc(x.h2)}</h2><p>${esc(x.p[0])}</p></div>`).join('');
     const others = SV.filter(x => x !== s);
     const hx = s.builds.length ? B(s.builds[0]) : null;
     const body = `
@@ -211,10 +210,9 @@ ${panel('The detail', 'Straight answers', qa, ' id="detail"')}
 ${tryCards(b, s.demos)}
 ${autoCards(b, autos, s.slug === 'follow-up-automation' ? 'The six automations' : 'The automations that go with it')}
 ${buildWall(b, s.builds, 'Running on this site', 'Working builds for made-up businesses. Open any of them on your phone and use it.')}
-${panel('The process', 'Teardown, quote, build, handover', `<h2>How does a build work?</h2><ol class="steps">${PROCESS.map(([n, t]) => `<li><b>${esc(n)}.</b> ${esc(t)}</li>`).join('')}</ol>`, ' id="process"')}
 ${fill(faqPanel(s.faq, `${s.name}: questions people ask`), b)}
 <section class="sec rel" aria-labelledby="h-rel">
-  <div class="wrap"><h2 id="h-rel" class="rel-h">The other services</h2><div class="rel-list">${others.map(x => `<a href="${b}services/${x.slug}/"><b>${esc(x.name)}</b><span>${esc(x.card)}</span></a>`).join('')}</div></div>
+  <div class="wrap"><h2 id="h-rel" class="rel-h">The other services</h2><div class="rel-list">${others.map(x => `<a href="${b}services/${x.slug}/"><b>${esc(x.name)}</b></a>`).join('')}</div></div>
 </section>
 </main>
 ${band(b, 'services', s.slug)}
