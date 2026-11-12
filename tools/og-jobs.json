@@ -694,9 +694,9 @@
   },
   {
     "key": "start",
-    "title": "Book a free 30-minute call.",
-    "kicker": "Skales Studio · three taps, then pick a time",
-    "sub": "Tell me what you do, then book a call with Tom on the same page."
+    "title": "Tell me what you need.",
+    "kicker": "Skales Studio · a few taps, then book a call",
+    "sub": "Answer a few quick questions, then book a call with Tom or send a request."
   },
   {
     "key": "try",

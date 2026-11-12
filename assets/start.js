@@ -1,19 +1,17 @@
-/* /start/ — the bio landing page. Three taps, then the call booked on the same page.
+/* /start/ — the bio landing page. One question a screen, then book a call on the page or send a request.
    Every screen is a history entry, so the phone's back button steps back a question; answers live in
-   sessionStorage, so a refresh keeps them. The answers go into the booking as Calendly's first
-   question (a1), with the channel they came from. The calendar script starts loading on the first
-   tap, so it is ready by the time they reach it. Events go to whatever analytics the page has. */
+   sessionStorage, so a refresh keeps them. The answers go into the booking as Calendly's first question
+   (a1) or into the request, with the channel they came from. The calendar script starts loading on the
+   first tap, so it is ready by the time they reach it. */
 (function(){
-  var d = document, S = window.SITE || {}, QS = window.STARTQS || [];
+  var d = document, S = window.SITE || {}, QS = window.STARTQS || [], B = window.STARTBUDGET || { min: 500, max: 10000, start: 1500 };
   var $ = function(id){ return d.getElementById(id); };
-  var check = $('check'), book = $('book'), form = $('qs'), head = $('intro'), top = $('top'), skip = $('skip');
-  if (!check || !form) return;
-  var qs = [].slice.call(form.querySelectorAll('.sq')), prog = [].slice.call(top.querySelectorAll('.st-prog span'));
+  var form = $('sf'); if (!form) return;
+  var secs = {}; [].forEach.call(form.querySelectorAll('.sf-s'), function(s){ secs[s.getAttribute('data-s')] = s; });
+  var back = $('back'), next = $('next'), bar = $('bar'), count = $('count'), prog = $('prog'), range = $('budget'), money = $('money'), other = $('other'), otherBox = $('otherBox');
   var enc = encodeURIComponent;
-  var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var store = { get: function(k){ try { return JSON.parse(sessionStorage.getItem(k)); } catch (e){ return null; } }, set: function(k, v){ try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e){} } };
   function track(name, props){ if (window.skTrack) skTrack(name, props); }   // assets/site.js
-  d.addEventListener('click', function(e){ var t = e.target.closest('[data-track]'); if (t) track(t.getAttribute('data-track'), { from: 'start' }); });
 
   /* where they came from (bio, story, an ad): kept for the booking so Tom sees the channel */
   var utm = store.get('st-utm') || {};
@@ -21,74 +19,83 @@
   store.set('st-utm', utm);
   var channel = utm.utm_source ? [utm.utm_source, utm.utm_medium, utm.utm_campaign].filter(Boolean).join(' / ') : (utm.ref || 'direct');
 
-  var a = store.get('st-b') || {}, cur = 0, started = false;
+  var a = store.get('st-c') || {}, cur = 'need', started = false;
+  var FLOW = ['need', 'goal', 'when', 'budget', 'how'], TOTAL = FLOW.length + 1;
   var q = function(key){ for (var i = 0; i < QS.length; i++) if (QS[i].key === key) return QS[i]; return null; };
-  var opt = function(key, v){ var x = q(key); if (x) for (var j = 0; j < x.opts.length; j++) if (x.opts[j].v === v) return x.opts[j]; return null; };
+  var label = function(key, v){ var x = q(key); if (x) for (var j = 0; j < x.opts.length; j++) if (x.opts[j].v === v) return x.opts[j].t; return ''; };
   var list = function(key){ return [].concat(a[key] || []); };
+  var save = function(){ store.set('st-c', a); };
+  var pounds = function(n){ n = +n; var t = n >= 1000 ? (Math.round(n / 100) / 10) + 'K' : String(n); return '£' + t + (n >= B.max ? '+' : ''); };
 
   /* ---------- screens ---------- */
-  function screen(name, i, push){
-    check.hidden = name !== 'q'; book.hidden = name !== 'book';
-    if (name === 'q'){
-      cur = i; qs.forEach(function(f, k){ f.hidden = k !== i; });
-      head.hidden = i > 0; top.hidden = i === 0; skip.hidden = i > 0;
-      prog.forEach(function(p, k){ p.classList.toggle('on', k <= i); });
-      var x = QS[i], picked = list(x.key);
-      [].forEach.call(qs[i].querySelectorAll('.sq-o'), function(o){ o.setAttribute('aria-pressed', String(picked.indexOf(o.getAttribute('data-v')) > -1)); });
-      var nx = qs[i].querySelector('[data-next]'); if (nx) nx.disabled = !picked.length;
-    }
-    if (push) history.pushState({ s: name, i: i }, '', name === 'q' ? (i ? '#q' + (i + 1) : location.pathname + location.search) : '#book');
-    scrollTo(0, 0);
-    var h = name === 'q' ? (i ? qs[i] : check).querySelector('h1,h2') : book.querySelector('h2');
-    if (h && push){ h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  function ready(){
+    if (cur === 'need') return list('need').length > 0 && (list('need').indexOf('other') < 0 || list('need').length > 1 || (a.other || '').trim().length > 1);
+    if (cur === 'goal') return list('goal').length > 0;
+    return true;
   }
-  addEventListener('popstate', function(e){
-    var s = e.state;
-    if (!s){ var m = location.hash.match(/^#q(\d)$/); return screen('q', m && QS[m[1] - 1] ? m[1] - 1 : 0); }
-    if (s.s === 'book') return openBook(false);
-    screen('q', s.i || 0);
+  function paint(){
+    var x = q(cur);
+    if (x){ var picked = list(cur); [].forEach.call(secs[cur].querySelectorAll('.sf-o'), function(o){ o.setAttribute('aria-pressed', String(picked.indexOf(o.getAttribute('data-v')) > -1)); }); }
+    if (cur === 'need' && otherBox){ otherBox.hidden = list('need').indexOf('other') < 0; if (other && other.value !== (a.other || '')) other.value = a.other || ''; }
+    if (cur === 'budget'){ range.value = a.budget || B.start; money.textContent = pounds(range.value); range.style.setProperty('--p', ((range.value - B.min) / (B.max - B.min) * 100) + '%'); }
+    var showNext = cur === 'need' || cur === 'goal' || cur === 'budget' || cur === 'reach';
+    next.hidden = !showNext; next.disabled = !ready(); next.textContent = cur === 'reach' ? 'Send request' : 'Continue';
+    back.hidden = cur === 'need' || cur === 'sent'; bar.hidden = cur === 'sent' || cur === 'book' || (back.hidden && next.hidden);
+    bar.classList.toggle('solo', next.hidden);
+    var at = FLOW.indexOf(cur), n = at > -1 ? at + 1 : TOTAL;
+    count.textContent = n + ' / ' + TOTAL; prog.style.width = (n / TOTAL * 100) + '%';
+  }
+  function show(name, push){
+    if (!secs[name]) name = 'need';
+    cur = name;
+    for (var k in secs) secs[k].hidden = k !== name;
+    paint();
+    if (push) history.pushState({ s: name }, '', name === 'need' ? location.pathname + location.search : '#' + name);
+    scrollTo(0, 0);
+    var h = secs[name].querySelector('h1,h2'); if (h && push) h.focus({ preventScroll: true });
+    if (name === 'book') openBook();
+  }
+  addEventListener('popstate', function(e){ show((e.state && e.state.s) || (location.hash || '').slice(1) || 'need'); });
+  function goBack(){ if (history.state && history.state.s) history.back(); else show(FLOW[Math.max(0, FLOW.indexOf(cur) - 1)] || 'how', true); }
+  back.addEventListener('click', goBack);
+  next.addEventListener('click', function(){
+    if (next.disabled) return;
+    if (cur === 'reach') return send();
+    if (cur === 'budget'){ a.budget = +range.value; save(); }
+    show(FLOW[FLOW.indexOf(cur) + 1], true);
   });
-  top.querySelector('[data-back]').addEventListener('click', function(){ history.back(); });
-  book.querySelector('[data-close]').addEventListener('click', function(){ if (history.state && history.state.s === 'book') history.back(); else screen('q', 0, true); });
-  d.querySelectorAll('[data-book]').forEach(function(btn){ btn.addEventListener('click', function(){ a = {}; store.set('st-b', a); openBook(true); }); });
 
   form.addEventListener('click', function(e){
-    var nx = e.target.closest('[data-next]');
-    if (nx){ if (!nx.disabled) screen('q', cur + 1, true); return; }
-    var o = e.target.closest('.sq-o'); if (!o) return;
+    if (e.target.closest('[data-back]')) return goBack();
+    var p = e.target.closest('[data-path]');
+    if (p){ a.path = p.getAttribute('data-path'); save(); track(a.path === 'book' ? 'call_clicked' : 'request_clicked', { channel: channel }); return show(a.path, true); }
+    var o = e.target.closest('.sf-o'); if (!o) return;
     var k = o.getAttribute('data-k'), v = o.getAttribute('data-v');
     if (!started){ started = true; track('check_started', { channel: channel }); warm(); }
     if (o.hasAttribute('data-multi')){
       var l = list(k), at = l.indexOf(v);
-      if (v === 'unsure') l = at > -1 ? [] : ['unsure'];
-      else { l = l.filter(function(x){ return x !== 'unsure'; }); if (at > -1) l.splice(l.indexOf(v), 1); else l.push(v); }
-      a[k] = l; store.set('st-b', a); screen('q', cur);
+      if (at > -1) l.splice(at, 1); else l.push(v);
+      a[k] = l; save(); paint();
+      if (v === 'other' && at < 0 && other) other.focus();
       return;
     }
-    a[k] = v; store.set('st-b', a);
-    [].forEach.call(o.parentNode.children, function(x){ x.setAttribute('aria-pressed', String(x === o)); });
-    setTimeout(function(){
-      if (cur < QS.length - 1) screen('q', cur + 1, true);
-      else { track('check_completed', { kind: a.kind, need: list('need').join(','), when: a.when, channel: channel }); openBook(true); }
-    }, 140);
+    a[k] = v; save(); paint();
+    setTimeout(function(){ show(FLOW[FLOW.indexOf(cur) + 1], true); }, 160);
   });
+  if (other) other.addEventListener('input', function(){ a.other = other.value.slice(0, 120); save(); next.disabled = !ready(); });
+  range.addEventListener('input', function(){ a.budget = +range.value; save(); paint(); });
+  form.addEventListener('submit', function(e){ e.preventDefault(); if (cur === 'reach') send(); });
 
   /* ---------- the answers, for the booking and for Tom ---------- */
   function summary(){
-    var k = opt('kind', a.kind), n = list('need').map(function(v){ return (opt('need', v) || {}).t; }).filter(Boolean), w = opt('when', a.when);
-    if (!k && !n.length && !w) return 'Booked straight from skales.studio/start · came from: ' + channel;
-    return [k ? k.t : '', n.length ? 'Wants: ' + n.join(', ') : '', w ? 'When: ' + w.t : '', 'Came from: ' + channel].filter(Boolean).join(' · ');
-  }
-  function answers(){
-    var k = opt('kind', a.kind), n = list('need'), w = opt('when', a.when), box = $('ans');
-    if (!k){ box.hidden = true; return; }
-    var chips = [k.t].concat(n.map(function(v){ return (opt('need', v) || {}).t; })).concat(w ? [w.t] : []);
-    box.innerHTML = chips.map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('') + '<button type="button" class="st-edit" data-edit>Change</button>';
-    box.hidden = false;
-    box.querySelector('[data-edit]').onclick = function(){ screen('q', 0, true); };
+    var need = list('need').filter(function(v){ return v !== 'other'; }).map(function(v){ return label('need', v); });
+    if (list('need').indexOf('other') > -1) need.push((a.other || '').trim() || 'Something else');
+    var goal = list('goal').map(function(v){ return label('goal', v); });
+    return [need.length ? 'Needs: ' + need.join(', ') : '', goal.length ? 'Goal: ' + goal.join(', ') : '', a.when ? 'Start: ' + label('when', a.when) : '',
+      a.budget ? 'Budget: about ' + pounds(a.budget) : '', 'Came from: ' + channel].filter(Boolean).join('\n');
   }
 
-  /* ---------- the call: Calendly or Cal.com inline, else a message ---------- */
+  /* ---------- the call: Calendly or Cal.com inline, else a request ---------- */
   var calLoaded = false, calBooted = '';
   function warm(){
     if (!S.calendly || /cal\.com\//.test(S.calendly) || window.Calendly || calLoaded) return;
@@ -96,46 +103,44 @@
     var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true;
     s.onerror = function(){ calLoaded = 'failed'; }; d.head.appendChild(s);
   }
-  function openBook(push){
-    track('call_clicked', { channel: channel, from: a.kind ? 'questions' : 'skip' });
-    screen('book', 0, push);
-    answers();
-    var k = opt('kind', a.kind), sys = $('lookSys');
-    if (sys){ sys.href = (S.base || '/') + 'work/system/' + (k && k.sys ? '?t=' + k.sys : ''); sys.firstChild.textContent = k ? 'The system, set up for ' + k.t.toLowerCase() : 'The system that runs the business'; }
+  function openBook(){
     var cal = $('cal'), none = $('calNone'), note = summary();
     if (calBooted === note && cal.querySelector('iframe')) return;
     calBooted = note;
+    function fallback(){ cal.innerHTML = ''; cal.hidden = true; none.hidden = false; }
     if (!S.calendly) return fallback();
     none.hidden = true; cal.hidden = false;
-    if (/cal\.com\//.test(S.calendly)){
-      cal.innerHTML = '<iframe title="Book a call" src="' + S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'embed=true&theme=dark&notes=' + enc(note) + '"></iframe>';
-      return;
-    }
-    var url = S.calendly + (S.calendly.indexOf('?') > -1 ? '&' : '?') + 'hide_gdpr_banner=1&hide_event_type_details=1&background_color=121317&text_color=f4f4f5&primary_color=ffe600&a1=' + enc(note);
+    var join = S.calendly.indexOf('?') > -1 ? '&' : '?';
+    if (/cal\.com\//.test(S.calendly)){ cal.innerHTML = '<iframe title="Book a call" src="' + S.calendly + join + 'embed=true&theme=dark&notes=' + enc(note) + '"></iframe>'; return; }
+    var url = S.calendly + join + 'hide_gdpr_banner=1&hide_event_type_details=1&background_color=0a0b0d&text_color=f4f4f5&primary_color=ffe600&a1=' + enc(note);
     var boot = function(){ if (!window.Calendly) return fallback(); cal.innerHTML = ''; window.Calendly.initInlineWidget({ url: url, parentElement: cal }); };
     if (window.Calendly) boot();
-    else {
-      warm();
-      var waited = 0, iv = setInterval(function(){ waited += 150; if (window.Calendly){ clearInterval(iv); boot(); } else if (calLoaded === 'failed' || waited > 8000){ clearInterval(iv); fallback(); } }, 150);
-    }
-    function fallback(){
-      cal.innerHTML = ''; cal.hidden = true; none.hidden = false;
-      var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, ''), bw = $('bkWa');
-      if (bw && wa) bw.href = 'https://wa.me/' + wa + '?text=' + enc('Hi Tom, I’d like a call.\n\n' + note);
-      $('bkMail').href = 'mailto:' + S.email + '?subject=' + enc('Call request from skales.studio') + '&body=' + enc('Hi Tom, I’d like a call.\n\n' + note);
-    }
+    else { warm(); var waited = 0, iv = setInterval(function(){ waited += 150; if (window.Calendly){ clearInterval(iv); boot(); } else if (calLoaded === 'failed' || waited > 8000){ clearInterval(iv); fallback(); } }, 150); }
   }
   addEventListener('message', function(e){
     var booked = (/calendly\.com$/.test(e.origin) && e.data && e.data.event === 'calendly.event_scheduled') || (/cal\.com$/.test(e.origin) && e.data && /booking(Successful|_successful)/i.test(JSON.stringify(e.data)));
     if (!booked) return;
-    track('call_booked', { channel: channel, kind: a.kind || '', tool: /cal\.com$/.test(e.origin) ? 'cal.com' : 'calendly' });
+    track('call_booked', { channel: channel, tool: /cal\.com$/.test(e.origin) ? 'cal.com' : 'calendly' });
     var done = $('done'); done.textContent = 'Booked. The confirmation is on its way to your email. Speak soon.'; done.hidden = false;
   });
 
+  /* ---------- the request: their details and answers, written out and handed to their email app ---------- */
+  function send(){
+    var name = $('fName').value.trim(), tel = $('fTel').value.trim(), mail = $('fMail').value.trim(), err = $('err');
+    var bad = name.length < 2 ? 'Add your name.' : tel.replace(/\D/g, '').length < 9 ? 'Add a WhatsApp number I can reach you on.' : !/^\S+@\S+\.\S+$/.test(mail) ? 'Add an email address.' : '';
+    if (bad){ err.textContent = bad; err.hidden = false; return; }
+    err.hidden = true;
+    var msg = 'Hi Tom, here is my request.\n\nName: ' + name + '\nWhatsApp: ' + tel + '\nEmail: ' + mail + '\n\n' + summary();
+    var href = 'mailto:' + S.email + '?subject=' + enc('Request from ' + name) + '&body=' + enc(msg);
+    $('sentMail').href = href;
+    track('request_sent', { channel: channel });
+    show('sent', true);
+    location.href = href;
+  }
+
   /* ---------- first paint ---------- */
   track('start_view', { channel: channel });
-  var qm = location.hash.match(/^#q(\d)$/);
-  if (location.hash === '#book'){ history.replaceState({ s: 'book' }, '', '#book'); openBook(false); }
-  else if (qm && QS[qm[1] - 1] && a.kind){ history.replaceState(null, '', location.pathname + location.search); history.pushState({ s: 'q', i: qm[1] - 1 }, '', '#q' + qm[1]); screen('q', qm[1] - 1); }
-  else { if (location.hash) history.replaceState(null, '', location.pathname + location.search); screen('q', 0); }
+  var first = (location.hash || '').slice(1);
+  if (first && secs[first] && first !== 'sent' && list('need').length){ history.replaceState({ s: first }, '', '#' + first); show(first); }
+  else { if (location.hash) history.replaceState(null, '', location.pathname + location.search); show('need'); }
 })();
