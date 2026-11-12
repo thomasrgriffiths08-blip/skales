@@ -19,6 +19,8 @@ const IC = {
   badge: I('<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>'),
   clock: I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
   bolt: I('<path d="M13 3 5 13h6l-1 8 8-10h-6Z"/>'),
+  spark: I('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7Z"/>'),
+  crm: I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/>'),
   compass: I('<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5Z"/>'),
   video: I('<rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/>'),
   chat: I('<path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.1A8 8 0 1 1 20 12Z"/>'),
@@ -26,19 +28,19 @@ const IC = {
 
 const QS = [
   { key: 'need', h: 'What do you need help with?', sub: 'Select all that apply', multi: true, other: 'What else do you need?', opts: [
+    { v: 'ai', t: 'AI employees for my business', i: 'spark' }, { v: 'crm', t: 'A CRM built for my business', i: 'crm' },
     { v: 'website', t: 'Build a new website', i: 'globe' }, { v: 'redo', t: 'Redo my website', i: 'redo' },
-    { v: 'booking', t: 'Online booking and a diary', i: 'cal' }, { v: 'missed', t: 'Catch the calls I miss', i: 'phone' },
-    { v: 'followup', t: 'Reviews and follow-up', i: 'star' }, { v: 'ads', t: 'Ads on Google or Instagram', i: 'ads' },
-    { v: 'other', t: 'Something else' }] },
+    { v: 'booking', t: 'Online booking and a diary', i: 'cal' }, { v: 'followup', t: 'Automated follow-up and reviews', i: 'star' },
+    { v: 'ads', t: 'Ads on Google or Instagram', i: 'ads' }, { v: 'other', t: 'Something else' }] },
   { key: 'goal', h: "What's your main goal?", sub: 'Select all that apply', multi: true, opts: [
-    { v: 'customers', t: 'Get more customers', i: 'up' }, { v: 'found', t: 'Get found on Google and AI', i: 'search' },
-    { v: 'pro', t: 'Look professional online', i: 'badge' }, { v: 'calls', t: 'Stop losing jobs to missed calls', i: 'phone' },
-    { v: 'admin', t: 'Spend less time on admin', i: 'clock' }, { v: 'unsure', t: 'Something else / not sure' }] },
+    { v: 'customers', t: 'Get more customers', i: 'up' }, { v: 'automate', t: 'Automate the work with AI', i: 'spark' },
+    { v: 'organise', t: 'Get every customer and job in one place', i: 'crm' }, { v: 'found', t: 'Get found on Google and AI', i: 'search' },
+    { v: 'pro', t: 'Look professional online', i: 'badge' }, { v: 'admin', t: 'Spend less time on admin', i: 'clock' }, { v: 'unsure', t: 'Something else / not sure' }] },
   { key: 'when', h: 'When are you looking to get started?', sub: 'Single choice', opts: [
     { v: 'asap', t: 'ASAP', i: 'bolt' }, { v: 'week', t: 'Within the next week' }, { v: 'month', t: 'Within the next month' }, { v: 'exploring', t: 'Just exploring for now', i: 'compass' }] },
 ];
 /* the budget slider: pounds. Tom's to set; nothing here is a quoted price. */
-const BUDGET = { min: 500, max: 10000, step: 250, start: 1500 };
+const BUDGET = { min: 3500, max: 15000, step: 500, start: 5000, bands: ['£750 - 1.5k', '£1.5k - 3.5k'] };
 const STEPS = QS.length + 3;   // + budget, how to continue, then the calendar or the contact details
 
 module.exports = { QS, pages: [{
@@ -64,9 +66,11 @@ module.exports = { QS, pages: [{
     ${QS.map(q).join('')}
     <section class="sf-s" data-s="budget" hidden>
       <h2 tabindex="-1">What budget are you working with?</h2><p class="sf-sub">Drag to your budget</p>
-      <output class="sf-money" id="money" for="budget">&pound;1.5K</output>
+      <output class="sf-money" id="money" for="budget">&pound;5k</output>
       <input class="sf-range" type="range" id="budget" min="${BUDGET.min}" max="${BUDGET.max}" step="${BUDGET.step}" value="${BUDGET.start}" aria-label="Your budget in pounds">
-      <div class="sf-ends"><span>&pound;500</span><span>&pound;10K+</span></div>
+      <div class="sf-ends"><span>&pound;3.5k</span><span>&pound;15k+</span></div>
+      <button type="button" class="sf-o sf-else" id="elseBtn" aria-expanded="false" aria-controls="bands"><span>Something else</span><svg class="sf-chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="sf-bands" id="bands" hidden>${BUDGET.bands.map(t => `<button type="button" class="sf-o sf-band" data-band="${esc(t)}" aria-pressed="false"><span>${esc(t)}</span></button>`).join('')}</div>
     </section>
     <section class="sf-s" data-s="how" hidden>
       <h2 tabindex="-1">How would you like to continue?</h2>

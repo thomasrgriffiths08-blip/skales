@@ -79,3 +79,8 @@ html,body{background:var(--pg);color:var(--tx)}
 }
 .sf-backlink{display:inline-flex;align-items:center;height:44px;margin:-14px 0 10px;padding:0;border:0;background:none;color:var(--tx-2);font:inherit;font-size:.9375rem;cursor:pointer}
 .sf-s[data-s="book"]{margin-bottom:-110px}
+.sf-else{margin-top:34px;gap:10px}
+.sf-chev{transition:transform .2s ease}
+.sf-else[aria-expanded="true"] .sf-chev{transform:rotate(180deg)}
+.sf-bands{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.is-band .sf-range,.is-band .sf-ends{opacity:.35}

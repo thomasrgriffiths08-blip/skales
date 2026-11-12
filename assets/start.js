@@ -8,7 +8,7 @@
   var $ = function(id){ return d.getElementById(id); };
   var form = $('sf'); if (!form) return;
   var secs = {}; [].forEach.call(form.querySelectorAll('.sf-s'), function(s){ secs[s.getAttribute('data-s')] = s; });
-  var back = $('back'), next = $('next'), bar = $('bar'), count = $('count'), prog = $('prog'), range = $('budget'), money = $('money'), other = $('other'), otherBox = $('otherBox');
+  var back = $('back'), next = $('next'), bar = $('bar'), count = $('count'), prog = $('prog'), range = $('budget'), money = $('money'), other = $('other'), otherBox = $('otherBox'), elseBtn = $('elseBtn'), bands = $('bands');
   var enc = encodeURIComponent;
   var store = { get: function(k){ try { return JSON.parse(sessionStorage.getItem(k)); } catch (e){ return null; } }, set: function(k, v){ try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e){} } };
   function track(name, props){ if (window.skTrack) skTrack(name, props); }   // assets/site.js
@@ -25,7 +25,7 @@
   var label = function(key, v){ var x = q(key); if (x) for (var j = 0; j < x.opts.length; j++) if (x.opts[j].v === v) return x.opts[j].t; return ''; };
   var list = function(key){ return [].concat(a[key] || []); };
   var save = function(){ store.set('st-c', a); };
-  var pounds = function(n){ n = +n; var t = n >= 1000 ? (Math.round(n / 100) / 10) + 'K' : String(n); return '£' + t + (n >= B.max ? '+' : ''); };
+  var pounds = function(n){ n = +n; var t = n >= 1000 ? (Math.round(n / 100) / 10) + 'k' : String(n); return '£' + t + (n >= B.max ? '+' : ''); };
 
   /* ---------- screens ---------- */
   function ready(){
@@ -37,7 +37,12 @@
     var x = q(cur);
     if (x){ var picked = list(cur); [].forEach.call(secs[cur].querySelectorAll('.sf-o'), function(o){ o.setAttribute('aria-pressed', String(picked.indexOf(o.getAttribute('data-v')) > -1)); }); }
     if (cur === 'need' && otherBox){ otherBox.hidden = list('need').indexOf('other') < 0; if (other && other.value !== (a.other || '')) other.value = a.other || ''; }
-    if (cur === 'budget'){ range.value = a.budget || B.start; money.textContent = pounds(range.value); range.style.setProperty('--p', ((range.value - B.min) / (B.max - B.min) * 100) + '%'); }
+    if (cur === 'budget'){
+      range.value = a.budget || B.start; range.style.setProperty('--p', ((range.value - B.min) / (B.max - B.min) * 100) + '%');
+      money.textContent = a.band || pounds(range.value); secs.budget.classList.toggle('is-band', !!a.band);
+      var open = !!(a.band || a.elseOpen); bands.hidden = !open; elseBtn.setAttribute('aria-expanded', String(open));
+      [].forEach.call(bands.querySelectorAll('[data-band]'), function(x){ x.setAttribute('aria-pressed', String(x.getAttribute('data-band') === a.band)); });
+    }
     var showNext = cur === 'need' || cur === 'goal' || cur === 'budget' || cur === 'reach';
     next.hidden = !showNext; next.disabled = !ready(); next.textContent = cur === 'reach' ? 'Send request' : 'Continue';
     back.hidden = cur === 'need' || cur === 'sent'; bar.hidden = cur === 'sent' || cur === 'book' || (back.hidden && next.hidden);
@@ -61,7 +66,7 @@
   next.addEventListener('click', function(){
     if (next.disabled) return;
     if (cur === 'reach') return send();
-    if (cur === 'budget'){ a.budget = +range.value; save(); }
+    if (cur === 'budget' && !a.band){ a.budget = +range.value; save(); }
     show(FLOW[FLOW.indexOf(cur) + 1], true);
   });
 
@@ -69,7 +74,7 @@
     if (e.target.closest('[data-back]')) return goBack();
     var p = e.target.closest('[data-path]');
     if (p){ a.path = p.getAttribute('data-path'); save(); track(a.path === 'book' ? 'call_clicked' : 'request_clicked', { channel: channel }); return show(a.path, true); }
-    var o = e.target.closest('.sf-o'); if (!o) return;
+    var o = e.target.closest('.sf-o[data-k]'); if (!o) return;
     var k = o.getAttribute('data-k'), v = o.getAttribute('data-v');
     if (!started){ started = true; track('check_started', { channel: channel }); warm(); }
     if (o.hasAttribute('data-multi')){
@@ -83,7 +88,9 @@
     setTimeout(function(){ show(FLOW[FLOW.indexOf(cur) + 1], true); }, 160);
   });
   if (other) other.addEventListener('input', function(){ a.other = other.value.slice(0, 120); save(); next.disabled = !ready(); });
-  range.addEventListener('input', function(){ a.budget = +range.value; save(); paint(); });
+  range.addEventListener('input', function(){ a.budget = +range.value; a.band = ''; save(); paint(); });
+  elseBtn.addEventListener('click', function(){ a.elseOpen = !(a.elseOpen || a.band); if (!a.elseOpen) a.band = ''; save(); paint(); });
+  bands.addEventListener('click', function(e){ var x = e.target.closest('[data-band]'); if (!x) return; var v = x.getAttribute('data-band'); a.band = a.band === v ? '' : v; a.elseOpen = true; save(); paint(); });
   form.addEventListener('submit', function(e){ e.preventDefault(); if (cur === 'reach') send(); });
 
   /* ---------- the answers, for the booking and for Tom ---------- */
@@ -92,7 +99,7 @@
     if (list('need').indexOf('other') > -1) need.push((a.other || '').trim() || 'Something else');
     var goal = list('goal').map(function(v){ return label('goal', v); });
     return [need.length ? 'Needs: ' + need.join(', ') : '', goal.length ? 'Goal: ' + goal.join(', ') : '', a.when ? 'Start: ' + label('when', a.when) : '',
-      a.budget ? 'Budget: about ' + pounds(a.budget) : '', 'Came from: ' + channel].filter(Boolean).join('\n');
+      a.band ? 'Budget: ' + a.band : a.budget ? 'Budget: about ' + pounds(a.budget) : '', 'Came from: ' + channel].filter(Boolean).join('\n');
   }
 
   /* ---------- the call: Calendly or Cal.com inline, else a request ---------- */
