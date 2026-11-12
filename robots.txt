@@ -95,4 +95,4 @@ Disallow: /demos/
 Disallow: /tools/
 Disallow: /data/
 
-Sitemap: https://thomasrgriffiths08-blip.github.io/skales/sitemap.xml
+Sitemap: https://skales.studio/sitemap.xml

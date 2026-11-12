@@ -7,7 +7,7 @@ module.exports = {
   tagline: 'Websites & systems for service businesses',
   // ORIGIN — the live address. Everything (canonicals, sitemap, schema, OG, the demo lock) derives from it.
   // Do NOT point this at a domain that is not registered and pointing here: every link becomes a parking page.
-  origin: 'https://thomasrgriffiths08-blip.github.io/skales',   // skales.studio is bought (2026-10-08) but not pointed yet — switch to 'https://skales.studio' the day DNS resolves, then rebuild
+  origin: 'https://skales.studio',   // live on Vercel (project skales-hero) from 2026-11-12; the old GitHub Pages copy is at thomasrgriffiths08-blip.github.io/skales
   // extra hosts the locked demos may run under (dev + any future domain)
   allowedHosts: ['localhost', '127.0.0.1', 'thomasrgriffiths08-blip.github.io', 'skales.studio', 'www.skales.studio'],
   locale: 'en-GB',
