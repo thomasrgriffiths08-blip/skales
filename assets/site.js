@@ -2,6 +2,9 @@
 (function(){
   var d = document, S = window.SITE || {};
   try{ if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) d.documentElement.classList.add('m-on'); }catch(e){}
+  /* where the visitor came from, kept for the visit so the booking can say it (assets/book.js) */
+  try{ var u = new URLSearchParams(location.search).get('utm_source'), h = d.referrer ? new URL(d.referrer).hostname.replace(/^www\./, '') : '';
+    if (u) sessionStorage.setItem('sk_src', u.slice(0, 40)); else if (h && h !== location.hostname && !sessionStorage.getItem('sk_src')) sessionStorage.setItem('sk_src', h.slice(0, 40)); }catch(e){}
   /* tracking: one call for every page. The dataLayer always; Meta and Google only once the visitor has
      accepted and assets/consent.js has loaded them. The events that matter to ads go as standard events. */
   var STD = { casefile_sent: 'Lead', teardown_sent: 'Lead', call_booked: 'Schedule', whatsapp_click: 'Contact', email_click: 'Contact' };

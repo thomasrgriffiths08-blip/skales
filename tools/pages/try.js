@@ -244,7 +244,7 @@ const crmBoard = `
   <div class="bd-hd"><b>Leads</b><span>Drag a card, or use its button</span></div>
   <div class="bd" id="board">
     ${[['e', 'Enquiry', '#3B18E0'], ['q', 'Quoted', '#D98A0B'], ['b', 'Booked', '#2F6FDB'], ['d', 'Done', '#22A06B']].map(([k, nm, c]) => `
-    <div class="bd-col" data-col="${k}"><h4><i style="background:${c}"></i>${nm}<span data-count="${k}"></span></h4><div class="bd-cards" id="col-${k}"></div></div>`).join('')}
+    <div class="bd-col" data-col="${k}"><h3><i style="background:${c}"></i>${nm}<span data-count="${k}"></span></h3><div class="bd-cards" id="col-${k}"></div></div>`).join('')}
   </div>
   <div class="crm-feed">
     <h4>Sent automatically <span class="crm-live"><i></i>Live</span></h4>

@@ -91,7 +91,7 @@ const system = b => {
       <li><b>Quotes chased.</b><span>Quotes come from your price list and chase themselves until the customer answers.</span></li>
       <li><b>Reviews asked for.</b><span>Every finished job asks for a Google review, and next year's service reminds itself.</span></li>
     </ul>
-    <div class="hs-ctas"><a class="tlink" href="${b}work/${sys.slug}/">See the system working <span aria-hidden="true">→</span></a></div>
+    <div class="hs-ctas"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="tlink" href="${b}work/${sys.slug}/">See the system working <span aria-hidden="true">→</span></a></div>
   </div>
 </section>`;
 };
@@ -107,7 +107,7 @@ const work = b => `<section class="hs hs-work" id="work" aria-labelledby="h-work
       <span class="w-shot"><img src="${shot(b, x, 1200)}" srcset="${shot(b, x, 1200)} 1200w, ${shot(b, x, 2160)} 2160w" sizes="(min-width: 900px) 46vw, 92vw" width="1200" height="750" alt="${esc(nameOf(x))} on a laptop: ${esc(x.short)}" loading="lazy" decoding="async"></span>
       <span class="w-cap"><b>${esc(nameOf(x))}</b><span>${esc(x.trade || x.biz)}</span></span>
     </a>`).join('')}</div>
-    <div class="hs-ctas"><a class="btn btn-glass" href="${b}work/">See all ${Words(SITES.length).toLowerCase()}</a></div>
+    <div class="hs-ctas"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-glass" href="${b}work/">See all ${Words(SITES.length).toLowerCase()}</a></div>
   </div>
 </section>`;
 
@@ -123,6 +123,7 @@ const how = b => `<section class="hs hs-how" id="how" aria-labelledby="h-how">
       <li><span class="n">03</span><b>Built by hand</b><span>The website and the system behind it, hand-coded with no page builder and no theme.</span></li>
       <li><span class="n">04</span><b>Yours from day one</b><span>The domain, the code and every account sit in your name. Nothing is rented back to you monthly.</span></li>
     </ol>
+    <div class="hs-ctas"><a class="btn btn-live" href="${b}book/">Book the free call</a></div>
   </div>
 </section>`;
 

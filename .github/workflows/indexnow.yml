@@ -1,0 +1,21 @@
+name: Tell search engines what changed
+on:
+  push:
+    branches: [main]
+    paths: ['**/index.html', 'sitemap.xml']
+permissions:
+  contents: read
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Wait for the site to publish
+        run: sleep 240
+      - name: Submit the changed pages
+        run: node tools/indexnow.mjs

@@ -67,7 +67,7 @@ module.exports = { QS, pages: [{
     <div id="calNone" class="st-cal-none" hidden>
       <p>Send me a message and you will get times back the same day.</p>
       <div class="st-acts">${wa ? `<a class="btn btn-live" id="bkWa" data-track="whatsapp_click" href="${L.waHref('Hi Tom — I would like a call.')}">Message me on WhatsApp</a>` : ''}<a class="btn ${wa ? 'btn-ghost' : 'btn-live'}" id="bkMail" href="mailto:${site.email}">Email me</a></div>
-      <p class="st-fine">Or use <a class="lnk" href="${b}book/">the booking form</a>.</p>
+      <p class="st-fine">Or open <a class="lnk" href="${b}book/">the booking page</a>.</p>
     </div>
     <p class="st-done" id="done" hidden role="status"></p>
     <div class="st-look">
