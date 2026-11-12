@@ -16,7 +16,7 @@ module.exports = {
   founder: { name: 'Tom Griffiths', alternateName: 'Thomas Griffiths', jobTitle: 'Founder & builder' },
   email: 'thomasrgriffiths08@gmail.com',
   whatsapp: '447413399910',                       // international digits only, e.g. '447700900123'. Empty = WhatsApp controls hide.
-  calendly: 'https://calendly.com/thomasrgriffiths08/30min',                       // Calendly or Cal.com link, e.g. 'https://calendly.com/<handle>/<event>' or 'https://cal.com/<handle>/20min'. Empty = booking hands off by email/WhatsApp.
+  calendly: 'https://calendly.com/thomasrgriffiths08/skales',                       // Calendly or Cal.com link, e.g. 'https://calendly.com/<handle>/<event>' or 'https://cal.com/<handle>/20min'. Empty = booking hands off by email/WhatsApp.
   leadEndpoint: '',                   // POST URL that texts a case file to the owner (the Cloudflare Worker). Empty = /start offers the share sheet instead.
   // TRACKING — only with the visitor's consent (assets/consent.js shows the banner). All empty = no banner, no tags, nothing loads.
   metaPixel: '',                      // Meta Pixel ID, digits only, from Events Manager

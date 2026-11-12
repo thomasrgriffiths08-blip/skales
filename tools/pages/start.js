@@ -75,13 +75,13 @@ module.exports = { QS, pages: [{
     <section class="sf-s" data-s="how" hidden>
       <h2 tabindex="-1">How would you like to continue?</h2>
       <div class="sf-cards">
-        <button type="button" class="sf-card is-main" data-path="book">${IC.video}<b>Book a call</b><span>Free, 30 minutes, with Tom</span></button>
+        <button type="button" class="sf-card is-main" data-path="book">${IC.video}<b>Book a call</b><span>Free, 45 minutes, with Tom</span></button>
         <button type="button" class="sf-card" data-path="reach">${IC.chat}<b>Send a request</b><span>I reply personally</span></button>
       </div>
     </section>
     <section class="sf-s sf-book" data-s="book" hidden>
       <button type="button" class="sf-backlink" data-back>&larr; Back</button>
-      <h2 tabindex="-1">Pick a day</h2><p class="sf-sub">A free 30-minute call with Tom. Times are shown in your own time zone.</p>
+      <h2 tabindex="-1">Pick a day</h2><p class="sf-sub">A free 45-minute call with Tom. Times are shown in your own time zone.</p>
       <div id="cal" class="sf-cal"><p class="sf-wait">Loading the calendar&hellip;</p></div>
       <div id="calNone" class="sf-none" hidden><p>The calendar did not load here. Send a request instead and you will get times back.</p><button type="button" class="btn btn-live" data-path="reach">Send a request</button></div>
       <p class="sf-done" id="done" hidden role="status"></p>

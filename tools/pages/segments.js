@@ -126,7 +126,7 @@ ${L.header(b, 'services')}
     <div class="hs-head">
       <p class="kick">Book</p>
       <h2 id="h-book">Want this working for your business?</h2>
-      <p class="lead">A free 30-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.</p>
+      <p class="lead">A free 45-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.</p>
     </div>
     <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="btn btn-glass btn-lg" href="${b}start/?utm_source=site&amp;utm_medium=trades&amp;utm_campaign=${s.slug}">Book in three taps</a></div>
   </div>
@@ -168,7 +168,7 @@ ${GROUPS.map(g => `    <h2 class="tp-rel-h" id="g-${g.replace(/\W+/g, '-').toLow
     <div class="hs-head">
       <p class="kick">Book</p>
       <h2 id="h-book">Not on the list? Book a call anyway.</h2>
-      <p class="lead">A free 30-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.</p>
+      <p class="lead">A free 45-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.</p>
     </div>
     <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="btn btn-glass btn-lg" href="${b}start/?utm_source=site&amp;utm_medium=trades&amp;utm_campaign=index">Book in three taps</a></div>
   </div>

@@ -6,10 +6,10 @@ const KIND = { heating: 'Plumbing & heating', electrical: 'Electrical', roofing:
 const DRAFT_TRADES = Object.fromEntries(require('../../data/trades.js').filter(t => t.builder !== false).map(t => [t.key, [t.label, KIND[t.key] || 'Another service business']]));
 module.exports = { pages: [{
   url: '/book/', og: 'book', priority: 0.9, changefreq: 'monthly',
-  meta: { key: 'book', title: 'Book a call', kicker: 'Free · 30 minutes · with Tom', sub: 'Pick a time. No forms, no pitch, no proposal deck.' },
+  meta: { key: 'book', title: 'Book a call', kicker: 'Free · 45 minutes · with Tom', sub: 'Pick a time. No forms, no pitch, no proposal deck.' },
   render(b){
-    const title = `Book a free 30-minute call | ${site.name}`;
-    const description = `Pick a time for a free 30-minute call with Tom, who builds every website and system. The calendar is on the page: no forms first. For UK service businesses.`;
+    const title = `Book a free 45-minute call | ${site.name}`;
+    const description = `Pick a time for a free 45-minute call with Tom, who builds every website and system. The calendar is on the page: no forms first. For UK service businesses.`;
     const nodes = [
       L.webPage({ path: '/book/', title, description, type: 'ContactPage', extra: { potentialAction: { '@type': 'ReserveAction', name: 'Book a call', target: L.abs('/book/') } } }),
       L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Book a call', path: '/book/' }]),
@@ -20,7 +20,7 @@ ${L.header(b, 'book')}
 <section class="wrap bk">
   <div class="bk-copy">
     <h1>Pick a time.</h1>
-    <p class="lead">A free 30-minute call with me, Tom. I build every website and system myself, so you talk to the person who does the work.</p>
+    <p class="lead">A free 45-minute call with me, Tom. I build every website and system myself, so you talk to the person who does the work.</p>
     <ul class="bk-list">
       <li>What is losing you jobs now, and what to fix first.</li>
       <li>A flat price, agreed before anything starts.</li>

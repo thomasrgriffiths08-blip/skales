@@ -166,8 +166,8 @@
     var link = location.href.split('#')[0] + '#f=' + pack(a);
     if (!r.leaks.length && r.verdict === 'fit') r.verdict = 'small';
     var verdict = {
-      fit: ['This is a fit.', 'You run it, there is real money on the table and you would start soon. The next step is a call: half an hour on this file, what to build first, and a flat quote with a date on it. Bring the file.'],
-      small: ['A fit, with a small brief.', 'The leaks on these numbers are modest, which usually means the business is already run well. A call will tell you in half an hour whether one piece is worth building, or whether a free teardown covers it.'],
+      fit: ['This is a fit.', 'You run it, there is real money on the table and you would start soon. The next step is a call: 45 minutes on this file, what to build first, and a flat quote with a date on it. Bring the file.'],
+      small: ['A fit, with a small brief.', 'The leaks on these numbers are modest, which usually means the business is already run well. A call will tell you in 45 minutes whether one piece is worth building, or whether a free teardown covers it.'],
       later: ['Keep this file.', 'You said you are looking for now, which is the right time to read it and the wrong time for a call. Save it; when you are ready, the link opens the same file and the call starts from it.'],
       owner: ['Put this in front of the owner.', 'Everything in here is only worth doing if the person who signs it off has read it. Send them the link: it opens this exact file, with your answers, on their phone.'],
     }[r.verdict];

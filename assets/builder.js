@@ -450,7 +450,7 @@
       if (o.t.key !== 'heating') d.querySelectorAll('[data-dx="price"]').forEach(function(el){ el.textContent = 'Price shown up front'; });
     }
     var b = d.getElementById('dxBook'); if (b){ b.href = bookUrl(o); b.textContent = 'Book a call about ' + o.ref; }
-    var rl = d.getElementById('dxRefline'); if (rl) rl.textContent = 'Thirty minutes, free. Your draft comes with you.';
+    var rl = d.getElementById('dxRefline'); if (rl) rl.textContent = 'Forty-five minutes, free. Your draft comes with you.';
   }
 
   /* ---------- first paint ----------

@@ -130,7 +130,7 @@ ${L.header(b, 'work')}
     <div class="hs-head">
       <p class="kick">Book</p>
       <h2 id="h-book">These are demos. Yours would have your name on it.</h2>
-      <p class="lead">A free 30-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.</p>
+      <p class="lead">A free 45-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.</p>
     </div>
     <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="btn btn-glass btn-lg" href="${b}try/">Try a live demo</a></div>
   </div>
@@ -300,7 +300,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
   </nav>`}
 </article>
 </main>
-${x.lane === 'system' ? L.ctaBand(b, 'Want this running for your business?', 'A free 30-minute call: which part would earn its keep first, what it would cost, and when it could be live.', `<a class="btn btn-ghost" href="${b}work/#websites">See the websites</a>`) : L.ctaBand(b, 'Want one like this, with your name on it?', `A short call to find out what is leaking in your business and whether a build like ${esc(x.name)} is the right fix.`, `<a class="btn btn-ghost" href="${b}${lane.path}">More ${esc(lane.kindWord.toLowerCase())}</a>`)}
+${x.lane === 'system' ? L.ctaBand(b, 'Want this running for your business?', 'A free 45-minute call: which part would earn its keep first, what it would cost, and when it could be live.', `<a class="btn btn-ghost" href="${b}work/#websites">See the websites</a>`) : L.ctaBand(b, 'Want one like this, with your name on it?', `A short call to find out what is leaking in your business and whether a build like ${esc(x.name)} is the right fix.`, `<a class="btn btn-ghost" href="${b}${lane.path}">More ${esc(lane.kindWord.toLowerCase())}</a>`)}
 ${L.footer(b)}`;
       return L.page(L.head({ b, path: `/work/${x.slug}/`, title, description, og: `work-${x.slug}`, css: ['device.css'], nodes, palette: x }), body, L.scripts(b, x.slug === 'system' ? ['builds.js', 'device.js', 'desk.js'] : ['builds.js', 'device.js']));
     }

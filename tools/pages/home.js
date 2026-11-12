@@ -118,7 +118,7 @@ const how = b => `<section class="hs hs-how" id="how" aria-labelledby="h-how">
       <h2 id="h-how">One call, one price, then it is built.</h2>
     </div>
     <ol class="steps">
-      <li><span class="n">01</span><b>A free call</b><span>Half an hour on what is losing you jobs now and what to fix first. Or ask for a <a class="lnk" href="${b}teardown.html">free teardown by message</a>.</span></li>
+      <li><span class="n">01</span><b>A free call</b><span>45 minutes on what is losing you jobs now and what to fix first. Or ask for a <a class="lnk" href="${b}teardown.html">free teardown by message</a>.</span></li>
       <li><span class="n">02</span><b>A flat price and a date</b><span>Agreed before anything starts, if it is a fit. If it is not, you will hear that on the call.</span></li>
       <li><span class="n">03</span><b>Built by hand</b><span>The website and the system behind it, hand-coded with no page builder and no theme.</span></li>
       <li><span class="n">04</span><b>Yours from day one</b><span>The domain, the code and every account sit in your name. Nothing is rented back to you monthly.</span></li>
@@ -145,7 +145,7 @@ const book = b => {
     <div>
       <p class="kick">Book</p>
       <h2 id="h-book">Pick a time for a free call.</h2>
-      <p class="lead">Thirty minutes on what is losing you jobs and what would fix it. The person on the call is the person who builds it.</p>
+      <p class="lead">Forty-five minutes on what is losing you jobs and what would fix it. The person on the call is the person who builds it.</p>
       <ul class="book-alt">
         ${site.whatsapp ? `<li><a class="tlink" data-wa="Hi Tom, found you through your site." href="${L.waHref('Hi Tom, found you through your site.')}">Rather message? WhatsApp me <span aria-hidden="true">→</span></a></li>` : ''}
         <li><a class="tlink" href="${b}teardown.html">Rather not talk? Get a free teardown by message <span aria-hidden="true">→</span></a></li>

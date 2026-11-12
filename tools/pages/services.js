@@ -98,7 +98,7 @@ const autoCards = (b, slugs, h) => !slugs.length ? '' : `<section class="sec" id
   </div>
 </section>`;
 const ctaRow = (b, demos, medium, slug) => `<div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a>${demos.length ? `<a class="btn btn-ghost" href="${b}try/${demos[0]}/">Try the demo</a>` : `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">See what you’re missing</a>`}</div>`;
-const band = (b, medium, slug) => L.ctaBand(b, 'Want this working for your business?', 'A free 30-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.', `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">Book in three taps</a>`);
+const band = (b, medium, slug) => L.ctaBand(b, 'Want this working for your business?', 'A free 45-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.', `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">Book in three taps</a>`);
 const fill = (html, b) => html.replace(/\{\{b\}\}/g, b);
 
 /* ---------- the ad previews on the two ads pages (a made-up business, labelled) ---------- */
