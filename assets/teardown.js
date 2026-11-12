@@ -1,6 +1,6 @@
 (function(){
   var d = document, S = window.SITE || {}, wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, '');
-  if (wa){ var alt = d.getElementById('waAlt'); alt.hidden = false; d.getElementById('waDirect').href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent('Hi Tom — saw your page, fancy the free teardown.'); }
+  if (wa){ var alt = d.getElementById('waAlt'); alt.hidden = false; d.getElementById('waDirect').href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent('Hi Tom, saw your page, fancy the free teardown.'); }
   var f = d.getElementById('f'), err = d.getElementById('fErr');
   f.addEventListener('submit', function(e){
     e.preventDefault();

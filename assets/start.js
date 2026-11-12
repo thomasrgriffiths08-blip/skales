@@ -138,8 +138,11 @@
     if (bad){ err.textContent = bad; err.hidden = false; return; }
     err.hidden = true;
     var msg = 'Hi Tom, here is my request.\n\nName: ' + name + '\nWhatsApp: ' + tel + '\nEmail: ' + mail + '\n\n' + summary();
-    var href = 'mailto:' + S.email + '?subject=' + enc('Request from ' + name) + '&body=' + enc(msg);
-    $('sentMail').href = href;
+    var wa = String(S.whatsapp || '').replace(/\D/g, '');
+    var mailHref = 'mailto:' + S.email + '?subject=' + enc('Request from ' + name) + '&body=' + enc(msg);
+    var href = wa ? 'https://wa.me/' + wa + '?text=' + enc(msg) : mailHref;
+    $('sentMail').href = mailHref;
+    $('sentMsg').textContent = wa ? 'WhatsApp has opened with your request written out. Press send and it is with me.' : 'Your email app has opened with your request written out. Press send and it is with me.';
     track('request_sent', { channel: channel });
     show('sent', true);
     location.href = href;

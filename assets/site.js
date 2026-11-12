@@ -93,7 +93,7 @@
     var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, '');
     d.querySelectorAll('[data-wa]').forEach(function(el){
       if (!wa){ el.hidden = true; return; }
-      el.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(el.getAttribute('data-wa') || 'Hi Tom — saw your site.'); el.hidden = false;
+      el.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(el.getAttribute('data-wa') || 'Hi Tom, saw your site.'); el.hidden = false;
     });
     d.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
     /* mobile menu */

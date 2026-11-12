@@ -39,7 +39,7 @@ ${L.header(b, '')}
           <p class="ps">PS &mdash; a missed call to your business could get an instant reply like this at 9:47pm, without you touching the phone. That is the kind of thing that gets built here.</p>
         </div>
       </div>
-      ${site.whatsapp ? `<p class="alt" id="waAlt">Prefer to skip the form? <a id="waDirect" href="${L.waHref('Hi Tom — saw your page, fancy the free teardown.')}">Message straight on WhatsApp</a></p>` : ''}
+      ${site.whatsapp ? `<p class="alt" id="waAlt">Prefer to skip the form? <a id="waDirect" href="${L.waHref('Hi Tom, saw your page, fancy the free teardown.')}">Message straight on WhatsApp</a></p>` : ''}
       <p class="reassure">No spam, no list, no obligation. One reply from a real person.</p>
     </div>
   </div>
