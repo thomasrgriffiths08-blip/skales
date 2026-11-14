@@ -1,6 +1,7 @@
 /* The lock every demo page carries first in <head>: it only renders when reached from this site (framed by our
    pages, opened from a link on them, or with #s=1); anywhere else it swaps itself for a plate pointing back here.
-   Used by tools/demos.js (the showcase builds) and tools/system.js (the system's parts). */
+   Used by tools/demos.js (the showcase builds) and tools/system.js (the system's parts); pasted by hand into the
+   demos/kit/ test page, pointing back to /work/. */
 const site = require('../data/site.js');
 const hosts = [...new Set([...site.allowedHosts, new URL(site.origin).hostname])];
 

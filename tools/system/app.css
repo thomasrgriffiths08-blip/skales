@@ -51,6 +51,7 @@ svg:not([width]){width:16px;height:16px;flex:none}
 .nav-i .ct.hot{min-width:18px;height:18px;padding:0 5px;border-radius:4px;background:var(--ac);color:var(--ac-ink);font-size:11px;font-weight:650;line-height:18px;text-align:center}
 .side-foot{margin-top:auto;padding:10px 9px 2px;border-top:1px solid var(--rail-line);font-size:12px;color:var(--rail-ink2);line-height:1.45}
 .side-foot b{color:var(--rail-ink);font-weight:550}
+.side-fict{display:block;text-wrap:balance}
 .live{display:inline-flex;align-items:center;gap:6px}
 .live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--good)}
 
@@ -93,7 +94,8 @@ svg:not([width]){width:16px;height:16px;flex:none}
 .btn.ink{background:var(--ink);border-color:var(--ink);color:#fff}
 .btn.sm{height:28px;padding:0 10px;font-size:12.5px}
 /* Book a call (full screen only, see core.js bookA): black, beside the part's own buttons on a laptop, in the top bar on a phone */
-.sys-book{text-decoration:none}
+.sys-book{text-decoration:none;border-radius:10px}
+.sys-book.btn-d{background:#0A0B0D;border-color:#0A0B0D;color:#FFFFFF}
 .sys-book.btn-m{display:none}
 .mtop-r{display:inline-flex;align-items:center;gap:10px;flex:none}
 .btn.ghost{border-color:transparent;background:none;color:var(--ink2)}
@@ -242,6 +244,9 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
 .toast{position:fixed;left:50%;bottom:22px;z-index:60;transform:translate(-50%,16px);opacity:0;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r);background:var(--ink);color:#fff;font-size:13px;font-weight:500;transition:opacity .2s,transform .2s;pointer-events:none;max-width:calc(100vw - 32px)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .toast .dot{background:#4ADE80}
+/* inside the site's viewer (or a laptop on a page) the caption under the build runs along the bottom: confirmations show at the top */
+.in-frame .toast{top:14px;bottom:auto;transform:translate(-50%,-16px)}
+.in-frame .toast.on{transform:translate(-50%,0)}
 
 .demo-note{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink3)}
 
@@ -381,12 +386,16 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
   .mtop{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:20;padding:10px 14px;background:var(--rail);color:var(--rail-ink)}
   .mtop .biz{width:auto;padding:4px 6px 4px 0}
   .mtop .biz-trade{display:none}
+  .in-frame .toast{top:64px}
+  /* full screen on a phone: the made-up business is said once, in a slim second row of the top bar */
+  .is-solo .mtop{flex-wrap:wrap;row-gap:8px;padding-bottom:7px}
+  .mtop-fict{flex:1 0 100%;padding-top:6px;border-top:1px solid var(--rail-line);font-size:12px;line-height:1.3;color:var(--rail-ink2)}
   .top{padding:16px 16px 12px;align-items:flex-start;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
   .top h1{font-size:22px}
   .acts{justify-content:flex-start;width:100%}
   .acts .btn{height:40px;padding:0 14px;font-size:14px}
   .acts .sys-book.btn-d{display:none}
-  .sys-book.btn-m{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 12px;border-radius:8px;background:#0A0B0D;color:#FFFFFF;border:1px solid rgba(255,255,255,.34);font-weight:600;font-size:13px;white-space:nowrap}
+  .sys-book.btn-m{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 12px;border-radius:10px;background:#0A0B0D;color:#FFFFFF;border:1px solid rgba(255,255,255,.34);font-weight:600;font-size:13px;white-space:nowrap}
   .view{padding:14px 14px 28px}
   .grid.g2,.grid.g3:not(.keep),.split{grid-template-columns:minmax(0,1fr)}
   .app{background:none}

@@ -35,7 +35,7 @@ ${L.header(b, 'why')}
     <div class="body">
       <h2>Why should you own your own website?</h2>
       <p class="lead">You should own your website because it is where your work comes from, and anything that important should not depend on a monthly payment to the person who built it. With ${esc(site.name)}, the domain, the code and every account sit in the client&rsquo;s name from the first day.</p>
-      <p>Some builders charge every month, forever, just to keep a site alive. A page-builder account the site cannot leave, a domain registered in the agency&rsquo;s name, a &ldquo;platform fee&rdquo; &mdash; each one is a lever, and it only gets pulled one way. Every build here is hand-coded, hosted in an account the client controls, with the domain registered to the client. Sack ${esc(site.founder.name)} tomorrow and everything keeps working.</p>
+      <p>Some builders charge every month, forever, just to keep a site alive. A page-builder account the site cannot leave, a domain registered in the agency&rsquo;s name, a &ldquo;platform fee&rdquo;: each one is a lever, and it only gets pulled one way. Every build here is hand-coded, hosted in an account the client controls, with the domain registered to the client. Sack ${esc(site.founder.name)} tomorrow and everything keeps working.</p>
       <p class="warn"><i>*</i><span>If a quote includes a &ldquo;monthly platform fee&rdquo; to keep your own site online, that is rent. Walk away.</span></p>
     </div>
   </div>
@@ -64,7 +64,7 @@ ${L.header(b, 'why')}
     <div class="lab"><span class="sheet">In public</span><span class="name">Watch the next one</span></div>
     <div class="body">
       <h2>Why build in public?</h2>
-      <p class="lead">Because it is the only honest portfolio. A logo wall proves someone paid; a build made in front of you proves what was built. ${esc(site.name)} makes one system a week in public, and the builds on this site are the result &mdash; all for invented businesses, so no client&rsquo;s numbers are ever on show.</p>
+      <p class="lead">Because it is the only honest portfolio. A logo wall proves someone paid; a build made in front of you proves what was built. ${esc(site.name)} makes one system a week in public, and the builds on this site are the result. They are all for invented businesses, so no client&rsquo;s numbers are ever on show.</p>
       <p class="f-note">Updated ${L.monthYear(L.UPDATED)}.</p>
     </div>
   </div>

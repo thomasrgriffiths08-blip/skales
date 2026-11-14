@@ -29,9 +29,9 @@
   .sk-book { height: 38px; }
 }
 
-/* ---------- "this runs live on a call": a small glass sheet over the app ---------- */
+/* ---------- "this runs live on a call": a small sheet over the app (Skales copy, so the house look: flat, 12px) ---------- */
 .ln-wrap { position: absolute; z-index: 40; inset: 0; display: grid; place-items: center; padding: 16px; background: rgba(2, 5, 9, .62); animation: ln-in .18s ease-out both; }
-.ln-sheet { width: min(440px, 100%); padding: 24px; border-radius: 20px; background-color: rgba(10, 15, 22, .95); background-image: var(--glass-fill), var(--noise); border: 1px solid rgba(255, 255, 255, .12); box-shadow: var(--glass-edge), 0 30px 80px rgba(0, 0, 0, .6); color: var(--ink); }
+.ln-sheet { width: min(440px, 100%); padding: 24px; border-radius: 12px; background: #0B1017; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 30px 80px rgba(0, 0, 0, .6); color: var(--ink); }
 .ln-k { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
 .ln-k .av-s { margin: 0; }
 .ln-kp { width: 24px; height: 24px; border-radius: 8px; }

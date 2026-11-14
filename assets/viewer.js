@@ -22,7 +22,6 @@
   var tradeOf = function(x){ var m = /(?:^|&)t=([a-z]+)/.exec(qs[x.slug] || ''); return m ? m[1] : (x.tk && !/^(any|other)$/.test(x.tk) ? x.tk : ''); };
   var bookHref = function(x){ var k = tradeOf(x); return b + 'book/?utm_source=site&utm_medium=demo&utm_content=' + encodeURIComponent(x.slug) + (k ? '&kind=' + encodeURIComponent(k) : ''); };
   var page = function(x){ return b + 'work/' + x.slug + '/'; };
-  var kind = function(x){ return x.kind === 'site' ? 'Website' : 'The system'; };
   var idx = function(slug){ for (var i = 0; i < LIST.length; i++) if (LIST[i].slug === slug) return i; return -1; };
   var store = { get: function(k){ try { return localStorage.getItem(k); } catch (e){ return null; } }, set: function(k, v){ try { localStorage.setItem(k, v); } catch (e){} } };
   var I = {
@@ -255,9 +254,10 @@
   function label(){
     var x = LIST[cur], pl = pool(), at = pl.indexOf(cur) + 1, word = flt === 'all' ? 'builds' : flt === 'tool' ? 'parts' : KW[flt].toLowerCase();
     var p = LIST[pl[(at - 2 + pl.length) % pl.length]], n = LIST[pl[at % pl.length]];
-    metaEl.innerHTML = esc(x.kind === 'site' ? kind(x) + ' · ' + (x.trade || x.biz) + ', invented' : 'The system · six made-up businesses') + '<i> &nbsp;' + at + ' of ' + pl.length + (flt === 'all' ? '' : ' ' + word) + '</i>';
+    /* what the build is, then the house label (on a phone the top bar keeps only the label, beside Book a call) */
+    metaEl.innerHTML = '<span class="vw-what">' + esc(x.kind === 'site' ? (x.trade || x.biz) + ' website' : 'The system') + '</span><span class="vw-fict">Fictional business · illustrative numbers</span><i>' + at + ' of ' + pl.length + (flt === 'all' ? '' : ' ' + word) + '</i>';
     whichName.textContent = x.name;
-    whichCount.innerHTML = esc(at + ' of ' + pl.length + ' ' + word + ' · what it does') + I.up;
+    whichCount.innerHTML = '<em>' + esc(at + ' of ' + pl.length + ' · what it does') + '</em>' + I.up;
     prevB.querySelector('.vw-peek').textContent = p.name; nextB.querySelector('.vw-peek').textContent = n.name;
   }
   /* the builds the arrows step through: all of them, or only the websites or only the tools */
@@ -321,6 +321,14 @@
     pushed = false;
     if (opener && opener.focus) try { opener.focus({ preventScroll: true }); } catch (e){}
   }
+  /* the system app says when its business changes (tools/system/core.js): Book a call and Open in a new tab follow it */
+  w.addEventListener('message', function(e){
+    var m = e.data, x = LIST[cur];
+    if (!isOpen || !x || !live || e.source !== live.contentWindow || !m || m.sk !== 'biz' || !/^[a-z]+$/.test(m.kind || '')) return;
+    qs[x.slug] = ['t=' + m.kind].concat((qs[x.slug] || '').split('&').filter(function(p){ return p && !/^t=/.test(p); })).join('&');
+    root.querySelectorAll('.vw-book,.vw-now-links .go').forEach(function(a){ a.href = bookHref(x); });
+    popEl.href = demo(x);
+  });
   w.addEventListener('popstate', function(){
     var m = /#view=([a-z0-9-]+)/.exec(location.hash);
     if (m && idx(m[1]) > -1){ if (!isOpen) open(m[1]); else show(idx(m[1])); }

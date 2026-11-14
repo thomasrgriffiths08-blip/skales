@@ -349,6 +349,13 @@
     var m = /\/demos\/([a-z0-9-]+)\//.exec(location.pathname), slug = m ? m[1] : 'system';
     return '<a class="sys-book ' + cls + '" href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=' + slug + '&amp;kind=' + encodeURIComponent(SYS.T.key) + '">Book a call</a>';
   }
+  /* on its own the app says once on screen that the business is made up (inside the site, the page around it says so) */
+  var FICT = 'Fictional business · illustrative numbers';
+  /* inside a frame, tell the page around it which business is showing, so its own Book a call names the right trade */
+  function tellParent(){
+    if (solo) return;
+    try { window.parent.postMessage({ sk: 'biz', kind: SYS.T.key }, /^https?:$/.test(location.protocol) ? location.origin : '*'); } catch (e){}
+  }
   function renderNav(){
     if (!nav) return;
     nav.innerHTML = SYS.order.map(function(id){
@@ -361,7 +368,7 @@
       return '<button class="tab" type="button" data-go="' + id + '"' + (SYS.cur === id ? ' aria-current="page"' : '') + '>' + SYS.icon(m.icon || id) + '<span>' + esc(m.short || m.label) + '</span>' + (c ? '<span class="tc">' + c + '</span>' : '') + '</button>';
     }).join('') + '<button class="tab" type="button" data-more' + (inMore ? ' aria-current="page"' : '') + '>' + SYS.icon(inMore ? (SYS.mods[SYS.cur].icon || SYS.cur) : 'more') + '<span>' + (inMore ? esc(SYS.mods[SYS.cur].short || SYS.mods[SYS.cur].label) : 'More') + '</span></button>';
     side.querySelector('.biz-slot').innerHTML = bizBtn();
-    mtop.innerHTML = bizBtn() + '<span class="mtop-r"><span class="demo-note"><span class="live">Live</span></span>' + bookA('btn-m') + '</span>';
+    mtop.innerHTML = bizBtn() + '<span class="mtop-r"><span class="demo-note"><span class="live">Live</span></span>' + bookA('btn-m') + '</span>' + (solo ? '<span class="mtop-fict">' + FICT + '</span>' : '');
   }
   SYS.go = function(id, opt){
     if (!SYS.mods[id]) id = SYS.order[0];
@@ -412,11 +419,14 @@
     try { localStorage.setItem('sk-sys-trade', t.key); } catch (e){}
     SYS.subs.forEach(function(fn){ try { fn({ trade: true }); } catch (e){} });
     SYS.go(SYS.cur || SYS.start);
+    tellParent();
   };
 
   SYS.boot = function(){
     app = doc.createElement('div'); app.className = 'app';
-    app.innerHTML = '<aside class="side" aria-label="Sections"><div class="biz-slot"></div><nav class="nav"></nav><div class="side-foot"><span class="live">Live</span> · sample data<br>Built for this business by <b>Skales</b></div></aside>'
+    /* in a frame, the caption under the build sits along the bottom, so confirmations show at the top instead */
+    doc.documentElement.classList.add(solo ? 'is-solo' : 'in-frame');
+    app.innerHTML = '<aside class="side" aria-label="Sections"><div class="biz-slot"></div><nav class="nav"></nav><div class="side-foot">' + (solo ? '<span class="side-fict">' + FICT + '</span>' : '<span class="live">Live</span> · sample data<br>') + 'Built for this business by <b>Skales</b></div></aside>'
       + '<div class="main"><div class="mtop"></div><header class="top"></header><main class="view" id="view"></main></div><nav class="tabs" aria-label="Sections"></nav>';
     doc.body.appendChild(app);
     side = app.querySelector('.side'); nav = app.querySelector('.nav'); tabs = app.querySelector('.tabs'); top = app.querySelector('.top'); view = app.querySelector('.view'); mtop = app.querySelector('.mtop');

@@ -76,7 +76,7 @@ const calcPanel = () => panel('Your numbers', 'What missed calls cost', `<h2>Wha
   <label class="cl-row"><span class="cl-l">What a typical job is worth</span><output class="cl-v" for="clJob" id="clJobV">£250</output><input type="range" id="clJob" min="0" max="40" step="1" value="8"></label>
   <fieldset class="cl-row cl-seg"><legend class="cl-l">Of those callers, how many would have booked?</legend><div class="cl-opts"><label><input type="radio" name="clRate" value="0.25"><span>1 in 4</span></label><label><input type="radio" name="clRate" value="0.333" checked><span>1 in 3</span></label><label><input type="radio" name="clRate" value="0.5"><span>1 in 2</span></label></div></fieldset>
   <div class="cl-out" aria-live="polite"><p class="cl-big"><span id="clMonth">£1,400</span> a month</p><p class="cl-sub">goes to whoever answers next. That is <b id="clYear">£16,800</b> a year.</p><p class="cl-work" id="clWork"></p></div>
-  <a class="btn btn-live" href="{{b}}start/?utm_source=site&amp;utm_medium=calculator">Book a call about it</a>
+  <a class="btn btn-live" href="{{b}}book/?utm_source=site&amp;utm_medium=calculator">Book a call about it</a>
 </form>
 <noscript><p>The calculator needs JavaScript. The sum is simple: missed calls a week × 4.3 weeks × the share who would have booked × what a job is worth.</p></noscript>`, ' id="cost"');
 const tryCards = (b, slugs, h = 'Try it on your phone') => !slugs.length ? '' : `<section class="sec" id="try" aria-labelledby="h-try">
@@ -147,14 +147,14 @@ const followWidgets = () => `<section class="sec sec-alu" id="see" aria-labelled
     <div class="sec-head"><h2 id="h-see">Two of them, running.</h2><p class="lead">A made-up fencing firm. Simulate a missed call and watch it get caught; watch the reviews come in after each job.</p></div>
     <div class="svc-demo two">
       <div class="dcard">
-        <div class="dbar"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><b>calls &mdash; Westfield Fencing</b></div>
+        <div class="dbar"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><b>Calls · Westfield Fencing</b></div>
         <div class="tb">
           <div class="tb-left"><p class="lbl">Incoming calls</p><div id="callList"></div><button class="btn btn-live btn-sm tb-btn" id="missBtn" type="button">Simulate a missed call</button></div>
           <div class="tb-right" id="tbChat"></div>
         </div>
       </div>
       <div class="dcard">
-        <div class="dbar"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><b>reviews &mdash; Westfield Fencing</b></div>
+        <div class="dbar"><span class="pips" aria-hidden="true"><i></i><i></i><i></i></span><b>Reviews · Westfield Fencing</b></div>
         <div class="rv">
           <div class="rv-feed" id="rvFeed"></div>
           <div class="rv-score"><div class="stars" id="rvStars"><b>&#9733;&#9733;&#9733;&#9733;</b>&#9733;</div><div class="num" id="rvNum">4.6</div><div class="lbl">Google rating<br>this quarter</div></div>
