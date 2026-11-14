@@ -1,0 +1,165 @@
+/* The demo shell kit: the slim page every rebuilt demo stands in. Wired by assets/shell.js around a story run by
+   assets/step.js; demos/kit/index.html is the reference page.
+   Look A, flat: the one yellow is the bar (and money in the caption). The stage is the business's own colour
+   (--biz, never yellow) as a solid plate with a 3px black outline, 12px corners and a hard 8px black shadow;
+   --biz-ink is the text colour that reads on it (#FFFFFF or #0A0B0D, whichever passes 4.5:1).
+   One radius: 12px plates, 10px buttons. No gradients, no glows, nothing pill-shaped.
+   Laptop: the customer's phone at its real 390px width in a plain dark bezel, the owner's side to the right.
+   Phone: no device drawn; the thread fills the stage and the owner's side is a drawer peeking 40px at the bottom.
+   Motion here only runs under .st-anim, which step.js adds when motion is allowed; with Reduce Motion the same
+   story plays as discrete swaps. Fonts: Geist (SIL Open Font License), served from assets/fonts. */
+@font-face{font-family:"Geist";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/geist-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Geist";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/geist-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Geist";font-style:italic;font-weight:100 900;font-display:swap;src:url(fonts/geist-italic.woff2) format("woff2")}
+
+.dm{
+  --y:#FFE600;--ink:#0A0B0D;--pg:#FFFFFF;--tx2:#55555B;--hair:#D6D6D3;
+  --biz:#2563EB;--biz-ink:#FFFFFF;
+  --pad:clamp(16px,4vw,48px);
+  --scr-h:clamp(420px,calc(100vh - 340px),600px);
+  --scene-h:clamp(320px,calc(100vh - 330px),470px);
+  margin:0;min-height:100vh;background:var(--pg);color:var(--ink);
+  font-family:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility
+}
+@supports (height:100svh){.dm{--scr-h:clamp(420px,calc(100svh - 340px),600px);--scene-h:clamp(320px,calc(100svh - 330px),470px)}}
+/* resets at zero specificity, so every class below wins; the kit's own blocks also set margin:0 themselves,
+   which keeps them right when the site's stylesheet (p+p, h1, button) is on the page too */
+.dm *,.dm *::before,.dm *::after{box-sizing:border-box}
+.dm [hidden]{display:none!important}
+:where(.dm) :where(button){font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+:where(.dm) :where(a){color:inherit}
+:where(.dm) :where(h1,h2,h3,p,ol,ul){margin:0}
+.dm :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.dm-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- the bar: flat yellow, 48px ---------- */
+.dm-bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:16px;height:48px;
+  padding:0 max(var(--pad),calc((100% - 1200px) / 2));background:var(--y);color:var(--ink)}
+.dm-mark{font-size:22px;font-weight:800;letter-spacing:-.045em;line-height:1;text-decoration:none}
+.dm-mark i{font-weight:300;font-style:italic;letter-spacing:-.02em;padding-right:.03em}
+.dm-fict{margin:0;font-size:13px;font-weight:500;line-height:1.2;justify-self:center;text-align:center}
+.dm-book{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 14px;border-radius:10px;
+  background:var(--ink);color:#fff!important;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap}
+
+/* ---------- title, modes, progress ---------- */
+.dm-main{width:min(1200px,100% - 2 * var(--pad));margin:0 auto;padding:20px 0 48px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title title" "modes prog" "stage stage";column-gap:24px}
+.dm-title{grid-area:title;margin:0 0 14px;font-size:clamp(1.5rem,1.05rem + 1.5vw,2.25rem);font-weight:800;letter-spacing:-.035em;line-height:1.06;text-wrap:balance}
+.dm-title b{font-weight:800}
+.dm-title i{font-weight:300;font-style:italic;letter-spacing:-.025em}
+.dm-modes{grid-area:modes;display:flex;gap:10px}
+.dm-btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border:3px solid var(--ink);border-radius:10px;
+  background:var(--pg);color:var(--ink);font-size:16px;font-weight:650;line-height:1;white-space:nowrap}
+.dm-btn[aria-pressed="true"]{background:var(--ink);color:#fff}
+.dm-btn:active{transform:translate(2px,2px)}
+.dm-prog{grid-area:prog;display:flex;align-items:center;gap:20px;justify-self:end}
+.dm-dots{margin:0;display:flex;align-items:center;gap:8px;padding:0;list-style:none}
+.dm-dots li{width:10px;height:10px;border:2px solid var(--ink);border-radius:50%;background:transparent}
+.dm-dots li.is-done{background:var(--ink)}
+.dm-link{display:inline-flex;align-items:center;min-height:44px;padding:0;border:0;background:none;color:var(--ink);
+  font-size:15px;font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;white-space:nowrap}
+.dm[data-state="ended"] .dm-prog .dm-link{visibility:hidden}
+
+/* ---------- the stage: the business's colour, flat ---------- */
+.dm-stage{grid-area:stage;position:relative;margin-top:16px;background:var(--biz);border:3px solid var(--ink);border-radius:12px;
+  box-shadow:8px 8px 0 var(--ink);overflow:hidden}
+.dm-view{position:relative}
+.dm-scene{position:relative;display:flex;justify-content:center;align-items:stretch;gap:clamp(20px,3vw,40px);padding:24px 24px 28px}
+.dm-cap{margin:0;display:flex;align-items:center;min-height:52px;padding:12px 18px;background:var(--ink);color:#fff;font-size:16px;font-weight:500;line-height:1.35}
+.dm-cap b{color:var(--y);font-weight:750}
+
+/* the customer's phone (laptop): real width, plain dark bezel */
+.dm-phone{flex:none;width:410px;padding:10px;border-radius:12px;background:#0A0B0D}
+.dm-screen{position:relative;display:flex;flex-direction:column;width:390px;height:var(--scr-h);overflow:hidden;background:#fff}
+.dm-top{flex:none;display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #E6E6E4}
+.dm-av{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--biz);color:var(--biz-ink);font-weight:800;font-size:17px}
+.dm-who{min-width:0;line-height:1.2}
+.dm-who b{display:block;font-size:15px;font-weight:700}
+.dm-who small{display:block;margin-top:2px;font-size:12px;color:var(--tx2)}
+.dm-thread{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:14px;overflow:hidden}
+.dm-day{align-self:center;margin:0 0 2px;font-size:12px;font-weight:500;color:var(--tx2)}
+.dm-msg{margin:0;max-width:84%;padding:10px 13px;border-radius:12px;font-size:15.5px;line-height:1.38}
+.dm-msg.is-me{align-self:flex-end;background:var(--ink);color:#fff}
+.dm-msg.is-them{align-self:flex-start;background:#fff;border:2px solid var(--ink)}
+.dm-msg b{font-weight:700}
+.dm-typing{letter-spacing:.18em;font-weight:700}
+.dm-act{align-self:flex-start;display:inline-flex;align-items:center;min-height:46px;padding:10px 14px;border:2px solid var(--ink);border-radius:10px;
+  background:var(--biz);color:var(--biz-ink);font-size:15px;font-weight:700;line-height:1.25;text-align:left}
+.dm-act.is-done{background:var(--ink);color:#fff;cursor:default}
+.dm-compose{flex:none;display:flex;align-items:center;height:40px;margin:0 10px 10px;padding:0 12px;border:2px solid var(--hair);border-radius:10px;font-size:14px;color:#6B6B70}
+
+/* the owner's side (laptop): a white plate beside the phone */
+.dm-owner{flex:1 1 360px;min-width:0;max-width:460px;display:flex;flex-direction:column;overflow:hidden;background:#fff;
+  border:3px solid var(--ink);border-radius:12px;box-shadow:8px 8px 0 var(--ink)}
+.dm-oh{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;height:40px;padding:0 14px;border-bottom:2px solid var(--ink);font-size:14px}
+.dm-oh b{font-weight:700}
+.dm-new{color:var(--tx2);font-weight:500}
+.dm-new.is-on{color:var(--ink);font-weight:700}
+.dm-ob{flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:14px;overflow:hidden}
+.dm-ot{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2)}
+.dm-diary,.dm-log{margin:0;display:grid;gap:8px;padding:0;list-style:none}
+.dm-diary li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;align-items:start}
+.dm-diary time,.dm-log time{font-size:13px;font-weight:650;font-variant-numeric:tabular-nums}
+.dm-diary time{padding-top:10px}
+.dm-cell{display:grid}
+.dm-cell>*{grid-area:1/1}
+.dm-job,.dm-gap{padding:8px 10px;border-radius:10px;font-size:14px;line-height:1.3}
+.dm-job{border:2px solid var(--ink);background:#fff}
+.dm-job small{display:block;font-size:12.5px;color:var(--tx2)}
+.dm-job.is-new small{color:inherit}
+.dm-job.is-new{background:var(--biz);color:var(--biz-ink)}
+.dm-gap{border:2px dashed #9A9AA0;color:var(--tx2)}
+.dm-log li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;font-size:14px;line-height:1.35}
+.dm-empty{color:var(--tx2)}
+.dm-log li.dm-empty{display:block}
+
+/* ---------- the end card ---------- */
+.dm-endwrap{position:absolute;inset:0;z-index:5;display:grid;place-items:center;padding:24px}
+.dm-end{width:min(560px,100%);padding:24px;background:#fff;border:3px solid var(--ink);border-radius:12px;box-shadow:8px 8px 0 var(--ink)}
+.dm-end:focus{outline:none}
+.dm-end-k{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2)}
+.dm-end h2{margin:0 0 14px;font-size:clamp(1.35rem,1.1rem + 1vw,1.75rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+.dm-res{display:flex;flex-wrap:wrap;row-gap:4px;margin:0 0 20px;padding:0;list-style:none;font-size:17px;line-height:1.35}
+.dm-res li:not(:last-child)::after{content:"·";margin:0 10px;font-weight:700}
+.dm-res b{font-weight:800}
+.dm-end-a{display:flex;flex-wrap:wrap;gap:10px}
+.dm-cta{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 20px;border:3px solid var(--ink);border-radius:10px;
+  background:var(--ink);color:#fff!important;font-size:16px;font-weight:650;text-decoration:none;white-space:nowrap}
+
+/* ---------- tablets and phones: no device drawn, the owner's side becomes a drawer ---------- */
+@media (max-width:859px){
+  .dm-stage{justify-self:center;width:100%;max-width:560px}
+  .dm-scene{display:block;height:var(--scene-h);padding:0}
+  .dm-phone{width:auto;height:100%;padding:0;border-radius:0;background:none}
+  .dm-screen{width:auto;height:100%;background:none}
+  .dm-top{padding:10px 16px;border-bottom:2px solid var(--ink);color:var(--biz-ink)}
+  .dm-av{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+  .dm-who small,.dm-day{color:var(--biz-ink)}
+  .dm-thread{padding:8px 16px 52px}
+  .dm-compose{display:none}
+  .dm-act{background:#fff;color:var(--ink)}
+  .dm-owner{position:absolute;left:0;right:0;bottom:0;z-index:2;height:min(80%,380px);max-width:none;
+    border-width:3px 0 0;border-radius:12px 12px 0 0;box-shadow:none;transform:translateY(calc(100% - 40px))}
+  .dm-owner.is-up{transform:none}
+  .st-anim .dm-owner{transition:transform .25s cubic-bezier(.2,.7,.2,1)}
+  .dm-oh{height:37px}
+  .dm-ob{gap:12px;padding:12px 16px}
+  .dm-log li:nth-child(n+3){display:none}
+  .dm-endwrap{place-items:end stretch;padding:12px}
+  .dm-end{width:auto;padding:20px}
+}
+@media (max-width:699px){
+  .dm-bar{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:48px 24px;height:auto}
+  .dm-fict{grid-column:1 / -1;grid-row:2;justify-self:stretch;text-align:left;font-size:12px;line-height:23px;border-top:1px solid rgba(10,11,13,.2)}
+  .dm-book{height:38px}
+  .dm-main{grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "modes" "stage" "prog";padding-top:16px}
+  .dm-title{margin-bottom:12px}
+  .dm-modes .dm-btn{flex:1;height:52px;font-size:17px}
+  .dm-stage{margin-top:14px}
+  .dm-prog{justify-self:stretch;justify-content:space-between;gap:12px;margin-top:12px}
+  .dm-cap{min-height:64px;padding:10px 16px;font-size:15px}
+  .dm-end h2{font-size:1.3rem}
+  .dm-res{font-size:16px;margin-bottom:16px}
+  .dm-cta,.dm-end .dm-btn{flex:1 1 100%;height:52px}
+}

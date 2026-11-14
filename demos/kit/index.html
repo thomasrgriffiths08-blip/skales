@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Demo kit test · Larchfield Heating</title>
+<meta name="description" content="Test page for the shared demo kit. Not linked from the site.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Cpath d='M22 16v32M43 17L25 33l18 15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<!-- ?site=1 also loads the site's own stylesheet first, to prove the kit survives it (Reduce Motion rules included) -->
+<script>if (/[?&]site=1(&|$)/.test(location.search)){ var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '../../assets/site.css'; document.head.appendChild(l); }</script>
+<link rel="stylesheet" href="../../assets/shell.css">
+</head>
+<body class="dm" data-slug="kit" data-kind="heating" data-base="../../" style="--biz:#2563EB;--biz-ink:#FFFFFF">
+<header class="dm-bar">
+  <a class="dm-mark" href="../../" aria-label="skales home">s<i>k</i>ales</a>
+  <p class="dm-fict">Fictional business · illustrative numbers</p>
+  <a class="dm-book" data-book href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=kit&amp;kind=heating">Book a call</a>
+</header>
+
+<main class="dm-main" id="main">
+  <h1 class="dm-title"><b>No hot water at 21:12.</b> <i>Booked and paid before Dan looks.</i></h1>
+
+  <div class="dm-modes" role="group" aria-label="How to see it">
+    <button type="button" class="dm-btn" data-dm="watch" aria-pressed="true">Watch it</button>
+    <button type="button" class="dm-btn" data-dm="try" aria-pressed="false">Try it</button>
+  </div>
+
+  <div class="dm-prog">
+    <ol class="dm-dots" aria-label="Progress"></ol>
+    <button type="button" class="dm-link" data-dm="pause">Play</button>
+    <a class="dm-link" data-dm="skip" href="#dm-end">Skip to the result</a>
+  </div>
+
+  <section class="dm-stage" aria-label="Larchfield Heating, a fictional business: the demo">
+    <div class="dm-view">
+      <div class="dm-scene">
+        <div class="dm-phone">
+          <div class="dm-screen">
+            <div class="dm-top">
+              <span class="dm-av" aria-hidden="true">L</span>
+              <span class="dm-who"><b>Larchfield Heating</b><small>Text message</small></span>
+            </div>
+            <div class="dm-thread">
+              <p class="dm-day">Today 21:12</p>
+              <p class="dm-msg is-me st-off" data-k="ask">Boiler’s showing F28 and there’s no hot water. Can someone come today?</p>
+              <p class="dm-msg is-them dm-typing st-off" data-k="typing"><span aria-hidden="true">···</span><span class="dm-sr">Larchfield is replying</span></p>
+              <p class="dm-msg is-them st-off" data-k="reply">Sorry to hear that. Dan can be with you <b>tomorrow at 08:00</b>. A breakdown visit is from £95, and a £30 deposit holds the slot.</p>
+              <button type="button" class="dm-act st-off" data-k="act">Book tomorrow 08:00 · pay £30</button>
+              <p class="dm-msg is-them st-off" data-k="paid"><b>£30 deposit paid.</b> You’re booked for tomorrow, 08:00 to 09:30. Dan will text when he’s on his way.</p>
+            </div>
+            <div class="dm-compose" aria-hidden="true">Text message</div>
+          </div>
+        </div>
+
+        <aside class="dm-owner" aria-label="What Dan sees">
+          <div class="dm-oh"><b>Dan’s phone</b><span class="dm-new">Nothing new</span></div>
+          <div class="dm-ob">
+            <section>
+              <h2 class="dm-ot">Tomorrow</h2>
+              <ol class="dm-diary">
+                <li><time>08:00</time><div class="dm-cell"><span class="dm-gap" data-k="gap">Free</span><span class="dm-job is-new st-off" data-k="slot">Breakdown visit, F28 · LS6<small>£30 deposit paid</small></span></div></li>
+                <li><time>10:30</time><div class="dm-cell"><span class="dm-job">Boiler service · LS8<small>Kieran</small></span></div></li>
+                <li><time>13:30</time><div class="dm-cell"><span class="dm-job">Landlord gas safety · LS16<small>Dan</small></span></div></li>
+              </ol>
+            </section>
+            <section>
+              <h2 class="dm-ot">Tonight</h2>
+              <ol class="dm-log"><li class="dm-empty">Nothing yet</li></ol>
+            </section>
+          </div>
+        </aside>
+      </div>
+
+      <div class="dm-endwrap" id="dm-end" hidden>
+        <div class="dm-end" tabindex="-1" role="group" aria-labelledby="dm-end-h">
+          <p class="dm-end-k">The result</p>
+          <h2 id="dm-end-h">Booked and paid while Dan was on another job.</h2>
+          <ul class="dm-res"><li><b>£95</b> job</li><li><b>£30</b> deposit</li><li><b>0 minutes</b> of your time</li></ul>
+          <div class="dm-end-a">
+            <a class="dm-cta" data-book href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=kit&amp;kind=heating">Book a 45-min call</a>
+            <button type="button" class="dm-btn" data-dm="again">Watch it again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="dm-cap" aria-live="polite"><span class="dm-cap-t">21:12. Dan is under a boiler in LS8.</span></p>
+  </section>
+</main>
+
+<script src="../../assets/step.js"></script>
+<script src="../../assets/shell.js"></script>
+<script>
+/* the sample story: five beats for the fictional Larchfield Heating (tools/system/data.js) */
+window.story = DemoShell.mount(document.body, {
+  idle: '21:12. Dan is under a boiler in LS8.',
+  opening: '21:12. Dan is under a boiler in LS8.',
+  result: '£95 job booked, £30 deposit in. 0 minutes of Dan’s time.',
+  tail: 2200,
+  steps: [
+    { at: 500, label: 'A text comes in', caption: 'A customer texts: boiler fault, no hot water.',
+      do: function(el, c){ c.show('[data-k=ask]', { from: 'right' }); c.log('21:12', 'New text: F28, no hot water, LS6'); } },
+    { after: 1500,
+      do: function(el, c){ c.show('[data-k=typing]', { from: 'left' }); } },
+    { after: 1300, label: 'It answers', caption: 'Larchfield answers in seconds with a real slot and the price.',
+      do: function(el, c){ c.hide('[data-k=typing]'); c.show('[data-k=reply]', { from: 'none' }); c.show('[data-k=act]'); c.log('21:12', 'Offered tomorrow 08:00, from £95'); } },
+    { after: 1700, label: 'The customer books', waitFor: 'tap', target: '[data-k=act]', hint: 'Tap', auto: 1500,
+      ask: { try: 'Your turn. Tap the slot to book it.', watch: 'The customer taps the slot.' },
+      caption: 'Booked, with a £30 deposit paid by card.',
+      do: function(el, c){ c.cls('[data-k=act]', 'is-done'); c.text('[data-k=act]', 'Booked: tomorrow 08:00'); c.show('[data-k=paid]', { from: 'left' }); c.log('21:13', '£30 deposit paid. Booked 08:00.'); } },
+    { after: 1500, label: 'Into the diary', caption: 'The visit drops into Dan’s diary for 08:00 tomorrow.',
+      do: function(el, c){ c.drawer(true); c.hide('[data-k=gap]'); c.show('[data-k=slot]', { from: 'above' }); } },
+    { after: 2300, label: 'Dan sees it done', caption: '£95 job booked, £30 deposit in. 0 minutes of Dan’s time.',
+      do: function(el, c){ c.log('21:40', 'Dan checks his phone. Nothing to do.'); } }
+  ]
+});
+</script>
+</body>
+</html>
