@@ -28,8 +28,9 @@ html.vw-open,html.vw-open body{overflow:hidden}
 .vw-modes button svg{width:17px;height:17px}
 .vw-modes button[aria-pressed="true"]{background:var(--vs2);color:var(--vt)}
 .vw-show svg{width:16px;height:16px;fill:currentColor;stroke:none}
-.vw-book{display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:12px;font-size:.9375rem;font-weight:600;background:var(--vt);color:var(--vbg);white-space:nowrap}
-.vw-book:hover{background:#FFF}
+/* Book a call: a black button with a white hairline, so it reads on the dark viewer and never looks like part of the demo */
+.vw-book{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:max-content;height:44px;padding:0 18px;border-radius:12px;font-size:.9375rem;font-weight:600;background:#0A0B0D;color:#FFFFFF;border:1px solid rgba(255,255,255,.34);white-space:nowrap;text-decoration:none}
+.vw-book:hover{border-color:#FFFFFF}
 
 /* the stage: arrows either side of the build */
 .vw-stage{--arw:72px;grid-column:2;grid-row:2;position:relative;display:grid;grid-template-columns:var(--arw) minmax(0,1fr) var(--arw);align-items:center;min-height:0}
@@ -127,9 +128,15 @@ html.vw-open,html.vw-open body{overflow:hidden}
 }
 
 @media (max-width:820px){
-  .vw{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
-  .vw-top,.vw-arrow{display:none}
-  .vw-stage{display:block;grid-column:1;grid-row:1}
+  .vw{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto}
+  .vw-arrow{display:none}
+  /* on a phone the top bar keeps only what it says the build is, and Book a call */
+  .vw-top{grid-row:1;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding-top:max(8px,env(safe-area-inset-top,0px));padding-bottom:8px;border-bottom:1px solid var(--vl)}
+  .vw-close,.vw-modes,.vw-id b,.vw-meta i{display:none}
+  .vw-meta{font-size:.8125rem}
+  .vw-book{height:40px;padding:0 14px;font-size:.875rem}
+  .vw-stage{display:block;grid-column:1;grid-row:2}
+  .vw-dock{grid-row:3}
   .vw[data-mode] .vw-frame{grid-template-rows:minmax(0,1fr);position:absolute;inset:0;justify-self:stretch;align-self:stretch;width:auto !important;height:auto !important;border-radius:0;padding:0;box-shadow:none;background:#FFF}
   .vw[data-mode] .vw-chrome{display:none}
   .vw[data-mode] .vw-screen{border-radius:0}

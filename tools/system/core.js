@@ -341,6 +341,14 @@
     var t = SYS.T;
     return '<button class="biz ' + (cls || '') + '" type="button" data-biz aria-haspopup="menu" aria-label="Switch business: ' + esc(t.biz) + '"><span class="biz-mark">' + esc(t.mark) + '</span><span class="biz-txt"><span class="biz-name">' + esc(t.biz) + '</span><span class="biz-trade">' + esc(t.label) + ' · ' + esc(t.town) + '</span></span>' + SYS.icon('chev', 'biz-chev') + '</button>';
   }
+  /* Book a call: only when the app is open on its own (full screen), never inside the site's viewer or a laptop on a
+     page, which have their own. It says which demo and which business it came from. */
+  var solo = (function(){ try { return window.top === window.self; } catch (e){ return false; } })();
+  function bookA(cls){
+    if (!solo) return '';
+    var m = /\/demos\/([a-z0-9-]+)\//.exec(location.pathname), slug = m ? m[1] : 'system';
+    return '<a class="sys-book ' + cls + '" href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=' + slug + '&amp;kind=' + encodeURIComponent(SYS.T.key) + '">Book a call</a>';
+  }
   function renderNav(){
     if (!nav) return;
     nav.innerHTML = SYS.order.map(function(id){
@@ -353,7 +361,7 @@
       return '<button class="tab" type="button" data-go="' + id + '"' + (SYS.cur === id ? ' aria-current="page"' : '') + '>' + SYS.icon(m.icon || id) + '<span>' + esc(m.short || m.label) + '</span>' + (c ? '<span class="tc">' + c + '</span>' : '') + '</button>';
     }).join('') + '<button class="tab" type="button" data-more' + (inMore ? ' aria-current="page"' : '') + '>' + SYS.icon(inMore ? (SYS.mods[SYS.cur].icon || SYS.cur) : 'more') + '<span>' + (inMore ? esc(SYS.mods[SYS.cur].short || SYS.mods[SYS.cur].label) : 'More') + '</span></button>';
     side.querySelector('.biz-slot').innerHTML = bizBtn();
-    mtop.innerHTML = bizBtn() + '<span class="demo-note"><span class="live">Live</span></span>';
+    mtop.innerHTML = bizBtn() + '<span class="mtop-r"><span class="demo-note"><span class="live">Live</span></span>' + bookA('btn-m') + '</span>';
   }
   SYS.go = function(id, opt){
     if (!SYS.mods[id]) id = SYS.order[0];
@@ -373,7 +381,7 @@
   };
   function renderTop(){
     var m = SYS.mods[SYS.cur];
-    top.innerHTML = '<div><h1>' + esc(m.title || m.label) + '</h1>' + (m.sub ? '<p class="sub">' + m.sub() + '</p>' : '') + '</div><div class="acts">' + (m.actions ? m.actions() : '') + '</div>';
+    top.innerHTML = '<div><h1>' + esc(m.title || m.label) + '</h1>' + (m.sub ? '<p class="sub">' + m.sub() + '</p>' : '') + '</div><div class="acts">' + (m.actions ? m.actions() : '') + bookA('btn ink btn-d') + '</div>';
   }
   SYS.refresh = function(){ if (!SYS.cur) return; var y = window.scrollY; renderTop(); var m = SYS.mods[SYS.cur]; if (m.update) m.update(view, SYS.opt); else { view.innerHTML = ''; m.render(view, SYS.opt); } window.scrollTo(0, y); };
 

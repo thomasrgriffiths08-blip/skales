@@ -65,6 +65,8 @@ window.TryKit = function(cfg){
     K.bind('[data-site]', A.site); K.bind('[data-domain]', A.domain); K.bind('[data-custno]', 'New customer');
     var W = (window.TRYSITES || {})[kind]; if (W) ph.style.setProperty('--bz', W.c);
     resetCrm(); if ($('wb')){ buildBooking(); K.diary(A.days[0], null); }
+    /* the end card's Book a call carries the demo and the trade the visitor picked */
+    [].forEach.call(d.querySelectorAll('[data-cta="call"]'), function(a){ a.setAttribute('href', a.getAttribute('href').replace(/&kind=[^&#]*/, '') + '&kind=' + encodeURIComponent(kind)); });
     end.hidden = true; say.hidden = false; hint.hidden = false;
     run.classList.remove('is-owner', 'is-done'); run.classList.add('is-ready');
     d.body.classList.add('tm-on');

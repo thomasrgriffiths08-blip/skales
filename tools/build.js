@@ -60,7 +60,7 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 
 ## Pages
 - [Home](${L.abs('/')}): what ${site.name} builds, with a live demonstration build on the page.
-- [Work: ${L.workLine().toLowerCase()}](${L.abs('/work/')}): every demonstration website and every part of the system, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (loud, motion, quiet, direct) with every example.\n- [The system](${L.abs('/work/system/')}): the one app behind the websites, as an overview screen plus six parts (inbox and missed calls, booking, quotes, reviews, reminders, results), shown for six made-up businesses.
+- [Work: ${L.workLine().toLowerCase()}](${L.abs('/work/')}): every demonstration website and every part of the system, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (bold, film-led, plain, straight to the phone) with every example.\n- [The system](${L.abs('/work/system/')}): the one app behind the websites, as an overview screen plus six parts (inbox and missed calls, booking, quotes, reviews, reminders, results), shown for six made-up businesses.
 - [Services](${L.abs('/services/')}): the five services, built as one system: ${SVC.SV.map(x => `[${x.name}](${L.abs('/services/' + x.slug + '/')})`).join(', ')}.
 - [Automations](${L.abs('/automations/')}): ${SVC.AU.map(x => `[${x.name.toLowerCase()}](${L.abs('/automations/' + x.slug + '/')})`).join(', ')}.
 - [Try it](${L.abs('/try/')}): live demos that run in the browser: a missed call texted back and booked, online booking with a deposit, and a CRM board whose follow-up texts send themselves.

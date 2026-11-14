@@ -14,7 +14,9 @@
     note.push('Draft site: ' + o.ref + ' (' + o.n.slice(0, 34) + ', ' + map[o.t][0] + ', ' + o.w.slice(0, 22) + ')');
   })();
   var src = q.get('utm_source'); try { src = src || sessionStorage.getItem('sk_src') || ''; } catch(e){}
-  if (src) note.push('Came from: ' + String(src).slice(0, 40));
+  /* a Book a call inside a demo also says which demo and which trade (utm_content, kind) */
+  var via = [q.get('utm_medium'), q.get('utm_content'), q.get('kind')].filter(Boolean).map(function(v){ return String(v).replace(/[^\w -]/g, '').slice(0, 30); });
+  if (src) note.push('Came from: ' + String(src).slice(0, 40) + (via.length ? ' / ' + via.join(' / ') : ''));
   var done = false;
   function fallback(){ if (done) return; done = true; cal.innerHTML = ''; cal.hidden = true; fb.hidden = false;
     var wa = S.whatsapp && String(S.whatsapp).replace(/\D/g, ''), waBtn = d.getElementById('fbWa');

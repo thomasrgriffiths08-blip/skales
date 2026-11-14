@@ -95,9 +95,10 @@ strong,b{font-weight:600}
 .mtoggle span:first-child{top:16px}.mtoggle span:last-child{top:26px}
 .mtoggle[aria-expanded="true"] span:first-child{top:21px;transform:rotate(45deg)}
 .mtoggle[aria-expanded="true"] span:last-child{top:21px;transform:rotate(-45deg)}
-.mnav{display:flex;flex-direction:column;background:var(--pg);border-bottom:1px solid var(--line);padding:8px var(--pad) 20px}
-.mnav a{display:flex;align-items:center;min-height:52px;font-size:1.25rem;font-weight:600;letter-spacing:-.02em;border-bottom:1px solid var(--line)}
-.mnav a.mcta{margin-top:16px;border:0;justify-content:center;background:var(--live);color:var(--live-ink);border-radius:var(--r-s);height:56px}
+/* the open phone menu is always the ink ground with white links and the one yellow button, whatever the page's own colours */
+.mnav{display:flex;flex-direction:column;background:var(--ink);color:var(--ink-tx);border-bottom:1px solid var(--ink-line);padding:8px var(--pad) 20px}
+.mnav a{display:flex;align-items:center;min-height:52px;font-size:1.25rem;font-weight:600;letter-spacing:-.02em;color:var(--ink-tx);border-bottom:1px solid var(--ink-line)}
+.mnav a.mcta{margin-top:16px;border:0;justify-content:center;background:#FFE600;color:#0A0B0D;border-radius:var(--r-s);height:56px}
 /* Book a call never leaves the header: inside the nav on wide screens, beside the menu button on phones */
 .hbook{display:none}
 @media (max-width:900px){.nav{display:none}.mtoggle{display:block;margin-left:10px}.hbook{display:inline-flex;margin-left:auto;height:42px;padding:0 16px;font-size:.9375rem}}

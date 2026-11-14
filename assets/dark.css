@@ -28,7 +28,7 @@ main::before{content:"";position:absolute;left:0;right:0;top:-64px;height:720px;
 .site-head .nav a.btn:hover{background:var(--c)}
 .site-head .mtoggle{background:transparent;border-color:rgba(255,255,255,.22)}
 .site-head .mtoggle span{background:#fff}
-.mnav{background:var(--pg)}
+.mnav{background:var(--ink)}
 .mbar{background:rgba(10,11,13,.94) !important;border-top-color:var(--ink-line) !important}
 .mbar a{background:transparent}
 

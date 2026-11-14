@@ -65,9 +65,9 @@ ${L.header(b, 'services')}
     <figure class="tp-stage">
       <div class="tp-lap" data-live="${live}" data-title="${esc(part.name)}, set up for ${esc(biz)}">
         <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>${esc(biz)} · ${esc(part.name)}</span></span>
-        <div class="tp-scr"><a class="tp-open" href="${live}" target="_blank" rel="noopener" aria-label="Open ${esc(part.name)} full screen, live"><img src="${still(b, part, t, 800)}" srcset="${still(b, part, t, 800)} 800w, ${still(b, part, t)} 1600w" sizes="(min-width: 1296px) 1200px, 94vw" width="1600" height="1000" alt="${esc(part.name)} in the Skales system, set up for ${esc(biz)}, a made-up ${esc(bizKind)}: ${esc(part.short)}" fetchpriority="high" decoding="async"></a></div>
+        <div class="tp-scr"><a class="tp-open" href="${live}" data-view="${part.slug}" data-q="t=${t}" aria-label="Open ${esc(part.name)} full screen, live"><img src="${still(b, part, t, 800)}" srcset="${still(b, part, t, 800)} 800w, ${still(b, part, t)} 1600w" sizes="(min-width: 1296px) 1200px, 94vw" width="1600" height="1000" alt="${esc(part.name)} in the Skales system, set up for ${esc(biz)}, a made-up ${esc(bizKind)}: ${esc(part.short)}" fetchpriority="high" decoding="async"></a></div>
       </div>
-      <figcaption class="tp-cap"><span class="tp-dot"><i></i>Live</span><span><b>${esc(part.name)}</b>, set up for ${esc(biz)}, a made-up ${esc(bizKind)}.</span><a class="tlink" href="${live}" target="_blank" rel="noopener">Full screen <span aria-hidden="true">→</span></a></figcaption>
+      <figcaption class="tp-cap"><span class="tp-dot"><i></i>Live</span><span><b>${esc(part.name)}</b>, set up for ${esc(biz)}, a made-up ${esc(bizKind)}.</span><a class="tlink" href="${live}" data-view="${part.slug}" data-q="t=${t}">Full screen <span aria-hidden="true">→</span></a></figcaption>
     </figure>
   </div>
 </section>

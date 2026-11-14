@@ -92,6 +92,10 @@ svg:not([width]){width:16px;height:16px;flex:none}
 .btn.pri:hover{background:var(--ac-text);border-color:var(--ac-text)}
 .btn.ink{background:var(--ink);border-color:var(--ink);color:#fff}
 .btn.sm{height:28px;padding:0 10px;font-size:12.5px}
+/* Book a call (full screen only, see core.js bookA): black, beside the part's own buttons on a laptop, in the top bar on a phone */
+.sys-book{text-decoration:none}
+.sys-book.btn-m{display:none}
+.mtop-r{display:inline-flex;align-items:center;gap:10px;flex:none}
 .btn.ghost{border-color:transparent;background:none;color:var(--ink2)}
 .btn.ghost:hover{background:var(--hover);color:var(--ink)}
 .btn[disabled]{opacity:.45;pointer-events:none}
@@ -381,6 +385,8 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
   .top h1{font-size:22px}
   .acts{justify-content:flex-start;width:100%}
   .acts .btn{height:40px;padding:0 14px;font-size:14px}
+  .acts .sys-book.btn-d{display:none}
+  .sys-book.btn-m{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 12px;border-radius:8px;background:#0A0B0D;color:#FFFFFF;border:1px solid rgba(255,255,255,.34);font-weight:600;font-size:13px;white-space:nowrap}
   .view{padding:14px 14px 28px}
   .grid.g2,.grid.g3:not(.keep),.split{grid-template-columns:minmax(0,1fr)}
   .app{background:none}

@@ -15,10 +15,14 @@
   var pad = function(n){ return (n < 10 ? '0' : '') + n; };
   var esc = function(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); };
   var still = function(x){ return b + 'assets/phones/' + pad(x.n) + '.webp'; };
-  var demo = function(x){ return b + 'demos/' + x.slug + '/#s=1'; };
+  /* a build can be opened as one business (?t=salon): kept per build until the viewer is closed */
+  var qs = {};
+  var demo = function(x){ return b + 'demos/' + x.slug + '/' + (qs[x.slug] ? '?' + qs[x.slug] : '') + '#s=1'; };
+  /* Book a call from inside a demo says which demo it came from, and the trade when the demo knows it */
+  var tradeOf = function(x){ var m = /(?:^|&)t=([a-z]+)/.exec(qs[x.slug] || ''); return m ? m[1] : (x.tk && !/^(any|other)$/.test(x.tk) ? x.tk : ''); };
+  var bookHref = function(x){ var k = tradeOf(x); return b + 'book/?utm_source=site&utm_medium=demo&utm_content=' + encodeURIComponent(x.slug) + (k ? '&kind=' + encodeURIComponent(k) : ''); };
   var page = function(x){ return b + 'work/' + x.slug + '/'; };
   var kind = function(x){ return x.kind === 'site' ? 'Website' : 'The system'; };
-  var lane = function(x){ return LN[x.lane] ? LN[x.lane].name : ''; };
   var idx = function(slug){ for (var i = 0; i < LIST.length; i++) if (LIST[i].slug === slug) return i; return -1; };
   var store = { get: function(k){ try { return localStorage.getItem(k); } catch (e){ return null; } }, set: function(k, v){ try { localStorage.setItem(k, v); } catch (e){} } };
   var I = {
@@ -43,7 +47,8 @@
 
   function groups(){
     var out = [];
-    ORDER.forEach(function(k){ var g = LIST.filter(function(x){ return x.lane === k; }); if (g.length) out.push({ k: k, kind: g[0].kind, name: (LN[k] ? (LN[k].name === LN[k].kindWord ? LN[k].name : LN[k].name + ' ' + LN[k].kindWord.toLowerCase()) : k), list: g }); });
+    /* two groups a visitor understands: the websites (still in style order, which stays data) and the system */
+    [['site', 'Websites'], ['tool', 'The system']].forEach(function(k){ var g = LIST.filter(function(x){ return x.kind === k[0]; }); if (g.length) out.push({ k: k[0], kind: k[0], name: k[1], list: g }); });
     return out;
   }
   function make(){
@@ -55,7 +60,7 @@
       + '<div class="vw-id"><b id="vwName"></b><span class="vw-meta"></span></div>'
       + '<div class="vw-tools"><div class="vw-modes" role="group" aria-label="Show it on">'
       + '<button type="button" data-m="desk" aria-pressed="false">' + I.desk + 'Desktop</button><button type="button" data-m="phone" aria-pressed="false">' + I.phone + 'Phone</button></div>'
-      + '<a class="vw-book" href="' + b + 'book/">Book a call</a></div>'
+      + '<a class="vw-book" href="' + b + 'book/?utm_source=site&amp;utm_medium=demo">Book a call</a></div>'
       + '</header>'
       + '<div class="vw-stage">'
       + '<button type="button" class="vw-arrow vw-prev" data-act="prev" aria-label="Previous build">' + I.l + '<span class="vw-peek"></span></button>'
@@ -68,7 +73,7 @@
       + '<div class="vw-side-body">'
       + '<section class="vw-now" aria-label="What you can do here"><b class="vw-now-name"></b><span class="vw-lab">What you can do here</span><p class="vw-now-short"></p><ol class="vw-try"></ol>'
       + '<button type="button" class="vw-show vw-show-big" data-act="show">' + I.play + '<span>Show me what it does</span></button>'
-      + '<div class="vw-now-links"><a class="vw-about" href="#">About this build</a><a class="go" href="' + b + 'book/">Book a call</a></div></section>'
+      + '<div class="vw-now-links"><a class="vw-about" href="#">About this build</a><a class="go" href="' + b + 'book/?utm_source=site&amp;utm_medium=demo">Book a call</a></div></section>'
       + '<div class="vw-tabs" role="group" aria-label="Show">' + [['all', 'All', LIST.length], ['site', 'Websites', LIST.filter(function(x){ return x.kind === 'site'; }).length], ['tool', 'The system', LIST.filter(function(x){ return x.kind === 'tool'; }).length]].map(function(t){
           return '<button type="button" data-f="' + t[0] + '" aria-pressed="' + (t[0] === 'all') + '">' + t[1] + ' <span>' + t[2] + '</span></button>';
         }).join('') + '</div>'
@@ -237,6 +242,7 @@
     tryList.innerHTML = (x.show || []).map(function(st, k){ return st.say ? '<li data-i="' + k + '">' + esc(st.say) + '</li>' : ''; }).join('')
       || '<li data-i="0">Use it like a customer would.</li>';
     root.querySelectorAll('.vw-about').forEach(function(a){ a.href = page(x); });
+    root.querySelectorAll('.vw-book,.vw-now-links .go').forEach(function(a){ a.href = bookHref(x); });
     addrEl.textContent = (S.origin || '').replace(/^https?:\/\//, '') + '/demos/' + x.slug + '/';
     popEl.href = demo(x);
     root.querySelectorAll('[data-slug]').forEach(function(t){ t.setAttribute('aria-current', String(t.getAttribute('data-slug') === x.slug)); });
@@ -249,7 +255,7 @@
   function label(){
     var x = LIST[cur], pl = pool(), at = pl.indexOf(cur) + 1, word = flt === 'all' ? 'builds' : flt === 'tool' ? 'parts' : KW[flt].toLowerCase();
     var p = LIST[pl[(at - 2 + pl.length) % pl.length]], n = LIST[pl[at % pl.length]];
-    metaEl.innerHTML = esc(x.kind === 'site' ? kind(x) + ' · ' + lane(x) + ' · ' + (x.trade || x.biz) + ', invented' : 'The system · six made-up businesses') + ' &nbsp;<i>' + at + ' of ' + pl.length + (flt === 'all' ? '' : ' ' + word) + '</i>';
+    metaEl.innerHTML = esc(x.kind === 'site' ? kind(x) + ' · ' + (x.trade || x.biz) + ', invented' : 'The system · six made-up businesses') + '<i> &nbsp;' + at + ' of ' + pl.length + (flt === 'all' ? '' : ' ' + word) + '</i>';
     whichName.textContent = x.name;
     whichCount.innerHTML = esc(at + ' of ' + pl.length + ' ' + word + ' · what it does') + I.up;
     prevB.querySelector('.vw-peek').textContent = p.name; nextB.querySelector('.vw-peek').textContent = n.name;
@@ -284,10 +290,13 @@
     setTimeout(function(){ hint.classList.remove('is-in'); }, 3300);
   }
 
-  function open(slug, from){
+  function open(slug, from, q){
     var i = idx(slug); if (i < 0) return false;
     if (!root) make();
     opener = from || d.activeElement;
+    if (!isOpen) qs = {};
+    if (q) qs[slug] = String(q).replace(/[^a-z0-9=&-]/gi, '');
+    if (q && i === cur && live) cur = -1;
     if (!isOpen){
       isOpen = true; root.hidden = false; d.documentElement.classList.add('vw-open');
       if (!/#view=/.test(location.hash) && history.pushState){ history.pushState({ vw: 1 }, '', '#view=' + slug); pushed = true; }

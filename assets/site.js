@@ -36,9 +36,10 @@
     if (cb) vq.push(cb);
     if (vState) return; vState = 1;
     var base = S.base || '', left = 2, done = function(){ if (--left) return; vState = 2; var q = vq; vq = []; q.forEach(function(f){ f(); }); };
-    var css = d.createElement('link'); css.rel = 'stylesheet'; css.href = base + 'assets/viewer.css'; css.onload = done; css.onerror = done; d.head.appendChild(css);
+    var lz = S.lazy || {}, at = function(f){ return base + 'assets/' + (lz[f] || f); };   /* versioned names, so a cached old viewer is never used */
+    var css = d.createElement('link'); css.rel = 'stylesheet'; css.href = at('viewer.css'); css.onload = done; css.onerror = done; d.head.appendChild(css);
     var fail = function(){ left = 1; done(); };
-    var add = function(src, next){ var s = d.createElement('script'); s.src = base + 'assets/' + src; s.onload = next; s.onerror = fail; d.body.appendChild(s); };
+    var add = function(src, next){ var s = d.createElement('script'); s.src = at(src); s.onload = next; s.onerror = fail; d.body.appendChild(s); };
     var go = function(){ add('viewer.js', done); };
     if (window.BUILDS) go(); else add('builds.js', go);
   }
@@ -48,7 +49,7 @@
     var a = e.target.closest && e.target.closest('a.tile, a[href*="demos/"], [data-view]'); if (!a) return;
     var slug = a.getAttribute('data-view') || slugOf(a); if (!slug) return;
     e.preventDefault();
-    viewer(function(){ if (!window.SKV || !SKV.open(slug, a)) location.href = a.href || (S.base || '') + 'demos/' + slug + '/#s=1'; });
+    viewer(function(){ if (!window.SKV || !SKV.open(slug, a, a.getAttribute('data-q'))) location.href = a.href || (S.base || '') + 'demos/' + slug + '/#s=1'; });
   });
   window.skViewer = viewer;
   /* moving cards: a card's clip plays once as it comes into view (a row starts one after another), pauses when it

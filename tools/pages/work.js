@@ -6,6 +6,8 @@ const { site, builds, esc, pad, LANES, SITE_LANES, TOOL_LANES, laneOf, kindWord,
 const SITES = builds.filter(x => x.kind === 'site');
 const FIRST = [...SITE_LANES, ...TOOL_LANES].map(k => builds.filter(x => x.lane === k).sort((a, z) => a.n - z.n)[0]).find(Boolean);
 const inLane = k => builds.filter(x => x.lane === k);
+/* the internal style labels stay in the data (and the schema keywords) but are never shown as a tag */
+const STYLE_WORD = /^(loud|motion|quiet|direct)$/i;
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const crumbs = (b, items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map((it, i) => i === items.length - 1 ? `<span aria-current="page">${esc(it[0])}</span>` : `<a href="${b}${it[1]}">${esc(it[0])}</a><span>/</span>`).join('')}</nav>`;
 const itemList = (name, list) => ({ '@type': 'ItemList', name, numberOfItems: list.length, itemListElement: list.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: L.abs(`/work/${x.slug}/`), name: x.name })) });
@@ -14,7 +16,7 @@ const laneSection = (b, k, { question = false } = {}) => {
   return `<section class="sec lane" id="${k}" data-lanehead="${k}" aria-labelledby="h-${k}">
   <div class="wrap">
     <div class="sec-head">
-      <h2 id="h-${k}">${question ? esc(l.question) : `${esc(l.kindWord)} &middot; ${esc(l.name)}`}</h2>
+      <h2 id="h-${k}">${question ? esc(l.question) : esc(l.label)}</h2>
       <p class="lead">${question ? esc(l.answer) : `<strong>${esc(l.line)}</strong> ${esc(l.who)}`}</p>
     </div>
     ${list.length ? L.wall(b, list, list.length === 3 ? 'wall-3' : '') : '<p class="f-note">Nothing here yet.</p>'}
@@ -32,7 +34,7 @@ const sysBlock = b => {
         <span class="shell"><picture><source media="(max-width: 640px)" srcset="${L.phoneSrc(b, main)}" width="585" height="1266"><img src="${L.clipSrc(b, main, 'webp')}" width="1280" height="800" alt="${esc(main.name)}: ${esc(main.short)}" loading="lazy" decoding="async"></picture><video muted playsinline preload="none" data-src="${L.clipSrc(b, main, 'mp4')}" aria-hidden="true"></video></span>
         <span class="sys-cap"><b>Open the system</b><span>${esc(main.short)}</span></span>
       </a>
-      <div class="sys-biz"><p>Open it as one of six made-up businesses:</p><div>${BIZ.map(([k, n, t]) => `<a href="${b}demos/system/?t=${k}#s=1" target="_blank" rel="noopener"><b>${esc(n)}</b><span>${esc(t)}</span></a>`).join('')}</div></div>
+      <div class="sys-biz"><p>Open it as one of six made-up businesses:</p><div>${BIZ.map(([k, n, t]) => `<a href="${b}demos/system/?t=${k}#s=1" data-view="system" data-q="t=${k}"><b>${esc(n)}</b><span>${esc(t)}</span></a>`).join('')}</div></div>
     </div>
     <h3 class="sys-h">The six parts</h3>
     ${L.wall(b, rest, 'wall-3')}`;
@@ -68,7 +70,7 @@ const deskHTML = (b, trade) => `<div class="desk" data-desk data-trade="${trade 
 const laneRow = (b, k) => {
   const l = LANES[k], list = inLane(k).sort((a, z) => a.n - z.n);
   return `<div class="lrow${l.kind === 'tool' ? ' lrow-top' : ''}" id="${k}" data-lanehead="${k}">
-      <div class="lhead"><h3>${esc(l.name)}</h3><p>${esc(l.line)}</p><small>${esc(l.who)}</small></div>
+      <div class="lhead"><h3>${esc(l.label)}</h3><p>${esc(l.line)}</p><small>${esc(l.who)}</small></div>
       ${L.wall(b, list, l.kind === 'site' ? 'wall-3' : '')}
     </div>`;
 };
@@ -122,7 +124,7 @@ ${L.header(b, 'work')}
     </a>
     <div class="wk-parts">${PARTS.filter(x => x.slug !== 'system').map(x => `<a href="${b}work/${x.slug}/" data-view="${x.slug}"><span class="wk-pshot"><img src="${L.clipSrc(b, x, 'webp')}" width="1280" height="800" alt="${esc(x.name)} on a laptop: ${esc(x.short)}" loading="lazy" decoding="async"></span><b>${esc(x.name)}</b><span>${esc(x.short)}</span></a>`).join('')}</div>
     <p class="tp-rel-h wk-biz-h">Open it as one of six made-up businesses</p>
-    <div class="tp-chips">${BIZ.map(([k, n, t]) => `<a href="${b}demos/system/?t=${k}#s=1" target="_blank" rel="noopener">${esc(n)} · ${esc(t)}</a>`).join('')}</div>
+    <div class="tp-chips">${BIZ.map(([k, n, t]) => `<a href="${b}demos/system/?t=${k}#s=1" data-view="system" data-q="t=${k}">${esc(n)} · ${esc(t)}</a>`).join('')}</div>
   </div>
 </section>
 <section class="hs hs-book tp-book" id="book" aria-labelledby="h-book">
@@ -144,10 +146,10 @@ ${L.footer(b)}`;
 /* ---------- /work/websites/ : the four lanes, explained ---------- */
 const websites = {
   url: '/work/websites/', og: 'websites', priority: 0.9, changefreq: 'weekly',
-  meta: { key: 'websites', title: 'Four kinds of website.', kicker: `Websites · ${SITES.length} live examples`, sub: 'Loud, motion, quiet, direct. Pick the lane that matches how your customers decide.' },
+  meta: { key: 'websites', title: 'Four kinds of website.', kicker: `Websites · ${SITES.length} live examples`, sub: 'Bold, film-led, plain or straight to the phone. Pick the one that matches how your customers decide.' },
   render(b){
     const title = `Website design for service businesses: ${SITES.length} live examples | ${site.name}`.length <= 60 ? `Website design for service businesses: ${SITES.length} live examples | ${site.name}` : `Website examples for service businesses | ${site.name}`;
-    const description = `${Words(SITES.length)} full websites for invented businesses, running live, in four lanes: loud and animated, motion-led, quiet and plain, or direct and built to get the phone ringing.`.slice(0, 158);
+    const description = `${Words(SITES.length)} full websites for invented businesses, running live, in four kinds: bold and animated, led by film, calm and plain, or built to get the phone ringing.`.slice(0, 158);
     const nodes = [
       L.webPage({ path: '/work/websites/', title, description, type: 'CollectionPage' }),
       L.breadcrumb([{ name: 'Home', path: '/' }, { name: 'Work', path: '/work/' }, { name: 'Websites', path: '/work/websites/' }]),
@@ -162,7 +164,7 @@ ${L.header(b, 'websites')}
   <h1>Four kinds of website.</h1>
   <p class="lead">A boxing club and an accountant should not get the same site. The first decision is the lane: <strong>how loud, how much moves, how fast it gets to the phone number.</strong> Every example is a full website for an invented business, running live.</p>
   <div class="lanes" style="margin-top:36px">
-    ${SITE_LANES.map(k => `<a href="#${k}"><b>${esc(LANES[k].name)}</b><span>${esc(LANES[k].line)}</span><small>${plural(inLane(k).length, 'example')} &middot; ${esc(LANES[k].who)}</small></a>`).join('')}
+    ${SITE_LANES.map(k => `<a href="#${k}"><b>${esc(LANES[k].label)}</b><span>${esc(LANES[k].line)}</span><small>${plural(inLane(k).length, 'example')}</small></a>`).join('')}
   </div>
 </section>
 ${SITE_LANES.map(k => laneSection(b, k, { question: true })).join('')}
@@ -188,11 +190,11 @@ const ownPhotos = slug => { try { return fs.readdirSync(path.join(__dirname, '..
 const domain = site.origin.replace(/^https?:\/\//, '');
 
 const caseCopy = (b, x, lane) => `<div class="meta">${x.lane === 'system' ? `<span>${x.slug === 'system' ? 'One app, six parts' : `Part of <a href="${b}work/system/">the system</a>`}</span><span>Shown for six made-up businesses</span>` : `<span>${esc(kindWord(x))} for a made-up ${esc((x.trade || x.biz).toLowerCase())}</span>`}</div>
-          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" target="_blank" rel="noopener">Use it full screen</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
+          <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" data-view="${x.slug}">Use it full screen</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
           <p class="hint">This is the build itself, not a recording. Use it like a customer would, or press Show me in full screen and watch it work.</p>`;
 /* the system's parts, the current one marked, and the six businesses it opens as */
 const partsNav = (b, x) => `<ol class="sys-parts">${PARTS.map(y => `<li><a href="${b}work/${y.slug}/"${y.slug === x.slug ? ' aria-current="page"' : ''}><b>${y.slug === 'system' ? 'Today' : esc(y.name)}</b><span>${esc(y.proves)}</span></a></li>`).join('')}</ol>
-        <div class="sys-biz sys-biz-row"><p>Open ${x.slug === 'system' ? 'it' : 'this part'} as one of the six businesses:</p><div>${BIZ.map(([k, n, t]) => `<a href="${b}demos/${x.slug}/?t=${k}#s=1" target="_blank" rel="noopener"><b>${esc(n)}</b><span>${esc(t)}</span></a>`).join('')}</div></div>`;
+        <div class="sys-biz sys-biz-row"><p>Open ${x.slug === 'system' ? 'it' : 'this part'} as one of the six businesses:</p><div>${BIZ.map(([k, n, t]) => `<a href="${b}demos/${x.slug}/?t=${k}#s=1" data-view="${x.slug}" data-q="t=${k}"><b>${esc(n)}</b><span>${esc(t)}</span></a>`).join('')}</div></div>`;
 /* ---------- one page per build ---------- */
 const cases = builds.map(x => {
   const lane = laneOf(x), peers = x.kind === 'site' ? builds.filter(y => y.kind === 'site') : inLane(x.lane), i = peers.findIndex(y => y.slug === x.slug);
@@ -258,7 +260,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
         <div>
           <h3>What is in it</h3>
           <ul class="feat" style="margin-top:12px">${(x.features || []).map(f => `<li>${esc(f)}</li>`).join('')}</ul>
-          <div class="tags" style="margin-top:16px">${(x.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+          <div class="tags" style="margin-top:16px">${(x.tags || []).filter(t => !STYLE_WORD.test(t)).map(t => `<span>${esc(t)}</span>`).join('')}</div>
         </div>
       </div>
     </div>

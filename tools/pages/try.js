@@ -261,7 +261,6 @@ const opt = k => `<option value="${k.key}">${esc(k.label)}</option>`;
    pretend business is filled in, and typing your own name (or picking your trade) makes it yours.
    The end card lands in the narration, so the phone and the CRM stay in view. */
 function demoPage(b, x, { n, lead, steps, layers, side = crm, runClass = '' }){
-  const camp = `utm_source=site&amp;utm_medium=try&amp;utm_campaign=${x.slug}`;
   const next = DEMOS[n % DEMOS.length];
   return `
 ${L.header(b, 'try')}
@@ -285,7 +284,7 @@ ${L.header(b, 'try')}
       <h2 tabindex="-1" id="endH"></h2>
       <p id="endP"></p>
       <div class="tm-acts">
-        <a class="btn btn-live" data-cta="call" href="${b}start/?${camp}">Book a free call</a>
+        <a class="btn btn-live" data-cta="call" href="${b}book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=${x.slug}">Book a free call</a>
         <a class="btn btn-ghost" data-cta="work" href="${b}work/">See the builds</a>
       </div>
       <p class="tm-again"><button type="button" class="lnk tm-redo" id="again">Run it again</button> · <a class="lnk" href="${b}try/${next.slug}/">Next: ${esc(next.name)} <span aria-hidden="true">→</span></a></p>
