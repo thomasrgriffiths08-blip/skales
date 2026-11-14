@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Kingpost AI team · Skales demo</title>
+<meta name="description" content="A sample AI team running a sample company, Kingpost. Every figure is illustrative.">
+<meta name="theme-color" content="#FFE600">
+<link rel="preload" href="../../assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="floor.css">
+<link rel="stylesheet" href="site-overrides.css">
+<script src="config.js"></script>
+<script type="importmap">{ "imports": { "three": "./vendor/three/build/three.module.min.js", "three/addons/": "./vendor/three/examples/jsm/" } }</script>
+</head>
+<body>
+<header class="sk-bar">
+  <a class="sk-mark" href="../../" aria-label="Skales home">s<i>k</i>ales</a>
+  <p class="sk-fict">Sample company · illustrative numbers</p>
+  <a class="sk-book" href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=ai-team">Book a call</a>
+</header>
+<div class="room" id="room">
+  <div class="stage" id="stage">
+    <div class="gl" id="gl"></div>
+    <div class="tags" id="tags"></div>
+
+    <aside class="panel" id="panel" hidden></aside>
+    <section class="page" id="page" hidden></section>
+    <aside class="rail" id="rail" aria-label="Menu"></aside>
+    <div class="status"><span class="working" id="working"></span><span class="clock" id="clock"></span></div>
+
+    <div class="chat" id="chat">
+      <div class="thread" id="thread" hidden></div>
+      <form class="ask" id="ask" autocomplete="off">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 3h11v7.5H7L4 13v-2.5H2.5z"/></svg>
+        <input id="ask-in" placeholder="Ask the team… e.g. “What did you all do today?”" aria-label="Ask the team">
+        <button>Ask</button>
+      </form>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+    <div class="cover" id="cover"><span class="kp" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M2.5 18.5L12 5l9.5 13.5z"/><path d="M12 5v13.5M12 12.2l-4.4 6.3M12 12.2l4.4 6.3"/></svg></span><span>Opening the office…</span></div>
+  </div>
+</div>
+<div class="shots" id="shots" hidden></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

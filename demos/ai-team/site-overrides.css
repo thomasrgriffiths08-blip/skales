@@ -1,0 +1,88 @@
+/* Site demo only (skales demos/ai-team). Tom's floor.css is untouched; everything the public copy needs on top of it
+   lives here: self-hosted fonts, the slim Skales bar, the "runs live on a call" sheet, Reduce Motion and phone fixes. */
+
+/* ---------- fonts: the site's own Geist files, no Google Fonts call ---------- */
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../../assets/fonts/geist-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Geist"; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../../assets/fonts/geist-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Geist"; font-style: italic; font-weight: 100 900; font-display: swap; src: url(../../assets/fonts/geist-italic.woff2) format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-style: normal; font-weight: 400 500; font-display: swap; src: url(../../assets/fonts/geist-mono-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+/* ---------- the Skales bar: flat yellow, 48px; the app sits underneath it ---------- */
+:root { --skb: 48px; }
+.sk-bar { position: fixed; z-index: 100; top: 0; left: 0; right: 0; height: var(--skb); display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: 16px; padding: 0 16px 0 20px; background: #FFE600; color: #0A0B0D; font-family: "Geist", system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+.sk-mark { color: #0A0B0D; font-size: 22px; font-weight: 800; letter-spacing: -.045em; line-height: 1; text-decoration: none; }
+.sk-mark i { font-weight: 300; font-style: italic; letter-spacing: -.02em; padding-right: .03em; }
+.sk-fict { margin: 0; font-size: 13px; font-weight: 500; line-height: 1.2; justify-self: center; text-align: center; color: #0A0B0D; }
+.sk-book { display: inline-flex; align-items: center; justify-content: center; height: 36px; padding: 0 14px; border-radius: 10px; background: #0A0B0D; color: #fff; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.sk-mark:focus-visible, .sk-book:focus-visible { outline: 2px solid #0A0B0D; outline-offset: 3px; }
+.sk-book:hover { background: #24262b; }
+
+.room { top: var(--skb); }
+.stage { width: 100%; height: 100%; }
+.portrait .stage { height: 100%; width: calc((100vh - var(--skb)) * 9 / 16); }
+.shots { display: none !important; } /* Tom's filming list: not part of the public copy */
+
+@media (max-width: 699px) {
+  :root { --skb: 72px; }
+  .sk-bar { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 48px 24px; padding: 0 12px 0 16px; }
+  .sk-fict { grid-column: 1 / -1; grid-row: 2; justify-self: stretch; text-align: left; font-size: 12px; line-height: 23px; border-top: 1px solid rgba(10, 11, 13, .2); }
+  .sk-book { height: 38px; }
+}
+
+/* ---------- "this runs live on a call": a small glass sheet over the app ---------- */
+.ln-wrap { position: absolute; z-index: 40; inset: 0; display: grid; place-items: center; padding: 16px; background: rgba(2, 5, 9, .62); animation: ln-in .18s ease-out both; }
+.ln-sheet { width: min(440px, 100%); padding: 24px; border-radius: 20px; background-color: rgba(10, 15, 22, .95); background-image: var(--glass-fill), var(--noise); border: 1px solid rgba(255, 255, 255, .12); box-shadow: var(--glass-edge), 0 30px 80px rgba(0, 0, 0, .6); color: var(--ink); }
+.ln-k { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+.ln-k .av-s { margin: 0; }
+.ln-kp { width: 24px; height: 24px; border-radius: 8px; }
+.ln-kp svg { width: 14px; height: 14px; }
+.ln-sheet h2 { margin: 16px 0 8px; font-size: 20px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; color: #fff; }
+.ln-sheet p { margin: 0 0 12px; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+.ln-sheet p.ln-s { font-size: 13px; color: var(--ink-3); }
+.ln-b { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.ln-b .btn { height: 40px; }
+@keyframes ln-in { from { opacity: 0; } }
+@container (max-aspect-ratio: 3/4) {
+  .ln-wrap { place-items: end stretch; padding: 12px; }
+  .ln-sheet { width: auto; padding: 20px; }
+  .ln-b .btn { flex: 1 1 auto; }
+}
+/* the same thing inline, where a card has room to say it */
+.note.ln-inline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.note.ln-inline a { color: var(--holo-2); font-weight: 600; white-space: nowrap; }
+
+/* ---------- Reduce Motion: every drawn ring, bar and count lands on its final state at once ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important; transition-duration: .01ms !important; transition-delay: 0ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- phone (the app's own 9:16 layout does most of it; these are the leftovers at 390px) ---------- */
+@container (max-aspect-ratio: 3/4) {
+  .page { overflow-x: hidden; }
+  .page .inner { min-width: 0; }
+}
+@container (max-width: 440px) {
+  /* Ads: the three hero figures (money in, leads out, cost per lead) ran into each other at 390px, so each gets a row */
+  .page .pg-ads .stages { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .page .pg-ads .arr { display: none; }
+  .page .pg-ads .stg { grid-template-columns: minmax(0, 1fr) 112px; grid-template-rows: auto auto auto; column-gap: 12px; }
+  .page .pg-ads .stg > :not(.trend) { grid-column: 1; }
+  .page .pg-ads .stg .trend { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin-top: 0; }
+  .page .pg-ads .stg .v { font-size: 26px; }
+  .page .pg-ads .stg .lab { font-size: 11px; }
+  /* the landing-page address and the proof chips under "Ask Archie for new ads" */
+  .page .pg-ads .sv-d, .page .pg-ads .sv-d > * { min-width: 0; }
+  .page .pg-ads .sv-d .mono { overflow-wrap: anywhere; }
+  .page .pg-ads .pf .chip { white-space: normal; height: auto; min-height: 24px; padding-top: 3px; padding-bottom: 3px; }
+}
+@container (max-width: 440px) {
+  /* tables: tighter cells so the last column (e.g. Ads "Per lead") isn't cut off at 390px */
+  .page table.t th, .page table.t td { padding-left: 7px; padding-right: 7px; }
+  .page table.t th { white-space: normal; }
+  /* Team: a long figure (Penny's £58,300) drops under the name instead of being clipped */
+  .page .pg-team .tm-nm { flex-wrap: wrap; column-gap: 6px; }
+  .page .pg-team .tm-nm em { font-size: 16px; }
+  /* How work moves: the hand-off diagram needs more than a phone's width, so the ranked list underneath (the same
+     numbers, desk to desk) carries it on its own */
+  .page .pg-handoffs .fm > div:first-child:has(.sk) { display: none; }
+}
