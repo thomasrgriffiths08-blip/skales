@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<script>(function(){try{var h=["localhost","127.0.0.1","thomasrgriffiths08-blip.github.io","skales.studio","www.skales.studio"],r=document.referrer||"",o=r?new URL(r).hostname:"";if(o&&h.indexOf(o)>-1)return;if(/(^|[#&?])s=1(&|$)/.test(location.hash)||/(^|[#&?])s=1(&|$)/.test(location.search))return;}catch(e){}window.stop();document.documentElement.innerHTML="<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"robots\" content=\"noindex,nofollow\"><title>This test page · runs inside Skales</title><style>html,body{height:100%;margin:0;background:#0E0E10;color:#fff;font:17px/1.5 -apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,sans-serif}main{min-height:100%;display:grid;place-items:center;padding:24px}div{max-width:42ch}p{margin:0 0 20px;color:rgba(255,255,255,.72);font-size:1.15rem;line-height:1.45;letter-spacing:-.01em}b{color:#fff;font-weight:600}a{display:inline-flex;align-items:center;height:52px;padding:0 22px;color:#141416;background:#fff;text-decoration:none;font-weight:600;border-radius:12px}small{display:block;margin-top:22px;font-size:13px;color:rgba(255,255,255,.45)}</style></head><body><main><div><p><b>This test page</b> is one of Skales’s working builds. It runs inside the site, not on its own.</p><a href=\"https://skales.studio/work/\">Open it on the site</a></div></main></body>";try{var p=location.pathname,i=p.indexOf("/demos/"),a=document.querySelector("main a");if(i>-1&&a)a.href=p.slice(0,i)+"/work/"}catch(e){}})();</script>
+<!-- the same lock as every demo (tools/demo-lock.js): it only renders when reached from this site, or with #s=1 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The AI receptionist · Larchfield Heating · Skales demo</title>
+<meta name="description" content="A late-night text to a fictional plumber, answered, checked, priced and booked with a deposit while the owner sleeps. Illustrative numbers.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Cpath d='M22 16v32M43 17L25 33l18 15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preload" href="../../assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/shell.css">
+<style>
+/* the AI receptionist: the kit plus a few pieces only this story has. Yellow stays the Skales bar's alone. */
+.rc-tag{grid-area:tag;justify-self:start;margin:-4px 0 16px;padding:5px 9px;border:2px solid var(--ink);border-radius:10px;
+  font:600 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.03em;text-transform:uppercase}
+.dm-main{grid-template-areas:"title title" "tag tag" "modes prog" "stage stage"}
+.dm-thread>*{flex:none}
+.rc-ai{display:inline-block;margin-right:6px;padding:1px 5px;border-radius:4px;background:var(--ink);color:#fff;font:700 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;vertical-align:1px}
+.rc-chips{flex:none;align-self:flex-end;display:flex;gap:8px}
+.rc-chip{min-height:44px;padding:0 16px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);font-size:15px;font-weight:650}
+.rc-card{flex:none;align-self:stretch;margin:0;border:2px solid var(--ink);border-radius:12px;background:#fff;overflow:hidden}
+.rc-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:10px 13px}
+.rc-row b{font-size:16px;font-weight:750}
+.rc-row small{display:block;margin-top:2px;font-size:13px;color:var(--tx2)}
+.rc-from{white-space:nowrap;font-size:13px;color:var(--tx2)}
+.rc-from strong{margin-left:4px;color:var(--ink);font-size:24px;font-weight:800;letter-spacing:-.03em}
+.rc-dep{border-top:2px solid var(--ink);font-size:14.5px;font-weight:600}
+.rc-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px 13px 12px;border-top:2px solid var(--ink)}
+.rc-slot{display:grid;justify-items:center;gap:1px;min-height:50px;padding:6px 4px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);line-height:1.1}
+.rc-slot small{font-size:12px;font-weight:600;color:var(--tx2)}
+.rc-slot b{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
+.rc-slot.is-on{background:var(--ink);color:#fff}
+.rc-slot.is-on small{color:#fff}
+.rc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 13px;background:var(--ink);color:#fff;font-size:15px;font-weight:750}
+.rc-head span{font-size:13px;font-weight:600}
+.rc-body{padding:10px 13px;font-size:15px;line-height:1.38}
+.rc-safe{padding:8px 13px 10px;border-top:1px solid var(--hair);font-size:13px;color:var(--tx2)}
+.rc-sleep{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:10px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:650}
+.rc-sum{flex:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
+.rc-sum div{padding:9px 12px}
+.rc-sum div+div{border-left:2px solid var(--ink)}
+.rc-sum small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2)}
+.rc-sum b{font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+@media (max-width:859px){
+  .rc-chip,.rc-slot{border-color:var(--ink)}
+  .rc-sum{display:none}
+  .rc-ai{background:#fff;color:var(--ink)}
+}
+@media (max-width:699px){
+  .dm-main{grid-template-areas:"title" "tag" "modes" "stage" "prog"}
+  .rc-tag{font-size:11px}
+}
+</style>
+</head>
+<body class="dm" data-slug="ai-receptionist" data-kind="heating" data-base="../../" style="--biz:#2563EB;--biz-ink:#FFFFFF">
+<header class="dm-bar">
+  <a class="dm-mark" href="../../" aria-label="skales home">s<i>k</i>ales</a>
+  <p class="dm-fict">Fictional business · illustrative numbers</p>
+  <a class="dm-book" data-book href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=ai-receptionist&amp;kind=heating">Book a call</a>
+</header>
+
+<main class="dm-main" id="main">
+  <h1 class="dm-title"><b>Dan clocked off at 17:30.</b> <i>At 23:10 his assistant booked the job.</i></h1>
+  <p class="rc-tag">Example tasks · confirm what you sell</p>
+
+  <div class="dm-modes" role="group" aria-label="How to see it">
+    <button type="button" class="dm-btn" data-dm="watch" aria-pressed="true">Watch it</button>
+    <button type="button" class="dm-btn" data-dm="try" aria-pressed="false">Try it</button>
+  </div>
+
+  <div class="dm-prog">
+    <ol class="dm-dots" aria-label="Progress"></ol>
+    <button type="button" class="dm-link" data-dm="pause">Play</button>
+    <a class="dm-link" data-dm="skip" href="#dm-end">Skip to the result</a>
+  </div>
+
+  <section class="dm-stage" aria-label="Larchfield Heating, a fictional plumber in Leeds: the demo">
+    <div class="dm-view">
+      <div class="dm-scene">
+        <div class="dm-phone">
+          <div class="dm-screen">
+            <div class="dm-top">
+              <span class="dm-av" aria-hidden="true">L</span>
+              <span class="dm-who"><b>Larchfield Heating’s assistant</b><small><span class="rc-ai">AI</span>Replies any hour · Dan sees everything</small></span>
+            </div>
+            <div class="dm-thread">
+              <p class="dm-day"><span data-d="tonight">Tonight</span> 23:10</p>
+              <p class="dm-msg is-me st-off" data-k="ask">Boiler’s showing F28 and there’s no hot water. Can someone come out?</p>
+              <p class="dm-msg is-them dm-typing st-off" data-k="t1"><span aria-hidden="true">···</span><span class="dm-sr">The assistant is replying</span></p>
+              <p class="dm-msg is-them st-off" data-k="q1">Sorry, Sam, that’s no fun. Two quick checks so Dan brings the right parts. Is any water leaking?</p>
+              <div class="rc-chips st-off" data-k="chips"><button type="button" class="rc-chip" data-k="no">No</button><button type="button" class="rc-chip" tabindex="-1">Yes</button></div>
+              <p class="dm-msg is-me st-off" data-k="a1">No</p>
+              <p class="dm-msg is-them st-off" data-k="q2">Good. Is the pressure dial below 1?</p>
+              <p class="dm-msg is-me st-off" data-k="a2">No, it’s on 1.5</p>
+              <p class="dm-msg is-them dm-typing st-off" data-k="t2"><span aria-hidden="true">···</span><span class="dm-sr">The assistant is replying</span></p>
+              <p class="dm-msg is-them st-off" data-k="q3">Then it needs a visit. Here’s the price and Dan’s free times:</p>
+              <div class="rc-card st-off" data-k="price">
+                <div class="rc-row"><span><b>Breakdown visit</b><small>Up to 90 minutes. Parts priced before fitting.</small></span><span class="rc-from">from<strong>£95</strong></span></div>
+                <div class="rc-row rc-dep"><span>Deposit today, off the bill</span><span>£30</span></div>
+                <div class="rc-slots">
+                  <button type="button" class="rc-slot" data-k="slot"><small data-d="d1s">Mon 16</small><b>08:00</b></button>
+                  <button type="button" class="rc-slot" tabindex="-1"><small data-d="d1s">Mon 16</small><b>15:30</b></button>
+                  <button type="button" class="rc-slot" tabindex="-1"><small data-d="d2s">Tue 17</small><b>08:00</b></button>
+                </div>
+              </div>
+              <div class="rc-card st-off" data-k="booked">
+                <div class="rc-head">Booked<span>£30 paid</span></div>
+                <p class="rc-body"><b><span data-d="d1l">Monday 16 November</span>, 08:00.</b> Dan will text when he’s on his way.</p>
+                <p class="rc-safe">Smell gas? Call 0800 111 999 straight away.</p>
+              </div>
+            </div>
+            <div class="dm-compose" aria-hidden="true">Text message</div>
+          </div>
+        </div>
+
+        <aside class="dm-owner" aria-label="What Dan sees">
+          <div class="dm-oh"><b>Dan’s side</b><span class="rc-sleep" data-k="sleep">Asleep since 22:40</span></div>
+          <div class="dm-ob">
+            <section>
+              <h2 class="dm-ot">Overnight · <span class="dm-new">Nothing new</span></h2>
+              <ol class="dm-log"><li class="dm-empty">Nothing yet</li></ol>
+            </section>
+            <section>
+              <h2 class="dm-ot" data-d="d1l">Monday 16 November</h2>
+              <ol class="dm-diary">
+                <li><time>08:00</time><div class="dm-cell"><span class="dm-gap" data-k="gap">Free</span><span class="dm-job is-new st-off" data-k="job">Breakdown visit · Sam Whitfield, LS6<small>F28, no hot water · £30 paid · from £95</small></span></div></li>
+                <li><time>10:30</time><div class="dm-cell"><span class="dm-job">Boiler service · LS8<small>Ravi Okafor</small></span></div></li>
+                <li><time>13:00</time><div class="dm-cell"><span class="dm-job">Landlord gas safety · Headingley<small>3 flats</small></span></div></li>
+              </ol>
+            </section>
+          </div>
+          <div class="rc-sum" aria-label="Overnight, in numbers">
+            <div><small>Booked</small><b data-k="s1">£0</b></div>
+            <div><small>Already in</small><b data-k="s2">£0</b></div>
+            <div><small>Dan’s time</small><b>0 min</b></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="dm-endwrap" id="dm-end" hidden>
+        <div class="dm-end" tabindex="-1" role="group" aria-labelledby="dm-end-h">
+          <p class="dm-end-k">The result</p>
+          <h2 id="dm-end-h">A job booked and paid for while Dan slept.</h2>
+          <ul class="dm-res"><li><b>£95</b> job</li><li><b>£30</b> deposit in</li><li><b>0 minutes</b> of Dan’s time</li></ul>
+          <div class="dm-end-a">
+            <a class="dm-cta" data-book href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=ai-receptionist&amp;kind=heating">Book a 45-min call</a>
+            <button type="button" class="dm-btn" data-dm="again">Watch it again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="dm-cap" aria-live="polite"><span class="dm-cap-t">23:10. Dan has been asleep since 22:40.</span></p>
+  </section>
+</main>
+
+<script src="../../assets/step.js"></script>
+<script src="../../assets/shell.js"></script>
+<script>
+/* real dates: the text comes in tonight; the visit is the next day Dan works (never a Sunday) */
+(function(){
+  var D = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var M = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function next(d){ var x = new Date(d); x.setDate(x.getDate() + 1); if (x.getDay() === 0) x.setDate(x.getDate() + 1); return x; }
+  var t = new Date(), d1 = next(t), d2 = next(d1);
+  var v = { tonight: 'Tonight', d1s: D[d1.getDay()].slice(0,3) + ' ' + d1.getDate(), d2s: D[d2.getDay()].slice(0,3) + ' ' + d2.getDate(),
+            d1l: D[d1.getDay()] + ' ' + d1.getDate() + ' ' + M[d1.getMonth()], d1d: D[d1.getDay()] };
+  [].forEach.call(document.querySelectorAll('[data-d]'), function(e){ var k = e.getAttribute('data-d'); if (v[k]) e.textContent = v[k]; });
+  window.RC = v;
+})();
+
+window.story = DemoShell.mount(document.body, {
+  idle: '23:10. Dan has been asleep since 22:40.',
+  opening: '23:10. Dan has been asleep since 22:40.',
+  result: '£95 job booked overnight, £30 deposit in. 0 minutes of Dan’s time.',
+  tail: 2400,
+  steps: [
+    { at: 500, label: 'A text at 23:10', caption: 'A customer texts at 23:10: boiler fault, no hot water.',
+      do: function(el, c){ c.show('[data-k=ask]', { from: 'right' }); c.log('23:10', 'Sam Whitfield, LS6: “F28, no hot water”'); } },
+    { after: 1200,
+      do: function(el, c){ c.show('[data-k=t1]', { from: 'left' }); } },
+    { after: 1200, label: 'It answers', caption: 'The assistant answers in 2 seconds and checks it is safe to wait.',
+      do: function(el, c){ c.hide('[data-k=t1]'); c.show('[data-k=q1]', { from: 'none' }); c.show('[data-k=chips]'); c.log('23:10', 'Replied in 2 seconds'); } },
+    { after: 1500, label: 'Two safety checks', waitFor: 'tap', target: '[data-k=no]', hint: 'Tap', hintAt: 'above', auto: 1300,
+      ask: { try: 'Your turn. You are Sam: tap No.', watch: 'Sam answers: no leak.' },
+      caption: 'No leak, and the pressure is fine. It needs a visit, not a 999 call.',
+      do: function(el, c){ c.hide('[data-k=chips]'); c.show('[data-k=a1]', { from: 'right' }); } },
+    { after: 1100,
+      do: function(el, c){ c.show('[data-k=q2]', { from: 'left' }); } },
+    { after: 1300,
+      do: function(el, c){ c.show('[data-k=a2]', { from: 'right' }); c.log('23:11', 'Checked: no leak, 1.5 bar'); } },
+    { after: 1000,
+      do: function(el, c){ c.show('[data-k=t2]', { from: 'left' }); } },
+    { after: 1100, label: 'Price and a real slot', caption: 'It gives the price from Dan’s list and his real free times.',
+      do: function(el, c){ c.hide('[data-k=t2]'); c.show('[data-k=q3]', { from: 'none' }); c.show('[data-k=price]'); } },
+    { after: 1800, label: 'Booked and paid', waitFor: 'tap', target: '[data-k=slot]', hint: 'Tap', hintAt: 'above', auto: 1500,
+      ask: { try: 'Your turn. Pick ' + RC.d1d + ' 08:00 and pay the deposit.', watch: 'Sam picks ' + RC.d1d + ' 08:00 and pays £30.' },
+      caption: 'Booked for ' + RC.d1d + ' 08:00, with a £30 deposit paid by card.',
+      do: function(el, c){ c.cls('[data-k=slot]', 'is-on'); c.show('[data-k=booked]', { from: 'below' });
+        c.log('23:12', 'Booked ' + RC.d1s + ' 08:00 · £30 deposit paid'); c.text('[data-k=s1]', '£95'); c.text('[data-k=s2]', '£30'); } },
+    { after: 2400,
+      do: function(el, c){ c.drawer(true); c.hide('[data-k=gap]'); c.show('[data-k=job]', { from: 'above' }); } },
+    { after: 2200, label: 'Dan’s morning', caption: '07:00. Dan wakes up to a paid job already in his diary.',
+      do: function(el, c){ c.text('[data-k=sleep]', 'Morning, Dan'); c.log('07:00', 'Dan wakes up. Nothing to do.'); } }
+  ]
+});
+</script>
+</body>
+</html>
