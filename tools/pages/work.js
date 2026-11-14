@@ -111,6 +111,20 @@ ${L.header(b, 'work')}
     </a>`).join('')}</div>
   </div>
 </section>
+<section class="hs wk-ai" id="ai-team" aria-labelledby="h-ai">
+  <div class="wrap">
+    <div class="hs-head">
+      <p class="kick">AI employees</p>
+      <h2 id="h-ai">The AI team</h2>
+      <p class="lead">Ten AI employees running the office of a made-up Bristol building firm: invoices, the inbox, the vans, money owed, search, ads, content, paperwork, a manager and a coach. Walk the office floor, open each one and see the hours it gives back.</p>
+    </div>
+    <a class="sys-shot wk-ai-shot" href="${b}demos/ai-team/">
+      <span class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>The AI team · Kingpost</span></span>
+      <picture><source media="(max-width: 640px)" srcset="${b}assets/work/ai-team-phone.webp" width="600" height="1076"><img src="${b}assets/work/ai-team-1440.webp" srcset="${b}assets/work/ai-team-800.webp 800w, ${b}assets/work/ai-team-1440.webp 1440w" sizes="(min-width: 1260px) 1200px, 92vw" width="1440" height="852" alt="The AI team demo: ten AI employees for a made-up building firm, with the hours each one saves" loading="lazy" decoding="async"></picture>
+    </a>
+    <div class="wk-ai-foot"><a class="btn btn-live" href="${b}demos/ai-team/">Open the AI team</a><span>Fictional business · illustrative numbers</span></div>
+  </div>
+</section>
 <section class="hs wk-sys" id="system" aria-labelledby="h-system">
   <div class="wrap">
     <div class="hs-head">

@@ -55,3 +55,15 @@
 .wk-hero{padding-bottom:clamp(28px,3vw,40px)}
 .wk .wk-sites{border-top:0;padding-top:0}
 .wk-bar .tp-rel-h{margin:0 0 14px}
+
+/* the AI team: one big screen like the system, opening the demo itself */
+.wk-ai .wk-ai-shot img{aspect-ratio:1440/852;object-position:top left}
+.wk-ai-shot picture{display:block}
+.wk-ai-foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:clamp(20px,2.4vw,28px)}
+.wk-ai-foot span{color:var(--ink-tx2);font:500 .75rem/1.3 var(--mono)}
+@media (max-width:640px){
+  .wk-ai .wk-ai-shot{max-width:340px;margin-inline:auto}
+  .wk-ai .wk-ai-shot .chrome{display:none}
+  .wk-ai .wk-ai-shot img{aspect-ratio:600/1076}
+  .wk-ai-foot{justify-content:center}
+}
