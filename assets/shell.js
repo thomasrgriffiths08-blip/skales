@@ -4,7 +4,7 @@
 
    <body class="dm" data-slug="kit" data-kind="heating" data-base="../../" style="--biz:#2563EB">
      header.dm-bar      .dm-mark  .dm-fict  a.dm-book[data-book]
-     main.dm-main       h1.dm-title (<b>…</b> <i>…</i>)
+     main.dm-main       h1.dm-title (<span>…</span> <span>…</span>, the second muted)
                         .dm-modes  button[data-dm=watch]  button[data-dm=try]
                         .dm-prog   ol.dm-dots  button[data-dm=pause]  a[data-dm=skip]
                         section.dm-stage > .dm-view > .dm-scene (the story's stage: .dm-phone, .dm-owner)
@@ -19,7 +19,7 @@
 (function(w, d){
   'use strict';
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  /* money figures in a caption go yellow */
+  /* money figures in a caption are set in the ink colour, a step darker than the caption */
   function money(s){ return esc(s).replace(/£\d[\d,]*(?:\.\d+)?k?/g, '<b>$&</b>'); }
 
   function mount(root, cfg){

@@ -10,47 +10,53 @@
 <meta name="description" content="A late-night text to a fictional plumber, answered, checked, priced and booked with a deposit while the owner sleeps. Illustrative numbers.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141416'/%3E%3Cpath d='M22 16v32M43 17L25 33l18 15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preload" href="../../assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/shell.css">
 <style>
-/* the AI receptionist: the kit plus a few pieces only this story has. Yellow stays the Skales bar's alone. */
-.rc-tag{grid-area:tag;justify-self:start;margin:-4px 0 16px;padding:5px 9px;border:2px solid var(--ink);border-radius:10px;
-  font:600 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.03em;text-transform:uppercase}
+/* the AI receptionist: the kit plus a few pieces only this story has. Yellow stays the Skales Book button's alone;
+   Larchfield's blue marks what the customer can tap, what they picked and the job that lands in Dan's diary. */
+.rc-tag{grid-area:tag;justify-self:start;margin:-8px 0 24px;font-size:14px;line-height:1.4;color:var(--tx3)}
 .dm-main{grid-template-areas:"title title" "tag tag" "modes prog" "stage stage"}
 .dm-thread>*{flex:none}
-.rc-ai{display:inline-block;margin-right:6px;padding:1px 5px;border-radius:4px;background:var(--ink);color:#fff;font:700 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;vertical-align:1px}
+.rc-ai{display:inline-block;margin-right:6px;padding:0 4px;border:1px solid var(--line2);border-radius:4px;color:var(--tx2);font:400 11px/16px var(--mono);vertical-align:1px}
 .rc-chips{flex:none;align-self:flex-end;display:flex;gap:8px}
-.rc-chip{min-height:44px;padding:0 16px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);font-size:15px;font-weight:650}
-.rc-card{flex:none;align-self:stretch;margin:0;border:2px solid var(--ink);border-radius:12px;background:#fff;overflow:hidden}
-.rc-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:10px 13px}
-.rc-row b{font-size:16px;font-weight:750}
-.rc-row small{display:block;margin-top:2px;font-size:13px;color:var(--tx2)}
-.rc-from{white-space:nowrap;font-size:13px;color:var(--tx2)}
-.rc-from strong{margin-left:4px;color:var(--ink);font-size:24px;font-weight:800;letter-spacing:-.03em}
-.rc-dep{border-top:2px solid var(--ink);font-size:14.5px;font-weight:600}
-.rc-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px 13px 12px;border-top:2px solid var(--ink)}
-.rc-slot{display:grid;justify-items:center;gap:1px;min-height:50px;padding:6px 4px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);line-height:1.1}
-.rc-slot small{font-size:12px;font-weight:600;color:var(--tx2)}
-.rc-slot b{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
-.rc-slot.is-on{background:var(--ink);color:#fff}
-.rc-slot.is-on small{color:#fff}
-.rc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 13px;background:var(--ink);color:#fff;font-size:15px;font-weight:750}
-.rc-head span{font-size:13px;font-weight:600}
-.rc-body{padding:10px 13px;font-size:15px;line-height:1.38}
-.rc-safe{padding:8px 13px 10px;border-top:1px solid var(--hair);font-size:13px;color:var(--tx2)}
-.rc-sleep{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:10px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:650}
-.rc-sum{flex:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
-.rc-sum div{padding:9px 12px}
-.rc-sum div+div{border-left:2px solid var(--ink)}
-.rc-sum small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2)}
-.rc-sum b{font-size:22px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.rc-chip{min-height:40px;padding:0 20px;border:1px solid var(--line2);border-radius:20px;background:#fff;color:var(--ink);font-size:15px;font-weight:500;transition:border-color .15s var(--ease),transform .15s var(--ease)}
+.rc-chip:hover{border-color:var(--tx4)}
+.rc-card{flex:none;align-self:stretch;margin:0;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.rc-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 14px}
+.rc-row b{font-size:16px;font-weight:500}
+.rc-row small{display:block;margin-top:2px;font-size:13px;color:var(--tx3)}
+.rc-from{white-space:nowrap;font-size:13px;color:var(--tx3)}
+.rc-from strong{margin-left:4px;color:var(--ink);font-size:24px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.rc-dep{border-top:1px solid var(--line);font-size:14px;color:var(--tx2)}
+.rc-dep span+span{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.rc-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 14px 14px;border-top:1px solid var(--line)}
+.rc-slot{display:grid;justify-items:center;gap:2px;min-height:52px;padding:8px 4px;border:1px solid var(--line2);border-radius:10px;background:#fff;color:var(--ink);line-height:1.15;
+  transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
+.rc-slot:hover{border-color:var(--tx4)}
+.rc-slot small{font-size:12px;font-weight:400;color:var(--tx3)}
+.rc-slot b{font-size:17px;font-weight:500;font-variant-numeric:tabular-nums}
+.rc-slot.is-on{background:var(--biz);border-color:transparent;color:var(--biz-ink)}
+.rc-slot.is-on small{color:inherit;opacity:.85}
+.rc-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px 0}
+.rc-head b{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:500}
+.rc-head svg{width:16px;height:16px;flex:none;color:#15803D}
+.rc-body{padding:4px 14px 12px;font-size:15px;line-height:1.4;color:var(--tx2)}
+.rc-body b{color:var(--ink);font-weight:500}
+.rc-safe{padding:10px 14px 12px;border-top:1px solid var(--line);font-size:13px;color:var(--tx3)}
+.rc-sleep{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--tx3)}
+.rc-sleep::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--tx4)}
+.rc-sum{flex:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.rc-sum div{padding:12px 16px}
+.rc-sum div+div{border-left:1px solid var(--line)}
+.rc-sum small{display:block;font-size:12px;font-weight:400;color:var(--tx3)}
+.rc-sum b{font-size:22px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 @media (max-width:859px){
-  .rc-chip,.rc-slot{border-color:var(--ink)}
   .rc-sum{display:none}
-  .rc-ai{background:#fff;color:var(--ink)}
 }
 @media (max-width:699px){
   .dm-main{grid-template-areas:"title" "tag" "modes" "stage" "prog"}
-  .rc-tag{font-size:11px}
+  .rc-tag{margin:-4px 0 16px;font-size:13px}
 }
 </style>
 </head>
@@ -62,7 +68,7 @@
 </header>
 
 <main class="dm-main" id="main">
-  <h1 class="dm-title"><b>Dan clocked off at 17:30.</b> <i>At 23:10 his assistant booked the job.</i></h1>
+  <h1 class="dm-title"><span>Dan clocked off at 17:30.</span> <span>At 23:10 his assistant booked the job</span></h1>
   <p class="rc-tag">Example tasks · confirm what you sell</p>
 
   <div class="dm-modes" role="group" aria-label="How to see it">
@@ -81,6 +87,7 @@
       <div class="dm-scene">
         <div class="dm-phone">
           <div class="dm-screen">
+            <div class="dm-status" aria-hidden="true"><span data-k="clock">23:10</span><span><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.3c2.3 0 4.4.9 6 2.4l1.2-1.3A10.4 10.4 0 0 0 8 .5 10.4 10.4 0 0 0 .8 3.4L2 4.7a8.6 8.6 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.2-1.3A6.7 6.7 0 0 0 8 4.1a6.7 6.7 0 0 0-4.6 1.8l1.2 1.3c.9-.8 2.1-1.3 3.4-1.3Zm0 3.6c.6 0 1.1.2 1.6.6L8 11.8 6.4 10.1c.5-.4 1-.6 1.6-.6Z"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="15" height="8" rx="2"/><path d="M25 4v4c.8-.3 1.4-1.1 1.4-2s-.6-1.7-1.4-2Z" opacity=".4"/></svg></span></div>
             <div class="dm-top">
               <span class="dm-av" aria-hidden="true">L</span>
               <span class="dm-who"><b>Larchfield Heating’s assistant</b><small><span class="rc-ai">AI</span>Replies any hour · Dan sees everything</small></span>
@@ -106,8 +113,8 @@
                 </div>
               </div>
               <div class="rc-card st-off" data-k="booked">
-                <div class="rc-head">Booked<span>£30 paid</span></div>
-                <p class="rc-body"><b><span data-d="d1l">Monday 16 November</span>, 08:00.</b> Dan will text when he’s on his way.</p>
+                <div class="rc-head"><b><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="m4.8 8.2 2.1 2.1 4.3-4.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Booked</b><span class="job">Job 0418 · 23:12</span></div>
+                <p class="rc-body"><b><span data-d="d1l">Monday 16 November</span>, 08:00.</b> £30 deposit paid. Dan will text when he’s on his way.</p>
                 <p class="rc-safe">Smell gas? Call 0800 111 999 straight away.</p>
               </div>
             </div>
@@ -125,7 +132,7 @@
             <section>
               <h2 class="dm-ot" data-d="d1l">Monday 16 November</h2>
               <ol class="dm-diary">
-                <li><time>08:00</time><div class="dm-cell"><span class="dm-gap" data-k="gap">Free</span><span class="dm-job is-new st-off" data-k="job">Breakdown visit · Sam Whitfield, LS6<small>F28, no hot water · £30 paid · from £95</small></span></div></li>
+                <li><time>08:00</time><div class="dm-cell"><span class="dm-gap" data-k="gap">Free</span><span class="dm-job is-new st-off" data-k="job">Breakdown visit · Sam Whitfield, LS6<small><span class="job">Job 0418</span> · F28, no hot water · £30 paid</small></span></div></li>
                 <li><time>10:30</time><div class="dm-cell"><span class="dm-job">Boiler service · LS8<small>Ravi Okafor</small></span></div></li>
                 <li><time>13:00</time><div class="dm-cell"><span class="dm-job">Landlord gas safety · Headingley<small>3 flats</small></span></div></li>
               </ol>
@@ -142,7 +149,7 @@
       <div class="dm-endwrap" id="dm-end" hidden>
         <div class="dm-end" tabindex="-1" role="group" aria-labelledby="dm-end-h">
           <p class="dm-end-k">The result</p>
-          <h2 id="dm-end-h">A job booked and paid for while Dan slept.</h2>
+          <h2 id="dm-end-h">A job booked and paid for while Dan slept</h2>
           <ul class="dm-res"><li><b>£95</b> job</li><li><b>£30</b> deposit in</li><li><b>0 minutes</b> of Dan’s time</li></ul>
           <div class="dm-end-a">
             <a class="dm-cta" data-book href="../../book/?utm_source=site&amp;utm_medium=demo&amp;utm_content=ai-receptionist&amp;kind=heating">Book a 45-min call</a>
@@ -189,7 +196,7 @@ window.story = DemoShell.mount(document.body, {
     { after: 1100,
       do: function(el, c){ c.show('[data-k=q2]', { from: 'left' }); } },
     { after: 1300,
-      do: function(el, c){ c.show('[data-k=a2]', { from: 'right' }); c.log('23:11', 'Checked: no leak, 1.5 bar'); } },
+      do: function(el, c){ c.show('[data-k=a2]', { from: 'right' }); c.log('23:11', 'Checked: no leak, 1.5 bar'); c.text('[data-k=clock]', '23:11'); } },
     { after: 1000,
       do: function(el, c){ c.show('[data-k=t2]', { from: 'left' }); } },
     { after: 1100, label: 'Price and a real slot', caption: 'It gives the price from Dan’s list and his real free times.',
@@ -198,7 +205,7 @@ window.story = DemoShell.mount(document.body, {
       ask: { try: 'Your turn. Pick ' + RC.d1d + ' 08:00 and pay the deposit.', watch: 'Sam picks ' + RC.d1d + ' 08:00 and pays £30.' },
       caption: 'Booked for ' + RC.d1d + ' 08:00, with a £30 deposit paid by card.',
       do: function(el, c){ c.cls('[data-k=slot]', 'is-on'); c.show('[data-k=booked]', { from: 'below' });
-        c.log('23:12', 'Booked ' + RC.d1s + ' 08:00 · £30 deposit paid'); c.text('[data-k=s1]', '£95'); c.text('[data-k=s2]', '£30'); } },
+        c.log('23:12', 'Job 0418 booked: ' + RC.d1s + ' 08:00 · £30 deposit paid'); c.text('[data-k=clock]', '23:12'); c.text('[data-k=s1]', '£95'); c.text('[data-k=s2]', '£30'); } },
     { after: 2400,
       do: function(el, c){ c.drawer(true); c.hide('[data-k=gap]'); c.show('[data-k=job]', { from: 'above' }); } },
     { after: 2200, label: 'Dan’s morning', caption: '07:00. Dan wakes up to a paid job already in his diary.',
