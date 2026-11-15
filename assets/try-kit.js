@@ -237,18 +237,19 @@ window.TryKit = function(cfg){
   };
 
   /* the confirmation screen, and the booking landing in the CRM */
+  K.JOB = '0418'; /* the job number every booking gets, as in the system */
   K.done = function(t){
     var A = K.A, job = K.jobName(), today = K.sameDay();
     K.show('done');
     K.bind('[data-donetx]', (today ? 'See you at ' + A.slots[A.slot] + '.' : 'You’ll get a reminder the day before.') + ' Nobody had to pick up the phone.');
     var row = ph.querySelector('[data-deprow]'); row.hidden = !A.dep; K.bind('[data-dep-paid]', '£' + A.dep + ' paid');
-    K.bind('[data-confirm]', 'Confirmed: ' + job + ', ' + K.when() + '.' + (A.dep ? ' £' + A.dep + ' deposit received.' : '') + (today ? ' See you later.' : ' We’ll remind you the day before.') + ' Reply R to rearrange.');
+    K.bind('[data-confirm]', 'Confirmed: ' + job + ', ' + K.when() + ', job ' + K.JOB + '.' + (A.dep ? ' £' + A.dep + ' deposit received.' : '') + (today ? ' See you later.' : ' We’ll remind you the day before.') + ' Reply R to rearrange.');
     var n2 = $('ntf2'); n2.hidden = true; K.later(function(){ n2.hidden = false; }, 1200);
     K.stage('booked', 'Booked');
     $('leadsub').textContent = job + ' · ' + K.when();
     K.tag('grn', 'diary', 'Booked');
     if (A.dep) K.tag('grn', 'card', '£' + A.dep + ' deposit');
-    K.feed('diary', 'grn', '<b>Booked</b>: ' + K.esc(job) + ', ' + K.when(), t, A.dep ? 'Booked, £' + A.dep + ' deposit paid' : 'Booked into the diary');
+    K.feed('diary', 'grn', '<b>Job ' + K.JOB + ' booked</b>: ' + K.esc(job) + ', ' + K.when(), t, A.dep ? 'Booked, £' + A.dep + ' deposit paid' : 'Booked into the diary');
     if (A.dep) K.feed('card', 'grn', '<b>£' + A.dep + ' deposit paid</b>, held against the job', t);
     K.feed('bell', 'gry', '<b>Confirmation sent</b>' + (today ? '' : ', reminder set for the day before'), t);
     K.diary(A.days[A.day], A.slot, job);

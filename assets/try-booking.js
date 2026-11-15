@@ -89,7 +89,7 @@
     var n = 0; A.slots.forEach(function(s, i){ if (i === A.slot || K.taken(day, i)) n++; });
     K.bind('[data-appsum]', n + (n === 1 ? ' job' : ' jobs') + ' · 1 new overnight');
     K.$('appList').innerHTML = A.slots.map(function(s, i){
-      if (i === A.slot) return '<li class="ap-new"><time>' + s + '</time><div><span class="ap-flag">New · booked ' + K.hm(A.t.booked) + ' last night</span><b>' + K.esc(K.jobName()) + '</b><small>Sam Carter · ' + A.custNo + '</small>' + (A.dep ? '<span class="ap-paid">£' + A.dep + ' deposit paid</span>' : '') + '<span class="ap-rem">Reminder sent to Sam</span></div></li>';
+      if (i === A.slot) return '<li class="ap-new"><time>' + s + '</time><div><span class="ap-flag">Job ' + K.JOB + ' · booked ' + K.hm(A.t.booked) + ' last night</span><b>' + K.esc(K.jobName()) + '</b><small>Sam Carter · ' + A.custNo + '</small>' + (A.dep ? '<span class="ap-paid">£' + A.dep + ' deposit paid</span>' : '') + '<span class="ap-rem">Reminder sent to Sam</span></div></li>';
       if (K.taken(day, i)) return '<li><time>' + s + '</time><div><b>' + K.esc(A.J.jobs[(i + day.getDate()) % A.J.jobs.length][0]) + '</b><small>Booked</small></div></li>';
       return '<li class="ap-free"><time>' + s + '</time><div><small>Free</small></div></li>';
     }).join('');
