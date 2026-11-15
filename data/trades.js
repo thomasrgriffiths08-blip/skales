@@ -78,7 +78,7 @@ module.exports = [
     ],
     cta: 'Get a price' },
 
-  { key: 'building', label: 'Building & joinery', plate: 'building', c: '#7A5230', demo: 13,
+  { key: 'building', label: 'Building & joinery', plate: 'building', c: '#C2410C', demo: 13,
     word: 'builder', plural: 'builders',
     photo: 'building', pos: '50% 55%', pos2: '50% 40%', font: 'Archivo',
     head: `Builders in {town} who finish.`,
