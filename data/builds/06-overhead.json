@@ -1,17 +1,15 @@
 {
   "trade": "Drone survey & filming",
   "tags": [
-    "Aerial film in the first screen",
-    "Survey lines that draw as you scroll",
-    "A flight log worked out from today"
+    "A straight-down flight with live telemetry",
+    "A survey that draws itself as you scroll",
+    "Postcode first, job reference back"
   ],
   "features": [
-    "A real aerial film loops behind the first screen, cut to a phone-sized portrait version on phones",
-    "Three real aerial stills with the deliverable drawn over them: contours and a boundary, a measured roof with numbered defects, cut and spoil on a building site",
-    "The survey lines draw themselves across the photo as you scroll, and every layer switches on and off",
-    "Four fixed prices, each one carrying its job straight into the enquiry form",
-    "A flight log of the last six flying days, dated back from today with the wind on each",
-    "The enquiry checks the postcode and comes back with a job reference and who rings you when"
+    "The first screen flies straight down with live telemetry, so it reads as surveyors, not hobby pilots",
+    "Each service draws itself over an aerial photo as you scroll, showing exactly what the client gets handed",
+    "The price sits beside every survey, so the call starts with the job rather than the cost",
+    "A quote form that starts with the postcode and gives back a job reference and a flight log"
   ],
   "n": 6,
   "slug": "overhead",
@@ -22,8 +20,8 @@
   "biz": "Drone survey, Peak District",
   "c": "#FF6A13",
   "pg": "#0E1621",
-  "short": "A drone survey firm whose survey lines draw themselves over real aerial photos as you scroll.",
-  "long": "A two-person drone survey outfit in slate and cloud with one hi-vis orange for booking. The first screen is a real aerial film flown over Peak District fields. Below it, three real stills show what the client actually gets back: half-metre contours and a boundary on a field, a measured roof with six numbered defects, and cut and spoil on a building site, each drawing itself over the photo as you scroll. Four fixed prices carry straight into an enquiry that checks the postcode and says who rings back and when.",
+  "short": "A drone survey website where each service is a survey you watch draw itself.",
+  "long": "Overhead's homepage flies straight down over a Peak District field with live telemetry. Scroll on and a pinned aerial photo draws each survey in turn, roof defects, cut and spoil, contours and a film circuit, with the price beside it. The quote form starts with the postcode and gives back a job reference.",
   "proves": "A survey firm can show what it hands over, not just a gallery of aerial photos.",
   "story": "Drone operators all show the same thing: pretty aerial photographs. What they are paid for is measurement, so the page draws the survey over the photo, the way the client will see it."
 }

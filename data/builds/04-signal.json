@@ -1,15 +1,15 @@
 {
   "trade": "Festival",
   "tags": [
-    "Real crowd and stage photos",
-    "A poster you can tap",
-    "Ticket maths, fee up front"
+    "A stage film toned in two inks",
+    "A line-up poster that checks for clashes",
+    "The booking fee shown before you hold"
   ],
   "features": [
-    "Real crowd, stage and venue photography with a live countdown to doors",
-    "The line-up as a still poster sized by billing: tap a name for its day, room and time",
-    "Build your weekend from the poster, with clashes flagged as you go",
-    "Four ticket tiers with live totals, the booking fee shown up front and a 15 minute hold"
+    "The name, the dates and the ticket price are all on the first screen, over the stage film",
+    "The line-up is a printed poster you tap to build your weekend, and it stamps any clash",
+    "The slip underneath draws each night hour by hour with the overlap marked, so nobody misses the act they came for",
+    "Ticket tiers show live availability and the booking fee before you hold, the thing that loses festival sales at checkout"
   ],
   "n": 4,
   "slug": "signal",
@@ -20,8 +20,8 @@
   "biz": "Music & light festival",
   "c": "#3B18E0",
   "pg": "#0A0A0A",
-  "short": "A real crowd, a poster you can tap, and tickets with the fee shown up front.",
-  "long": "The first screen is a real crowd facing the stage, with a live countdown to doors. The line-up is a still poster sized by billing: tap any name for its day, room and time, and add it to your weekend, which flags clashes as you build it. Tickets are four tiers with live totals and the booking fee shown before you pay.",
+  "short": "A festival website where the line-up poster builds your weekend and warns you about clashes.",
+  "long": "Signal opens on the stage film with the festival name set edge to edge. The line-up is a printed poster: tap the acts you want and it stamps any clash, while the slip underneath draws your nights hour by hour. Tickets show the booking fee before you hold them.",
   "proves": "Bold, and still easy to use.",
   "story": "The bold one, rebuilt around the crowd. Everything on it helps someone decide to go: who is on, when, where, and what it costs."
 }

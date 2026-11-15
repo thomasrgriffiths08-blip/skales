@@ -1,16 +1,15 @@
 {
   "trade": "Film production company",
   "tags": [
-    "A real showreel in the first screen",
-    "Timecode and a scrub bar on the footage",
-    "Jobs that play as you pass"
+    "The showreel is the first screen",
+    "A scrub bar made of the jobs",
+    "A call sheet instead of a contact form"
   ],
   "features": [
-    "A ten second showreel cut from four real clips fills the first screen, with a phone-sized portrait cut for phones",
-    "A running timecode and a scrub bar sit on the footage, one segment per job: drag, tap a job or use the arrow keys",
-    "Four jobs that play on hover on a laptop and as they come into view on a phone, each one able to jump the reel to its shot",
-    "Services set out as a real call sheet, dated next Tuesday with Manchester's sunrise and sunset worked out for that day",
-    "Add a line from the sheet and it lands on the request, which comes back as a call sheet with who rings you and when"
+    "The reel plays on the first screen, so a buyer sees the work before they read about it",
+    "The scrub bar is made of the jobs: tap one and the reel cuts straight to the work the client cares about",
+    "Every job in the index plays full screen as you point at it, with the crew set out as end credits",
+    "A call sheet request instead of a contact form: the job, the crew size and the date, so the first reply can quote"
   ],
   "n": 5,
   "slug": "long-exposure",
@@ -19,10 +18,10 @@
   "lane": "motion",
   "name": "Long Exposure",
   "biz": "Film production, Manchester",
-  "c": "#E8E8E8",
+  "c": "#E5322D",
   "pg": "#050505",
-  "short": "A film company whose first screen is its showreel, with the timecode and scrub bar on top.",
-  "long": "A four-person production company in black and white, with one red REC dot. The first screen is a showreel cut from four of this year's jobs, with a running timecode and a scrub bar laid over the footage, one segment per job. Below it the four jobs play on hover or as they scroll into view, a still from a night shoot runs edge to edge, and the services are set out as a real call sheet dated next Tuesday. Add a line and it goes straight onto a request that comes back as a call sheet of its own.",
+  "short": "A showreel website that plays your best work first and turns viewers into booked shoots.",
+  "long": "Long Exposure's reel fills the first screen with a running timecode, and the scrub bar is made of the four jobs: tap one and the reel cuts to it. Below, the work index plays each job full screen as you point at it, and the call sheet request starts with the six things they shoot.",
   "proves": "A film company's site can open on the film, and still take the enquiry.",
   "story": "Film companies tend to bury the reel behind a play button on a black page. This one opens on it, keeps the timecode honest, and lets you scrub straight to the job you care about."
 }
