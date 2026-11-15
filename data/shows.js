@@ -67,8 +67,9 @@ module.exports = {
     { tap: '.pslot', say: 'One tap and it is booked in' },
   ],
   'kestrel-electrical': [
-    { tap: 'button[data-c="2"]', say: 'Flip a breaker' },
-    { tap: 'button[data-c="6"]', say: 'The emergency one' },
+    { tap: 'button[data-c="2"]', say: 'Flip a breaker for that job' },
+    { scroll: '#det', say: 'Its price, how long it takes and who does it' },
+    { tap: 'button[data-c="6"]', say: 'The emergency one puts the 24-hour number up' },
   ],
   'kerb-and-camber': [
     { type: '#reg', text: 'KX19 LBD', say: 'Put your reg in' },

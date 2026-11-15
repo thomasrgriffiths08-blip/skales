@@ -1,0 +1,41 @@
+/* ============================================================
+   A website's case page, below the live build: the phone view on the site's own colour beside what the
+   site does for its owner, then what comes with a site like this. Written to sell the work, not explain the code.
+   ============================================================ */
+.cs-own{padding:clamp(56px,8vw,112px) 0;border-top:1px solid var(--line)}
+.cs-own-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);align-items:start}
+.cs-phone{position:sticky;top:calc(var(--head-h, 64px) + 24px);margin:0;display:grid;gap:14px;justify-items:center;padding:clamp(28px,4vw,56px) 16px;border-radius:18px;background:#17181B;background:var(--cv,#17181B);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.cs-bezel{display:block;width:300px;max-width:100%;aspect-ratio:585/1266;border-radius:38px;overflow:hidden;background:#0B0C0E;box-shadow:0 0 0 6px #0B0C0E,0 0 0 7px rgba(255,255,255,.16),0 40px 70px -30px rgba(0,0,0,.8)}
+.cs-bezel img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.cs-phone figcaption{font-size:.875rem;color:rgba(255,255,255,.72);text-align:center;margin-top:10px}
+.cs-own-copy{display:grid;gap:20px;align-content:start;padding-top:clamp(0px,2vw,24px)}
+.cs-k{margin:0;font-size:.9375rem;font-weight:600;color:var(--tx-2)}
+.cs-own-copy h2{margin:0;font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.08;letter-spacing:-.03em;text-wrap:balance;max-width:20ch}
+.cs-own-copy .lead{margin:0}
+.cs-feats{list-style:none;margin:8px 0 0;padding:0;counter-reset:f;display:grid;gap:0}
+.cs-feats li{counter-increment:f;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;padding:18px 0;border-top:1px solid var(--line);font-size:1.0625rem;line-height:1.5;color:var(--tx)}
+.cs-feats li:last-child{border-bottom:1px solid var(--line)}
+.cs-feats li::before{content:counter(f, decimal-leading-zero);font:600 .9375rem/1.6 var(--sans);color:var(--tx-2);font-variant-numeric:tabular-nums}
+.cs-own-copy .cta-row{margin-top:8px}
+
+.cs-comes{padding:clamp(56px,8vw,112px) 0;border-top:1px solid var(--line)}
+.cs-comes h2{margin:0 0 clamp(28px,3.6vw,48px);font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.08;letter-spacing:-.03em}
+.cs-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(24px,3vw,48px)}
+.cs-grid li{display:grid;gap:8px;align-content:start;padding:24px 0 28px;border-top:1px solid var(--line)}
+.cs-grid b{font-size:1.1875rem;letter-spacing:-.015em;color:var(--tx)}
+.cs-grid span{color:var(--tx-2);line-height:1.55}
+.cs-small{margin:clamp(24px,3vw,40px) 0 0;font-size:.875rem;color:var(--tx-3, var(--tx-2));max-width:72ch}
+
+@media (max-width:900px){
+  .cs-own-in{grid-template-columns:minmax(0,1fr)}
+  .cs-phone{position:relative;top:auto}
+  .cs-bezel{width:240px;border-radius:32px}
+  .cs-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
+@media (max-width:560px){
+  /* the live build above is already the phone view, so the picture would only repeat it */
+  .cs-phone{display:none}
+  .cs-grid{grid-template-columns:minmax(0,1fr)}
+  .cs-grid li{padding:18px 0 20px}
+  .cs-feats li{grid-template-columns:34px minmax(0,1fr);font-size:1rem;padding:15px 0}
+}

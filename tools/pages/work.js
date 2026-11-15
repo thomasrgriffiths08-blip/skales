@@ -44,6 +44,31 @@ const WK_OF = { 'kerb-and-camber': 'trades', 'kestrel-electrical': 'trades', ove
   'hale-and-partners': 'pro', 'atelier-voss': 'pro', cadence: 'pro', 'marrow-and-pin': 'creative', 'long-exposure': 'creative', signal: 'creative', maree: 'creative' };
 const WK = [12, 11, 6, 10, 7, 9, 1, 2, 8, 5, 4, 3].map(n => builds.find(x => x.n === n)).filter(x => x && WK_OF[x.slug]);
 const nameOf = x => { const n = x.name.split(/\s+[—–-]\s+/)[0]; return n === n.toUpperCase() ? n.charAt(0) + n.slice(1).toLowerCase().replace(/\s(\w)/g, (m, c) => ' ' + c.toUpperCase()) : n; };
+/* the colour behind a website's cover: its own colour mixed into the night ground. Warm colours (yellow, orange,
+   red, pink) go brown when darkened, so those take the site's own page colour when it is a real colour, else graphite. */
+const hsl = h => { const n = parseInt(String(h).slice(1), 16), r = (n >> 16 & 255) / 255, g = (n >> 8 & 255) / 255, bl = (n & 255) / 255;
+  const mx = Math.max(r, g, bl), mn = Math.min(r, g, bl), l = (mx + mn) / 2, d = mx - mn;
+  if (!d) return [0, 0, l];
+  const sat = d / (1 - Math.abs(2 * l - 1)); let hu = mx === r ? ((g - bl) / d) % 6 : mx === g ? (bl - r) / d + 2 : (r - g) / d + 4;
+  hu *= 60; if (hu < 0) hu += 360; return [hu, sat, l]; };
+const coverBg = x => {
+  const [h, sat, l] = hsl(x.c || '#888888');
+  const warm = sat > .2 && (h < 75 || h > 320);
+  if (!warm) return `color-mix(in oklab, ${x.c} 30%, #141518)`;
+  const [ph, ps, pl] = hsl(x.pg || '#000000');
+  return ps > .3 && pl > .06 && pl < .3 && !(ph < 75 || ph > 320) ? x.pg : '#1B1C1F';
+};
+/* a website on /work/: its own colour behind it, the laptop screen and the phone together, then what it is and
+   what it does for the owner. The phone plays its clip once as it comes into view (assets/site.js). */
+const cover = (b, x, i) => `<a class="wk-card" href="${b}work/${x.slug}/" data-view="${x.slug}" data-f="${WK_OF[x.slug]}" style="--cv:${coverBg(x)}">
+      <span class="wk-cover">
+        <span class="wk-lap"><img src="${b}assets/screens/${pad(x.n)}-1200.webp" srcset="${b}assets/screens/${pad(x.n)}-1200.webp 1200w, ${b}assets/screens/${pad(x.n)}-2160.webp 2160w" sizes="(min-width: 1100px) 560px, 80vw" width="1200" height="750" alt="${esc(nameOf(x))} on a laptop: ${esc(x.short)}"${i < 2 ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"></span>
+        <span class="wk-ph"><img src="${L.clipSrc(b, x, 'webp')}" width="600" height="1077" alt="" loading="lazy" decoding="async"><video muted playsinline preload="none" data-src="${L.clipSrc(b, x, 'mp4')}" aria-hidden="true"></video></span>
+      </span>
+      <span class="wk-meta"><b>${esc(nameOf(x))}</b><span>${esc(x.trade || x.biz)}</span></span>
+      <span class="wk-short">${esc(x.short)}</span>
+      <span class="wk-open">Open the website <i aria-hidden="true">→</i></span>
+    </a>`;
 const WK_F = [['all', 'All'], ['trades', 'Trades'], ['health', 'Health & fitness'], ['pro', 'Professional'], ['creative', 'Creative & events']];
 /* the desk: the system on a laptop and the customer's phone beside it, live and talking to each other
    (tools/system/desk.js, tools/system/phone.js, assets/desk.js). On a phone, one screen at a time. */
@@ -104,11 +129,7 @@ ${L.header(b, 'work')}
   <div class="wrap">
     <div class="wk-bar"><h2 id="h-websites" class="tp-rel-h">The websites · tap one to open it full screen</h2></div>
     <div class="wk-filter" role="group" aria-label="Show websites for">${WK_F.map(([k, label], i) => `<button type="button" data-f="${k}" aria-pressed="${i ? 'false' : 'true'}">${esc(label)}<span>${k === 'all' ? WK.length : WK.filter(x => WK_OF[x.slug] === k).length}</span></button>`).join('')}</div>
-    <div class="wk-grid">${WK.map((x, i) => `<a class="w wk-card" href="${b}work/${x.slug}/" data-view="${x.slug}" data-f="${WK_OF[x.slug]}">
-      <span class="w-shot"><picture><source media="(max-width: 640px)" srcset="${L.phoneSrc(b, x)}" width="600" height="1077"><img src="${b}assets/screens/${pad(x.n)}-1200.webp" srcset="${b}assets/screens/${pad(x.n)}-1200.webp 1200w, ${b}assets/screens/${pad(x.n)}-2160.webp 2160w" sizes="(min-width: 1100px) 380px, 46vw" width="1200" height="750" alt="${esc(nameOf(x))}: ${esc(x.short)}"${i < 3 ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"></picture></span>
-      <span class="w-cap"><b>${esc(nameOf(x))}</b><span>${esc(x.trade || x.biz)}</span></span>
-      <span class="wk-short">${esc(x.short)}</span>
-    </a>`).join('')}</div>
+    <div class="wk-grid">${WK.map((x, i) => cover(b, x, i)).join('')}</div>
   </div>
 </section>
 <section class="hs wk-ai" id="ai-team" aria-labelledby="h-ai">
@@ -262,7 +283,33 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
     </div>
   </section>
 
-  <section class="panel">
+  ${x.kind === 'site' ? `<section class="cs-own" aria-labelledby="h-own">
+    <div class="wrap cs-own-in">
+      <figure class="cs-phone" style="--cv:${coverBg(x)}"><span class="cs-bezel"><img src="${b}assets/phones/${pad(x.n)}.webp" width="585" height="1266" alt="${esc(x.name)} on a phone" loading="lazy" decoding="async"></span><figcaption>On a phone, where most customers will meet it</figcaption></figure>
+      <div class="cs-own-copy">
+        <p class="cs-k">What it does for the owner</p>
+        <h2 id="h-own">${esc(x.proves)}</h2>
+        <p class="lead">${esc(x.story)}</p>
+        <ol class="cs-feats">${(x.features || []).map(f => `<li>${esc(f)}</li>`).join('')}</ol>
+        <div class="cta-row"><a class="btn btn-dark" href="${b}demos/${x.slug}/#s=1" data-view="${x.slug}">Open it full screen</a><a class="btn btn-ghost" href="${b}book/">Book a call</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-comes" aria-labelledby="h-comes">
+    <div class="wrap">
+      <h2 id="h-comes">What comes with a site like this</h2>
+      <ul class="cs-grid">
+        <li><b>Built for your trade</b><span>Designed from scratch around how your customers decide, like the ${esc(x.trade ? x.trade.toLowerCase() : 'business')} idea at the heart of ${esc(x.name)}. No theme, no template.</span></li>
+        <li><b>Quick on a phone</b><span>Written by hand with nothing bought in, so it loads fast on a phone signal and works with a thumb.</span></li>
+        <li><b>Found on Google and in AI answers</b><span>Titles, descriptions, schema and an llms.txt set up page by page. <a class="lnk" href="${b}seo/">How the search side works</a>.</span></li>
+        <li><b>Wired into the system</b><span>Missed calls get a text back, bookings land in the diary and reviews get asked for. <a class="lnk" href="${b}work/system/">See the system</a>.</span></li>
+        <li><b>Yours from day one</b><span>Your name, your numbers and your domain, owned by you. No platform holding it hostage.</span></li>
+        <li><b>A fixed price first</b><span>A free 45-minute call, then a fixed price before anything is built.</span></li>
+      </ul>
+      <p class="cs-small">${esc(x.biz)} is invented, so every person, number and review on it is fictional. ${photos.length ? `Photographs by ${photos.map(p => p.url ? `<a class="lnk" href="${p.url}" rel="noopener">${esc(p.by)}</a>` : esc(p.by)).join(' and ')} on Pexels.` : ownPhotos(x.slug) ? 'Photographs from Pexels, graded and cropped for this page. Nobody pictured is presented as staff.' : 'Every visual is drawn in code.'}</p>
+    </div>
+  </section>` : `  <section class="panel">
     <div class="wrap inner">
       <div class="lab"><span class="sheet">What it proves</span><span class="name">${esc(x.proves)}</span></div>
       <div class="body case-grid">
@@ -280,7 +327,9 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
     </div>
   </section>
 
-  ${x.lane === 'system' && x.slug !== 'system' ? '' : `<section class="panel">
+`}
+
+  ${x.kind === 'site' || (x.lane === 'system' && x.slug !== 'system') ? '' : `<section class="panel">
     <div class="wrap inner">
       <div class="lab"><span class="sheet">How it was built</span><span class="name">By hand, with nothing bought in</span></div>
       <div class="body">
@@ -318,7 +367,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
 </main>
 ${x.lane === 'system' ? L.ctaBand(b, 'Want this running for your business?', 'A free 45-minute call: which part would earn its keep first, what it would cost, and when it could be live.', `<a class="btn btn-ghost" href="${b}work/#websites">See the websites</a>`) : L.ctaBand(b, 'Want one like this, with your name on it?', `A short call to find out what is leaking in your business and whether a build like ${esc(x.name)} is the right fix.`, `<a class="btn btn-ghost" href="${b}${lane.path}">More ${esc(lane.kindWord.toLowerCase())}</a>`)}
 ${L.footer(b)}`;
-      return L.page(L.head({ b, path: `/work/${x.slug}/`, title, description, og: `work-${x.slug}`, css: ['device.css'], nodes, palette: x }), body, L.scripts(b, x.slug === 'system' ? ['builds.js', 'device.js', 'desk.js'] : ['builds.js', 'device.js']));
+      return L.page(L.head({ b, path: `/work/${x.slug}/`, title, description, og: `work-${x.slug}`, css: x.kind === 'site' ? ['device.css', 'work-case.css'] : ['device.css'], nodes, palette: x }), body, L.scripts(b, x.slug === 'system' ? ['builds.js', 'device.js', 'desk.js'] : ['builds.js', 'device.js']));
     }
   };
 });

@@ -111,7 +111,7 @@
     "key": "work-kestrel-electrical",
     "title": "Kestrel Electrical",
     "kicker": "Two-van electrical firm · Website",
-    "sub": "An electrician's page built as a fuse board: every job is a breaker.",
+    "sub": "An electrician's site where every job is a breaker you can switch on.",
     "colour": "#C8F031",
     "sheet": "#F7FDE2",
     "phone": "assets/phones/11.webp"
@@ -733,5 +733,11 @@
     "title": "Cookies",
     "kicker": "Skales Studio",
     "sub": "No ad or analytics cookies."
+  },
+  {
+    "key": "seo",
+    "title": "Found on Google. Quoted by AI.",
+    "kicker": "SEO · GEO · schema · metadata",
+    "sub": "What goes into every page so search engines and AI assistants can read it, and why it works."
   }
 ]

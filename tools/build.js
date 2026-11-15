@@ -9,7 +9,7 @@ const notes = require('../data/notes.js');
 const why = require('./pages/why.js');
 const SVC = require('./pages/services.js');
 const SEG = require('./pages/segments.js');
-const mods = [require('./pages/home.js'), require('./pages/work.js'), SVC, SEG, why, require('./pages/book.js'), require('./pages/notes.js'), require('./pages/misc.js'), require('./pages/case.js'), require('./pages/start.js'), require('./pages/try.js'), require('./pages/legal.js')];
+const mods = [require('./pages/home.js'), require('./pages/work.js'), SVC, SEG, why, require('./pages/book.js'), require('./pages/notes.js'), require('./pages/misc.js'), require('./pages/case.js'), require('./pages/start.js'), require('./pages/try.js'), require('./pages/legal.js'), require('./pages/seo.js')];
 
 const write = (rel, content) => { const p = path.join(ROOT, rel); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, content); };
 const baseFor = url => { const depth = url.replace(/^\//, '').split('/').filter(Boolean).length - (url.endsWith('/') ? 0 : 1); return depth > 0 ? '../'.repeat(depth) : ''; };
@@ -62,6 +62,7 @@ ${site.facts.map(f => `- ${f}`).join('\n')}
 - [Home](${L.abs('/')}): what ${site.name} builds, with a live demonstration build on the page.
 - [Work: ${L.workLine().toLowerCase()}](${L.abs('/work/')}): every demonstration website and every part of the system, each running live and each with its own page.\n- [Websites](${L.abs('/work/websites/')}): the four kinds of website (bold, film-led, plain, straight to the phone) with every example.\n- [The system](${L.abs('/work/system/')}): the one app behind the websites, as an overview screen plus six parts (inbox and missed calls, booking, quotes, reviews, reminders, results), shown for six made-up businesses.
 - [Services](${L.abs('/services/')}): the five services, built as one system: ${SVC.SV.map(x => `[${x.name}](${L.abs('/services/' + x.slug + '/')})`).join(', ')}.
+- [SEO and GEO](${L.abs('/seo/')}): how the websites are set up to be found on Google and quoted by AI assistants: title tags, meta descriptions, headings, schema.org JSON-LD, canonical addresses, share cards, sitemaps, robots rules, llms.txt, IndexNow and speed, why each one works, and what nobody can promise.
 - [Automations](${L.abs('/automations/')}): ${SVC.AU.map(x => `[${x.name.toLowerCase()}](${L.abs('/automations/' + x.slug + '/')})`).join(', ')}.
 - [Try it](${L.abs('/try/')}): live demos that run in the browser: a missed call texted back and booked, online booking with a deposit, and a CRM board whose follow-up texts send themselves.
 - [Compare](${L.abs('/compare/')}): honest comparisons against ${SVC.CP.map(x => `[${x.them}](${L.abs('/compare/' + x.slug + '/')})`).join(', ')}.

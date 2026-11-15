@@ -1,16 +1,16 @@
 {
   "trade": "Electrician",
   "tags": [
-    "Breaker board",
-    "Three-field callback",
-    "Postcode area check",
-    "Open-now line switching"
+    "Consumer unit services",
+    "Price list",
+    "Postcode check",
+    "24-hour number switching"
   ],
   "features": [
-    "A full-width consumer unit with seven breakers (fault finding, fuse board, EV charger, rewire, EICR, sockets and lights, emergency); flip one and it switches on to show what is included, the price and a button to ring",
-    "The main switch is the phone number, and every number on the page swaps between the office line and the emergency mobile from the London clock",
-    "The circuit chart beside the board is the price list: tap a row and its breaker flips on",
-    "Real photos, a three-field call-back, a postcode check across NG1 to NG17, and a sticky Call and Quote bar on phones"
+    "The phone number is the biggest thing on the first screen, and it switches between the office and the emergency mobile on the clock, so night callers ring someone who answers",
+    "Every service is a breaker on a consumer unit: switch one on to see what is included, what it costs and who does it",
+    "Prices on the page, fixed before the work starts, so the call starts with a yes",
+    "A postcode check, a written-quote form and a Call and Quote bar that stays on screen on a phone"
   ],
   "n": 11,
   "slug": "kestrel-electrical",
@@ -21,8 +21,8 @@
   "biz": "Two-van electrical firm",
   "c": "#C8F031",
   "pg": "#0A0A0A",
-  "short": "An electrician's page built as a fuse board: every job is a breaker.",
-  "long": "Real photos, the phone number at poster size and a three-field call-back up top. The services are a full-width consumer unit: flip a breaker and it switches on to show what's included, what it costs and a button to ring about it. The circuit chart beside it is the price list. The only things that move are switches.",
-  "proves": "Someone standing in a dark kitchen can ring the right number in one tap, at any hour, without reading a word of marketing.",
-  "story": "Most trade sites bury the number under a hero image and a form nobody fills in. Borrowing the layout of the thing an electrician opens every day made the page label itself: everything is a switch, and the biggest one rings the phone."
+  "short": "An electrician's site where every job is a breaker you can switch on.",
+  "long": "A photo-led first screen with the number at poster size and a 24-hour line that answers. Below it, the services are a real consumer unit: switch a breaker on and it shows what is included, the price and a button to ring. Then the price list, a review over a real job, the emergency line, a postcode check and a written-quote form.",
+  "proves": "Someone with the power off can ring the right number in one tap, at any hour, and know the price before they do.",
+  "story": "Most trade sites bury the number under a slogan and a form nobody fills in. This one leads with the number and the work, and borrows the thing an electrician opens every day: the board. Every job is a switch, and the main switch rings the phone."
 }
