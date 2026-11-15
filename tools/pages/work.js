@@ -175,7 +175,7 @@ ${L.header(b, 'websites')}
 <main id="main">
 <section class="hero-w wrap">
   ${crumbs(b, [['Home', ''], ['Work', 'work/'], ['Websites', 'work/websites/']])}
-  <h1>Four kinds of website.</h1>
+  <h1>Four kinds of website</h1>
   <p class="lead">A boxing club and an accountant should not get the same site. The first decision is the lane: <strong>how loud, how much moves, how fast it gets to the phone number.</strong> Every example is a full website for an invented business, running live.</p>
   <div class="lanes" style="margin-top:36px">
     ${SITE_LANES.map(k => `<a href="#${k}"><b>${esc(LANES[k].label)}</b><span>${esc(LANES[k].line)}</span><small>${plural(inLane(k).length, 'example')}</small></a>`).join('')}

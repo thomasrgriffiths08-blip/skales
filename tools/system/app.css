@@ -312,7 +312,7 @@ textarea.inp{height:auto;padding:8px 10px;resize:vertical;min-height:72px;line-h
 .tdb-job small{margin-top:2px;font-size:11px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;transition:color .3s var(--ease)}
 .tdb-job i{position:absolute;inset:0;display:none;place-items:center;font:400 11px/1 var(--mono);font-style:normal}
 /* a block too narrow for its name shows its start time across the whole block, and nothing when even that will not fit */
-@container (max-width:52px){.tdb-job b,.tdb-job small{display:none}.tdb-job i{display:grid}}
+@container (max-width:64px){.tdb-job b,.tdb-job small{display:none}.tdb-job i{display:grid}}
 @container (max-width:16px){.tdb-job i{display:none}}
 .tdb-job.now{background:var(--ac);box-shadow:none;color:var(--ac-ink)}
 .tdb-job.now small{color:color-mix(in srgb,var(--ac-ink) 78%,transparent)}

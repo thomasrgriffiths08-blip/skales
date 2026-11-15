@@ -123,7 +123,7 @@ window.TryKit = function(cfg){
     bell: '<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>'
   };
   K.ic = function(n){ return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + IC[n] + '</svg>'; };
-  var COL = { red: ['#FDECEC', '#B42318'], blu: ['#ECEBFE', '#3B18E0'], grn: ['#E7F6EE', '#13744A'], gry: ['#F2F0EC', '#5d5a54'], amb: ['#FEF3E2', '#9A5B07'] };
+  var COL = { red: ['#FDECEC', '#B42318'], blu: ['#F0F0F0', '#171717'], grn: ['#E7F6EE', '#13744A'], gry: ['#F4F4F5', '#5C5C5C'], amb: ['#FEF3E2', '#9A5B07'] };
   /* toast: false = log only; a string = the words of the phone-width toast */
   K.feed = function(icon, col, html, t, toastText){
     var f = $('feed'), e = f.querySelector('.crm-empty'); if (e) e.remove();

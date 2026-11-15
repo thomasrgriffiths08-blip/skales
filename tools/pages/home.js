@@ -24,7 +24,7 @@ const hero = b => {
   return `<section class="hx hx-home" aria-labelledby="h-top">
   <div class="wrap">
     <div class="hx-top">
-      <h1 id="h-top">Websites that <br>get you <em>booked.</em></h1>
+      <h1 id="h-top">Websites that <br>get you booked</h1>
       <div class="hx-side">
         <p class="hx-sub"><strong>I build your website, the booking and follow-up behind it, and run the ads that fill it.</strong> One flat price, agreed before anything starts.</p>
         <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="tlink" href="${b}try/missed-call/">Try a live demo</a></div>
@@ -78,7 +78,7 @@ const system = b => {
   <div class="wrap">
     <div class="hs-head">
       <p class="kick">What happens after the website</p>
-      <h2 id="h-sys">Then the system does the chasing.</h2>
+      <h2 id="h-sys">Then the system does the chasing</h2>
       <p class="lead">One app behind the website, set up for your business and owned by you. It answers, books and follows up while you are on a job.</p>
     </div>
     <a class="sys-shot" href="${b}work/${sys.slug}/">
@@ -115,7 +115,7 @@ const how = b => `<section class="hs hs-how" id="how" aria-labelledby="h-how">
   <div class="wrap">
     <div class="hs-head">
       <p class="kick">How it works</p>
-      <h2 id="h-how">One call, one price, then it is built.</h2>
+      <h2 id="h-how">One call, one price, then it is built</h2>
     </div>
     <ol class="steps">
       <li><span class="n">01</span><b>A free call</b><span>45 minutes on what is losing you jobs now and what to fix first. Or ask for a <a class="lnk" href="${b}teardown.html">free teardown by message</a>.</span></li>
@@ -144,7 +144,7 @@ const book = b => {
   <div class="wrap book2">
     <div>
       <p class="kick">Book</p>
-      <h2 id="h-book">Pick a time for a free call.</h2>
+      <h2 id="h-book">Pick a time for a free call</h2>
       <p class="lead">Forty-five minutes on what is losing you jobs and what would fix it. The person on the call is the person who builds it.</p>
       <ul class="book-alt">
         ${site.whatsapp ? `<li><a class="tlink" data-wa="Hi Tom, found you through your site." href="${L.waHref('Hi Tom, found you through your site.')}">Rather message? WhatsApp me <span aria-hidden="true">→</span></a></li>` : ''}
