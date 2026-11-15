@@ -1,15 +1,15 @@
 {
   "trade": "Boxing club",
   "tags": [
-    "Working round timer",
-    "Live timetable",
-    "Photo-led booking"
+    "A round timer you can train to",
+    "The week printed as a poster",
+    "A free first session in two fields"
   ],
   "features": [
-    "A working round timer in the first screen: three-minute rounds, a minute's rest, twelve rounds, with the digits turning red for the last ten seconds",
-    "The week's timetable straight underneath, worked out from the visitor's clock: what's on now, the next bell, and what has already finished",
-    "First-session booking that starts with four photo tiles (never boxed, done a bit, competed, it's for my kid), then a day this week, then two fields",
-    "Real gym photography, membership with a monthly or annual switch, and a book and call bar that stays on screen on phones"
+    "A real round timer with the bell, so the site is useful to members and worth coming back to",
+    "The week's classes printed as a poster, and any class taps straight into a booking",
+    "Four ways in, from never boxed to competed, each showing only the sessions that suit",
+    "A free first session booked with a name and a mobile, and the prices on the wall"
   ],
   "n": 7,
   "slug": "southpaw",
@@ -20,8 +20,8 @@
   "biz": "Boxing club, Leeds",
   "c": "#E5232E",
   "pg": "#0B0B0B",
-  "short": "A boxing club site run by a live round timer, with the week straight under it.",
-  "long": "Ring black, chalk white and one corner red. The first screen is a real ringside photo and a working round timer (start, pause, reset, twelve three-minute rounds with a minute's rest), with this week's timetable straight underneath and tonight's next bell worked out from the visitor's own clock. Booking a free first session starts with four photo tiles, so a beginner and a parent each see themselves before they pick a day.",
+  "short": "Ring the bell on the club clock, then book a free first session from the timetable.",
+  "long": "The club clock is the centrepiece: ring the bell and a real round runs, three minutes in red, a minute's rest, twelve rounds with the bell. Below it the week is printed like a poster; tap any class and it becomes your free first session, booked with a name and a mobile.",
   "proves": "Somebody who has never boxed can pick a level, pick a night this week and be booked in about twenty seconds.",
   "story": "Gyms sell on atmosphere and then hide the timetable three clicks deep. This one puts the noise and the booking in the same place, so the page feels like the gym and still books the session."
 }

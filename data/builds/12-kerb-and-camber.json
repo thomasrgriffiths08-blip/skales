@@ -1,16 +1,15 @@
 {
   "trade": "Garage",
   "tags": [
-    "direct",
-    "reg lookup",
-    "booking"
+    "A real number plate you type into",
+    "The headline answers with your MOT date",
+    "The price board as it hangs in the office"
   ],
   "features": [
-    "Number-plate input with a fictional lookup that is deterministic and labelled as a demo",
-    "MOT due or overdue counted against the real clock, with the next three free slots on the ramp",
-    "Price board as it hangs by the office door, with a Book button on each line that picks the job for you",
-    "Half-hour slot booking on a diary built from today, Sundays closed, ending in a booking reference",
-    "Real workshop photos, opening hours that say open now or opens at, and a call and book bar on phones"
+    "The reg goes into a real number plate and the headline answers with the MOT date, so nobody has to dig out the V5",
+    "The next three free half-hours sit under the answer, and one tap fills in the booking with the day, the time and the reg",
+    "A pinned job card walks a real MOT from 08:30 to 09:40, so a first-time customer knows exactly what happens",
+    "Every line on the price board has its own Book button, so the price and the booking are one tap apart"
   ],
   "n": 12,
   "slug": "kerb-and-camber",
@@ -21,8 +20,8 @@
   "biz": "Kerb & Camber MOT Centre",
   "c": "#F6C700",
   "pg": "#0E2240",
-  "short": "A UK number plate you type into, and the MOT date that comes back.",
-  "long": "An independent MOT and service centre where the hero is a real number plate you can type in. Press Check and a job card comes back with the vehicle, the last advisory, how many days until the MOT runs out, and the next three slots on the ramp. Below it sit the price board from the office door, each line with its own Book button, the clock times of a real MOT from keys to away, and a half-hour diary. On a phone the call and book buttons never leave the screen.",
+  "short": "Type your reg into a real number plate and the MOT date and next free slots come back.",
+  "long": "The hero is a UK number plate set into the workshop photo: type the reg, press Check, and the headline turns into the answer, \"MOT due in 247 days.\", with the next three free half-hours under it. Tap one and the booking sheet is already filled in: MOT, the day, the time and the reg. Below it a pinned job card walks a real MOT from 08:30 to 09:40, then the price board as it hangs by the office door.",
   "proves": "Somebody who does not know when their MOT is due can find out and book it before they close the tab.",
   "story": "Half the calls a garage takes are somebody asking when their MOT is due. Answering it on the page turns that call into a booking."
 }

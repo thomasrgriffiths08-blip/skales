@@ -19,7 +19,10 @@ function localise(cssUrl){
     let rule = m[2];
     const src = /url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/.exec(rule)[1];
     const fam = /font-family:\s*'([^']+)'/.exec(rule)[1].toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const name = `${fam}-${path.basename(src, '.woff2')}.woff2`;
+    // Google serves discrete weight lists from font?kit=… addresses: a '?' in a file name 404s on any static
+    // host, so those files are named by a short hash of the address instead.
+    const base = path.basename(src, '.woff2');
+    const name = `${fam}-${/^[\w-]+$/.test(base) ? base : require('crypto').createHash('sha1').update(src).digest('hex').slice(0, 16)}.woff2`;
     const file = path.join(OUT, name);
     if (!fs.existsSync(file)) get(src, file);
     rule = rule.replace(src, `../../assets/fonts/g/${name}`).replace(/\s*\n\s*/g, '');

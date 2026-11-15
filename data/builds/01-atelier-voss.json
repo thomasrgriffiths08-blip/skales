@@ -1,16 +1,15 @@
 {
   "trade": "Architecture practice",
   "tags": [
-    "Real buildings beside their drawings",
-    "Drawings that draw as you scroll",
-    "An enquiry on a title block"
+    "Finished buildings, full bleed",
+    "Drawings that draw themselves",
+    "An enquiry set out as a title block"
   ],
   "features": [
-    "The name huge over a full-screen photo of a finished building",
-    "Four projects, each a photo beside its drawing sheet",
-    "Plans, sections and elevations that draw themselves as you scroll",
-    "Numbered callouts linking each drawing to the same spot in the photo",
-    "An enquiry form laid out as the practice's own title block"
+    "The finished buildings fill the screen, so the work is judged at the size it was built",
+    "Each building sits beside a drawing that draws itself, which shows the thinking clients are paying for",
+    "One house is told slowly, with numbered spots linked across photo, plan and list",
+    "The enquiry is the practice's own title block and issues a reference, so it reads as the start of a project"
   ],
   "n": 1,
   "slug": "atelier-voss",
@@ -21,8 +20,8 @@
   "biz": "Architecture practice",
   "c": "#2B59FF",
   "pg": "#FFFFFF",
-  "short": "An architecture practice whose four projects sit beside the drawings that made them.",
-  "long": "The name runs huge across a photo of a finished house. Below it, four projects each get a full chapter: the real building on one side, and on the other the plan, section or elevation drawing itself in as you scroll. Tap a number on the drawing and the same spot lights up on the photo. Enquiries go in on the practice's own title block.",
+  "short": "An architect's portfolio where every building sits beside a drawing that draws itself.",
+  "long": "Atelier Voss opens on a finished house with the practice name across it. Pick a building in the index and its photo fills the screen while its drawing draws itself on a sheet. Halvard House is then told slowly, with numbered spots lighting up on photo and plan together, and the enquiry is the practice's own title block.",
   "proves": "Real photography and technical drawing on the same page, so a visitor sees both the finished building and the thinking behind it.",
   "story": "An architect sells the drawing and the building. This site shows both, side by side, and links them point by point."
 }

@@ -1,16 +1,15 @@
 {
   "trade": "Accountant",
   "tags": [
-    "Deadlines counted from today",
-    "Three-question triage",
-    "Year end that settles"
+    "The year ahead counted from today",
+    "Your dates only, by what you are",
+    "Three fixed fees in plain columns"
   ],
   "features": [
-    "The next deadline counted in days in the first screen, worked out from the visitor's own date",
-    "Seven services as a ledger: what you hand over, and what you get back",
-    "Three questions that light up the one line to start with",
-    "A sample year-end statement that settles from last year's figures to this year's, then ticks itself filed",
-    "A fee request that asks for a turnover band instead of publishing a price"
+    "Every tax and Companies House date is counted from today, so the visitor sees what they owe and when",
+    "Pick company, sole trader, employer or VAT and only your own dates light up",
+    "Three fixed-fee bands in plain columns, so the price is agreed before the first meeting",
+    "A fee request that remembers what you typed, so nobody fills the form in twice"
   ],
   "n": 9,
   "slug": "hale-and-partners",
@@ -21,8 +20,8 @@
   "biz": "Chartered accountants, Harrogate",
   "c": "#12B76A",
   "pg": "#FFFFFF",
-  "short": "An accountant's site that counts down to your next deadline from the first screen.",
-  "long": "A practice site in ledger navy and white with one green for anything on time. The first screen shows a real office and the next tax deadline counted in days from the day you open the page, with the two after it underneath. Seven services sit as a ledger of what you hand over and what you get back, three questions light up the one to start with, and a sample year end settles from last year's figures to this year's before ticking itself filed.",
+  "short": "An accountant's site that counts down your tax deadlines from today and quotes a fixed fee.",
+  "long": "Hale & Partners reads like an annual report written for the client. The year ahead is a large calendar counted from today: pick what you are and your dates turn green, tap one and the big figure counts down. Fixed fees, a finished set of accounts and a fee request follow.",
   "proves": "The dates and the figures do the selling. Nothing else has to.",
   "story": "Built to prove a quiet site can still work: no photographs of handshakes, no stock office, just the two things an accountant is actually judged on: the dates and the numbers."
 }

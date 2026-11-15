@@ -1,16 +1,15 @@
 {
   "trade": "Physiotherapy clinic",
   "tags": [
-    "quiet",
-    "booking",
-    "body map"
+    "A bright treatment room, not a stock smile",
+    "Tap where it hurts on a drawn body",
+    "The next three free slots beside the answer"
   ],
   "features": [
-    "Line-drawn figure, front and back, with ten points to tap and the area lighting up in teal",
-    "Each point says what it usually is and what the physio would do, with the next three free slots right beside it",
-    "Four-step booking: problem, physio, slot, details, ending in a real confirmation card",
-    "Slot diary built from today's date, each physio's working days and a two-hour lead time",
-    "Real treatment-room photos, opening hours that read open now or opens at, and a book and call bar on phones"
+    "Patients tap where it hurts on a drawn body, so they never have to explain it to a receptionist",
+    "The next three free slots sit beside the answer, so pointing at a knee becomes a booking in one more tap",
+    "The first visit is told minute by minute, which takes away the nerves that stop people booking",
+    "The first visit and its price, £62, are on the first screen, and a booking bar stays in reach on a phone"
   ],
   "n": 10,
   "slug": "fern-physio",
@@ -19,10 +18,10 @@
   "lane": "quiet",
   "name": "Fern Physio",
   "biz": "Fern Physio",
-  "c": "#14B8A6",
+  "c": "#8EE6C4",
   "pg": "#FFFFFF",
-  "short": "A drawn body with ten tappable points, and a booking flow behind it.",
-  "long": "A two-room physiotherapy clinic where the hero is a line-drawn standing figure, front and back, with ten points you can tap. Each one names what the problem usually turns out to be and what the physio would actually do, and the next three free slots for that area sit right beside it, one tap from booked. Real treatment photos, the price list and both physios follow on a crisp white page. The diary is generated from the real clock, so the slots are never stale.",
+  "short": "A calm clinic site where patients tap where it hurts and book the next free slot.",
+  "long": "Fern Physio opens on a bright treatment room and lets patients show where it hurts on a drawn body. Tap a knee or shoulder to see what that usually is, with the next three free slots one tap from booked. The first visit minute by minute, prices and the two physios follow.",
   "proves": "A visitor can say where it hurts before they have to say anything to a receptionist.",
   "story": "Clinics lose people at the phone call, because a sore shoulder is hard to describe to a stranger. Pointing at a drawing is not."
 }

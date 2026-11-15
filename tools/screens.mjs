@@ -44,7 +44,8 @@ for (const x of list){
   /* #s=1 tells the demo it is being shown as itself, not inside the viewer */
   await page.goto(`http://127.0.0.1:${port}/demos/${x.slug}/index.html#s=1`, { waitUntil: 'load' });
   await page.clock.runFor(3500);
-  await page.waitForTimeout(400);
+  /* CSS entrance animations run on real time, not the installed clock, so give them time to finish */
+  await page.waitForTimeout(2600);
   const png = path.join(raw, pad(x.n) + '.png');
   await page.screenshot({ path: png });
   await page.close();
@@ -60,7 +61,7 @@ for w, q in ((2160, 78), (1200, 82)):
   await ph.clock.install({ time: new Date('2026-10-20T10:40:00+01:00') });
   await ph.goto(`http://127.0.0.1:${port}/demos/${x.slug}/index.html#s=1`, { waitUntil: 'load' });
   await ph.clock.runFor(3500);
-  await ph.waitForTimeout(400);
+  await ph.waitForTimeout(2600);
   const phPng = path.join(raw, pad(x.n) + '-ph.png');
   await ph.screenshot({ path: phPng });
   await ph.close();

@@ -30,18 +30,18 @@ Key facts:
 - [Notes](https://skales.studio/notes/): short pieces: what a missed call actually costs a service business; why I don’t rent you your own website; built for businesses that don’t exist, on purpose.
 
 ## The builds
-- [Atelier Voss](https://skales.studio/work/atelier-voss/): website for an invented architecture practice: An architecture practice whose four projects sit beside the drawings that made them.
-- [Cadence](https://skales.studio/work/cadence/): website for an invented software company: A product page where the board runs a real shift while you watch.
-- [Marée](https://skales.studio/work/maree/): website for an invented fragrance house: A real bottle on a black stage, ink in the water, and a clock for the notes.
-- [SIGNAL 2027](https://skales.studio/work/signal/): website for an invented festival: A real crowd, a poster you can tap, and tickets with the fee shown up front.
-- [Long Exposure](https://skales.studio/work/long-exposure/): website for an invented film production company: A film company whose first screen is its showreel, with the timecode and scrub bar on top.
-- [Overhead](https://skales.studio/work/overhead/): website for an invented drone survey & filming: A drone survey firm whose survey lines draw themselves over real aerial photos as you scroll.
-- [Southpaw](https://skales.studio/work/southpaw/): website for an invented boxing club: A boxing club site run by a live round timer, with the week straight under it.
-- [Marrow & Pin](https://skales.studio/work/marrow-and-pin/): website for an invented tattoo studio: A tattoo studio whose flash wall inks itself, stencil to black, as you scroll.
-- [Hale & Partners](https://skales.studio/work/hale-and-partners/): website for an invented accountant: An accountant's site that counts down to your next deadline from the first screen.
-- [Fern Physio](https://skales.studio/work/fern-physio/): website for an invented physiotherapy clinic: A drawn body with ten tappable points, and a booking flow behind it.
+- [Atelier Voss](https://skales.studio/work/atelier-voss/): website for an invented architecture practice: An architect's portfolio where every building sits beside a drawing that draws itself.
+- [Cadence](https://skales.studio/work/cadence/): website for an invented software company: Route and shift software that prices every late job and lets your coordinator make the call.
+- [Marée](https://skales.studio/work/maree/): website for an invented fragrance house: Eleven hours on skin, drawn as five tides, from a one-scent house in Saint-Malo.
+- [SIGNAL 2027](https://skales.studio/work/signal/): website for an invented festival: A festival website where the line-up poster builds your weekend and warns you about clashes.
+- [Long Exposure](https://skales.studio/work/long-exposure/): website for an invented film production company: A showreel website that plays your best work first and turns viewers into booked shoots.
+- [Overhead](https://skales.studio/work/overhead/): website for an invented drone survey & filming: A drone survey website where each service is a survey you watch draw itself.
+- [Southpaw](https://skales.studio/work/southpaw/): website for an invented boxing club: Ring the bell on the club clock, then book a free first session from the timetable.
+- [Marrow & Pin](https://skales.studio/work/marrow-and-pin/): website for an invented tattoo studio: The flash wall turns each stencil into healed skin, and one tap asks for that piece.
+- [Hale & Partners](https://skales.studio/work/hale-and-partners/): website for an invented accountant: An accountant's site that counts down your tax deadlines from today and quotes a fixed fee.
+- [Fern Physio](https://skales.studio/work/fern-physio/): website for an invented physiotherapy clinic: A calm clinic site where patients tap where it hurts and book the next free slot.
 - [Kestrel Electrical](https://skales.studio/work/kestrel-electrical/): website for an invented electrician: An electrician's site where every job is a breaker you can switch on.
-- [Kerb & Camber](https://skales.studio/work/kerb-and-camber/): website for an invented garage: A UK number plate you type into, and the MOT date that comes back.
+- [Kerb & Camber](https://skales.studio/work/kerb-and-camber/): website for an invented garage: Type your reg into a real number plate and the MOT date and next free slots come back.
 - [The system](https://skales.studio/work/system/): part of the system, shown for six invented businesses: One screen: every call caught, every job booked, and what still needs you.
 - [Inbox and missed calls](https://skales.studio/work/inbox/): part of the system, shown for six invented businesses: Every call, text and form in one list. Missed calls get a text back in seconds.
 - [Booking and the diary](https://skales.studio/work/booking/): part of the system, shown for six invented businesses: Customers book a real free time and pay a deposit. It lands in the right diary.

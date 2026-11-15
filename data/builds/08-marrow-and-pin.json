@@ -1,16 +1,15 @@
 {
   "trade": "Tattoo studio",
   "tags": [
-    "Flash that inks itself",
-    "Stencil over the healed piece",
-    "Placement on a body outline"
+    "Plates from the artist's book",
+    "A flash wall that heals into skin",
+    "Ask for a piece and the enquiry fills itself in"
   ],
   "features": [
-    "A real studio photo in the first screen, with a flash sheet pinned over it that inks itself as the page opens",
-    "Nine flash sheets that draw themselves from purple stencil to black ink as they scroll into view, filtered by artist",
-    "Two healed pieces with their real stencils laid back over them: drag across to compare",
-    "A consultation form laid out like the studio's own paperwork, placement picked on a body outline",
-    "The next free chair and the guest artist's dates worked out from today's date"
+    "The flash wall shows each design as it heals on skin, so a visitor can picture it on themselves",
+    "“Ask for this piece” fills in the enquiry with the artist, the size and the idea, so the artist can quote from the first message",
+    "Each resident's prices and next free week are worked out from today, so nobody asks when they can get in",
+    "How booking works and aftercare in five lines, which answers the questions that take up the studio’s phone"
   ],
   "n": 8,
   "slug": "marrow-and-pin",
@@ -21,8 +20,8 @@
   "biz": "Tattoo studio, Bristol",
   "c": "#F0386B",
   "pg": "#050505",
-  "short": "A tattoo studio whose flash wall inks itself, stencil to black, as you scroll.",
-  "long": "A private studio site in black and bone with one pink for booking. The first screen is a real photo of a stencil going on skin, with a flash sheet pinned over it that inks itself as the page opens. Nine more sheets on the wall draw themselves from purple stencil to black as they come into view, two healed pieces have their real stencils laid back over them to drag across, and any sheet carries straight into a consultation form with the placement picked on a body outline.",
+  "short": "The flash wall turns each stencil into healed skin, and one tap asks for that piece.",
+  "long": "The flash wall hangs nine stencils like plates in an artist's book: hover or tap one and the skin comes up, the ink runs down and the stencil goes with it. Pin a piece and “Ask for this piece” fills in the enquiry with the artist, size and idea. Then the three residents in type with their next free week, how booking works, aftercare in five lines and a short form.",
   "proves": "Your own drawings can be the website, and they can still take the booking.",
   "story": "Built for the trades that sell by showing the work: the drawings are the design, so the page had to be made of them rather than of photographs of them."
 }

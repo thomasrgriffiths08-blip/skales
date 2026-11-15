@@ -5,11 +5,10 @@
    scrollBy (+ dur), wait. `say` is the caption shown while the step plays; `pause` is the wait after it. */
 module.exports = {
   'atelier-voss': [
-    { wait: 2200, say: 'The name over a finished building' },
-    { scroll: '#halvard .dw', say: 'The plan draws itself as you scroll' },
-    { tap: '#halvard .keys button[data-n="3"]', say: 'Tap a number to find it in the photo' },
-    { scroll: '#cloister .dw', say: 'A section that decides where the sun lands' },
-    { tap: '#kinds .chip[data-k=conv]', say: 'Enquiries go in on a title block' },
+    { tap: '.pr[data-p=barn]', say: 'Pick a building and its photo fills the screen' },
+    { wait: 1600, say: 'Its drawing draws itself on the sheet' },
+    { scroll: '#halvard', say: 'Halvard House pins in place and the plan draws as you scroll' },
+    { tap: '.keys button[data-n="3"]', say: 'Tap a number and it lights up on the photo and the plan' },
   ],
   'cadence': [
     { wait: 1200, say: 'The live board is the first screen' },
@@ -42,26 +41,25 @@ module.exports = {
     { tap: '#t-film', say: 'Twenty stills and the circuit for the film' },
   ],
   'southpaw': [
-    { wait: 2200, say: 'The round timer is already running' },
-    { scroll: '#levelOpts', say: 'Tell them where you are starting from' },
-    { tap: 'button[data-level=new]', say: 'Never boxed: this week\'s beginners\' sessions' },
+    { tap: '#startBtn', say: 'Ring the bell: a real three-minute round starts', pause: 2200 },
+    { scroll: '#week', say: 'The week as a poster. Tap a class to book it' },
+    { tap: 'button[data-level=kids]', say: 'For my kid: this week’s kids’ sessions' },
+    { scroll: '#dues', say: 'Prices on the wall' },
   ],
   'marrow-and-pin': [
-    { scroll: '#wall', say: 'Each sheet inks itself, stencil to black' },
-    { tap: 'button[data-f=joss]', say: 'Filter the wall by artist' },
-    { set: '#pair .frame input', to: 12, say: 'Lay the stencil back over the healed piece' },
-    { tap: 'button[data-i="6"]', say: 'Open a sheet for sizes' },
+    { scroll: '#flash', say: 'The flash wall: nine stencils, each tattooed once' },
+    { tap: '#wall .plate[data-i="0"]', say: 'Tap one and it heals into skin' },
+    { tap: '#askBtn', say: 'Ask for this piece: the enquiry fills itself in' },
   ],
   'hale-and-partners': [
-    { scroll: '.next', say: 'The next deadline, counted from today' },
-    { tap: 'button[data-v=ltd]', say: 'Say what you run' },
-    { tap: 'button[data-v=dead]', say: 'And what is worrying you' },
-    { tap: 'button[data-v=cloud]', say: 'The line to start with lights up' },
+    { tap: '.who button[data-who=ltd]', say: 'Pick what you are and your dates turn green' },
+    { tap: '.cal .dl[data-k=ct]', say: 'Tap any date and the count starts from today' },
+    { scroll: '#sheet', say: 'A finished set of accounts, settling into this year' },
   ],
   'fern-physio': [
-    { tap: 'button[data-r=shoulder]', say: 'Tap where it hurts' },
-    { scroll: '.pbook', say: 'The next free slots sit right beside it' },
-    { tap: '.pslot', say: 'One tap and it is booked in' },
+    { tap: '.hot[data-r=shoulder]', say: 'Tap where it hurts' },
+    { scroll: '#panel .slots', say: 'The next free slots sit right beside it' },
+    { tap: '#panel .slot', say: 'One tap and it is waiting in the booking' },
   ],
   'kestrel-electrical': [
     { tap: 'button[data-c="2"]', say: 'Flip a breaker for that job' },
@@ -69,8 +67,10 @@ module.exports = {
     { tap: 'button[data-c="6"]', say: 'The emergency one puts the 24-hour number up' },
   ],
   'kerb-and-camber': [
-    { type: '#reg', text: 'KX19 LBD', say: 'Put your reg in' },
-    { tap: '#checkBtn', say: 'It tells you when the MOT is due' },
+    { type: '#reg', text: 'KX19 LBD', say: 'Put your reg in on the plate' },
+    { tap: '#checkBtn', say: 'The headline answers: when the MOT is due' },
+    { tap: '#nextRow .slot-btn', say: 'Take the next free half-hour: the booking is filled in' },
+    { scroll: '#prices', say: 'The price board, with Book on every line' },
   ],
   /* the system: one app, so each part's walkthrough starts on that part */
   'system': [

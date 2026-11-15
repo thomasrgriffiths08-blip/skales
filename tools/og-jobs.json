@@ -21,7 +21,7 @@
     "key": "work-atelier-voss",
     "title": "Atelier Voss",
     "kicker": "Architecture practice · Website",
-    "sub": "An architecture practice whose four projects sit beside the drawings that made them.",
+    "sub": "An architect's portfolio where every building sits beside a drawing that draws itself.",
     "colour": "#2B59FF",
     "sheet": "#E1E8FF",
     "phone": "assets/phones/01.webp"
@@ -30,7 +30,7 @@
     "key": "work-cadence",
     "title": "Cadence",
     "kicker": "Field-ops software · Website",
-    "sub": "A product page where the board runs a real shift while you watch.",
+    "sub": "Route and shift software that prices every late job and lets your coordinator make the call.",
     "colour": "#22D3EE",
     "sheet": "#E0F9FD",
     "phone": "assets/phones/02.webp"
@@ -39,7 +39,7 @@
     "key": "work-maree",
     "title": "Marée",
     "kicker": "Fragrance house · Website",
-    "sub": "A real bottle on a black stage, ink in the water, and a clock for the notes.",
+    "sub": "Eleven hours on skin, drawn as five tides, from a one-scent house in Saint-Malo.",
     "colour": "#A9CBBD",
     "sheet": "#F3F8F6",
     "phone": "assets/phones/03.webp"
@@ -48,7 +48,7 @@
     "key": "work-signal",
     "title": "SIGNAL 2027",
     "kicker": "Music & light festival · Website",
-    "sub": "A real crowd, a poster you can tap, and tickets with the fee shown up front.",
+    "sub": "A festival website where the line-up poster builds your weekend and warns you about clashes.",
     "colour": "#3B18E0",
     "sheet": "#E4DFFB",
     "phone": "assets/phones/04.webp"
@@ -57,16 +57,16 @@
     "key": "work-long-exposure",
     "title": "Long Exposure",
     "kicker": "Film production, Manchester · Website",
-    "sub": "A film company whose first screen is its showreel, with the timecode and scrub bar on top.",
-    "colour": "#E8E8E8",
-    "sheet": "#FCFCFC",
+    "sub": "A showreel website that plays your best work first and turns viewers into booked shoots.",
+    "colour": "#E5322D",
+    "sheet": "#FBE2E2",
     "phone": "assets/phones/05.webp"
   },
   {
     "key": "work-overhead",
     "title": "Overhead",
     "kicker": "Drone survey, Peak District · Website",
-    "sub": "A drone survey firm whose survey lines draw themselves over real aerial photos as you scroll.",
+    "sub": "A drone survey website where each service is a survey you watch draw itself.",
     "colour": "#FF6A13",
     "sheet": "#FFEADE",
     "phone": "assets/phones/06.webp"
@@ -75,7 +75,7 @@
     "key": "work-southpaw",
     "title": "Southpaw",
     "kicker": "Boxing club, Leeds · Website",
-    "sub": "A boxing club site run by a live round timer, with the week straight under it.",
+    "sub": "Ring the bell on the club clock, then book a free first session from the timetable.",
     "colour": "#E5232E",
     "sheet": "#FBE0E2",
     "phone": "assets/phones/07.webp"
@@ -84,7 +84,7 @@
     "key": "work-marrow-and-pin",
     "title": "Marrow & Pin",
     "kicker": "Tattoo studio, Bristol · Website",
-    "sub": "A tattoo studio whose flash wall inks itself, stencil to black, as you scroll.",
+    "sub": "The flash wall turns each stencil into healed skin, and one tap asks for that piece.",
     "colour": "#F0386B",
     "sheet": "#FDE3EA",
     "phone": "assets/phones/08.webp"
@@ -93,7 +93,7 @@
     "key": "work-hale-and-partners",
     "title": "Hale & Partners",
     "kicker": "Chartered accountants, Harrogate · Website",
-    "sub": "An accountant's site that counts down to your next deadline from the first screen.",
+    "sub": "An accountant's site that counts down your tax deadlines from today and quotes a fixed fee.",
     "colour": "#12B76A",
     "sheet": "#DEF5EA",
     "phone": "assets/phones/09.webp"
@@ -102,9 +102,9 @@
     "key": "work-fern-physio",
     "title": "Fern Physio",
     "kicker": "Fern Physio · Website",
-    "sub": "A drawn body with ten tappable points, and a booking flow behind it.",
-    "colour": "#14B8A6",
-    "sheet": "#DEF5F3",
+    "sub": "A calm clinic site where patients tap where it hurts and book the next free slot.",
+    "colour": "#8EE6C4",
+    "sheet": "#EFFCF7",
     "phone": "assets/phones/10.webp"
   },
   {
@@ -120,7 +120,7 @@
     "key": "work-kerb-and-camber",
     "title": "Kerb & Camber",
     "kicker": "Kerb & Camber MOT Centre · Website",
-    "sub": "A UK number plate you type into, and the MOT date that comes back.",
+    "sub": "Type your reg into a real number plate and the MOT date and next free slots come back.",
     "colour": "#F6C700",
     "sheet": "#FEF7DB",
     "phone": "assets/phones/12.webp"
