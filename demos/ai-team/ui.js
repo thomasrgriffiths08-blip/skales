@@ -26,7 +26,7 @@ export const sec = (title, body, right = "") => `<div class="sec"><h3>${title}${
 export const note = (html, tone = "") => `<div class="note ${tone}">${html}</div>`;
 export const empty = (text) => `<div class="empty">${esc(text)}</div>`;
 export const foot = () => window.AI_TEAM_STATIC // site demo: on the public page nothing runs, so it says so
-  ? `<div class="foot">Kingpost is a sample company. Every name and figure here is sample data. On this public page nothing runs or is sent; on a call with Tom, each live step is a real call to Claude.</div>`
+  ? `<div class="foot">Kingpost is a fictional business. Every name and figure here is illustrative. On this public page nothing runs or is sent; on a call with Tom, each live step is a real call to Claude.</div>`
   : `<div class="foot">Kingpost is a sample company. Every name and figure here is sample data. The AI work is real: each live step is a call to Claude.</div>`;
 
 // page header: optional owner pill, title, one-line lede, actions on the right

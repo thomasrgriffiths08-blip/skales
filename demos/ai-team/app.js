@@ -263,7 +263,7 @@ function renderRail() {
   const st = $(".status"); if (st && r.contains(st)) $("#stage").appendChild(st); // keep the status bar: rebuilding the menu must not delete it
   const lit = LIT[S.view];
   const person = PEOPLE.find((p) => p.page === S.view);
-  r.innerHTML = `<a class="rbrand" href="#home" aria-label="Kingpost home">${KP}<span class="lbl"><b>Kingpost</b><span>AI team · ${window.AI_TEAM_STATIC ? "sample" : "live"}</span></span></a>
+  r.innerHTML = `<a class="rbrand" href="#home" aria-label="Kingpost home">${KP}<span class="lbl"><b>Kingpost</b><span>AI team · ${window.AI_TEAM_STATIC ? "example" : "live"}</span></span></a>
     <nav class="rnav">
       <div class="rg">${PLACES.map((it) => `<a href="#${it.id}" data-label="${UI.esc(it.label)}"${it.id === lit ? ' aria-current="page"' : ""}><span class="ic">${ICONS[it.icon]}</span><span class="lbl">${UI.esc(it.label)}</span></a>`).join("")}</div>
       <div class="rg people"><h4>Your AI team</h4>${PEOPLE.map((p) => { const a = BY_ID[p.agent], st = status(p.agent); return `<a href="#${p.page || "floor"}" ${p.page ? "" : `data-desk="${p.agent}"`} data-label="${UI.esc(a.name)}"${person?.agent === p.agent ? ' aria-current="page"' : ""}>${UI.av(p.agent)}<span class="lbl">${UI.esc(a.name)}<em>${UI.esc(a.role)}</em></span><i class="live ${st.busy ? "on" : ""}" data-live="${p.agent}"></i></a>`; }).join("")}</div>
