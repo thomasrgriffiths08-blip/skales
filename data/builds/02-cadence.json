@@ -1,15 +1,15 @@
 {
   "trade": "Software company",
   "tags": [
-    "Real depot photography",
-    "A live board that runs a shift",
-    "Pricing that does the maths"
+    "The live board is the first screen",
+    "The 07:40 slip, priced in pounds",
+    "Pricing as a monthly statement"
   ],
   "features": [
-    "The product is the hero, in real DOM, with a real depot photo behind the headline",
-    "At 07:40 a job slips, the board prices it and proposes a crew swap you can take or leave",
-    "A three-tap field app card that works with no signal",
-    "Pricing as one statement table that recalculates as you change regions and jobs"
+    "The product is the first screen, so a buyer sees what it does before reading a word",
+    "At 07:40 a job slips and the board prices it, so the value shows up in pounds rather than adjectives",
+    "The visitor takes, keeps or undoes the crew swap, so they make the coordinator’s call themselves",
+    "Pricing laid out as a monthly statement that does the maths, and a walkthrough booking that remembers the slot"
   ],
   "n": 2,
   "slug": "cadence",
@@ -20,8 +20,8 @@
   "biz": "Field-ops software",
   "c": "#22D3EE",
   "pg": "#08090A",
-  "short": "A product page where the board runs a real shift while you watch.",
-  "long": "A near-black product page in the Linear manner: a short headline over a real depot photograph, then the live board, large and sharp, with a faint cyan glow. At 07:40 a job slips, the board prices it and offers a crew swap with the cost of both choices. Pricing is one statement table that does the maths.",
+  "short": "Route and shift software that prices every late job and lets your coordinator make the call.",
+  "long": "Cadence opens on its own live board. Scroll and the clock ticks to 07:40, a job slips behind a crash and the board proposes a crew swap you take or leave. Then three features cut from the real screens, a pricing statement that does the maths and a walkthrough booking.",
   "proves": "Software can be sold by letting people use it on the first screen.",
-  "story": "A field-ops software page where the board is not a screenshot. Scroll and a shift plays out: a van is held on the A629, the job turns amber, and you decide whether to move the crew."
+  "story": "Route and shift software for cold-chain field crews. The board is not a screenshot: scroll and a shift plays out, a job slips behind a crash on the A629, and you decide whether to move the crew."
 }

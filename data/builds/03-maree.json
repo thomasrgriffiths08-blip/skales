@@ -1,15 +1,15 @@
 {
   "trade": "Fragrance house",
   "tags": [
-    "A real bottle on a black stage",
-    "Ink drifting through the water",
-    "A wear clock for the notes"
+    "Real photographs of the bottle and the notes",
+    "A tide chart for a day on skin",
+    "A bag that gives fill and arrival dates"
   ],
   "features": [
-    "One real bottle photograph with ink-in-water drifting over the stage",
-    "A wear clock: slide through eleven hours on skin and watch which notes lead",
-    "Three sizes, a working bag and a checkout that gives real fill and delivery dates",
-    "A 2 ml sample and delivery threshold handled in the bag"
+    "The bottle and its price are on the first screen, so a visitor can buy without scrolling",
+    "A tide chart turns the notes into something you can feel through a screen: drag through eleven hours and each one rises as it leads",
+    "Three sizes and a bag that says when the bottle is filled and when it arrives, the two questions that stall a luxury order",
+    "A sample in every box and 30-day returns sit beside the button, right where the doubt is"
   ],
   "n": 3,
   "slug": "maree",
@@ -20,8 +20,8 @@
   "biz": "Fragrance house",
   "c": "#A9CBBD",
   "pg": "#03080E",
-  "short": "A real bottle on a black stage, ink in the water, and a clock for the notes.",
-  "long": "One photograph of the bottle on dark stone, with ink drifting slowly through the water around it. The notes are five short lines on a wear clock: slide through eleven hours on skin and the ones you would smell light up. Then straight to three sizes and a bag that knows when the bottle is filled and when it reaches you.",
-  "proves": "Luxury that sells, without a single gold gradient.",
-  "story": "A fragrance house that refuses the category's default gold. Built to show that a luxury site can be calm, photographic and still get the bottle into the bag in two taps."
+  "short": "Eleven hours on skin, drawn as five tides, from a one-scent house in Saint-Malo.",
+  "long": "Marée sells one mineral extrait, so the page behaves like the sea it comes from. Drag through a day on skin and each note rises over its own photograph as it leads. Pick a size and the bag says when it is filled and when it arrives.",
+  "proves": "A luxury brand can feel expensive and still get the bottle into the bag in two taps.",
+  "story": "A one-scent fragrance house in Saint-Malo. Most perfume sites sell with gold and adjectives. This one sells with the sea: real photographs of every note, a tide chart for a day on skin, and a bag that answers when it ships."
 }
