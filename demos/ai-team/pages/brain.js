@@ -1,4 +1,4 @@
-// Team brain (video 2): everything the team knows, as a 3D hologram. Every point of light is a note: a customer, a job,
+// Team brain (video 2): everything the team knows, as a 3D hologram. Every dot is a note: a customer, a job,
 // an invoice, an email, a certificate, a rule. Notes cluster round the employee who uses them; pulses show the team
 // reaching into its memory. Today's live notes come from the server (also written to state/vault/ as Obsidian notes);
 // the long memory around them is sample history (brainnotes.js). The hologram survives redraws.
@@ -30,29 +30,29 @@ function neighbours(id) { return brain.links.filter((l) => l.source === id || l.
 
 export default {
   css: `
-  .pg-brain .stage3 { position: relative; height: clamp(440px, 64cqh, 720px); padding: 0; overflow: hidden; background: radial-gradient(600px 380px at 50% 45%, rgba(40, 130, 210, .16), transparent 70%), linear-gradient(180deg, rgba(10, 20, 32, .95), rgba(4, 9, 15, .98)); }
+  .pg-brain .stage3 { position: relative; height: clamp(440px, 64cqh, 720px); padding: 0; overflow: hidden; background: rgba(22, 22, 24, .98); }
   .pg-brain .stage3 > .b3 { position: absolute; inset: 0; }
   .pg-brain .hudtop { position: absolute; z-index: 2; top: 16px; left: 16px; right: 16px; display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; pointer-events: none; flex-wrap: wrap; }
   .pg-brain .hudtop > * { pointer-events: auto; }
-  .pg-brain .stats { display: flex; gap: 24px; padding: 12px 16px; background: rgba(4, 9, 15, .72); border: 1px solid var(--line); border-radius: 14px; }
+  .pg-brain .stats { display: flex; gap: 24px; padding: 12px 16px; background: rgba(22, 22, 24, .72); border: 1px solid var(--line); border-radius: 14px; }
   .pg-brain .stats div { display: grid; }
-  .pg-brain .stats b { font: 300 26px/1.1 var(--mono); color: #fff; text-shadow: none; }
-  .pg-brain .stats span { font-size: 12.5px; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+  .pg-brain .stats b { font: 500 26px/1.1 var(--sans); font-variant-numeric: tabular-nums; color: #fff; text-shadow: none; }
+  .pg-brain .stats span { font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
   .pg-brain .tools { display: flex; gap: 8px; align-items: center; }
-  .pg-brain .tools input { height: 40px; width: 240px; padding: 0 12px; background: rgba(4, 9, 15, .8); }
+  .pg-brain .tools input { height: 40px; width: 240px; padding: 0 12px; background: rgba(22, 22, 24, .8); }
   .pg-brain .filters { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 16px; display: flex; gap: 6px; flex-wrap: wrap; pointer-events: none; }
-  .pg-brain .filters button { pointer-events: auto; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(4, 9, 15, .78); color: var(--ink-2); font-size: 12px; cursor: pointer; }
-  .pg-brain .filters button i { width: 7px; height: 7px; border-radius: 50%; box-shadow: 0 0 8px currentColor; }
-  .pg-brain .filters button[aria-pressed="true"] { border-color: rgba(70, 200, 255, .6); color: #fff; background: rgba(70, 200, 255, .14); }
-  .pg-brain .reader { position: absolute; z-index: 3; top: 16px; right: 16px; bottom: 60px; width: min(360px, 46%); display: flex; flex-direction: column; background: rgba(4, 9, 15, .92); border: 1px solid var(--line-2); border-radius: 16px; box-shadow: 0 0 40px -16px var(--holo-glow); overflow: hidden; animation: slidein .35s cubic-bezier(.2, .8, .2, 1); }
+  .pg-brain .filters button { pointer-events: auto; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--line); background: rgba(22, 22, 24, .78); color: var(--ink-2); font-size: 12px; cursor: pointer; }
+  .pg-brain .filters button i { width: 7px; height: 7px; border-radius: 50%; box-shadow: none; }
+  .pg-brain .filters button[aria-pressed="true"] { border-color: rgba(111, 168, 220, .6); color: #fff; background: rgba(111, 168, 220, .14); }
+  .pg-brain .reader { position: absolute; z-index: 3; top: 16px; right: 16px; bottom: 60px; width: min(360px, 46%); display: flex; flex-direction: column; background: rgba(22, 22, 24, .92); border: 1px solid var(--line-2); border-radius: 16px; box-shadow: none; overflow: hidden; animation: slidein .35s cubic-bezier(.22, 1, .36, 1); }
   @keyframes slidein { from { transform: translateX(24px); opacity: 0; } }
   .pg-brain .reader header { display: flex; gap: 8px; align-items: center; padding: 12px 12px 12px 16px; border-bottom: 1px solid var(--line); }
-  .pg-brain .reader header .t { font-size: 12.5px; letter-spacing: 0; text-transform: none; color: var(--holo-2); }
+  .pg-brain .reader header .t { font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--holo-2); }
   .pg-brain .reader header button { margin-left: auto; }
   .pg-brain .reader .body { flex: 1; overflow-y: auto; padding: 16px; }
   .pg-brain .reader .lk { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
   .pg-brain .reader .lk button { cursor: pointer; }
-  .pg-brain .hovertip { position: absolute; z-index: 4; pointer-events: none; padding: 6px 10px; border-radius: 8px; background: #0b1622; border: 1px solid var(--line-2); font-size: 12px; color: #fff; white-space: nowrap; transform: translate(12px, -110%); }
+  .pg-brain .hovertip { position: absolute; z-index: 4; pointer-events: none; padding: 6px 10px; border-radius: 8px; background: #1C1C1F; border: 1px solid var(--line-2); font-size: 12px; color: #fff; white-space: nowrap; transform: translate(12px, -110%); }
   .pg-brain .lower { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 16px; }
   @container (max-width: 900px) { .pg-brain .lower { grid-template-columns: minmax(0, 1fr); } .pg-brain .tools input { width: 170px; } }
   @container (max-width: 640px) { .pg-brain .reader { left: 16px; width: auto; top: auto; height: 60%; } .pg-brain .stats { gap: 16px; } .pg-brain .stats b { font-size: 20px; } }
@@ -63,42 +63,42 @@ export default {
   .pg-brain .learned .it .av-s { margin: 0; grid-row: span 2; }
   .pg-brain .obs code, .pg-brain .two code { font: 12px var(--mono); color: var(--holo-2); }
   .pg-brain .stats .bn { display: grid; align-content: center; padding-right: 20px; border-right: 1px solid var(--line); }
-  .pg-brain .stats .bn em { font-style: normal; font-size: 12.5px; letter-spacing: 0; text-transform: none; color: var(--holo-2); }
+  .pg-brain .stats .bn em { font-style: normal; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--holo-2); }
   .pg-brain .stats .bn strong { font: 500 15px/1.3 var(--sans); color: #fff; }
   .pg-brain .two .tb { display: grid; grid-template-columns: minmax(0, 1fr) 190px minmax(0, 1.35fr); gap: 16px; align-items: stretch; margin-top: 4px; }
   .pg-brain .two .bx { padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, .015); display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-  .pg-brain .two .k { font-style: normal; font-size: 12.5px; letter-spacing: 0; text-transform: none; color: var(--holo-2); }
+  .pg-brain .two .k { font-style: normal; font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--holo-2); }
   .pg-brain .two .nm { font: 500 22px/1.1 var(--sans); color: #fff; letter-spacing: -.01em; margin-top: -4px; }
-  .pg-brain .two p { margin: 0; color: var(--ink-2); font-size: 13.5px; line-height: 1.45; }
+  .pg-brain .two p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.45; }
   .pg-brain .two .mini { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 12px; margin: 4px 0 2px; }
   .pg-brain .two .mini div { display: grid; }
-  .pg-brain .two .mini b { font: 300 26px/1.1 var(--mono); color: #fff; text-shadow: none; }
-  .pg-brain .two .mini span { font-size: 12.5px; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+  .pg-brain .two .mini b { font: 500 26px/1.1 var(--sans); font-variant-numeric: tabular-nums; color: #fff; text-shadow: none; }
+  .pg-brain .two .mini span { font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
   .pg-brain .two .bx > .btn { align-self: flex-start; margin-top: auto; }
   .pg-brain .two .mr { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
-  .pg-brain .two .mr .mrh { font-size: 12.5px; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+  .pg-brain .two .mr .mrh { font-size: 13px; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
   .pg-brain .two .mr div { display: grid; }
-  .pg-brain .two .mr b { color: #fff; font-weight: 500; font-size: 13.5px; }
+  .pg-brain .two .mr b { color: #fff; font-weight: 500; font-size: 14px; }
   .pg-brain .two .mr small { font-size: 12px; color: var(--ink-3); }
   .pg-brain .two .seg { flex-wrap: nowrap; max-width: 100%; }
   .pg-brain .two .lnk { display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 8px 0; text-align: center; }
-  .pg-brain .two .pipe { position: relative; height: 2px; margin: 4px 6px; background: linear-gradient(90deg, rgba(70, 200, 255, .15), var(--holo), rgba(70, 200, 255, .15)); box-shadow: 0 0 12px var(--holo-glow); }
-  .pg-brain .two .pipe i { position: absolute; top: -4px; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--holo); box-shadow: 0 0 14px var(--holo); animation: bflow 2.6s cubic-bezier(.5, 0, .5, 1) infinite; }
+  .pg-brain .two .pipe { position: relative; height: 2px; margin: 4px 6px; background: var(--holo); box-shadow: none; }
+  .pg-brain .two .pipe i { position: absolute; top: -4px; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--holo); box-shadow: none;  }
   .pg-brain .two .pipe i + i { animation-direction: reverse; animation-delay: -1.3s; }
   @keyframes bflow { from { left: 0; } to { left: calc(100% - 10px); } }
   .pg-brain .two .steps3 { display: grid; gap: 8px; text-align: left; }
   .pg-brain .two .steps3 div { display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--ink); }
-  .pg-brain .two .steps3 i { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 500 11px var(--mono); font-style: normal; color: var(--holo-2); border: 1px solid rgba(70, 200, 255, .45); box-shadow: 0 0 10px -2px var(--holo-glow); }
+  .pg-brain .two .steps3 i { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 500 11px var(--mono); font-style: normal; color: var(--holo-2); border: 1px solid rgba(111, 168, 220, .45); box-shadow: none; }
   .pg-brain .two .wb { display: grid; }
-  .pg-brain .two .wb b { font: 300 24px/1.1 var(--mono); color: #fff; text-shadow: none; }
+  .pg-brain .two .wb b { font: 500 24px/1.1 var(--sans); font-variant-numeric: tabular-nums; color: #fff; text-shadow: none; }
   .pg-brain .two .wb span { font-size: 11px; color: var(--ink-3); }
   .pg-brain .two .nbl { display: grid; gap: 2px; }
   .pg-brain .two .nl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; text-align: left; padding: 9px 8px; border: 0; border-radius: 10px; background: none; color: inherit; cursor: pointer; font: inherit; }
   .pg-brain .two .nl:hover, .pg-brain .two .nl[aria-expanded="true"] { background: var(--holo-tint); }
   .pg-brain .two .nl .av-s { margin: 1px 0 0; }
-  .pg-brain .two .nl b { display: block; color: #fff; font-weight: 500; font-size: 13.5px; line-height: 1.35; }
+  .pg-brain .two .nl b { display: block; color: #fff; font-weight: 500; font-size: 14px; line-height: 1.35; }
   .pg-brain .two .nl small { display: block; margin-top: 2px; font-size: 12px; color: var(--ink-3); }
-  .pg-brain .two .nl .why { display: block; margin-top: 6px; font-size: 12.5px; line-height: 1.45; color: var(--ink-2); }
+  .pg-brain .two .nl .why { display: block; margin-top: 6px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
   .pg-brain .two .seg { align-self: flex-start; }
   @container (max-width: 980px) { .pg-brain .two .tb { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); } .pg-brain .two .lnk { grid-column: 1 / -1; grid-row: 2; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 24px; } .pg-brain .two .lnk .pipe { flex: 1 1 120px; } .pg-brain .two .steps3 { grid-auto-flow: column; } }
   @container (max-width: 640px) { .pg-brain .two .tb { grid-template-columns: minmax(0, 1fr); } .pg-brain .two .lnk { grid-row: auto; } .pg-brain .two .steps3 { grid-auto-flow: row; } .pg-brain .stats .bn { padding-right: 12px; } }
@@ -127,7 +127,7 @@ export default {
     const nbTab = L.nb || "price";
     const nbList = (nbTab === "price" ? [...pick(NB.price), ...custLimits] : nbTab === "never" ? pick(NB.never) : every).slice(0, 5);
     host.innerHTML = `<div class="inner pg-brain">
-      ${head({ title: "Team brain", lede: "Everything the team knows, in one place. Every point of light is a note: a customer, a job, an invoice, a rule. When one of them learns something, the rest can use it straight away.", actions: `<button class="btn" id="b-grow">Grow it again</button><button class="btn primary" data-go="training">Teach it something</button>` })}
+      ${head({ title: "Team brain", lede: "Everything the team knows, in one place. Every dot is a note: a customer, a job, an invoice, a rule. When one of them learns something, the rest can use it straight away.", actions: `<button class="btn" id="b-grow">Grow it again</button><button class="btn primary" data-go="training">Teach it something</button>` })}
       <section class="card hud stage3">
         <div id="b-slot"></div>
         <div class="hudtop">

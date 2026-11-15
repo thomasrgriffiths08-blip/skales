@@ -1,0 +1,151 @@
+/* Unslop pass, 15 Nov (Skales site demo only).
+   Method: "unslop" by Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop
+   Kingpost is an office system for a heating firm, so it should look like a well-made tool, not a sci-fi HUD:
+   graphite surfaces, hairlines, one steel-blue accent for "the AI is working", amber only where a person is needed.
+   No glass, no glows, no blurred office behind the pages, no gradients. Loaded last; page styles go in before it. */
+
+:root {
+  --bg: #0E0E10; --bg-2: #121214;
+  --panel: #161618; --panel-2: #1C1C1F; --panel-3: #242427;
+  --line: rgba(255, 255, 255, .08); --line-2: rgba(255, 255, 255, .14);
+  --ink: #EDEDED; --ink-2: #A1A1A6; --ink-3: #85858C;
+  --holo: #6FA8DC; --holo-2: #A7C7E7; --holo-tint: rgba(111, 168, 220, .12); --holo-glow: transparent;
+  --amber-glow: transparent;
+  --noise: none; --glass-fill: none; --glass-tint: var(--panel);
+  --glass-edge: 0 0 0 transparent; --glass-drop: 0 0 0 transparent;
+  --well: var(--bg-2); --chrome: var(--panel);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+html, body { background: var(--bg); }
+::selection { background: rgba(111, 168, 220, .32); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .12); }
+
+/* ---------- the Skales bar: dark to sit with the app, the yellow button is the only Skales colour ---------- */
+:root { --skb: 56px; }
+.sk-bar { background: var(--bg); color: var(--ink); border-bottom: 1px solid var(--line); padding: 0 16px 0 20px; }
+.sk-mark { color: var(--ink); font-weight: 700; letter-spacing: -.04em; }
+.sk-mark i { font-style: normal; font-weight: 700; letter-spacing: -.04em; padding-right: 0; color: #FFE600; }
+.sk-fict { font-weight: 400; color: var(--ink-3); }
+.sk-book { background: #FFE600; color: #0A0B0D; border-radius: 8px; font-weight: 500; padding: 0 16px; }
+.sk-book:hover { background: #F5DC00; }
+.sk-book:active { transform: scale(.98); }
+.sk-mark:focus-visible, .sk-book:focus-visible { outline: 2px solid #FFE600; outline-offset: 3px; }
+@media (max-width: 699px) {
+  :root { --skb: 80px; }
+  .sk-bar { grid-template-rows: 52px 28px; }
+  .sk-fict { line-height: 27px; border-top: 1px solid var(--line); }
+  .sk-book { height: 36px; }
+}
+
+/* ---------- surfaces: one solid step per layer, hairline edges ---------- */
+.page { background: var(--bg) !important; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: none; }
+.card.click:hover { border-color: var(--line-2); box-shadow: none; }
+.rail, .panel, .thread, .ask, .status, .toast, .shots { background: var(--panel); border-color: var(--line); box-shadow: none; }
+.panel { box-shadow: 0 24px 48px rgba(0, 0, 0, .4); }
+.toast { border-color: var(--line-2); box-shadow: 0 12px 32px rgba(0, 0, 0, .4); }
+.rail .status { background: none; }
+.list, .kv, .tablewrap, .note:not(.amber):not(.red), .stp, .kb-c, .cr, .ph-card { background: var(--bg-2); border-color: var(--line); }
+.kb-t { background: var(--panel-2); border-color: var(--line); box-shadow: none; }
+.kb-t.new { border-color: rgba(111, 168, 220, .5); box-shadow: none; }
+.li.click:hover, .li.sel { background: var(--panel-2); }
+input, textarea, select { background: var(--bg-2); border-color: var(--line-2); box-shadow: none; border-radius: 8px; }
+input:focus, textarea:focus, select:focus { border-color: var(--holo); box-shadow: 0 0 0 3px rgba(111, 168, 220, .18); }
+
+/* ---------- the menu ---------- */
+.kp { background: var(--panel-3); box-shadow: inset 0 0 0 1px var(--line-2); border-radius: 8px; }
+.rail { border-radius: 16px; }
+.rail nav a { border-radius: 8px; color: var(--ink-2); }
+.rail nav a:hover { background: var(--panel-2); color: var(--ink); }
+.rail nav a[aria-current="page"] { background: var(--panel-3); color: var(--ink); box-shadow: none; }
+.rail nav a[aria-current="page"] .ic { color: var(--ink); }
+.rail .ic { color: var(--ink-3); }
+.rbrand .lbl span, .rg h4 { letter-spacing: 0; font-size: 12px; font-weight: 400; color: var(--ink-3); }
+.rail .people .live.on { background: var(--holo); }
+.clock { color: var(--ink-3); font-weight: 400; }
+.working { color: var(--ink-2); }
+
+/* ---------- controls ---------- */
+.btn { height: 36px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line-2); box-shadow: none; color: var(--ink); font-weight: 500; transition: background .15s var(--ease), border-color .15s var(--ease); }
+.btn:hover { background: var(--panel-3); border-color: rgba(255, 255, 255, .2); }
+.btn:active { transform: scale(.98); }
+.btn.primary { background: var(--ink); border-color: var(--ink); color: #0E0E10; box-shadow: none; }
+.btn.primary:hover { background: #FFFFFF; border-color: #FFFFFF; }
+.btn.amber { background: var(--amber); border-color: var(--amber); color: #1A1206; box-shadow: none; }
+.btn.amber:hover { background: #E8B26E; }
+.btn.sm { height: 32px; border-radius: 8px; }
+.ask { border-radius: 12px; }
+.ask svg { color: var(--ink-3); }
+.ask button { background: var(--ink); color: #0E0E10; border-radius: 8px; box-shadow: none; font-weight: 500; }
+.ask button:hover { background: #fff; }
+.chip { background: var(--panel-2); border-color: var(--line); border-radius: 6px; font-weight: 500; }
+.chip.ink, .chip.holo { background: var(--holo-tint); border-color: rgba(111, 168, 220, .32); color: var(--holo-2); }
+.seg, .sectabs { background: var(--bg-2); border: 1px solid var(--line); box-shadow: none; border-radius: 12px; }
+.seg button, .sectabs a { border-radius: 8px; }
+.seg button[aria-selected="true"], .sectabs a[aria-current="page"] { background: var(--panel-3); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line-2); }
+
+/* ---------- type: sentence case, 400/500, figures in the sans with tabular digits ---------- */
+.page h1 { font-weight: 500; letter-spacing: -.02em; color: var(--ink); }
+.card h3, .sec > h3, .kb-c h4 { color: var(--ink-2); font-weight: 500; }
+.card .big { font: 500 32px/1.1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -.02em; color: var(--ink); }
+.kv b { font: 500 22px/1.2 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -.01em; color: var(--ink); }
+.owner { color: var(--ink-3); }
+.owner b { color: var(--ink-2); }
+.working-line { font-family: var(--sans); font-size: 12px; color: var(--ink-3); opacity: 1; }
+.feed time, .feed2 time { color: var(--ink-3) !important; opacity: 1; }
+.shimmer { background: none; color: var(--ink-3); -webkit-background-clip: border-box; background-clip: border-box; }
+a { color: var(--holo-2); }
+
+/* ---------- charts and meters: solid ink, no glow ---------- */
+.chart .bc b, .chart .bc b.last { background: var(--holo); box-shadow: none; border-radius: 4px 4px 0 0; }
+.chart .bc b { opacity: .55; }
+.chart .bc b.last { opacity: 1; }
+.chart .bc:hover b { background: var(--holo-2); opacity: 1; }
+.chart .pt i { background: var(--holo); }
+.chart .pt:last-child i { background: var(--ink); }
+.hb i, .meter i, .score .bar { background: rgba(255, 255, 255, .06); border-radius: 4px; }
+.hb i b, .meter i b, .score .bar i { background: var(--holo); box-shadow: none; border-radius: 4px; }
+.ldot { background: #3A3A40; }
+.ldot.busy { background: var(--holo); }
+.ldot.need { background: var(--amber); }
+.scan::after { display: none; }
+.ring-ticks, .ring-spin, .ring-core { display: none; }
+.ring-c b { font: 500 48px/1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -.03em; }
+
+/* ---------- the office floor: plain name tags ---------- */
+.tag { background: var(--panel); border-color: var(--line-2); border-radius: 8px; box-shadow: none; }
+.tag.busy { border-color: rgba(111, 168, 220, .6); box-shadow: none; }
+.tag.alert { background: #2A1517; border-color: var(--red); }
+.tag .av, .ph .av { box-shadow: none; }
+
+/* ---------- the brain: flat labels ---------- */
+.b3-label { background: var(--panel); border-color: var(--line-2); border-radius: 6px; }
+.b3-label b { letter-spacing: 0; }
+.tip { background: var(--panel-3); border-color: var(--line-2); border-radius: 8px; }
+
+/* ---------- loading cover ---------- */
+.cover { background: var(--bg); color: var(--ink-3); font-size: 14px; letter-spacing: 0; text-transform: none; }
+.cover .kp { width: 40px; height: 40px; border-radius: 10px; }
+
+/* ---------- the "runs live on a call" sheet ---------- */
+.ln-wrap { background: rgba(14, 14, 16, .72); }
+.ln-sheet { background: var(--panel); border-color: var(--line-2); border-radius: 16px; box-shadow: 0 24px 64px rgba(0, 0, 0, .5); }
+.ln-sheet h2 { font-weight: 500; color: var(--ink); }
+.note.ln-inline a { font-weight: 500; }
+
+/* figures: the sans with tabular digits (mono only for clock times) */
+.num { font-family: var(--sans); font-variant-numeric: tabular-nums; }
+.hb em { font-family: var(--sans); color: var(--ink-2); }
+.pg-home .kpis { margin-top: 16px; }
+
+/* ---------- page pieces that were HUD dressing ---------- */
+.pg-team .tm-core .tk, .pg-team .tm-core .ds, .pg-team .tm-core .glow { display: none; }
+.pg-team .tm-core .bd { fill: var(--panel); stroke: var(--line-2); stroke-width: 1; }
+.pg-team .tm-core:hover .bd { stroke: rgba(255, 255, 255, .24); }
+.pg-team .tm-core .arc { stroke-width: 2; stroke-dasharray: none; }
+.ak-orb .o-tk, .ak-orb .o-ds, .ak-orb .o-arc, .ak-orb .o-rg, .ak-orb .o-core, .ak-orb .o-hot { display: none; }
+.ak-orb .o-in { fill: var(--panel-2); stroke: var(--line-2); }
+.pg-paperwork .sc-c { display: none; }
+.pg-team .tm-cc .l { font-size: 12px; color: var(--ink-3); }
+.pg-team .tm-cc b small { color: var(--ink-3); font-weight: 400; }
+.pg-team .tm-cc .m { font-family: var(--sans); color: var(--ink-3); }

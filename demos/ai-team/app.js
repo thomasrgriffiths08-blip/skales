@@ -281,7 +281,7 @@ const mods = {};
 function pageMod(id) {
   return (mods[id] ||= import(`./pages/${id}.js`).then((m) => {
     const mod = m.default;
-    if (mod.css && !document.querySelector(`style[data-page="${id}"]`)) { const st = document.createElement("style"); st.dataset.page = id; st.textContent = mod.css; document.head.appendChild(st); }
+    if (mod.css && !document.querySelector(`style[data-page="${id}"]`)) { const st = document.createElement("style"); st.dataset.page = id; st.textContent = mod.css; document.head.insertBefore(st, document.getElementById("unslop")); } // site demo: page styles go in before unslop.css
     return mod;
   }).catch((err) => { console.error(err); mods[id] = null; return { render(host) { host.innerHTML = `<div class="inner">${UI.head({ title: ITEM[id]?.label || id })}${UI.note(`This page didn't load: ${UI.esc(err.message)}`, "red")}</div>`; } }; }));
 }
@@ -349,6 +349,7 @@ function render() {
 
 // the pages are glass over a still of the office: one small, pre-blurred frame, so nothing re-blurs while you scroll
 function officeBackdrop(cv) {
+  return; // site demo (unslop): pages sit on a plain dark ground, not a blurred still of the office
   if (!cv.width || !cv.height) return;
   const w = 240, h = Math.max(1, Math.round((w * cv.height) / cv.width)), c = document.createElement("canvas");
   c.width = w; c.height = h;

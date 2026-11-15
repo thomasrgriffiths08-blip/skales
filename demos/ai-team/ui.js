@@ -63,7 +63,7 @@ export function lineChart(data, { h = 180, fmt = (v) => v, label = (d) => d.l, e
   const x = (i) => (data.length < 2 ? 50 : (i / (data.length - 1)) * 100), y = (v) => (invert ? ((v - min) / span) * 100 : 100 - ((v - min) / span) * 100);
   const pts = data.map((d, i) => `${x(i)},${y(d.v)}`).join(" "), uid = Math.random().toString(36).slice(2, 7);
   return `<div class="chart line" style="height:${h}px">${[min, (min + max) / 2, max].map((t) => `<i class="gl" style="bottom:${100 - y(t)}%"><span>${esc(fmt(Math.round(t)))}</span></i>`).join("")}
-    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="lg${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#46c8ff" stop-opacity=".28"/><stop offset="1" stop-color="#46c8ff" stop-opacity="0"/></linearGradient></defs><polygon points="0,100 ${pts} 100,100" fill="url(#lg${uid})"/><polyline points="${pts}" fill="none" stroke="#46c8ff" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" style="filter:drop-shadow(0 0 4px rgba(70,200,255,.8))"/></svg>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,100 ${pts} 100,100" fill="#6FA8DC" fill-opacity=".08"/><polyline points="${pts}" fill="none" stroke="#6FA8DC" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>
     ${data.map((d, i) => `<div class="pt" style="left:${x(i)}%;top:${y(d.v)}%" data-tip="${esc(label(d))}: ${esc(fmt(d.v))}"><i></i></div>`).join("")}</div>
     <div class="xl">${data.map((d, i) => `<span style="width:${100 / data.length}%">${(data.length - 1 - i) % every === 0 ? esc(d.l) : ""}</span>`).join("")}</div>`;
 }
@@ -111,20 +111,16 @@ export function ring(segs, { size = 260, value = "", unit = "", label = "", sub 
   }).join("");
   const ticks = Array.from({ length: 72 }, (_, i) => { const a = (i / 72) * Math.PI * 2, r1 = c - 8, r2 = c - (i % 6 === 0 ? 16 : 12); return `<line x1="${c + r1 * Math.cos(a)}" y1="${c + r1 * Math.sin(a)}" x2="${c + r2 * Math.cos(a)}" y2="${c + r2 * Math.sin(a)}"/>`; }).join("");
   return `<div class="ring" style="width:${size}px;height:${size}px"><svg viewBox="0 0 ${size} ${size}">
-    <g class="ring-ticks">${ticks}</g>
-    <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="rgba(120,200,255,.08)" stroke-width="${thick + 6}"/>
+    <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="rgba(255, 255, 255,.06)" stroke-width="${thick + 6}"/>
     <g class="ring-arcs">${arcs}</g>
-    <circle cx="${c}" cy="${c}" r="${r - thick - 10}" fill="none" stroke="rgba(120,200,255,.18)" stroke-dasharray="2 6" class="ring-spin"/>
-    <circle cx="${c}" cy="${c}" r="${r - thick - 22}" fill="url(#rcore)" class="ring-core"/>
-    <defs><radialGradient id="rcore"><stop offset="0" stop-color="#46c8ff" stop-opacity=".22"/><stop offset="1" stop-color="#46c8ff" stop-opacity="0"/></radialGradient></defs>
   </svg><div class="ring-c"><span class="ring-l">${esc(label)}</span><b class="num" data-count="${parseFloat(value) || 0}" data-fmt="${esc(unit)}">${esc(value)}${unit ? `<small>${esc(unit)}</small>` : ""}</b><span class="ring-s">${esc(sub)}</span></div></div>`;
 }
 // a tiny glowing trend line for tiles
-export function spark(vals, { w = 120, h = 32, color = "#46c8ff" } = {}) {
+export function spark(vals, { w = 120, h = 32, color = "#6FA8DC" } = {}) {
   const lo = Math.min(...vals), hi = Math.max(...vals), sp = hi - lo || 1;
   const pts = vals.map((v, i) => `${(i / (vals.length - 1)) * w},${h - 3 - ((v - lo) / sp) * (h - 6)}`).join(" ");
   const last = pts.split(" ").pop().split(",");
-  return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linejoin="round" style="filter:drop-shadow(0 0 3px ${color})"/><circle cx="${last[0]}" cy="${last[1]}" r="2.6" fill="#fff"/></svg>`;
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
 }
 // count numbers up from zero when a page draws (keeps prefixes/suffixes: "£4,876", "58 h", "96%")
 // Site demo fix: the count ran only on animation frames, so whenever frames stalled (the 3D office and the brain

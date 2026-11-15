@@ -6,15 +6,16 @@ import * as THREE from "three";
 import { BY_ID } from "./agents.js";
 
 export const TYPES = {
-  agent: { c: "#ffffff", s: 1.5, label: "AI employee" }, person: { c: "#ffd08a", s: 0.9, label: "Person" },
-  customer: { c: "#ffc36b", s: 0.55, label: "Customer" }, property: { c: "#6fb7ff", s: 0.36, label: "Property" },
-  job: { c: "#46c8ff", s: 0.36, label: "Job" }, invoice: { c: "#5ef0c0", s: 0.36, label: "Invoice" },
-  email: { c: "#8fb4ff", s: 0.32, label: "Email" }, doc: { c: "#ffb547", s: 0.5, label: "Document" },
-  cert: { c: "#7cf5a8", s: 0.4, label: "Certificate" }, engineer: { c: "#d6f0ff", s: 0.6, label: "Engineer" },
-  supplier: { c: "#ff9ed2", s: 0.6, label: "Supplier" }, rule: { c: "#b9a6ff", s: 0.5, label: "Rule" },
-  lesson: { c: "#c9b8ff", s: 0.6, label: "Lesson" }, search: { c: "#7fe3ff", s: 0.6, label: "Search" },
-  page: { c: "#5ef0c0", s: 0.7, label: "Page" }, campaign: { c: "#ff8a7a", s: 0.7, label: "Ad campaign" },
-  arrival: { c: "#cfe6ff", s: 0.45, label: "Came in" }, event: { c: "#ff6168", s: 0.8, label: "Event" },
+  // site demo (unslop): muted inks on graphite instead of neon
+  agent: { c: "#EDEDED", s: 1.5, label: "AI employee" }, person: { c: "#EBC08A", s: 0.9, label: "Person" },
+  customer: { c: "#E0A458", s: 0.55, label: "Customer" }, property: { c: "#7E9CB8", s: 0.36, label: "Property" },
+  job: { c: "#6FA8DC", s: 0.36, label: "Job" }, invoice: { c: "#5DBB8A", s: 0.36, label: "Invoice" },
+  email: { c: "#8E9AAF", s: 0.32, label: "Email" }, doc: { c: "#C9A27A", s: 0.5, label: "Document" },
+  cert: { c: "#7FC29B", s: 0.4, label: "Certificate" }, engineer: { c: "#B8C4D0", s: 0.6, label: "Engineer" },
+  supplier: { c: "#C995B4", s: 0.6, label: "Supplier" }, rule: { c: "#A99BD6", s: 0.5, label: "Rule" },
+  lesson: { c: "#B7AADB", s: 0.6, label: "Lesson" }, search: { c: "#7FB0C9", s: 0.6, label: "Search" },
+  page: { c: "#5DBB8A", s: 0.7, label: "Page" }, campaign: { c: "#D98A7E", s: 0.7, label: "Ad campaign" },
+  arrival: { c: "#9AA3AD", s: 0.45, label: "Came in" }, event: { c: "#E5686D", s: 0.8, label: "Event" },
 };
 function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
 const hashId = (id) => { let h = 2166136261; for (let i = 0; i < id.length; i++) { h ^= id.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
@@ -23,8 +24,8 @@ const gauss = (R) => { let u = 0, v = 0; while (!u) u = R(); while (!v) v = R();
 const PT_VERT = `attribute float size; attribute float alpha; attribute vec3 acolor; varying vec3 vColor; varying float vAlpha; uniform float uScale;
 void main(){ vColor = acolor; vAlpha = alpha; vec4 mv = modelViewMatrix * vec4(position, 1.0); gl_PointSize = size * uScale / max(0.5, -mv.z); gl_Position = projectionMatrix * mv; }`;
 const PT_FRAG = `varying vec3 vColor; varying float vAlpha;
-void main(){ vec2 p = gl_PointCoord - 0.5; float d = length(p); if (d > 0.5) discard; float glow = pow(1.0 - d * 2.0, 2.4); float core = smoothstep(0.17, 0.07, d);
-  gl_FragColor = vec4(vColor * glow * 1.15 + vec3(1.0) * core * 0.7, (glow * 0.85 + core) * vAlpha); }`;
+void main(){ vec2 p = gl_PointCoord - 0.5; float d = length(p); if (d > 0.3) discard; float a = smoothstep(0.3, 0.24, d);
+  gl_FragColor = vec4(vColor, a * vAlpha); }`; // site demo (unslop): a flat dot, no glow halo
 
 export function createBrain3D(host, { lite = false, labels = true, autoRotate = 0.09, interactive = true, distance = 40, threads: threadK = 1 } = {}) {
   host.classList.add("b3");
@@ -53,11 +54,12 @@ export function createBrain3D(host, { lite = false, labels = true, autoRotate = 
     fragmentShader: "varying vec2 vUv; void main(){ gl_FragColor = vec4(0.27, 0.78, 1.0, (1.0 - vUv.y) * 0.07); }",
   }));
   beam.position.y = -6.5; holo.add(beam);
-  const globe = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(16.5, 2)), lineMat(0.045)); brainG.add(globe);
+  holo.visible = false; // site demo (unslop): no holotable, no beam, no wire globe; just the notes
+  const globe = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(16.5, 2)), lineMat(0.045)); brainG.add(globe); globe.visible = false;
 
   // ---- the graph
   let N = [], byId = new Map(), L = [], pts = null, threads = null, pulses = null, pulseState = [], agentLinks = [];
-  const ptMat = new THREE.ShaderMaterial({ uniforms: { uScale: { value: 400 } }, vertexShader: PT_VERT, fragmentShader: PT_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+  const ptMat = new THREE.ShaderMaterial({ uniforms: { uScale: { value: 400 } }, vertexShader: PT_VERT, fragmentShader: PT_FRAG, transparent: true, depthWrite: false, blending: THREE.NormalBlending });
   const labelEls = new Map();
 
   function layout(nodes, links) {
@@ -125,7 +127,7 @@ export function createBrain3D(host, { lite = false, labels = true, autoRotate = 
     pulseState = Array.from({ length: PN }, () => newPulse());
     const pg = new THREE.BufferGeometry();
     pg.setAttribute("position", new THREE.BufferAttribute(new Float32Array(PN * 3), 3));
-    pg.setAttribute("acolor", new THREE.BufferAttribute(new Float32Array(PN * 3).fill(1), 3));
+    pg.setAttribute("acolor", new THREE.BufferAttribute(new Float32Array(PN * 3).map((_, i) => [0.44, 0.66, 0.86][i % 3]), 3));
     pg.setAttribute("size", new THREE.BufferAttribute(new Float32Array(PN).fill(0.42), 1));
     pg.setAttribute("alpha", new THREE.BufferAttribute(new Float32Array(PN).fill(1), 1));
     pulses = new THREE.Points(pg, ptMat); brainG.add(pulses);
@@ -156,12 +158,12 @@ export function createBrain3D(host, { lite = false, labels = true, autoRotate = 
     });
     if (replay) { const now = performance.now(); N.forEach((n, i) => { const k = Math.max(0, Math.min(1, (now - replay.born[i]) / 500)); A.array[i] *= k; if (k < 1 && k > 0) S.array[i] *= 1 + (1 - k) * 1.6; }); }
     A.needsUpdate = S.needsUpdate = true;
-    const LC = threads.geometry.attributes.color, base = new THREE.Color(0x46c8ff);
+    const LC = threads.geometry.attributes.color, base = new THREE.Color(0x9AA3AD);
     L.forEach((l, k) => {
       const hot = sel && (l.source === sel || l.target === sel);
       const ai = A.array[byId.get(l.source)], bi = A.array[byId.get(l.target)];
       const m = hot ? 0.9 : sel ? 0.03 : Math.min(ai, bi) * 0.16 * threadK;
-      const c = hot ? new THREE.Color(0xffd08a) : base;
+      const c = hot ? new THREE.Color(0xE0A458) : base;
       LC.array.set([c.r * m, c.g * m, c.b * m, c.r * m, c.g * m, c.b * m], k * 6);
     });
     LC.needsUpdate = true;
