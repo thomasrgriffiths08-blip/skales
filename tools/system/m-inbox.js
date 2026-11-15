@@ -122,7 +122,7 @@
       var b = SYS.addBooking({ pid: c.pid, svc: c.svc, start: slot.start, who: slot.who, src: c.src });
       say(c, 'them', 'Booked for ' + f.when(slot.start).replace('Tomorrow', 'tomorrow') + (b.dep ? '. Paid the deposit.' : '.') + ' Thanks!');
       say(c, 'sys', 'Booked: ' + s.name + ', ' + f.when(slot.start)); c.bid = b.id; c.st = 'booked';
-      repaint(); SYS.toast('Booked: ' + s.name + ', ' + f.when(slot.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : ''));
+      repaint(); SYS.toast(SYS.jobNo(b) + ' booked: ' + s.name + ', ' + f.when(slot.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : ''));
     });
   }
   /* for the desk: the phone beside the laptop replies, and books from the link */

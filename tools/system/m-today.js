@@ -40,7 +40,7 @@
   function job(b, n, cls){
     var p = SYS.person(b.pid), s = SYS.svc(b.svc), st = +b.start, en = st + b.mins * MIN;
     var state = en <= n ? ' done' : (st <= n ? ' now' : '');
-    return '<button class="tdb-job' + state + (cls ? ' ' + cls : '') + '" type="button" data-go="booking" data-ref="' + b.id + '" data-s="' + st + '" data-e="' + en + '" data-m="' + (+b.madeAt) + '" style="left:' + pct(st).toFixed(2) + '%;width:' + (pct(en) - pct(st)).toFixed(2) + '%" aria-label="' + esc(f.time(b.start) + ' ' + s.name + ', ' + p.name) + '"><b>' + esc(s.name) + '</b><small>' + esc(f.time(b.start) + ' · ' + p.name) + '</small><i aria-hidden="true">' + esc(p.name.split(/\s+/).map(function(w){ return w.charAt(0); }).join('').slice(0, 2)) + '</i></button>';
+    return '<button class="tdb-job' + state + (cls ? ' ' + cls : '') + '" type="button" data-go="booking" data-ref="' + b.id + '" data-s="' + st + '" data-e="' + en + '" data-m="' + (+b.madeAt) + '" style="left:' + pct(st).toFixed(2) + '%;width:' + (pct(en) - pct(st)).toFixed(2) + '%" aria-label="' + esc(f.time(b.start) + ' ' + s.name + ', ' + p.name) + '"><b>' + esc(s.name) + '</b><small>' + esc(f.time(b.start) + ' · ' + p.name) + '</small><i aria-hidden="true">' + f.time(b.start) + '</i></button>';
   }
   /* dots that would sit on top of each other drop to the second row */
   function rowFor(p){
@@ -75,27 +75,27 @@
       + fig('quotes', 'tdQuotes', f.money(Math.round(x.qv)), 'in quotes won').replace('id="tdQuotes"', 'id="tdQuotes" data-v="' + x.qv + '"')
       + fig('reviews', 'tdRating', rv.hist[rv.hist.length - 1].toFixed(1), 'on Google, up from ' + rv.hist[0].toFixed(1))
       + '</div>'
-      + '<div class="td-acts"><button class="td-play" type="button" data-act="replay" id="tdPlay"' + (pending ? ' hidden' : '') + '>' + SYS.icon('play') + '<span>Replay this morning</span></button>'
-      + '<button class="td-play" type="button" data-act="skip" id="tdSkip"' + (pending ? '' : ' hidden') + '>' + SYS.icon('right') + '<span>Skip</span></button></div>'
+      + '<div class="td-acts"><button class="btn td-play" type="button" data-act="replay" id="tdPlay"' + (pending ? ' hidden' : '') + '>' + SYS.icon('play') + '<span>Replay this morning</span></button>'
+      + '<button class="btn td-play" type="button" data-act="skip" id="tdSkip"' + (pending ? '' : ' hidden') + '>' + SYS.icon('right') + '<span>Skip</span></button></div>'
       + '</div>'
       + '<div class="td-day"><div class="td-dh"><b>Your day</b><span>The diary, and every call, text and booking the system handled</span></div>'
       + '<div class="tdb" style="--rows:' + t.team.length + '">'
       + '<div class="tdb-names" aria-hidden="true"><span></span><span>System</span>' + t.team.map(function(w){ return '<span>' + esc(w) + '</span>'; }).join('') + '</div>'
       + '<div class="tdb-plot" id="tdPlot"><div class="tdb-axis" aria-hidden="true">' + axis + '</div><div class="tdb-lines" aria-hidden="true">' + lines + '</div>'
-      + '<div class="tdb-past" id="tdPast" style="width:' + pct(at).toFixed(2) + '%"></div>'
+      + '<div class="tdb-past" id="tdPast" style="transform:scaleX(' + (pct(at) / 100).toFixed(4) + ')"></div>'
       + '<div class="tdb-track tdb-ev" id="tdEv">' + dots + '</div>' + lanes
-      + '<div class="tdb-now" id="tdNow" style="left:' + pct(at).toFixed(2) + '%"><span>' + f.time(at) + '</span></div></div></div></div>'
+      + '<div class="tdb-now" id="tdNow" style="transform:translateX(' + pct(at).toFixed(2) + '%)"><span>' + f.time(at) + '</span></div></div></div></div>'
       + '<div class="td-note" id="tdNote" aria-live="polite"></div>'
       + '</section>';
   }
   function li(e, cls){
-    return '<li' + (cls ? ' class="' + cls + '"' : '') + ' data-t="' + (+e.at) + '"><span class="tm">' + f.time(e.at) + '</span><button class="ev" data-k="' + (e.k || '') + '" type="button" data-go="' + e.mod + '" data-ref="' + (e.ref || '') + '" style="text-align:left"><span class="ic">' + SYS.icon(e.ic || 'bolt') + '</span><b>' + esc(e.text) + '</b>' + (e.sub ? '<small>' + esc(e.sub) + '</small>' : '') + '</button></li>';
+    return '<li' + (cls ? ' class="' + cls + '"' : '') + ' data-t="' + (+e.at) + '"><span class="tm">' + f.time(e.at) + '</span><button class="ev" data-k="' + (e.k || '') + '" type="button" data-go="' + e.mod + '" data-ref="' + (e.ref || '') + '" style="text-align:left"><span class="ic">' + SYS.icon(e.ic || 'bolt') + '</span><b>' + esc(e.text) + '</b>' + (e.sub ? '<small>' + (e.job ? '<span class="job">' + esc(e.job) + '</span> · ' : '') + esc(e.sub) + '</small>' : '') + '</button></li>';
   }
   function countText(k){ return k + (k === 1 ? ' thing' : ' things') + ', none of them by hand'; }
   function feed(pending){
     var list = B.evs.slice(-MAX_FEED).reverse();
     return '<div class="card"><div class="card-h"><h2>What happened today</h2><span class="meta" id="tdCount">' + countText(pending ? 0 : B.evs.length) + '</span></div>'
-      + (list.length ? '<div class="card-b" style="padding-top:6px;padding-bottom:6px"><ul class="tl td-feed" id="todayFeed">' + list.map(function(e){ return li(e, pending ? 'pend' : ''); }).join('') + '</ul></div>' : '<div class="empty">Quiet so far. Things land here as they happen.</div>') + '</div>';
+      + (list.length ? '<div class="card-b td-fb"><ul class="tl td-feed" id="todayFeed">' + list.map(function(e){ return li(e, pending ? 'pend' : ''); }).join('') + '<li class="td-wait">Things land here as the morning replays.</li></ul></div>' : '<div class="empty">Quiet so far. Things land here as they happen.</div>') + '</div>';
   }
   function side(){
     var S = SYS.S, n = SYS.now(), t = SYS.T, P = SYS.person, d0 = +SYS.sod(n);
@@ -126,7 +126,7 @@
     /* three rows of dots on a laptop, four smaller ones on a phone, kept a dot's width apart */
     var phone = innerWidth <= 760, w = v.clientWidth || innerWidth, plot = phone ? w - 36 : (innerWidth <= 1180 ? w - 120 : w - 420);
     B = { evs: evs, r: range(evs), rows: phone ? [-99, -99, -99, -99] : [-99, -99, -99], gap: Math.max(2, (phone ? 14 : 23) / Math.max(240, plot) * 100) };
-    v.innerHTML = hero(pending) + '<div class="split side-first" style="margin-top:14px"><div class="grid">' + feed(pending) + '</div><div class="grid" id="tdSide">' + side() + '</div></div>';
+    v.innerHTML = hero(pending) + '<div class="split side-first" style="margin-top:16px"><div class="grid">' + feed(pending) + '</div><div class="grid" id="tdSide">' + side() + '</div></div>';
   }
 
   /* ---------- moving parts ---------- */
@@ -149,9 +149,9 @@
     if (b) b.nextElementSibling.textContent = x.booked === 1 ? 'job booked' : 'jobs booked';
   }
   function setNow(T){
-    var p = pct(T).toFixed(2) + '%', nw = $('tdNow'), past = $('tdPast'), clk = $('tdClock');
-    if (nw){ nw.style.left = p; nw.firstChild.textContent = f.time(T); }
-    if (past) past.style.width = p;
+    var p = pct(T), nw = $('tdNow'), past = $('tdPast'), clk = $('tdClock');
+    if (nw){ nw.style.transform = 'translateX(' + p.toFixed(2) + '%)'; nw.firstChild.textContent = f.time(T); }
+    if (past) past.style.transform = 'scaleX(' + (p / 100).toFixed(4) + ')';
     if (clk) clk.textContent = f.time(T);
   }
   function jobsAt(T){
@@ -244,7 +244,7 @@
       var opts = t.services.filter(function(s){ return s.dep > 0; }), s = opts[(liveN * 3) % opts.length];
       var sl = SYS.freeSlots(s.id, 3)[liveN % 3] || SYS.freeSlots(s.id, 1)[0]; if (!sl) return;
       var b = SYS.addBooking({ pid: p.id, svc: s.id, start: sl.start, who: sl.who, src: 'Booked online' });
-      arrive({ at: b.madeAt, mod: 'booking', ref: b.id, k: 'good', ic: 'booking', val: b.price, text: 'Booked online: ' + s.name, sub: p.name + ' · ' + f.when(b.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : '') }, b);
+      arrive({ at: b.madeAt, mod: 'booking', ref: b.id, k: 'good', ic: 'booking', val: b.price, job: SYS.jobNo(b), text: 'Booked online: ' + s.name, sub: p.name + ' · ' + f.when(b.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : '') }, b);
       return;
     }
     if (k === 'review'){
@@ -272,7 +272,7 @@
   }
   function note(e){
     var el = $('tdNote'); if (!el) return;
-    el.innerHTML = '<span class="ic" data-k="' + (e.k || '') + '">' + SYS.icon(e.ic || 'bolt') + '</span><span class="tx"><b>' + esc(e.text) + '</b>' + (e.sub ? '<small>' + esc(e.sub) + '</small>' : '') + '</span><em>now</em>';
+    el.innerHTML = '<span class="ic" data-k="' + (e.k || '') + '">' + SYS.icon(e.ic || 'bolt') + '</span><span class="tx"><b>' + esc(e.text) + '</b>' + (e.sub ? '<small>' + (e.job ? '<span class="job">' + esc(e.job) + '</span> · ' : '') + esc(e.sub) + '</small>' : '') + '</span><em>now</em>';
     el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
     clearTimeout(noteT); noteT = setTimeout(function(){ el.classList.remove('on'); }, 5200);
   }

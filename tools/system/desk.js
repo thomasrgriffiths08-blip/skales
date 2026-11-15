@@ -64,7 +64,7 @@
   SYS.css('desk', [
     '.desk-tap{position:fixed;z-index:99;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:rgba(24,24,27,.22);border:2px solid rgba(24,24,27,.55);pointer-events:none;animation:deskTap .9s ease-out forwards}',
     '@keyframes deskTap{0%{transform:scale(.6);opacity:0}25%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}',
-    '.desk-cue{position:relative;box-shadow:0 0 0 0 var(--ac);animation:deskCue 1.4s ease-out infinite}',
+    '.desk-cue{position:relative;outline:2px solid color-mix(in srgb,var(--ac) 45%,transparent);outline-offset:2px;animation:deskCue 1.4s ease-out 3}',
     '@keyframes deskCue{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ac) 55%,transparent)}100%{box-shadow:0 0 0 9px color-mix(in srgb,var(--ac) 0%,transparent)}}'
   ].join('\n'));
 })();

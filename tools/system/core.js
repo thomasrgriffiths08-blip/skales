@@ -71,7 +71,7 @@
     bolt: '<path d="M13 2.5L5 13.5h6l-1 8 8-11h-6z"/>',
     play: '<path d="M8 5.5v13l10.5-6.5z"/>'
   };
-  SYS.icon = function(k, cls){ return '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (I[k] || '') + '</svg>'; };
+  SYS.icon = function(k, cls){ return '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (I[k] || '') + '</svg>'; };
   var CH = SYS.CH = { call: ['Phone call', 'call'], missed: ['Missed call', 'missed'], text: ['Text', 'text'], web: ['Website form', 'web'], google: ['Google profile', 'google'], fb: ['Facebook', 'fb'], ig: ['Instagram', 'ig'] };
   SYS.chIcon = function(ch, missed){ var c = CH[missed ? 'missed' : ch] || CH.text; return '<span class="ch" title="' + c[0] + '">' + SYS.icon(c[1]) + '</span>'; };
 
@@ -252,6 +252,8 @@
     }
     return out;
   };
+  /* the signature detail: every booking has a job number, the way a firm's own job sheets do ("Job 0418") */
+  SYS.jobNo = function(b){ var n = parseInt(String((b && b.id) || '').slice(1), 10) || 0, base = 200 + (hash(SYS.T ? SYS.T.key : '') % 60) * 10; return 'Job ' + String(base + n).padStart(4, '0'); };
   SYS.addBooking = function(o){
     var s = SYS.T.svc[o.svc], b = { id: 'b' + (SYS.S.ids++), pid: o.pid, svc: o.svc, start: o.start, mins: s.mins, who: o.who || SYS.T.team[0], price: s.price, dep: o.dep != null ? o.dep : s.dep, src: o.src || 'Booked online', madeAt: SYS.now(), ev: [], fresh: true };
     SYS.S.bookings.push(b); return b;
@@ -266,10 +268,10 @@
       if (m.at < from || m.at > now()) return;
       if (m.k === 'sys' && m.text === 'Missed call') out.push({ at: m.at, mod: 'inbox', ref: c.id, k: 'warn', ic: 'missed', text: 'Missed call from ' + p.name, sub: 'Nobody free to answer' });
       else if (m.k === 'auto') out.push({ at: m.at, mod: 'inbox', ref: c.id, k: 'ac', ic: 'text', text: 'Text sent ' + Math.round((m.at - c.at) / 1000) + ' seconds later', sub: 'Automatic, while the phone was in a pocket' });
-      else if (m.k === 'sys' && /^Booked/.test(m.text)) out.push({ at: m.at, mod: 'booking', ref: c.bid, k: 'good', ic: 'booking', val: (S.bookings.filter(function(b){ return b.id === c.bid; })[0] || {}).price || 0, text: p.name + ' booked', sub: m.text.replace('Booked: ', '') });
+      else if (m.k === 'sys' && /^Booked/.test(m.text)) out.push({ at: m.at, mod: 'booking', ref: c.bid, k: 'good', ic: 'booking', val: (S.bookings.filter(function(b){ return b.id === c.bid; })[0] || {}).price || 0, text: p.name + ' booked', sub: m.text.replace('Booked: ', ''), job: c.bid ? SYS.jobNo({ id: c.bid }) : '' });
       else if (m.k === 'them' && m === c.msgs[0]) out.push({ at: m.at, mod: 'inbox', ref: c.id, ic: (SYS.CH[c.ch] || SYS.CH.text)[1], text: 'New enquiry from ' + p.name, sub: (SYS.CH[c.ch] || [''])[0] });
     }); });
-    S.bookings.forEach(function(b){ if (b.madeAt >= from && b.madeAt <= now() && b.src === 'Booked online') out.push({ at: b.madeAt, mod: 'booking', ref: b.id, k: 'good', ic: 'booking', val: b.price || 0, text: 'Booked online: ' + SYS.svc(b.svc).name, sub: P(b.pid).name + ' · ' + f.when(b.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : '') }); });
+    S.bookings.forEach(function(b){ if (b.madeAt >= from && b.madeAt <= now() && b.src === 'Booked online') out.push({ at: b.madeAt, mod: 'booking', ref: b.id, k: 'good', ic: 'booking', val: b.price || 0, text: 'Booked online: ' + SYS.svc(b.svc).name, sub: P(b.pid).name + ' · ' + f.when(b.start) + (b.dep ? ' · ' + f.money(b.dep) + ' deposit paid' : ''), job: SYS.jobNo(b) }); });
     S.quotes.forEach(function(q){ q.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'quotes', ref: q.id, k: e.k === 'ok' || e.k === 'paid' ? 'good' : (e.k === 'chase' ? 'ac' : ''), ic: e.k === 'ok' || e.k === 'paid' ? 'pound' : 'quotes', won: e.k === 'ok', val: e.k === 'ok' ? SYS.quoteTotal(q).total : 0, text: q.no + ' ' + e.text.charAt(0).toLowerCase() + e.text.slice(1), sub: P(q.pid).name + ' · ' + f.money(SYS.quoteTotal(q).total) }); }); });
     S.asks.forEach(function(a){ a.ev.forEach(function(e){ if (e.at >= from && e.at <= now()) out.push({ at: e.at, mod: 'reviews', ref: a.id, k: /stars/.test(e.text) ? 'good' : '', ic: 'reviews', text: e.text, sub: P(a.pid).name }); }); });
     S.reviews.forEach(function(r){ if (r.at >= from && r.at <= now()) out.push({ at: r.at, mod: 'reviews', ref: r.id, k: 'good', ic: 'reviews', text: r.s + '-star review from ' + P(r.pid).name, sub: 'Google' }); });
