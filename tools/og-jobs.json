@@ -318,7 +318,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "59 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "65 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -673,6 +673,42 @@
     "title": "Rubbish removal and clearance",
     "kicker": "For your trade",
     "sub": "Photo in, price out, collection booked."
+  },
+  {
+    "key": "for-heat-pump-installers",
+    "title": "Heat pump installers",
+    "kicker": "For your trade",
+    "sub": "From the first survey to the first warm winter."
+  },
+  {
+    "key": "for-loft-conversions",
+    "title": "Loft conversion specialists",
+    "kicker": "For your trade",
+    "sub": "Show them the room they have not got yet."
+  },
+  {
+    "key": "for-damp-proofing",
+    "title": "Damp proofing specialists",
+    "kicker": "For your trade",
+    "sub": "Name the damp before you quote for it."
+  },
+  {
+    "key": "for-home-care-agencies",
+    "title": "Home care agencies",
+    "kicker": "For your trade",
+    "sub": "Families choosing care, carers choosing you."
+  },
+  {
+    "key": "for-childminders-and-nurseries",
+    "title": "Childminders and nurseries",
+    "kicker": "For your trade",
+    "sub": "From the first visit to the first day, without the phone tag."
+  },
+  {
+    "key": "for-makeup-artists",
+    "title": "Makeup artists",
+    "kicker": "For your trade",
+    "sub": "The date held, the trial booked, the deposit paid."
   },
   {
     "key": "why",
