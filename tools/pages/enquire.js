@@ -1,8 +1,9 @@
 /* /enquire/ — the full enquiry form, for people who already want to work with Skales. One question a
    screen, like /start/, but it asks what a proper first call needs: the business, how far along it is,
    roughly what it turns over, what needs doing, how soon, the budget (from £1.5k), and how to reach them.
-   Then the calendar, with every answer riding into the booking. If site.formKey is set, the whole form
-   is also emailed to Tom the moment they press Send, so nobody who stops before booking is lost.
+   Send delivers the enquiry to Tom; booking a call afterwards is offered but optional (Tom, 16 Nov 2026).
+   With site.formKey set, Send emails the whole form through Web3Forms; without it, the last screen asks
+   them to send it on WhatsApp. Either way, a booked call carries every answer in the Calendly note.
    The logic lives in assets/enquire.js; the look is assets/start.css plus assets/enquire.css. */
 const L = require('../lib.js');
 const { site, esc } = L;
@@ -36,10 +37,10 @@ const icon = name => { const m = startSrc.match(new RegExp(`\\b${name}: I\\('([^
 
 module.exports = { pages: [{
   url: '/enquire/', og: 'enquire', noindex: true, sitemap: false,
-  meta: { key: 'enquire', title: 'Start a project.', kicker: 'Skales Studio · enquiry form', sub: 'Tell me about your business and what you need, then book a call with Tom.' },
+  meta: { key: 'enquire', title: 'Start a project.', kicker: 'Skales Studio · enquiry form', sub: 'Tell me about your business and what you need. Booking a call is optional.' },
   render(b){
     const title = `Start a project | ${site.name}`;
-    const description = `Tell me about your business, what you need and your budget, then book a free call with Tom on the same page.`;
+    const description = `Tell me about your business, what you need and your budget. Tom replies to every enquiry, and you can book a free call if you want one.`;
     const nodes = [L.webPage({ path: '/enquire/', title, description })];
     const q = x => `<section class="sf-s" data-s="${x.key}" hidden>
       <h2 tabindex="-1">${esc(x.h)}</h2><p class="sf-sub">${esc(x.sub)}</p>
@@ -49,13 +50,13 @@ module.exports = { pages: [{
     const body = `
 <a class="skip" href="#main">Skip to content</a>
 <header class="sf-top">
-  <div class="sf-row"><a class="wordmark" href="${b}" aria-label="${esc(site.name)}, home">${esc(site.wordmark.a)}<i>${esc(site.wordmark.x)}</i>${esc(site.wordmark.b)}</a><span class="sf-count" id="count" aria-live="polite">1 / 8</span></div>
+  <div class="sf-row"><a class="wordmark" href="${b}" aria-label="${esc(site.name)}, home">${esc(site.wordmark.a)}<i>${esc(site.wordmark.x)}</i>${esc(site.wordmark.b)}</a><span class="sf-count" id="count" aria-live="polite">1 / 7</span></div>
   <div class="sf-prog" aria-hidden="true"><i id="prog"></i></div>
 </header>
 <main id="main" class="sf">
   <form id="eq" novalidate>
     <section class="sf-s" data-s="biz">
-      <h1 tabindex="-1">Tell me about your business.</h1><p class="sf-sub">Eight quick steps, then you pick a time for a free call with Tom.</p>
+      <h1 tabindex="-1">Tell me about your business.</h1><p class="sf-sub">Seven quick steps. At the end you can book a free call with Tom if you want one.</p>
       <label class="sf-f"><span>Business name</span><input type="text" id="fBiz" autocomplete="organization" maxlength="120" placeholder="e.g. Hartley Plumbing" required></label>
       <label class="sf-f"><span>What does it do?</span><input type="text" id="fWhat" maxlength="160" placeholder="e.g. plumbing and heating, a hair salon" required></label>
       <label class="sf-f"><span>Where is it based? <em>Optional</em></span><input type="text" id="fTown" autocomplete="address-level2" maxlength="80" placeholder="Town or area"></label>
@@ -69,22 +70,27 @@ module.exports = { pages: [{
       <div class="sf-ends"><span>&pound;1.5k</span><span>&pound;15k+</span></div>
     </section>
     <section class="sf-s" data-s="contact" hidden>
-      <h2 tabindex="-1">Where can I reach you?</h2><p class="sf-sub">Last step before you pick a time. I reply to every enquiry myself.</p>
+      <h2 tabindex="-1">Where can I reach you?</h2><p class="sf-sub">Last step. I reply to every enquiry myself.</p>
       <label class="sf-f"><span>Your name</span><input type="text" id="fName" autocomplete="name" maxlength="80" placeholder="Your name" required></label>
       <label class="sf-f"><span>Email</span><input type="email" id="fMail" autocomplete="email" inputmode="email" maxlength="120" placeholder="you@yourbusiness.co.uk" required></label>
       <label class="sf-f"><span>Mobile or WhatsApp</span><input type="tel" id="fTel" autocomplete="tel" inputmode="tel" maxlength="30" placeholder="07700 900123" required></label>
       <input type="checkbox" id="fBot" name="botcheck" class="eq-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="sf-err" id="err" hidden role="alert"></p>
     </section>
-    <section class="sf-s sf-book" data-s="book" hidden>
-      <h2 tabindex="-1" id="bookH">Pick a time for your call.</h2>
-      <p class="sf-sub" id="bookSub">A free 45-minute call with Tom. Your answers come with the booking, so we start on your business. Times are shown in your own time zone.</p>
-      <div id="cal" class="sf-cal"><p class="sf-wait">Loading the calendar&hellip;</p></div>
-      <div id="calNone" class="sf-none" hidden><p>The calendar did not load here. Send your answers on WhatsApp and you will get times back.</p></div>
-      <p class="sf-done" id="done" hidden role="status"></p>
-      <div class="eq-alt" id="alt">
-        <p>Not ready to book yet?</p>
-        <button type="button" class="btn btn-ghost" id="waBtn">${IC.chat}<span>Send my answers on WhatsApp</span></button>
+    <section class="sf-s sf-book" data-s="done" hidden>
+      <h2 tabindex="-1" id="doneH">Thanks. Your enquiry is with Tom.</h2>
+      <p class="sf-sub" id="doneSub">I reply to every enquiry myself, by email or WhatsApp.</p>
+      <div class="eq-wa" id="waRow" hidden>
+        <button type="button" class="btn btn-live" id="waBtn">${IC.chat}<span>Send it on WhatsApp</span></button>
+        <a class="lnk" id="mailLnk" href="mailto:${esc(site.email)}">Or email it instead</a>
+      </div>
+      <div class="eq-call" id="callBox">
+        <h3>Want to talk it through? <em>Optional</em></h3>
+        <p>A free 45-minute call with Tom. Your answers come with the booking, and times show in your own time zone.</p>
+        <button type="button" class="btn btn-ghost" id="callBtn">${IC.video}<span>Pick a time</span></button>
+        <div id="cal" class="sf-cal" hidden><p class="sf-wait">Loading the calendar&hellip;</p></div>
+        <div id="calNone" class="sf-none" hidden><p>The calendar did not load here. Message Tom on WhatsApp and you will get times back.</p></div>
+        <p class="sf-done" id="done" hidden role="status"></p>
       </div>
     </section>
   </form>

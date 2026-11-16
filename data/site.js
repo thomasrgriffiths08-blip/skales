@@ -17,7 +17,7 @@ module.exports = {
   email: 'thomasrgriffiths08@gmail.com',
   whatsapp: '447413399910',                       // international digits only, e.g. '447700900123'. Empty = WhatsApp controls hide.
   calendly: 'https://calendly.com/thomasrgriffiths08/skales',                       // Calendly or Cal.com link, e.g. 'https://calendly.com/<handle>/<event>' or 'https://cal.com/<handle>/20min'. Empty = booking hands off by email/WhatsApp.
-  formKey: '',                        // Web3Forms access key (made at web3forms.com with Tom's email). Set = every /enquire/ form is emailed to Tom. Empty = answers go with the booking or WhatsApp only.
+  formKey: '80cf2d99-90ee-4295-9bab-b18181a34053',  // Web3Forms access key (Tom's, 16 Nov 2026; public by design, made for client-side use). Set = every /enquire/ form is emailed to Tom on Send. Empty = the last screen asks them to send it on WhatsApp.
   leadEndpoint: '',                   // POST URL that texts a case file to the owner (the Cloudflare Worker). Empty = /start offers the share sheet instead.
   // TRACKING — only with the visitor's consent (assets/consent.js shows the banner). All empty = no banner, no tags, nothing loads.
   metaPixel: '',                      // Meta Pixel ID, digits only, from Events Manager

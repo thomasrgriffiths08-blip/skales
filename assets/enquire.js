@@ -1,10 +1,11 @@
-/* /enquire/ — the full enquiry form. One question a screen (same engine and look as /start/), then
-   the calendar. Every screen is a history entry, so the phone's back button steps back a question;
-   answers live in sessionStorage, so a refresh keeps them. On Send:
-   - if SITE.formKey is set, the whole form is emailed to Tom through Web3Forms straight away;
-   - the calendar opens with their name and email filled in and every answer in Calendly's first
-     question (a1), so the call starts on their business;
-   - "Send my answers on WhatsApp" hands the same summary to WhatsApp for anyone not ready to book. */
+/* /enquire/ — the full enquiry form. One question a screen (same engine and look as /start/). Every
+   screen is a history entry, so the phone's back button steps back a question; answers live in
+   sessionStorage, so a refresh keeps them. On Send:
+   - with a Web3Forms key (data/site.js formKey), the whole form is emailed to Tom and the last screen
+     says so; if that fails, or there is no key, the last screen asks them to send it on WhatsApp
+     (or email), because the page must never claim an enquiry arrived when it did not;
+   - booking a call is offered underneath and is optional. The calendar opens with their name and
+     email filled in and every answer in Calendly's first question (a1). */
 (function(){
   var d = document, S = window.SITE || {}, KEY = S.formKey || window.EQKEY || '', QS = window.EQQS || [], B = window.EQBUDGET || { min: 1500, max: 15000, start: 5000 };
   var $ = function(id){ return d.getElementById(id); };
@@ -22,8 +23,8 @@
   var kept = ''; try { kept = sessionStorage.getItem('sk_src') || ''; } catch (e){}
   var channel = utm.utm_source ? [utm.utm_source, utm.utm_medium, utm.utm_campaign].filter(Boolean).join(' / ') : (utm.ref || kept.replace(/^"|"$/g, '') || 'direct');
 
-  var a = store.get('eq-c') || {}, cur = 'biz', started = false, sent = store.get('eq-sent') || '';
-  var FLOW = ['biz', 'stage', 'revenue', 'need', 'when', 'budget', 'contact', 'book'], TOTAL = FLOW.length;
+  var a = store.get('eq-c') || {}, cur = 'biz', started = false, sent = store.get('eq-sent') || '', sending = false;
+  var FLOW = ['biz', 'stage', 'revenue', 'need', 'when', 'budget', 'contact', 'done'], TOTAL = FLOW.length - 1;   // 'done' is not a step
   var FIELDS = { fBiz: 'biz', fWhat: 'what', fTown: 'town', fSite: 'site', fNotes: 'notes', fName: 'name', fMail: 'mail', fTel: 'tel' };
   var q = function(key){ for (var i = 0; i < QS.length; i++) if (QS[i].key === key) return QS[i]; return null; };
   var label = function(key, v){ var x = q(key); if (x) for (var j = 0; j < x.opts.length; j++) if (x.opts[j].v === v) return x.opts[j].t; return ''; };
@@ -47,12 +48,12 @@
     [].forEach.call(secs[cur].querySelectorAll('input[id],textarea[id]'), function(f){ var k = FIELDS[f.id]; if (k && f.value !== (a[k] || '')) f.value = a[k] || ''; });
     if (cur === 'budget'){ range.value = a.budget || B.start; range.style.setProperty('--p', ((range.value - B.min) / (B.max - B.min) * 100) + '%'); money.textContent = pounds(range.value); }
     var single = x && !x.multi;
-    next.hidden = single || cur === 'book';
-    next.disabled = !ready(); next.textContent = cur === 'contact' ? 'Send and pick a time' : 'Continue';
-    back.hidden = cur === 'biz' || cur === 'book'; bar.hidden = cur === 'book' || (back.hidden && next.hidden);
+    next.hidden = single || cur === 'done';
+    next.disabled = sending || !ready(); next.textContent = cur !== 'contact' ? 'Continue' : sending ? 'Sending…' : 'Send enquiry';
+    back.hidden = cur === 'biz' || cur === 'done'; bar.hidden = cur === 'done' || (back.hidden && next.hidden);
     bar.classList.toggle('solo', next.hidden);
-    var n = FLOW.indexOf(cur) + 1;
-    count.textContent = n + ' / ' + TOTAL; prog.style.width = (n / TOTAL * 100) + '%';
+    var n = Math.min(FLOW.indexOf(cur) + 1, TOTAL);
+    count.textContent = cur === 'done' ? 'Done' : n + ' / ' + TOTAL; prog.style.width = (n / TOTAL * 100) + '%';
   }
   function show(name, push){
     if (!secs[name]) name = 'biz';
@@ -62,7 +63,6 @@
     if (push) history.pushState({ s: name }, '', name === 'biz' ? location.pathname + location.search : '#' + name);
     scrollTo(0, 0);
     var h = secs[name].querySelector('h1,h2'); if (h && push) h.focus({ preventScroll: true });
-    if (name === 'book') openBook();
   }
   addEventListener('popstate', function(e){ show((e.state && e.state.s) || (location.hash || '').slice(1) || 'biz'); });
   function goBack(){ if (history.state && history.state.s) history.back(); else show(FLOW[Math.max(0, FLOW.indexOf(cur) - 1)], true); }
@@ -116,23 +116,33 @@
   }
   function contactLines(){ return ['Name: ' + val('name'), 'Email: ' + val('mail'), 'Mobile: ' + val('tel')]; }
 
-  /* ---------- Send: check, email Tom (if the inbox is on), then the calendar ---------- */
+  /* ---------- Send: check, email Tom (when the inbox is on), then the thank-you screen ---------- */
   function send(){
+    if (sending) return;
     var err = $('err');
     var bad = val('name').length < 2 ? 'Add your name.' : !okMail(val('mail')) ? 'Add an email address I can reply to.' : !okTel(val('tel')) ? 'Add a mobile or WhatsApp number.' : '';
     if (bad){ err.textContent = bad; err.hidden = false; return; }
     err.hidden = true;
-    var sig = JSON.stringify(a);
-    if (KEY && sent !== sig && !$('fBot').checked){
-      var msg = contactLines().concat([''], lines()).join('\n');
-      fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, keepalive: true,
-        body: JSON.stringify({ access_key: KEY, subject: 'New enquiry: ' + val('biz') + ' (' + pounds(a.budget || B.start) + ')', from_name: 'Skales enquiry form', name: val('name'), email: val('mail'), replyto: val('mail'), phone: val('tel'), message: msg, botcheck: '' }) })
-        .then(function(r){ return r.json(); }).then(function(j){ if (j && j.success){ sent = sig; store.set('eq-sent', sig); track('enquiry_emailed', { channel: channel }); } }).catch(function(){});
-    }
     track('enquiry_sent', { channel: channel, budget: a.budget || B.start, stage: a.stage || '', revenue: a.revenue || '' });
+    var sig = JSON.stringify(a);
+    if (!KEY || $('fBot').checked) return finish(false);
+    if (sent === sig) return finish(true);
+    sending = true; paint();
+    var msg = contactLines().concat([''], lines()).join('\n'), settled = false;
+    var done = function(ok){ if (settled) return; settled = true; sending = false; if (ok){ sent = sig; store.set('eq-sent', sig); track('enquiry_emailed', { channel: channel }); } finish(ok); };
+    setTimeout(function(){ done(false); }, 12000);
+    fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: KEY, subject: 'New enquiry: ' + val('biz') + ' (' + pounds(a.budget || B.start) + ')', from_name: 'Skales enquiry form', name: val('name'), email: val('mail'), replyto: val('mail'), phone: val('tel'), message: msg, botcheck: '' }) })
+      .then(function(r){ return r.json(); }).then(function(j){ done(!!(j && j.success)); }).catch(function(){ done(false); });
+  }
+  /* the last screen tells the truth: "with Tom" only when the inbox took it, otherwise one tap to send */
+  function finish(ok){
     var first = val('name').split(/\s+/)[0];
-    $('bookH').textContent = 'Thanks, ' + first + '. Pick a time for your call.';
-    show('book', true);
+    $('doneH').textContent = ok ? 'Thanks, ' + first + '. Your enquiry is with Tom.' : 'Nearly there, ' + first + '. Send it to Tom.';
+    $('doneSub').textContent = ok ? 'I reply to every enquiry myself, by email or WhatsApp.' : 'One tap sends your answers to Tom on WhatsApp. If you book a call below, they come with the booking too.';
+    $('waRow').hidden = ok;
+    $('callBtn').className = 'btn ' + (ok ? 'btn-live' : 'btn-ghost');
+    show('done', true);
   }
 
   /* ---------- the call: Calendly inline with their details and answers filled in ---------- */
@@ -143,6 +153,7 @@
     var s = d.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true;
     s.onerror = function(){ calLoaded = 'failed'; }; d.head.appendChild(s);
   }
+  $('callBtn').addEventListener('click', function(){ this.hidden = true; track('call_opened', { channel: channel, from: 'enquire' }); openBook(); });
   function openBook(){
     var cal = $('cal'), none = $('calNone'), note = lines().join('\n');
     if (calBooted === note && cal.querySelector('iframe')) return;
@@ -162,20 +173,22 @@
     if (!booked) return;
     track('call_booked', { channel: channel, from: 'enquire' });
     var done = $('done'); done.textContent = 'Booked. The confirmation is on its way to your email. Speak soon.'; done.hidden = false;
-    $('alt').hidden = true;
   });
 
-  /* ---------- not ready to book: the same answers on WhatsApp (or email if there is no number) ---------- */
+  /* ---------- no inbox (or it failed): the same answers on WhatsApp, or by email ---------- */
+  function waMsg(){ return 'Hi Tom, here is my enquiry.\n\n' + contactLines().concat([''], lines()).join('\n'); }
+  var mailHref = function(){ return 'mailto:' + S.email + '?subject=' + enc('Enquiry from ' + val('biz')) + '&body=' + enc(waMsg()); };
   $('waBtn').addEventListener('click', function(){
-    var msg = 'Hi Tom, here is my enquiry.\n\n' + contactLines().concat([''], lines()).join('\n');
     var wa = String(S.whatsapp || '').replace(/\D/g, '');
     track('enquiry_whatsapp', { channel: channel });
-    location.href = wa ? 'https://wa.me/' + wa + '?text=' + enc(msg) : 'mailto:' + S.email + '?subject=' + enc('Enquiry from ' + val('biz')) + '&body=' + enc(msg);
+    var url = wa ? 'https://wa.me/' + wa + '?text=' + enc(waMsg()) : mailHref();
+    if (!wa || !window.open(url, '_blank', 'noopener')) location.href = url;   // a new tab keeps this page (and the calendar) open
   });
+  $('mailLnk').addEventListener('click', function(){ track('enquiry_email', { channel: channel }); this.href = mailHref(); });
 
   /* ---------- first paint ---------- */
   track('enquiry_view', { channel: channel });
   var start = (location.hash || '').slice(1);
-  if (start && secs[start] && start !== 'book' && val('biz')){ history.replaceState({ s: start }, '', '#' + start); show(start); }
+  if (start && secs[start] && start !== 'done' && val('biz')){ history.replaceState({ s: start }, '', '#' + start); show(start); }
   else { if (location.hash) history.replaceState(null, '', location.pathname + location.search); show('biz'); }
 })();
