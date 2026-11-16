@@ -86,6 +86,7 @@ module.exports = [
     faq: [
       ['Should I leave Checkatrade?', 'Not necessarily. Many trades use both: the directory for volume while the website builds up, and the website for the work that comes to you directly. The numbers in your CRM show when the balance has shifted.'],
       ['Is Checkatrade worth it?', 'It can be, if the jobs it brings in pay back the membership with room to spare. Log every directory enquiry in your CRM for a few months: how many came in, how many you won and what they were worth. If most of your work already comes from people searching for you by name, your own site and Google profile may be doing that job.'],
+      ['Are Bark and MyBuilder worth it for tradespeople?', 'They work differently from a listing. On lead sites like Bark and MyBuilder you pay for the chance to quote on a job that other businesses can quote for too, so you pay whether or not you win it. Log every lead in your CRM with what it cost and whether you won it, and after a few months you will know whether it pays.'],
       ['Can my directory reviews go on my website?', 'You can link to them, but reviews on your own Google Business Profile are the ones that help you in search. Review requests can send every new customer there.'],
     ],
   },
