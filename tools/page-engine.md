@@ -8,6 +8,19 @@ Read `tools/search-profile.md` first. It holds the identity, the facts bank (the
 
 Gather what is available and say plainly in the PR which sources were missing.
 
+**Free tools only.** Tom's rule (9 November 2026): the page engine and the weekly report use free tools. Never use a paid connector or spend credits on one (Ahrefs, Similarweb, Semrush, Firecrawl and the like), even when it is connected. The free sources, once Tom has set each one up:
+
+| Source | What it gives the run |
+|---|---|
+| Google Search Console | Searches, impressions, clicks and position per page |
+| Bing Webmaster Tools | The same for Bing, plus its free keyword research for search volumes |
+| Google Analytics 4 | Visits by source, and each funnel step: check started, call clicked, call booked |
+| Calendly | Booked calls. A booking from /start/ carries "Came from:" with its source |
+| Google UK autocomplete and Google Trends | Demand for a trade or question when there is no volume data |
+| WebSearch | The AI-assistant and competitor checks below |
+
+Microsoft Clarity (free recordings and heatmaps) is for Tom to watch, not for the report: its export only covers the last few days.
+
 - **Search Console** (once Tom has given access). Collect the queries with impressions where the site sits below position 8. Group them by page.
 - **The /start check.** Collect the trades and problems people picked, from the lead home once it exists.
 - **AI assistants.**
@@ -74,7 +87,7 @@ Use UK English. Use no prices, no promised results, and no invented numbers, cli
   1. A line per page: its address, the search it answers, why it exists (the gap and its source), and the passage an AI engine would quote.
   2. The pages that were considered and dropped, and why.
   3. Questions for Tom: facts the bank lacks that would unlock a page.
-  4. The weekly report. Follow a visitor from reach to interest, intent, action and result, using whatever data exists. With no data yet, say which sources are still missing. Never invent a number.
+  4. The weekly report. Follow a visitor from reach to interest, intent, action and result, using whatever data exists, with one row per source: Instagram, LinkedIn, search, AI assistants and direct. With no data yet, say which sources are still missing. Never invent a number.
 - End the PR body with the attribution lines the session's instructions give.
 
 Never merge. Never touch the do-not-touch list. Never post anything outside the pull request.
@@ -92,3 +105,4 @@ Append one line per run: the date, the pages proposed, the pages merged, and the
 - 2026-10-19: 7 pages proposed, all trades: nail technicians, massage therapists, dog walkers and pet sitters, dog trainers, private tutors, chimney sweeps and handyman services. Run 1's 8 pages went live with the launch (PR #12, 12 October), so this run is based on `main`. Missing: Search Console, /start data and keyword volumes; the Ahrefs connector connected but returned "Insufficient plan", so demand was read from Google UK autocomplete again.
 - 2026-10-26: 6 pages proposed, all trades: painters and decorators, window and door fitters, flooring and carpet fitters, carpet and upholstery cleaners, driveway and patio cleaners, and dance schools. Run 2's 7 pages are in PR #13, which has not merged yet, so this run is based on `claude/hero-builder`. Merged since last run: none. Missing: Search Console, /start data, keyword volumes and Google autocomplete. Firecrawl ran out of credits and Ahrefs returned "Insufficient plan", so demand was judged from web search: which UK agencies and booking-software makers have built pages aimed at each trade.
 - 2026-11-02: 8 pages proposed, all trades: plasterers, drainage engineers, alarm and CCTV installers, solar panel installers, blinds and shutters, vets, opticians and wedding venues. Runs 2 and 3 are still waiting in PRs #13 and #18, so this run is based on `engine/2026-10-26`. Merged since last run: none. Missing: Search Console, /start data and keyword volumes (Ahrefs returned "Insufficient plan" again). Firecrawl credits were low, so Google UK autocomplete was used sparingly and demand was mostly judged from which UK agencies and trade bodies have built marketing pages aimed at each trade. Considered and dropped: scaffolders, appliance repair, air conditioning and phone repair.
+- 2026-11-09: 6 pages proposed: five trades (chiropractors and osteopaths, counsellors and therapists, car body repair, dog day care and kennels, rubbish removal and clearance) and a Bark and MyBuilder question on /compare/directories/. Runs 2 to 4 and the full rebuild are still waiting to merge, so this run is based on `claude/rebuild`, the newest branch, which carries every earlier page. Merged since last run: none. Missing: Search Console, /start data and keyword volumes; demand was judged from which UK agencies and booking-software makers have built pages aimed at each trade. Considered and dropped: holiday lets and B&Bs, podiatrists, yoga and pilates studios, party hire. No old-page review yet, as there is no Search Console data.

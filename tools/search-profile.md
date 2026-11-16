@@ -13,7 +13,7 @@ This is the file every SEO, GEO and page-engine agent trains on. It holds who th
 1. Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).
 2. Runs Facebook and Instagram (Meta) ads, and Google search ads and Local Services Ads where the trade qualifies.
 3. One person: the person you message is the person who builds it.
-4. Thirty-six working demonstration builds run live on the site; every business in them is fictional, and each is labelled.
+4. Twelve demonstration websites and one system (six parts) run live on the site; every business in them is fictional, and each is labelled.
 5. One system a week is built in public on Instagram.
 6. Clients own their domain, code and accounts from day one; nothing is rented back to them monthly. Ad accounts are set up in the client's name.
 7. Every build is hand-coded, with no page builder and no theme.
@@ -32,7 +32,7 @@ Anything not on this list, and not already on the site, does not get published. 
 - Demos and films always carry "Fictional business · illustrative numbers".
 
 ## Do not touch
-- The cold open on the home page and the 36 demo builds in /demos/.
+- The cold open on the home page and the demo builds in /demos/.
 - /start/ (noindex, built for the Instagram bio and ads).
 - Tom's Instagram account: never visited, scraped or posted to.
 
@@ -69,3 +69,4 @@ None of them sells the website, booking, follow-up and ads as one system: that i
 
 ## Run history
 - 2026-10-08: profile written with phase 4 (services, automations, compare, FAQ, 27 trade pages, build-time metadata check).
+- 2026-11-09: facts bank item 4 brought in line with the site (twelve websites and one system, since the 25 October rebuild); for Tom to confirm by merging.
