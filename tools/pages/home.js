@@ -24,7 +24,7 @@ const hero = b => {
   return `<section class="hx hx-home" aria-labelledby="h-top">
   <div class="wrap">
     <div class="hx-top">
-      <h1 id="h-top">Websites that <br>get you booked</h1>
+      <h1 id="h-top">Get found, <br>Get booked, <br>Get paid</h1>
       <div class="hx-side">
         <p class="hx-sub"><strong>I build your website, the booking and follow-up behind it, and run the ads that fill it.</strong> One flat price, agreed before anything starts.</p>
         <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="tlink" href="${b}try/missed-call/">Try a live demo</a></div>
@@ -159,7 +159,7 @@ const book = b => {
 
 module.exports = { pages: [{
   url: '/', og: 'home', priority: 1.0, changefreq: 'weekly',
-  meta: { key: 'home', title: 'Websites that get you booked.', kicker: `${site.name} · websites · booking · ads · UK`, sub: 'Websites, booking and follow-up for UK trades, built by one person. Real builds run live on the page.' },
+  meta: { key: 'home', title: 'Get\u00a0found, Get\u00a0booked, Get\u00a0paid', kicker: `${site.name} · websites · booking · ads · UK`, sub: 'Websites, booking and follow-up for UK trades, built by one person. Real builds run live on the page.' },
   render(b){
     const title = `Websites & booking systems for UK trades | ${site.legalName}`;
     const description = 'Websites, online booking, missed-call text-back and ads for UK trades, built by one person. See twelve real builds and try a live demo on your phone.';
