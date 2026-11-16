@@ -47,7 +47,7 @@ const privacy = {
     const adsLine = tags.length
       ? `Only if you accept on the cookie banner. ${and(tags).replace(/^t/, 'T')} then record the pages you visit and actions like booking a call, so I can see which ads work and show them to people likely to need them. The <a class="lnk" href="${b}cookies/">cookies page</a> lists exactly what is set.`
       : 'None at the moment: the site runs no analytics or advertising tags. If that changes, a cookie banner will ask you first and this page will say so.';
-    const sharers = [`the site’s host (${hostCo})`, booking && `${booking} for bookings`, site.leadEndpoint && 'the service that forwards case files by text', ...firms.map(f => `${f}, if you accept their cookies`)].filter(Boolean);
+    const sharers = [`the site’s host (${hostCo})`, booking && `${booking} for bookings`, site.leadEndpoint && 'the service that forwards case files by text', site.formKey && 'Web3Forms, which emails the enquiry form to me', ...firms.map(f => `${f}, if you accept their cookies`)].filter(Boolean);
     const abroad = [hostCo, 'Google', booking, T.pixel && 'Meta'].filter(Boolean);
     const body = `
       <h2>Who is responsible for your information?</h2>
@@ -55,7 +55,8 @@ const privacy = {
 
       <h2>What is collected, and why?</h2>
       <p><b>The three questions on /start.</b> Your answers stay in your browser until you book a call; then they go into the booking with where you arrived from, so I can prepare.</p>
-      <p><b>Booking a call.</b> The booking page asks for your name, business, town, phone, email and what you would like help with. ${bookLine}</p>
+      ${site.formKey ? `<p><b>The enquiry form.</b> Your business details, answers, name, email and mobile. When you press Send they are emailed to me through Web3Forms, so I can reply; if you book a call, they go with the booking too.</p>
+` : ''}      <p><b>Booking a call.</b> The booking page asks for your name, business, town, phone, email and what you would like help with. ${bookLine}</p>
       <p><b>The free teardown.</b> Your name, number and a line about your business, sent from your own WhatsApp or email.</p>
       <p><b>Messages.</b> Whatever you send me by email, WhatsApp or Instagram, so I can reply.</p>
       <p><b>The live demos.</b> Anything you type into the demos on /try/ stays in your browser and is not sent anywhere.</p>
