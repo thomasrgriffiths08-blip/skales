@@ -15,7 +15,7 @@ const out = path.join(__dirname, '..', 'assets', 'tp');
   const br = await chromium.launch();
   const ctx = await br.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1.25, reducedMotion: 'reduce' });
   for (const [part, t] of stills()) {
-    if (!process.env.FORCE && fs.existsSync(path.join(out, `${part}-${t}.webp`))) continue;
+    if (!process.env.FORCE && fs.existsSync(path.join(out, `${part}-${t}.webp`)) && fs.existsSync(path.join(out, `${part}-${t}-800.webp`))) continue;
     const p = await ctx.newPage();
     await p.goto(`${base}demos/${part}/?t=${t}#s=1`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(1500);
