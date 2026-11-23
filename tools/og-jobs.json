@@ -745,5 +745,11 @@
     "title": "Found on Google. Quoted by AI.",
     "kicker": "SEO · GEO · schema · metadata",
     "sub": "What goes into every page so search engines and AI assistants can read it, and why it works."
+  },
+  {
+    "key": "ai",
+    "title": "Your phone, answered by AI",
+    "kicker": "AI voice agents · AI receptionist · AI team",
+    "sub": "Hear an AI agent take a call, book the job and hand over when it should."
   }
 ]

@@ -21,6 +21,7 @@ This is the file every SEO, GEO and page-engine agent trains on. It holds who th
 9. A website on its own takes days; a full system with booking and follow-up usually takes one to two weeks.
 10. The process: free teardown, flat quote, built in public, handover.
 11. The live demos on /try/ run in the browser with a fictional business (Larchfield Heating in the films).
+12. Builds AI phone agents and AI receptionists for service businesses, set up on the owner's diary, price list and rules: they say they are an AI, book jobs, send confirmations and hand over to a person when they should (Tom, 9 and 23 Nov 2026). The calls on /ai/ are recorded examples for fictional businesses with AI voices, not a live agent, and the page says so.
 
 Anything not on this list, and not already on the site, does not get published. A page that needs a missing fact is blocked and the fact goes to Tom as a question.
 

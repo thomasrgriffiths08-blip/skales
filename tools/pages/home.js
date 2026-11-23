@@ -127,6 +127,20 @@ const how = b => `<section class="hs hs-how" id="how" aria-labelledby="h-how">
   </div>
 </section>`;
 
+const V = require('../voice/embed.js');
+/* the voice agent, playable on the home page: the same player as /ai/ */
+const ai = b => `<section class="hs hs-ai" id="ai" aria-labelledby="h-ai">
+  <div class="wrap">
+    <div class="hs-head">
+      <p class="kick">AI on the phone</p>
+      <h2 id="h-ai">The phone gets answered, even at 23:10</h2>
+      <p class="lead">Ring one of these made-up businesses and listen. An AI assistant picks up, checks the diary and the price list, books the job and knows when to hand over.</p>
+    </div>
+    ${V.stage(b)}
+    <div class="hs-ctas"><a class="btn btn-glass" href="${b}ai/">See all the AI work</a><a class="tlink" href="${b}demos/ai-receptionist/">Or watch it book a job by text <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>`;
+
 const who = b => `<section class="hs hs-who" id="who" aria-labelledby="h-who">
   <div class="wrap who">
     <div>
@@ -174,13 +188,14 @@ ${L.header(b, 'home')}
 ${hero(b)}
 ${tryIt(b)}
 ${system(b)}
+${ai(b)}
 ${work(b)}
 ${how(b)}
 ${who(b)}
 ${book(b)}
 </main>
 ${L.footer(b, { mbar: false, dark: true })}`;
-    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['home.css'], nodes, palette: BRAND, theme: '#0A0B0D', dark: false }), body,
-      L.scripts(b, ['home.js']));
+    return L.page(L.head({ b, path: '/', title, description, og: 'home', css: ['home.css', V.css, 'ai.css'], nodes, palette: BRAND, theme: '#0A0B0D', dark: false }), body,
+      L.scripts(b, ['home.js', V.js]));
   }
 }]};
