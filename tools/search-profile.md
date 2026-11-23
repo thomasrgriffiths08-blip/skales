@@ -7,7 +7,7 @@ This is the file every SEO, GEO and page-engine agent trains on. It holds who th
 - **Person:** Tom Griffiths (also Thomas Griffiths), founder and the only builder. Instagram @tomxsystems.
 - **What it is:** a one-person UK studio that builds websites, online booking with a CRM and follow-up automation for UK service businesses, and runs Meta and Google ads that point at them.
 - **Area:** United Kingdom. The town for the single location page is still to come from Tom. No other location pages, ever.
-- **Domain:** skales.studio (bought 8 October 2026; the site runs on the github.io address until DNS is pointed).
+- **Domain:** skales.studio (bought 8 October 2026; the site has been live on it since 15 November 2026, served by Vercel).
 
 ## Facts bank (the only claims a page may make)
 1. Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).

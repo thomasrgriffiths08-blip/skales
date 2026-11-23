@@ -318,7 +318,7 @@
     "key": "for",
     "title": "Websites and booking for your trade",
     "kicker": "By trade",
-    "sub": "65 kinds of business, each with what its website needs and the demos set up for it."
+    "sub": "72 kinds of business, each with what its website needs and the demos set up for it."
   },
   {
     "key": "for-plumbers",
@@ -709,6 +709,48 @@
     "title": "Makeup artists",
     "kicker": "For your trade",
     "sub": "The date held, the trial booked, the deposit paid."
+  },
+  {
+    "key": "for-escape-rooms",
+    "title": "Escape rooms",
+    "kicker": "For your trade",
+    "sub": "Every slot booked and paid, before the team walks in."
+  },
+  {
+    "key": "for-padel-and-tennis-clubs",
+    "title": "Padel and tennis clubs",
+    "kicker": "For your trade",
+    "sub": "Courts full in the evenings, and new players coming back."
+  },
+  {
+    "key": "for-bridal-shops",
+    "title": "Bridal shops",
+    "kicker": "For your trade",
+    "sub": "Appointments booked, fittings remembered, brides who come back to say yes."
+  },
+  {
+    "key": "for-caterers",
+    "title": "Caterers",
+    "kicker": "For your trade",
+    "sub": "The date, the numbers and the dietary list, before you quote."
+  },
+  {
+    "key": "for-interior-designers",
+    "title": "Interior designers",
+    "kicker": "For your trade",
+    "sub": "Show the room, then book the consultation."
+  },
+  {
+    "key": "for-tilers",
+    "title": "Tilers",
+    "kicker": "For your trade",
+    "sub": "Show the finish up close, then quote from the photos."
+  },
+  {
+    "key": "for-holiday-clubs",
+    "title": "Holiday clubs and kids’ camps",
+    "kicker": "For your trade",
+    "sub": "Places booked and paid, and parents back next holidays."
   },
   {
     "key": "why",
