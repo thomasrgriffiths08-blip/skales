@@ -100,12 +100,20 @@ def word_times(text, a):
     if len(merged) != len(phrases):
         merged = [[merged[0][0] if merged else 0, merged[-1][1] if merged else len(loud)]]
         phrases = [words]
-    out = []
-    for (s0, s1), ph in zip(merged, phrases):
-        ws = [weight(w) for w in ph]; tot = sum(ws); acc = 0
-        for w, x in zip(ph, ws):
-            out.append(round((s0 + (s1 - s0) * acc / tot) / 100, 2)); acc += x
-    return out, len(merged) > 1
+    def place(segs, phs):
+        out = []
+        for (s0, s1), ph in zip(segs, phs):
+            ws = [weight(w) for w in ph]; tot = sum(ws); acc = 0
+            for w, x in zip(ph, ws):
+                out.append(round((s0 + (s1 - s0) * acc / tot) / 100, 2)); acc += x
+        return out
+    # a pause inside a phrase can pair the wrong words with the wrong stretch of speech: if any phrase would be
+    # spoken more than three times slower than the line as a whole, spread the words across the whole line instead
+    whole = [[merged[0][0], merged[-1][1]]]
+    pace = (whole[0][1] - whole[0][0]) / max(1, sum(weight(w) for w in words))
+    if any((s1 - s0) / sum(weight(w) for w in ph) > 3 * pace for (s0, s1), ph in zip(merged, phrases)):
+        merged, phrases = whole, [words]
+    return place(merged, phrases), len(merged) > 1
 
 def norm(s): return re.sub(r'[^a-z0-9 ]', '', s.lower().replace('-', ' ').replace('’', '').replace("'", '')).split()
 
