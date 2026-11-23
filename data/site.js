@@ -30,7 +30,7 @@ module.exports = {
   founded: '2026',
   // honest, verifiable claims only — these feed schema, llms.txt and page copy
   facts: [
-    'Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).',
+    'Builds websites, online booking, AI receptionists, AI employees and automation for UK service businesses (trades and local operators).',
     'One person: the person you message is the person who builds it.',
     '{{W}} run live on the site as working demonstrations; every business in them is fictional.',
     'One system a week is built in public on Instagram.',

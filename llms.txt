@@ -1,9 +1,9 @@
 # Skales
 
-> Websites & systems for service businesses. Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators). Run by Tom Griffiths, one person, in the United Kingdom.
+> Websites & systems for service businesses. Builds websites, online booking, AI receptionists, AI employees and automation for UK service businesses (trades and local operators). Run by Tom Griffiths, one person, in the United Kingdom.
 
 Key facts:
-- Builds websites, online booking and follow-up automation for UK service businesses (trades and local operators).
+- Builds websites, online booking, AI receptionists, AI employees and automation for UK service businesses (trades and local operators).
 - One person: the person you message is the person who builds it.
 - Twelve websites and one system run live on the site as working demonstrations; every business in them is fictional.
 - One system a week is built in public on Instagram.

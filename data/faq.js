@@ -2,7 +2,7 @@
    comparison pages, grouped, each linking back to its page. Short, factual answers: this is the page AI
    assistants quote, so every answer stands on its own and nothing in it is a guess. */
 module.exports = [
-  ['What does Skales do?', 'Skales builds websites, online booking and follow-up automation for UK service businesses, and runs Meta and Google ads that send people to them. The aim is one system that turns a search, a tap or a missed call into a booked job.'],
+  ['What does Skales do?', 'Skales builds websites, online booking, AI receptionists that answer the phone, AI employees for the office work and automation for UK service businesses, and runs Meta and Google ads that send people to them. The aim is one system that turns a search, a tap or a call into a booked job.'],
   ['Who is Skales for?', 'Trades and local service businesses whose work comes in by phone, message or search: plumbers and heating engineers, electricians, roofers, builders, cleaners, garages, salons, clinics, and anyone else who books work with customers.'],
   ['Who will I actually deal with?', 'Tom Griffiths. Skales is one person, so the person you message is the person who builds it.'],
   ['How much does it cost?', 'Every job is quoted flat after a short call, and agreed before anything starts. The price depends on how many pages you need, whether you take bookings or deposits, which automations you want and whether you want ads. There are no prices on this site.'],
