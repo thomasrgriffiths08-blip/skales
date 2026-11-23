@@ -28,7 +28,7 @@ const FAQ = [
 const shot = (b, name, alt) => `<picture><source media="(max-width: 640px)" srcset="${b}assets/work/${name}-phone.webp" width="600" height="1076"><img src="${b}assets/work/${name}-1440.webp" srcset="${b}assets/work/${name}-800.webp 800w, ${b}assets/work/${name}-1440.webp 1440w" sizes="(min-width: 1000px) 580px, 92vw" width="1440" height="852" alt="${esc(alt)}" loading="lazy" decoding="async"></picture>`;
 const MORE = [
   { href: 'demos/ai-receptionist/', bar: 'The AI receptionist · Larchfield Heating', img: 'ai-receptionist', alt: 'The AI receptionist demo: a late-night text conversation that ends with a boiler repair booked in the diary',
-    h: 'The AI receptionist, by text', p: 'The same night at Larchfield Heating, but the customer messages instead of ringing. Watch it reply, check the diary and book the job, then type to it yourself.', go: 'Open the AI receptionist' },
+    h: 'The AI receptionist, by text', p: 'The same night at Larchfield Heating, but the customer messages instead of ringing. Watch it reply, check the diary and book the job, then tap through it yourself.', go: 'Open the AI receptionist' },
   { href: 'demos/ai-team/', bar: 'The AI team · Kingpost', img: 'ai-team', alt: 'The AI team demo: ten AI employees for a made-up building firm, with the hours each one saves',
     h: 'The AI team', p: 'Ten AI employees running the office of a made-up Bristol building firm, from invoices to the vans. Walk the floor, open each one and see the hours it gives back.', go: 'Open the AI team' },
 ];

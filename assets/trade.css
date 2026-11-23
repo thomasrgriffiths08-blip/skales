@@ -98,7 +98,13 @@
   .tp-hero .hx-sub{order:4;font-size:1rem}
   .tp-hero .hx-ctas{order:5;margin-top:0}
   .tp .hx-ctas .btn{flex:1 1 auto;padding:0 18px}
-  .tp-cap{font-size:.875rem;gap:4px 12px}
+  /* the desktop app shrunk to a phone's width cannot be read, so the frame shows a close crop of the same picture:
+     the working part of the screen, from just right of the side menu, at about two thirds of real size */
+  .tp-scr{aspect-ratio:10/9}
+  .tp-open img{width:216%;max-width:none;height:auto;margin-left:-41.5%;object-fit:fill}
+  .tp-cap{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:2px 12px;font-size:.875rem}
+  .tp-cap>span:nth-child(2){grid-column:1 / -1;grid-row:2}
+  .tp-cap .tlink{grid-column:2;grid-row:1;justify-self:end}
   .tp-needs{grid-template-columns:minmax(0,1fr)}
   .tp-needs li{padding:14px 0;font-size:.9375rem}
   .tp-qs summary{min-height:56px}

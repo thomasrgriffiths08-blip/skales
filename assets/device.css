@@ -86,7 +86,7 @@
 .tile[hidden]{display:none}
 
 /* the way in: a tile opens the build full screen (assets/viewer.js) */
-.tile .shell::after{content:"Use it";position:absolute;z-index:2;left:50%;bottom:14px;transform:translate(-50%,6px);display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;
+.tile .shell::after{content:"Use it";position:absolute;z-index:2;left:50%;bottom:14px;transform:translate(-50%,6px);display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:8px;
   background:rgba(255,255,255,.96);color:var(--tx);font-size:.8125rem;font-weight:600;box-shadow:0 8px 20px -8px rgba(0,0,0,.45);opacity:0;transition:opacity .2s var(--ease),transform .2s var(--ease);pointer-events:none}
 .tile:hover .shell::after,.tile:focus-visible .shell::after{opacity:1;transform:translate(-50%,0)}
 .hint-inline{font-size:.9375rem;color:var(--tx-2)}

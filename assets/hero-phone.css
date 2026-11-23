@@ -9,6 +9,8 @@
 .hph{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:16px;padding:12px;border-radius:var(--r-m);background:var(--alu);max-width:520px}
 .hph-shell{position:relative;aspect-ratio:390/500;border-radius:18px;padding:4px;background:var(--hand);overflow:hidden}
 .hph-shell img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:14px;background:#FFF}
+/* a small crop of a tall screen: it fades out at the foot, so it never ends halfway through a word */
+.hph-shell::after{content:"";position:absolute;left:4px;right:4px;bottom:4px;height:30%;border-radius:0 0 14px 14px;background:linear-gradient(transparent,var(--hand) 88%);pointer-events:none}
 .hph-shell iframe{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);border:0;border-radius:38px;background:#FFF;opacity:0;transition:opacity .45s var(--ease)}
 .hph.is-live .hph-shell iframe{opacity:1}
 .hph-live{display:none}
@@ -27,6 +29,7 @@
   .hph-shell{width:406px;aspect-ratio:auto;height:clamp(540px,calc(100vh - 290px),700px);padding:8px;border-radius:46px;
     box-shadow:0 40px 80px -30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.06) inset;animation:hp-rise .9s var(--ease) .1s both}
   .hph-shell img{border-radius:38px}
+  .hph-shell::after{content:none}
   .hph-live{display:block;margin-top:2px;opacity:0;transition:opacity .3s var(--ease) .2s}
   .hph-live::before{content:"";display:inline-block;width:6px;height:6px;margin:0 7px 1px 0;border-radius:50%;background:var(--live);vertical-align:middle}
   .hph.is-live .hph-live{opacity:1}

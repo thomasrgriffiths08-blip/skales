@@ -66,7 +66,7 @@
     }
 
     var story = w.Steps.run(scene, steps, {
-      mode: cfg.mode, view: stage, animRoot: root, tail: cfg.tail, delay: cfg.delay, autostart: cfg.autostart,
+      mode: cfg.mode, view: stage, animRoot: root, tail: cfg.tail, delay: cfg.delay, autostart: cfg.autostart, threshold: cfg.threshold,
       helpers: function(c){
         return {
           /* the owner's side: a panel on a laptop, a drawer that rises on a phone */

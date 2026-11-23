@@ -20,7 +20,7 @@
 .dm-thread>*{flex:none}
 .rc-ai{display:inline-block;margin-right:6px;padding:0 4px;border:1px solid var(--line2);border-radius:4px;color:var(--tx2);font:400 11px/16px var(--mono);vertical-align:1px}
 .rc-chips{flex:none;align-self:flex-end;display:flex;gap:8px}
-.rc-chip{min-height:40px;padding:0 20px;border:1px solid var(--line2);border-radius:20px;background:#fff;color:var(--ink);font-size:15px;font-weight:500;transition:border-color .15s var(--ease),transform .15s var(--ease)}
+.rc-chip{min-height:40px;padding:0 20px;border:1px solid var(--line2);border-radius:10px;background:#fff;color:var(--ink);font-size:15px;font-weight:500;transition:border-color .15s var(--ease),transform .15s var(--ease)}
 .rc-chip:hover{border-color:var(--tx4)}
 .rc-card{flex:none;align-self:stretch;margin:0;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .rc-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 14px}
@@ -34,6 +34,7 @@
 .rc-slot{display:grid;justify-items:center;gap:2px;min-height:52px;padding:8px 4px;border:1px solid var(--line2);border-radius:10px;background:#fff;color:var(--ink);line-height:1.15;
   transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
 .rc-slot:hover{border-color:var(--tx4)}
+.rc-slot .st-tap.is-above{right:-8px;bottom:auto;top:-15px}
 .rc-slot small{font-size:12px;font-weight:400;color:var(--tx3)}
 .rc-slot b{font-size:17px;font-weight:500;font-variant-numeric:tabular-nums}
 .rc-slot.is-on{background:var(--biz);border-color:transparent;color:var(--biz-ink)}
@@ -182,6 +183,7 @@ window.story = DemoShell.mount(document.body, {
   opening: '23:10. Dan has been asleep since 22:40.',
   result: '£95 job booked overnight, £30 deposit in. 0 minutes of Dan’s time.',
   tail: 2400,
+  threshold: 0.5,
   steps: [
     { at: 500, label: 'A text at 23:10', caption: 'A customer texts at 23:10: boiler fault, no hot water.',
       do: function(el, c){ c.show('[data-k=ask]', { from: 'right' }); c.log('23:10', 'Sam Whitfield, LS6: “F28, no hot water”'); } },
@@ -189,7 +191,7 @@ window.story = DemoShell.mount(document.body, {
       do: function(el, c){ c.show('[data-k=t1]', { from: 'left' }); } },
     { after: 1200, label: 'It answers', caption: 'The assistant answers in 2 seconds and checks it is safe to wait.',
       do: function(el, c){ c.hide('[data-k=t1]'); c.show('[data-k=q1]', { from: 'none' }); c.show('[data-k=chips]'); c.log('23:10', 'Replied in 2 seconds'); } },
-    { after: 1500, label: 'Two safety checks', waitFor: 'tap', target: '[data-k=no]', hint: 'Tap', hintAt: 'above', auto: 1300,
+    { after: 1500, label: 'Two safety checks', waitFor: 'tap', target: '[data-k=no]', hint: 'Tap', hintAt: 'left', auto: 1300,
       ask: { try: 'Your turn. You are Sam: tap No.', watch: 'Sam answers: no leak.' },
       caption: 'No leak, and the pressure is fine. It needs a visit, not a 999 call.',
       do: function(el, c){ c.hide('[data-k=chips]'); c.show('[data-k=a1]', { from: 'right' }); } },

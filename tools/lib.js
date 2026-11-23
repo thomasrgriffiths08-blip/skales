@@ -236,16 +236,18 @@ function header(b, active){
 function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
   const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['The system', 'work/system/'], ['Inbox and missed calls', 'work/inbox/'], ['Booking and the diary', 'work/booking/']];
-  const studio = [['Try it: live demos', 'try/'], ['AI agents', 'ai/'], ['Services', 'services/'], ['SEO and GEO', 'seo/'], ['By trade', 'for/'], ['Automations', 'automations/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
+  const services = [['Services', 'services/'], ['AI agents', 'ai/'], ['SEO and GEO', 'seo/'], ['Automations', 'automations/'], ['By trade', 'for/'], ['Compare', 'compare/']];
+  const studio = [['Try it: live demos', 'try/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
   return `${o.mbar !== true ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
 <footer class="site-foot${o.dark === false ? '' : ' is-dark'}">
   <div class="wrap">
     <div class="f-top">
-      <div class="f-brand">${wordmark(b)}<p>${esc(site.tagline)}. One person, ${esc(site.areaServed)}. ${esc(workLine())} running live on this site, every business in them invented.</p></div>
+      <div class="f-brand">${wordmark(b)}<p>${esc(site.tagline)}. One person, ${esc(site.areaServed)}. ${esc(workLine())} running live on this site, every business in them invented.</p>
+        <div class="f-contact"><h2>Contact</h2>${contact.map(link).join('')}${site.whatsapp ? `<a data-wa="Hi Tom, found you through your site." href="${waHref('Hi Tom, found you through your site.')}">WhatsApp</a>` : ''}</div></div>
       <div><h2>Work</h2>${work.map(link).join('')}</div>
+      <div><h2>Services</h2>${services.map(link).join('')}</div>
       <div><h2>Studio</h2>${studio.map(link).join('')}</div>
-      <div><h2>Contact</h2>${contact.map(link).join('')}${site.whatsapp ? `<a data-wa="Hi Tom, found you through your site." href="${waHref('Hi Tom, found you through your site.')}">WhatsApp</a>` : ''}</div>
     </div>
     <div class="f-row">
       <span>&copy; <span data-year></span> ${esc(site.name)} &middot; ${esc(site.areaServed)}</span>

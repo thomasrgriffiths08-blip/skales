@@ -34,10 +34,12 @@
     '.st-tap.is-right{left:calc(100% + 12px);top:50%;transform:translateY(-50%)}' +
     '.st-tap.is-above{right:-5px;bottom:calc(100% + 9px)}' +
     '.st-tap.is-below{right:-5px;top:calc(100% + 9px)}' +
+    '.st-tap.is-left{right:calc(100% + 12px);top:50%;transform:translateY(-50%)}' +
     '.st-press{transform:scale(.97)!important}';
 
   var mq = null; try { mq = w.matchMedia('(prefers-reduced-motion: reduce)'); } catch (e){}
-  function motionOK(){ return !(mq && mq.matches); }
+  /* the steps are the content: they move for everyone, Reduce Motion or not (Tom's rule, his own devices have it on) */
+  function motionOK(){ return true; }
   var raf = w.requestAnimationFrame ? function(f){ return w.requestAnimationFrame(f); } : function(f){ return setTimeout(f, 16); };
   var caf = w.cancelAnimationFrame ? function(id){ w.cancelAnimationFrame(id); } : clearTimeout;
   var now = function(){ return w.performance && performance.now ? performance.now() : Date.now(); };
@@ -153,7 +155,7 @@
     }
     /* the label sits beside the target when there is room, else above it (or where the step says: hintAt) */
     function hintSide(el, s){
-      if (/^(right|above|below)$/.test(s.hintAt)) return s.hintAt;
+      if (/^(right|above|below|left)$/.test(s.hintAt)) return s.hintAt;
       var r = el.getBoundingClientRect(), box = (el.parentElement || stage).getBoundingClientRect();
       return box.right - r.right >= 64 ? 'right' : 'above';
     }

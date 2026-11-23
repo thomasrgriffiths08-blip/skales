@@ -82,13 +82,13 @@ const calcPanel = () => panel('Your numbers', 'What missed calls cost', `<h2>Wha
 const tryCards = (b, slugs, h = 'Try it on your phone') => !slugs.length ? '' : `<section class="sec" id="try" aria-labelledby="h-try">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-try">${esc(h)}</h2><p class="lead">Live demos with a made-up business. You play the customer, then see what the business sees. About a minute each.</p></div>
-    <div class="try-list${slugs.length === 2 ? ' is-2' : ''}">${slugs.map(demo).filter(Boolean).map((x, i) => tryCard(b, x, i, { first: false })).join('')}</div>
+    <div class="try-list${slugs.length === 2 ? ' is-2' : slugs.length === 1 ? ' is-1' : ''}">${slugs.map(demo).filter(Boolean).map((x, i) => tryCard(b, x, i, { first: false })).join('')}</div>
   </div>
 </section>`;
 const buildWall = (b, ns, h, p) => !ns.length ? '' : `<section class="sec sec-alu" id="builds" aria-labelledby="h-builds">
   <div class="wrap">
     <div class="sec-head"><h2 id="h-builds">${esc(h)}</h2><p class="lead">${p}</p></div>
-    ${L.wall(b, ns.map(B).filter(Boolean), ns.length === 3 ? 'wall-3' : '')}
+    ${L.wall(b, ns.map(B).filter(Boolean), ns.length === 3 ? 'wall-3' : ns.length === 2 || ns.length === 4 ? 'is-2' : '')}
   </div>
 </section>`;
 const autoCards = (b, slugs, h) => !slugs.length ? '' : `<section class="sec" id="automations" aria-labelledby="h-auto">

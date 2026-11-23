@@ -58,6 +58,11 @@ const coverBg = x => {
   const [ph, ps, pl] = hsl(x.pg || '#000000');
   return ps > .3 && pl > .06 && pl < .3 && !(ph < 75 || ph > 320) ? x.pg : '#1B1C1F';
 };
+/* the website before and the one after, at the foot of a website's case page: the laptop screen from the top, so the
+   picture always starts at the header and the headline is whole (the phone clip cropped mid-headline) */
+const moreSite = (b, y, dir) => `<a class="tile cs-more" href="${b}work/${y.slug}/" data-n="${y.n}" data-kind="site">
+  <span class="cs-more-shot" style="--cv:${coverBg(y)}"><img src="${b}assets/screens/${pad(y.n)}-1200.webp" width="1200" height="750" alt="${esc(y.name)} on a laptop: ${esc(y.short)}" loading="lazy" decoding="async"></span>
+  <span class="cap"><span class="dir">${esc(dir)}</span><b>${esc(y.name)}</b><span>${esc(y.short)}</span></span></a>`;
 /* a website on /work/: its own colour behind it, the laptop screen and the phone together, then what it is and
    what it does for the owner. The phone plays its clip once as it comes into view (assets/site.js). */
 const cover = (b, x, i) => `<a class="wk-card" href="${b}work/${x.slug}/" data-view="${x.slug}" data-f="${WK_OF[x.slug]}" style="--cv:${coverBg(x)}">
@@ -358,7 +363,7 @@ ${L.header(b, x.kind === 'site' ? 'websites' : 'system')}
     <div class="wrap inner">
       <div class="lab"><span class="sheet">More websites</span><span class="name">The one before and the one after</span></div>
       <div class="body">
-        <div class="pair">${L.tile(b, prev, { dir: 'Previous' })}${L.tile(b, next, { dir: 'Next' })}</div>
+        <div class="pair">${x.kind === 'site' ? moreSite(b, prev, 'Previous') + moreSite(b, next, 'Next') : L.tile(b, prev, { dir: 'Previous' }) + L.tile(b, next, { dir: 'Next' })}</div>
         <p class="f-note" style="margin-top:20px">${related.length ? `Same trade: ${related.map(y => `<a class="lnk" href="${b}work/${y.slug}/">${esc(y.name)}</a>`).join(', ')}. ` : ''}<a class="lnk" href="${b}work/">All ${Words(peers.length).toLowerCase()} websites</a>.</p>
       </div>
     </div>

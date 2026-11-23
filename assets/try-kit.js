@@ -141,6 +141,10 @@ window.TryKit = function(cfg){
   K.banner = function(who, text, cls){
     if (innerWidth >= 1000) return;
     clearTimeout(tt); toast.className = 'tm-toast' + (cls ? ' ' + cls : ''); toast.hidden = false;
+    /* it drops in under the site header, unless the line that says what to do next is there: then it sits just below that */
+    var hd = d.querySelector('.site-head'), top = (hd ? hd.getBoundingClientRect().bottom : 64) + 8, sr = say.getBoundingClientRect(), hr = hint.getBoundingClientRect();
+    if (sr.top < top + 96 && hr.bottom > top) top = hr.bottom + 8;
+    toast.style.top = Math.round(top) + 'px';
     toast.innerHTML = '<b>' + K.esc(who) + '<small>now</small></b><span>' + K.esc(text) + '</span>';
     tt = setTimeout(function(){ toast.classList.add('is-out'); tt = setTimeout(function(){ toast.hidden = true; }, 320); }, cls ? 4200 : 3200);
   };

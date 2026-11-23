@@ -40,12 +40,12 @@
 .dm-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .dm .job{font-family:var(--mono);font-size:12px;font-weight:400;font-variant-numeric:tabular-nums;color:var(--tx3)}
 
-/* ---------- the bar: the site's own header, white with a hairline ---------- */
+/* ---------- the bar: the site's own header, dark so the yellow k in the mark reads ---------- */
 .dm-bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:16px;height:56px;
-  padding:0 max(var(--pad),calc((100% - 1200px) / 2));background:var(--pg);color:var(--ink);border-bottom:1px solid var(--line)}
-.dm-mark{font-size:22px;font-weight:700;letter-spacing:-.04em;line-height:1;text-decoration:none;color:var(--ink)}
+  padding:0 max(var(--pad),calc((100% - 1200px) / 2));background:#0A0B0D;color:#F4F4F5;border-bottom:1px solid #0A0B0D}
+.dm-mark{font-size:22px;font-weight:700;letter-spacing:-.04em;line-height:1;text-decoration:none;color:#F4F4F5}
 .dm-mark i{font-style:normal;color:var(--y)}
-.dm-fict{margin:0;font-size:13px;font-weight:400;line-height:1.2;color:var(--tx3);justify-self:center;text-align:center}
+.dm-fict{margin:0;font-size:13px;font-weight:400;line-height:1.2;color:rgba(244,244,245,.66);justify-self:center;text-align:center}
 .dm-book{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;border-radius:8px;
   background:var(--y);color:var(--y-ink)!important;font-size:15px;font-weight:500;text-decoration:none;white-space:nowrap;
   transition:background-color .15s var(--ease),transform .15s var(--ease)}
@@ -178,7 +178,7 @@
 }
 @media (max-width:699px){
   .dm-bar{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:52px 28px;height:auto}
-  .dm-fict{grid-column:1 / -1;grid-row:2;justify-self:stretch;text-align:left;font-size:12px;line-height:27px;border-top:1px solid var(--line)}
+  .dm-fict{grid-column:1 / -1;grid-row:2;justify-self:stretch;text-align:left;font-size:12px;line-height:27px;border-top:1px solid rgba(255,255,255,.12)}
   .dm-book{height:36px}
   .dm-main{grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "modes" "stage" "prog";padding-top:20px}
   .dm-title{margin-bottom:16px}
@@ -188,6 +188,7 @@
   .dm-prog{justify-self:stretch;justify-content:space-between;gap:12px;margin-top:12px}
   .dm-cap{min-height:64px;padding:12px 16px;font-size:15px}
   .dm-end h2{font-size:1.3rem}
-  .dm-res{font-size:15px;margin-bottom:16px}
+  .dm-res{font-size:15px;margin-bottom:16px;flex-direction:column}
+  .dm-res li:not(:last-child)::after{content:none}
   .dm-cta,.dm-end .dm-btn{flex:1 1 100%;height:48px}
 }

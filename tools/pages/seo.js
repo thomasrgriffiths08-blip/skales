@@ -198,8 +198,8 @@ ${L.header(b, 'services')}
       <div><h3>You do</h3><ul>
         <li>Claim your Google Business Profile and keep the hours right</li>
         <li>Ask happy customers for reviews (the system asks after every finished job)</li>
-        <li>Give access to Google Search Console and Bing Webmaster Tools, so we can see what people actually search</li>
-        <li>Tell us when prices, areas or hours change</li>
+        <li>Give access to Google Search Console and Bing Webmaster Tools, so I can see what people actually search</li>
+        <li>Tell me when prices, areas or hours change</li>
       </ul></div>
     </div>
     <p class="sx-proof">This site runs the same way: every page is checked when it is built, every publish pings IndexNow, it has its own <a class="lnk" href="${b}llms.txt">llms.txt</a> and <a class="lnk" href="${b}sitemap.xml">sitemap</a>, and a weekly job drafts new pages for the trades people search for.</p>
@@ -219,7 +219,7 @@ ${L.header(b, 'services')}
 <section class="sx-sec" aria-labelledby="h-own">
   <div class="wrap">
     <div class="sx-head">
-      <h2 id="h-own">Do not take our word for it</h2>
+      <h2 id="h-own">Do not take my word for it</h2>
       <p class="lead">This page carries its own schema, the same way a client site would. Here it is, read straight out of the page you are on.</p>
     </div>
     <button type="button" class="btn btn-glass" data-sx-own aria-expanded="false" aria-controls="sx-own">Show this page’s schema</button>

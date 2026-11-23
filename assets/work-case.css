@@ -26,6 +26,12 @@
 .cs-grid span{color:var(--tx-2);line-height:1.55}
 .cs-small{margin:clamp(24px,3vw,40px) 0 0;font-size:.875rem;color:var(--tx-3, var(--tx-2));max-width:72ch}
 
+/* more websites: each one is its laptop screen from the top edge, whole, on that site's own colour */
+.cs-more .cs-more-shot{position:relative;display:block;padding:clamp(10px,2.2vw,22px) clamp(10px,2.2vw,22px) 0;border-radius:14px;overflow:hidden;background:#17181B;background:var(--cv,#17181B);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);transition:transform .25s var(--ease)}
+.cs-more .cs-more-shot img{display:block;width:100%;height:auto;aspect-ratio:1200/640;object-fit:cover;object-position:top center;border-radius:8px 8px 0 0;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.cs-more:hover .cs-more-shot{transform:translateY(-4px)}
+.cs-more:active .cs-more-shot{transform:scale(.985)}
+
 @media (max-width:900px){
   .cs-own-in{grid-template-columns:minmax(0,1fr)}
   .cs-phone{position:relative;top:auto}
@@ -38,4 +44,12 @@
   .cs-grid{grid-template-columns:minmax(0,1fr)}
   .cs-grid li{padding:18px 0 20px}
   .cs-feats li{grid-template-columns:34px minmax(0,1fr);font-size:1rem;padding:15px 0}
+}
+
+/* the hero on a phone (assets/device.js swaps in the phone still and one button): the button sat in the middle of the
+   picture, on top of the site's own words. It now has its own bar under the picture, and the picture fades into the
+   bar so it never ends halfway through a button or a line. The whole frame still opens the site. */
+@media (max-width:760px){
+  .case-rig .rig .dev-play{align-items:end;justify-items:stretch;place-items:end stretch;padding:0 14px 14px;background:linear-gradient(0deg,#0E0F11 0,#0E0F11 80px,rgba(14,15,17,.86) 104px,rgba(14,15,17,0) 168px)}
+  .case-rig .rig .dev-play span{justify-content:center}
 }

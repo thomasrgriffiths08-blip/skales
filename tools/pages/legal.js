@@ -71,7 +71,7 @@ const privacy = {
       <p>Nobody buys it, and it is never sold or swapped. The services that handle it for me are ${and(sharers)}, plus email and WhatsApp when you choose to use them, and anyone the law requires me to share it with.</p>
 
       <h2>Does it leave the UK?</h2>
-      <p>Some of those services are run by companies based in the United States, including ${and(abroad)}. Where information goes outside the UK, it is covered by the safeguards UK data protection law requires, such as the UK–US data bridge or the contract clauses those companies use.</p>
+      <p>Some of those services are run by companies based in the United States, including ${and(abroad)}. Where information goes outside the UK, it is covered by the safeguards UK data protection law requires, such as the UK to US data bridge or the contract clauses those companies use.</p>
 
       <h2>How long is it kept?</h2>
       <p>Enquiries that do not turn into work are deleted within 12 months of the last message. For clients, information is kept while we work together, and invoices and business records for as long as tax law requires.${tags.length ? ` ${and(firms)} keep ads and analytics data under their own retention settings, and your cookie choice stays in your browser until you clear it.` : ''}</p>

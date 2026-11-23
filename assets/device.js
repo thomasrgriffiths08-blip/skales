@@ -75,7 +75,7 @@
           + '<button type="button" class="dev-play" data-view="' + x.slug + '"><span>Use it full screen</span></button>';
         dev.classList.add('is-live');
       } else if (!frame){
-        frame = d.createElement('iframe'); frame.src = demo(x); frame.setAttribute('title', x.name + ' — live build');
+        frame = d.createElement('iframe'); frame.src = demo(x); frame.setAttribute('title', x.name + ', live build');
         frame.addEventListener('load', function(){ dev.classList.add('is-live'); screen.classList.remove('fade'); });
         screen.appendChild(frame);
       } else { screen.classList.add('fade'); setTimeout(function(){ frame.src = demo(x); }, 120); }
@@ -110,7 +110,7 @@
           + '<button type="button" class="dev-play" data-view="' + x.slug + '"><span>Use it full screen</span></button>';
         return;
       }
-      vp.innerHTML = ''; var f = d.createElement('iframe'); f.src = src ? b + src : demo(x); f.setAttribute('title', (x ? x.name : vp.getAttribute('data-title')) + ' — live build'); vp.appendChild(f);
+      vp.innerHTML = ''; var f = d.createElement('iframe'); f.src = src ? b + src : demo(x); f.setAttribute('title', (x ? x.name : vp.getAttribute('data-title')) + ', live build'); vp.appendChild(f);
     };
     if ('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ mount(e.target); io.unobserve(e.target); } }); }, { rootMargin: '200px 0px' });

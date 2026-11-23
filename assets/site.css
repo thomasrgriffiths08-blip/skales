@@ -288,7 +288,8 @@ strong,b{font-weight:600}
 
 /* ---------- footer ---------- */
 .site-foot{border-top:1px solid var(--line);padding:clamp(40px,6vw,72px) 0 32px;color:var(--tx-2);font-size:.9375rem}
-.f-top{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:32px}
+.f-top{display:grid;grid-template-columns:1.35fr repeat(3,1fr);gap:32px}
+.f-contact{margin-top:28px}
 .f-top h2{font-size:.9375rem;font-weight:600;color:var(--tx);margin-bottom:12px}
 .f-top a{display:block;padding:5px 0;color:var(--tx-2)}
 @media (max-width:760px){.f-top a{padding:11px 0}}
@@ -297,7 +298,8 @@ strong,b{font-weight:600}
 .f-brand p{max-width:34ch;line-height:1.5}
 .f-row{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:.875rem}
 .f-note{margin-top:16px;font-size:.875rem;color:var(--tx-3)}
-@media (max-width:800px){.f-top{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.f-brand{grid-column:1/-1}.f-top a{overflow-wrap:anywhere}}
+@media (max-width:1000px){.f-top{grid-template-columns:repeat(3,minmax(0,1fr))}.f-brand{grid-column:1/-1}}
+@media (max-width:800px){.f-top{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.f-top>div:last-child{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:32px}.f-top>div:last-child h2{grid-column:1/-1}.f-top a{overflow-wrap:anywhere}}
 /* the footer under a night page (the home) */
 .site-foot.is-dark{background:var(--ink);border-top-color:var(--ink-line);color:var(--ink-tx2)}
 .site-foot.is-dark .wordmark,.site-foot.is-dark .f-top h2{color:var(--ink-tx)}
