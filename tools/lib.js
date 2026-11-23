@@ -235,9 +235,9 @@ function header(b, active){
 }
 function footer(b, o = {}){
   const link = ([t, p]) => `<a href="${/^(https?:|mailto:)/.test(p) ? p : b + p}"${/^https?:/.test(p) ? ' target="_blank" rel="noopener"' : ''}>${esc(t)}</a>`;
-  const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['The system', 'work/system/'], ['Inbox and missed calls', 'work/inbox/'], ['Booking and the diary', 'work/booking/']];
-  const services = [['Services', 'services/'], ['AI agents', 'ai/'], ['SEO and GEO', 'seo/'], ['Automations', 'automations/'], ['By trade', 'for/'], ['Compare', 'compare/']];
-  const studio = [['Try it: live demos', 'try/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
+  const work = [['All the work', 'work/'], ['Websites', 'work/websites/'], ['The system', 'work/system/'], ['AI calls and demos', 'ai/'], ['Try it: live demos', 'try/']];
+  const services = [['All services', 'services/'], ['Websites', 'services/websites/'], ['Booking and CRM', 'services/booking-and-crm/'], ['AI receptionist', 'services/ai-receptionist/'], ['AI employees', 'services/ai-employees/'], ['Business automation', 'services/business-automation/'], ['Follow-up texts', 'services/follow-up-automation/'], ['Meta ads', 'services/meta-ads/'], ['Google ads', 'services/google-ads/']];
+  const studio = [['Every automation', 'automations/'], ['SEO and GEO', 'seo/'], ['By trade', 'for/'], ['Compare', 'compare/'], ['Questions, answered', 'faq/'], ['About', 'why/'], ['Notes', 'notes/'], ['Book a call', 'book/'], ['Free teardown', 'teardown.html']];
   const contact = [[site.email, 'mailto:' + site.email], [site.instagramHandle + ' on Instagram', site.instagram]];
   return `${o.mbar !== true ? '' : `<nav class="mbar" aria-label="Quick actions"><a href="${b}work/">The work</a><a class="go" href="${b}book/">Book a call</a></nav>`}
 <footer class="site-foot${o.dark === false ? '' : ' is-dark'}">

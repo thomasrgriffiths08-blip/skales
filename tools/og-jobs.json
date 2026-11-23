@@ -190,9 +190,9 @@
   },
   {
     "key": "services",
-    "title": "Websites, booking, follow-up and ads",
+    "title": "Websites, booking, AI and automation",
     "kicker": "Services",
-    "sub": "Five services, one system: a search, a tap or a missed call, turned into a booked job."
+    "sub": "Eight services, one system: a search, a call or a message, turned into a booked job and the admin done."
   },
   {
     "key": "services-websites",
@@ -207,10 +207,28 @@
     "sub": "Customers book a free slot and pay a deposit at any hour. Every enquiry sits on one board."
   },
   {
+    "key": "services-ai-receptionist",
+    "title": "AI receptionist",
+    "kicker": "Services",
+    "sub": "Answers your phone and your messages at any hour, books from your diary and hands over when it should."
+  },
+  {
+    "key": "services-ai-employees",
+    "title": "AI employees",
+    "kicker": "Services",
+    "sub": "AI agents that each take one office job off you, such as invoices, the inbox or chasing what you are owed."
+  },
+  {
     "key": "services-follow-up-automation",
     "title": "Follow-up automation",
     "kicker": "Services",
     "sub": "Missed-call text-back, quote chasers, reminders and review requests. Set up once, runs itself."
+  },
+  {
+    "key": "services-business-automation",
+    "title": "Business automation",
+    "kicker": "Services",
+    "sub": "The admin between your tools, done for you: enquiries, jobs, invoices and reviews passed along without retyping."
   },
   {
     "key": "services-meta-ads",

@@ -97,7 +97,18 @@ const autoCards = (b, slugs, h) => !slugs.length ? '' : `<section class="sec" id
     <div class="hub-list${slugs.length === 2 || slugs.length === 4 ? ' is-2' : ''}">${slugs.map(auto).filter(Boolean).map(a => `<a class="hub-card" href="${b}automations/${a.slug}/"><h3>${esc(a.name)}</h3><p>${esc(a.card)}</p><span class="try-go">How it works <span aria-hidden="true">→</span></span></a>`).join('')}</div>
   </div>
 </section>`;
-const ctaRow = (b, demos, medium, slug) => `<div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a>${demos.length ? `<a class="btn btn-ghost" href="${b}try/${demos[0]}/">Try the demo</a>` : `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">See what you’re missing</a>`}</div>`;
+const ctaRow = (b, demos, medium, slug, cta) => `<div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a>${cta ? `<a class="btn btn-ghost" href="${b}${cta[0]}">${esc(cta[1])}</a>` : demos.length ? `<a class="btn btn-ghost" href="${b}try/${demos[0]}/">Try the demo</a>` : `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">See what you’re missing</a>`}</div>`;
+/* the AI demos a service page shows: a framed still that opens the demo (stills in assets/work/) */
+const still = (b, name, alt) => `<picture><source media="(max-width: 640px)" srcset="${b}assets/work/${name}-phone.webp" width="600" height="1076"><img src="${b}assets/work/${name}-1440.webp" srcset="${b}assets/work/${name}-800.webp 800w, ${b}assets/work/${name}-1440.webp 1440w" sizes="(min-width: 900px) 640px, 92vw" width="1440" height="852" alt="${esc(alt)}" loading="lazy" decoding="async"></picture>`;
+const showcase = (b, items) => !items || !items.length ? '' : `<section class="sec" id="see" aria-labelledby="h-see">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="h-see">See it working</h2><p class="lead">${items.length > 1 ? 'Both run' : 'It runs'} in your browser, on a phone or a laptop, with nothing to install or sign up for.</p></div>
+    <div class="svc-show${items.length === 1 ? ' is-1' : ''}">${items.map(x => `<article class="svc-sc">
+      <a class="svc-shot" href="${b}${x.href}" tabindex="-1" aria-hidden="true"><span class="chrome"><i></i><i></i><i></i><span>${esc(x.bar)}</span></span>${still(b, x.img, x.alt)}</a>
+      <div class="svc-sc-t"><h3>${esc(x.h)}</h3><p>${esc(x.p)}</p><div class="svc-sc-f"><a class="btn btn-ghost" href="${b}${x.href}">${esc(x.go)}</a><span>Fictional business · illustrative numbers</span></div></div>
+    </article>`).join('')}</div>
+  </div>
+</section>`;
 const band = (b, medium, slug) => L.ctaBand(b, 'Want this working for your business?', 'A free 45-minute call with me, Tom: what is costing you work, what I would build first, and a fixed price.', `<a class="btn btn-ghost" href="${utm(b, medium, slug)}">Book in three taps</a>`);
 const fill = (html, b) => html.replace(/\{\{b\}\}/g, b);
 
@@ -193,7 +204,7 @@ ${L.header(b, 'services')}
   ${crumbs(b, cr)}
   <h1>${esc(s.h1)}</h1>
   ${L.fold(s.answer, 'lead answer')}
-  ${ctaRow(b, s.demos, 'services', s.slug)}
+  ${ctaRow(b, s.demos, 'services', s.slug, s.cta)}
   </div>
   ${hx ? L.heroPhone(b, hx) : ''}
 </section>
@@ -205,6 +216,7 @@ ${s.film ? `<section class="sec sec-alu" id="film" aria-labelledby="h-film">
 </section>` : ''}
 ${s.adPreview ? adSection(s) : ''}
 ${s.slug === 'follow-up-automation' ? followWidgets() : ''}
+${showcase(b, s.show)}
 ${panel('What you get', esc(s.name), `<h2>What is included?</h2><ul class="feat cols">${s.gets.map(g => `<li>${esc(g)}</li>`).join('')}</ul>`)}
 ${panel('The detail', 'Straight answers', qa, ' id="detail"')}
 ${tryCards(b, s.demos)}
@@ -227,10 +239,10 @@ ${L.footer(b)}`;
 /* ---------- /services/ ---------- */
 const servicesIndex = {
   url: '/services/', og: 'services', priority: 0.9, changefreq: 'monthly',
-  meta: { key: 'services', title: 'Websites, booking, follow-up and ads', kicker: 'Services', sub: 'Five services, one system: a search, a tap or a missed call, turned into a booked job.' },
+  meta: { key: 'services', title: 'Websites, booking, AI and automation', kicker: 'Services', sub: 'Eight services, one system: a search, a call or a message, turned into a booked job and the admin done.' },
   render(b){
-    const path = '/services/', title = `Websites, booking, follow-up and ads | ${site.name}`;
-    const description = `Websites, online booking and CRM, follow-up automation, and Meta and Google ads for UK trades and service businesses, built as one system you own.`;
+    const path = '/services/', title = `Websites, booking, AI and automation | ${site.name}`;
+    const description = `Websites, booking and CRM, AI receptionists, AI employees, automation and ads for UK trades and service businesses, built as one system you own.`;
     const nodes = [
       L.webPage({ path, title, description, type: 'CollectionPage' }),
       crumbNodes([['Home', ''], ['Services', 'services/']]),
@@ -243,14 +255,14 @@ ${L.header(b, 'services')}
 <main id="main">
 <section class="hero-w wrap">
   ${crumbs(b, [['Home', ''], ['Services', 'services/']])}
-  <h1>Websites, booking, follow-up and ads for service businesses.</h1>
-  <p class="lead answer">${esc(site.name)} builds five things for UK trades and service businesses: a website that turns a visit into a job, online booking with a CRM, follow-up texts that send themselves, and Meta and Google ads that point at all three. They work as one system, and everything is set up in your name.</p>
+  <h1>Websites, booking, AI and automation for service businesses.</h1>
+  <p class="lead answer">${esc(site.name)} builds eight things for UK trades and service businesses: a website that turns a visit into a job, online booking with a CRM, an AI receptionist that answers every call, AI employees for the office work, follow-up texts and business automation that run themselves, and Meta and Google ads that point at all of it. They work as one system, and everything is set up in your name.</p>
   <div class="cta-row hero-cta"><a class="btn btn-live" href="${b}book/">Book a call</a><a class="btn btn-ghost" href="${b}try/">Try the live demos</a></div>
 </section>
-<section class="sec" aria-label="The five services">
-  <div class="wrap"><div class="hub-list hub-5">${SV.map(s => `<a class="hub-card"${s.legacy ? ` id="${s.legacy}"` : ''} href="${b}services/${s.slug}/"><span class="try-n">${s.n}</span><h2>${esc(s.name)}</h2><p>${esc(s.card)}</p><span class="try-go">More <span aria-hidden="true">→</span></span></a>`).join('')}</div></div>
+<section class="sec" aria-label="The eight services">
+  <div class="wrap"><div class="hub-list hub-8">${SV.map(s => `<a class="hub-card"${s.legacy ? ` id="${s.legacy}"` : ''} href="${b}services/${s.slug}/"><span class="try-n">${s.n}</span><h2>${esc(s.name)}</h2><p>${esc(s.card)}</p><span class="try-go">More <span aria-hidden="true">→</span></span></a>`).join('')}</div></div>
 </section>
-${panel('How it fits', 'One system', `<h2>Why one system rather than five suppliers?</h2><p class="lead">Because the gaps between them are where the jobs go missing. An ad that lands on a page that cannot book, a booking that never gets a reminder, a missed call nobody returns. Here the ad points at the website, the website books into the CRM, and the CRM sends the texts, so nothing falls between two suppliers.</p><p>You can start with one piece and add the rest. Most owners start with the website or the missed-call text-back, because that is where the most work is leaking.</p>`)}
+${panel('How it fits', 'One system', `<h2>Why one system rather than several suppliers?</h2><p class="lead">Because the gaps between them are where the jobs go missing. An ad that lands on a page that cannot book, a booking that never gets a reminder, a missed call nobody returns. Here the ad points at the website, the website books into the CRM, and the CRM sends the texts, so nothing falls between two suppliers.</p><p>You can start with one piece and add the rest. Most owners start with the website or the missed-call text-back, because that is where the most work is leaking.</p>`)}
 ${panel('The process', 'Teardown, quote, build, handover', `<h2>How does a build work?</h2><ol class="steps">${PROCESS.map(([n, t]) => `<li><b>${esc(n)}.</b> ${esc(t)}</li>`).join('')}</ol>`, ' id="process"')}
 ${autoCards(b, AU.map(a => a.slug), 'The automations')}
 ${panel('Search', 'SEO, GEO and schema', `<h2>How do the websites get found?</h2><p class="lead">Every page is written so Google and AI assistants can read it: a title and description for the search, schema for the business, its services and prices, a sitemap, llms.txt and fast pages on a phone. <a class="lnk" href="${b}seo/">See how the search side works</a>, layer by layer, on a real page.</p>`)}

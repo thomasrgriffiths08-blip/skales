@@ -1,10 +1,12 @@
-/* The voice agent player. A recorded example call plays line by line: the waveform is drawn from the real loudness
-   of the recording, the words light up as they are said, each thing the assistant checks or books appears at the
-   moment it happens, and the visitor answers one question as the caller. If sound cannot play, the same call runs
-   on a clock with captions only. One <audio> element is reused for every part, so phones keep it unlocked. */
+/* The call recordings player. A recorded example call plays like a recording in a phone system's call log: the
+   waveform is the real loudness of the call, the transcript follows it word by word, each thing the assistant does
+   shows in the transcript at the moment it happens, and the diary entry and the text message fill in beside it.
+   The whole transcript is there before anyone presses play, so it reads without sound too. If the audio cannot
+   play, the same call runs on a clock as text. Motion uses the Web Animations API, which Reduce Motion settings in
+   site.css do not switch off. */
 (function(){
   'use strict';
-  var roots = document.querySelectorAll('[data-vc]');
+  var roots = document.querySelectorAll('[data-vp]');
   if (!roots.length) return;
   var ICON = {
     ok: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', done: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
@@ -13,256 +15,268 @@
     rule: '<path d="M12 3.5l7 2.5v5.5c0 4-2.8 7.2-7 9-4.2-1.8-7-5-7-9V6z"/>',
     stop: '<circle cx="12" cy="12" r="8"/><path d="M6.5 6.5l11 11"/>'
   };
-  var icon = function(k){ return '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' + (ICON[k] || ICON.ok) + '</svg>'; };
+  var icon = function(k){ return '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' + (ICON[k] || ICON.ok) + '</svg>'; };
   var esc = function(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
   var tomorrow = new Date(Date.now() + 864e5);
   var day = function(o){ return tomorrow.toLocaleDateString('en-GB', o).replace(/,/g, ''); };
   var TOM = day({ weekday: 'short', day: 'numeric', month: 'short' }), TOML = day({ weekday: 'long', day: 'numeric', month: 'long' });
   var fill = function(s){ return String(s).replace(/\{tomLong\}/g, TOML).replace(/\{tom\}/g, TOM); };
-  var mmss = function(s){ s = Math.max(0, Math.floor(s)); return ('0' + Math.floor(s / 60)).slice(-2) + ':' + ('0' + (s % 60)).slice(-2); };
+  var mss = function(s){ s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); };
   var B36 = '0123456789abcdefghijklmnopqrstuvwxyz';
+  var RATES = [1, 1.25, 1.5];
+  var pop = function(n, y){ if (n.animate) n.animate([{ opacity: 0, transform: 'translateY(' + (y || 6) + 'px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'cubic-bezier(.2,.7,.2,1)' }); };
+  var players = [];
 
   Array.prototype.forEach.call(roots, function(root){
-    var q = function(n){ return root.querySelector('[data-vc-' + n + ']'); };
-    var el = { phone: root.querySelector('.vc-phone'), clock: q('clock'), state: q('state'), timer: q('timer'), av: q('av'), biz: q('biz'), place: q('place'),
-      wave: q('wave'), who: q('who'), line: q('line'), act: q('act'), ask: q('ask'), q: q('q'), opts: q('opts'), count: q('count'),
-      end: q('end'), endH: q('end-h'), next: q('next'), other: q('other'), go: q('go'), goT: q('go-t'), live: q('live'), pause: q('pause'), mute: q('mute'), again: q('again'), hint: q('hint'),
-      roll: q('roll'), feed: q('feed'), empty: q('empty'), res: q('res') };
+    var q = function(n){ return root.querySelector('[data-vp-' + n + ']'); };
+    var el = { av: q('av'), caller: q('caller'), from: q('from'), biz: q('biz'), place: q('place'), clock: q('clock'), out: q('out'), panel: q('panel'),
+      go: q('go'), scrub: q('scrub'), canvas: q('canvas'), now: q('now'), len: q('len'), key: q('key'), rate: q('rate'), mute: q('mute'),
+      state: q('state'), roll: q('roll'), scene: q('scene'), lines: q('lines'), diary: q('diary'), diaryK: q('diary-k'), sms: q('sms'), res: q('res') };
     var tabs = root.querySelectorAll('[role="tab"]');
     var base = root.getAttribute('data-base');
-    var D = null, loading = null, ci = 0, C = null, part = null, pi = -1;
-    var phase = 'idle', silent = false, muted = false, paused = false;
-    var audio = new Audio(); audio.preload = 'auto';
-    var clk = { base: 0, at: 0, run: false }, ev = [], fired = 0, cur = null, grp = -1, said = -1, talked = 0;
-    var hist = [], histN = 0, raf = 0, slow = 0, auto = 0, blobs = {}, tick = null, pre = null;
-    var HZ = 20, BW = 3, STEP = 6;
+    var D = null, loading = null, ci = 0, C = null;
+    var L = [], E = [], T = {}, bars = [];
+    var playing = false, silent = false, muted = false, ri = 0, done = false, raf = 0, slow = 0, userAt = -1e9;
+    var cur = -2, lit = -1, evN = -1, shown = {}, label = '';
+    var clk = { base: 0, at: 0, run: false };
+    var audio = new Audio(); audio.preload = 'none';
+    var me = { pause: function(){ if (playing) toggle(); } };
+    players.push(me);
 
     var load = function(){
-      if (!loading) loading = fetch(root.getAttribute('data-src')).then(function(r){ return r.json(); }).then(function(d){ D = d; C = D.calls[ci]; return d; });
+      if (!loading) loading = fetch(root.getAttribute('data-src')).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){ D = d; return d; });
       return loading;
     };
-    var now = function(){ return clk.run ? clk.base + (performance.now() - clk.at) / 1000 : clk.base; };
+    var now = function(){ return clk.run ? clk.base + (performance.now() - clk.at) / 1000 * RATES[ri] : clk.base; };
     var freeze = function(){ clk.base = now(); clk.run = false; };
     var run = function(from){ if (from != null) clk.base = from; clk.at = performance.now(); clk.run = true; };
 
-    /* ---------- the waveform: a rolling history of what has been said, newest at the right ---------- */
-    var ctx = el.wave.getContext('2d'), W = 0, H = 0;
-    var size = function(){
-      var r = el.wave.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
-      W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
-      el.wave.width = W * d; el.wave.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); draw();
-    };
+    /* ---------- the waveform: the whole call, played part solid ---------- */
+    var ctx = el.canvas.getContext('2d'), W = 0, H = 0, STEP = 3, BW = 2;
     var whoAt = function(t){
-      for (var i = 0; i < part.lines.length; i++){ var l = part.lines[i]; if (t >= l.t - .05 && t <= l.t + l.d + .05) return l.who === 'agent' ? 1 : 2; }
+      for (var i = 0; i < C.lines.length; i++){ var l = C.lines[i]; if (t >= l.t - .04 && t <= l.t + l.d + .04) return l.who === 'agent' ? 1 : 2; }
       return 0;
     };
-    var sample = function(t){
-      /* fill the history up to time t of the current part */
-      var upto = Math.floor(t * HZ), per = D.hz / HZ;
-      while (histN < upto){
-        var a = 0, s = histN * per;
-        for (var j = 0; j < per; j++) a = Math.max(a, B36.indexOf(part.env.charAt(s + j)));
-        hist.push([Math.max(0, a) / 35, whoAt((histN + .5) / HZ)]);
-        histN++;
+    var measure = function(){
+      if (!C) return;
+      var n = Math.max(20, Math.floor(W / STEP)), per = C.len / n, hz = D.hz;
+      bars = [];
+      for (var i = 0; i < n; i++){
+        var a = 0, s = Math.floor(i * per * hz), e = Math.max(s + 1, Math.floor((i + 1) * per * hz));
+        for (var j = s; j < e; j++){ var v = B36.indexOf(C.env.charAt(j)); if (v > a) a = v; }
+        bars.push([a / 35, whoAt((i + .5) * per), (i + 1) * per]);
       }
-      if (hist.length > 400) hist.splice(0, hist.length - 400);
     };
-    var bar = function(x, h, col){
-      ctx.fillStyle = col; var y = (H - h) / 2;
-      if (ctx.roundRect){ ctx.beginPath(); ctx.roundRect(x, y, BW, h, 1.5); ctx.fill(); } else ctx.fillRect(x, y, BW, h);
-    };
-    var COL = ['rgba(255,255,255,.30)', '#FFE600', 'rgba(255,255,255,.66)'];
-    var draw = function(){
+    var COL = { on: ['rgba(244,244,245,.32)', '#FFE600', 'rgba(244,244,245,.92)'], off: ['rgba(244,244,245,.12)', 'rgba(255,230,0,.30)', 'rgba(244,244,245,.28)'] };
+    var draw = function(t){
       if (!W) return;
       ctx.clearRect(0, 0, W, H);
-      var frac = part && phase === 'live' ? (now() * HZ) % 1 : 0, x = W - BW - frac * STEP, i = hist.length - 1;
-      for (; x > -STEP; x -= STEP, i--){
-        if (i >= 0){ var v = hist[i]; bar(x, Math.max(3, v[0] * H * .94), COL[v[1]]); }
-        else bar(x, 3, 'rgba(255,255,255,.16)');
+      for (var i = 0; i < bars.length; i++){
+        var b = bars[i], h = Math.max(2, Math.round(b[0] * H * .92)), x = i * STEP;
+        ctx.fillStyle = (b[2] - C.len / bars.length / 2 <= t ? COL.on : COL.off)[b[1]];
+        ctx.fillRect(x, Math.round((H - h) / 2), BW, h);
       }
+      if (t > 0){ ctx.fillStyle = 'rgba(244,244,245,.9)'; ctx.fillRect(Math.min(W - 1, Math.round(t / C.len * bars.length * STEP)), 0, 1, H); }
+    };
+    var size = function(){
+      var r = el.canvas.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+      W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
+      el.canvas.width = W * d; el.canvas.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+      measure(); draw(now());
     };
 
-    /* ---------- the words on the call screen ---------- */
-    var groups = function(l){
-      if (l.g) return l.g;
-      var ws = l.text.split(' '), g = [], c = [];
-      ws.forEach(function(w, i){ c.push(i); if (/[.?!]$/.test(w) || i === ws.length - 1){ g.push(c); c = []; } });
-      /* a very short sentence rides with the next one, so the caption does not flicker */
-      for (var i = 0; i < g.length - 1; i++) if (g[i].length < 4){ g[i + 1] = g[i].concat(g[i + 1]); g.splice(i, 1); i--; }
-      l.ws = ws; l.g = g; return g;
-    };
-    var caption = function(l, t){
-      var g = groups(l), n = 0;
-      for (var i = 0; i < l.w.length; i++) if (l.w[i] <= t - l.t) n = i + 1;
-      var gi = 0; for (i = 0; i < g.length; i++) if (g[i][0] < Math.max(1, n)) gi = i;
-      if (cur !== l){
-        cur = l; grp = -1; said = -1;
-        el.who.className = 'vc-who ' + (l.who === 'agent' ? 'is-agent' : 'is-caller');
-        el.who.lastElementChild.textContent = l.who === 'agent' ? 'AI assistant' : C.caller + ', the caller';
-      }
-      if (grp !== gi){ grp = gi; said = -1; el.line.innerHTML = g[gi].map(function(k){ return '<span>' + esc(l.ws[k]) + '</span>'; }).join(' '); }
-      var on = Math.max(0, Math.min(g[gi].length, n - g[gi][0]));
-      if (on !== said){ said = on; var sp = el.line.children; for (i = 0; i < sp.length; i++) sp[i].className = i < on ? 'on' : ''; }
-    };
-    var note = function(who, text, cls){ cur = null; el.who.className = 'vc-who ' + (cls || ''); el.who.lastElementChild.textContent = who; el.line.textContent = text; };
-
-    /* ---------- the feed beside it ---------- */
-    var follow = function(){ if (el.roll.scrollHeight > el.roll.clientHeight + 4) el.roll.scrollTop = el.roll.scrollHeight; };
-    var say = function(l, at, quiet){
-      var li = document.createElement('li'); li.className = 'vc-m ' + (l.who === 'agent' ? 'is-agent' : 'is-caller') + (quiet ? '' : ' in');
-      li.innerHTML = '<span>' + (l.who === 'agent' ? 'AI assistant' : esc(C.caller)) + ' · ' + mmss(at) + '</span><p>' + esc(l.text) + '</p>';
-      el.feed.appendChild(li);
-    };
-    var did = function(a, quiet){
-      var li = document.createElement('li'); li.className = 'vc-a k-' + a[2] + (quiet ? '' : ' in');
-      li.innerHTML = '<i>' + icon(a[2]) + '</i><span>' + esc(fill(a[1])) + '</span>';
-      el.feed.appendChild(li);
-      if (!quiet){ el.act.className = 'vc-act'; el.act.innerHTML = '<i>' + icon(a[2]) + '</i><span>' + esc(fill(a[1])) + '</span>'; void el.act.offsetWidth; el.act.className = 'vc-act in'; }
-    };
-    var cues = function(p){
-      var out = [];
-      p.lines.forEach(function(l){
-        out.push({ t: l.t, line: l });
-        l.acts.forEach(function(a){ out.push({ t: l.t + a[0] * l.d + (a[0] ? 0 : .25), act: a }); });
+    /* ---------- the transcript, built once per call ---------- */
+    var build = function(){
+      var h = [], at = [];
+      L = []; E = []; T = {};
+      C.lines.forEach(function(l, i){
+        var name = l.who === 'agent' ? 'AI assistant' : C.caller;
+        h.push('<li class="vp-l ' + (l.who === 'agent' ? 'is-a' : 'is-c') + '" data-l="' + i + '"><p class="vp-l-h"><b>' + esc(name) + '</b><span>' + mss(l.t) + '</span></p><p class="vp-l-t">' +
+          l.text.split(' ').map(function(w){ return '<span>' + esc(w) + '</span>'; }).join(' ') + '</p></li>');
+        l.acts.map(function(a){ return { a: a, t: l.t + a[0] * l.d + (a[0] ? 0 : .25) }; }).sort(function(x, y){ return x.t - y.t; }).forEach(function(x){
+          h.push('<li class="vp-e k-' + x.a[2] + '" data-e="' + E.length + '"><i>' + icon(x.a[2]) + '</i><span>' + esc(fill(x.a[1])) + '</span><time>' + mss(x.t) + '</time></li>');
+          E.push({ t: x.t }); if (x.a[3] && T[x.a[3]] == null) T[x.a[3]] = x.t;
+        });
       });
-      return out.sort(function(a, b){ return a.t - b.t; });
+      el.lines.innerHTML = h.join('');
+      Array.prototype.forEach.call(el.lines.querySelectorAll('[data-l]'), function(n, i){ L.push({ el: n, sp: n.querySelector('.vp-l-t').children, l: C.lines[i] }); });
+      Array.prototype.forEach.call(el.lines.querySelectorAll('[data-e]'), function(n, i){ E[i].el = n; });
+      var last = C.lines[C.lines.length - 1];
+      T.res = Math.min(C.len - .05, last.t + last.d + .15);
+      el.roll.scrollTop = 0;
+      cur = -2; lit = -1; evN = -1; shown = {}; label = '';
+      ['diary', 'sms', 'res'].forEach(function(k){ card(k, false); });
     };
-    var result = function(r){
-      el.res.innerHTML = '<h4>' + esc(r.h) + '</h4><dl class="vc-stats">' + r.stats.map(function(s){ return '<div><dt>' + esc(s[0]) + '</dt><dd>' + esc(s[1]) + '</dd></div>'; }).join('') + '</dl>' +
-        '<div class="vc-two"><div class="vc-card" style="--b:' + C.c + '"><span>' + esc(r.card.k) + '</span><b>' + esc(fill(r.card.t)) + '</b><p>' + esc(r.card.s) + '</p><small>' + esc(fill(r.card.m)) + '</small></div>' +
-        '<div class="vc-sms"><span>Text message · sent during the call</span><p>' + esc(fill(r.sms)) + '</p></div></div>';
-      el.res.hidden = false;
-    };
-
-    /* ---------- states ---------- */
-    var set = function(p, label){ phase = p; el.phone.setAttribute('data-phase', p); if (label) el.state.textContent = label; };
-    var stop = function(){ cancelAnimationFrame(raf); clearTimeout(slow); clearTimeout(auto); audio.pause(); freeze(); };
-    var idle = function(i){
-      stop(); ci = i; if (D) C = D.calls[i];
-      Array.prototype.forEach.call(tabs, function(t, k){ t.setAttribute('aria-selected', k === i ? 'true' : 'false'); t.tabIndex = k === i ? 0 : -1; });
-      part = null; pi = -1; hist = []; histN = 0; paused = false; talked = 0; clk.base = 0;
-      el.feed.innerHTML = ''; el.res.hidden = true; el.res.innerHTML = ''; el.empty.hidden = false; el.roll.scrollTop = 0;
-      el.ask.hidden = true; el.end.hidden = true; el.act.className = 'vc-act'; el.act.innerHTML = ''; el.live.hidden = true; el.go.hidden = false; el.hint.hidden = false;
-      el.hint.textContent = silent ? 'No sound here, so the call plays as captions.' : 'Sound on. You answer one question as the caller.';
-      el.pause.setAttribute('aria-pressed', 'false'); el.timer.textContent = '00:00';
-      set('idle', 'Not started');
-      if (C){
-        el.clock.textContent = C.clock; el.av.textContent = C.initial; el.av.style.background = C.c; el.av.style.color = C.ink; el.biz.textContent = C.biz; el.place.textContent = C.place;
-        el.goT.textContent = 'Ring ' + C.biz; note('Before the call', C.scene);
-      }
-      draw();
-    };
-    var goSilent = function(){
-      if (silent) return; silent = true; clearTimeout(slow); audio.pause();
-      el.hint.hidden = false; el.hint.textContent = 'No sound here, so the call plays as captions.';
-      if (phase === 'live' && !paused) run();
-    };
-    var play = function(p){
-      part = p; ev = cues(p); fired = 0; histN = 0; cur = null; clk.base = 0; clk.run = false; paused = false;
-      el.pause.setAttribute('aria-pressed', 'false'); el.pause.disabled = false;
-      set('live', p.ring ? 'Ringing' : 'On the call');
-      if (p.ring) note('Ringing', 'Calling ' + C.biz + '.');
-      cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
-      if (silent){ run(0); return; }
-      audio.muted = muted; audio.src = blobs[p.src] || base + p.src;
-      clearTimeout(slow); slow = setTimeout(goSilent, 8000);
-      var pr = audio.play(); if (pr && pr.catch) pr.catch(function(e){ if (e && e.name === 'AbortError') return; goSilent(); });
-    };
-    audio.addEventListener('playing', function(){ clearTimeout(slow); if (phase === 'live' && !paused) run(audio.currentTime); });
-    audio.addEventListener('waiting', function(){ if (!silent) freeze(); });
-    audio.addEventListener('pause', function(){ if (!silent) freeze(); });
-    audio.addEventListener('ended', function(){ if (!silent && phase === 'live'){ clk.base = part.len; clk.run = false; } });
-    audio.addEventListener('error', function(){ if (phase === 'live') goSilent(); });
-
-    var frame = function(){
-      if (phase !== 'live') return;
-      var t = now();
-      if (!silent && clk.run && !audio.paused && Math.abs(audio.currentTime - t) > .14){ run(audio.currentTime); t = clk.base; }
-      while (fired < ev.length && ev[fired].t <= t){
-        var e = ev[fired++];
-        if (e.line){ if (el.empty.hidden === false) el.empty.hidden = true; say(e.line, talked + Math.max(0, e.line.t - (part.ring ? part.lines[0].t : 0))); }
-        else did(e.act);
-        follow();
-      }
-      var first = part.lines[0].t;
-      if (part.ring && t < first - .2) el.state.textContent = 'Ringing';
+    var card = function(k, on, fresh){
+      if (shown[k] === on) return; shown[k] = on;
+      var box = el[k], f = box.querySelector('.vp-fill'), r = C.result;
+      box.classList.toggle('is-on', on);
+      if (!on) f.innerHTML = '<p class="vp-wait">' + (k === 'diary' ? 'Nothing booked yet' : k === 'sms' ? 'Nothing sent yet' : 'Shows when the call ends') + '</p>';
+      else if (k === 'diary') f.innerHTML = '<div class="vp-ev" style="--b:' + C.c + '"><b>' + esc(fill(r.card.t)) + '</b><span>' + esc(r.card.s) + '</span><small>' + esc(fill(r.card.m)) + '</small></div>';
+      else if (k === 'sms') f.innerHTML = '<p class="vp-bub">' + esc(fill(r.sms)) + '</p><p class="vp-sent">To ' + esc(C.from) + ' · sent during the call</p>';
       else {
-        el.state.textContent = 'On the call';
-        var l = null; for (var i = 0; i < part.lines.length; i++) if (part.lines[i].t <= t) l = part.lines[i];
-        if (l) caption(l, t);
+        var nx = D.calls[(ci + 1) % D.calls.length];
+        f.innerHTML = '<p class="vp-res-h">' + esc(fill(r.h)) + '</p><dl class="vp-stats">' + r.stats.map(function(s){ return '<div><dt>' + esc(s[0]) + '</dt><dd>' + esc(s[1]) + '</dd></div>'; }).join('') + '</dl>' +
+          '<button type="button" class="vp-next" data-vp-next>Next call: ' + esc(nx.caller) + ', ' + esc(nx.biz) + ' <span aria-hidden="true">→</span></button>';
       }
-      el.timer.textContent = mmss(talked + Math.max(0, t - (part.ring ? first : 0)));
-      sample(Math.min(t, part.len)); draw();
-      if (t >= part.len - .02) return finish();
+      if (k === 'diary') el.diaryK.textContent = on ? r.card.k : 'Diary';
+      if (on && fresh) pop(f);
+    };
+
+    /* ---------- one moment of the call: what is lit, what is filled in ---------- */
+    var follow = function(n){
+      if (!n || performance.now() - userAt < 3500) return;
+      var top = n.offsetTop - el.roll.clientHeight * .28;
+      if (el.roll.scrollTo) el.roll.scrollTo({ top: Math.max(0, top), behavior: 'smooth' }); else el.roll.scrollTop = top;
+    };
+    var setLabel = function(s){ if (s !== label){ label = s; el.state.textContent = s; } };
+    var update = function(t, fresh){
+      el.now.textContent = mss(t);
+      el.scrub.setAttribute('aria-valuenow', Math.round(t)); el.scrub.setAttribute('aria-valuetext', mss(t) + ' of ' + mss(C.len));
+      var k = -1, i;
+      for (i = 0; i < L.length; i++) if (L[i].l.t <= t + .02) k = i;
+      if (k !== cur){
+        for (i = 0; i < L.length; i++) L[i].el.classList.toggle('is-past', i < k), L[i].el.classList.toggle('is-now', i === k);
+        cur = k; lit = -1; if (k >= 0 && (playing || fresh)) follow(L[k].el);
+      }
+      if (k >= 0){
+        var x = L[k], n = 0;
+        if (t >= x.l.t + x.l.d) n = x.sp.length; else for (i = 0; i < x.l.w.length; i++) if (x.l.w[i] <= t - x.l.t) n = i + 1;
+        if (n !== lit){ for (i = 0; i < x.sp.length; i++) x.sp[i].className = i < n ? 'on' : ''; lit = n; }
+      }
+      var m = 0; for (i = 0; i < E.length; i++) if (E[i].t <= t) m = i + 1;
+      if (m !== evN){
+        for (i = 0; i < E.length; i++) E[i].el.classList.toggle('is-on', i < m);
+        if (fresh && m === evN + 1 && m > 0) pop(E[m - 1].el.firstChild, 0);
+        evN = m;
+      }
+      card('diary', T.diary != null && t >= T.diary, fresh);
+      card('sms', T.sms != null && t >= T.sms, fresh);
+      card('res', done || t >= T.res, fresh);
+      setLabel(done ? 'Call ended · ' + mss(C.len) : !playing && t <= 0 ? (silent ? 'No sound here, so the call plays as text' : 'Press play to listen') :
+        t < C.ring[1] ? 'Ringing' : playing ? (silent ? 'Playing as text, no sound' : 'Playing') : 'Paused');
+    };
+
+    /* ---------- playing ---------- */
+    var setGo = function(){
+      el.go.classList.toggle('is-on', playing);
+      el.go.setAttribute('aria-label', playing ? 'Pause the call' : done ? 'Play the call again' : 'Play the call');
+    };
+    var frame = function(){
+      if (!playing) return;
+      var t = now();
+      if (!silent && clk.run && !audio.paused && Math.abs(audio.currentTime - t) > .15){ run(audio.currentTime); t = clk.base; }
+      if (t >= C.len){ finish(); return; }
+      update(t, true); draw(t);
       raf = requestAnimationFrame(frame);
     };
-    var warm = function(){
-      C.paths.forEach(function(p){
-        if (blobs[p.src] || !window.URL || !URL.createObjectURL) return;
-        fetch(base + p.src).then(function(r){ return r.ok ? r.blob() : null; }).then(function(b){ if (b) blobs[p.src] = URL.createObjectURL(b); }).catch(function(){});
-      });
+    var goSilent = function(){
+      if (silent) return; silent = true; clearTimeout(slow);
+      var t = audio.paused ? clk.base : audio.currentTime || clk.base; audio.pause();
+      if (playing) run(t);
     };
     var finish = function(){
-      audio.pause(); freeze(); draw();
-      if (pi < 0){
-        talked = part.len - part.lines[0].t;
-        set('ask', 'Your turn');
-        el.q.textContent = C.ask;
-        el.opts.innerHTML = C.paths.map(function(p, i){ return '<button type="button" class="btn btn-glass" data-i="' + i + '">' + esc(p.label) + '</button>'; }).join('');
-        el.act.className = 'vc-act'; el.ask.hidden = false; el.pause.disabled = true;
-        if (tick) tick.cancel(); tick = el.count.animate ? el.count.animate([{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }], { duration: 12000, fill: 'forwards' }) : null;
-        clearTimeout(auto); auto = setTimeout(function(){ pick(0); }, 12000);
-      } else {
-        var r = C.paths[pi].result, nx = D.calls[(ci + 1) % D.calls.length];
-        set('done', 'Call ended');
-        note('Call ended', r.h + '.', 'is-end');
-        el.act.className = 'vc-act'; el.pause.disabled = true;
-        result(r); follow();
-        el.next.textContent = 'Next call: ' + nx.biz; el.other.textContent = 'Try the other answer';
-        el.end.hidden = false;
+      playing = false; done = true; cancelAnimationFrame(raf); clearTimeout(slow); audio.pause(); clk.base = C.len; clk.run = false;
+      setGo(); update(C.len, true); draw(C.len);
+    };
+    var toggle = function(){
+      if (!C) return;
+      if (playing){
+        playing = false; cancelAnimationFrame(raf); clearTimeout(slow);
+        if (silent) freeze(); else { audio.pause(); clk.base = audio.currentTime || now(); clk.run = false; }
+        setGo(); update(now()); return;
       }
+      players.forEach(function(p){ if (p !== me) p.pause(); });
+      if (done || now() >= C.len - .05){ done = false; clk.base = 0; card('res', false); }
+      playing = true; setGo();
+      if (silent){ run(); }
+      else {
+        audio.muted = muted; audio.playbackRate = RATES[ri];
+        if (Math.abs(audio.currentTime - clk.base) > .05) try { audio.currentTime = clk.base; } catch (e) {}
+        clearTimeout(slow); slow = setTimeout(goSilent, 9000);
+        var pr = audio.play(); if (pr && pr.catch) pr.catch(function(e){ if (e && e.name === 'AbortError') return; goSilent(); });
+      }
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
     };
-    var pick = function(i){
-      clearTimeout(auto); el.ask.hidden = true; pi = i; play(C.paths[i]);
+    audio.addEventListener('playing', function(){ clearTimeout(slow); if (playing && !silent) run(audio.currentTime); });
+    audio.addEventListener('waiting', function(){ if (!silent) freeze(); });
+    audio.addEventListener('ended', function(){ if (!silent && playing) finish(); });
+    audio.addEventListener('error', function(){ if (playing) goSilent(); });
+
+    var seek = function(t){
+      if (!C) return;
+      t = Math.max(0, Math.min(C.len - .05, t));
+      if (done){ done = false; card('res', false); }
+      clk.base = t; if (playing) run(t);
+      if (!silent && audio.src) try { audio.currentTime = t; } catch (e) {}
+      userAt = -1e9; cur = -2; update(t, playing); draw(t);
+      if (!playing && L.length){ var k = -1; for (var i = 0; i < L.length; i++) if (L[i].l.t <= t + .02) k = i; follow(L[Math.max(0, k)].el); }
     };
-    var start = function(){
-      el.go.hidden = true; el.live.hidden = false; el.hint.hidden = !silent; set('live', 'Connecting');
-      load().then(function(){ el.empty.hidden = true; warm(); play(C.open); }).catch(function(){ el.go.hidden = false; el.live.hidden = true; el.hint.hidden = false; el.hint.textContent = 'The call did not load. Check your connection and try again.'; set('idle', 'Not started'); });
+
+    /* ---------- picking a call ---------- */
+    var select = function(i){
+      if (playing){ playing = false; cancelAnimationFrame(raf); clearTimeout(slow); audio.pause(); }
+      ci = i; C = D.calls[i]; done = false; clk.base = 0; clk.run = false;
+      Array.prototype.forEach.call(tabs, function(t, k){ t.setAttribute('aria-selected', k === i ? 'true' : 'false'); t.tabIndex = k === i ? 0 : -1; });
+      el.panel.setAttribute('aria-labelledby', tabs[i].id);
+      el.av.textContent = C.initial; el.av.style.background = C.c; el.av.style.color = C.ink;
+      el.caller.textContent = C.caller; el.from.textContent = C.from; el.biz.textContent = C.biz; el.place.textContent = C.place; el.clock.textContent = C.clock;
+      el.out.textContent = C.outcome; el.key.textContent = C.caller; el.len.textContent = mss(C.len); el.scene.textContent = C.scene;
+      el.scrub.setAttribute('aria-valuemax', Math.round(C.len));
+      audio.src = base + C.src; audio.preload = 'none';
+      build(); measure(); setGo(); update(0); draw(0);
     };
 
     /* ---------- controls ---------- */
-    el.go.addEventListener('click', start);
-    el.opts.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) pick(+b.getAttribute('data-i')); });
-    el.pause.addEventListener('click', function(){
-      if (phase !== 'live') return;
-      paused = !paused; el.pause.setAttribute('aria-pressed', paused ? 'true' : 'false'); el.pause.setAttribute('aria-label', paused ? 'Carry on with the call' : 'Pause the call');
-      if (paused){ if (silent) freeze(); else audio.pause(); el.state.textContent = 'Paused'; cancelAnimationFrame(raf); }
-      else { if (silent) run(); else { var pr = audio.play(); if (pr && pr.catch) pr.catch(goSilent); } raf = requestAnimationFrame(frame); }
-    });
+    el.go.addEventListener('click', function(){ if (D) toggle(); else load().then(function(){ select(ci); toggle(); }); });
+    var warm = function(){ if (audio.preload !== 'auto') audio.preload = 'auto'; };
+    el.go.addEventListener('pointerenter', warm); el.go.addEventListener('focus', warm); el.go.addEventListener('touchstart', warm, { passive: true });
     el.mute.addEventListener('click', function(){
       muted = !muted; audio.muted = muted; el.mute.setAttribute('aria-pressed', muted ? 'true' : 'false'); el.mute.setAttribute('aria-label', muted ? 'Turn the sound on' : 'Turn the sound off');
     });
-    el.again.addEventListener('click', function(){ idle(ci); start(); });
-    el.next.addEventListener('click', function(){ idle((ci + 1) % D.calls.length); start(); });
-    el.other.addEventListener('click', function(){
-      var o = pi ? 0 : 1; el.end.hidden = true; el.res.hidden = true; el.feed.innerHTML = '';
-      cues(C.open).forEach(function(e){ if (e.line) say(e.line, Math.max(0, e.line.t - C.open.lines[0].t), true); else did(e.act, true); });
-      pick(o); follow();
+    el.rate.addEventListener('click', function(){
+      var t = now(); ri = (ri + 1) % RATES.length; audio.playbackRate = RATES[ri]; if (clk.run) run(t);
+      el.rate.textContent = RATES[ri] + '×'; el.rate.setAttribute('aria-label', 'Playback speed, now ' + (ri ? RATES[ri] + ' times' : 'normal'));
+    });
+    var drag = false;
+    var at = function(e){ var r = el.scrub.getBoundingClientRect(); return (e.clientX - r.left) / Math.max(1, bars.length * STEP) * C.len; };
+    el.scrub.addEventListener('pointerdown', function(e){ if (!C) return; drag = true; if (el.scrub.setPointerCapture) el.scrub.setPointerCapture(e.pointerId); seek(at(e)); });
+    el.scrub.addEventListener('pointermove', function(e){ if (drag) seek(at(e)); });
+    el.scrub.addEventListener('pointerup', function(){ drag = false; });
+    el.scrub.addEventListener('pointercancel', function(){ drag = false; });
+    el.scrub.addEventListener('keydown', function(e){
+      if (!C) return;
+      var d = { ArrowRight: 5, ArrowUp: 5, ArrowLeft: -5, ArrowDown: -5, PageUp: 15, PageDown: -15 }[e.key];
+      if (d) { e.preventDefault(); seek(now() + d); }
+      else if (e.key === 'Home'){ e.preventDefault(); seek(0); }
+      else if (e.key === 'End'){ e.preventDefault(); seek(C.len); }
+      else if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); toggle(); }
+    });
+    el.lines.addEventListener('click', function(e){
+      var n = e.target.closest('[data-l],[data-e]'); if (!n || !C) return;
+      seek(n.hasAttribute('data-l') ? C.lines[+n.getAttribute('data-l')].t - .05 : E[+n.getAttribute('data-e')].t - 1.2);
+      if (!playing) toggle();
+    });
+    ['wheel', 'touchstart', 'keydown'].forEach(function(t){ el.roll.addEventListener(t, function(){ userAt = performance.now(); }, { passive: true }); });
+    el.res.addEventListener('click', function(e){
+      if (!e.target.closest('[data-vp-next]')) return;
+      select((ci + 1) % D.calls.length); tabs[ci].focus({ preventScroll: true }); toggle();
     });
     Array.prototype.forEach.call(tabs, function(t, i){
-      t.addEventListener('click', function(){ if (i !== ci || phase !== 'idle') load().then(function(){ idle(i); }); });
+      t.addEventListener('click', function(){ load().then(function(){ if (i !== ci || !C) select(i); }); });
       t.addEventListener('keydown', function(e){
-        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
-        var n = (i + d + tabs.length) % tabs.length; e.preventDefault(); tabs[n].focus(); load().then(function(){ idle(n); });
+        var d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (!d) return;
+        var n = (i + d + tabs.length) % tabs.length; e.preventDefault(); tabs[n].focus(); load().then(function(){ select(n); });
       });
     });
     window.addEventListener('resize', size);
-    if (window.ResizeObserver) new ResizeObserver(size).observe(el.wave);
-    size();
-    /* fetch the words once the player is near the screen, so the first press starts at once */
+    if (window.ResizeObserver) new ResizeObserver(size).observe(el.canvas);
+
+    /* fetch the calls once the player is near the screen, so the transcript is there before anyone presses play */
+    var ready = function(){ load().then(function(){ if (!C) { select(ci); size(); } }).catch(function(){ setLabel('The calls did not load. Check your connection and refresh.'); }); };
     if (window.IntersectionObserver){
-      var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); load().then(function(){ pre = new Audio(); pre.preload = 'auto'; pre.src = base + D.calls[0].open.src; }).catch(function(){}); } }, { rootMargin: '600px' });
+      var io = new IntersectionObserver(function(es){ if (es[0].isIntersecting){ io.disconnect(); ready(); } }, { rootMargin: '800px' });
       io.observe(root);
-    } else load().catch(function(){});
+    } else ready();
   });
 })();

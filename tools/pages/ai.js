@@ -1,6 +1,6 @@
-/* /ai/ : the AI work in one place. The first screen is the voice agent itself: three recorded example calls a visitor
-   can play, each with one question they answer as the caller (tools/voice/). Then how an agent is set up, what it
-   will not do, the two other AI demos (the receptionist by text and the AI team), and the calls as plain text.
+/* /ai/ : the AI work in one place. The first screen is the voice agent itself: three recorded example calls, played
+   like recordings in a phone system's call log (tools/voice/). Then how an agent is set up, what it will not do, the
+   two other AI demos (the receptionist by text and the AI team), and the calls as plain text.
    Every business is made up and the page says so; the calls are recordings, not a live agent, and the page says that too. */
 const L = require('../lib.js');
 const V = require('../voice/embed.js');
@@ -15,10 +15,10 @@ const SETUP = [
 const NEVER = [
   ['Pretend to be a person', 'It says it is an AI in its first sentence, on every call. Listen for it in the three calls above.'],
   ['Make up a price', 'In the garage call it is asked what a brake repair will cost. It will not guess, and offers a call back from the mechanic.'],
-  ['Carry on when it should stop', 'In the heating call, answer yes to the gas question. The booking stops, the caller gets the emergency number and the owner’s phone rings.'],
+  ['Skip your rules', 'Dan’s rule is to ask about a gas smell before anything else. Listen to the heating call: it asks that before it talks about times or prices.'],
 ];
 const FAQ = [
-  ['Are the calls on this page real?', 'No. They are recorded examples: scripts written for made-up businesses and spoken by two AI voices, so you can hear how a call goes and what the assistant does during it. An agent for your business is set up on your own diary, price list and rules.'],
+  ['Are the calls on this page real?', 'No. They are recorded examples: scripts written for made-up businesses, and every voice is AI, the callers too. They let you hear how a call goes and what the assistant does during it. An agent for your business is set up on your own diary, price list and rules.'],
   ['Will my callers know it is an AI?', 'Yes. It says so in its first sentence. Nobody is tricked into thinking they are talking to a person.'],
   ['What happens when it cannot answer something?', 'It says so, takes the details, tells the caller who will ring them back, and sends you the note. It does not guess at prices or advice.'],
   ['Does it replace the person who answers my phone?', 'It covers the calls nobody can take: when you are on a job, with a customer, or closed for the night. Anything it should not handle is passed to a person with the details.'],
@@ -56,7 +56,7 @@ ${L.header(b, 'ai')}
       <h1 id="h-top">Your phone, answered by AI</h1>
       <div class="hx-side">
         <p class="hx-sub"><strong>It picks up on the first ring, at any hour.</strong> It books from your real diary and price list, follows your rules, and hands over to you when it should.</p>
-        <p class="ai-cue">Ring one of the three businesses below and listen. Each call takes under a minute.</p>
+        <p class="ai-cue">Three recorded calls to made-up businesses. Press play on any of them; each takes about a minute.</p>
       </div>
     </div>
     ${V.stage(b)}
@@ -113,7 +113,7 @@ ${L.header(b, 'ai')}
     <div class="hs-head">
       <p class="kick">No sound where you are?</p>
       <h2 id="h-text">The three calls, written out</h2>
-      <p class="lead">Every word of each call, with both ways it can end.</p>
+      <p class="lead">Every word of each call.</p>
     </div>
     <div>${V.transcripts()}</div>
   </div>
@@ -125,7 +125,8 @@ ${L.header(b, 'ai')}
       <h2 id="h-book">Want one answering your phone?</h2>
       <p class="lead">A free 45 minute call on the calls you are missing now and what an AI agent would take off your hands. The person on the call is the person who builds it.</p>
     </div>
-    <div class="hs-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="tlink" href="${b}try/missed-call/">Try the missed call demo <span aria-hidden="true">→</span></a></div>
+    <div class="hs-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a></div>
+    <p class="ai-svc">What it takes to set one up: <a href="${b}services/ai-receptionist/">AI receptionist</a>, <a href="${b}services/ai-employees/">AI employees</a> and <a href="${b}services/business-automation/">business automation</a>.</p>
   </div>
 </section>
 </main>

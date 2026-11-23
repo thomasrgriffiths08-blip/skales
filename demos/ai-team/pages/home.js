@@ -2,6 +2,7 @@
 // Every figure comes from the one model (ctx.model), with its working on hover or underneath.
 import { esc, money, num, av, chip, hbars, working, foot, hhmm, $, $$, BY_ID, AGENTS } from "../ui.js";
 import { longMemory } from "../brainnotes.js";
+import { OFFER } from "../recorded.js";
 
 const PAGE_OF = { seo: "search", ads: "ads", content: "content", paperwork: "paperwork", manager: "tasks", coach: "training" };
 // site demo (unslop): no greeting, no ring, no hologram on Home. The date, what needs a person, and plain figures.
@@ -25,7 +26,12 @@ export default {
   .pg-home .hh { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 24px; }
   .pg-home .hh h1 { font-size: 36px; }
   .pg-home .hh .lede { margin-bottom: 0; }
-  .pg-home .hh-ask { flex: 1 1 340px; max-width: 480px; }
+  .pg-home .hh-r { flex: 1 1 340px; max-width: 480px; display: grid; gap: 10px; }
+  .pg-home .hh-qs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pg-home .hh-qs span { width: 100%; font-size: 12px; color: var(--ink-3); }
+  .pg-home .hh-qs button { height: 30px; padding: 0 10px; border: 1px solid var(--line-2); border-radius: 6px; background: none; color: var(--ink-2); font: 400 13px var(--sans); cursor: pointer; }
+  .pg-home .hh-qs button:hover { color: var(--ink); border-color: rgba(255, 255, 255, .28); }
+  .pg-home .needs .ch .r { color: var(--amber-ink); font-size: 13px; }
   .pg-home .hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; align-items: start; }
   @container (max-width: 860px) { .pg-home .hero { grid-template-columns: minmax(0, 1fr); } .pg-home .hh h1 { font-size: 30px; } }
   .pg-home .needs { padding: 20px 8px 8px; }
@@ -86,11 +92,12 @@ export default {
       <header class="hh">
         <div><div class="owner"><span class="ldot ${busy ? "busy" : ""}"></span>Kingpost AI team · ${AGENTS.length} on shift${busy ? ` · ${busy} working now` : ""}</div>
           <h1>${today()}</h1><p class="lede">What your AI team did this week, and the ${needs.length} things waiting on you.</p></div>
-        <form class="ask hh-ask" id="home-ask" autocomplete="off"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 3h11v7.5H7L4 13v-2.5H2.5z"/></svg><input id="home-ask-in" placeholder="Ask your team anything, like “Who owes us money?”"><button>Ask</button></form>
+        <div class="hh-r"><form class="ask hh-ask" id="home-ask" autocomplete="off"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 3h11v7.5H7L4 13v-2.5H2.5z"/></svg><input id="home-ask-in" aria-label="Ask your team" placeholder="Ask your team a question"><button>Ask</button></form>
+          <div class="hh-qs" role="group" aria-label="Questions to try"><span>Or tap one:</span>${OFFER.slice(0, 3).map((q) => `<button type="button" data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div></div>
       </header>
       <section class="hero">
         <div class="card needs">
-          <div class="ch"><h3>Needs you</h3><span class="r">${chip(`${needs.length} things`, "amber")}</span></div>
+          <div class="ch"><h3>Needs you</h3><span class="r">${needs.length} things</span></div>
           ${needs.slice(0, 6).map((n, i) => `<div class="item ${n.fresh ? "new" : ""}" data-need="${i}">${av(n.agent)}<b>${esc(n.what)}</b><span class="t">${esc(n.who)} · ${ago(n.mins)}</span><span class="d">${esc(n.detail)}</span></div>`).join("")}
           ${needs.length > 6 ? `<div class="more">${needs.length - 6} more on the task board</div>` : ""}
         </div>
@@ -122,7 +129,9 @@ export default {
     if (!brainStats) ctx.graph().then((g) => { const mem = longMemory(g, { rules: ctx.pages.training?.library || [] }); const ids = new Set([...g.nodes, ...mem.nodes].map((n) => n.id)); brainStats = { notes: g.nodes.length + mem.nodes.length, links: [...g.links, ...mem.links].filter((l) => ids.has(l.source) && ids.has(l.target)).length }; $$(".bs-n").forEach((e) => (e.textContent = num(brainStats.notes))); $$(".bs-l").forEach((e) => (e.textContent = num(brainStats.links))); });
     $$("[data-need]", host).forEach((el) => (el.onclick = () => { const n = needs[+el.dataset.need]; n.page === "team" && !PAGE_OF[n.agent] ? ctx.openAgent(n.agent) : ctx.go(n.page || "tasks"); }));
     $$("[data-person]", host).forEach((el) => (el.onclick = () => { const id = el.dataset.person; PAGE_OF[id] ? ctx.go(PAGE_OF[id]) : ctx.openAgent(id); }));
-    $("#home-ask", host).onsubmit = (e) => { e.preventDefault(); const q = $("#home-ask-in", host).value.trim(); if (!q) return; ctx.local.q = q; ctx.S.ps.ask = { ...(ctx.S.ps.ask || {}), pending: q }; ctx.go("ask"); };
+    const askQ = (q) => { ctx.local.q = q; ctx.S.ps.ask = { ...(ctx.S.ps.ask || {}), pending: q }; ctx.go("ask"); };
+    $("#home-ask", host).onsubmit = (e) => { e.preventDefault(); const q = $("#home-ask-in", host).value.trim(); if (q) askQ(q); };
+    $$(".hh-qs button", host).forEach((b) => { b.onclick = () => askQ(b.dataset.q); });
   },
   onEvent(ev) { return ev.demo === "floor" || ev.type === "brain" || ev.type === "sheet" || ev.demo === "d2"; },
 };

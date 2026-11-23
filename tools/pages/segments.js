@@ -44,7 +44,7 @@ const segPage = s => ({
       { '@type': 'Service', '@id': L.abs(path) + '#service', name: `Websites, booking and follow-up for ${lc(s.label)}`, serviceType: 'Web design, online booking and follow-up automation',
         description: s.answer, url: L.abs(path), provider: { '@id': L.ORG_ID }, areaServed: { '@type': 'Country', name: site.areaServed },
         audience: { '@type': 'BusinessAudience', name: `UK ${lc(s.label)}` },
-        isRelatedTo: [...SV.slice(0, 3).map(x => ({ '@id': P.svcId(x.slug) })), ...s.autos.map(([a]) => ({ '@id': P.autoId(a) }))] },
+        isRelatedTo: [...['websites', 'booking-and-crm', 'follow-up-automation'].map(x => ({ '@id': P.svcId(x) })), ...s.autos.map(([a]) => ({ '@id': P.autoId(a) }))] },
       { '@type': 'ItemList', '@id': L.abs(path) + '#demos', name: `Live demos for ${lc(s.label)}`, itemListElement: s.demos.map((d, i) => ({ '@type': 'ListItem', position: i + 1, url: L.abs(`/try/${d}/`), name: P.demo(d).name })) },
       P.faqNode(faq, path),
     ];

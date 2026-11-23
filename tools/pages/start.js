@@ -28,7 +28,8 @@ const IC = {
 
 const QS = [
   { key: 'need', h: 'What do you need help with?', sub: 'Select all that apply', multi: true, other: 'What else do you need?', opts: [
-    { v: 'ai', t: 'AI employees for my business', i: 'spark' }, { v: 'crm', t: 'A CRM built for my business', i: 'crm' },
+    { v: 'ai', t: 'AI employees for my business', i: 'spark' }, { v: 'receptionist', t: 'An AI receptionist for my phone', i: 'phone' },
+    { v: 'automation', t: 'Automate my admin', i: 'clock' }, { v: 'crm', t: 'A CRM built for my business', i: 'crm' },
     { v: 'website', t: 'Build a new website', i: 'globe' }, { v: 'redo', t: 'Redo my website', i: 'redo' },
     { v: 'booking', t: 'Online booking and a diary', i: 'cal' }, { v: 'followup', t: 'Automated follow-up and reviews', i: 'star' },
     { v: 'ads', t: 'Ads on Google or Instagram', i: 'ads' }, { v: 'other', t: 'Something else' }] },

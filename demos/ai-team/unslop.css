@@ -145,6 +145,11 @@ a { color: var(--holo-2); }
 .pg-team .tm-core .arc { stroke-width: 2; stroke-dasharray: none; }
 .ak-orb .o-tk, .ak-orb .o-ds, .ak-orb .o-arc, .ak-orb .o-rg, .ak-orb .o-core, .ak-orb .o-hot { display: none; }
 .ak-orb .o-in { fill: var(--panel-2); stroke: var(--line-2); }
+.ak-orb .o-bars, .ak-orb .o-in2 { display: none; }
+/* 23 Nov: the answering avatar without the voice-wave ring around it, and smaller, so the answer leads */
+.page .pg-ask .ak-hero { --orb: 120px; }
+.page .pg-ask .ak-hero.has { --orb: 96px; }
+.page .pg-ask .ak-glyph .ag { box-shadow: none; }
 .pg-paperwork .sc-c { display: none; }
 .pg-team .tm-cc .l { font-size: 12px; color: var(--ink-3); }
 .pg-team .tm-cc b small { color: var(--ink-3); font-weight: 400; }

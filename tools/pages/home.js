@@ -26,7 +26,7 @@ const hero = b => {
     <div class="hx-top">
       <h1 id="h-top">Get found, <br>Get booked, <br>Get paid</h1>
       <div class="hx-side">
-        <p class="hx-sub"><strong>I build your website, the booking and follow-up behind it, and run the ads that fill it.</strong> One flat price, agreed before anything starts.</p>
+        <p class="hx-sub"><strong>I build your website, the booking, follow-up and AI behind it, and run the ads that fill it.</strong> One flat price, agreed before anything starts.</p>
         <div class="hx-ctas"><a class="btn btn-live btn-lg" href="${b}book/">Book a call</a><a class="tlink" href="${b}try/missed-call/">Try a live demo</a></div>
       </div>
     </div>
@@ -134,7 +134,7 @@ const ai = b => `<section class="hs hs-ai" id="ai" aria-labelledby="h-ai">
     <div class="hs-head">
       <p class="kick">AI on the phone</p>
       <h2 id="h-ai">The phone gets answered, even at 23:10</h2>
-      <p class="lead">Ring one of these made-up businesses and listen. An AI assistant picks up, checks the diary and the price list, books the job and knows when to hand over.</p>
+      <p class="lead">Press play on a call to one of these made-up businesses. An AI assistant picks up, checks the diary and the price list, books the job and knows when to hand over.</p>
     </div>
     ${V.stage(b)}
     <div class="hs-ctas"><a class="btn btn-glass" href="${b}ai/">See all the AI work</a><a class="tlink" href="${b}demos/ai-receptionist/">Or watch it book a job by text <span aria-hidden="true">→</span></a></div>
