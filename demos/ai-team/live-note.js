@@ -1,6 +1,7 @@
 // What happens on this public demo when you press something that would call Claude: nothing runs, and a small glass
 // sheet says so plainly, with a way to see it run for real on a call with Tom.
 import { BY_ID } from "./agents.js";
+import { OFFER } from "./recorded.js";
 
 export const LIVE = "​live-only"; // the error message a live step throws here; flash() ignores it (the sheet has said it)
 export const BOOK = "../../book/?utm_source=site&utm_medium=demo&utm_content=ai-team";
@@ -9,7 +10,9 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 
 // what each live step would have done, in plain words
 const KINDS = {
-  ask: { agent: null, title: "Asking the team runs live", what: "The right person answers from Kingpost's records in a few seconds, and shows you what they checked." },
+  // typed questions only: the suggested ones play a recorded example answer (recorded.js)
+  ask: { agent: null, title: "Typed questions run live", what: "The answers on this page are recorded examples, so there is one for each suggested question and none for a question typed in. Try one of these:",
+    offer: OFFER, small: "Nothing you typed was sent. On a call, Tom runs the team live and it answers your own questions from your own records." },
   check: { agent: "seo", title: "Seren checks a search live", what: "She reads any search the way a local customer means it, says what local pages miss, and briefs the page Kingpost should build." },
   relay: { agent: "seo", title: "The hand-off runs live", what: "Seren briefs Clara, Clara writes the page, Archie writes three ads to test it, and Maeve checks the lot before it goes to Priya." },
   ads: { agent: "ads", title: "Archie writes test ads live", what: "Three ads, a small test plan and his own check against your rules, all waiting for Kieran's yes." },
@@ -67,13 +70,18 @@ export function liveOnly(pathOrKind) {
       <div class="ln-k">${a ? `<span class="av-s" style="background:${a.color}" aria-hidden="true">${a.name[0]}</span><span>${esc(a.name)} · ${esc(a.role)}</span>` : `<span class="kp ln-kp">${LOGO}</span><span>The Kingpost AI team</span>`}</div>
       <h2 id="ln-h">${esc(K.title)}</h2>
       <p>${esc(K.what)}</p>
-      <p class="ln-s">This public demo doesn't run the AI, and nothing is sent. Tom runs it live on a call, with your own work in it.</p>
+      ${K.offer ? `<div class="ln-offer">${K.offer.map((q) => `<button class="ln-q" type="button" data-ln-q="${esc(q)}">${esc(q)}</button>`).join("")}</div>` : ""}
+      <p class="ln-s">${esc(K.small || "This public demo doesn't run the AI, and nothing is sent. Tom runs it live on a call, with your own work in it.")}</p>
       <div class="ln-b"><a class="btn primary" href="${BOOK}">Book a 45-min call</a><button class="btn" type="button" data-ln-close>Keep looking</button></div>
     </div>`;
   (document.getElementById("stage") || document.body).appendChild(el);
   open = { el, back: document.activeElement };
-  el.addEventListener("click", (e) => { if (e.target === el || e.target.closest("[data-ln-close]")) close(); });
-  el.querySelector(".btn.primary").focus({ preventScroll: true });
+  el.addEventListener("click", (e) => {
+    const pick = e.target.closest("[data-ln-q]");
+    if (pick) { const q = pick.dataset.lnQ; open.back = null; close(); dispatchEvent(new CustomEvent("ai-team-ask", { detail: q })); return; } // app.js asks it
+    if (e.target === el || e.target.closest("[data-ln-close]")) close();
+  });
+  (el.querySelector("[data-ln-q]") || el.querySelector(".btn.primary")).focus({ preventScroll: true });
 }
 // Escape closes the sheet, and only the sheet (the app's own Escape flies back to the office)
 // Tab stays inside the sheet while it's open

@@ -8,7 +8,7 @@ import { createBrainWall } from "./brainwall.js";
 import { createNarrator } from "./narrator.js";
 import { PLACES, PEOPLE, SECTIONS, SECTION_OF, LIT, ITEM, ICONS, PAGE_IDS } from "./nav.js";
 import * as UI from "./ui.js";
-import { api as staticApi } from "./static-api.js"; // site demo
+import { api as staticApi, listen as staticListen } from "./static-api.js"; // site demo
 import { liveOnly, LIVE } from "./live-note.js"; // site demo
 
 const $ = (s, el = document) => el.querySelector(s);
@@ -80,6 +80,14 @@ es.onmessage = (m) => {
   }
   N.scan(S); render(); pageEvent(ev);
 };
+staticListen((ev) => es.onmessage({ data: JSON.stringify(ev) })); // site demo: recorded example answers arrive the way live ones do
+// a suggested question picked on the "typed questions run live" sheet
+addEventListener("ai-team-ask", (e) => {
+  const q = String(e.detail || "").trim(); if (!q) return;
+  if (S.view === "floor") return ask(q);
+  S.ps.ask = { ...(S.ps.ask || {}), pending: q, draft: "" };
+  if (S.view === "ask") drawPage({ force: true }); else go("ask");
+});
 
 // ------------------------------------------------------------------ what each employee is doing
 const fl = (id) => S.fl.log.filter((l) => l.agent === id);
@@ -154,8 +162,9 @@ for (const a of AGENTS) {
   $("#tags").appendChild(el); tags[a.id] = el;
 }
 function tagMode(el, mode) { if (el._mode === mode) return; el.classList.remove("small", "dim"); if (mode) el.classList.add(...mode.split(" ")); el._mode = mode; }
-function measureTag(el) { tagMode(el, ""); el._wFull = el.offsetWidth; el._h = el.offsetHeight; el.classList.add("small"); el._wSmall = el.offsetWidth; el.classList.remove("small"); }
-new ResizeObserver(() => Object.values(tags).forEach((t) => (t._wFull = 0))).observe($("#stage"));
+function measureTag(el) { tagMode(el, ""); el._wFull = el.offsetWidth; el._h = el.offsetHeight; el.classList.add("small"); el._wSmall = el.offsetWidth; el._hSmall = el.offsetHeight; el.classList.remove("small"); }
+let stageW = $("#stage").clientWidth;
+new ResizeObserver(() => { stageW = $("#stage").clientWidth; Object.values(tags).forEach((t) => (t._wFull = 0)); }).observe($("#stage"));
 S3.onPick((id) => openAgent(id));
 S3.onWall((w, uv) => { if (w === "numbers") return go("overview"); const n = wall.pick(uv); if (n) openNote(n.id); });
 S3.onFrame(() => {
@@ -164,18 +173,22 @@ S3.onFrame(() => {
   // nearest desks first; a tag that would cover a nearer one shrinks to the name, then fades
   const show = S.view === "floor", placed = [];
   const list = AGENTS.map((a) => ({ p: S3.project(a.id), el: tags[a.id] })).sort((x, y) => x.p.d - y.p.d);
+  // a desk at the edge of the view keeps its whole tag: the tag slides in until it sits inside the stage.
+  // A desk that is properly out of view (more than `edge` past the side) gets no tag at all.
+  const edge = Math.max(48, stageW * 0.07);
   for (const { p, el } of list) {
-    el.style.display = p.on && show ? "" : "none";
-    el.style.transform = `translate(${p.x}px, ${p.y}px) translate(-50%, -100%)`;
+    const on = p.on && show && p.x > -edge && p.x < stageW + edge;
+    el.style.display = on ? "" : "none";
     el.style.left = "0"; el.style.top = "0";
-    if (!p.on || !show) continue;
+    if (!on) continue;
     if (!el._wFull) measureTag(el);
-    const box = (w) => ({ l: p.x - w / 2 - 4, r: p.x + w / 2 + 4, t: p.y - el._h, b: p.y });
+    const box = (w, h) => { const x = Math.min(Math.max(p.x, w / 2 + 8), Math.max(w / 2 + 8, stageW - w / 2 - 8)); return { x, l: x - w / 2 - 4, r: x + w / 2 + 4, t: p.y - h, b: p.y }; };
     const hit = (b) => placed.some((q) => b.l < q.r && b.r > q.l && b.t < q.b && b.b > q.t);
-    let b = box(el._wFull), mode = "";
-    if (hit(b)) { b = box(el._wSmall); mode = hit(b) ? "small dim" : "small"; }
+    let b = box(el._wFull, el._h), mode = "";
+    if (hit(b)) { b = box(el._wSmall, el._hSmall); mode = hit(b) ? "small dim" : "small"; }
     placed.push(b);
     tagMode(el, mode);
+    el.style.transform = `translate(${b.x}px, ${p.y}px) translate(-50%, -100%)`;
   }
   flushScreens();
 });
@@ -184,7 +197,7 @@ S3.onFrame(() => {
 const dirtySet = new Set(); let lastFlush = 0;
 const dirty = (id) => dirtySet.add(id);
 const dirtyAll = () => AGENTS.forEach((a) => dirtySet.add(a.id));
-const SWATCH = { "g-boiler": "#c9b49a", "g-boiler-ba-sn": "#d1bfa6", "g-plumb": "#a7b9c4", "g-elec": "#c4bc96", "g-leak": "#9fb0b8", "m-landlord": "#b5a7b8", "m-ext": "#a9b79b" };
+const SWATCH = { "g-boiler": "#aab4c0", "g-boiler-ba-sn": "#b9c2cc", "g-plumb": "#a7b9c4", "g-elec": "#b3b8c6", "g-leak": "#9fb0b8", "m-landlord": "#b5a7b8", "m-ext": "#a3b5ae" };
 function screenView(id) {
   const st = status(id), F = S.fl, base = { status: st.text, busy: !!st.busy, alert: !!st.alert };
   if (id === "invoices") return { ...base, title: `Job sheets → invoices · about ${n0(perDay("invoices"))} a day`, rows: [{ a: "Contract batch for Priya", b: `${batch().n} invoices · ${money(batch().gbp, 0)}`, tag: "To approve", tone: "amber" }, ...S.inv.sheets.slice(0, 4).map((s) => ({ a: s.read?.header?.customer || "Reading…", b: s.invoice ? money(s.invoice.total) : "", tag: s.approved ? "Approved" : s.status === "reading" ? "Reading" : "To approve", tone: s.approved ? "green" : "amber" }))] };
@@ -579,25 +592,28 @@ function md(src) {
 $("#ask").onsubmit = async (e) => { e.preventDefault(); const q = $("#ask-in").value.trim(); if (q) ask(q); };
 async function ask(q) {
   $("#ask-in").value = ""; $("#ask-in").blur();
-  if (window.AI_TEAM_STATIC) { $("#ask-in").value = q; return api("/api/floor/chat", { q }).catch(() => {}); } // site demo: the team answers live on a call
   S.chat.push({ who: "me", text: q }, { who: "thinking" }); drawChat();
   try {
     const r = await api("/api/floor/chat", { q, history: S.chat.filter((m) => m.text).map((m) => ({ who: m.who === "me" ? "Priya" : BY_ID[m.who]?.name, text: m.text })) });
     S.chat = S.chat.filter((m) => m.who !== "thinking");
     for (const [i, rep] of r.replies.entries()) {
       await new Promise((res) => setTimeout(res, i ? 650 : 0));
-      S.chat.push({ who: rep.agent, text: rep.text }); drawChat();
+      S.chat.push({ who: rep.agent, text: rep.text, rec: !!r.recorded }); drawChat();
       tags[rep.agent]?.classList.add("busy"); S3.setBusy(rep.agent, true); setTimeout(() => dirty(rep.agent), 2500);
     }
     if (r.replies.length === 1 && !S.sel) S3.glide(r.replies[0].agent, 1600);
-  } catch (err) { S.chat = S.chat.filter((m) => m.who !== "thinking"); S.chat.push({ who: "manager", text: `Sorry, that didn't work: ${err.message}` }); }
+  } catch (err) {
+    S.chat = S.chat.filter((m) => m.who !== "thinking");
+    if (err.live) { S.chat.pop(); $("#ask-in").value = q; } // site demo: no recording for a typed question; the sheet has said so and offered some
+    else S.chat.push({ who: "manager", text: `Sorry, that didn't work: ${err.message}` });
+  }
   drawChat();
 }
 function drawChat() {
   const t = $("#thread"); t.hidden = !S.chat.length;
   t.innerHTML = `<button class="x" data-clearchat>Clear</button>` + S.chat.map((m) => m.who === "me" ? `<div class="msg me"><p>${esc(m.text)}</p></div>`
     : m.who === "thinking" ? `<div class="msg"><span class="av" style="background:#c9c7c1">…</span><div><p class="shimmer">The team's looking it up…</p></div></div>`
-    : `<div class="msg"><span class="av" style="background:${BY_ID[m.who].color}">${BY_ID[m.who].name[0]}</span><div><b>${BY_ID[m.who].name}</b> <span class="muted" style="font-size:12px">${BY_ID[m.who].role}</span><p>${esc(m.text)}</p></div></div>`).join("");
+    : `<div class="msg"><span class="av" style="background:${BY_ID[m.who].color}">${BY_ID[m.who].name[0]}</span><div><b>${BY_ID[m.who].name}</b> <span class="muted" style="font-size:12px">${BY_ID[m.who].role}${m.rec ? " · recorded example" : ""}</span><p>${esc(m.text)}</p></div></div>`).join("");
   t.scrollTop = t.scrollHeight;
   $("[data-clearchat]", t).onclick = () => { S.chat = []; drawChat(); };
 }

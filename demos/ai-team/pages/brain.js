@@ -55,7 +55,17 @@ export default {
   .pg-brain .hovertip { position: absolute; z-index: 4; pointer-events: none; padding: 6px 10px; border-radius: 8px; background: #1C1C1F; border: 1px solid var(--line-2); font-size: 12px; color: #fff; white-space: nowrap; transform: translate(12px, -110%); }
   .pg-brain .lower { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 16px; }
   @container (max-width: 900px) { .pg-brain .lower { grid-template-columns: minmax(0, 1fr); } .pg-brain .tools input { width: 170px; } }
-  @container (max-width: 640px) { .pg-brain .reader { left: 16px; width: auto; top: auto; height: 60%; } .pg-brain .stats { gap: 16px; } .pg-brain .stats b { font-size: 20px; } }
+  @container (max-width: 640px) { .pg-brain .reader { left: 16px; width: auto; top: auto; height: 60%; } .pg-brain .stats { gap: 16px; } .pg-brain .stats b { font-size: 20px; }
+    /* phone: the figures, then the search box, then the map in its own clipped box, then the legend. Nothing sits on the map. */
+    .pg-brain .stage3 { height: auto; display: flex; flex-direction: column; }
+    .pg-brain .hudtop { position: static; order: 1; flex-direction: column; align-items: stretch; gap: 10px; padding: 14px 14px 0; }
+    .pg-brain .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 12px; padding: 0; background: none; border: 0; border-radius: 0; }
+    .pg-brain .stage3 .stats .bn { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0 0 10px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .pg-brain .stats b { font-size: 22px; }
+    .pg-brain .tools, .pg-brain .tools input { width: 100%; }
+    .pg-brain .stage3 > .b3 { position: relative; inset: auto; order: 2; height: 360px; margin-top: 12px; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .pg-brain .filters { position: static; order: 3; padding: 12px 14px 14px; }
+    .pg-brain .reader { bottom: 12px; height: 70%; z-index: 5; } }
   .pg-brain .learned .it { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 12px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, .05); cursor: pointer; }
   .pg-brain .learned .it:first-child { border-top: 0; }
   .pg-brain .learned .it b { color: #fff; font-weight: 500; }

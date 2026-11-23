@@ -90,7 +90,9 @@ a { color: var(--holo-2); }
 .tag { position: absolute; transform: translate(-50%, -100%); pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; background: rgba(22, 22, 24, .88); border: 1px solid rgba(111, 168, 220, .3); border-radius: 6px; white-space: nowrap; transition: opacity .2s; color: var(--ink); box-shadow: none; }
 .tag .av { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font: 500 11px var(--sans); flex: none; box-shadow: 0 0 0 1px rgba(255, 255, 255, .25); }
 .tag b { font-weight: 500; font-size: 13px; }
-.tag span { font-size: 12px; color: var(--ink-2); max-width: 190px; overflow: hidden; text-overflow: ellipsis; }
+.tag span { font-size: 12px; color: var(--ink-2); }
+/* the status line wraps onto a second line when it needs to; nothing is cut off with an ellipsis */
+.tag span:not(.av) { max-width: 196px; white-space: normal; line-height: 1.3; text-wrap: balance; padding: 1px 0; }
 .tag.busy { border-color: var(--holo); box-shadow: none; }
 .tag.busy span { color: var(--holo-2); }
 .tag.alert { border-color: var(--red); background: rgba(40, 8, 10, .9); }
@@ -274,7 +276,8 @@ table.t tr:last-child td { border-bottom: 0; }
   .panel, .panel.wide { top: auto; left: 12px; right: 12px; bottom: 12px; width: auto; height: 58cqh; }
   .chat { left: 12px; right: 12px; bottom: 12px; width: auto; }
   .panel:not([hidden]) ~ .chat { display: none; }
-  .page { padding: 80px 16px 24px; }
+  /* the band behind the menu is the page's own border, so it is solid and scrolled content can never show in it */
+  .page { padding: 12px 16px 24px; border-top: 76px solid var(--bg); }
   .page h1 { font-size: 28px; }
   .phead { flex-direction: column; align-items: flex-start; }
   .tag span { display: none; }
@@ -351,7 +354,9 @@ table.t tr:last-child td { border-bottom: 0; }
 .chart .pt:last-child i { width: 10px; height: 10px; background: #D2E2F0; }
 .chart .pt:hover i { background: var(--amber); }
 .xl { display: flex; margin: 8px 0 0 48px; }
-.xl span { font: 11px var(--mono); color: var(--ink-3); text-align: center; white-space: nowrap; }
+.xl span { display: flex; justify-content: center; min-width: 0; font: 11px var(--mono); color: var(--ink-3); white-space: nowrap; }
+.xl span em { font-style: normal; flex: none; }
+@container (max-width: 560px) { .xl span.alt em { display: none; } } /* phone: every other date, so they never touch */
 .tip { position: absolute; z-index: 10; background: #1C1C1F; border: 1px solid var(--line-2); color: #fff; font-size: 12px; padding: 6px 10px; border-radius: 8px; pointer-events: none; max-width: 300px; white-space: normal; box-shadow: 0 8px 24px rgba(0, 0, 0, .5); }
 
 /* loading cover until the first frame is drawn */

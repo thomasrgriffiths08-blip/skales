@@ -65,7 +65,7 @@ function message(run, i, n) {
     </div></div>`;
   });
   if (r.error) out += `<div class="note red">${esc(r.error)}</div>`;
-  if (!r.running && reps.length) out += `<div class="ak-foot"><span>Answered in <b class="num">${num((r.ms || 0) / 1000, 1)} s</b> from today's records</span>${i === n - 1 && r.follow_ups?.length ? `<div class="ak-fu">${r.follow_ups.map((f) => `<button class="ak-chip" data-q="${esc(f)}">${esc(f)}</button>`).join("")}</div>` : ""}</div>`;
+  if (!r.running && reps.length) out += `<div class="ak-foot"><span>${r.recorded ? `<b class="ak-rec">Recorded example</b> · written from Kingpost's sample records` : `Answered in <b class="num">${num((r.ms || 0) / 1000, 1)} s</b> from today's records`}</span>${i === n - 1 && r.follow_ups?.length ? `<div class="ak-fu">${r.follow_ups.map((f) => `<button class="ak-chip" data-q="${esc(f)}">${esc(f)}</button>`).join("")}</div>` : ""}</div>`;
   return out;
 }
 
@@ -130,6 +130,9 @@ export default {
 .pg-ask .ak-looked em { font-style: normal; font-size: 12px; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(111, 168, 220, .3); color: var(--holo-2); background: rgba(111, 168, 220, .05); }
 .pg-ask .ak-foot { margin-left: 42px; display: grid; gap: 8px; font-size: 12px; color: var(--ink-3); }
 .pg-ask .ak-fu { display: flex; flex-wrap: wrap; gap: 6px; }
+.pg-ask .ak-rec { font-weight: 500; color: var(--holo-2); }
+.pg-ask .ak-recnote { margin: 14px 0 0; font-size: 13px; line-height: 1.45; color: var(--ink-3); }
+.pg-ask .ak-recnote b { font-weight: 500; color: var(--ink-2); }
 .pg-ask .ak-thread .note.red { margin-left: 42px; }
 .pg-ask .ak-form { display: flex; gap: 8px; align-items: center; height: 60px; margin-top: 20px; padding: 0 8px 0 18px; border-radius: 18px; border: 1px solid rgba(111, 168, 220, .45); background: rgba(0, 0, 0, .22); box-shadow: 0 0 0 4px rgba(111, 168, 220, .06); }
 .pg-ask .ak-form:focus-within { border-color: var(--holo); box-shadow: 0 0 0 4px rgba(111, 168, 220, .14); }
@@ -155,7 +158,7 @@ export default {
 .pg-ask .kn-r .av-s { margin: 0; }
 .pg-ask .ak-all { background: var(--holo-tint); color: var(--holo-2); box-shadow: inset 0 0 0 1px rgba(111, 168, 220, .5); font-size: 11px; }
 .pg-ask .kn-r b { display: block; font-size: 13px; font-weight: 500; color: var(--ink); }
-.pg-ask .kn-r small { display: block; font-size: 12px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pg-ask .kn-r small { display: block; font-size: 12px; line-height: 1.35; color: var(--ink-3); }
 .pg-ask .kn-r em { font: 500 22px/1 var(--sans); font-variant-numeric: tabular-nums; font-style: normal; letter-spacing: -.02em; color: #fff; text-shadow: none; white-space: nowrap; }
 .pg-ask .kn-r.amber em { color: var(--amber-ink); text-shadow: none; }
 .pg-ask .past { display: grid; gap: 2px; margin-top: 4px; }
@@ -184,7 +187,8 @@ export default {
     const speaking = cur?.partial?.replies?.filter((x) => x && BY_ID[x.agent]).at(-1);
     const mode = cur ? (speaking?.text ? "speak" : "think") : "";
     const say = cur ? (speaking ? `<span class="ldot busy"></span>${esc(BY_ID[speaking.agent].name)} is answering` : `<span class="ldot busy"></span>Checking the records`)
-      : lastDone ? `Answered in ${num((lastDone.ms || 0) / 1000, 1)} s` : `<span class="ldot good"></span>Ten on shift · ready`;
+      : lastDone ? (lastDone.recorded ? "Recorded example" : `Answered in ${num((lastDone.ms || 0) / 1000, 1)} s`) : `<span class="ldot good"></span>Ten on shift · ready`;
+    const REC = !!window.AI_TEAM_STATIC; // site demo: the suggested questions play recorded example answers
     const has = thread.length > 0;
 
     const groups = `<div class="ak-sugs">${(D.suggested || []).map((g) => `<div><h4>${esc(g.group)}</h4><div>${g.qs.map((q) => `<button class="ak-chip" data-q="${esc(q)}" ${cur ? "disabled" : ""}>${esc(q)}</button>`).join("")}</div></div>`).join("")}</div>`;
@@ -192,17 +196,18 @@ export default {
     const past = (D.asked_week || []).slice(0, 6);
 
     host.innerHTML = `<div class="inner pg-ask">
-      <header class="ak-hh"><div class="owner"><span class="ldot busy"></span>The whole team · answers from Kingpost's own records</div><h1>Ask the team</h1></header>
+      <header class="ak-hh"><div class="owner"><span class="ldot busy"></span>${REC ? "The whole team · recorded example answers from Kingpost's sample records" : "The whole team · answers from Kingpost's own records"}</div><h1>Ask the team</h1></header>
       <div class="ak-main">
         <section class="card hud ak-hero ${has ? "has" : ""}">
           <div class="ak-stage">
             <div class="ak-orbw"><div id="ak-orb-slot"></div><div class="ak-say">${say}</div></div>
             ${has ? `<div class="ak-thread">${thread.map((r, i) => message(r, i, thread.length)).join("")}</div>`
-              : `<div class="ak-intro"><h2>Ask anything about the business.</h2><p>Money owed, tomorrow's vans, the ads, what's waiting for Priya. The right person answers from Kingpost's records and shows you what they checked.</p></div>`}
+              : `<div class="ak-intro"><h2>Ask anything about the business.</h2><p>Money owed, tomorrow's vans, the ads, what's waiting for Priya. The right person answers from Kingpost's records and shows you what they checked.${REC ? " Pick a question below to play a recorded example." : ""}</p></div>`}
           </div>
           <form class="ak-form" autocomplete="off"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 3h11v7.5H7L4 13v-2.5H2.5z"/></svg>
             <input name="q" aria-label="Ask the team" placeholder="${cur ? "The team's answering…" : "Ask the team… “Who owes us money?”"}" value="${esc(L.draft || "")}" maxlength="400">
             ${has && !cur ? `<button type="button" class="btn sm" data-clear>Clear</button>` : ""}<button class="btn primary" ${cur ? "disabled" : ""}>${cur ? "Answering" : "Ask"}</button></form>
+          ${REC ? `<p class="ak-recnote"><b>Recorded examples.</b> Every question below, and every row on the right, plays an answer written from Kingpost's sample records. Typed questions run live on a call.</p>` : ""}
           ${groups}
         </section>
         <aside class="ak-side">

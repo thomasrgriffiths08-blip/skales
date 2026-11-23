@@ -44,16 +44,16 @@ function shadow(o, cast = true, receive = true) { o.traverse((m) => { if (m.isMe
 function concreteMaps() {
   const R = rng(7);
   const map = canvasTex(1024, 1024, (g, w, h) => {
-    g.fillStyle = "#b9b4ac"; g.fillRect(0, 0, w, h);
+    g.fillStyle = "#a3a7ac"; g.fillRect(0, 0, w, h);
     for (let i = 0; i < 520; i++) {
       const x = R() * w, y = R() * h, r = 30 + R() * 160, dark = R() < 0.55;
       const gr = g.createRadialGradient(x, y, 0, x, y, r);
-      gr.addColorStop(0, dark ? "rgba(90,84,76,0.07)" : "rgba(235,230,222,0.07)"); gr.addColorStop(1, "rgba(0,0,0,0)");
+      gr.addColorStop(0, dark ? "rgba(78,82,88,0.07)" : "rgba(228,232,236,0.07)"); gr.addColorStop(1, "rgba(0,0,0,0)");
       g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2);
     }
-    for (let i = 0; i < 26000; i++) { const s = R(); g.fillStyle = s < 0.5 ? `rgba(70,64,58,${0.08 + R() * 0.15})` : `rgba(250,248,244,${0.06 + R() * 0.12})`; g.fillRect(R() * w, R() * h, 1 + R() * 1.6, 1 + R() * 1.6); }
+    for (let i = 0; i < 26000; i++) { const s = R(); g.fillStyle = s < 0.5 ? `rgba(60,64,70,${0.08 + R() * 0.15})` : `rgba(244,246,249,${0.06 + R() * 0.12})`; g.fillRect(R() * w, R() * h, 1 + R() * 1.6, 1 + R() * 1.6); }
     // saw-cut joints at the tile edges (every 4 m)
-    g.fillStyle = "rgba(60,56,52,0.55)"; g.fillRect(0, 0, w, 2); g.fillRect(0, 0, 2, h);
+    g.fillStyle = "rgba(52,56,62,0.55)"; g.fillRect(0, 0, w, 2); g.fillRect(0, 0, 2, h);
     g.fillStyle = "rgba(255,255,255,0.18)"; g.fillRect(0, 3, w, 1); g.fillRect(3, 0, 1, h);
   }, { repeat: [34 / 4, 18 / 4] });
   const rough = canvasTex(512, 512, (g, w, h) => {
@@ -64,20 +64,20 @@ function concreteMaps() {
 }
 function brickMat(seed = 3, tint = 0) {
   const R = rng(seed);
-  const pal = ["#8a4a35", "#7d4130", "#93553c", "#6e3b2d", "#a0634b", "#5f3529", "#86503d", "#794536"];
+  const pal = ["#676d75", "#5e646c", "#70767e", "#585e66", "#787e86", "#535961", "#6a7078", "#61676f"]; // brick painted slate grey
   const draw = (bump) => (g, w, h) => {
-    g.fillStyle = bump ? "#2a2a2a" : "#b3a796"; g.fillRect(0, 0, w, h);
+    g.fillStyle = bump ? "#2a2a2a" : "#474c53"; g.fillRect(0, 0, w, h);
     const rows = 32, cols = 10, bh = h / rows, bw = w / cols, m = 3;
     const R2 = rng(seed);
     for (let r = 0; r < rows; r++) for (let c = -1; c <= cols; c++) {
       const x = c * bw + (r % 2 ? bw / 2 : 0), y = r * bh;
       const col = pal[Math.floor(R2() * pal.length)], soot = R2() < 0.12, v = R2();
       if (bump) { const l = 170 + Math.floor(v * 60); g.fillStyle = `rgb(${l},${l},${l})`; }
-      else g.fillStyle = soot ? "#4a2d25" : col;
+      else g.fillStyle = soot ? "#454a51" : col;
       g.fillRect(x + m, y + m, bw - m * 2, bh - m * 2);
-      if (!bump) for (let k = 0; k < 16; k++) { g.fillStyle = `rgba(${R2() < 0.5 ? "30,18,12" : "220,170,140"},${0.06 + R2() * 0.08})`; g.fillRect(x + m + R2() * (bw - 8), y + m + R2() * (bh - 8), 2 + R2() * 7, 1 + R2() * 3); }
+      if (!bump) for (let k = 0; k < 16; k++) { g.fillStyle = `rgba(${R2() < 0.5 ? "24,27,32" : "200,206,214"},${0.06 + R2() * 0.08})`; g.fillRect(x + m + R2() * (bw - 8), y + m + R2() * (bh - 8), 2 + R2() * 7, 1 + R2() * 3); }
     }
-    if (tint && !bump) { g.fillStyle = `rgba(240,232,220,${tint})`; g.fillRect(0, 0, w, h); }
+    if (tint && !bump) { g.fillStyle = `rgba(232,236,240,${tint})`; g.fillRect(0, 0, w, h); }
   };
   const map = canvasTex(1024, 1024, draw(false), { repeat: [1, 1] });
   const bump = canvasTex(1024, 1024, draw(true), { repeat: [1, 1], srgb: false });
@@ -96,6 +96,14 @@ function woodTex(base, dark, seed, w = 1024, h = 256) {
     for (let i = 0; i < 6; i++) { const x = R() * w, y = R() * h; g.fillStyle = `rgba(${dark},0.18)`; g.beginPath(); g.ellipse(x, y, 10 + R() * 14, 3 + R() * 4, 0, 0, 7); g.fill(); }
   });
 }
+// desk and table tops: graphite linoleum with a fine fleck, so a top still catches the light like a real surface
+function laminateTex() {
+  const R = rng(13);
+  return canvasTex(512, 512, (g, w, h) => {
+    g.fillStyle = "#3b3f45"; g.fillRect(0, 0, w, h);
+    for (let i = 0; i < 9000; i++) { g.fillStyle = R() < 0.5 ? `rgba(16,18,22,${0.06 + R() * 0.1})` : `rgba(200,208,218,${0.04 + R() * 0.08})`; g.fillRect(R() * w, R() * h, 1 + R() * 1.4, 1 + R() * 1.4); }
+  });
+}
 
 // ------------------------------------------------------------------ the scene
 export async function createScene(host) {
@@ -111,16 +119,16 @@ export async function createScene(host) {
   host.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color("#d9d2c6");
+  scene.background = new THREE.Color("#d3d7db");
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   scene.environmentIntensity = 0.55;
-  scene.fog = new THREE.Fog("#e6dccd", 26, 70);
+  scene.fog = new THREE.Fog("#dfe3e7", 26, 70);
 
   const camera = new THREE.PerspectiveCamera(36, 16 / 9, 0.1, 200);
 
   // ---------------------------------------------------------------- light: low sun through the harbour windows
-  const sun = new THREE.DirectionalLight("#ffd6a3", 4.2);
+  const sun = new THREE.DirectionalLight("#fff3e4", 4.2);
   sun.position.set(-7, 12.5, 24);
   sun.target.position.set(0, 0, 0);
   sun.castShadow = true;
@@ -128,7 +136,7 @@ export async function createScene(host) {
   Object.assign(sun.shadow.camera, { left: -24, right: 24, top: 18, bottom: -18, near: 4, far: 70 });
   sun.shadow.bias = -0.00025; sun.shadow.normalBias = 0.025;
   scene.add(sun, sun.target);
-  scene.add(new THREE.HemisphereLight("#fff3e2", "#7d7266", 0.75));
+  scene.add(new THREE.HemisphereLight("#f3f6f9", "#6f757c", 0.75));
   const fill = new THREE.DirectionalLight("#cfe0ff", 0.35); fill.position.set(10, 8, -12); scene.add(fill);
 
   // ---------------------------------------------------------------- shell
@@ -161,17 +169,17 @@ export async function createScene(host) {
 
   // outside: harbourside quay, water, the hill of coloured terraces and the old cranes, in afternoon haze
   const skyTex = canvasTex(2048, 1024, (g, w, h) => {
-    const s = g.createLinearGradient(0, 0, 0, h * 0.7); s.addColorStop(0, "#a9bccb"); s.addColorStop(0.55, "#e9d9bd"); s.addColorStop(1, "#f6dcae"); g.fillStyle = s; g.fillRect(0, 0, w, h);
-    const sunG = g.createRadialGradient(w * 0.32, h * 0.5, 0, w * 0.32, h * 0.5, 420); sunG.addColorStop(0, "rgba(255,236,196,0.9)"); sunG.addColorStop(1, "rgba(255,236,196,0)"); g.fillStyle = sunG; g.fillRect(0, 0, w, h);
+    const s = g.createLinearGradient(0, 0, 0, h * 0.7); s.addColorStop(0, "#a9bccb"); s.addColorStop(0.55, "#d3dde5"); s.addColorStop(1, "#e7edf2"); g.fillStyle = s; g.fillRect(0, 0, w, h);
+    const sunG = g.createRadialGradient(w * 0.32, h * 0.5, 0, w * 0.32, h * 0.5, 420); sunG.addColorStop(0, "rgba(250,250,246,0.9)"); sunG.addColorStop(1, "rgba(250,250,246,0)"); g.fillStyle = sunG; g.fillRect(0, 0, w, h);
     const R = rng(21);
     g.fillStyle = "#9aa5a8"; g.beginPath(); g.moveTo(0, h * 0.62); for (let x = 0; x <= w; x += 40) g.lineTo(x, h * 0.6 - Math.sin(x / w * 3.1) * 70 - 30); g.lineTo(w, h); g.lineTo(0, h); g.fill();
-    const pastel = ["#c9a89c", "#b9b7a2", "#a8b4b8", "#c7b48d", "#b49aa6", "#a9b39c", "#cfc3b0"];
+    const pastel = ["#b4bdc5", "#a7b0b9", "#a8b4b8", "#c0c7cd", "#9eaab6", "#aab6bb", "#c8ced3"];
     for (let row = 0; row < 7; row++) for (let x = -20; x < w; x += 22 + R() * 10) {
       const y = h * 0.6 - Math.sin(x / w * 3.1) * 70 - 30 + row * 26 + R() * 6; const bw = 18 + R() * 8, bh = 16 + R() * 8;
       g.fillStyle = pastel[Math.floor(R() * pastel.length)]; g.fillRect(x, y, bw, bh);
       g.fillStyle = "rgba(70,72,80,0.35)"; g.fillRect(x + 3, y + 4, 3, 4); g.fillRect(x + bw - 7, y + 4, 3, 4);
     }
-    const haze = g.createLinearGradient(0, h * 0.45, 0, h * 0.86); haze.addColorStop(0, "rgba(240,226,204,0.55)"); haze.addColorStop(1, "rgba(240,226,204,0.15)"); g.fillStyle = haze; g.fillRect(0, h * 0.4, w, h * 0.5);
+    const haze = g.createLinearGradient(0, h * 0.45, 0, h * 0.86); haze.addColorStop(0, "rgba(226,232,238,0.55)"); haze.addColorStop(1, "rgba(226,232,238,0.15)"); g.fillStyle = haze; g.fillRect(0, h * 0.4, w, h * 0.5);
     g.fillStyle = "#58616a"; // cranes
     for (const cx of [w * 0.58, w * 0.66, w * 0.73]) {
       g.fillRect(cx, h * 0.5, 9, h * 0.32); g.fillRect(cx - 70, h * 0.48, 150, 7); g.fillRect(cx - 4, h * 0.44, 18, 40);
@@ -179,18 +187,18 @@ export async function createScene(host) {
       g.fillRect(cx - 62, h * 0.485, 2, 90);
     }
     const water = g.createLinearGradient(0, h * 0.82, 0, h); water.addColorStop(0, "#8c9a9b"); water.addColorStop(1, "#5d6b6e"); g.fillStyle = water; g.fillRect(0, h * 0.82, w, h * 0.18);
-    for (let i = 0; i < 400; i++) { g.fillStyle = `rgba(255,236,200,${R() * 0.25})`; g.fillRect(R() * w, h * 0.83 + R() * h * 0.16, 10 + R() * 40, 1.5); }
+    for (let i = 0; i < 400; i++) { g.fillStyle = `rgba(240,244,248,${R() * 0.25})`; g.fillRect(R() * w, h * 0.83 + R() * h * 0.16, 10 + R() * 40, 1.5); }
   }, { repeat: [1, 1], aniso: 4 });
   skyTex.wrapS = skyTex.wrapT = THREE.ClampToEdgeWrapping;
   const sky = new THREE.Mesh(new THREE.PlaneGeometry(130, 65), new THREE.MeshBasicMaterial({ map: skyTex, fog: false, toneMapped: false }));
   sky.position.set(-6, 14, 48); sky.rotation.y = Math.PI; scene.add(sky);
-  const quay = new THREE.Mesh(new THREE.PlaneGeometry(80, 12), new THREE.MeshStandardMaterial({ color: "#a39a8d", roughness: 0.95 }));
+  const quay = new THREE.Mesh(new THREE.PlaneGeometry(80, 12), new THREE.MeshStandardMaterial({ color: "#9aa0a6", roughness: 0.95 }));
   quay.rotation.x = -Math.PI / 2; quay.position.set(0, -0.02, D / 2 + 6.4); quay.receiveShadow = true; scene.add(quay);
 
   // roof: boarded underside on purlins, carried by kingpost trusses every 4 m
-  const fir = woodTex("#8a6745", "60,38,20", 5, 1024, 128);
-  const timber = new THREE.MeshStandardMaterial({ map: fir, roughness: 0.8 });
-  const boards = woodTex("#6f5640", "40,26,14", 9, 1024, 1024); boards.repeat.set(6, 1);
+  const fir = woodTex("#2e3237", "10,12,15", 5, 1024, 128); // painted graphite
+  const timber = new THREE.MeshStandardMaterial({ map: fir, roughness: 0.62, metalness: 0.15 });
+  const boards = woodTex("#555b62", "22,25,30", 9, 1024, 1024); boards.repeat.set(6, 1);
   const roofMat = new THREE.MeshStandardMaterial({ map: boards, roughness: 0.9, side: THREE.DoubleSide });
   const rise = 3.6, half = D / 2 + 0.4, slope = Math.hypot(half, rise), ang = Math.atan2(rise, half);
   for (const s of [-1, 1]) {
@@ -214,7 +222,7 @@ export async function createScene(host) {
 
   // pendants over the desks
   const shadeMat = new THREE.MeshStandardMaterial({ color: "#232426", roughness: 0.5, metalness: 0.5, side: THREE.DoubleSide });
-  const bulbMat = new THREE.MeshStandardMaterial({ color: "#fff3df", emissive: "#ffd9a0", emissiveIntensity: 3.2 });
+  const bulbMat = new THREE.MeshStandardMaterial({ color: "#fbfbf8", emissive: "#fff0dc", emissiveIntensity: 3.2 });
   const cordMat = new THREE.MeshBasicMaterial({ color: "#111" });
   const pendant = (x, z, y = 3.3) => {
     const g = new THREE.Group();
@@ -225,22 +233,22 @@ export async function createScene(host) {
   };
   for (const x of [-7, -2.6]) for (const z of [-4.8, -1.6, 1.6, 4.8]) pendant(x + 0.6, z, 4.3);
   for (const [x, z] of [[2.2, 0], [12, 2.6], [12, 4.4], [8, -8.15], [10.8, -8.15]]) pendant(x, z, 3.1);
-  if (HQ) for (const [x, z] of [[-6.4, -3], [-6.4, 3], [-2, -3], [-2, 3], [12, 3.5]]) { const l = new THREE.PointLight("#ffcf94", 3.2, 8, 2); l.position.set(x, 3.9, z); scene.add(l); }
+  if (HQ) for (const [x, z] of [[-6.4, -3], [-6.4, 3], [-2, -3], [-2, 3], [12, 3.5]]) { const l = new THREE.PointLight("#ffe9cf", 3.2, 8, 2); l.position.set(x, 3.9, z); scene.add(l); }
 
   // ---------------------------------------------------------------- furniture
-  const oak = new THREE.MeshStandardMaterial({ map: woodTex("#b98d5f", "90,58,30", 13), roughness: 0.55 });
+  const oak = new THREE.MeshStandardMaterial({ map: laminateTex(), roughness: 0.5 }); // desk and table tops: graphite linoleum
   const black = new THREE.MeshStandardMaterial({ color: "#202124", roughness: 0.5, metalness: 0.55 });
   const plastic = new THREE.MeshStandardMaterial({ color: "#2a2b2e", roughness: 0.6 });
-  const ceramic = new THREE.MeshStandardMaterial({ color: "#f4f1ea", roughness: 0.35 });
+  const ceramic = new THREE.MeshStandardMaterial({ color: "#f1f3f5", roughness: 0.35 });
   const leaf = new THREE.MeshStandardMaterial({ color: "#3f5f36", roughness: 0.7, side: THREE.DoubleSide });
   const leaf2 = new THREE.MeshStandardMaterial({ color: "#56763f", roughness: 0.7, side: THREE.DoubleSide });
-  const potMat = new THREE.MeshStandardMaterial({ color: "#8e8a84", roughness: 0.9 });
+  const potMat = new THREE.MeshStandardMaterial({ color: "#878b90", roughness: 0.9 });
 
   function plant(x, z, size = 1, kind = 0) {
     const g = new THREE.Group(), R = rng(Math.floor(x * 13 + z * 7 + 99));
     const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.28 * size, 0.22 * size, 0.5 * size, 24), potMat); pot.position.y = 0.25 * size; g.add(pot);
     if (kind === 0) { // fiddle-leaf fig: trunk + broad leaves
-      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.025 * size, 0.035 * size, 1.5 * size, 6), new THREE.MeshStandardMaterial({ color: "#5b4632", roughness: 0.9 })); trunk.position.y = 1.2 * size; g.add(trunk);
+      const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.025 * size, 0.035 * size, 1.5 * size, 6), new THREE.MeshStandardMaterial({ color: "#4b4f54", roughness: 0.9 })); trunk.position.y = 1.2 * size; g.add(trunk);
       const lg = new THREE.SphereGeometry(0.16 * size, 8, 6); lg.scale(1, 1.4, 0.18);
       for (let i = 0; i < 38; i++) { const l = new THREE.Mesh(lg, R() < 0.5 ? leaf : leaf2); const a = R() * Math.PI * 2, r = 0.12 + R() * 0.38, y = 1.05 + R() * 1.1; l.position.set(Math.cos(a) * r * size, y * size, Math.sin(a) * r * size); l.rotation.set(R() * 1.2 - 0.6, a, R() - 0.5); g.add(l); }
     } else { // snake plant blades
@@ -331,7 +339,7 @@ export async function createScene(host) {
   ];
   const desks = {};
   const pickables = [];
-  const keyboardMat = new THREE.MeshStandardMaterial({ color: "#d9d6cf", roughness: 0.6 });
+  const keyboardMat = new THREE.MeshStandardMaterial({ color: "#d5d8dc", roughness: 0.6 });
   for (const s of SPOTS) {
     const a = AGENTS.find((x) => x.id === s.id);
     const x = s.x + 0.03 * s.z * s.z;
@@ -391,21 +399,21 @@ export async function createScene(host) {
   const consoleTable = box(3.2, 0.06, 0.5, oak, 0.01); consoleTable.position.set(W / 2 - 0.4, 0.8, 0.6); consoleTable.rotation.y = Math.PI / 2; scene.add(shadow(consoleTable));
 
   // ---------------------------------------------------------------- the lounge, kitchen and meeting table (the right half)
-  const sofaFab = new THREE.MeshStandardMaterial({ color: "#7b806f", roughness: 0.95 });
+  const sofaFab = new THREE.MeshStandardMaterial({ color: "#69717a", roughness: 0.95 });
   { const g = new THREE.Group(); const base = box(2.6, 0.42, 0.95, sofaFab, 0.08); base.position.y = 0.3; g.add(base); const back = box(2.6, 0.5, 0.25, sofaFab, 0.1); back.position.set(0, 0.7, -0.38); g.add(back);
     for (const sx of [-1.22, 1.22]) { const a = box(0.22, 0.6, 0.95, sofaFab, 0.08); a.position.set(sx, 0.38, 0); g.add(a); }
     g.position.set(12.4, 0, -4.4); scene.add(shadow(g));
-    const rug = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.8), new THREE.MeshStandardMaterial({ color: "#c9bfae", roughness: 1 })); rug.rotation.x = -Math.PI / 2; rug.position.set(12.4, 0.005, -3.3); rug.receiveShadow = true; scene.add(rug);
+    const rug = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.8), new THREE.MeshStandardMaterial({ color: "#b7bcc2", roughness: 1 })); rug.rotation.x = -Math.PI / 2; rug.position.set(12.4, 0.005, -3.3); rug.receiveShadow = true; scene.add(rug);
     const ct = box(1.2, 0.05, 0.6, oak, 0.015); ct.position.set(12.4, 0.4, -2.9); scene.add(shadow(ct)); for (const [lx, lz] of [[-0.5, -0.22], [0.5, -0.22], [-0.5, 0.22], [0.5, 0.22]]) { const l = box(0.04, 0.38, 0.04, black); l.position.set(12.4 + lx, 0.19, -2.9 + lz); scene.add(l); } }
   { const tbl = box(3.4, 0.05, 1.1, oak, 0.015); tbl.position.set(12, 0.75, 3.5); scene.add(shadow(tbl));
     for (const sx of [-1.5, 1.5]) { const l = box(0.06, 0.73, 0.9, black); l.position.set(12 + sx, 0.37, 3.5); scene.add(shadow(l)); }
     for (const [cx, cz, r] of [[11, 2.6, 0], [12.2, 2.6, 0], [11, 4.4, Math.PI], [12.2, 4.4, Math.PI], [13.2, 2.6, 0], [13.2, 4.4, Math.PI]]) { const c = chair(new THREE.MeshStandardMaterial({ color: "#3a3b3e", roughness: 0.9 })); c.position.set(cx, 0, cz); c.rotation.y = r; scene.add(shadow(c)); } }
-  { const counter = box(8, 0.92, 0.66, new THREE.MeshStandardMaterial({ color: "#2f3a37", roughness: 0.6 }), 0.01); counter.position.set(10.5, 0.46, -8.55); scene.add(shadow(counter));
+  { const counter = box(8, 0.92, 0.66, new THREE.MeshStandardMaterial({ color: "#2c3238", roughness: 0.6 }), 0.01); counter.position.set(10.5, 0.46, -8.55); scene.add(shadow(counter));
     const worktop = box(8.04, 0.04, 0.7, oak, 0.008); worktop.position.set(10.5, 0.94, -8.53); scene.add(shadow(worktop));
     const shelf = box(5, 0.04, 0.3, oak); shelf.position.set(10.5, 2.1, -8.66); scene.add(shadow(shelf));
-    const R = rng(77); for (let i = 0; i < 14; i++) { const j = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.12 + R() * 0.12, 14), R() < 0.5 ? ceramic : new THREE.MeshStandardMaterial({ color: "#b07d55", roughness: 0.4 })); j.position.set(8.2 + i * 0.33, 2.18 + 0.06, -8.66); scene.add(shadow(j)); } }
+    const R = rng(77); for (let i = 0; i < 14; i++) { const j = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.12 + R() * 0.12, 14), R() < 0.5 ? ceramic : new THREE.MeshStandardMaterial({ color: "#8d959d", roughness: 0.4 })); j.position.set(8.2 + i * 0.33, 2.18 + 0.06, -8.66); scene.add(shadow(j)); } }
   // the gathering spot in front of the brain wall: a rug, two long oak benches, a low table
-  { const rug = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 7.2), new THREE.MeshStandardMaterial({ color: "#b8ab95", roughness: 1 })); rug.rotation.x = -Math.PI / 2; rug.position.set(-12.4, 0.006, 0); rug.receiveShadow = true; scene.add(rug);
+  { const rug = new THREE.Mesh(new THREE.PlaneGeometry(3.6, 7.2), new THREE.MeshStandardMaterial({ color: "#a7adb4", roughness: 1 })); rug.rotation.x = -Math.PI / 2; rug.position.set(-12.4, 0.006, 0); rug.receiveShadow = true; scene.add(rug);
     for (const z of [-2.2, 2.2]) { const b = box(0.5, 0.06, 2.6, oak, 0.015); b.position.set(-11.4, 0.44, z); scene.add(shadow(b)); for (const dz of [-1.1, 1.1]) { const l = box(0.42, 0.42, 0.05, black); l.position.set(-11.4, 0.21, z + dz); scene.add(shadow(l)); } }
     const t = box(0.9, 0.05, 1.6, oak, 0.015); t.position.set(-12.6, 0.36, 0); scene.add(shadow(t)); for (const [dx, dz] of [[-0.38, -0.7], [0.38, -0.7], [-0.38, 0.7], [0.38, 0.7]]) { const l = box(0.04, 0.34, 0.04, black); l.position.set(-12.6 + dx, 0.17, dz); scene.add(l); }
     for (const [x, z] of [[-13.4, -2.6], [-13.4, 2.6]]) { const st = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.44, 24), sofaFab); st.position.set(x, 0.22, z); scene.add(shadow(st)); } }

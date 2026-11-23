@@ -50,12 +50,15 @@ export const meter = (v, label = "") => `<span class="meter"><i><b style="width:
 
 // charts: one series, one ink colour, quiet grid, hover tips (call wireTips(host) after rendering).
 // The axis shows d.l (keep it short, e.g. "27 Aug"); `label(d)` is only the hover tip.
+// one x-axis label. `back` counts bars from the newest. Every other shown label is marked "alt" so a narrow chart
+// (a phone) can drop it and the dates never run into each other.
+const xlab = (d, back, every, w) => { const on = back % every === 0; return `<span style="width:${w}%"${on && (back / every) % 2 ? ' class="alt"' : ""}>${on ? `<em>${esc(d.l)}</em>` : ""}</span>`; };
 export function barChart(data, { h = 180, fmt = (v) => v, label = (d) => d.l, every = 2 } = {}) {
   const max = Math.max(1, ...data.map((d) => d.v)) * 1.1, W = 100 / data.length;
   const ticks = [0, 0.5, 1].map((k) => max * k);
   return `<div class="chart" style="height:${h}px">${ticks.map((t) => `<i class="gl" style="bottom:${(t / max) * 100}%"><span>${esc(fmt(Math.round(t)))}</span></i>`).join("")}
     ${data.map((d, i) => `<div class="bc" style="left:${i * W}%;width:${W}%" data-tip="${esc(label(d))}: ${esc(fmt(d.v))}"><b style="height:${(d.v / max) * 100}%" class="${d.hot || (d.hot === undefined && i === data.length - 1) ? "last" : ""}"></b></div>`).join("")}</div>
-    <div class="xl">${data.map((d, i) => `<span style="width:${W}%">${(data.length - 1 - i) % every === 0 ? esc(d.l) : ""}</span>`).join("")}</div>`;
+    <div class="xl">${data.map((d, i) => xlab(d, data.length - 1 - i, every, W)).join("")}</div>`;
 }
 export function lineChart(data, { h = 180, fmt = (v) => v, label = (d) => d.l, every = 3, min: lo, max: hi, invert = false } = {}) {
   const vs = data.map((d) => d.v);
@@ -65,7 +68,7 @@ export function lineChart(data, { h = 180, fmt = (v) => v, label = (d) => d.l, e
   return `<div class="chart line" style="height:${h}px">${[min, (min + max) / 2, max].map((t) => `<i class="gl" style="bottom:${100 - y(t)}%"><span>${esc(fmt(Math.round(t)))}</span></i>`).join("")}
     <svg viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,100 ${pts} 100,100" fill="#6FA8DC" fill-opacity=".08"/><polyline points="${pts}" fill="none" stroke="#6FA8DC" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>
     ${data.map((d, i) => `<div class="pt" style="left:${x(i)}%;top:${y(d.v)}%" data-tip="${esc(label(d))}: ${esc(fmt(d.v))}"><i></i></div>`).join("")}</div>
-    <div class="xl">${data.map((d, i) => `<span style="width:${100 / data.length}%">${(data.length - 1 - i) % every === 0 ? esc(d.l) : ""}</span>`).join("")}</div>`;
+    <div class="xl">${data.map((d, i) => xlab(d, data.length - 1 - i, every, 100 / data.length)).join("")}</div>`;
 }
 // horizontal bars: [{ label (HTML ok), v, tip }]
 export function hbars(items, { fmt = (v) => v, max } = {}) {

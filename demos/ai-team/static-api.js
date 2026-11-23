@@ -1,7 +1,9 @@
 // The static stand-in for Tom's local server. Every read the app makes is answered from a JSON snapshot taken
 // right after a reset (./data/), and nothing that would call Claude runs: it opens the "this runs live" sheet instead.
+// The one exception is Ask the team, where the suggested questions play a recorded example answer (recorded.js).
 // The snapshots bake in the day they were taken, so the dates in them are moved on to today when they load.
 import { liveOnly, LIVE } from "./live-note.js";
+import { build, norm } from "./recorded.js";
 
 const DATA = new URL("./data/", import.meta.url);
 const GETS = {
@@ -62,6 +64,46 @@ export async function api(path, body) {
   }
   // reading a note on the brain wall is a read, so it's answered too
   if (path === "/api/floor/note") { const notes = await json("notes"); if (notes[body?.id]) return structuredClone(notes[body.id]); throw new Error("That note isn't in this demo"); }
+  // Ask the team: the suggested questions play a recorded example answer; a typed one with no recording gets the sheet
+  if (path === "/api/floor/act/ask/ask") { const a = await recorded(body?.q); if (a) return play(a, String(body.q).trim()); }
+  if (path === "/api/floor/act/ask/clear") { runId++; thread = []; emitThread(); return { ok: true }; }
+  if (path === "/api/floor/chat") { const a = await recorded(body?.q); if (a) { await wait(1200); return { recorded: true, replies: a.replies.map(({ agent, text }) => ({ agent, text })) }; } }
   liveOnly(path, body);
   const err = new Error(LIVE); err.live = true; throw err;
+}
+
+// ---------------------------------------------------------------- recorded example answers (recorded.js)
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+let answers = null;
+const recorded = async (q) => {
+  answers ||= Promise.all(["/api/floor/state", "/api/d2/state", "/api/d3/state", "/api/office/chase/state", "/api/office/inv/state"].map((p) => api(p))).then(([F, I, P, C, O]) => build({ F, I, P, C, O }));
+  return (await answers).get(norm(q)) || null;
+};
+// the app listens here the way it listens to the local server's live events
+const subs = new Set();
+export const listen = (fn) => { subs.add(fn); return () => subs.delete(fn); };
+let thread = [], runId = 0;
+const emitThread = () => { const ev = { demo: "floor", type: "act", page: "ask", store: { thread: structuredClone(thread) } }; for (const fn of subs) fn(ev); };
+// plays one answer into the Ask page's thread: a beat of checking, then each reply typed out a few words at a time.
+// It runs on timers, not CSS, so it plays the same with Reduce Motion switched on.
+function play(a, q) {
+  const id = ++runId, run = { q, at: Date.now(), running: true, recorded: true, partial: { replies: [] }, replies: [], follow_ups: [] };
+  thread = [...thread.slice(-5), run]; emitThread();
+  (async () => {
+    await wait(1100);
+    for (const rep of a.replies) {
+      if (id !== runId) return;
+      const cur = { agent: rep.agent, text: "", looked_at: [] }; run.partial.replies.push(cur);
+      for (let n = 0; n < rep.text.length;) {
+        const sp = rep.text.indexOf(" ", n + 16); n = sp < 0 ? rep.text.length : sp;
+        cur.text = rep.text.slice(0, n); emitThread(); await wait(120);
+        if (id !== runId) return;
+      }
+      cur.looked_at = rep.looked_at || []; emitThread(); await wait(400);
+    }
+    if (id !== runId) return;
+    Object.assign(run, { running: false, replies: a.replies.map((r) => ({ ...r })), follow_ups: a.follow_ups || [], ms: Date.now() - run.at }); delete run.partial;
+    emitThread();
+  })();
+  return { ok: true };
 }

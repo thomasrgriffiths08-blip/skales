@@ -125,9 +125,11 @@ export default {
 .pg-team .tm-nm { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; min-width: 0; }
 .pg-team .tm-nm b { font-weight: 500; color: #fff; font-size: 14px; }
 .pg-team .tm-nm em { font: 500 18px/1.15 var(--sans); font-variant-numeric: tabular-nums; font-style: normal; letter-spacing: -.02em; color: #fff; text-shadow: none; white-space: nowrap; }
-.pg-team .tm-kl { font-size: 11px; color: var(--ink-3); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pg-team .tm-kl { font-size: 11px; line-height: 1.3; color: var(--ink-3); text-align: right; }
 .pg-team .tm-st { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; margin-top: 3px; font-size: 12px; color: var(--ink-2); min-width: 0; }
-.pg-team .tm-st span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pg-team .tm-st { align-items: flex-start; line-height: 1.35; }
+.pg-team .tm-st span { min-width: 0; overflow-wrap: anywhere; } /* wraps onto a second line; nothing is cut with an ellipsis */
+.pg-team .tm-st .ldot { margin-top: 5px; flex: none; }
 .pg-team .tm-st .ldot { width: 6px; height: 6px; }
 .pg-team .tm-pod.busy .tm-st { color: var(--holo-2); }
 .pg-team .tm-pod.alert .tm-st { color: #F0B4B6; }
@@ -191,6 +193,7 @@ export default {
 .pg-team .tm-k3 span { display: block; font-size: 11px; line-height: 1.3; color: var(--ink-3); }
 .pg-team .tm-line { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); min-width: 0; }
 .pg-team .tm-line span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@container (max-width: 640px) { .pg-team .tm-line { align-items: flex-start; } .pg-team .tm-line span { white-space: normal; overflow: visible; } }
 .pg-team .tm-card.busy .tm-line.now { color: var(--holo-2); }
 .pg-team .tm-line.need { color: var(--amber-ink); align-items: flex-start; }
 .pg-team .tm-line.need .ldot { margin-top: 6px; }
