@@ -23,7 +23,7 @@ fs.mkdirSync(path.join(ROOT, 'assets/voice'), { recursive: true });
 if (!fs.existsSync(path.join(ROOT, 'assets/voice/calls.json')) || fs.readFileSync(path.join(ROOT, 'assets/voice/calls.json'), 'utf8') !== json) fs.writeFileSync(path.join(ROOT, 'assets/voice/calls.json'), json);
 const VER = crypto.createHash('md5').update(json).digest('hex').slice(0, 8);
 
-const mss = s => { s = Math.round(s); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+const mss = s => { s = Math.floor(s); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
 const svg = (d, w = 18) => `<svg viewBox="0 0 24 24" width="${w}" height="${w}" aria-hidden="true">${d}</svg>`;
 const I = {
   play: svg('<path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/>', 20),
