@@ -56,7 +56,7 @@ ${L.header(b, 'ai')}
       <h1 id="h-top">Your phone, answered by AI</h1>
       <div class="hx-side">
         <p class="hx-sub"><strong>It picks up on the first ring, at any hour.</strong> It books from your real diary and price list, follows your rules, and hands over to you when it should.</p>
-        <p class="ai-cue">Three recorded calls to made-up businesses. Press play on any of them; each takes about a minute.</p>
+        <p class="ai-cue">Three recorded calls to made-up businesses. Press play on any of them; each takes a minute or two.</p>
       </div>
     </div>
     ${V.stage(b)}
