@@ -102,7 +102,7 @@ module.exports = [
         acts: [[0, 'Answered on the first ring, and said it is an AI', 'ok']] },
       { id: 'c1', who: C, text: 'Oh, hiya. It’s Hannah, Hannah Price. Erm, I’m booked in on Thursday, but they’ve just put me on a late shift, so I can’t actually make it now.',
         say: 'Oh, hiya. It’s Hannah... Hannah Price. Erm, I’m booked in on Thursday, but [sighs] they’ve just put me on a late shift, so... I can’t actually make it now.' },
-      { id: 'a2', who: A, text: 'That’s annoying. Let me find you. Yes, here you are, Thursday at half four with Dev. Do you want to move it?',
+      { id: 'a2', who: A, text: 'Ah, that’s annoying. Let me find you. Yes, here you are, Thursday at half four with Dev. Do you want to move it?',
         say: 'Ah, that’s annoying. Let me find you... Yes, here you are, Thursday at half four with Dev. Do you want to move it?',
         acts: [[.3, 'Found the booking: Hannah Price, Dev, Thu 16:30', 'look']] },
       { id: 'c2', who: C, gap: -.15, text: 'Yeah, if I can. Is there anything on Friday?' },
